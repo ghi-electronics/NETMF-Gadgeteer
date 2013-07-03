@@ -1,13 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder_41", "RotaryEncoder\RotaryEncoder_41\RotaryEncoder_41.csproj", "{1AE84774-3D46-47C4-89AD-542DAD8DC970}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder_42", "RotaryEncoder\RotaryEncoder_42\RotaryEncoder_42.csproj", "{B9DCC667-072D-461E-BC84-B8070269DC0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder", "RotaryEncoder\RotaryEncoder\RotaryEncoder.csproj", "{DA8DFABA-A5D9-42CD-9E38-38FB9DCC391E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{B150CE72-EC07-4ACE-940C-A4C86D85E25D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{B150CE72-EC07-4ACE-940C-A4C86D85E25D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
