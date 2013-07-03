@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluetooth_42", "Bluetooth\B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluetooth", "Bluetooth\Bluetooth\Bluetooth.csproj", "{A65D0B90-B708-4375-84CF-5657BC39224F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTestApp", "TestApp\ClientTestApp.csproj", "{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostTestApp", "HostTestApp\HostTestApp.csproj", "{507DBED0-FB7F-42F4-BF00-EB241AC1C044}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostTestApp", "..\HostTestApp\HostTestApp.csproj", "{507DBED0-FB7F-42F4-BF00-EB241AC1C044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

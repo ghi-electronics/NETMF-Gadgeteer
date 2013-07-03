@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stepper_L6470_42", "Stepper
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stepper_L6470", "Stepper_L6470\Stepper_L6470\Stepper_L6470.csproj", "{2E1CA47A-4B0E-46CC-91B3-A991695F7733}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp 42", "TestApp 42\TestApp 42.csproj", "{0DA5B2C7-6D33-4E24-B63F-A1928033E5DC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{0DA5B2C7-6D33-4E24-B63F-A1928033E5DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

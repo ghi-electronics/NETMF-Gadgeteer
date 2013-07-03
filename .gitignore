@@ -152,9 +152,19 @@ $RECYCLE.BIN/
 
 # Mac desktop service store files
 .DS_Store
-/Modules/MSR/Accelerometer/Software/Accelerometer/Accelerometer_41/Accelerometer_41.cs
-/Modules
+
+
+# Gadgeteer stuff from other manufacturers
+
 /3D Models/MSR Contributed
+
 /GadgeteerCore
-/Kits/SytechDesigns/SytechGadgeteerSDK/Software
-/Mainboards/SytechDesigns/NANO/Software/NANO
+
+/Kits/Seeed
+/Kits/SytechDesigns
+
+/Mainboards/SytechDesigns
+
+/Modules/MSR
+/Modules/Seeed
+/Modules/SytechDesigns

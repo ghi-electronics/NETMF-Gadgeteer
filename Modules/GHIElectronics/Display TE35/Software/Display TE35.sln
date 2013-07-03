@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35_42", "Display 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35", "Display TE35\Display_TE35\Display_TE35.csproj", "{90675549-3299-4AD6-A544-D7764E71CACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp42", "TestApp42\TestApp42.csproj", "{0A29A4A2-479A-4E6E-AA41-4B80AE8D56CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{0A29A4A2-479A-4E6E-AA41-4B80AE8D56CA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
