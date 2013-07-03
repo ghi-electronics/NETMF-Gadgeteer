@@ -1,0 +1,77 @@
+Partlist
+
+Exported from FEZ Hydra.sch at 2/22/2012 11:11:29 AM
+
+EAGLE Version 5.4.0 Copyright (c) 1988-2009 CadSoft
+
+Part     Value             Device            Package          Library     Sheet
+
+12                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+C1       .1uF              C-USC0603K        C0603K           rcl         2
+C7       .1uF              C-USC0603K        C0603K           rcl         2
+C8       .1uF              C-USC0603K        C0603K           rcl         2
+C9       .1uF              C-USC0603K        C0603K           rcl         2
+C10      .1uF              C-USC0603K        C0603K           rcl         2
+C11      10pF              C-USC0603         C0603            rcl         2
+C12      .1uF              C-USC0603K        C0603K           rcl         2
+C13      4.7nF             C-USC0603K        C0603K           rcl         2
+C14      470pF             C-USC0603K        C0603K           rcl         2
+C15      .1uF              C-USC0603K        C0603K           rcl         2
+C16      .1uF              C-USC0603K        C0603K           rcl         2
+C17      .1uF              C-USC0603K        C0603K           rcl         2
+C18      10uF              CPOL-USCT3528     CT3528           rcl         2
+C19      27pF              C-USC0603K        C0603K           rcl         2
+C20      27pF              C-USC0603K        C0603K           rcl         2
+C21      27pF              C-USC0603K        C0603K           rcl         2
+C22      27pF              C-USC0603K        C0603K           rcl         2
+C23      .1uF              C-USC0603K        C0603K           rcl         2
+C24      .1uF              C-USC0603K        C0603K           rcl         2
+C25      .1uF              C-USC0603K        C0603K           rcl         2
+C26      .1uF              C-USC0603K        C0603K           rcl         2
+C27      .1uF              C-USC0603K        C0603K           rcl         2
+C28      2.2uF             C-USC0805K        C0805K           rcl         2
+C29      2.2uF             C-USC0805K        C0805K           rcl         1
+C30      2.2uF             C-USC0805K        C0805K           rcl         1
+C31      220uF 6.3V        CPOL-USD/7343-31W D/7343-31W       rcl         1
+D1       1N4148            DIODE-SOD323-W    SOD323-W         diode       2
+FUD1     FIDUCIAL          FIDUCIAL          FIDUCIAL_40MIL   GHI         1
+FUD2     FIDUCIAL          FIDUCIAL          FIDUCIAL_40MIL   GHI         1
+FUD3     FIDUCIAL          FIDUCIAL          FIDUCIAL_40MIL   GHI         1
+IC1      DATAFLASHW        DATAFLASHW        SO8-WIDE         GHI         2
+IC2      Do nto populate   SERIAL_FLASH      SO8              GHI         2
+IC4      K4S56163H         K4S56163H         TSOP54           GHI         2
+IC5      AT91SAM9RL64      AT91SAM9RL64      LFBGA217         GHI         2
+IC6      MCP1700T-1202E    MCP1700           SOT23            GHI         1
+IC7      DNP               5PIN_REG          SOT23-5          GHI         1
+JMP1     close this jumper JP_SW             JP_SW            CPT_SMD     2
+L1       4.7uH             R-US_R1210        R1210            rcl         2
+LED      Green             LEDCHIPLED_0805   CHIPLED_0805     led         1
+PWR      Red               LEDCHIPLED_0805   CHIPLED_0805     led         1
+Q1       32.768Khz         CRYSTALTC38H      TC38H            crystal     2
+R3       2.2K              R-US_R0603        R0603            rcl         1
+R4       2.2K              R-US_R0603        R0603            rcl         1
+R5       330               R-US_R0603        R0603            rcl         1
+R6       330               R-US_R0603        R0603            rcl         1
+R7       10K               R-US_R0603        R0603            rcl         1
+R8       6.8K              R-US_R0603        R0603            rcl         2
+R9       1.5K 1%           R-US_R0603        R0603            rcl         2
+R10      39                R-US_R0603        R0603            rcl         2
+R11      39                R-US_R0603        R0603            rcl         2
+R13      1K                R-US_R0603        R0603            rcl         2
+R14      1K                R-US_R0603        R0603            rcl         2
+RESET    DTSM-6            DTSM-6            DTSM-6           switch-tact 1
+RTCK     PTR1B2,54         PTR1B2,54         B2,54            testpad     2
+X1                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X2                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X3                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X4                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X5                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X6                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X7                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X8                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X9                         2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X10                        2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X11                        2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X13                        2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X14                        2X5_1.27MMFRAME   2X5_1.27MM_FRAME GHI         1
+X15      12Mhz             CRYTALSM49        SM49@1           crystal     2

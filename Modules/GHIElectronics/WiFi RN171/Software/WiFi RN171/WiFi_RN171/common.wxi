@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <!-- Change this whenever building a new installer.  The fourth number is ignored, so change one of the top three.
+  Otherwise, users will not be able to upgrade properly; Windows Installer will exit with an error instead of upgrading. -->
+  <!-- Also change the version numbers in Properties/AssemblyInfo.cs for each NETMF version supported -->
+  <?define ModuleSoftwareVersion = "1.0.2.0" ?>
+
+  <!-- Alternatively, to synchronize this mainboard version to a kit version, uncomment the below lines, edit the pathname
+  to point to your kit, and comment out the line above.  You also need to edit AssemblyInfo.cs.  See the kit readme.txt 
+  for more details of how and why to do this. -->
+  <!--
+  <?include $(var.SourcePath)..\..\..\..\..\Kits\GHIElectronics\KitName\Software\KitName\version.wxi ?>
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  -->
+
+  <!-- SafeModuleName should match the name printed on the module PCB, without any spaces/punctuation. -->
+  <?define SafeModuleName = "WiFi_RN171" ?>
+
+  <!-- SafeManufacturer should match the manufacturer name printed on the module PCB, without any spaces/punctuation. -->
+  <?define SafeManufacturer = "GHIElectronics" ?>
+
+  <!-- FullManufacturer can have spaces, e.g. Microsoft Research.  This shows up as the manufacturer name in add/remove programs. -->
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <!-- These define which versions of NETMF are supported - comment out or delete any unsupported NETMF versions. -->
+  <!-- <?define NETMF41Supported ?> -->
+  <?define NETMF42Supported ?>
+
+
+  <!-- No need to change anything below this line. -->
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "WiFi_RN171" ?>
+
+  <!-- These two should be copied over if upgrading from an older template -->
+  <?define guid_msi_upgrade_code =  "1dd1c9b6-3b5c-40a1-b9d1-26195b9a038a" ?>
+  <?define guid_msm_package_id = "9b0e1502-6455-476e-8106-6707fbe24c4e" ?>
+
+  <?define guid_msm_comp_resources_id = "27bf78da-55c3-4b87-a615-ee06a10b200e" ?>
+  <?define guid_msm_comp_registry_id = "ace4abea-a77b-4dc9-b2fd-505b17e94557" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "5b793241-7e0d-4ec7-bec2-142b54a01b5f"?>
+
+  <?define guid_msm_comp_files_id_41 = "6d3da82e-f173-4562-bb25-af4971d06e7a" ?>
+  <?define guid_msm_comp_files_be_id_41 = "b81470a3-7cca-4384-9adf-e92256a94d85" ?>
+  <?define guid_msm_comp_files_le_id_41 = "e5db9773-07dc-464c-8184-89fa7fdb26e2" ?>
+
+  <?define guid_msm_comp_files_id_42 = "89e9cc86-ca4e-40aa-a356-5f9937eee4a3" ?>
+  <?define guid_msm_comp_files_be_id_42 = "8754c2c7-aa7a-4c92-b861-530d35525ec6" ?>
+  <?define guid_msm_comp_files_le_id_42 = "c52b0484-0016-4b08-ba54-ef1571856cf9" ?>
+  
+</Include>
+

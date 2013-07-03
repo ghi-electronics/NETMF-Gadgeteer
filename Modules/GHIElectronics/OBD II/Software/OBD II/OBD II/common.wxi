@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <!-- Change this whenever building a new installer.  The fourth number is ignored, so change one of the top three.
+  Otherwise, users will not be able to upgrade properly; Windows Installer will exit with an error instead of upgrading. -->
+  <!-- Also change the version numbers in Properties/AssemblyInfo.cs for each NETMF version supported -->
+  <?define ModuleSoftwareVersion = "1.1.2.0" ?>
+
+  <!-- Alternatively, to synchronize this mainboard version to a kit version, uncomment the below lines, edit the pathname
+  to point to your kit, and comment out the line above.  You also need to edit AssemblyInfo.cs.  See the kit readme.txt 
+  for more details of how and why to do this. -->
+  <!--
+  <?include $(var.SourcePath)..\..\..\..\..\Kits\GHIElectronics\KitName\Software\KitName\version.wxi ?>
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  -->
+
+  <!-- SafeModuleName should match the name printed on the module PCB, without any spaces/punctuation. -->
+  <?define SafeModuleName = "OBD_II" ?>
+
+  <!-- SafeManufacturer should match the manufacturer name printed on the module PCB, without any spaces/punctuation. -->
+  <?define SafeManufacturer = "GHIElectronics" ?>
+
+  <!-- FullManufacturer can have spaces, e.g. Microsoft Research.  This shows up as the manufacturer name in add/remove programs. -->
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <!-- These define which versions of NETMF are supported - comment out or delete any unsupported NETMF versions. -->
+  <!--<?define NETMF41Supported ?>-->
+  <?define NETMF42Supported ?>
+
+
+  <!-- No need to change anything below this line. -->
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "OBD II" ?>
+
+  <!-- These two should be copied over if upgrading from an older template -->
+  <?define guid_msi_upgrade_code =  "26b450f1-3457-4d78-bc3d-142ff66d02df" ?>
+  <?define guid_msm_package_id = "0ec9631e-4c47-4dc8-99b6-3d26286ce9c5" ?>
+
+  <?define guid_msm_comp_resources_id = "b8bca559-b9c8-4772-be58-802bc43ac089" ?>
+  <?define guid_msm_comp_registry_id = "5f522d96-7aff-4566-96d4-e707d8a30f3f" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "0e8f555d-afa3-4d80-b294-4ada337d86e3"?>
+
+  <?define guid_msm_comp_files_id_41 = "D3A140AE-F469-4E08-B72C-222826735546" ?>
+  <?define guid_msm_comp_files_be_id_41 = "B9840EE3-53BA-4DB9-BDF8-ADE6B3385D6A" ?>
+  <?define guid_msm_comp_files_le_id_41 = "ADB78C4D-A800-4965-A36C-E3E1C06CF90D" ?>
+
+  <?define guid_msm_comp_files_id_42 = "CA3878B0-BA49-4A88-B88D-EA656727AC2B" ?>
+  <?define guid_msm_comp_files_be_id_42 = "7F76E536-A83F-4513-A257-2DCC9EA3DBD5" ?>
+  <?define guid_msm_comp_files_le_id_42 = "3473F2A5-7F29-4FF2-A7F9-9183855FBCF6" ?>
+
+</Include>
+

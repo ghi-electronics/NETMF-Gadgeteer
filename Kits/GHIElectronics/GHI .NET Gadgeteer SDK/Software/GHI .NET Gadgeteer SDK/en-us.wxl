@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+Product strings for en-us culture
+-->
+
+<WixLocalization xmlns="http://schemas.microsoft.com/wix/2006/localization"
+                 Culture="en-us">
+
+  <!-- Change these settings -->
+  
+  <!-- DistributorFull can have spaces, e.g. Microsoft Research.  This shows up as the publisher name in add/remove programs. -->
+  <String Id="DistributorFull">GHI Electronics</String>
+
+  <!-- This can have spaces, and should probably include the word "Kit" at the end. 
+  It will show up as the product name in add/remove programs -->
+  <String Id="KitName">GHI .NET Gadgeteer SDK</String>
+
+  <!-- No need to change these settings -->
+  <String Id="GadgeteerDirectoryName">Microsoft .NET Gadgeteer</String>
+  <String Id="KitDirectoryName">Kits</String>
+  <String Id="DocsDirectoryName">Documentation</String>
+  <String Id="GSGDirectoryName">GettingStartedGuide</String>
+  <String Id="ForGadgeteer"></String>
+  <String Id="NewerVersionFoundPrefix">A newer version of</String>
+  <String Id="NewerVersionFoundSuffix">is already installed. Setup will now exit.</String>
+  <String Id="SameVersionInstalledPrefix">Version number was not updated correctly. Please manually uninstall</String>
+  <String Id="SameVersionInstalledSuffix">and run the installer again.</String>
+  <String Id="GadgeteerCoreIsNotInstalled">Microsoft .NET Gadgeteer Core is not installed. Please install this first (e.g. from http://gadgeteer.codeplex.com/ ).</String>
+
+  <!--Additional Folder Paths-->
+  <String Id="FirmwareUpdaterDirectoryName">Firmware Update</String>
+  <String Id="GettingStartedGuideDirectoryName">Getting Started Guides</String>
+
+</WixLocalization>

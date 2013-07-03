@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <MainboardDefinitions>
+    <!-- This mainboard definition should be filled in.  Mouse over any attribute name to get more help about that attribute. -->
+    <MainboardDefinition 
+            Name="FEZCerbuinoBee" 
+            Type="GHIElectronics.Gadgeteer.FEZCerbuinoBee"
+            HardwareVersion="1.2"
+            Image="Resources\Image.jpg"
+            BoardWidth="85"
+            BoardHeight="57"
+            MinimumGadgeteerCoreVersion="2.42.500"
+            HelpUrl="http://www.ghielectronics.com/catalog/product/351"
+            >
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.093</TypicalCurrent>
+          <MaximumCurrent>0.110</MaximumCurrent>
+        </PowerRequirements>
+
+        <PowerRequirements Voltage="5">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+
+      <!-- This lists the assemblies which provides the API to this mainboard, i.e. the output assemblies of this template. -->
+      <!-- If you do not provide support for both NETMF 4.1 and 4.2, the relevant lines should be removed -->
+      <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
+      <Assemblies>
+        <!--<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZCerbuinoBee" />-->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbuinoBee" />
+      </Assemblies>
+      
+      <!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->
+      <ProvidedSockets>
+
+        <ProvidedSocket Label="1" Left="79.5" Top="16" Orientation="180" ConstructorParameter="1">
+          <Types>
+            <Type>P</Type>
+            <Type>S</Type>
+            <Type>U</Type>
+            <Type>Y</Type>
+          </Types>
+          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
+          <!--<SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+          </SharedPinMaps>-->
+        </ProvidedSocket>
+
+        <ProvidedSocket Label="2" Left="79.5" Top="30" Orientation="180" ConstructorParameter="2">
+          <Types>
+            <Type>A</Type>
+            <Type>I</Type>
+            <Type>K</Type>
+            <Type>U</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
+
+        <ProvidedSocket Label="3" Left="79.5" Top="44.5" Orientation="180" ConstructorParameter="3">
+          <Types>
+            <Type>A</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <!--<SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+          </SharedPinMaps>-->
+        </ProvidedSocket>
+
+      </ProvidedSockets>
+      
+      <LibrariesProvided>
+        <!-- This should be filled in with a list of assemblies provided by the mainboard which are not the standard NETMF assemblies.  Delete the example "CustomMFAssembly" below. -->
+        <!-- Providing this list allows the designer to automatically determine when a module that only works with specific mainboards is compatible with the current mainboard. -->
+        <!--
+        <Assembly MFVersion="4.1" Name="CustomMFAssembly"/>
+        ADD THE REALLY COOL XBEE DRIVER FOR CERBUINO HERE
+        OH AND DONT FORGET TO HANDLE THE ONBOARD SD CARD AND USB HOST
+        <Assembly MFVersion="4.2" Name="CustomMFAssembly"/>
+        -->
+        
+        <!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
+        <!--<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZCerbuinoBee" />-->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbuinoBee" />
+      </LibrariesProvided>
+      
+    </MainboardDefinition>
+  </MainboardDefinitions>
+</GadgeteerDefinitions>

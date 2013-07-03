@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED7R_41", "LED7R\LED7R_41\LED7R_41.csproj", "{08330C44-9281-4561-80DC-B44F7BAF7FF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED7R_42", "LED7R\LED7R_42\LED7R_42.csproj", "{512C3B2C-2469-4BA6-8104-676F628C60FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED7R", "LED7R\LED7R\LED7R.csproj", "{6AB428D9-AD38-4D6F-80B8-6B4C7502D972}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{08330C44-9281-4561-80DC-B44F7BAF7FF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08330C44-9281-4561-80DC-B44F7BAF7FF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08330C44-9281-4561-80DC-B44F7BAF7FF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08330C44-9281-4561-80DC-B44F7BAF7FF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{512C3B2C-2469-4BA6-8104-676F628C60FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{512C3B2C-2469-4BA6-8104-676F628C60FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{512C3B2C-2469-4BA6-8104-676F628C60FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{512C3B2C-2469-4BA6-8104-676F628C60FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB428D9-AD38-4D6F-80B8-6B4C7502D972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB428D9-AD38-4D6F-80B8-6B4C7502D972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB428D9-AD38-4D6F-80B8-6B4C7502D972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB428D9-AD38-4D6F-80B8-6B4C7502D972}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

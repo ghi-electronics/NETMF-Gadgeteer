@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender_41", "Extender\Extender_41\Extender_41.csproj", "{D60C3022-44BE-4941-B22D-DBC013BCAC5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender_42", "Extender\Extender_42\Extender_42.csproj", "{162045F4-704B-485F-BA07-0660DA2EC53F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender", "Extender\Extender\Extender.csproj", "{A5B9DE21-8732-4114-8DD7-23F7010FB82B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D60C3022-44BE-4941-B22D-DBC013BCAC5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D60C3022-44BE-4941-B22D-DBC013BCAC5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D60C3022-44BE-4941-B22D-DBC013BCAC5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D60C3022-44BE-4941-B22D-DBC013BCAC5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{162045F4-704B-485F-BA07-0660DA2EC53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{162045F4-704B-485F-BA07-0660DA2EC53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{162045F4-704B-485F-BA07-0660DA2EC53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{162045F4-704B-485F-BA07-0660DA2EC53F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

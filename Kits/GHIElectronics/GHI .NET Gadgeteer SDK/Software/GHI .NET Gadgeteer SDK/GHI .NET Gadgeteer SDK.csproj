@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{153588DE-E205-41A3-B0BF-23EB3F32174C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KitInstaller</RootNamespace>
+    <AssemblyName>KitInstaller</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Ignore\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Ignore\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="en-us.wxl" />
+    <None Include="common.wxi">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="msi.wxs">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="G.ico" />
+    <None Include="html.ico" />
+    <None Include="version.wxi">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="AssemblyInfoGlobal.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!--Stuff for wix-->
+  <PropertyGroup>
+    <WixTasksPath Condition=" '$(WixTasksPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\WixTasks.dll</WixTasksPath>
+    <WixTasksPath Condition=" '$(WixTasksPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\WixTasks.dll</WixTasksPath>
+    <WixToolPath Condition=" '$(WixToolPath)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
+    <WixToolPath Condition=" '$(WixToolPath)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
+    <WixExtDir Condition=" '$(WixExtDir)' == ''">$(WixToolPath)</WixExtDir>
+    <WixIntermediateFolderPath>$(IntermediateOutputPath)\..\Installer</WixIntermediateFolderPath>
+    <WixOutputFolderPath>$(OutDir)\..\Installer</WixOutputFolderPath>
+    <IsInstallerBuildEnabled>true</IsInstallerBuildEnabled>
+  </PropertyGroup>
+  <UsingTask TaskName="Candle" AssemblyFile="$(WixTasksPath)" />
+  <UsingTask TaskName="Light" AssemblyFile="$(WixTasksPath)" />
+  <!--Build for installer -->
+  <Target Name="AfterBuild" Condition="'$(IsInstallerBuildEnabled)' == 'true'">
+    <Message Text="Compiling msi" />
+    <Candle ToolPath="$(WixToolPath)" DefineConstants="BinPath=$(OutDir);SourcePath=$(ProjectDir);Configuration=$(Configuration)" SourceFiles="msi.wxs" OutputFile="$(WixIntermediateFolderPath)\msi.wixobj" />
+    <Message Text="Linking msi" />
+    <Light ToolPath="$(WixToolPath)" LocalizationFiles="en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msi.wixobj" OutputFile="$(WixOutputFolderPath)\GHI.NET_Gadgeteer_SDK.msi" extensions="wixvsextension.dll" />
+  </Target>
+  <!--Cleanup for installer -->
+  <Target Name="AfterClean">
+    <Message Text="Cleaning up installer" />
+    <ItemGroup>
+      <InstallerFiles Include="$(WixIntermediateFolderPath)\*" />
+      <InstallerFiles Include="$(WixOutputFolderPath)\*" />
+    </ItemGroup>
+    <Delete Files="@(InstallerFiles)" />
+  </Target>
+</Project>

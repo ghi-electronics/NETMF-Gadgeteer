@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+  <?include common.wxi?>
+  
+  <Module Id="id_module_msm" Language="0" Version="$(var.ModuleSoftwareVersion)">
+
+    <Package Id="$(var.guid_msm_package_id)" 
+             InstallerVersion="100" 
+             Languages="1033" 
+             Manufacturer="$(var.FullManufacturer)" 
+             SummaryCodepage="1252" 
+             AdminImage="no" />
+
+    <Property Id="ALLUSERS" Value="2"/>
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      
+      <!--Files-->
+      <Directory Id='ProgramFilesFolder' Name='PFiles'>
+        <Directory Id='id_dir_mfgr' Name='$(var.FullManufacturer)'>
+          <Directory Id='id_dir_gdgtr' Name='!(loc.GadgeteerDirectoryName)'>
+            <Directory Id='id_dir_modules' Name='!(loc.ModulesDirectoryName)'>
+              <Directory Id='INSTALLDIR' Name='$(var.SafeModuleName)'>
+
+                <!-- The GadgeteerHardware.xml file is mandatory, or else the designer won't pick up this module -->
+                <Component Id='id_comp_gadgeteerhardware' Guid='$(var.guid_msm_comp_gadgeteerhardware_id)'>
+                  <File Id="id_file_gadgeteerhardware" Source="$(var.SourcePath)\GadgeteerHardware.xml" KeyPath="yes"/>
+                </Component>
+
+                <!-- Even if you do not have an image, leave the default zero-length file so you can easily add one later -->
+                <Directory Id="id_dir_resources" Name="Resources">
+                  <Component Id="id_comp_resources" Guid="$(var.guid_msm_comp_resources_id)">
+                    <File Id="id_file_res_image.jpg" Source="$(var.SourcePath)\Image.jpg" KeyPath="yes"/>
+                  </Component>
+                </Directory>
+
+                <!-- NETMF 4.1 -->
+                <?ifdef NETMF41Supported ?>
+                  <Directory Id="id_dir_netmf_41" Name="NETMF 4.1" FileSource="$(var.SourcePath)..\$(var.ProjectPath)_41\bin\Release\">
+                    <Component Id="id_comp_files_41" Guid="$(var.guid_msm_comp_files_id_41)">
+                      <File Id="id_file_binary_41" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                      <File Id="id_file_pdb_41" Name="$(var.OutputFileName).pdb" />
+                      <File Id="id_file_xml_41" Name="$(var.OutputFileName).XML" />
+                      <!-- If your module relies on custom assemblies other than the one in this template, -->
+                      <!-- then include the dll, pdb and xml files in the output folder (e.g. by setting "copy local" on the reference) -->
+                      <!-- and include the assemblies' files here, e.g.: -->
+                      <!--
+                      <File Id="id_custom_binary_41" Name="Manufacturer.CustomAssembly.dll"/>
+                      <File Id="id_custom_pdb_41" Name="Manufacturer.CustomAssembly.pdb" />
+                      <File Id="id_custom_xml_41" Name="Manufacturer.CustomAssembly.XML" />
+                      -->
+                      <!-- NB see http://msdn.microsoft.com/en-us/library/ms229048.aspx for naming guidelines for assemblies -->
+                      <!-- since these assemblies will appear in "Add Reference" for all NETMF projects -->
+                    </Component>
+
+                    <Directory Id="id_dir_be_41" Name="be">
+                      <Component Id="id_comp_files_be_41" Guid="$(var.guid_msm_comp_files_be_id_41)">
+                        <File Id="id_file_be_binary_41" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                        <File Id="id_file_be_pdb_41" Name="$(var.OutputFileName).pdb" />
+                        <File Id="id_file_be_pdbx_41" Name="$(var.OutputFileName).pdbx" />
+                        <File Id="id_file_be_pe_41" Name="$(var.OutputFileName).pe" />
+                        <!-- If your module relies on custom assemblies other than the one in this template, -->
+                        <!-- then include the be subdirectory's dll, pdb and pdbx and pe files for those assemblies here, e.g.: -->
+                        <!--
+                        <File Id="id_custom_be_binary_41" Name="Manufacturer.CustomAssembly.dll"/>
+                        <File Id="id_custom_be_pdb_41" Name="Manufacturer.CustomAssembly.pdb" />
+                        <File Id="id_custom_be_pdbx_41" Name="Manufacturer.CustomAssembly.pdbx" />
+                        <File Id="id_custom_be_pe_41" Name="Manufacturer.CustomAssembly.pe" />
+                        -->
+                      </Component>
+                    </Directory>
+
+                    <Directory Id="id_dir_le_41" Name="le">
+                      <Component Id="id_comp_files_le_41" Guid="$(var.guid_msm_comp_files_le_id_41)">
+                        <File Id="id_file_le_binary_41" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                        <File Id="id_file_le_pdb_41" Name="$(var.OutputFileName).pdb" />
+                        <File Id="id_file_le_pdbx_41" Name="$(var.OutputFileName).pdbx" />
+                        <File Id="id_file_le_pe_41" Name="$(var.OutputFileName).pe" />
+                        <!-- If your module relies on custom assemblies other than the one in this template, -->
+                        <!-- then include the le subdirectory's dll, pdb and pdbx and pe files for those assemblies here, e.g.: -->
+                        <!--
+                        <File Id="id_custom_le_binary_41" Name="Manufacturer.CustomAssembly.dll"/>
+                        <File Id="id_custom_le_pdb_41" Name="Manufacturer.CustomAssembly.pdb" />
+                        <File Id="id_custom_le_pdbx_41" Name="Manufacturer.CustomAssembly.pdbx" />
+                        <File Id="id_custom_le_pe_41" Name="Manufacturer.CustomAssembly.pe" />
+                        -->
+                      </Component>
+                    </Directory>
+                  </Directory>
+                <?endif ?>
+
+                
+                <!-- NETMF 4.2 -->
+                <?ifdef NETMF42Supported ?>
+                  <Directory Id="id_dir_netmf_42" Name="NETMF 4.2" FileSource="$(var.SourcePath)..\$(var.ProjectPath)_42\bin\Release\">
+                    <Component Id="id_comp_files_42" Guid="$(var.guid_msm_comp_files_id_42)">
+                      <File Id="id_file_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                      <File Id="id_file_pdb_42" Name="$(var.OutputFileName).pdb" />
+                      <File Id="id_file_xml_42" Name="$(var.OutputFileName).XML" />
+                      <!-- If your module relies on custom assemblies other than the one in this template, -->
+                      <!-- then include the dll, pdb and xml files in the output folder (e.g. by setting "copy local" on the reference) -->
+                      <!-- and include the assemblies' files here, e.g.: -->
+                      <!--
+                      <File Id="id_custom_binary_42" Name="Manufacturer.CustomAssembly.dll"/>
+                      <File Id="id_custom_pdb_42" Name="Manufacturer.CustomAssembly.pdb" />
+                      <File Id="id_custom_xml_42" Name="Manufacturer.CustomAssembly.XML" />
+                      -->
+                      <!-- NB see http://msdn.microsoft.com/en-us/library/ms229048.aspx for naming guidelines for assemblies -->
+                      <!-- since these assemblies will appear in "Add Reference" for all NETMF projects. -->
+                    </Component>
+
+                    <Directory Id="id_dir_be_42" Name="be">
+                      <Component Id="id_comp_files_be_42" Guid="$(var.guid_msm_comp_files_be_id_42)">
+                        <File Id="id_file_be_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                        <File Id="id_file_be_pdb_42" Name="$(var.OutputFileName).pdb" />
+                        <File Id="id_file_be_pdbx_42" Name="$(var.OutputFileName).pdbx" />
+                        <File Id="id_file_be_pe_42" Name="$(var.OutputFileName).pe" />
+                        <!-- If your module relies on custom assemblies other than the one in this template, -->
+                        <!-- then include the be subdirectory's dll, pdb and pdbx and pe files for those assemblies here, e.g.: -->
+                        <!--
+                        <File Id="id_custom_be_binary_42" Name="Manufacturer.CustomAssembly.dll"/>
+                        <File Id="id_custom_be_pdb_42" Name="Manufacturer.CustomAssembly.pdb" />
+                        <File Id="id_custom_be_pdbx_42" Name="Manufacturer.CustomAssembly.pdbx" />
+                        <File Id="id_custom_be_pe_42" Name="Manufacturer.CustomAssembly.pe" />
+                        -->
+                      </Component>
+                    </Directory>
+
+                    <Directory Id="id_dir_le_42" Name="le">
+                      <Component Id="id_comp_files_le_42" Guid="$(var.guid_msm_comp_files_le_id_42)">
+                        <File Id="id_file_le_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                        <File Id="id_file_le_pdb_42" Name="$(var.OutputFileName).pdb" />
+                        <File Id="id_file_le_pdbx_42" Name="$(var.OutputFileName).pdbx" />
+                        <File Id="id_file_le_pe_42" Name="$(var.OutputFileName).pe" />
+                        <!-- If your module relies on custom assemblies other than the one in this template, -->
+                        <!-- then include the le subdirectory's dll, pdb and pdbx and pe files for those assemblies here, e.g.: -->
+                        <!--
+                        <File Id="id_custom_le_binary_42" Name="Manufacturer.CustomAssembly.dll"/>
+                        <File Id="id_custom_le_pdb_42" Name="Manufacturer.CustomAssembly.pdb" />
+                        <File Id="id_custom_le_pdbx_42" Name="Manufacturer.CustomAssembly.pdbx" />
+                        <File Id="id_custom_le_pe_42" Name="Manufacturer.CustomAssembly.pe" />
+                        -->
+                      </Component>
+                    </Directory>
+                  </Directory>
+                <?endif ?>
+
+              </Directory>
+            </Directory>
+          </Directory>
+        </Directory>
+      </Directory>
+
+      <!--Registry stuff-->
+      <!--NOTE: This is marked as win32 so that it puts it in the correct location in the registry on x64 machines with registry redirection-->
+      <Component Id="id_comp_reg_key_netmf" Guid="$(var.guid_msm_comp_registry_id)" Win64="no">
+        <!--Registry key for the designer - specifies the folder containing Gadgeteerhardware.xml -->
+        <RegistryValue Id="VSAddinRegKey" Root="HKLM" Type="string" Key="SOFTWARE\Microsoft\.NETGadgeteer\v2\HardwareDefinitionFolders\$(var.OutputFileName)" Value="[INSTALLDIR]" />
+
+        <?ifdef NETMF41Supported ?>
+          <RegistryValue Id="NetMicroFxAssemblyGAC41" Root="HKLM" Type="string" Key="SOFTWARE\Microsoft\.NETMicroFramework\v4.1\AssemblyFoldersEx\$(var.OutputFileName)" Value="[INSTALLDIR]NETMF 4.1"/>
+        <?endif ?>
+
+        <?ifdef NETMF42Supported ?>
+          <RegistryValue Id="NetMicroFxAssemblyGAC42" Root="HKLM" Type="string" Key="SOFTWARE\Microsoft\.NETMicroFramework\v4.2\AssemblyFoldersEx\$(var.OutputFileName)" Value="[INSTALLDIR]NETMF 4.2"/>
+        <?endif ?>
+      </Component>
+      
+    </Directory>
+
+  </Module>
+</Wix>

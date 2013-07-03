@@ -1,0 +1,1 @@
+Full design files are open source and found on GHI website. Please see this for full detials. http://wiki.tinyclr.com/index.php?title=FEZ_Hydra_Developer

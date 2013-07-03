@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluetooth_41", "Bluetooth\Bluetooth_41\Bluetooth_41.csproj", "{A4168F55-3213-429A-B999-13AC8623B3EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluetooth_42", "Bluetooth\Bluetooth_42\Bluetooth_42.csproj", "{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bluetooth", "Bluetooth\Bluetooth\Bluetooth.csproj", "{A65D0B90-B708-4375-84CF-5657BC39224F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTestApp", "TestApp\ClientTestApp.csproj", "{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostTestApp", "HostTestApp\HostTestApp.csproj", "{507DBED0-FB7F-42F4-BF00-EB241AC1C044}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A4168F55-3213-429A-B999-13AC8623B3EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4168F55-3213-429A-B999-13AC8623B3EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4168F55-3213-429A-B999-13AC8623B3EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4168F55-3213-429A-B999-13AC8623B3EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A65D0B90-B708-4375-84CF-5657BC39224F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A65D0B90-B708-4375-84CF-5657BC39224F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A65D0B90-B708-4375-84CF-5657BC39224F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A65D0B90-B708-4375-84CF-5657BC39224F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EEDA3E5-D4AA-4239-AEE9-42379ED6BA69}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{507DBED0-FB7F-42F4-BF00-EB241AC1C044}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

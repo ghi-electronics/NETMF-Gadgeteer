@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joystick_41", "Joystick\Joystick_41\Joystick_41.csproj", "{6FB08DC8-BA76-4E29-8D59-2B33826636B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joystick_42", "Joystick\Joystick_42\Joystick_42.csproj", "{1A78001D-748B-4F69-B929-8A4A4A49BCDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Joystick", "Joystick\Joystick\Joystick.csproj", "{5DEC764F-EE38-4E91-96C4-E769534736C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6FB08DC8-BA76-4E29-8D59-2B33826636B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB08DC8-BA76-4E29-8D59-2B33826636B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB08DC8-BA76-4E29-8D59-2B33826636B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB08DC8-BA76-4E29-8D59-2B33826636B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A78001D-748B-4F69-B929-8A4A4A49BCDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A78001D-748B-4F69-B929-8A4A4A49BCDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A78001D-748B-4F69-B929-8A4A4A49BCDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A78001D-748B-4F69-B929-8A4A4A49BCDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DEC764F-EE38-4E91-96C4-E769534736C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEC764F-EE38-4E91-96C4-E769534736C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEC764F-EE38-4E91-96C4-E769534736C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEC764F-EE38-4E91-96C4-E769534736C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

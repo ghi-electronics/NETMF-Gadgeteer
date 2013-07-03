@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientDP_41", "UsbClientDP\UsbClientDP_41\UsbClientDP_41.csproj", "{56B1DA7B-8BBE-4289-8436-8486F057672F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientDP_42", "UsbClientDP\UsbClientDP_42\UsbClientDP_42.csproj", "{75D12EDF-BC59-4311-AFE2-187DD2E4C53D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientDP", "UsbClientDP\UsbClientDP\UsbClientDP.csproj", "{2F8027A7-D8C3-4268-9642-C6CAA24750FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56B1DA7B-8BBE-4289-8436-8486F057672F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56B1DA7B-8BBE-4289-8436-8486F057672F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56B1DA7B-8BBE-4289-8436-8486F057672F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56B1DA7B-8BBE-4289-8436-8486F057672F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75D12EDF-BC59-4311-AFE2-187DD2E4C53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75D12EDF-BC59-4311-AFE2-187DD2E4C53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75D12EDF-BC59-4311-AFE2-187DD2E4C53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75D12EDF-BC59-4311-AFE2-187DD2E4C53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F8027A7-D8C3-4268-9642-C6CAA24750FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F8027A7-D8C3-4268-9642-C6CAA24750FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F8027A7-D8C3-4268-9642-C6CAA24750FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F8027A7-D8C3-4268-9642-C6CAA24750FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

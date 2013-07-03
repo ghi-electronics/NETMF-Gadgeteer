@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZHydra_41", "FEZHydra\FEZHydra_41\FEZHydra_41.csproj", "{86677EA9-243C-4226-A748-47B3C533109A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZHydra_42", "FEZHydra\FEZHydra_42\FEZHydra_42.csproj", "{FC3C1A23-FFB7-43D4-A06E-FA00DD043F98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZHydra", "FEZHydra\FEZHydra\FEZHydra.csproj", "{2DC5C8DC-264D-4F55-8A3B-562F448C20C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{86677EA9-243C-4226-A748-47B3C533109A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86677EA9-243C-4226-A748-47B3C533109A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86677EA9-243C-4226-A748-47B3C533109A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86677EA9-243C-4226-A748-47B3C533109A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC3C1A23-FFB7-43D4-A06E-FA00DD043F98}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC3C1A23-FFB7-43D4-A06E-FA00DD043F98}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC3C1A23-FFB7-43D4-A06E-FA00DD043F98}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC3C1A23-FFB7-43D4-A06E-FA00DD043F98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DC5C8DC-264D-4F55-8A3B-562F448C20C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DC5C8DC-264D-4F55-8A3B-562F448C20C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DC5C8DC-264D-4F55-8A3B-562F448C20C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DC5C8DC-264D-4F55-8A3B-562F448C20C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

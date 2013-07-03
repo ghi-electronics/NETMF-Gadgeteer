@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip_41", "LED Strip\LED_Strip_41\LED_Strip_41.csproj", "{1D33E05F-AD72-4B63-8A13-B7D13B4CE710}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip_42", "LED Strip\LED_Strip_42\LED_Strip_42.csproj", "{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip", "LED Strip\LED_Strip\LED_Strip.csproj", "{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{64909B1D-D761-4277-98C5-B616CD7F8B65}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D33E05F-AD72-4B63-8A13-B7D13B4CE710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D33E05F-AD72-4B63-8A13-B7D13B4CE710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D33E05F-AD72-4B63-8A13-B7D13B4CE710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D33E05F-AD72-4B63-8A13-B7D13B4CE710}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64909B1D-D761-4277-98C5-B616CD7F8B65}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_HD44780_41", "Display_HD44780\Display_HD44780_41\Display_HD44780_41.csproj", "{0D593362-3BFA-48BE-9147-BEA32D97844F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_HD44780_42", "Display_HD44780\Display_HD44780_42\Display_HD44780_42.csproj", "{A0DA3633-52CF-40A4-81A1-3DA5453A67D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_HD44780", "Display_HD44780\Display_HD44780\Display_HD44780.csproj", "{A856E3A6-0AF2-4CE6-9EB8-97382673C5F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D593362-3BFA-48BE-9147-BEA32D97844F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D593362-3BFA-48BE-9147-BEA32D97844F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D593362-3BFA-48BE-9147-BEA32D97844F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D593362-3BFA-48BE-9147-BEA32D97844F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0DA3633-52CF-40A4-81A1-3DA5453A67D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0DA3633-52CF-40A4-81A1-3DA5453A67D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0DA3633-52CF-40A4-81A1-3DA5453A67D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0DA3633-52CF-40A4-81A1-3DA5453A67D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A856E3A6-0AF2-4CE6-9EB8-97382673C5F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A856E3A6-0AF2-4CE6-9EB8-97382673C5F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A856E3A6-0AF2-4CE6-9EB8-97382673C5F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A856E3A6-0AF2-4CE6-9EB8-97382673C5F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
