@@ -36,7 +36,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     ///     {
     ///         void ProgramStarted()
     ///         {
-    ///             double lightPercent = lightsensor.ReadLightSensorPercentage();
+    ///             double lightPercent = lightSensor.ReadLightSensorPercentage();
     ///
     ///             Debug.Print(lightPercent.ToString());
     ///         }
@@ -65,7 +65,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Returns the current voltage reading of the light sensor
-        /// </summary>
+		/// </summary>
+		/// <returns>A voltage reading between 0 and 3.3.</returns>
         public double ReadLightSensorVoltage()
         {
             return input.ReadVoltage();
@@ -74,9 +75,24 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         ///  Returns the current strength of the light relative to its maximum: range 0.0 to 100.0
         /// </summary>
+		/// <returns>A percentage between 0 and 100.</returns>
         public double ReadLightSensorPercentage()
         {
             return (input.ReadProportion() * 100);
         }
+
+		/// <summary>
+		/// Returns the current sensor reading in lux.
+		/// </summary>
+		/// <returns>A reading in lux between 0 and MAX_ILLUMINANCE.</returns>
+		public double GetIlluminance()
+		{
+			return this.input.ReadProportion() * LightSensor.MAX_ILLUMINANCE;
+		}
+
+		/// <summary>
+		/// The maximum amount of lux the sensor can detect before becoming saturated.
+		/// </summary>
+		public const double MAX_ILLUMINANCE = 750;
     }
 }
