@@ -88,7 +88,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thermocouple\Thermocouple_42\Thermocouple_42.csproj">
+    <ProjectReference Include="..\Software\Thermocouple\Thermocouple_42\Thermocouple_42.csproj">
       <Project>{278676AE-B8AB-4990-82A4-675221F60AB7}</Project>
       <Name>Thermocouple_42</Name>
     </ProjectReference>

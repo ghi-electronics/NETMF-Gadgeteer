@@ -1,8 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder_41", "RotaryEncoder\RotaryEncoder_41\RotaryEncoder_41.csproj", "{1AE84774-3D46-47C4-89AD-542DAD8DC970}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder_42", "RotaryEncoder\RotaryEncoder_42\RotaryEncoder_42.csproj", "{B9DCC667-072D-461E-BC84-B8070269DC0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryEncoder", "RotaryEncoder\RotaryEncoder\RotaryEncoder.csproj", "{DA8DFABA-A5D9-42CD-9E38-38FB9DCC391E}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1AE84774-3D46-47C4-89AD-542DAD8DC970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AE84774-3D46-47C4-89AD-542DAD8DC970}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AE84774-3D46-47C4-89AD-542DAD8DC970}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AE84774-3D46-47C4-89AD-542DAD8DC970}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B9DCC667-072D-461E-BC84-B8070269DC0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B9DCC667-072D-461E-BC84-B8070269DC0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B9DCC667-072D-461E-BC84-B8070269DC0D}.Release|Any CPU.ActiveCfg = Release|Any CPU

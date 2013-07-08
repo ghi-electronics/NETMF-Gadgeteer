@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{05B30D3F-5FA6-4C6F-B523-C5F7B2817F4C}</ProjectGuid>
+    <ProjectGuid>{FCB41E58-415E-488D-B488-5C55E4C07416}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -53,12 +53,6 @@
     <None Include="msi.wxs" />
     <None Include="G.ico" />
     <None Include="Image.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\IR Receiver_42\IR Receiver_42.csproj">
-      <Project>{A3C0503E-8434-458B-A9A7-032F160C6E4B}</Project>
-      <Name>IR Receiver_42</Name>
-    </ProjectReference>
   </ItemGroup>
   <!--Stuff for wix-->
   <PropertyGroup>

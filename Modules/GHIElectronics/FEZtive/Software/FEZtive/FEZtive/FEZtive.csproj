@@ -43,7 +43,6 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <ProjectReference Include="..\FEZtive_41\FEZtive_41.csproj" />
     <ProjectReference Include="..\FEZtive_42\FEZtive_42.csproj" />
   </ItemGroup>
   <ItemGroup>

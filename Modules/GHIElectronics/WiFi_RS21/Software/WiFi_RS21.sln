@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21_41", "WiFi_RS21\WiFi_RS21_41\WiFi_RS21_41.csproj", "{BD04153B-6F24-4485-A4AD-BC71F2E496F8}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21_42", "WiFi_RS21\WiFi_RS21_42\WiFi_RS21_42.csproj", "{D232475E-CB64-49C1-8154-52060B88DE83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21", "WiFi_RS21\WiFi_RS21\WiFi_RS21.csproj", "{F565F4F1-C836-4BE7-8692-A70E797E8745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider_42", "..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider_42\FEZSpider_42.csproj", "{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BD04153B-6F24-4485-A4AD-BC71F2E496F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD04153B-6F24-4485-A4AD-BC71F2E496F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD04153B-6F24-4485-A4AD-BC71F2E496F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD04153B-6F24-4485-A4AD-BC71F2E496F8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D232475E-CB64-49C1-8154-52060B88DE83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D232475E-CB64-49C1-8154-52060B88DE83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D232475E-CB64-49C1-8154-52060B88DE83}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,10 +27,6 @@ Global
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.Deploy.0 = Release|Any CPU
-		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

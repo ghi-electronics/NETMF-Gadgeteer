@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard_41", "SDCard\SDCard_41\SDCard_41.csproj", "{0B2BED27-C6B3-4604-92A2-26158B767C25}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard_42", "SDCard\SDCard_42\SDCard_42.csproj", "{4ADEB7C6-8F80-4E7A-8D20-1B41E1D2351C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard", "SDCard\SDCard\SDCard.csproj", "{9824E858-BDD0-48F2-8297-CA6D75EAED19}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0B2BED27-C6B3-4604-92A2-26158B767C25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0B2BED27-C6B3-4604-92A2-26158B767C25}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0B2BED27-C6B3-4604-92A2-26158B767C25}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0B2BED27-C6B3-4604-92A2-26158B767C25}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4ADEB7C6-8F80-4E7A-8D20-1B41E1D2351C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4ADEB7C6-8F80-4E7A-8D20-1B41E1D2351C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ADEB7C6-8F80-4E7A-8D20-1B41E1D2351C}.Release|Any CPU.ActiveCfg = Release|Any CPU

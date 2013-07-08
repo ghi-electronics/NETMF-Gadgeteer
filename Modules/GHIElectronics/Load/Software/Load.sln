@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Load_41", "Load\Load_41\Load_41.csproj", "{1F3D05C2-4DF6-496D-99A3-2AE1059A45E7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Load_42", "Load\Load_42\Load_42.csproj", "{A740A4AE-DEE4-4CF7-B978-6163B1E74C82}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Load", "Load\Load\Load.csproj", "{9E90AA88-DBED-48E1-90DE-DB9198A7D88C}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1F3D05C2-4DF6-496D-99A3-2AE1059A45E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1F3D05C2-4DF6-496D-99A3-2AE1059A45E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1F3D05C2-4DF6-496D-99A3-2AE1059A45E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1F3D05C2-4DF6-496D-99A3-2AE1059A45E7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A740A4AE-DEE4-4CF7-B978-6163B1E74C82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A740A4AE-DEE4-4CF7-B978-6163B1E74C82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A740A4AE-DEE4-4CF7-B978-6163B1E74C82}.Release|Any CPU.ActiveCfg = Release|Any CPU

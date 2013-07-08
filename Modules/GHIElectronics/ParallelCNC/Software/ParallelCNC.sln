@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelCNC_41", "ParallelCNC\ParallelCNC_41\ParallelCNC_41.csproj", "{DBC9FBB1-7A45-4DA4-8B99-53AA9C7F2680}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelCNC_42", "ParallelCNC\ParallelCNC_42\ParallelCNC_42.csproj", "{D7D49E7E-A24B-4895-949E-4CB6A038B852}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParallelCNC", "ParallelCNC\ParallelCNC\ParallelCNC.csproj", "{7DA8E2C4-84ED-46E4-A68A-10B0D4D65553}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DBC9FBB1-7A45-4DA4-8B99-53AA9C7F2680}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DBC9FBB1-7A45-4DA4-8B99-53AA9C7F2680}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DBC9FBB1-7A45-4DA4-8B99-53AA9C7F2680}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DBC9FBB1-7A45-4DA4-8B99-53AA9C7F2680}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D7D49E7E-A24B-4895-949E-4CB6A038B852}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D7D49E7E-A24B-4895-949E-4CB6A038B852}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7D49E7E-A24B-4895-949E-4CB6A038B852}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -96,11 +96,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider_42\FEZSpider_42.csproj">
-      <Project>{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}</Project>
-      <Name>FEZSpider_42</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WiFi_RS21\WiFi_RS21_42\WiFi_RS21_42.csproj">
+    <ProjectReference Include="..\Software\WiFi_RS21\WiFi_RS21_42\WiFi_RS21_42.csproj">
       <Project>{D232475E-CB64-49C1-8154-52060B88DE83}</Project>
       <Name>WiFi_RS21_42</Name>
     </ProjectReference>

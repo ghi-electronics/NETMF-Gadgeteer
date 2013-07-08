@@ -99,7 +99,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ethernet_J11D\Ethernet_J11D_42\Ethernet_J11D_42.csproj">
+    <ProjectReference Include="..\Software\Ethernet_J11D\Ethernet_J11D_42\Ethernet_J11D_42.csproj">
       <Project>{9A8AD39E-73D4-4B37-B7EF-0AA5D2C5CB4B}</Project>
       <Name>Ethernet_J11D_42</Name>
     </ProjectReference>

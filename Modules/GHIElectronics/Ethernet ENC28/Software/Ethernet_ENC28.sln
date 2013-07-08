@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28_41", "Ethernet_ENC28\Ethernet_ENC28_41\Ethernet_ENC28_41.csproj", "{8D8CD5A9-8303-4AA8-9623-B6B8AED79D62}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28_42", "Ethernet_ENC28\Ethernet_ENC28_42\Ethernet_ENC28_42.csproj", "{0B8B7B11-EEE7-4C09-943C-DE5ABD065F60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28", "Ethernet_ENC28\Ethernet_ENC28\Ethernet_ENC28.csproj", "{766B22F0-6E1A-4EC7-B596-A2B08CBAD744}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8D8CD5A9-8303-4AA8-9623-B6B8AED79D62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8D8CD5A9-8303-4AA8-9623-B6B8AED79D62}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8D8CD5A9-8303-4AA8-9623-B6B8AED79D62}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8D8CD5A9-8303-4AA8-9623-B6B8AED79D62}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B8B7B11-EEE7-4C09-943C-DE5ABD065F60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B8B7B11-EEE7-4C09-943C-DE5ABD065F60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B8B7B11-EEE7-4C09-943C-DE5ABD065F60}.Release|Any CPU.ActiveCfg = Release|Any CPU

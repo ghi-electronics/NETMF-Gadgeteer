@@ -98,7 +98,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Stepper_L6470\Stepper_L6470_42\Stepper_L6470_42.csproj">
+    <ProjectReference Include="..\Software\Stepper_L6470\Stepper_L6470_42\Stepper_L6470_42.csproj">
       <Project>{01E20C4D-5BC7-462E-9D4B-9EFFA50DAB8D}</Project>
       <Name>Stepper_L6470_42</Name>
     </ProjectReference>

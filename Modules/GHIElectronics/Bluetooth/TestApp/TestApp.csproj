@@ -91,7 +91,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluetooth\Bluetooth_42\Bluetooth_42.csproj">
+    <ProjectReference Include="..\Software\Bluetooth\Bluetooth_42\Bluetooth_42.csproj">
       <Project>{95D7029E-07E6-4C36-BBA3-DBFF2FBB1EDA}</Project>
       <Name>Bluetooth_42</Name>
     </ProjectReference>

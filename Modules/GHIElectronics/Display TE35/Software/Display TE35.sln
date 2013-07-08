@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35_41", "Display TE35\Display_TE35_41\Display_TE35_41.csproj", "{9C05FBCE-F42B-4DA9-9625-B827F22DE887}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35_42", "Display TE35\Display_TE35_42\Display_TE35_42.csproj", "{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35", "Display TE35\Display_TE35\Display_TE35.csproj", "{90675549-3299-4AD6-A544-D7764E71CACD}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{9C05FBCE-F42B-4DA9-9625-B827F22DE887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C05FBCE-F42B-4DA9-9625-B827F22DE887}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C05FBCE-F42B-4DA9-9625-B827F22DE887}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C05FBCE-F42B-4DA9-9625-B827F22DE887}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU

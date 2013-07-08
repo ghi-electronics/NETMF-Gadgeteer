@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor_41", "LightSensor\LightSensor_41\LightSensor_41.csproj", "{8A8C013D-57B7-47D1-BC81-C1338C156E0E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor_42", "LightSensor\LightSensor_42\LightSensor_42.csproj", "{20D0E5E8-C17F-4FF9-BFEF-84073A258737}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor", "LightSensor\LightSensor\LightSensor.csproj", "{29E02078-C269-4EE7-9341-B388B4E326F8}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8A8C013D-57B7-47D1-BC81-C1338C156E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8A8C013D-57B7-47D1-BC81-C1338C156E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8A8C013D-57B7-47D1-BC81-C1338C156E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8A8C013D-57B7-47D1-BC81-C1338C156E0E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{20D0E5E8-C17F-4FF9-BFEF-84073A258737}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{20D0E5E8-C17F-4FF9-BFEF-84073A258737}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20D0E5E8-C17F-4FF9-BFEF-84073A258737}.Release|Any CPU.ActiveCfg = Release|Any CPU

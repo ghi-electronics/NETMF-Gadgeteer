@@ -88,7 +88,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FLASH\FLASH_42\FLASH_42.csproj">
+    <ProjectReference Include="..\Software\FLASH\FLASH_42\FLASH_42.csproj">
       <Project>{E91C15F6-FA2F-4880-8E1E-393435B6AA90}</Project>
       <Name>FLASH_42</Name>
     </ProjectReference>

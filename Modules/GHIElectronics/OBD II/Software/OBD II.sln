@@ -1,11 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBD II_41", "OBD II\OBD II_41\OBD II_41.csproj", "{ADCE88E9-DE75-465F-8690-16CDD103BA95}"
-	ProjectSection(ProjectDependencies) = postProject
-		{16AFE004-4A9F-446F-B6A1-391AA6D92336} = {16AFE004-4A9F-446F-B6A1-391AA6D92336}
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBD II_42", "OBD II\OBD II_42\OBD II_42.csproj", "{B314DD82-A006-402F-BF22-5C17BC362350}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBD II", "OBD II\OBD II\OBD II.csproj", "{31E37877-503D-453B-A3C9-ADB54985C451}"
@@ -21,10 +16,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{ADCE88E9-DE75-465F-8690-16CDD103BA95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ADCE88E9-DE75-465F-8690-16CDD103BA95}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ADCE88E9-DE75-465F-8690-16CDD103BA95}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ADCE88E9-DE75-465F-8690-16CDD103BA95}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B314DD82-A006-402F-BF22-5C17BC362350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B314DD82-A006-402F-BF22-5C17BC362350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B314DD82-A006-402F-BF22-5C17BC362350}.Release|Any CPU.ActiveCfg = Release|Any CPU

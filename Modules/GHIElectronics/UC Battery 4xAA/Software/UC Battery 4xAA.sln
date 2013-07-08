@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA_41", "UC Battery 4xAA\UC_Battery_4xAA_41\UC_Battery_4xAA_41.csproj", "{4A9D2197-B1A5-4C70-86A3-EEBFE33D0955}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA_42", "UC Battery 4xAA\UC_Battery_4xAA_42\UC_Battery_4xAA_42.csproj", "{8F40A973-0B17-4B4A-80ED-C05E52C2759C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA", "UC Battery 4xAA\UC_Battery_4xAA\UC_Battery_4xAA.csproj", "{18C72E51-A4B0-4A1E-AADC-0A0BE8DDD27A}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4A9D2197-B1A5-4C70-86A3-EEBFE33D0955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A9D2197-B1A5-4C70-86A3-EEBFE33D0955}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A9D2197-B1A5-4C70-86A3-EEBFE33D0955}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A9D2197-B1A5-4C70-86A3-EEBFE33D0955}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8F40A973-0B17-4B4A-80ED-C05E52C2759C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8F40A973-0B17-4B4A-80ED-C05E52C2759C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F40A973-0B17-4B4A-80ED-C05E52C2759C}.Release|Any CPU.ActiveCfg = Release|Any CPU

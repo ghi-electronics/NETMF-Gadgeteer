@@ -98,7 +98,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Display TE35\Display_TE35_42\Display_TE35_42.csproj">
+    <ProjectReference Include="..\Software\Display TE35\Display_TE35_42\Display_TE35_42.csproj">
       <Project>{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}</Project>
       <Name>Display_TE35_42</Name>
     </ProjectReference>

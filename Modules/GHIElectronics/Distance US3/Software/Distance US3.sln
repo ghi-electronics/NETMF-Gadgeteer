@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distance_US3_41", "Distance US3\Distance_US3_41\Distance_US3_41.csproj", "{920D8D00-1150-4431-A743-E672C51B31DA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distance_US3_42", "Distance US3\Distance_US3_42\Distance_US3_42.csproj", "{5B74CFD4-F73A-4B5C-9FB8-5CDC4A76FC29}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distance_US3", "Distance US3\Distance_US3\Distance_US3.csproj", "{1F5B1EE6-199D-48D9-8F90-48561A7B2E9E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{920D8D00-1150-4431-A743-E672C51B31DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{920D8D00-1150-4431-A743-E672C51B31DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{920D8D00-1150-4431-A743-E672C51B31DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{920D8D00-1150-4431-A743-E672C51B31DA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B74CFD4-F73A-4B5C-9FB8-5CDC4A76FC29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5B74CFD4-F73A-4B5C-9FB8-5CDC4A76FC29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5B74CFD4-F73A-4B5C-9FB8-5CDC4A76FC29}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,12 +19,6 @@ Global
 		{1F5B1EE6-199D-48D9-8F90-48561A7B2E9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F5B1EE6-199D-48D9-8F90-48561A7B2E9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F5B1EE6-199D-48D9-8F90-48561A7B2E9E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5DDFFB30-0EE9-4160-BE13-D0BB3E5AC969}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed_41", "MulticolorLed\MulticolorLed_41\MulticolorLed_41.csproj", "{D884D6C7-5F8D-4F87-B2A9-50C5E113402A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed_42", "MulticolorLed\MulticolorLed_42\MulticolorLed_42.csproj", "{F97AA9C7-BA57-46C3-9529-FB84996D20D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed", "MulticolorLed\MulticolorLed\MulticolorLed.csproj", "{2EBC8058-E210-4103-8E21-A1879A3749F8}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D884D6C7-5F8D-4F87-B2A9-50C5E113402A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D884D6C7-5F8D-4F87-B2A9-50C5E113402A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D884D6C7-5F8D-4F87-B2A9-50C5E113402A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D884D6C7-5F8D-4F87-B2A9-50C5E113402A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F97AA9C7-BA57-46C3-9529-FB84996D20D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F97AA9C7-BA57-46C3-9529-FB84996D20D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F97AA9C7-BA57-46C3-9529-FB84996D20D9}.Release|Any CPU.ActiveCfg = Release|Any CPU

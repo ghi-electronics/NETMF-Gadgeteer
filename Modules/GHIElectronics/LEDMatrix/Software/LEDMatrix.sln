@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix_41", "LEDMatrix\LEDMatrix_41\LEDMatrix_41.csproj", "{8563D1E3-1F69-4E96-ADE3-28F5C194C513}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix_42", "LEDMatrix\LEDMatrix_42\LEDMatrix_42.csproj", "{2827FEF2-7C66-4E48-B378-C471CA3A99DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix", "LEDMatrix\LEDMatrix\LEDMatrix.csproj", "{DF4E99DB-8C41-4851-8638-24D0DC2BCE66}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8563D1E3-1F69-4E96-ADE3-28F5C194C513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8563D1E3-1F69-4E96-ADE3-28F5C194C513}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8563D1E3-1F69-4E96-ADE3-28F5C194C513}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8563D1E3-1F69-4E96-ADE3-28F5C194C513}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2827FEF2-7C66-4E48-B378-C471CA3A99DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2827FEF2-7C66-4E48-B378-C471CA3A99DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2827FEF2-7C66-4E48-B378-C471CA3A99DA}.Release|Any CPU.ActiveCfg = Release|Any CPU

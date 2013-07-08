@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW_41", "CAN_DW\CAN_DW_41\CAN_DW_41.csproj", "{CF5F8348-3539-49DC-9BEE-3B042B88C263}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW_42", "CAN_DW\CAN_DW_42\CAN_DW_42.csproj", "{EF4F3340-28C6-4524-9943-B0069C2988A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW", "CAN_DW\CAN_DW\CAN_DW.csproj", "{E60A3D70-3D2D-4FD4-8860-EED931744E93}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CF5F8348-3539-49DC-9BEE-3B042B88C263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CF5F8348-3539-49DC-9BEE-3B042B88C263}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CF5F8348-3539-49DC-9BEE-3B042B88C263}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CF5F8348-3539-49DC-9BEE-3B042B88C263}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EF4F3340-28C6-4524-9943-B0069C2988A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EF4F3340-28C6-4524-9943-B0069C2988A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EF4F3340-28C6-4524-9943-B0069C2988A1}.Release|Any CPU.ActiveCfg = Release|Any CPU

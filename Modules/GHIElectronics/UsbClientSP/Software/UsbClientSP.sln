@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientSP_41", "UsbClientSP\UsbClientSP_41\UsbClientSP_41.csproj", "{6DDC1845-0CE2-4C3F-9434-31DB19199C91}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientSP_42", "UsbClientSP\UsbClientSP_42\UsbClientSP_42.csproj", "{4DCBE9FA-EDC5-480F-A4F1-077D7286354C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbClientSP", "UsbClientSP\UsbClientSP\UsbClientSP.csproj", "{2007CDEA-E9A3-42E9-8C9B-9947024AD34F}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6DDC1845-0CE2-4C3F-9434-31DB19199C91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6DDC1845-0CE2-4C3F-9434-31DB19199C91}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6DDC1845-0CE2-4C3F-9434-31DB19199C91}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6DDC1845-0CE2-4C3F-9434-31DB19199C91}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4DCBE9FA-EDC5-480F-A4F1-077D7286354C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4DCBE9FA-EDC5-480F-A4F1-077D7286354C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DCBE9FA-EDC5-480F-A4F1-077D7286354C}.Release|Any CPU.ActiveCfg = Release|Any CPU

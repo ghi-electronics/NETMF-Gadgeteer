@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZtive_41", "FEZtive\FEZtive_41\FEZtive_41.csproj", "{A4DA8296-E54B-4902-AFE8-F73A5C9EECF1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZtive_42", "FEZtive\FEZtive_42\FEZtive_42.csproj", "{856DD273-5727-4014-A04F-0BEF703D42B2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZtive", "FEZtive\FEZtive\FEZtive.csproj", "{417743CE-9288-4F08-AE16-7DCC695457B9}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A4DA8296-E54B-4902-AFE8-F73A5C9EECF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A4DA8296-E54B-4902-AFE8-F73A5C9EECF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A4DA8296-E54B-4902-AFE8-F73A5C9EECF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A4DA8296-E54B-4902-AFE8-F73A5C9EECF1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{856DD273-5727-4014-A04F-0BEF703D42B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{856DD273-5727-4014-A04F-0BEF703D42B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{856DD273-5727-4014-A04F-0BEF703D42B2}.Release|Any CPU.ActiveCfg = Release|Any CPU

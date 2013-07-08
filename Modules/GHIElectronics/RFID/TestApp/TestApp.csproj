@@ -94,7 +94,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RFID\RFID_42\RFID_42.csproj">
+    <ProjectReference Include="..\Software\RFID\RFID_42\RFID_42.csproj">
       <Project>{EB6C0748-66CF-498B-938C-6785617DE188}</Project>
       <Name>RFID_42</Name>
     </ProjectReference>

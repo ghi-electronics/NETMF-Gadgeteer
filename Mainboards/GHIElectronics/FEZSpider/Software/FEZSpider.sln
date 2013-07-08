@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider_41", "FEZSpider\FEZSpider_41\FEZSpider_41.csproj", "{674294E0-FA6E-4AF9-80CE-DAA76A088904}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider_42", "FEZSpider\FEZSpider_42\FEZSpider_42.csproj", "{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider", "FEZSpider\FEZSpider\FEZSpider.csproj", "{293A9835-65A1-4D0E-B2D4-C448E4204E5E}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{674294E0-FA6E-4AF9-80CE-DAA76A088904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{674294E0-FA6E-4AF9-80CE-DAA76A088904}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{674294E0-FA6E-4AF9-80CE-DAA76A088904}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{674294E0-FA6E-4AF9-80CE-DAA76A088904}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}.Release|Any CPU.ActiveCfg = Release|Any CPU

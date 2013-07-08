@@ -68,28 +68,6 @@
               </File>
             </Component>
 
-            <!--Firmware Updaters--><!--
-            <Directory Id ='id_dir_firmware_update' Name='!(loc.FirmwareUpdaterDirectoryName)' FileSource='..\Firmware Update'>
-              <Component Id='id_firmware_updaters_spider' Guid="$(var.guid_firmware_updater_id_spider)">
-                --><!--FEZSpider Updater--><!--
-                <File Name="FEZSpiderMainboardUpdater.exe" KeyPath="yes"/>
-                <Shortcut Id="FEZSpiderUpdaterShortcut" Advertise="yes" Directory="ProgramMenuSubFolderFirmware" Name="FEZSpider Firmware Updater">
-                  <Icon Id ="SpiderUpdateIcon.exe" SourceFile="G.ico"/>
-                </Shortcut>
-              </Component>
-              --><!--End FEZSpider Updater--><!--
-
-              <Component Id='id_firmware_updaters_hydra' Guid="$(var.guid_firmware_updater_id_hydra)">
-                --><!--FEZHydra Updater--><!--
-                <File Name="FEZHydraMainboardUpdater.exe"/>
-                <Shortcut Id ="FEZHydraUpdaterShortcut" Advertise="yes" Directory ="ProgramMenuSubFolderFirmware" Name="FEZHydra Firmware Updater">
-                  <Icon Id ="HydraUpdateIcon.exe" SourceFile="G.ico"/>
-                </Shortcut>
-                --><!--End FEZHydra Updater--><!--
-              </Component>
-            </Directory>
-            --><!--End Firmware Updaters-->
-
             <!--Getting Started Guides-->
             <Directory Id='id_dir_getting_started_guides' Name='!(loc.GettingStartedGuideDirectoryName)' FileSource='..\Getting Started Guides'>
               <Component Id='id_getting_started_guides_spider' Guid="$(var.guid_getting_started_guides_id_spider)">
@@ -155,7 +133,6 @@
       <Merge Id="id_CAN_DW_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CAN_DW\Software\CAN_DW\CAN_DW\bin\Release\Installer\CAN_DW.msm" DiskId="1" />
       <Merge Id="id_Display_T35_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T35\Software\Display T35\Display T35\bin\Release\Installer\Display_T35.msm" DiskId="1" />
       <Merge Id="id_Display_HD44780_msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_HD44780\Software\Display_HD44780\Display_HD44780\bin\Release\Installer\Display_HD44780.msm" DiskId="1" />
-      <!--<Merge Id="id_EBlockExpansion_msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\EBlockExpansion\Software\EBlockExpansion\EBlockExpansion\bin\Release\Installer\EBlockExpansion.msm" DiskId="1" />-->
       <Merge Id="id_Ethernet_J11D_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet_J11D\Software\Ethernet_J11D\Ethernet_J11D\bin\Release\Installer\Ethernet_J11D.msm" DiskId="1" />
       <Merge Id="id_Extender_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Extender\Software\Extender\Extender\bin\Release\Installer\Extender.msm" DiskId="1" />
       <Merge Id="id_GenericDaisylink_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GenericDaisylink\Software\GenericDaisylink\GenericDaisylink\bin\Release\Installer\GenericDaisylink.msm" DiskId="1" />
@@ -231,10 +208,6 @@
     </Directory>
 
     <Feature Id="main" Title="Main" Level="1">
-      <!-- List all merge modules above here, e.g.:
-      <MergeRef Id="id_Button_msm" />
-      <MergeRef Id="id_MainboardName_msm" />
-      -->
 
       <MergeRef Id="id_Bluetooth_msm" />
       <MergeRef Id="id_Button_msm" />
@@ -242,7 +215,6 @@
       <MergeRef Id="id_CAN_DW_msm" />
       <MergeRef Id="id_Display_T35_msm" />
       <MergeRef Id="id_Display_HD44780_msm" />
-      <!--<MergeRef Id="id_EBlockExpansion_msm" />-->
       <MergeRef Id="id_Ethernet_J11D_msm" />
       <MergeRef Id="id_Extender_msm" />
       <MergeRef Id="id_GenericDaisylink_msm" />
@@ -315,10 +287,7 @@
       
       <MergeRef Id="id_FEZCerbot_msm" />
 
-      <!--<ComponentRef Id="GettingStartedHtmFiles"/>-->
-      <ComponentRef Id="id_sdk_files"/><!--
-      <ComponentRef Id="id_firmware_updaters_spider"/>
-      <ComponentRef Id="id_firmware_updaters_hydra"/>-->
+      <ComponentRef Id="id_sdk_files"/>
       <ComponentRef Id="id_getting_started_guides_spider"/>
       <ComponentRef Id="id_getting_started_guides_hydra"/>
       <ComponentRef Id="id_getting_started_guides_cerberus"/>

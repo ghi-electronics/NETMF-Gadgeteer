@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBee_41", "XBee\XBee_41\XBee_41.csproj", "{029F90A6-818F-4715-BEBE-0864194C2F7B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBee_42", "XBee\XBee_42\XBee_42.csproj", "{ECF92ED3-749E-4EB9-A0FD-AD182E56137F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XBee", "XBee\XBee\XBee.csproj", "{831158A4-262C-4629-9B7D-CF0F1BEE0E3C}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{029F90A6-818F-4715-BEBE-0864194C2F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{029F90A6-818F-4715-BEBE-0864194C2F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{029F90A6-818F-4715-BEBE-0864194C2F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{029F90A6-818F-4715-BEBE-0864194C2F7B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECF92ED3-749E-4EB9-A0FD-AD182E56137F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECF92ED3-749E-4EB9-A0FD-AD182E56137F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECF92ED3-749E-4EB9-A0FD-AD182E56137F}.Release|Any CPU.ActiveCfg = Release|Any CPU

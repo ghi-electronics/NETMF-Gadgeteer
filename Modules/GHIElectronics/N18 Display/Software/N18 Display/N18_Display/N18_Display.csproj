@@ -43,7 +43,6 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <ProjectReference Include="..\N18_Display_41\N18_Display_41.csproj" />
     <ProjectReference Include="..\N18_Display_42\N18_Display_42.csproj" />
   </ItemGroup>
   <ItemGroup>

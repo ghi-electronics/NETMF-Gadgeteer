@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZ Cerbuino Bee_41", "FEZ Cerbuino Bee\FEZ Cerbuino Bee_41\FEZ Cerbuino Bee_41.csproj", "{FACAA4F1-C303-48C2-890F-DE3BA59A68F2}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZ Cerbuino Bee_42", "FEZ Cerbuino Bee\FEZ Cerbuino Bee_42\FEZ Cerbuino Bee_42.csproj", "{CEFD2559-385F-4DDB-9DD7-2211C67BF036}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZ Cerbuino Bee", "FEZ Cerbuino Bee\FEZ Cerbuino Bee\FEZ Cerbuino Bee.csproj", "{004BA2DA-7657-4DCC-9DCD-19BBD5BE7C08}"
@@ -13,10 +11,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FACAA4F1-C303-48C2-890F-DE3BA59A68F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FACAA4F1-C303-48C2-890F-DE3BA59A68F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FACAA4F1-C303-48C2-890F-DE3BA59A68F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FACAA4F1-C303-48C2-890F-DE3BA59A68F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CEFD2559-385F-4DDB-9DD7-2211C67BF036}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CEFD2559-385F-4DDB-9DD7-2211C67BF036}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CEFD2559-385F-4DDB-9DD7-2211C67BF036}.Release|Any CPU.ActiveCfg = Release|Any CPU

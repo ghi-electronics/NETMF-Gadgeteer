@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulseInOut_41", "PulseInOut\PulseInOut_41\PulseInOut_41.csproj", "{43BB1610-198A-4B65-81E6-D5289F31349A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulseInOut_42", "PulseInOut\PulseInOut_42\PulseInOut_42.csproj", "{47A2CC75-EEAB-4364-9E87-1C53DBCBBB2D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulseInOut", "PulseInOut\PulseInOut\PulseInOut.csproj", "{3BB3CCFD-FF91-4056-A5FA-788BCA0E9A94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{887E756E-CCD3-4F7E-B574-09DA6DC15A18}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{887E756E-CCD3-4F7E-B574-09DA6DC15A18}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{43BB1610-198A-4B65-81E6-D5289F31349A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{43BB1610-198A-4B65-81E6-D5289F31349A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{43BB1610-198A-4B65-81E6-D5289F31349A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{43BB1610-198A-4B65-81E6-D5289F31349A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{47A2CC75-EEAB-4364-9E87-1C53DBCBBB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{47A2CC75-EEAB-4364-9E87-1C53DBCBBB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47A2CC75-EEAB-4364-9E87-1C53DBCBBB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU

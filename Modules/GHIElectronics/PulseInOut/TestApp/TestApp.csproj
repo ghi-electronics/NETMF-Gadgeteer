@@ -89,7 +89,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PulseInOut\PulseInOut_42\PulseInOut_42.csproj">
+    <ProjectReference Include="..\Software\PulseInOut\PulseInOut_42\PulseInOut_42.csproj">
       <Project>{47A2CC75-EEAB-4364-9E87-1C53DBCBBB2D}</Project>
       <Name>PulseInOut_42</Name>
     </ProjectReference>
