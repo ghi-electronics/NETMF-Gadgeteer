@@ -221,7 +221,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 // read header
                 ReadBytes(header, 0, 5);
             }
-            catch (Exception exception)
+            catch
             {
                 dataImage = null;               
                 return false;
@@ -261,6 +261,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             return false;
         }
+
+		/// <summary>
+		/// Sets the ratio.
+		/// </summary>
+		/// <param name="ratio">The ratio.</param>
+		/// <returns>Whether it was successful or not.</returns>
         public Boolean SetRatio(byte ratio)
         {
             CleanSerialPort();
@@ -323,14 +329,24 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
         #endregion
 
+		/// <summary>
+		/// Whether or not a new image is ready.
+		/// </summary>
         public Boolean isNewImageReady = false;
         private Boolean isUpdateStreaming = false;
         private Boolean isPause = false;
+
+		/// <summary>
+		/// The image data.
+		/// </summary>
         public byte[] dataImage;
         private int dataSize;
         private Thread ThreadUpdateStreaming;
 
         #region User Control
+		/// <summary>
+		/// Starts streaming from the device.
+		/// </summary>
         public void StartStreaming()
         {
             StopStreaming();
@@ -381,6 +397,10 @@ namespace Gadgeteer.Modules.GHIElectronics
                 
             }
         }
+
+		/// <summary>
+		/// Stops streaming from the device.
+		/// </summary>
         public void StopStreaming()
         {
             isUpdateStreaming = false;
@@ -394,6 +414,11 @@ namespace Gadgeteer.Modules.GHIElectronics
                 ThreadUpdateStreaming = null;
             }
         }
+
+		/// <summary>
+		/// Returns the image data.
+		/// </summary>
+		/// <returns>The image data.</returns>
         public byte[] GetImageData()
         {
             if (isNewImageReady && (dataImage != null && dataImage.Length > 0))
@@ -404,6 +429,15 @@ namespace Gadgeteer.Modules.GHIElectronics
             return null;
 
         }
+
+		/// <summary>
+		/// Draws a bitmap.
+		/// </summary>
+		/// <param name="bitmap">The bitmap to draw.</param>
+		/// <param name="xBitmap">The x coordinate to draw at.</param>
+		/// <param name="yBitmap">The y coordinate to draw at.</param>
+		/// <param name="width">The width of the image to draw.</param>
+		/// <param name="height">The height of the image to draw.</param>
         public void DrawImage(Bitmap bitmap, int xBitmap, int yBitmap, int width, int height)
         {
             if (isNewImageReady && (dataImage != null && dataImage.Length > 0))
@@ -415,10 +449,18 @@ namespace Gadgeteer.Modules.GHIElectronics
                 ResumeStreaming();
             }
         }
+
+		/// <summary>
+		/// Pauses streaming from the device.
+		/// </summary>
         public void PauseStreaming()
         {
             isPause = true;            
         }
+
+		/// <summary>
+		/// Resumes streaming from the device.
+		/// </summary>
         public void ResumeStreaming()
         {
             isPause = false;

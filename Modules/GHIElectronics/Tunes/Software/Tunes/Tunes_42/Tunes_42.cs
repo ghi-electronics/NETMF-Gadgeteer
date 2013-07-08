@@ -64,6 +64,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.list.Enqueue(note);
 			}
 
+			/// <summary>
+			/// Gets the next note to play from the melody.
+			/// </summary>
+			/// <returns></returns>
 			public MusicNote GetNextNote()
 			{
 				if (this.list.Count == 0)
@@ -102,6 +106,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// </summary>
 			public double freq;
 
+			/// <summary>
+			/// Constructs a new Tone.
+			/// </summary>
+			/// <param name="freq">The frequency of the tone.</param>
 			public Tone(double freq)
 			{
 				this.freq = freq;
@@ -165,7 +173,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public class MusicNote
 		{
+			/// <summary>
+			/// The tone of the note.
+			/// </summary>
 			public Tone tone;
+			/// <summary>
+			/// The duration of the note.
+			/// </summary>
 			public int duration;
 
 			/// <summary>
@@ -214,9 +228,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
 		/// <summary>
-		/// Plays the given frequency indefinitely.
+		/// Plays the melody.
 		/// </summary>
-		/// <param name="frequency">The frequency to play.</param>
+		/// <param name="melody">The melody to play.</param>
 		public void Play(Melody melody)
 		{
 			this.playList = melody;

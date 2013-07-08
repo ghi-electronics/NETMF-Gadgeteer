@@ -2,13 +2,6 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   
   <?include common.wxi?>
-
-  <?ifdef NETMF41Supported ?>
-  <?include $(var.SourcePath)..\$(var.ProjectPath)_41\Setup\wixparameters41.wxi?>
-  <?endif ?>
-  <?ifdef NETMF42Supported ?>
-  <?include $(var.SourcePath)..\$(var.ProjectPath)_42\Setup\wixparameters42.wxi?>
-  <?endif ?>
   
   <Module Id="id_module_msm" Language="0" Version="$(var.ModuleSoftwareVersion)">
 

@@ -38,6 +38,9 @@
   <!-- These two should be copied over if upgrading from an older template -->
   <?define guid_msi_upgrade_code =  "18bdab58-1340-43cc-8305-d967741283f8" ?>
   <?define guid_msm_package_id = "6a78ad23-f231-49b0-a1cf-ec788a20efdf" ?>
+	
+<?define guid_msm_comp_files_id_42 = "f2095a32-159a-44d9-9976-984a43c1d78e" ?>
+<?define guid_msm_comp_files_be_id_42 = "dd6ea3fd-19cb-4e8a-843b-41479a79399b" ?>
+<?define guid_msm_comp_files_le_id_42 = "8446006d-d757-48f3-8ac0-8962e002da44" ?>
 
 </Include>
-

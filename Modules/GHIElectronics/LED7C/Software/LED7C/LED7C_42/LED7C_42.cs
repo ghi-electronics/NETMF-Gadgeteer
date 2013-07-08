@@ -18,6 +18,9 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class LED7C : GTM.Module
     {
+		/// <summary>
+		/// Represents possible display colors.
+		/// </summary>
         public enum LEDColor
         {
             /// <summary>

@@ -720,8 +720,16 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         #region Ogg Vorbis Recording
         
+		/// <summary>
+		/// Is the device ready to record.
+		/// </summary>
         public bool _isReadyRecord = false;
         
+		/// <summary>
+		/// Begins recording to the given stream.
+		/// </summary>
+		/// <param name="recordingStream">The stream to write the recorded data to.</param>
+		/// <param name="oggPatch">The ogg patch to use.</param>
         public void RecordOggVorbis(Stream recordingStream, ushort[] oggPatch)
         {
             _isReadyRecord = false;
@@ -839,6 +847,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         #endregion
+		/// <summary>
+		/// The ogg patch.
+		/// </summary>
         public static ushort[] patch_ogg = 
         {
           0x0007, 0x0001, 0xc01a, 0x0006, 0x0001, 0x0002, 0x0007, 0x0001, /*    0 */

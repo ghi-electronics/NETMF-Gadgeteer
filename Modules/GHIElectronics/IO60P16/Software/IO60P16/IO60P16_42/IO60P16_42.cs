@@ -318,8 +318,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             IO60P16 _io60p16;
             /// <summary>
             /// Constructor
-            /// </summary>
-            /// <param name="pin">Pin to be created</param>
+			/// </summary>
+			/// <param name="io60p16">The IO60 the port is on.</param>
+			/// <param name="pin">Pin to be created</param>
             /// <param name="resisterMode">Desired resistor mode for the pin to be constructed</param>
             public InputPort(IO60P16 io60p16, IOPin pin, ResistorMode resisterMode)
             {
@@ -377,7 +378,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             IO60P16 _io60p16;
             /// <summary>
             /// Constructor
-            /// </summary>
+			/// </summary>
+			/// <param name="io60p16">The IO60 the port is on.</param>
             /// <param name="pin">Pin to be created</param>
             /// <param name="initialState">If the pin should be created and set high (true) or low (false)</param>
             public OutputPort(IO60P16 io60p16, IOPin pin, Boolean initialState)
@@ -461,7 +463,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             /// <summary>
             /// Constructor
-            /// </summary>
+			/// </summary>
+			/// <param name="io60p16">The IO60 the port is on.</param>
             /// <param name="pin">The pin to be constructed</param>
             /// <param name="tickWidth">The desired width between ticks</param>
             public PWM(IO60P16 io60p16, PWMPin pin, TickWidth tickWidth)

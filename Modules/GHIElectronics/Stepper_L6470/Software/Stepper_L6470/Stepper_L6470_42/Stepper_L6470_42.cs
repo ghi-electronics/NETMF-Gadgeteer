@@ -25,6 +25,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private GT.Interfaces.DigitalInput busyPin;
         private GT.Interfaces.DigitalOutput resetPin;
+		/// <summary>
+		/// The step clock.
+		/// </summary>
         public GT.Interfaces.DigitalOutput stepClock;
 
         private RegsStruct regsStruct;
@@ -453,8 +456,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Action
         {
+			/// <summary>
+			/// The reset option.
+			/// </summary>
             ACTION_RESET = ((byte)0x00),
-            ACTION_COPY = ((byte)0x01)
+            /// <summary>
+            /// The copy option.
+            /// </summary>
+			ACTION_COPY = ((byte)0x01)
         };
 
         /// <summary>
@@ -462,7 +471,13 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Direction
         {
+			/// <summary>
+			/// The forward option.
+			/// </summary>
             FWD = ((byte)0x01),
+			/// <summary>
+			/// The reverse option.
+			/// </summary>
             REV = ((byte)0x00)
         };
 
@@ -471,20 +486,65 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Status_Masks
         {
-            STATUS_HIZ = (((ushort)0x0001)),
-            STATUS_BUSY = (((ushort)0x0002)),
-            STATUS_SW_F = (((ushort)0x0004)),
-            STATUS_SW_EVN = (((ushort)0x0008)),
-            STATUS_DIR = (((ushort)0x0010)),
-            STATUS_MOT_STATUS = (((ushort)0x0060)),
-            STATUS_NOTPERF_CMD = (((ushort)0x0080)),
-            STATUS_WRONG_CMD = (((ushort)0x0100)),
-            STATUS_UVLO = (((ushort)0x0200)),
-            STATUS_TH_WRN = (((ushort)0x0400)),
-            STATUS_TH_SD = (((ushort)0x0800)),
-            STATUS_OCD = (((ushort)0x1000)),
-            STATUS_STEP_LOSS_A = (((ushort)0x2000)),
-            STATUS_STEP_LOSS_B = (((ushort)0x4000)),
+			/// <summary>
+			/// The HIZ status mask.
+			/// </summary>
+			STATUS_HIZ = (((ushort)0x0001)),
+			/// <summary>
+			/// The BUSY status mask.
+			/// </summary>
+			STATUS_BUSY = (((ushort)0x0002)),
+			/// <summary>
+			/// The SW_F status mask.
+			/// </summary>
+			STATUS_SW_F = (((ushort)0x0004)),
+			/// <summary>
+			/// The SW_EVN status mask.
+			/// </summary>
+			STATUS_SW_EVN = (((ushort)0x0008)),
+			/// <summary>
+			/// The DIR status mask.
+			/// </summary>
+			STATUS_DIR = (((ushort)0x0010)),
+			/// <summary>
+			/// The MOT_STATUS status mask.
+			/// </summary>
+			STATUS_MOT_STATUS = (((ushort)0x0060)),
+			/// <summary>
+			/// The NOTPERF_CMD status mask.
+			/// </summary>
+			STATUS_NOTPERF_CMD = (((ushort)0x0080)),
+			/// <summary>
+			/// The WRONG_CMD status mask.
+			/// </summary>
+			STATUS_WRONG_CMD = (((ushort)0x0100)),
+			/// <summary>
+			/// The OVLO status mask.
+			/// </summary>
+			STATUS_UVLO = (((ushort)0x0200)),
+			/// <summary>
+			/// The TH_WRN status mask.
+			/// </summary>
+			STATUS_TH_WRN = (((ushort)0x0400)),
+			/// <summary>
+			/// The TH_SD status mask.
+			/// </summary>
+			STATUS_TH_SD = (((ushort)0x0800)),
+			/// <summary>
+			/// The OCD status mask.
+			/// </summary>
+			STATUS_OCD = (((ushort)0x1000)),
+			/// <summary>
+			/// The STEP_LOSS_a status mask.
+			/// </summary>
+			STATUS_STEP_LOSS_A = (((ushort)0x2000)),
+			/// <summary>
+			/// The STATUS_STEP_LOSS_B status mask.
+			/// </summary>
+			STATUS_STEP_LOSS_B = (((ushort)0x4000)),
+			/// <summary>
+			/// The STATUS_SCK_MOD status mask.
+			/// </summary>
             STATUS_SCK_MOD = (((ushort)0x8000))
         };
 
@@ -493,32 +553,113 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Registers
         {
-            ABS_POS = ((byte)0x01),
-            EL_POS = ((byte)0x02),
-            MARK = ((byte)0x03),
-            SPEED = ((byte)0x04),
-            ACC = ((byte)0x05),
-            DEC = ((byte)0x06),
-            MAX_SPEED = ((byte)0x07),
-            MIN_SPEED = ((byte)0x08),
-            FS_SPD = ((byte)0x15),
-            KVAL_HOLD = ((byte)0x09),
-            KVAL_RUN = ((byte)0x0A),
-            KVAL_ACC = ((byte)0x0B),
-            KVAL_DEC = ((byte)0x0C),
-            INT_SPD = ((byte)0x0D),
-            ST_SLP = ((byte)0x0E),
-            FN_SLP_ACC = ((byte)0x0F),
-            FN_SLP_DEC = ((byte)0x10),
-            K_THERM = ((byte)0x11),
-            ADC_OUT = ((byte)0x12),
-            OCD_TH = ((byte)0x13),
-            STALL_TH = ((byte)0x14),
-            STEP_MODE = ((byte)0x16),
-            ALARM_EN = ((byte)0x17),
-            CONFIG = ((byte)0x18),
-            STATUS = ((byte)0x19),
-            RESERVED_REG1 = ((byte)0x1A),
+			/// <summary>
+			/// The ABS_POS register.
+			/// </summary>
+			ABS_POS = ((byte)0x01),
+			/// <summary>
+			/// The EL_POS register.
+			/// </summary>
+			EL_POS = ((byte)0x02),
+			/// <summary>
+			/// The MARK register.
+			/// </summary>
+			MARK = ((byte)0x03),
+			/// <summary>
+			/// The SPEED register.
+			/// </summary>
+			SPEED = ((byte)0x04),
+			/// <summary>
+			/// The ACC register.
+			/// </summary>
+			ACC = ((byte)0x05),
+			/// <summary>
+			/// The DEC register.
+			/// </summary>
+			DEC = ((byte)0x06),
+			/// <summary>
+			/// The MAX_SPEED register.
+			/// </summary>
+			MAX_SPEED = ((byte)0x07),
+			/// <summary>
+			/// The MIN_SPEED register.
+			/// </summary>
+			MIN_SPEED = ((byte)0x08),
+			/// <summary>
+			/// The FS_SPD register.
+			/// </summary>
+			FS_SPD = ((byte)0x15),
+			/// <summary>
+			/// The KVAL_HOLD register.
+			/// </summary>
+			KVAL_HOLD = ((byte)0x09),
+			/// <summary>
+			/// The KVAL_RUN register.
+			/// </summary>
+			KVAL_RUN = ((byte)0x0A),
+			/// <summary>
+			/// The KVAL_ACC register.
+			/// </summary>
+			KVAL_ACC = ((byte)0x0B),
+			/// <summary>
+			/// The KVAL_DEC register.
+			/// </summary>
+			KVAL_DEC = ((byte)0x0C),
+			/// <summary>
+			/// The INT_SPD register.
+			/// </summary>
+			INT_SPD = ((byte)0x0D),
+			/// <summary>
+			/// The ST_SLP register.
+			/// </summary>
+			ST_SLP = ((byte)0x0E),
+			/// <summary>
+			/// The FN_SLP_ACC register.
+			/// </summary>
+			FN_SLP_ACC = ((byte)0x0F),
+			/// <summary>
+			/// The FN_SLP_DEC register.
+			/// </summary>
+			FN_SLP_DEC = ((byte)0x10),
+			/// <summary>
+			/// The K_THERM register.
+			/// </summary>
+			K_THERM = ((byte)0x11),
+			/// <summary>
+			/// The ADC_OUT register.
+			/// </summary>
+			ADC_OUT = ((byte)0x12),
+			/// <summary>
+			/// The OCD_TH register.
+			/// </summary>
+			OCD_TH = ((byte)0x13),
+			/// <summary>
+			/// The STALL_TH register.
+			/// </summary>
+			STALL_TH = ((byte)0x14),
+			/// <summary>
+			/// The STEP_MODE register.
+			/// </summary>
+			STEP_MODE = ((byte)0x16),
+			/// <summary>
+			/// The ALARM_EN register.
+			/// </summary>
+			ALARM_EN = ((byte)0x17),
+			/// <summary>
+			/// The CONFIG register.
+			/// </summary>
+			CONFIG = ((byte)0x18),
+			/// <summary>
+			/// The STATUS register.
+			/// </summary>
+			STATUS = ((byte)0x19),
+			/// <summary>
+			/// The RESERVED_REG1 register.
+			/// </summary>
+			RESERVED_REG1 = ((byte)0x1A),
+			/// <summary>
+			/// The RESERVED_REG2 register.
+			/// </summary>
             RESERVED_REG2 = ((byte)0x1B)
         };
 
@@ -526,27 +667,90 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Commands
         /// </summary>
         public enum Commands
-        {
-            NOP = ((byte)0x00),
-            SET_PARAM = ((byte)0x00),
-            GET_PARAM = ((byte)0x20),
-            RUN = ((byte)0x50),
-            STEP_CLOCK = ((byte)0x58),
-            MOVE = ((byte)0x40),
-            GO_TO = ((byte)0x60),
-            GO_TO_DIR = ((byte)0x68),
-            GO_UNTIL = ((byte)0x82),
-            RELEASE_SW = ((byte)0x92),
-            GO_HOME = ((byte)0x70),
-            GO_MARK = ((byte)0x78),
-            RESET_POS = ((byte)0xD8),
-            RESET_DEVICE = ((byte)0xC0),
-            SOFT_STOP = ((byte)0xB0),
-            HARD_STOP = ((byte)0xB8),
-            SOFT_HIZ = ((byte)0xA0),
-            HARD_HIZ = ((byte)0xA8),
-            GET_STATUS = ((byte)0xD0),
-            RESERVED_CMD1 = ((byte)0xEB),
+		{
+			/// <summary>
+			/// The NOP command.
+			/// </summary>
+			NOP = ((byte)0x00),
+			/// <summary>
+			/// The SET_PARAM command.
+			/// </summary>
+			SET_PARAM = ((byte)0x00),
+			/// <summary>
+			/// The GET_PARAM command.
+			/// </summary>
+			GET_PARAM = ((byte)0x20),
+			/// <summary>
+			/// The RUN command.
+			/// </summary>
+			RUN = ((byte)0x50),
+			/// <summary>
+			/// The STEP_CLOCK command.
+			/// </summary>
+			STEP_CLOCK = ((byte)0x58),
+			/// <summary>
+			/// The MOVE command.
+			/// </summary>
+			MOVE = ((byte)0x40),
+			/// <summary>
+			/// The GO_TO command.
+			/// </summary>
+			GO_TO = ((byte)0x60),
+			/// <summary>
+			/// The GO_TO_DIR command.
+			/// </summary>
+			GO_TO_DIR = ((byte)0x68),
+			/// <summary>
+			/// The GO_UNTIL command.
+			/// </summary>
+			GO_UNTIL = ((byte)0x82),
+			/// <summary>
+			/// The RELEASE_SW command.
+			/// </summary>
+			RELEASE_SW = ((byte)0x92),
+			/// <summary>
+			/// The GO_HOME command.
+			/// </summary>
+			GO_HOME = ((byte)0x70),
+			/// <summary>
+			/// The GO_MARK command.
+			/// </summary>
+			GO_MARK = ((byte)0x78),
+			/// <summary>
+			/// The RESET_POS command.
+			/// </summary>
+			RESET_POS = ((byte)0xD8),
+			/// <summary>
+			/// The RESET_DEVICE command.
+			/// </summary>
+			RESET_DEVICE = ((byte)0xC0),
+			/// <summary>
+			/// The SOFT_STOP command.
+			/// </summary>
+			SOFT_STOP = ((byte)0xB0),
+			/// <summary>
+			/// The HARD_STOP command.
+			/// </summary>
+			HARD_STOP = ((byte)0xB8),
+			/// <summary>
+			/// The SOFT_HIZ command.
+			/// </summary>
+			SOFT_HIZ = ((byte)0xA0),
+			/// <summary>
+			/// The HARD_HIZ command.
+			/// </summary>
+			HARD_HIZ = ((byte)0xA8),
+			/// <summary>
+			/// The GET_STATUS command.
+			/// </summary>
+			GET_STATUS = ((byte)0xD0),
+			/// <summary>
+			/// The RESERVED_CMD1 command.
+			/// </summary>
+			RESERVED_CMD1 = ((byte)0xEB),
+			/// <summary>
+			/// The RESERVED_CMD2 command.
+			/// </summary>
             RESERVED_CMD2 = ((byte)0xF8)
         };
 
@@ -614,21 +818,69 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Overcurrent_Detection_Threshold
         {
-            OCD_TH_375mA = ((byte)0x00),
-            OCD_TH_750mA = ((byte)0x01),
-            OCD_TH_1125mA = ((byte)0x02),
-            OCD_TH_1500mA = ((byte)0x03),
-            OCD_TH_1875mA = ((byte)0x04),
-            OCD_TH_2250mA = ((byte)0x05),
-            OCD_TH_2625mA = ((byte)0x06),
-            OCD_TH_3000mA = ((byte)0x07),
-            OCD_TH_3375mA = ((byte)0x08),
-            OCD_TH_3750mA = ((byte)0x09),
-            OCD_TH_4125mA = ((byte)0x0A),
-            OCD_TH_4500mA = ((byte)0x0B),
-            OCD_TH_4875mA = ((byte)0x0C),
-            OCD_TH_5250mA = ((byte)0x0D),
-            OCD_TH_5625mA = ((byte)0x0E),
+			/// <summary>
+			/// The 375mA option.
+			/// </summary>
+			OCD_TH_375mA = ((byte)0x00),
+			/// <summary>
+			/// The 750mA option.
+			/// </summary>
+			OCD_TH_750mA = ((byte)0x01),
+			/// <summary>
+			/// The 1125mA option.
+			/// </summary>
+			OCD_TH_1125mA = ((byte)0x02),
+			/// <summary>
+			/// The 1500mA option.
+			/// </summary>
+			OCD_TH_1500mA = ((byte)0x03),
+			/// <summary>
+			/// The 1875mA option.
+			/// </summary>
+			OCD_TH_1875mA = ((byte)0x04),
+			/// <summary>
+			/// The 2250mA option.
+			/// </summary>
+			OCD_TH_2250mA = ((byte)0x05),
+			/// <summary>
+			/// The 2625mA option.
+			/// </summary>
+			OCD_TH_2625mA = ((byte)0x06),
+			/// <summary>
+			/// The 3000mA option.
+			/// </summary>
+			OCD_TH_3000mA = ((byte)0x07),
+			/// <summary>
+			/// The 3375mA option.
+			/// </summary>
+			OCD_TH_3375mA = ((byte)0x08),
+			/// <summary>
+			/// The 3750mA option.
+			/// </summary>
+			OCD_TH_3750mA = ((byte)0x09),
+			/// <summary>
+			/// The 4125mA option.
+			/// </summary>
+			OCD_TH_4125mA = ((byte)0x0A),
+			/// <summary>
+			/// The 4500mA option.
+			/// </summary>
+			OCD_TH_4500mA = ((byte)0x0B),
+			/// <summary>
+			/// The 4875mA option.
+			/// </summary>
+			OCD_TH_4875mA = ((byte)0x0C),
+			/// <summary>
+			/// The 5250mA option.
+			/// </summary>
+			OCD_TH_5250mA = ((byte)0x0D),
+			/// <summary>
+			/// The 5625mA option.
+			/// </summary>
+			OCD_TH_5625mA = ((byte)0x0E),
+			/// <summary>
+			/// The 6000mA option.
+			/// </summary>
             OCD_TH_6000mA = ((byte)0x0F)
         };
 
@@ -637,13 +889,37 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Step_Select
         {
-            STEP_SEL_1 = ((byte)0x00),
-            STEP_SEL_1_2 = ((byte)0x01),
-            STEP_SEL_1_4 = ((byte)0x02),
-            STEP_SEL_1_8 = ((byte)0x03),
-            STEP_SEL_1_16 = ((byte)0x04),
-            STEP_SEL_1_32 = ((byte)0x05),
-            STEP_SEL_1_64 = ((byte)0x06),
+			/// <summary>
+			/// The step 1 option.
+			/// </summary>
+			STEP_SEL_1 = ((byte)0x00),
+			/// <summary>
+			/// The step 2 option.
+			/// </summary>
+			STEP_SEL_1_2 = ((byte)0x01),
+			/// <summary>
+			/// The step 4 option.
+			/// </summary>
+			STEP_SEL_1_4 = ((byte)0x02),
+			/// <summary>
+			/// The step 8 option.
+			/// </summary>
+			STEP_SEL_1_8 = ((byte)0x03),
+			/// <summary>
+			/// The step 16 option.
+			/// </summary>
+			STEP_SEL_1_16 = ((byte)0x04),
+			/// <summary>
+			/// The step 32 option.
+			/// </summary>
+			STEP_SEL_1_32 = ((byte)0x05),
+			/// <summary>
+			/// The step 64 option.
+			/// </summary>
+			STEP_SEL_1_64 = ((byte)0x06),
+			/// <summary>
+			/// The step 128 option.
+			/// </summary>
             STEP_SEL_1_128 = ((byte)0x07)
         };
 
@@ -652,13 +928,37 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum Alarm_Enable
         {
-            ALARM_EN_OVERCURRENT = ((byte)0x01),
-            ALARM_EN_THERMAL_SHUTDOWN = ((byte)0x02),
-            ALARM_EN_THERMAL_WARNING = ((byte)0x04),
-            ALARM_EN_UNDER_VOLTAGE = ((byte)0x08),
-            ALARM_EN_STALL_DET_A = ((byte)0x10),
-            ALARM_EN_STALL_DET_B = ((byte)0x20),
-            ALARM_EN_SW_TURN_ON = ((byte)0x40),
+			/// <summary>
+			/// The overcurrent option.
+			/// </summary>
+			ALARM_EN_OVERCURRENT = ((byte)0x01),
+			/// <summary>
+			/// The thermal shutdown option.
+			/// </summary>
+			ALARM_EN_THERMAL_SHUTDOWN = ((byte)0x02),
+			/// <summary>
+			/// The thermal warning option.
+			/// </summary>
+			ALARM_EN_THERMAL_WARNING = ((byte)0x04),
+			/// <summary>
+			/// The under voltage option.
+			/// </summary>
+			ALARM_EN_UNDER_VOLTAGE = ((byte)0x08),
+			/// <summary>
+			/// The overcurrent option.
+			/// </summary>
+			ALARM_EN_STALL_DET_A = ((byte)0x10),
+			/// <summary>
+			/// The stall detection A option.
+			/// </summary>
+			ALARM_EN_STALL_DET_B = ((byte)0x20),
+			/// <summary>
+			/// The stall detection B option.
+			/// </summary>
+			ALARM_EN_SW_TURN_ON = ((byte)0x40),
+			/// <summary>
+			/// The wrong nperf option.
+			/// </summary>
             ALARM_EN_WRONG_NPERF_CMD = ((byte)0x80)
         };
 
@@ -666,125 +966,285 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Configuration Register Options
         /// </summary>
         public enum CONFIG_OSC_MGMT
-        {
-            CONFIG_INT_16MHZ = ((ushort)0x0000),
-            CONFIG_INT_16MHZ_OSCOUT_2MHZ = ((ushort)0x0008),
-            CONFIG_INT_16MHZ_OSCOUT_4MHZ = ((ushort)0x0009),
-            CONFIG_INT_16MHZ_OSCOUT_8MHZ = ((ushort)0x000A),
-            CONFIG_INT_16MHZ_OSCOUT_16MHZ = ((ushort)0x000B),
-            CONFIG_EXT_8MHZ_XTAL_DRIVE = ((ushort)0x0004),
-            CONFIG_EXT_16MHZ_XTAL_DRIVE = ((ushort)0x0005),
-            CONFIG_EXT_24MHZ_XTAL_DRIVE = ((ushort)0x0006),
-            CONFIG_EXT_32MHZ_XTAL_DRIVE = ((ushort)0x0007),
-            CONFIG_EXT_8MHZ_OSCOUT_INVERT = ((ushort)0x000C),
-            CONFIG_EXT_16MHZ_OSCOUT_INVERT = ((ushort)0x000D),
-            CONFIG_EXT_24MHZ_OSCOUT_INVERT = ((ushort)0x000E),
+		{
+			/// <summary>
+			/// The 16MHz option.
+			/// </summary>
+			CONFIG_INT_16MHZ = ((ushort)0x0000),
+			/// <summary>
+			/// The 16MHz OSCOUNT 2MHz option.
+			/// </summary>
+			CONFIG_INT_16MHZ_OSCOUT_2MHZ = ((ushort)0x0008),
+			/// <summary>
+			/// The 16MHz OSCOUNT 4MHz option.
+			/// </summary>
+			CONFIG_INT_16MHZ_OSCOUT_4MHZ = ((ushort)0x0009),
+			/// <summary>
+			/// The 16MHz OSCOUNT 8MHz option.
+			/// </summary>
+			CONFIG_INT_16MHZ_OSCOUT_8MHZ = ((ushort)0x000A),
+			/// <summary>
+			/// The 16MHz OSCOUNT 16MHz option.
+			/// </summary>
+			CONFIG_INT_16MHZ_OSCOUT_16MHZ = ((ushort)0x000B),
+			/// <summary>
+			/// The 8MHz XTAL drive option.
+			/// </summary>
+			CONFIG_EXT_8MHZ_XTAL_DRIVE = ((ushort)0x0004),
+			/// <summary>
+			/// The 16MHz XTAL drive option.
+			/// </summary>
+			CONFIG_EXT_16MHZ_XTAL_DRIVE = ((ushort)0x0005),
+			/// <summary>
+			/// The 24MHz XTAL drive option.
+			/// </summary>
+			CONFIG_EXT_24MHZ_XTAL_DRIVE = ((ushort)0x0006),
+			/// <summary>
+			/// The 32MHz XTAL drive option.
+			/// </summary>
+			CONFIG_EXT_32MHZ_XTAL_DRIVE = ((ushort)0x0007),
+			/// <summary>
+			/// The 8MHz OSCOUNT invert option.
+			/// </summary>
+			CONFIG_EXT_8MHZ_OSCOUT_INVERT = ((ushort)0x000C),
+			/// <summary>
+			/// The 16MHz OSCOUNT invert option.
+			/// </summary>
+			CONFIG_EXT_16MHZ_OSCOUT_INVERT = ((ushort)0x000D),
+			/// <summary>
+			/// The 24MHz OSCOUNT invert option.
+			/// </summary>
+			CONFIG_EXT_24MHZ_OSCOUT_INVERT = ((ushort)0x000E),
+			/// <summary>
+			/// The 32MHz OSCOUNT invert option.
+			/// </summary>
             CONFIG_EXT_32MHZ_OSCOUT_INVERT = ((ushort)0x000F)
         };
 
         /// <summary>
-        /// TODO
+        /// The SW Mode configuration.
         /// </summary>
         public enum CONFIG_SW_MODE_TypeDef
-        {
-            CONFIG_SW_HARD_STOP = ((ushort)0x0000),
+		{
+			/// <summary>
+			/// The hard stop option.
+			/// </summary>
+			CONFIG_SW_HARD_STOP = ((ushort)0x0000),
+			/// <summary>
+			/// The user option.
+			/// </summary>
             CONFIG_SW_USER = ((ushort)0x0010)
         };
 
         /// <summary>
-        /// TODO
+        /// The PWM configuration options.
         /// </summary>
         public enum CONFIG_F_PWM_DEC
-        {
-            CONFIG_PWM_MUL_0_625 = (((ushort)0x00) << 10),
-            CONFIG_PWM_MUL_0_75 = (((ushort)0x01) << 10),
-            CONFIG_PWM_MUL_0_875 = (((ushort)0x02) << 10),
-            CONFIG_PWM_MUL_1 = (((ushort)0x03) << 10),
-            CONFIG_PWM_MUL_1_25 = (((ushort)0x04) << 10),
-            CONFIG_PWM_MUL_1_5 = (((ushort)0x05) << 10),
-            CONFIG_PWM_MUL_1_75 = (((ushort)0x06) << 10),
+		{
+			/// <summary>
+			/// The 0-625 option.
+			/// </summary>
+			CONFIG_PWM_MUL_0_625 = (((ushort)0x00) << 10),
+			/// <summary>
+			/// The 0-75 option.
+			/// </summary>
+			CONFIG_PWM_MUL_0_75 = (((ushort)0x01) << 10),
+			/// <summary>
+			/// The 0-875 option.
+			/// </summary>
+			CONFIG_PWM_MUL_0_875 = (((ushort)0x02) << 10),
+			/// <summary>
+			/// The 1 option.
+			/// </summary>
+			CONFIG_PWM_MUL_1 = (((ushort)0x03) << 10),
+			/// <summary>
+			/// The 1-25 option.
+			/// </summary>
+			CONFIG_PWM_MUL_1_25 = (((ushort)0x04) << 10),
+			/// <summary>
+			/// The 1-5 option.
+			/// </summary>
+			CONFIG_PWM_MUL_1_5 = (((ushort)0x05) << 10),
+			/// <summary>
+			/// The 1-75 option.
+			/// </summary>
+			CONFIG_PWM_MUL_1_75 = (((ushort)0x06) << 10),
+			/// <summary>
+			/// The 2 option.
+			/// </summary>
             CONFIG_PWM_MUL_2 = (((ushort)0x07) << 10)
         };
         
         /// <summary>
-        /// TODO
+        /// The PWM INT configuration options.
         /// </summary>
         public enum CONFIG_F_PWM_INT
-        {
-            CONFIG_PWM_DIV_1 = (((ushort)0x00) << 13),
-            CONFIG_PWM_DIV_2 = (((ushort)0x01) << 13),
-            CONFIG_PWM_DIV_3 = (((ushort)0x02) << 13),
-            CONFIG_PWM_DIV_4 = (((ushort)0x03) << 13),
-            CONFIG_PWM_DIV_5 = (((ushort)0x04) << 13),
-            CONFIG_PWM_DIV_6 = (((ushort)0x05) << 13),
+		{
+			/// <summary>
+			/// The DIV 1 option.
+			/// </summary>
+			CONFIG_PWM_DIV_1 = (((ushort)0x00) << 13),
+			/// <summary>
+			/// The DIV 2 option.
+			/// </summary>
+			CONFIG_PWM_DIV_2 = (((ushort)0x01) << 13),
+			/// <summary>
+			/// The DIV 3 option.
+			/// </summary>
+			CONFIG_PWM_DIV_3 = (((ushort)0x02) << 13),
+			/// <summary>
+			/// The DIV 4 option.
+			/// </summary>
+			CONFIG_PWM_DIV_4 = (((ushort)0x03) << 13),
+			/// <summary>
+			/// The DIV 5 option.
+			/// </summary>
+			CONFIG_PWM_DIV_5 = (((ushort)0x04) << 13),
+			/// <summary>
+			/// The DIV 6 option.
+			/// </summary>
+			CONFIG_PWM_DIV_6 = (((ushort)0x05) << 13),
+			/// <summary>
+			/// The DIV 7 option.
+			/// </summary>
             CONFIG_PWM_DIV_7 = (((ushort)0x06) << 13)
         };
 
         /// <summary>
-        /// TODO
+        /// The POW SR configuration options.
         /// </summary>
         public enum CONFIG_POW_SR
-        {
-            CONFIG_SR_180V_us = ((ushort)0x0000),
-            CONFIG_SR_290V_us = ((ushort)0x0200),
+		{
+			/// <summary>
+			/// The 180V option.
+			/// </summary>
+			CONFIG_SR_180V_us = ((ushort)0x0000),
+			/// <summary>
+			/// The 290V option.
+			/// </summary>
+			CONFIG_SR_290V_us = ((ushort)0x0200),
+			/// <summary>
+			/// The 530V option.
+			/// </summary>
             CONFIG_SR_530V_us = ((ushort)0x0300)
         };
 
         /// <summary>
-        /// TODO
+        /// The EN VSCOMP configuration options.
         /// </summary>
         public enum CONFIG_EN_VSCOMP
-        {
-            CONFIG_VS_COMP_DISABLE = ((ushort)0x0000),
+		{
+			/// <summary>
+			/// The disable option.
+			/// </summary>
+			CONFIG_VS_COMP_DISABLE = ((ushort)0x0000),
+			/// <summary>
+			/// The enable option.
+			/// </summary>
             CONFIG_VS_COMP_ENABLE = ((ushort)0x0020)
         };
 
         /// <summary>
-        /// TODO
+        /// The OC configuration options.
         /// </summary>
         public enum CONFIG_OC_SD
-        {
-            CONFIG_OC_SD_DISABLE = ((ushort)0x0000),
+		{
+			/// <summary>
+			/// The disable option.
+			/// </summary>
+			CONFIG_OC_SD_DISABLE = ((ushort)0x0000),
+			/// <summary>
+			/// The enable option.
+			/// </summary>
             CONFIG_OC_SD_ENABLE = ((ushort)0x0080)
         };
 
-
+		/// <summary>
+		/// Converts speed steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public uint Speed_Steps_to_Par(uint steps)
         {
             return ((uint)(((steps) * 67.108864) + 0.5));
         }
+		/// <summary>
+		/// Converts AccDec steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public ushort AccDec_Steps_to_Par(uint steps)
         {
             return ((ushort)(((steps) * 0.068719476736) + 0.5));
         }
+		/// <summary>
+		/// Converts max speed steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public ushort MaxSpd_Steps_to_Par(uint steps)
         {
             return ((ushort)(((steps) * 0.065536) + 0.5));
         }
+		/// <summary>
+		/// Converts min speed steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public ushort MinSpd_Steps_to_Par(uint steps)
         {
             return ((ushort)(((steps) * 4.194304) + 0.5));
         }
+		/// <summary>
+		/// Converts FS speed steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public ushort FSSpd_Steps_to_Par(uint steps)
         {
             return (ushort)(((steps) * 0.065536));
         }
+		/// <summary>
+		/// Converts int speed steps to par.
+		/// </summary>
+		/// <param name="steps">The steps.</param>
+		/// <returns>Steps expressed as par.</returns>
         public ushort IntSpd_Steps_to_Par(uint steps)
         {
             return ((ushort)(((steps) * 4.194304) + 0.5));
         }
+		/// <summary>
+		/// Converts Kval percent to par.
+		/// </summary>
+		/// <param name="perc">The percent.</param>
+		/// <returns>Percent expressed as par.</returns>
         public byte Kval_Perc_to_Par(float perc)
         {
             return ((byte)(((perc) / 0.390625) + 0.5));
         }
+		/// <summary>
+		/// Converts BEMF slope percent to par.
+		/// </summary>
+		/// <param name="perc">The percent.</param>
+		/// <returns>Percent expressed as par.</returns>
         public byte BEMF_Slope_Perc_to_Par(float perc)
         {
             return ((byte)(((perc) / 0.00156862745098) + 0.5));
         }
+		/// <summary>
+		/// Converts KTherm to par.
+		/// </summary>
+		/// <param name="KTherm">The percent.</param>
+		/// <returns>KTherms expressed as par.</returns>
         public byte KTherm_to_Par(uint KTherm)
         {
             return ((byte)(((KTherm - 1) / 0.03125) + 0.5));
         }
+		/// <summary>
+		/// Converts StallTH to par.
+		/// </summary>
+		/// <param name="StallTh">The StallTh.</param>
+		/// <returns>StallTh expressed as par.</returns>
         public byte StallTh_to_Par(uint StallTh)
         {
             return ((byte)(((StallTh - 31.25) / 31.25) + 0.5));
@@ -803,29 +1263,102 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             //
         }
-        public uint ABS_POS;
-        public ushort EL_POS;
-        public uint MARK;
-        public uint SPEED;
-        public ushort ACC;
-        public ushort DEC;
-        public ushort MAX_SPEED;
-        public ushort MIN_SPEED;
-        public ushort FS_SPD;
-        public byte KVAL_HOLD;
-        public byte KVAL_RUN;
-        public byte KVAL_ACC;
-        public byte KVAL_DEC;
-        public ushort INT_SPD;
-        public byte ST_SLP;
-        public byte FN_SLP_ACC;
-        public byte FN_SLP_DEC;
-        public byte K_THERM;
-        public byte ADC_OUT;
-        public byte OCD_TH;
-        public byte STALL_TH;
-        public byte STEP_MODE;
-        public byte ALARM_EN;
+
+		/// <summary>
+		/// The ABS_POS register.
+		/// </summary>
+		public uint ABS_POS;
+		/// <summary>
+		/// The EL_POS register.
+		/// </summary>
+		public ushort EL_POS;
+		/// <summary>
+		/// The MARK register.
+		/// </summary>
+		public uint MARK;
+		/// <summary>
+		/// The SPEED register.
+		/// </summary>
+		public uint SPEED;
+		/// <summary>
+		/// The ACC register.
+		/// </summary>
+		public ushort ACC;
+		/// <summary>
+		/// The DEC register.
+		/// </summary>
+		public ushort DEC;
+		/// <summary>
+		/// The MAX_SPEED register.
+		/// </summary>
+		public ushort MAX_SPEED;
+		/// <summary>
+		/// The MIN_SPEED register.
+		/// </summary>
+		public ushort MIN_SPEED;
+		/// <summary>
+		/// The FS_SPD register.
+		/// </summary>
+		public ushort FS_SPD;
+		/// <summary>
+		/// The KVAL_HOLD register.
+		/// </summary>
+		public byte KVAL_HOLD;
+		/// <summary>
+		/// The KVAL_RUN register.
+		/// </summary>
+		public byte KVAL_RUN;
+		/// <summary>
+		/// The KVAL_ACC register.
+		/// </summary>
+		public byte KVAL_ACC;
+		/// <summary>
+		/// The KVAL_DEC register.
+		/// </summary>
+		public byte KVAL_DEC;
+		/// <summary>
+		/// The INT_SPD register.
+		/// </summary>
+		public ushort INT_SPD;
+		/// <summary>
+		/// The ST_SLP register.
+		/// </summary>
+		public byte ST_SLP;
+		/// <summary>
+		/// The FN_SLP_ACC register.
+		/// </summary>
+		public byte FN_SLP_ACC;
+		/// <summary>
+		/// The FN_SLP_DEC register.
+		/// </summary>
+		public byte FN_SLP_DEC;
+		/// <summary>
+		/// The K_THERM register.
+		/// </summary>
+		public byte K_THERM;
+		/// <summary>
+		/// The ADC_OUT register.
+		/// </summary>
+		public byte ADC_OUT;
+		/// <summary>
+		/// The OCD_TH register.
+		/// </summary>
+		public byte OCD_TH;
+		/// <summary>
+		/// The STALL_TH register.
+		/// </summary>
+		public byte STALL_TH;
+		/// <summary>
+		/// The STEP_MODE register.
+		/// </summary>
+		public byte STEP_MODE;
+		/// <summary>
+		/// The ALARM_EN register.
+		/// </summary>
+		public byte ALARM_EN;
+		/// <summary>
+		/// The CONFIG register.
+		/// </summary>
         public ushort CONFIG;
     }
 }

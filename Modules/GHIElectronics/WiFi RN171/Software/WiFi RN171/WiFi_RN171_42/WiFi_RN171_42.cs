@@ -52,6 +52,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                 #region "Enumerations"
 
+		/// <summary>
+		/// Represents the debug mode.
+		/// </summary>
         public enum DebugMode
         {
             /// <summary>
@@ -71,11 +74,24 @@ namespace Gadgeteer.Modules.GHIElectronics
             SerialDebug
         };
 
+		/// <summary>
+		/// Represents the debug level.
+		/// </summary>
         public enum DebugLevel
         {
-            DebugErrors, DebugAll
+			/// <summary>
+			/// Only debug errors.
+			/// </summary>
+            DebugErrors, 
+			/// <summary>
+			/// Debug everything.
+			/// </summary>
+			DebugAll
         };
 
+		/// <summary>
+		/// Represents the level of data to return.
+		/// </summary>
         public enum DataReturnLevel
         {
             /// <summary>
@@ -90,6 +106,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             ReturnIncomming
         };
 
+		/// <summary>
+		/// Represents the stream mode.
+		/// </summary>
         public enum StreamMode
         {
             /// <summary>
@@ -113,6 +132,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             DataStream
         };
 
+		/// <summary>
+		/// Represents the socket protocal.
+		/// </summary>
         public enum SocketProtocol
         {
             /// <summary>
@@ -121,7 +143,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             UDP = 1,
 
             /// <summary>
-            /// TCP Server Mode: TCP Connection with handshaking (Client & Server)
+            /// TCP Server Mode: TCP Connection with handshaking (Client and Server)
             /// </summary>
             TCP_Server = 2,
 
@@ -136,7 +158,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             TCP_Client = 8
         }
 
-        public enum WirelessEncrytionMode
+		/// <summary>
+		/// Represents the encyrption mode to use.
+		/// </summary>
+        public enum WirelessEncryptionMode
         {
             /// <summary>Open Authentication (No Passphrase required)</summary>
             Open = 0,
@@ -193,6 +218,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         //Others
         private StreamMode _stream = StreamMode.NoStream;
+		/// <summary>
+		/// The current debug mode.
+		/// </summary>
         public DebugMode _debug = DebugMode.NoDebug;
         private DebugLevel _debug_level = DebugLevel.DebugErrors;
         private DataReturnLevel _data_level = DataReturnLevel.ReturnIncomming;
@@ -203,35 +231,47 @@ namespace Gadgeteer.Modules.GHIElectronics
         #endregion
 
         #region "Public Data Types"
+		/// <summary>
+		/// Is the device ready.
+		/// </summary>
         public bool IsReady = false;
 
         //strings
+		/// <summary>
+		/// The local IP of the device.
+		/// </summary>
         public string LocalIP { get; protected set; }
+		/// <summary>
+		/// The local listening port of the device.
+		/// </summary>
         public string LocalListenPort { get; protected set; }
-        #endregion
-
-        #region Private Structs
-
-        private struct Configuration
-        {
-            double FW_Ver;
-            string FW_File;
-            string IP_Address;
-            int IP_Port;
-            string SSID;
-            string SSID_Phrase;
-            RunMode State;
-        }
-
         #endregion
 
         #region "Public Events"
 
         //Delegates
-        public delegate void HttpRequestReceivedHandler(HttpStream request);
-        public delegate void DataReceivedHandler(string data);
-        public delegate void LineReceivedHandler(string line);
-        public delegate void ConnectionEstablishedHandler();
+		/// <summary>
+		/// A delegate representing receipt of an HTTP request.
+		/// </summary>
+		/// <param name="request">The HTTP request.</param>
+		public delegate void HttpRequestReceivedHandler(HttpStream request);
+		/// <summary>
+		/// A delegate representing data received.
+		/// </summary>
+		/// <param name="data">The data received.</param>
+		public delegate void DataReceivedHandler(string data);
+		/// <summary>
+		/// A delegate representing line received.
+		/// </summary>
+		/// <param name="line">The line received.</param>
+		public delegate void LineReceivedHandler(string line);
+		/// <summary>
+		/// A delegate representing connection opening.
+		/// </summary>
+		public delegate void ConnectionEstablishedHandler();
+		/// <summary>
+		/// A delegate representing connection closure.
+		/// </summary>
         public delegate void ConnectionClosedHandler();
 
         //Handlers
@@ -265,6 +305,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         //Triggers
 
+		/// <summary>
+		/// Fired when an HTTP request is received.
+		/// </summary>
+		/// <param name="request">The request received.</param>
         protected virtual void OnHttpRequestReceived(HttpRequest request)
         {
             if (HttpRequestReceived != null)
@@ -274,24 +318,38 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
+		/// <summary>
+		/// Fired when data is received.
+		/// </summary>
+		/// <param name="data">The line received.</param>
         protected virtual void OnDataReceived(string data)
         {
             if (DataReceived != null)
                 DataReceived(data);
         }
 
+		/// <summary>
+		/// Fired when an a line is received.
+		/// </summary>
+		/// <param name="line">The HTTP request.</param>
         protected virtual void OnLineReceived(string line)
         {
             if (LineReceived != null)
                 LineReceived(line);
         }
 
+		/// <summary>
+		/// Fired when the connection is opened.
+		/// </summary>
         protected virtual void OnConnectionEstablished()
         {
             if (ConnectionEstablished != null)
                 ConnectionEstablished();
         }
 
+		/// <summary>
+		/// Fired when the connection is closed.
+		/// </summary>
         protected virtual void OnConnectionClosed()
         {
             if (ConnectionClosed != null)
@@ -405,6 +463,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
+		/// <summary>
+		/// updates the firmware.
+		/// </summary>
+		/// <returns>Whether it was successful or not.</returns>
         public bool UpdateFirmware()
         {
             //Exit command mode..just in case
@@ -447,6 +509,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
+		/// <summary>
+		/// Creates an access point with the given SSID.
+		/// </summary>
+		/// <param name="SSID">The SSID to use.</param>
+		/// <returns>Whether or not it was successful.</returns>
         public bool CreateAccessPoint(string SSID = "")
         {
             //Exit command mode..just in case
@@ -495,8 +562,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Enable DHPC Mode
-        /// </summary>
-        /// <returns></returns>
+		/// </summary>
+		/// <param name="Gateway">The Gateway address.</param>
+		/// <param name="SubnetMask">The Subnet mask.</param>
+		/// <param name="DNS">The DNS address.</param>
+        /// <returns>Whether or not it was successful</returns>
         public bool EnableDHCP(string Gateway = "192.168.1.1", string SubnetMask = "255.255.255.0", string DNS = "192.168.1.1")
         {
             _DHCP = true;
@@ -526,12 +596,6 @@ namespace Gadgeteer.Modules.GHIElectronics
                 return false;
 
             return true;
-
-            //Exit command mode
-            if (!_Command_Mode_Exit())
-                return false;
-
-            return true;
         }
 
         /// <summary>
@@ -540,8 +604,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="IP">IP Requested</param>
         /// <param name="Gateway">Gateway</param>
         /// <param name="SubnetMask">Subnet Mask</param>
-        /// <param name="DNS">DNS Server</param>
-        /// <returns></returns>
+		/// <param name="DNS">DNS Server</param>
+		/// <returns>Whether or not it was successful</returns>
         public bool EnableStaticIP(string IP, string Gateway = "192.168.1.1", string SubnetMask = "255.255.255.0", string DNS = "192.168.1.1")
         {
             _DHCP = false;
@@ -585,9 +649,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="SSID"></param>
         /// <param name="Passphrase"></param>
         /// <param name="channel"></param>
-        /// <param name="Authentication"></param>
-        /// <returns></returns>
-        public bool JoinWirelessNetwork(string SSID, string Passphrase, int channel = 0, WirelessEncrytionMode Authentication = WirelessEncrytionMode.Open)
+		/// <param name="Authentication"></param>
+		/// <returns>Whether or not it was successful</returns>
+        public bool JoinWirelessNetwork(string SSID, string Passphrase, int channel = 0, WirelessEncryptionMode Authentication = WirelessEncryptionMode.Open)
         {
             //Enter command mode
             if (!_Command_Mode_Start())
@@ -808,7 +872,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         private bool HttpEnabled = false;
         private bool HttpStream = false;
         private string HttpBuffer = "";
-        private int content_length = 0;
         private HttpRequest current_request;
         private bool bAwaitingPostData = false;
 
@@ -1207,6 +1270,11 @@ namespace Gadgeteer.Modules.GHIElectronics
         #region "Command Mode"
 
         //Attempt to execute a command
+		/// <summary>
+		/// Executes the command.
+		/// </summary>
+		/// <param name="Command">The command to execute.</param>
+		/// <returns>Whether or not it was successful</returns>
         public bool _Command_Execute(string Command)
         {
             //Append the return
@@ -1231,7 +1299,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             return _Command_Mode_Response_Okay;
         }
 
-        //Initiate command mode
+		//Initiate command mode
+		/// <summary>
+		/// Starts command mode.
+		/// </summary>
+		/// <returns>Whether or not it was successful</returns>
         public bool _Command_Mode_Start()
         {
             Thread.Sleep(100);
@@ -1252,7 +1324,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
-        //Exit command mode
+		//Exit command mode
+		/// <summary>
+		/// Exits command mode.
+		/// </summary>
+		/// <returns>Whether or not it was successful</returns>
         public bool _Command_Mode_Exit()
         {
             _Command_Mode_Write("exit\r");
@@ -1271,7 +1347,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
-        //Command write string method
+		//Command write string method
+		/// <summary>
+		/// Write to the device.
+		/// </summary>
+		/// <param name="Command">The command to write.</param>
+		/// <returns>Whether or not it was successful</returns>
         public void _Command_Mode_Write(string Command)
         {
             //Await response
@@ -1285,7 +1366,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             return;
         }
 
-        //Command write bytes method
+		//Command write bytes method
+		/// <summary>
+		/// Write to the device.
+		/// </summary>
+		/// <param name="Command">The command to write.</param>
+		/// <returns>Whether or not it was successful</returns>
         public void _Command_Mode_Write(byte[] Command)
         {
             //Await response

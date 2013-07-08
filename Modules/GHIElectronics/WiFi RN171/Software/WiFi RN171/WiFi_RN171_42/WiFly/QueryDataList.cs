@@ -3,7 +3,10 @@ using Microsoft.SPOT;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    public class QueryDataList : HttpHeaderList
-    {
-    }
+	/// <summary>
+	/// Represents the query data.
+	/// </summary>
+	public class QueryDataList : HttpHeaderList
+	{
+	}
 }

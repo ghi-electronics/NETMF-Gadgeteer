@@ -4,15 +4,25 @@ using System.Collections;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
+	/// <summary>
+	/// Represents the HTTP headers.
+	/// </summary>
     public class HttpHeaderList
     {
         private ArrayList _list;
 
+		/// <summary>
+		/// Constructs a new instance.
+		/// </summary>
         public HttpHeaderList()
         {
             _list = new ArrayList();
         }
 
+		/// <summary>
+		/// Returns a string representing this instance.
+		/// </summary>
+		/// <returns>A string representing this instance.</returns>
         public override string ToString()
         {
             string header = "";
@@ -31,6 +41,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             return header;
         }
 
+		/// <summary>
+		/// Gets or sets one of the headers.
+		/// </summary>
+		/// <param name="i">The index of the header.</param>
+		/// <returns>The header value at the index.</returns>
         public string this[string i]
         {
             get
@@ -64,6 +79,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
+		/// <summary>
+		/// Gets or sets one of the headers.
+		/// </summary>
+		/// <param name="i">The index of the header.</param>
+		/// <returns>The header value at the index.</returns>
         public string this[int i]
         {
             get

@@ -4,56 +4,162 @@ using System.IO.Ports;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
+	/// <summary>
+	/// An HTTP response.
+	/// </summary>
     public class HttpResponse
     {
         private ResponseStatus _status;
 
+		/// <summary>
+		/// The response status.
+		/// </summary>
         public enum ResponseStatus
-        {
-            //Informational Header Responses
-            Continue = 100,
+		{
+			//Informational Header Responses
+
+			/// <summary>
+			/// The Continue status
+			/// </summary>
+			Continue = 100,
+			/// <summary>
+			/// The SwitchingProtocols status
+			/// </summary>
             SwitchingProtocols = 101,
 
-            //Successful Header Responses
-            OK = 200,
-            Created = 201,
-            Accepted = 202,
-            NonAuthoritativeInformation = 203,
-            NoContent = 204,
+			//Successful Header Responses
+			/// <summary>
+			/// The OK status
+			/// </summary>
+			OK = 200,
+			/// <summary>
+			/// The Created status
+			/// </summary>
+			Created = 201,
+			/// <summary>
+			/// The Accepted status
+			/// </summary>
+			Accepted = 202,
+			/// <summary>
+			/// The NonAuthoritativeInformation status
+			/// </summary>
+			NonAuthoritativeInformation = 203,
+			/// <summary>
+			/// The NoContent status
+			/// </summary>
+			NoContent = 204,
+			/// <summary>
+			/// The ResetContent status
+			/// </summary>
             ResetContent = 205,
 
-            //Client Errors
-            BadRequest = 400,
-            Unauthorized = 401,
-            /* Reserved for future use: Payment Required = 402, */
-            Forbidden = 403,
-            NotFound = 404,
-            MethodNotAllowed = 405,
-            NotAcceptable = 406,
-            ProxyAuthenticationRequired = 407,
-            RequestTimeout = 408,
-            Conflict = 409,
-            Gone = 410,
-            LengthRequired = 411,
-            PreconditionFailed = 412,
-            RequestEntityTooLarge = 413,
-            RequestUriTooLong = 414,
-            UnsupportedMediaType = 415,
-            RequestedRangeNotSatisfiable = 416,
+			//Client Errors
+			/// <summary>
+			/// The BadRequest status
+			/// </summary>
+			BadRequest = 400,
+			/// <summary>
+			/// The Unauthorized status
+			/// </summary>
+			Unauthorized = 401,
+			/* Reserved for future use: Payment Required = 402, */
+			/// <summary>
+			/// The Forbidden status
+			/// </summary>
+			Forbidden = 403,
+			/// <summary>
+			/// The NotFound status
+			/// </summary>
+			NotFound = 404,
+			/// <summary>
+			/// The MethodNotAllowed status
+			/// </summary>
+			MethodNotAllowed = 405,
+			/// <summary>
+			/// The NotAcceptable status
+			/// </summary>
+			NotAcceptable = 406,
+			/// <summary>
+			/// The ProxyAuthenticationRequired status
+			/// </summary>
+			ProxyAuthenticationRequired = 407,
+			/// <summary>
+			/// The RequestTimeout status
+			/// </summary>
+			RequestTimeout = 408,
+			/// <summary>
+			/// The Conflict status
+			/// </summary>
+			Conflict = 409,
+			/// <summary>
+			/// The Gone status
+			/// </summary>
+			Gone = 410,
+			/// <summary>
+			/// The LengthRequired status
+			/// </summary>
+			LengthRequired = 411,
+			/// <summary>
+			/// The PreconditionFailed status
+			/// </summary>
+			PreconditionFailed = 412,
+			/// <summary>
+			/// The RequestEntityTooLarge status
+			/// </summary>
+			RequestEntityTooLarge = 413,
+			/// <summary>
+			/// The RequestUriTooLong status
+			/// </summary>
+			RequestUriTooLong = 414,
+			/// <summary>
+			/// The UnsupportedMediaType status
+			/// </summary>
+			UnsupportedMediaType = 415,
+			/// <summary>
+			/// The RequestedRangeNotSatisfiable status
+			/// </summary>
+			RequestedRangeNotSatisfiable = 416,
+			/// <summary>
+			/// The ExpectationFailed status
+			/// </summary>
             ExpectationFailed = 417,
 
-            //Server Errors
-            InternalServerError = 500,
-            NotImplemented = 501,
-            BadGateway = 502,
-            ServiceUnavailable = 503,
-            GatewayTimeout = 504,
+			//Server Errors
+			/// <summary>
+			/// The InternalServerError status
+			/// </summary>
+			InternalServerError = 500,
+			/// <summary>
+			/// The NotImplemented status
+			/// </summary>
+			NotImplemented = 501,
+			/// <summary>
+			/// The BadGateway status
+			/// </summary>
+			BadGateway = 502,
+			/// <summary>
+			/// The ServiceUnavailable status
+			/// </summary>
+			ServiceUnavailable = 503,
+			/// <summary>
+			/// The GatewayTimeout status
+			/// </summary>
+			GatewayTimeout = 504,
+			/// <summary>
+			/// The HTTPVersionNotSupported status
+			/// </summary>
             HTTPVersionNotSupported = 505
         }
 
         private Gadgeteer.Interfaces.Serial _stream;
+		/// <summary>
+		/// The header data of the response.
+		/// </summary>
         public HttpHeaderList HeaderData;
 
+		/// <summary>
+		/// The status code of the reponse.
+		/// </summary>
         public ResponseStatus StatusCode
         {
             get
@@ -67,6 +173,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
+		/// <summary>
+		/// Constructs a new response from a stream.
+		/// </summary>
+		/// <param name="stream">The stream to use.</param>
         public HttpResponse(Gadgeteer.Interfaces.Serial stream)
         {
             if (stream == null)
@@ -77,6 +187,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             HeaderData = new HttpHeaderList();
         }
 
+		/// <summary>
+		/// Sends a response.
+		/// </summary>
+		/// <param name="document">The body of the response.</param>
         public void Send(byte[] document)
         {
             byte[] header = System.Text.Encoding.UTF8.GetBytes(this.HeaderData.ToString());

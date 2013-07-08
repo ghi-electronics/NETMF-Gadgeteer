@@ -23,7 +23,7 @@
   <?define FullManufacturer = "GHI Electronics" ?>
 
   <!-- These define which versions of NETMF are supported - comment out or delete any unsupported NETMF versions. -->
-  <?define NETMF41Supported ?>
+  <!-- <?define NETMF41Supported ?> -->
   <?define NETMF42Supported ?>
 
 
