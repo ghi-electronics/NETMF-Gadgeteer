@@ -7,12 +7,6 @@ using GTI = Gadgeteer.Interfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-
     /// <summary>
     /// A LED Strip module for Microsoft .NET Gadgeteer
     /// </summary>
@@ -20,34 +14,21 @@ namespace Gadgeteer.Modules.GHIElectronics
     {
         private GTI.DigitalOutput[] LEDs = new GTI.DigitalOutput[7];
 
+		/// <summary>
+		/// The maximum value a bitmask can have.
+		/// </summary>
         public readonly uint MAX_VALUE = 0x7F;
 
-        /*/// <summary>
-        /// Enum for the types of bitwise operations that can be performed on this module.
-        /// </summary>
-        public enum Bitwise_Operation
-        {
-            /// <summary>
-            /// A bitwise AND takes two binary representations of equal length and 
-            /// performs the logical AND operation on each pair of corresponding bits.
-            /// </summary>
-            Bitwise_AND = 0, 
-
-            /// <summary>
-            /// A bitwise OR takes two bit patterns of equal length and performs the 
-            /// logical inclusive OR operation on each pair of corresponding bits.
-            /// </summary>
-            Bitwise_OR = 1,
-
-            /// <summary>
-            /// The bitwise NOT, or complement, is an unary operation that performs 
-            /// logical negation on each bit, forming the ones' complement of the given 
-            /// binary value. Bits that are 0 become 1, and those that are 1 become 0.
-            /// </summary>
-            Bitwise_NOT = 2,
-
-            Bitwise_XOR = 3
-        }*/
+		/// <summary>
+		/// Gets the number of LEDs on the module.
+		/// </summary>
+		public int LedCount
+		{
+			get
+			{
+				return 7;
+			}
+		}
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -59,7 +40,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             for (int i = 0; i < 7; i++)
             {
-                LEDs[i] = new GTI.DigitalOutput(socket, Socket.Pin.Three + i, false, this);
+                this.LEDs[i] = new GTI.DigitalOutput(socket, Socket.Pin.Three + i, false, this);
             }
         }
 
@@ -72,7 +53,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (led > 6)
                 throw new ArgumentOutOfRangeException();
 
-            LEDs[led].Write(true);
+			this.SetLED(led, true);
         }
 
         /// <summary>
@@ -84,7 +65,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (led > 6)
                 throw new ArgumentOutOfRangeException();
 
-            LEDs[led].Write(false);
+			this.SetLED(led, false);
         }
 
         /// <summary>
@@ -111,26 +92,56 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             uint value = 1;
 
-            for (uint i = 0; i < 7; i++)
+            for (int i = 0; i < 7; i++)
             {
                 if ((mask & value) == value)
-                    LEDs[i].Write(true);
-                else
-                    LEDs[i].Write(false);
+					this.TurnLEDOn(i);
+				else
+					this.TurnLEDOff(i);
 
                 value = value << 1;
             }
         }
 
-        /*/// <summary>
-        /// Sets the LEDs on the module depending on the current state of the module and the operation passed in.
-        /// </summary>
-        /// <param name="mask"></param>
-        /// <param name="op"></param>
-        public void SetBitmask(uint mask, Bitwise_Operation op)
-        {
-            if (mask > MAX_VALUE)
-                throw new ArgumentOutOfRangeException();
-        }*/
+		/// <summary>
+		/// Turns all of the LEDs on.
+		/// </summary>
+		public void TurnAllLedsOn()
+		{
+			for (int i = 0; i < 7; i++)
+				this.TurnLEDOn(i);
+		}
+
+		/// <summary>
+		/// Turns all of the LEDs off.
+		/// </summary>
+		public void TurnAllLedsOff()
+		{
+			for (int i = 0; i < 7; i++)
+				this.TurnLEDOff(i);
+		}
+
+		/// <summary>
+		/// Gets or sets the value of the specified LED.
+		/// </summary>
+		/// <param name="index">The LED whose state to get or set.</param>
+		/// <returns>Whether or not the LED is on or off.</returns>
+		public bool this[int index]
+		{
+			get
+			{
+				if (index >= this.LedCount || index < 0)
+					throw new IndexOutOfRangeException();
+
+				return this.LEDs[index].Read();
+			}
+			set
+			{
+				if (index >= this.LedCount || index < 0)
+					throw new IndexOutOfRangeException();
+
+				this.SetLED(index, value);
+			}
+		}
     }
 }
