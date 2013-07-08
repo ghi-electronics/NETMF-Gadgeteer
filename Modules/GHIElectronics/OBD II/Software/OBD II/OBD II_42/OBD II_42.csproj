@@ -53,9 +53,6 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Setup\wixparameters42.wxi" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Elm327.Core\Elm327.Core.csproj">
       <Project>{16AFE004-4A9F-446F-B6A1-391AA6D92336}</Project>
       <Name>Elm327.Core</Name>

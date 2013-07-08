@@ -39,5 +39,8 @@
   <?define guid_msi_upgrade_code =  "ed061030-a567-4205-bb2a-2f0fa286721a" ?>
   <?define guid_msm_package_id = "867af88d-2b7a-404c-8a7d-570fa7b3e7ac" ?>
 
+	<?define guid_msm_comp_files_id_42 = "bb059f54-63ca-4417-98de-2d365ada91f9" ?>
+	<?define guid_msm_comp_files_be_id_42 = "e24fdab4-f32d-480f-bebb-b5f26342203d" ?>
+	<?define guid_msm_comp_files_le_id_42 = "25258b99-b72f-4639-ac68-0afcffb7c6ba" ?>
 </Include>
 

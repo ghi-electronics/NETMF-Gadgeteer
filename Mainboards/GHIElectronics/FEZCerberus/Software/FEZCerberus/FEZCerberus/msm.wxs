@@ -3,13 +3,6 @@
   
   <?include common.wxi?>
 
-  <?ifdef NETMF41Supported ?>
-  <?include $(var.SourcePath)..\$(var.ProjectPath)_41\Setup\wixparameters41.wxi?>
-  <?endif ?>
-  <?ifdef NETMF42Supported ?>
-  <?include $(var.SourcePath)..\$(var.ProjectPath)_42\Setup\wixparameters42.wxi?>
-  <?endif ?>
-  
   <Module Id="id_mainboard_msm" Language="0" Version="$(var.MainboardSoftwareVersion)">
 
     <Package Id="$(var.guid_msm_package_id)" 

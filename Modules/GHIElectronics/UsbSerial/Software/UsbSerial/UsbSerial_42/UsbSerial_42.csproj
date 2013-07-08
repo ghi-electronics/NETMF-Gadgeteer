@@ -53,7 +53,4 @@
     <Reference Include="Gadgeteer.Serial, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="mscorlib" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Setup\wixparameters42.wxi" />
-  </ItemGroup>
 </Project>

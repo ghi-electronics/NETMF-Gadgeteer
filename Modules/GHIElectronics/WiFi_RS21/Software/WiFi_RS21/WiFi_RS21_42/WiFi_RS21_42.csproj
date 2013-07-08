@@ -62,7 +62,4 @@
     <Reference Include="Microsoft.SPOT.Net" />
     <Reference Include="mscorlib" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Setup\wixparameters42.wxi" />
-  </ItemGroup>
 </Project>

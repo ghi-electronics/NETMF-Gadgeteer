@@ -53,7 +53,4 @@
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="mscorlib" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Setup\wixparameters42.wxi" />
-  </ItemGroup>
 </Project>
