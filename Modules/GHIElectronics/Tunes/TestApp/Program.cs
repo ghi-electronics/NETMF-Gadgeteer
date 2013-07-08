@@ -10,10 +10,9 @@ using Microsoft.SPOT.Touch;
 using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-
 using Gadgeteer.Modules.GHIElectronics;
 
-namespace TestApp_42
+namespace TestApp
 {
     public partial class Program
     {
@@ -64,8 +63,34 @@ namespace TestApp_42
 
             tunes.Play();
 
-            // Use Debug.Print to show messages in Visual Studio's "Output" window during debugging.
-            Debug.Print("Program Started");
+			Thread.Sleep(5000);
+
+			Tunes.Melody melody = new Tunes.Melody();
+
+			// up
+			melody.Add(Tunes.Tone.C4, 200);
+			melody.Add(Tunes.Tone.D4, 200);
+			melody.Add(Tunes.Tone.E4, 200);
+			melody.Add(Tunes.Tone.F4, 200);
+			melody.Add(Tunes.Tone.G4, 200);
+			melody.Add(Tunes.Tone.A4, 200);
+			melody.Add(Tunes.Tone.B4, 200);
+			melody.Add(Tunes.Tone.C5, 200);
+			melody.Add(Tunes.Tone.B4, 200);
+			melody.Add(Tunes.Tone.A4, 200);
+			melody.Add(Tunes.Tone.G4, 200);
+			melody.Add(Tunes.Tone.F4, 200);
+			melody.Add(Tunes.Tone.E4, 200);
+			melody.Add(Tunes.Tone.D4, 200);
+			melody.Add(Tunes.Tone.C4, 200);
+			melody.Add(Tunes.Tone.E4, 200);
+			melody.Add(Tunes.Tone.G4, 200);
+			melody.Add(Tunes.Tone.C5, 200);
+			melody.Add(Tunes.Tone.G4, 200);
+			melody.Add(Tunes.Tone.E4, 200);
+			melody.Add(Tunes.Tone.C4, 200);
+
+			tunes.Play(melody);
         }
 
         void PlayNote(Tunes.Tone tone)

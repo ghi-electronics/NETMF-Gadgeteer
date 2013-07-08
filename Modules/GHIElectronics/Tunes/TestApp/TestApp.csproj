@@ -59,10 +59,7 @@
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
-    <Reference Include="GTM.GHIElectronics.Tunes, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GHIElectronics.Gadgeteer.FEZCerberus, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
@@ -99,5 +96,11 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Software\Tunes\Tunes_42\Tunes_42.csproj">
+      <Project>{C5010C4C-50AF-4BCC-AE8D-43BB7FF58B44}</Project>
+      <Name>Tunes_42</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

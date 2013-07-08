@@ -10,223 +10,301 @@ using System.Threading;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
+	/// <summary>
+	/// A Tunes module for Microsoft .NET Gadgeteer
+	/// </summary>
+	public class Tunes : GTM.Module
+	{
+		private GT.Interfaces.PWMOutput tunePWM;
+		private Melody playList;
+		private bool running = false;
+		private Thread playbackThread;
 
-    /// <summary>
-    /// A Tunes module for Microsoft .NET Gadgeteer
-    /// </summary>
-    public class Tunes : GTM.Module
-    {
-        private GT.Interfaces.PWMOutput tunePWM;
-        private Queue playList;
+		/// <summary>
+		/// Represents a list of notes to play in sequence.
+		/// </summary>
+		public class Melody
+		{
+			private Queue list;
 
-        /// <summary>
-        /// Class that holds and manages notes that can be played.
-        /// </summary>
-        public class Tone
-        {
-            /// <summary>
-            /// Frequency of the note in hertz
-            /// </summary>
-            public double freq;
+			/// <summary>
+			/// Creates a new instance of a melody.
+			/// </summary>
+			public Melody()
+			{
+				this.list = new Queue();
+			}
 
-            private Tone(double freq)
-            {
-                this.freq = freq;
-            }
+			/// <summary>
+			/// Adds a new note to the list to play.
+			/// </summary>
+			/// <param name="frequency">The frequency of the note.</param>
+			/// <param name="milliseconds">The duration of the note.</param>
+			public void Add(int frequency, int milliseconds)
+			{
+				this.Add(new Tone(frequency), milliseconds);
+			}
 
-            /// <summary>
-            /// A "rest" note, or a silent note.
-            /// </summary>
-            public static readonly Tone Rest = new Tone(0.0);
+			/// <summary>
+			/// Adds a new note to the list to play.
+			/// </summary>
+			/// <param name="tone">The tone of the note.</param>
+			/// <param name="duration">The duration of the note.</param>
+			public void Add(Tone tone, int duration)
+			{
+				this.Add(new MusicNote(tone, duration));
+			}
 
-            #region 4th Octave
-            /// <summary>
-            /// C in the 4th octave. Middle C.
-            /// </summary>
-            public static readonly Tone C4 = new Tone(261.626);
+			/// <summary>
+			/// Adds an existing note to the list to play.
+			/// </summary>
+			/// <param name="note">The note to add.</param>
+			public void Add(MusicNote note)
+			{
+				this.list.Enqueue(note);
+			}
 
-            /// <summary>
-            /// D in the 4th octave.
-            /// </summary>
-            public static readonly Tone D4 = new Tone(293.665);
+			public MusicNote GetNextNote()
+			{
+				if (this.list.Count == 0)
+					throw new Exception("No notes added.");
 
-            /// <summary>
-            /// E in the 4th octave.
-            /// </summary>
-            public static readonly Tone E4 = new Tone(329.628);
+				return (MusicNote)this.list.Dequeue();
+			}
 
-            /// <summary>
-            /// F in the 4th octave.
-            /// </summary>
-            public static readonly Tone F4 = new Tone(349.228);
+			/// <summary>
+			/// Gets the number of notes left to play in the melody.
+			/// </summary>
+			public int NotesRemaining
+			{
+				get
+				{
+					return this.list.Count;
+				}
+			}
 
-            /// <summary>
-            /// G in the 4th octave.
-            /// </summary>
-            public static readonly Tone G4 = new Tone(391.995);
+			/// <summary>
+			/// Removes all notes from the melody.
+			/// </summary>
+			public void Clear()
+			{
+				this.list.Clear();
+			}
+		}
 
-            /// <summary>
-            /// A in the 4th octave.
-            /// </summary>
-            public static readonly Tone A4 = new Tone(440);
+		/// <summary>
+		/// Class that holds and manages notes that can be played.
+		/// </summary>
+		public class Tone
+		{
+			/// <summary>
+			/// Frequency of the note in hertz
+			/// </summary>
+			public double freq;
 
-            /// <summary>
-            /// B in the 4th octave.
-            /// </summary>
-            public static readonly Tone B4 = new Tone(493.883);
+			public Tone(double freq)
+			{
+				this.freq = freq;
+			}
 
-            #endregion 4th Octave
+			/// <summary>
+			/// A "rest" note, or a silent note.
+			/// </summary>
+			public static readonly Tone Rest = new Tone(0.0);
 
-            #region 5th Octave
+			#region 4th Octave
+			/// <summary>
+			/// C in the 4th octave. Middle C.
+			/// </summary>
+			public static readonly Tone C4 = new Tone(261.626);
 
-            /// <summary>
-            /// C in the 5th octave.
-            /// </summary>
-            public static readonly Tone C5 = new Tone(523.251);
+			/// <summary>
+			/// D in the 4th octave.
+			/// </summary>
+			public static readonly Tone D4 = new Tone(293.665);
 
-            #endregion 5th Octave
-        }
+			/// <summary>
+			/// E in the 4th octave.
+			/// </summary>
+			public static readonly Tone E4 = new Tone(329.628);
 
-        /// <summary>
-        /// Class that describes a musical note, containing a tone and a duration.
-        /// </summary>
-        public class MusicNote
-        {
-            public Tone tone;
-            public int duration;
+			/// <summary>
+			/// F in the 4th octave.
+			/// </summary>
+			public static readonly Tone F4 = new Tone(349.228);
 
-            /// <summary>
-            /// Constructor
-            /// </summary>
-            /// <param name="tone">The tone of the note.</param>
-            /// <param name="duration">The duration that the note should be played.</param>
-            public MusicNote(Tone tone, int duration)
-            {
-                this.tone = tone;
-                this.duration = duration;
-            }
-        }
+			/// <summary>
+			/// G in the 4th octave.
+			/// </summary>
+			public static readonly Tone G4 = new Tone(391.995);
 
-        // Note: A constructor summary is auto-generated by the doc builder.
-        /// <summary></summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Tunes(int socketNumber)
-        {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			/// <summary>
+			/// A in the 4th octave.
+			/// </summary>
+			public static readonly Tone A4 = new Tone(440);
 
-            socket.EnsureTypeIsSupported('P', this);
+			/// <summary>
+			/// B in the 4th octave.
+			/// </summary>
+			public static readonly Tone B4 = new Tone(493.883);
 
-            tunePWM = new GTI.PWMOutput(socket, Socket.Pin.Nine, false, this);
+			#endregion 4th Octave
 
-            playList = new Queue();
-            playList.Clear();
-        }
+			#region 5th Octave
 
-        // Determines if the module is currently iterating through the queue and playing notes.
-        private bool bIsPlaying = false;
+			/// <summary>
+			/// C in the 5th octave.
+			/// </summary>
+			public static readonly Tone C5 = new Tone(523.251);
 
-        // Determines if playback should stop. False if there is no need to stop. When set to True, playback is stopped and this value is toggled back to False once playback is over. 
-        private bool bStopAcknowledged = false;
+			#endregion 5th Octave
+		}
 
-        private Thread playbackThread;
+		/// <summary>
+		/// Class that describes a musical note, containing a tone and a duration.
+		/// </summary>
+		public class MusicNote
+		{
+			public Tone tone;
+			public int duration;
 
-        /// <summary>
-        /// Starts note playback. Returns if it made any change.
-        /// </summary>
-        /// <returns>Returns true if notes were not playing and they were started. False if notes were already being played.</returns>
-        public bool Play()
-        {
-            // Make sure the queue is not empty and we are not currently playing it.
-            if (!bIsPlaying && playList.Count > 0)
-            {
-                bIsPlaying = true;
-                bStopAcknowledged = false;
+			/// <summary>
+			/// Constructor
+			/// </summary>
+			/// <param name="tone">The tone of the note.</param>
+			/// <param name="duration">The duration that the note should be played.</param>
+			public MusicNote(Tone tone, int duration)
+			{
+				this.tone = tone;
+				this.duration = duration;
+			}
+		}
 
-                playbackThread = new Thread(playbackThreadStart);
-                playbackThread.Start();
+		/// <summary></summary>
+		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
+		public Tunes(int socketNumber)
+		{
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
-                return true;
-            }
-            else
-            {
-                // We can do nothing. It is already running.
-                return false;
-            }
-        }
+			socket.EnsureTypeIsSupported('P', this);
 
-        /// <summary>
-        /// The function that runs when the playback thread is started. Returns (ends the thread) when playback is finished or Stop() is called.
-        /// </summary>
-        void playbackThreadStart()
-        {
-            while (playList.Count > 0)
-            {
-                if (bStopAcknowledged)
-                {
-                    bStopAcknowledged = false;
-                    break;
-                }
+			tunePWM = new GTI.PWMOutput(socket, Socket.Pin.Nine, false, this);
 
-                // Get the next note.
-                MusicNote currNote = (MusicNote)playList.Dequeue();
+			playList = new Melody();
+		}
 
-                // Set the tone and sleep for the duration
-                SetTone(currNote.tone);
+		/// <summary>
+		/// Plays the given frequency indefinitely.
+		/// </summary>
+		/// <param name="frequency">The frequency to play.</param>
+		public void Play(int frequency)
+		{
+			this.playList.Clear();
+			this.playList.Add(frequency, int.MaxValue);
+			this.Play();
+		}
 
-                Thread.Sleep(currNote.duration);
-            }
+		/// <summary>
+		/// Plays the given tone indefinitely.
+		/// </summary>
+		/// <param name="tone">The tone to play.</param>
+		public void Play(Tone tone)
+		{
+			this.Play((int)tone.freq);
+		}
 
-            SetTone(Tone.Rest);
-            bIsPlaying = false;
-        }
+		/// <summary>
+		/// Plays the given frequency indefinitely.
+		/// </summary>
+		/// <param name="frequency">The frequency to play.</param>
+		public void Play(Melody melody)
+		{
+			this.playList = melody;
+			this.Play();
+		}
 
-        /// <summary>
-        ///  Sets PWM to the tone frequency and starts it.
-        /// </summary>
-        /// <param name="tone"></param>
-        private void SetTone(Tone tone)
-        {
-            tunePWM.Active = false;
+		/// <summary>
+		/// Starts note playback of the notes added using AddNote(). Returns if it made any change.
+		/// </summary>
+		/// <returns>Returns true if notes were not playing and they were started. False if notes were already being played.</returns>
+		public bool Play()
+		{
+			if (this.running)
+				return false;
 
-            if (tone == Tone.Rest)
-                return;
+			// Make sure the queue is not empty and we are not currently playing it.
+			if (playList.NotesRemaining > 0)
+			{
+				this.running = true;
 
-            tunePWM.Set((int)tone.freq, 0.5);
-            tunePWM.Active = true;
-        }
+				playbackThread = new Thread(playbackThreadStart);
+				playbackThread.Start();
+			}
 
-        /// <summary>
-        /// Stops note playback. Returns if it made any change.
-        /// </summary>
-        /// <returns>Returns true if notes were playing and they were stopped. False if playback was already stopped.</returns>
-        public bool Stop()
-        {
-            if (bIsPlaying)
-            {
-                bStopAcknowledged = true;
+			return true;
+		}
 
-                return true;
-            }
-            else
-            {
-                // We can do nothing. It is already stopped.
-                return false;
-            }
-        }
+		/// <summary>
+		/// The function that runs when the playback thread is started. Returns (ends the thread) when playback is finished or Stop() is called.
+		/// </summary>
+		void playbackThreadStart()
+		{
+			while (this.running && playList.NotesRemaining > 0)
+			{
+				// Get the next note.
+				MusicNote currNote = playList.GetNextNote();
 
-        /// <summary>
-        /// Adds a note to the queue to be played
-        /// </summary>
-        /// <param name="note">The note to be added, which describes the tone and duration to be played.</param>
-        public void AddNote(MusicNote note)
-        {
-            playList.Enqueue(note);
-        }
+				// Set the tone and sleep for the duration
+				SetTone(currNote.tone);
 
-    }
+				Thread.Sleep(currNote.duration);
+			}
+
+			SetTone(Tone.Rest);
+
+			this.running = false;
+		}
+
+		/// <summary>
+		///  Sets PWM to the tone frequency and starts it.
+		/// </summary>
+		/// <param name="tone"></param>
+		private void SetTone(Tone tone)
+		{
+			tunePWM.Active = false;
+
+			if (tone == Tone.Rest)
+				return;
+
+			tunePWM.Set((int)tone.freq, 0.5);
+			tunePWM.Active = true;
+		}
+
+		/// <summary>
+		/// Stops note playback. Returns if it made any change.
+		/// </summary>
+		/// <returns>Returns true if notes were playing and they were stopped. False if playback was already stopped.</returns>
+		public bool Stop()
+		{
+			if (this.running)
+			{
+				this.running = false;
+
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		/// <summary>
+		/// Adds a note to the queue to be played
+		/// </summary>
+		/// <param name="note">The note to be added, which describes the tone and duration to be played.</param>
+		public void AddNote(MusicNote note)
+		{
+			playList.Add(note);
+		}
+	}
 }
