@@ -44,7 +44,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Display_N18(int socketNumber) : base(WPFRenderOptions.Ignore)
+        public Display_N18(int socketNumber) : base(WPFRenderOptions.Intercept)
         {
 			this.byteArray = new byte[1];
 			this.shortArray = new ushort[2];
