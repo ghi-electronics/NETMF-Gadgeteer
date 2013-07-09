@@ -165,7 +165,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 			toSend[1] = (byte)(mask & 0xFF);
 
 			this.forwardLEDs.Write(toSend);
-			Thread.Sleep(40);
 		}
 
 		/// <summary>
@@ -263,7 +262,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				rightSpeed *= -1;
 
 			this.SetSpeed(this.leftMotor, this.leftMotorDirection, leftSpeed, true);
-			this.SetSpeed(this.rightMotor, this.rightMotorDirection, leftSpeed, false);
+			this.SetSpeed(this.rightMotor, this.rightMotorDirection, rightSpeed, false);
 		}
 
 		private void SetSpeed(PWM motor, OutputPort direction, int speed, bool isLeft)
