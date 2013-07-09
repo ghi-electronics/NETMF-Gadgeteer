@@ -196,16 +196,18 @@
       <Merge Id="id_WiFi_RN171_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\WiFi RN171\Software\WiFi RN171\WiFi_RN171\bin\Release\Installer\WiFi_RN171.msm" DiskId="1" />
       <Merge Id="id_FEZCerbot_Controller_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CerbotController\Software\CerbotController\CerbotController\bin\Release\Installer\CerbotController.msm" DiskId="1" />
 
-      <Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
+	  <Merge Id="id_Keypad_KP16_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Keypad KP16\Software\Keypad KP16\Keypad_KP16\bin\Release\Installer\Keypad_KP16.msm" DiskId="1" />
+      <Merge Id="id_HubAP5_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\HubAP5\Software\HubAP5\HubAP5\bin\Release\Installer\HubAP5.msm" DiskId="1" />
+
+		
+	  <Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
       <Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
       <Merge Id="id_FEZSpider_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider\bin\Release\Installer\FEZSpider.msm" DiskId="1" />
       <Merge Id="id_FEZ_Cerbuino_Bee_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoBee\Software\FEZ Cerbuino Bee\FEZ Cerbuino Bee\bin\Release\Installer\FEZ_Cerbuino_Bee.msm" DiskId="1" />
       <Merge Id="id_FEZCobraII_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCobra II\Software\FEZCobra II\FEZCobra_II\bin\Release\Installer\FEZCobra_II.msm" DiskId="1" />
       <Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
-
       <Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
-
-    </Directory>
+	</Directory>
 
     <Feature Id="main" Title="Main" Level="1">
 
@@ -273,8 +275,10 @@
       <MergeRef Id="id_USB_Serial_SP_msm"/>
       <MergeRef Id="id_Amp_M35_msm"/>
       <MergeRef Id="id_Accel_G248_msm"/>
-      <MergeRef Id="id_LED_Strip_msm"/>
-      <MergeRef Id="id_WiFi_RN171_msm"/>
+	  <MergeRef Id="id_LED_Strip_msm"/>
+	  <MergeRef Id="id_WiFi_RN171_msm"/>
+	  <MergeRef Id="id_Keypad_KP16_msm"/>
+	  <MergeRef Id="id_HubAP5_msm"/>
 
       <MergeRef Id="id_FEZHydra_msm" />
       <MergeRef Id="id_FEZCerberus_msm" />
