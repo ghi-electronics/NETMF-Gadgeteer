@@ -151,10 +151,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported('Y', this);
 
+            //Default on-state fix submitted by community member 'Lubos'
             data = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
             clock = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
+            enable = new GTI.DigitalOutput(socket, Socket.Pin.Three, true, this); //Switching lines for enable and latch prevents default on state
             latch = new GTI.DigitalOutput(socket, Socket.Pin.Five, false, this);
-            enable = new GTI.DigitalOutput(socket, Socket.Pin.Three, true, this);
             clear = new GTI.DigitalOutput(socket, Socket.Pin.Four, true, this);
 
             DisableAllRelays();
