@@ -51,7 +51,9 @@
   <ItemGroup>
     <None Include="msm.wxs" />
     <None Include="en-us.wxl" />
-    <None Include="common.wxi" />
+    <None Include="common.wxi">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="msi.wxs" />
     <None Include="G.ico" />
     <None Include="Image.jpg" />

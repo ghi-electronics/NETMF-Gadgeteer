@@ -283,15 +283,13 @@ namespace GHIElectronics.Gadgeteer
 
 	}
 
-	// This example class can be used to implement Analog Out support, if present on this mainboard
 	internal class FEZCerbot_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
 	{
-		// Declare a mainboard-specific analog output interface here (set to null since it is inactive)
 		private AnalogOutput aout = null;
 
 		Cpu.AnalogOutputChannel pin;
-		readonly double _minVoltage = 0;
-		readonly double _maxVoltage = 3.3;
+		const double MIN_VOLTAGE = 0;
+		const double MAX_VOLTAGE = 3.3;
 
 		public FEZCerbot_AnalogOut(Cpu.AnalogOutputChannel pin)
 		{
@@ -302,7 +300,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return _minVoltage;
+				return FEZCerbot_AnalogOut.MIN_VOLTAGE;
 			}
 		}
 
@@ -310,7 +308,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return _maxVoltage;
+				return FEZCerbot_AnalogOut.MAX_VOLTAGE;
 			}
 		}
 
@@ -318,41 +316,37 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return aout != null;
+				return this.aout != null;
 			}
-
 			set
 			{
-				if (value == Active) return;
+				if (value == this.Active)
+					return;
+
 				if (value)
 				{
-					// Instantiate a mainboard-specific analog output interface here
-					// e.g. aout = new AOUT(pin);
-					aout = new AnalogOutput(pin, 3.3, 0, 12);
-					aout.Write(_minVoltage);
+					this.aout = new AnalogOutput(this.pin, 1 / FEZCerbot_AnalogOut.MAX_VOLTAGE, 0, 12);
+					this.SetVoltage(FEZCerbot_AnalogOut.MIN_VOLTAGE);
 				}
 				else
 				{
-					// Stop the mainboard-specific analog output interface here
-					aout.Dispose();
-					aout = null;
+					this.aout.Dispose();
+					this.aout = null;
 				}
 			}
 		}
 
 		public void SetVoltage(double voltage)
 		{
-			Active = true;
+			this.Active = true;
 
-			// Check that voltage does not fall outside of mix/max range
-			if (voltage < _minVoltage)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is 0.0V");
+			if (voltage < FEZCerbot_AnalogOut.MIN_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCerbot_AnalogOut.MIN_VOLTAGE.ToString() + "V");
 
-			if (voltage > _maxVoltage)
-				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is 3.3V");
+			if (voltage > FEZCerbot_AnalogOut.MAX_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCerbot_AnalogOut.MAX_VOLTAGE.ToString() + "V");
 
-			// Use the mainboard-specific analog
-			aout.Write(voltage);
+			this.aout.Write(voltage);
 		}
 	}
 }
