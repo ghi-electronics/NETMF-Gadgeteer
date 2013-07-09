@@ -37,7 +37,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             string t_Command_Init = "$$$";
             _Command_Init = System.Text.Encoding.UTF8.GetBytes(t_Command_Init);
 
-            int baud = 9600;
+            int baud = 115200; //Changed from datasheet
 
             _wifly = new GTI.Serial(socket, baud, GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits.One, 8, GTI.Serial.HardwareFlowControl.NotRequired, this);
             _wifly.Open();
@@ -48,9 +48,18 @@ namespace Gadgeteer.Modules.GHIElectronics
             RTS = new GTI.DigitalOutput(socket, Socket.Pin.Six, false, this);
         }
 
+        //Added method for user-defined baud rates as well as
+        //the ability to work with WiFly modules
+        public void SetBaudRate(int baud = 115200)
+        {
+            _wifly.Close();
+            _wifly.BaudRate = baud;
+            _wifly.Open();
 
+            _baud = baud;
+        }
 
-                #region "Enumerations"
+        #region "Enumerations"
 
 		/// <summary>
 		/// Represents the debug mode.
