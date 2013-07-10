@@ -7,7 +7,7 @@ namespace TestApp
 	{
 		void ProgramStarted()
 		{
-			var pulse = pulseCount; // new GTM.GHIElectronics.PulseCount(2);
+			var pulse = new GTM.GHIElectronics.PulseCount(2);
 
 			new Thread(() =>
 			{

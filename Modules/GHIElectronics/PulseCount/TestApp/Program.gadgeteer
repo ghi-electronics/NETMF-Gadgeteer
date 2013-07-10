@@ -46,21 +46,6 @@
         </socketUses>
       </module>
     </gadgeteerModelHasGadgeteerHardware>
-    <gadgeteerModelHasGadgeteerHardware Id="7148838e-7a0a-4b54-abef-2713db33ab6d">
-      <module Id="901878cc-c27c-4d3b-a74c-39cc41c3100f" cachedDefinition="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ModuleDefinition xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; Name=&quot;PulseCount&quot; Type=&quot;Gadgeteer.Modules.GHIElectronics.PulseCount&quot; HardwareVersion=&quot;1.0&quot; Image=&quot;C:\Program Files (x86)\GHI Electronics\Microsoft .NET Gadgeteer\Modules\PulseCount\Resources\Image.jpg&quot; BoardWidth=&quot;42&quot; BoardHeight=&quot;32&quot; MinimumGadgeteerCoreVersion=&quot;2.42.500&quot; HelpUrl=&quot;&quot; UniqueId=&quot;37966566-7c55-45d3-85ff-706b713d7546&quot; Manufacturer=&quot;GHI Electronics&quot; Description=&quot;A PulseCount module&quot; InstanceName=&quot;pulseCount&quot; ModuleSuppliesPower=&quot;false&quot;&gt;&#xD;&#xA;  &lt;Power /&gt;&#xD;&#xA;  &lt;ProvidedSockets /&gt;&#xD;&#xA;  &lt;Assemblies&gt;&#xD;&#xA;    &lt;Assembly MFVersion=&quot;4.2&quot; Name=&quot;GTM.GHIElectronics.PulseCount&quot; /&gt;&#xD;&#xA;  &lt;/Assemblies&gt;&#xD;&#xA;  &lt;LibrariesProvided /&gt;&#xD;&#xA;  &lt;Sockets&gt;&#xD;&#xA;    &lt;Socket Orientation=&quot;90&quot; Left=&quot;21&quot; Top=&quot;29&quot; TypesLabel=&quot;Y&quot; ConstructorOrder=&quot;1&quot; Optional=&quot;false&quot;&gt;&#xD;&#xA;      &lt;Types&gt;&#xD;&#xA;        &lt;Type&gt;Y&lt;/Type&gt;&#xD;&#xA;      &lt;/Types&gt;&#xD;&#xA;      &lt;Pins&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;6&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;7&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;8&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;9&lt;/Pin&gt;&#xD;&#xA;      &lt;/Pins&gt;&#xD;&#xA;    &lt;/Socket&gt;&#xD;&#xA;  &lt;/Sockets&gt;&#xD;&#xA;  &lt;ExtraLibrariesRequired /&gt;&#xD;&#xA;&lt;/ModuleDefinition&gt;" name="pulseCount" moduleType="Gadgeteer.Modules.GHIElectronics.PulseCount" moduleDefinitionId="37966566-7c55-45d3-85ff-706b713d7546">
-        <socketUses>
-          <moduleHasSocketUses Id="c0c934e1-8100-4349-b18a-b8593724c34a">
-            <socketUse Id="1f834d90-0f87-46c2-8cbd-e86bea3139fe" label="Y">
-              <socket>
-                <socketUseReferencesSocket Id="05726c41-2b62-4779-8e48-ef3a1d0b36cf">
-                  <socketMoniker Id="02d14f33-90ba-43fb-8dae-ca1a198711ac" />
-                </socketUseReferencesSocket>
-              </socket>
-            </socketUse>
-          </moduleHasSocketUses>
-        </socketUses>
-      </module>
-    </gadgeteerModelHasGadgeteerHardware>
   </gadgeteerHardware>
   <comments>
     <gadgeteerModelHasComments Id="35514845-5135-406a-b8bd-2bda21a15c0f">

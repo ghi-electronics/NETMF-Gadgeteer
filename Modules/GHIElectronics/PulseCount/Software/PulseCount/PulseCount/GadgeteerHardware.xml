@@ -14,7 +14,7 @@
                   HardwareVersion="1.0"
                   Image="Resources\Image.jpg"
                   BoardHeight="32"
-                  BoardWidth="42"
+                  BoardWidth="47"
                   MinimumGadgeteerCoreVersion="2.42.500"
                   HelpUrl=""
       			>
@@ -72,7 +72,7 @@
       <Sockets>
 
         <!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
-        <Socket Left="21" Top="28" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
+        <Socket Left="24" Top="28" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
           <Types>
             <Type>Y</Type>
           </Types>

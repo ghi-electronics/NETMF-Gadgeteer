@@ -67,8 +67,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR1,
 							   (byte)MDR1Mode.LS7366_MDR1_2BYTE   // 2 byte counter mode
 							 | (byte)MDR1Mode.LS7366_MDR1_ENCNT);   // enable counting
-
-			//this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR0, (byte)CountMode.NoneQuad);
 		}
 
         /// <summary>

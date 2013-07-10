@@ -17,8 +17,6 @@ namespace TestApp {
         
         private Gadgeteer.Modules.GHIElectronics.Display_HD44780 char_Display;
         
-        private Gadgeteer.Modules.GHIElectronics.PulseCount pulseCount;
-        
         public static void Main() {
             // Important to initialize the Mainboard first
             Program.Mainboard = new GHIElectronics.Gadgeteer.FEZCerberus();
@@ -30,7 +28,6 @@ namespace TestApp {
         }
         
         private void InitializeModules() {
-            this.pulseCount = new GTM.GHIElectronics.PulseCount(2);
             this.char_Display = new GTM.GHIElectronics.Display_HD44780(7);
         }
     }
