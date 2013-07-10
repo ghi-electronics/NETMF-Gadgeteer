@@ -36,7 +36,9 @@
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <None Include="GadgeteerHardware.xml" />
+    <None Include="GadgeteerHardware.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ReadMe.txt" />
     <None Include="msm.wxs" />
     <None Include="en-us.wxl" />

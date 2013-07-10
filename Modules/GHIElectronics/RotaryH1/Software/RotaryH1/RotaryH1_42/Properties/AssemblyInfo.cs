@@ -2,11 +2,11 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("GTM.GHIElectronics.RotaryEncoder")]
-[assembly: AssemblyDescription("Driver for RotaryEncoder module made by GHI Electronics for Microsoft .NET Gadgeteer")]
+[assembly: AssemblyTitle("GTM.GHIElectronics.RotaryH1")]
+[assembly: AssemblyDescription("Driver for RotaryH1 module made by GHI Electronics for Microsoft .NET Gadgeteer")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GHI Electronics")]
-[assembly: AssemblyProduct("RotaryEncoder")]
+[assembly: AssemblyProduct("RotaryH1")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

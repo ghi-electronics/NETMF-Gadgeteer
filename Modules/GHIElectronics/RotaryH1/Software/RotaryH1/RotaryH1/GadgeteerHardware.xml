@@ -4,12 +4,12 @@
     <!-- This module definition should be filled in.  Mouse over any attribute name to get more help about that attribute. -->
     <!-- The Unique ID is auto-generated and does not usually need to be modified. -->
     <!-- For file paths, do not use forward slash (/), use backslash (\) or it fails in Windows XP. -->
-    <ModuleDefinition Name="RotaryEncoder"
+    <ModuleDefinition Name="RotaryH1"
                   UniqueId="a90b8716-63b1-4a2c-a068-d45127ea5348"
                   Manufacturer="GHI Electronics"
-                  Description="A RotaryEncoder module"
+                  Description="A RotaryH1 module"
                   InstanceName="rotaryEncoder"
-                  Type="Gadgeteer.Modules.GHIElectronics.RotaryEncoder"
+                  Type="Gadgeteer.Modules.GHIElectronics.RotaryH1"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"
                   Image="Resources\Image.jpg"
@@ -29,9 +29,9 @@
         <!-- This lists the assemblies which provides the API to this module, i.e. the output assemblies of this template. ((1) in the list above) -->
         <!-- If you do not provide support for all of NETMF 4.1, 4.2 and 4.3, the relevant lines should be removed -->
         <!-- NB you should use the same name for the same assembly's NETMF 4.1, NETMF 4.2 and NETMF 4.3 versions, since this will make it easier for users to change framework versions -->
-        <!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.RotaryEncoder"/> -->
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RotaryEncoder"/>
-        <!-- <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RotaryEncoder"/> -->
+        <!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.RotaryH1"/> -->
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RotaryH1"/>
+        <!-- <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RotaryH1"/> -->
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--
@@ -72,14 +72,11 @@
       <Sockets>
 
         <!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
-        <Socket Left="10" Top="10" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
+        <Socket Left="16" Top="43" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
           <Types>
             <Type>Y</Type>
           </Types>
           <Pins>
-            <Pin Shared="false">3</Pin>
-            <Pin Shared="false">4</Pin>
-            <Pin Shared="false">5</Pin>
             <Pin Shared="false">6</Pin>
             <Pin Shared="false">7</Pin>
             <Pin Shared="false">8</Pin>

@@ -46,9 +46,9 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RotaryEncoder_42\RotaryEncoder_42.csproj">
+    <ProjectReference Include="..\RotaryH1_42\RotaryH1_42.csproj">
       <Project>{B9DCC667-072D-461E-BC84-B8070269DC0D}</Project>
-      <Name>RotaryEncoder_42</Name>
+      <Name>RotaryH1_42</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
@@ -64,11 +64,11 @@
     <Message Text="Compiling msm" />
     <Candle ToolPath="$(WixToolPath)" DefineConstants="BinPath=$(OutDir);SourcePath=$(ProjectDir)" SourceFiles="msm.wxs" OutputFile="$(WixIntermediateFolderPath)\msm.wixobj" />
     <Message Text="Linking msm" />
-    <Light ToolPath="$(WixToolPath)" LocalizationFiles="en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\RotaryEncoder.msm" />
+    <Light ToolPath="$(WixToolPath)" LocalizationFiles="en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\RotaryH1.msm" />
     <Message Text="Compiling msi" />
     <Candle ToolPath="$(WixToolPath)" DefineConstants="BinPath=$(OutDir);SourcePath=$(ProjectDir)" SourceFiles="msi.wxs" OutputFile="$(WixIntermediateFolderPath)\msi.wixobj" />
     <Message Text="Linking msi" />
-    <Light ToolPath="$(WixToolPath)" LocalizationFiles="en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msi.wixobj" OutputFile="$(WixOutputFolderPath)\RotaryEncoder.msi" />
+    <Light ToolPath="$(WixToolPath)" LocalizationFiles="en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msi.wixobj" OutputFile="$(WixOutputFolderPath)\RotaryH1.msi" />
   </Target>
   <!--Cleanup for installer -->
   <Target Name="AfterClean">

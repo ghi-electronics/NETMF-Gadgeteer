@@ -8,10 +8,10 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics
 {
     /// <summary>
-    /// A PulseCount module for Microsoft .NET Gadgeteer
+	/// A RotaryH1 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class PulseCount : GTM.Module
-    {
+    public class RotaryH1 : GTM.Module
+	{
 		private byte[] write1 = new byte[1];
 		private byte[] write2 = new byte[2];
 		private byte[] read2 = new byte[2];
@@ -23,99 +23,119 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.DigitalOutput CLOCK;
         private GTI.DigitalOutput CS;
 #else
-        private GTI.SPI.Configuration config;
-        private GTI.SPI spi;
+        private readonly GTI.SPI.Configuration config;
+        private readonly GTI.SPI spi;
 #endif
 
-        /// <summary>Constructs a new PulseCount instance.</summary>
+		/// <summary>Constructs a new instance of the RotaryH1 module.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public PulseCount(int socketNumber)
+		public RotaryH1(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
 #if USE_SOFTWARE_SPI
             socket.EnsureTypeIsSupported('Y', this);
 
-            this.CS = new GTI.DigitalOutput(socket, Socket.Pin.Six, true, this);
-            this.MISO = new GTI.DigitalInput(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-            this.MOSI = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
-            this.CLOCK = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
+			this.CS = new GTI.DigitalOutput(socket, Socket.Pin.Six, true, this);
+			this.MISO = new GTI.DigitalInput(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.MOSI = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
+			this.CLOCK = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
 #else
             socket.EnsureTypeIsSupported('S', this);
 
             this.config = new GTI.SPI.Configuration(false, 0, 0, false, true, 1000);
 			this.spi = new GTI.SPI(socket, this.config, GTI.SPI.Sharing.Shared, socket, GT.Socket.Pin.Six, this);
 #endif
-
+            
 			this.Initialize();
-        }
-
-		private void Initialize()
-		{
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_MDR0);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_MDR1);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_STR);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_CNTR);
-			this.Write((byte)Commands.LS7366_LOAD | (byte)registeristers.LS7366_OTR);
-
-			this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR0,
-							   (byte)MDR0Mode.LS7366_MDR0_QUAD1   // none quadrature mode
-							 | (byte)MDR0Mode.LS7366_MDR0_FREER   // modulo-n counting 
-							 | (byte)MDR0Mode.LS7366_MDR0_DIDX
-							 | (byte)MDR0Mode.LS7366_MDR0_FFAC2);
-
-			this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR1,
-							   (byte)MDR1Mode.LS7366_MDR1_2BYTE   // 2 byte counter mode
-							 | (byte)MDR1Mode.LS7366_MDR1_ENCNT);   // enable counting
-
-			//this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR0, (byte)CountMode.NoneQuad);
 		}
 
-        /// <summary>
-        /// Gets the current value of the pulse counter.
-        /// </summary>
-        /// <returns>The current value of the pulse counter.</returns>
-        public int GetValue()
+		/// <summary>
+		/// Gets the current count of the encoder.
+		/// </summary>
+		/// <returns>An integer representing the count.</returns>
+		public int GetCount()
+		{
+			int count = this.Read2((byte)Commands.LS7366_READ | (byte)Registers.LS7366_CNTR);
+
+			if ((this.ReadStatusReg() & 0x1) > 0) // native number
+			{
+				count = ~count;
+				count &= 0x7FFF;
+				count *= (-1);
+			}
+
+			return count;
+		}
+
+		/// <summary>
+		/// Gets the current direction that the encoder count is going.
+		/// </summary>
+		/// <returns>The direction the encoder count is going.</returns>
+		public Direction GetDirection()
+		{
+			return ((this.ReadStatusReg() & 0x2) >> 1) > 0 ? Direction.Up : Direction.Down;
+		}
+
+        private void Initialize()
         {
-            this.Read1((byte)Commands.LS7366_READ | (byte)registeristers.LS7366_STR);
-            return this.Read2((byte)Commands.LS7366_READ | (byte)registeristers.LS7366_CNTR);
+            this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_MDR0);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_MDR1);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_STR);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_CNTR);
+			this.Write((byte)Commands.LS7366_LOAD | (byte)Registers.LS7366_OTR);
+
+            this.Write((byte)Commands.LS7366_WRITE | (byte)Registers.LS7366_MDR0,
+                               (byte)MDR0Mode.LS7366_MDR0_QUAD1   // none quadrature mode
+                             | (byte)MDR0Mode.LS7366_MDR0_FREER   // modulo-n counting 
+                             | (byte)MDR0Mode.LS7366_MDR0_DIDX
+                             | (byte)MDR0Mode.LS7366_MDR0_FFAC2);
+
+			this.Write((byte)Commands.LS7366_WRITE | (byte)Registers.LS7366_MDR1,
+                               (byte)MDR1Mode.LS7366_MDR1_2BYTE     // 2 byte counter mode
+                             | (byte)MDR1Mode.LS7366_MDR1_ENCNT);   // enable counting
         }
+
+		private byte ReadStatusReg()
+		{
+			return this.Read1((byte)((byte)Commands.LS7366_READ | (byte)Registers.LS7366_STR));
+		}
 
         private byte Read1(byte register)
         {
-            write1[0] = register;
+			write1[0] = register;
 
 #if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write1, read2);
+            this.SoftwareSPI_WriteRead(write1, read2);
 #else
 			this.spi.WriteRead(write1, read2);
 #endif
-            return read2[1];
+			return read2[1];
         }
 
-        private int Read2(byte register)
+		private short Read2(byte register)
         {
-            write1[0] = register;
+			write1[0] = register;
 
 #if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write1, read4);
+            this.SoftwareSPI_WriteRead(write1, read4);
 #else
 			this.spi.WriteRead(write1, read4);
 #endif
 
-			return (read4[1] << 8) + read4[2];
+			return (short)((read4[1] << 8) + read4[2]);
         }
 
         private void Write(byte register)
         {
-            write1[0] = register;
+			write1[0] = register;
 
 #if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write1, null);
+            this.SoftwareSPI_WriteRead(write1, null);
 #else
 			this.spi.Write(write1);
 #endif
-        }
+		}
 
         private void Write(byte register, byte command)
         {
@@ -123,11 +143,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 			write2[1] = command;
 
 #if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write2, null);
+            this.SoftwareSPI_WriteRead(write2, null);
 #else
 			this.spi.Write(write2);
 #endif
-        }
+		}
 
 #if USE_SOFTWARE_SPI
         private void SoftwareSPI_WriteRead(byte[] write, byte[] read)
@@ -187,15 +207,30 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 #endif
 
-		private enum Commands : byte
+		/// <summary>
+		/// The direction the encoder is being turned.
+		/// </summary>
+		public enum Direction : byte
 		{
-			LS7366_CLEAR = 0x00, // clear registerister
-			LS7366_READ = 0x40, // read registerister
-			LS7366_WRITE = 0x80, // write registerister
-			LS7366_LOAD = 0xC0, // load registerister
+			/// <summary>
+			/// The count is going up.
+			/// </summary>
+			Up,
+			/// <summary>
+			/// The count is going down.
+			/// </summary>
+			Down
 		}
 
-		private enum registeristers : byte
+		private enum Commands : byte
+		{
+			LS7366_CLEAR = 0x00, // clear register
+			LS7366_READ = 0x40, // read register
+			LS7366_WRITE = 0x80, // write register
+			LS7366_LOAD = 0xC0, // load register
+		}
+
+		private enum Registers : byte
 		{
 			LS7366_MDR0 = 0x08, // select MDR0
 			LS7366_MDR1 = 0x10, // select MDR1

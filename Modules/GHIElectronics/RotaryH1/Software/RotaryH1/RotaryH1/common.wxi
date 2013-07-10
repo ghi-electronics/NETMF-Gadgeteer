@@ -14,7 +14,7 @@
   -->
 
   <!-- SafeModuleName should match the name printed on the module PCB, without any spaces/punctuation. -->
-  <?define SafeModuleName = "RotaryEncoder" ?>
+  <?define SafeModuleName = "RotaryH1" ?>
 
   <!-- SafeManufacturer should match the manufacturer name printed on the module PCB, without any spaces/punctuation. -->
   <?define SafeManufacturer = "GHIElectronics" ?>
@@ -29,7 +29,7 @@
 
   <!-- No need to change anything below this line. -->
   <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
-  <?define ProjectPath = "RotaryEncoder" ?>
+  <?define ProjectPath = "RotaryH1" ?>
 
   <!-- These two should be copied over if upgrading from an older template -->
   <?define guid_msi_upgrade_code =  "d991f239-adc3-4789-aeb4-908f48aa4f01" ?>
