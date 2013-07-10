@@ -50,6 +50,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         //Added method for user-defined baud rates as well as
         //the ability to work with WiFly modules
+		/// <summary>
+		/// Sets the baud rate for the device.
+		/// </summary>
+		/// <param name="baud">The baudrate to use.</param>
         public void SetBaudRate(int baud = 115200)
         {
             _wifly.Close();

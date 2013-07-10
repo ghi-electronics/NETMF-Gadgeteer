@@ -161,35 +161,27 @@
       <Merge Id="id_LEDMatrix_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LEDMatrix\Software\LEDMatrix\LEDMatrix\bin\Release\Installer\LEDMatrix.msm" DiskId="1" />
       <Merge Id="id_ParallelCNC_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ParallelCNC\Software\ParallelCNC\ParallelCNC\bin\Release\Installer\ParallelCNC.msm" DiskId="1" />
       <Merge Id="id_RFID_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RFID\Software\RFID\RFID\bin\Release\Installer\RFID.msm" DiskId="1" />
-
       <Merge Id="id_Display_CP7_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_CP7\Software\Display_CP7\Display_CP7\bin\Release\Installer\Display_CP7.msm" DiskId="1" />
       <Merge Id="id_SerCam_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SerCam\Software\SerCam\SerCam\bin\Release\Installer\SerCam.msm" DiskId="1" />
-
       <Merge Id="id_Display_TE35.msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display TE35\Software\Display TE35\Display_TE35\bin\Release\Installer\Display_TE35.msm" DiskId="1" />
-
       <Merge Id="id_Current_ACS712.msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Current ACS712\Software\Current ACS712\Current_ACS712\bin\Release\Installer\Current_ACS712.msm" DiskId="1" />
       <Merge Id="id_FLASH.msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FLASH\Software\FLASH\FLASH\bin\Release\Installer\FLASH.msm" DiskId="1" />
       <Merge Id="id_GasSense.msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GasSense\Software\GasSense\GasSense\bin\Release\Installer\GasSense.msm" DiskId="1" />
       <Merge Id="id_PulseInOut.msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseInOut\Software\PulseInOut\PulseInOut\bin\Release\Installer\PulseInOut.msm" DiskId="1" />
       <Merge Id="id_RelayISOx16.msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RelayISOx16\Software\RelayISOx16\RelayISOx16\bin\Release\Installer\RelayISOx16.msm" DiskId="1" />
       <Merge Id="id_UC_Battery_4xAA.msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UC Battery 4xAA\Software\UC Battery 4xAA\UC_Battery_4xAA\bin\Release\Installer\UC_Battery_4xAA.msm" DiskId="1" />
-
       <Merge Id="id_Thermocouple.msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Thermocouple\Software\Thermocouple\Thermocouple\bin\Release\Installer\Thermocouple.msm" DiskId="1" />
       <Merge Id="id_Ethernet_ENC28_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet ENC28\Software\Ethernet_ENC28\Ethernet_ENC28\bin\Release\Installer\Ethernet_ENC28.msm" DiskId="1" />
       <Merge Id="id_Breakout_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout\Software\Breakout\Breakout\bin\Release\Installer\Breakout.msm" DiskId="1" />
       <Merge Id="id_Stepper_L6470_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Stepper_L6470\Software\Stepper_L6470\Stepper_L6470\bin\Release\Installer\Stepper_L6470.msm" DiskId="1" />
-
       <Merge Id="id_ColorSense_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ColorSense\Software\ColorSense\ColorSense\bin\Release\Installer\ColorSense.msm" DiskId="1" />
-
       <Merge Id="id_Display_N18_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N18\Software\Display N18\Display_N18\bin\Release\Installer\Display_N18.msm" DiskId="1" />
       <Merge Id="id_Display_T43_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T43\Software\Display T43\Display_T43\bin\Release\Installer\Display_T43.msm" DiskId="1" />
       <Merge Id="id_LED7C_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED7C\Software\LED7C\LED7C\bin\Release\Installer\LED7C.msm" DiskId="1" />
-
       <Merge Id="id_Tunes_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Tunes\Software\Tunes\Tunes\bin\Release\Installer\Tunes.msm" DiskId="1" />
       <Merge Id="id_Distance_US3_msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Distance US3\Software\Distance US3\Distance_US3\bin\Release\Installer\Distance_US3.msm" DiskId="1" />
       <Merge Id="id_Radio_FM1_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FM Radio\Software\FMRadio\FMRadio\bin\Release\Installer\FMRadio.msm" DiskId="1" />
       <Merge Id="id_USB_Serial_SP_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbSerialSP\Software\UsbSerialSP\UsbSerialSP\bin\Release\Installer\UsbSerialSP.msm" DiskId="1" />
-
       <Merge Id="id_Amp_M35_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Amp M35\Software\Amp M35\Amp_M35\bin\Release\Installer\Amp_M35.msm" DiskId="1" />
       <Merge Id="id_Accel_G248_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Accel G248\Software\Accel G248\Accel_G248\bin\Release\Installer\Accel_G248.msm" DiskId="1" />
       <Merge Id="id_LED_Strip_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED Strip\Software\LED Strip\LED_Strip\bin\Release\Installer\LED_Strip.msm" DiskId="1" />
@@ -198,8 +190,9 @@
 
 	  <Merge Id="id_Keypad_KP16_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Keypad KP16\Software\Keypad KP16\Keypad_KP16\bin\Release\Installer\Keypad_KP16.msm" DiskId="1" />
       <Merge Id="id_HubAP5_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\HubAP5\Software\HubAP5\HubAP5\bin\Release\Installer\HubAP5.msm" DiskId="1" />
+	  <Merge Id="id_Relay_X1_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Relay X1\Software\Relay X1\Relay_X1\bin\Release\Installer\Relay_X1.msm" DiskId="1" />
 
-		
+
 	  <Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
       <Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
       <Merge Id="id_FEZSpider_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider\bin\Release\Installer\FEZSpider.msm" DiskId="1" />
@@ -245,30 +238,23 @@
       <MergeRef Id="id_LEDMatrix_msm"/>
       <MergeRef Id="id_ParallelCNC_msm" />
       <MergeRef Id="id_RFID_msm" />
-
       <MergeRef Id="id_Display_CP7_msm"/>
       <MergeRef Id="id_SerCam_msm"/>
-
       <MergeRef Id="id_Display_TE35.msm"/>
-
       <MergeRef Id="id_Current_ACS712.msm"/>
       <MergeRef Id="id_FLASH.msm"/>
       <MergeRef Id="id_GasSense.msm"/>
       <MergeRef Id="id_PulseInOut.msm"/>
       <MergeRef Id="id_RelayISOx16.msm"/>
       <MergeRef Id="id_UC_Battery_4xAA.msm"/>
-
       <MergeRef Id="id_Thermocouple.msm"/>
       <MergeRef Id="id_Ethernet_ENC28_msm"/>
       <MergeRef Id="id_Breakout_msm"/>
       <MergeRef Id="id_Stepper_L6470_msm"/>
-
       <MergeRef Id="id_ColorSense_msm"/>
-
       <MergeRef Id="id_Display_N18_msm" />
       <MergeRef Id="id_Display_T43_msm" />
       <MergeRef Id="id_LED7C_msm" />
-
       <MergeRef Id="id_Tunes_msm" />
       <MergeRef Id="id_Distance_US3_msm" />
       <MergeRef Id="id_Radio_FM1_msm" />
@@ -277,8 +263,10 @@
       <MergeRef Id="id_Accel_G248_msm"/>
 	  <MergeRef Id="id_LED_Strip_msm"/>
 	  <MergeRef Id="id_WiFi_RN171_msm"/>
+      <MergeRef Id="id_FEZCerbot_Controller_msm" />
 	  <MergeRef Id="id_Keypad_KP16_msm"/>
 	  <MergeRef Id="id_HubAP5_msm"/>
+	  <MergeRef Id="id_Relay_X1_msm"/>
 
       <MergeRef Id="id_FEZHydra_msm" />
       <MergeRef Id="id_FEZCerberus_msm" />
@@ -286,9 +274,6 @@
       <MergeRef Id="id_FEZ_Cerbuino_Bee_msm" />
       <MergeRef Id="id_FEZCobraII_msm" />
       <MergeRef Id="id_FEZSpiderII_msm" />
-
-      <MergeRef Id="id_FEZCerbot_Controller_msm" />
-      
       <MergeRef Id="id_FEZCerbot_msm" />
 
       <ComponentRef Id="id_sdk_files"/>
