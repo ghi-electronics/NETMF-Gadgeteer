@@ -120,12 +120,12 @@
 			</Directory>
 
 			<!-- List merge modules for mainboard(s) and module(s) here
-      Useful tip: copy one of the lines below, select it, Ctrl-H (Quick Replace), set "Look In" to "Selection", and replace "Button" with the name of the module. Also replace "MSR" with the right manufacturer name
-      NB the relative path reference below should work if your local directory structure matches the source control repository at http://gadgeteer.codeplex.com/ 
-      
-      <Merge Id="id_Button_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\MSR\Button\Software\Button\Button\bin\Release\Installer\Button.msm" DiskId="1" />
-      <Merge Id="id_MainboardName_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\MSR\MainboardName\Software\MainboardName\MainboardName\bin\Release\Installer\MainboardName.msm" DiskId="1" />
-      -->
+	  Useful tip: copy one of the lines below, select it, Ctrl-H (Quick Replace), set "Look In" to "Selection", and replace "Button" with the name of the module. Also replace "MSR" with the right manufacturer name
+	  NB the relative path reference below should work if your local directory structure matches the source control repository at http://gadgeteer.codeplex.com/ 
+	  
+	  <Merge Id="id_Button_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\MSR\Button\Software\Button\Button\bin\Release\Installer\Button.msm" DiskId="1" />
+	  <Merge Id="id_MainboardName_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\MSR\MainboardName\Software\MainboardName\MainboardName\bin\Release\Installer\MainboardName.msm" DiskId="1" />
+	  -->
 
 			<Merge Id="id_Bluetooth_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Bluetooth\Software\Bluetooth\Bluetooth\bin\Release\Installer\Bluetooth.msm" DiskId="1" />
 			<Merge Id="id_Button_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Button\Software\Button\Button\bin\Release\Installer\Button.msm" DiskId="1" />
@@ -194,6 +194,8 @@
 			<Merge Id="id_OneWire_X1_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\OneWire X1\Software\OneWire X1\OneWire_X1\bin\Release\Installer\OneWire_X1.msm" DiskId="1" />
 			<Merge Id="id_RotaryH1_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RotaryH1\Software\RotaryH1\RotaryH1\bin\Release\Installer\RotaryH1.msm" DiskId="1" />
 			<Merge Id="id_PulseCount_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseCount\Software\PulseCount\PulseCount\bin\Release\Installer\PulseCount.msm" DiskId="1" />
+			<Merge Id="id_TouchC8_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchC8\Software\TouchC8\TouchC8\bin\Release\Installer\TouchC8.msm" DiskId="1" />
+			<Merge Id="id_TouchL12_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchL12\Software\TouchL12\TouchL12\bin\Release\Installer\TouchL12.msm" DiskId="1" />
 
 			<Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
 			<Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
@@ -271,7 +273,9 @@
 			<MergeRef Id="id_BreadBoard_X1_msm"/>
 			<MergeRef Id="id_OneWire_X1_msm"/>
 			<MergeRef Id="id_RotaryH1_X1_msm"/>
-			<MergeRef Id="id_PulseCount_X1_msm"/>
+			<MergeRef Id="id_PulseCount_msm"/>
+			<MergeRef Id="id_TouchC8_msm"/>
+			<MergeRef Id="id_TouchL12_msm"/>
 
 			<MergeRef Id="id_FEZHydra_msm" />
 			<MergeRef Id="id_FEZCerberus_msm" />
