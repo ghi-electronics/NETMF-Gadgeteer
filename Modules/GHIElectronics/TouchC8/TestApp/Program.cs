@@ -83,8 +83,8 @@ namespace TestApp
 
 			this.sensor.OnProximityEnter += (sender, state) => { this.proximity = state; };
 			this.sensor.OnProximityExit += (sender, state) => { this.proximity = state; };
-			this.sensor.OnButtonPressed += (sender, button, state) => { switch (button) { case TouchC8.Buttons.A: this.buttonATouched = state; break; case TouchC8.Buttons.B: this.buttonBTouched = state; break; case TouchC8.Buttons.C: this.buttonCTouched = state; break; }; };
-			this.sensor.OnButtonReleased += (sender, button, state) => { switch (button) { case TouchC8.Buttons.A: this.buttonATouched = state; break; case TouchC8.Buttons.B: this.buttonBTouched = state; break; case TouchC8.Buttons.C: this.buttonCTouched = state; break; }; };
+			this.sensor.OnButtonPressed += (sender, button, state) => { switch (button) { case TouchC8.Buttons.Up: this.buttonATouched = state; break; case TouchC8.Buttons.Middle: this.buttonBTouched = state; break; case TouchC8.Buttons.Down: this.buttonCTouched = state; break; }; };
+			this.sensor.OnButtonReleased += (sender, button, state) => { switch (button) { case TouchC8.Buttons.Up: this.buttonATouched = state; break; case TouchC8.Buttons.Middle: this.buttonBTouched = state; break; case TouchC8.Buttons.Down: this.buttonCTouched = state; break; }; };
 			this.sensor.OnWheelPressed += (sender, state) => { this.wheelTouched = state; };
 			this.sensor.OnWheelReleased += (sender, state) => { this.wheelTouched = state; };
 			this.sensor.OnWheelPositionChanged += (sender, position, direction) => { this.position = position; this.direction = direction; };

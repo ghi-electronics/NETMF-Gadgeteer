@@ -44,17 +44,17 @@ namespace Gadgeteer.Modules.GHIElectronics
 		public enum Buttons
 		{
 			/// <summary>
-			/// Button A
+			/// The up button.
 			/// </summary>
-			A = 0x2,
+			Up = 0x2,
 			/// <summary>
-			/// Button B
+			/// The middle button.
 			/// </summary>
-			B = 0x4,
+			Middle = 0x4,
 			/// <summary>
-			/// Button C
+			/// The down button.
 			/// </summary>
-			C = 0x8
+			Down = 0x8
 		}
 
 		/// <summary>
@@ -323,13 +323,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 					this.OnProximityEvent(this, button0);
 
 				if (button1 != this.previousButton1Touched)
-					this.OnButtonEvent(this, Buttons.A, button1);
+					this.OnButtonEvent(this, Buttons.Up, button1);
 
 				if (button2 != this.previousButton2Touched)
-					this.OnButtonEvent(this, Buttons.B, button2);
+					this.OnButtonEvent(this, Buttons.Middle, button2);
 
 				if (button3 != this.previousButton3Touched)
-					this.OnButtonEvent(this, Buttons.C, button3);
+					this.OnButtonEvent(this, Buttons.Down, button3);
 
 				this.previousButton0Touched = button0;
 				this.previousButton1Touched = button1;
