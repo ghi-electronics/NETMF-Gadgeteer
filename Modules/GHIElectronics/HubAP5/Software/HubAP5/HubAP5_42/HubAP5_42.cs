@@ -579,7 +579,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			private const byte MAX_CHANNEL = 6;
 			private const byte CMD_SD_SE = 0x80;
-			private const byte CMD_PD_OFF = 0x08;
+			private const byte CMD_PD_OFF = 0x00;
 			private const byte CMD_PD_ON = 0x04;
 			private const byte I2C_ADDRESS = 0x48;
 

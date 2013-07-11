@@ -11,15 +11,24 @@ using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-namespace Tester
+namespace TestApp
 {
     public partial class Program
     {
-        GT.Interfaces.InterruptInput interrupt;
-        GTM.GHIElectronics.HubAP5 hubAP5 = new GTM.GHIElectronics.HubAP5(2);
 
         void ProgramStarted()
         {
+			//GT.Interfaces.InterruptInput interrupt;
+			GTM.GHIElectronics.HubAP5 hubAP5 = new GTM.GHIElectronics.HubAP5(2);
+			//GTM.GHIElectronics.LED_Strip led_Strip = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket1);
+			//GTM.GHIElectronics.LED_Strip led_Strip1 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket2);
+			//GTM.GHIElectronics.LED_Strip led_Strip2 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket3);
+			//GTM.GHIElectronics.LED_Strip led_Strip3 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket4);
+			//GTM.GHIElectronics.LED_Strip led_Strip4 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket5);
+			//GTM.GHIElectronics.LED_Strip led_Strip5 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket6);
+			//GTM.GHIElectronics.LED_Strip led_Strip6 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket7);
+			//GTM.GHIElectronics.LED_Strip led_Strip7 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket8);
+
             //var dOut = new Thread(() =>
             //    {
             //        int next = 0;
