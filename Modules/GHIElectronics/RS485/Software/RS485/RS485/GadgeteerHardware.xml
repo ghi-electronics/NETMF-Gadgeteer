@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <!-- This module definition should be filled in.  Mouse over any attribute name to get more help about that attribute. -->
+    <!-- The Unique ID is auto-generated and does not usually need to be modified. -->
+    <!-- For file paths, do not use forward slash (/), use backslash (\) or it fails in Windows XP. -->
+    <ModuleDefinition Name="RS485"
+                  UniqueId="679622e3-6cfc-44b0-a941-c72f7da7040a"
+                  Manufacturer="GHI Electronics"
+                  Description="A RS485 module"
+                  InstanceName="RS485"
+                  Type="Gadgeteer.Modules.GHIElectronics.RS485"
+                  ModuleSuppliesPower="false"
+                  HardwareVersion="1.0"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="26"
+                  BoardWidth="31"
+                  MinimumGadgeteerCoreVersion="2.42.500"
+                  HelpUrl="https://www.ghielectronics.com/catalog/product/479"
+      			>
+
+      <!-- Assemblies listed here are added to the project as references by the designer whenever this module is instantiated.  -->
+      <!-- This functionality is used to -->
+      <!--   (1) include the output assemblies of this template -->
+      <!--   (2) include other custom assemblies that the module relies on (NB you must edit msm.wxs so these are installed too) -->
+      <!--   (3) indicate a reliance on a Gadgeteer assembly other than Gadgeteer.dll (which is always referenced) -->
+      <!-- Some examples are provided inline: -->
+      <Assemblies>
+        <!-- This lists the assemblies which provides the API to this module, i.e. the output assemblies of this template. ((1) in the list above) -->
+        <!-- If you do not provide support for all of NETMF 4.1, 4.2 and 4.3, the relevant lines should be removed -->
+        <!-- NB you should use the same name for the same assembly's NETMF 4.1, NETMF 4.2 and NETMF 4.3 versions, since this will make it easier for users to change framework versions -->
+        <!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.RS485"/> -->
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RS485"/>
+        <!-- <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RS485"/> -->
+
+        <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
+        <!--
+        <Assembly MFVersion="4.1" Name="GHIElectronics.CustomAssembly"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.CustomAssembly"/>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.CustomAssembly"/>
+        -->
+
+        <!-- If your module either relies upon or is often used with a .NET Gadgeteer assembly other than Gadgeteer.dll, then list it here -->
+        <!-- so that the designer automatically includes it when your module is included - e.g. by uncommenting the lines below -->
+        <!-- These .NET Gadgeteer assemblies were separated out for NETMF 4.2, so don't need to be listed for NETMF 4.1 as separate -->
+        <!-- Uncomment any of the below that you require for this module. -->
+        <!--
+        <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
+
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
+        -->
+		<Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
+
+        <!-- If this is a networking module, then uncomment all four lines below to include Gadgeteer's web client/web server libraries -->
+        <!-- 
+        <Assembly MFVersion="4.1" Name="Gadgeteer.WebClient" />
+        <Assembly MFVersion="4.1" Name="Gadgeteer.WebServer" />
+        <Assembly MFVersion="4.2" Name="Gadgeteer.WebClient" />
+        <Assembly MFVersion="4.2" Name="Gadgeteer.WebServer" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.WebClient" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.WebServer" />
+        -->
+      </Assemblies>
+
+      <!--
+      This is an example socket specification with two sockets on the board.  
+      The socket positions are specified in mm from the top left corner of the board, with the orientation 90 indicating the socket notches are pointing upwards (0=right, 180=left, 270=down)
+      -->
+      <Sockets>
+
+        <!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
+        <Socket Left="15" Top="22" Orientation="90" ConstructorOrder="1" TypesLabel="U">
+          <Types>
+            <Type>U</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+
+      </Sockets>
+
+      <!-- Use the ExtraLibrariesRequired element if this module requires specific firmware libraries to be provided by the mainboard, and so is limited to a subset of mainboards. -->
+      <!-- 
+      <ExtraLibrariesRequired>
+        <Assembly MFVersion="4.1" Name="FooHelper" ErrorMessage="This module only works with the MainboardName1 or MainboardName2 mainboards." />
+        <Assembly MFVersion="4.2" Name="FooHelper" ErrorMessage="This module only works with the MainboardName1 or MainboardName2 mainboards." />
+        <Assembly MFVersion="4.3" Name="FooHelper" ErrorMessage="This module only works with the MainboardName1 or MainboardName2 mainboards." />
+      </ExtraLibrariesRequired>
+      -->
+
+      <!-- Also use the ExtraLibrariesRequired element if this module represents built-in functionality in a mainboard, listing the mainboard's driver as the required assembly. -->
+      <!-- 
+      <ExtraLibrariesRequired>
+        <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.MainboardName" ErrorMessage="This module is built-in to the MainboardName mainboard, so cannot be used with any other mainboard." />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.MainboardName" ErrorMessage="This module is built-in to the MainboardName mainboard, so cannot be used with any other mainboard." />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.MainboardName" ErrorMessage="This module is built-in to the MainboardName mainboard, so cannot be used with any other mainboard." />
+      </ExtraLibrariesRequired>
+      -->
+
+      <!-- Use the ProvidedSocket tag if this module provides a socket that another module can plug into -->
+      <!-- The example below is for DaisyLink modules which provide a socket type "*" -->
+      <!--
+      <ProvidedSockets>
+        <ProvidedSocket Label="*" Left="30" Top="10" Orientation="0" ConstructorParameter="DaisyLinkSocketNumber">
+          <Types>
+            <Type>*</Type>
+          </Types>
+        </ProvidedSocket>
+      </ProvidedSockets>
+      -->
+
+      <!-- Uncomment to specify power consumption data for use by the VS designer. -->
+      <!-- Do not partially fill this in - either fill it all in or leave it out totally. -->
+      <!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
+      <!--
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.123</TypicalCurrent>
+          <MaximumCurrent>0.456</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.789</TypicalCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+      -->
+
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>
