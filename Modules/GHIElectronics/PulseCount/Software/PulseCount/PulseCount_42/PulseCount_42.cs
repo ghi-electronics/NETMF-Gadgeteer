@@ -14,8 +14,9 @@ namespace Gadgeteer.Modules.GHIElectronics
     {
 		private byte[] write1 = new byte[1];
 		private byte[] write2 = new byte[2];
-		private byte[] read2 = new byte[2];
-		private byte[] read4 = new byte[4];
+		private byte[] read5 = new byte[5];
+		private CountMode mode;
+		private Socket socket;
 
 #if USE_SOFTWARE_SPI
         private GTI.DigitalInput MISO;
@@ -31,15 +32,15 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public PulseCount(int socketNumber)
         {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+            this.socket = Socket.GetSocket(socketNumber, true, this, null);
 
 #if USE_SOFTWARE_SPI
-            socket.EnsureTypeIsSupported('Y', this);
+			this.socket.EnsureTypeIsSupported('Y', this);
 
-            this.CS = new GTI.DigitalOutput(socket, Socket.Pin.Six, true, this);
-            this.MISO = new GTI.DigitalInput(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-            this.MOSI = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
-            this.CLOCK = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
+			this.CS = new GTI.DigitalOutput(this.socket, Socket.Pin.Six, true, this);
+			this.MISO = new GTI.DigitalInput(this.socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.MOSI = new GTI.DigitalOutput(this.socket, Socket.Pin.Seven, false, this);
+			this.CLOCK = new GTI.DigitalOutput(this.socket, Socket.Pin.Nine, false, this);
 #else
             socket.EnsureTypeIsSupported('S', this);
 
@@ -50,59 +51,89 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.Initialize();
         }
 
+		public GTI.DigitalInput CreateInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode)
+		{
+			return new GTI.DigitalInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, this);
+		}
+
+		public GTI.InterruptInput CreateInterruptInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode)
+		{
+			return new GTI.InterruptInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, interruptMode, this);
+		}
+
 		private void Initialize()
 		{
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_MDR0);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_MDR1);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_STR);
-			this.Write((byte)Commands.LS7366_CLEAR | (byte)registeristers.LS7366_CNTR);
-			this.Write((byte)Commands.LS7366_LOAD | (byte)registeristers.LS7366_OTR);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_MDR0);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_MDR1);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_STR);
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_CNTR);
+			this.Write((byte)Commands.LS7366_LOAD | (byte)Registers.LS7366_OTR);
 
-			this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR0,
-							   (byte)MDR0Mode.LS7366_MDR0_QUAD1   // none quadrature mode
-							 | (byte)MDR0Mode.LS7366_MDR0_FREER   // modulo-n counting 
-							 | (byte)MDR0Mode.LS7366_MDR0_DIDX
-							 | (byte)MDR0Mode.LS7366_MDR0_FFAC2);
+			this.Mode = CountMode.Quad1;
 
-			this.Write((byte)Commands.LS7366_WRITE | (byte)registeristers.LS7366_MDR1,
-							   (byte)MDR1Mode.LS7366_MDR1_2BYTE   // 2 byte counter mode
-							 | (byte)MDR1Mode.LS7366_MDR1_ENCNT);   // enable counting
+			this.Write((byte)Commands.LS7366_WRITE | (byte)Registers.LS7366_MDR1, (byte)MDR1Mode.LS7366_MDR1_4BYTE | (byte)MDR1Mode.LS7366_MDR1_ENCNT);
 		}
 
         /// <summary>
-        /// Gets the current value of the pulse counter.
+        /// Gets the current count from the module.
         /// </summary>
-        /// <returns>The current value of the pulse counter.</returns>
-        public int GetValue()
-        {
-            this.Read1((byte)Commands.LS7366_READ | (byte)registeristers.LS7366_STR);
-            return this.Read2((byte)Commands.LS7366_READ | (byte)registeristers.LS7366_CNTR);
+        /// <returns>The current count on the module.</returns>
+        public int GetCount()
+		{
+			this.Write((byte)Commands.LS7366_LOAD | (byte)Registers.LS7366_OTR);
+            return this.Read4((byte)Commands.LS7366_READ | (byte)Registers.LS7366_OTR);
         }
 
-        private byte Read1(byte register)
-        {
-            write1[0] = register;
+		/// <summary>
+		/// Resets the count on the module to 0.
+		/// </summary>
+		public void ResetCount()
+		{
+			this.Write((byte)Commands.LS7366_CLEAR | (byte)Registers.LS7366_CNTR);
+		}
+
+		/// <summary>
+		/// Sets or gets the count mode the module uses.
+		/// </summary>
+		public CountMode Mode
+		{
+			get
+			{
+				return this.mode;
+			}
+			set
+			{
+				if (this.mode == value)
+					return;
+
+				this.mode = value;
+
+				byte command = (byte)MDR0Mode.LS7366_MDR0_FREER | (byte)MDR0Mode.LS7366_MDR0_DIDX | (byte)MDR0Mode.LS7366_MDR0_FFAC2;
+
+				switch (this.mode)
+				{
+					case CountMode.NoneQuad: command |= (byte)MDR0Mode.LS7366_MDR0_QUAD0; break;
+					case CountMode.Quad1: command |= (byte)MDR0Mode.LS7366_MDR0_QUAD1; break;
+					case CountMode.Quad2: command |= (byte)MDR0Mode.LS7366_MDR0_QUAD2; break;
+					case CountMode.Quad4: command |= (byte)MDR0Mode.LS7366_MDR0_QUAD4; break;
+				}
+
+				this.Write((byte)Commands.LS7366_WRITE | (byte)Registers.LS7366_MDR0, command);
+			}
+		}
+
+		private int Read4(byte register)
+		{
+			write1[0] = register;
 
 #if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write1, read2);
+			SoftwareSPI_WriteRead(write1, read5);
 #else
-			this.spi.WriteRead(write1, read2);
-#endif
-            return read2[1];
-        }
-
-        private int Read2(byte register)
-        {
-            write1[0] = register;
-
-#if USE_SOFTWARE_SPI
-            SoftwareSPI_WriteRead(write1, read4);
-#else
-			this.spi.WriteRead(write1, read4);
+			this.spi.WriteRead(write1, read5);
 #endif
 
-			return (read4[1] << 8) + read4[2];
-        }
+			return (read5[1] << 24) + (read5[2] << 16) + (read5[3] << 8) + read5[4];
+		}
 
         private void Write(byte register)
         {
@@ -185,6 +216,29 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 #endif
 
+		/// <summary>
+		/// The possible count modes the modules can use.
+		/// </summary>
+		public enum CountMode
+		{
+			/// <summary>
+			/// Non-quadrature mode.
+			/// </summary>
+			NoneQuad,
+			/// <summary>
+			/// 1x quadrature mode.
+			/// </summary>
+			Quad1,
+			/// <summary>
+			/// 2x quadrature mode.
+			/// </summary>
+			Quad2,
+			/// <summary>
+			/// 4x quadrature mode.
+			/// </summary>
+			Quad4
+		}
+
 		private enum Commands : byte
 		{
 			LS7366_CLEAR = 0x00, // clear registerister
@@ -193,7 +247,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			LS7366_LOAD = 0xC0, // load registerister
 		}
 
-		private enum registeristers : byte
+		private enum Registers : byte
 		{
 			LS7366_MDR0 = 0x08, // select MDR0
 			LS7366_MDR1 = 0x10, // select MDR1
@@ -229,14 +283,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 			LS7366_MDR0_FFAC2 = 0x80, // filter clock division factor=2
 
 			LS7366_MDR0_NOFLA = 0x00, // no flags
-		}
-
-		private enum CountMode : byte
-		{
-			NoneQuad = 0x00, // none quadrature mode
-			Quad1 = 0x01, // quadrature x1 mode
-			Quad2 = 0x02, // quadrature x2 mode
-			Quad4 = 0x03, // quadrature x4 mode
 		}
 
 		private enum MDR1Mode : byte
