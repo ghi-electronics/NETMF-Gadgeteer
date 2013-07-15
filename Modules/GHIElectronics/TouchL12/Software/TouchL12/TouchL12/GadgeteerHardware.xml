@@ -121,8 +121,8 @@
       <!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>0.0255</TypicalCurrent>
-          <MaximumCurrent>0.00019</MaximumCurrent>
+          <TypicalCurrent>0.00019</TypicalCurrent>
+          <MaximumCurrent>0.0255</MaximumCurrent>
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
           <TypicalCurrent>0.000</TypicalCurrent>
