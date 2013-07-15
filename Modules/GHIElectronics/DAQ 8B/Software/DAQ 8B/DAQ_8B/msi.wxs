@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include common.wxi?>
+  
+  <Product Name='$(var.SafeModuleName) !(loc.ForGadgeteer)' 
+           Id='*' 
+           UpgradeCode='$(var.guid_msi_upgrade_code)'
+           Language='1033' Codepage='1252' 
+           Version='$(var.ModuleSoftwareVersion)' 
+           Manufacturer='$(var.FullManufacturer)'>
+
+    <Package Id='*' 
+             Manufacturer='$(var.FullManufacturer)'
+             InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252'
+             InstallPrivileges='elevated'/>
+
+    <!-- Upgrade related stuff-->
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Property Id="SAMEVERSIONINSTALLED" Secure="yes"/>
+    <Upgrade Id="$(var.guid_msi_upgrade_code)">
+      <UpgradeVersion Maximum="$(var.ModuleSoftwareVersion)"
+                      Property="PREVIOUSVERSIONSINSTALLED"
+                      IncludeMinimum="yes"
+                      IncludeMaximum="no"
+                      OnlyDetect="no"/>
+
+      <UpgradeVersion Minimum="$(var.ModuleSoftwareVersion)"
+                      Property="NEWERVERSIONINSTALLED"
+                      IncludeMinimum="no"
+                      OnlyDetect="yes"/>
+
+      <UpgradeVersion Minimum="$(var.ModuleSoftwareVersion)"
+                      IncludeMinimum="yes"
+                      Maximum="$(var.ModuleSoftwareVersion)"
+                      IncludeMaximum="yes"
+                      Property="SAMEVERSIONINSTALLED"
+                      OnlyDetect="yes"/>
+
+    </Upgrade>
+    
+    <CustomAction Id='NoDowngrade' Error='!(loc.NewerVersionFoundPrefix) $(var.SafeModuleName) !(loc.NewerVersionFoundSuffix)' />
+
+    <CustomAction Id='SameVersionError' Error='!(loc.SameVersionInstalledPrefix) $(var.SafeModuleName) !(loc.SameVersionInstalledSuffix)'/>
+
+    <CustomAction Id='GadgeteerCoreNotInstalledError' Error='!(loc.GadgeteerCoreIsNotInstalled)'/>
+
+    <Property Id="GADGETEER_CORE_INSTALLED">
+      <ComponentSearch Id="id_GadgeteerCoreInstalledComponentSearch" Guid="20CDFFF1-2E36-45CE-A4C1-1DFA1FB123CC" Type="file"/>
+    </Property>
+
+    <!--ARP stuff (Add/Remove Programs)-->
+    <Property Id="ARPNOMODIFY" Value="1" />
+    <Property Id="ARPNOREPAIR" Value="1" />
+    
+    <!-- Files -->
+    <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+
+    <Directory Id='TARGETDIR' Name='SourceDir'>
+      <Merge Id="id_msm" Language="1033" SourceFile="$(var.BinPath)\..\Installer\$(var.SafeModuleName).msm" DiskId="1" />
+    </Directory>
+
+    <Feature Id="main" Title="Main" Level="1">
+      <MergeRef Id="id_msm" />      
+    </Feature>
+
+    <Icon Id="AppAddRemoveIcon" SourceFile="$(var.SourcePath)\G.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="AppAddRemoveIcon"/>
+
+    <!--Sequences-->
+    <InstallExecuteSequence>
+
+      <!--In case this is a newer version then remove the existing product-->
+      <RemoveExistingProducts Before="InstallInitialize"/>
+
+      <!--In case you're installing an older version tell the user and exit -->
+      <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERVERSIONINSTALLED</Custom>
+
+      <!--Display an error if overwriting the same version-->
+      <Custom Action="SameVersionError" After="FindRelatedProducts">SAMEVERSIONINSTALLED</Custom>
+
+      <!--Display an error if gadgeteer core is not installed-->
+      <Custom Action="GadgeteerCoreNotInstalledError" Before="InstallInitialize">&amp;main&gt;2 AND NOT GADGETEER_CORE_INSTALLED</Custom>
+      
+    </InstallExecuteSequence>
+
+  </Product>
+</Wix>
