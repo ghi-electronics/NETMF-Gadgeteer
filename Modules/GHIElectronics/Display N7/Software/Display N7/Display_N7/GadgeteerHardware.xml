@@ -151,18 +151,17 @@
       <!-- Uncomment to specify power consumption data for use by the VS designer. -->
       <!-- Do not partially fill this in - either fill it all in or leave it out totally. -->
       <!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
-      <!--
-      <Power>
-        <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>0.123</TypicalCurrent>
-          <MaximumCurrent>0.456</MaximumCurrent>
-        </PowerRequirements>
-        <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>0.789</TypicalCurrent>
-          <MaximumCurrent>Infinity</MaximumCurrent>
-        </PowerRequirements>
-      </Power>
-      -->
+		<Power>
+			<PowerRequirements Voltage="3.3">
+				<TypicalCurrent>0.050</TypicalCurrent>
+				<MaximumCurrent>0.050</MaximumCurrent>
+			</PowerRequirements>
+
+			<PowerRequirements Voltage="5">
+				<TypicalCurrent>0.700</TypicalCurrent>
+				<MaximumCurrent>0.700</MaximumCurrent>
+			</PowerRequirements>
+		</Power>
 
     </ModuleDefinition>
   </ModuleDefinitions>
