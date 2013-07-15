@@ -28,10 +28,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="parity">Specifies the parity bit for the serial port. Defaulted to none.</param>
         /// <param name="stopBits">Specifies the number of stop bits used on the serial port. Defaulted to one.</param>
         /// <param name="dataBits">The number of data bits. Defaulted to 8.</param>
-        /// <param name="flowControl">Specifies if the serial port should use flow control. Defaulted to not use.</param>
-        public GTI.Serial Initialize(int baudRate = 38400, GTI.Serial.SerialParity parity = GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits stopBits = GTI.Serial.SerialStopBits.One, int dataBits = 8, GTI.Serial.HardwareFlowControl flowControl = GTI.Serial.HardwareFlowControl.NotRequired)
+        public GTI.Serial Initialize(int baudRate = 38400, GTI.Serial.SerialParity parity = GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits stopBits = GTI.Serial.SerialStopBits.One, int dataBits = 8)
         {
-            this.port = new GTI.Serial(this.socket, baudRate, parity, stopBits, dataBits, flowControl, this);
+            this.port = new GTI.Serial(this.socket, baudRate, parity, stopBits, dataBits, GTI.Serial.HardwareFlowControl.NotRequired, this);
             this.port.Open();
 			return this.port;
         }
