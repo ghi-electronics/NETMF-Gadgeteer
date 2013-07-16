@@ -8,8 +8,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// </summary>
 	public class OneWire_X1 : GTM.Module
 	{
-		private OutputPort port;
 		private OneWire oneWire;
+		private OutputPort port;
 
 		/// <summary>Constructs a new OneWire_X1 module.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -32,17 +32,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 			get
 			{
 				return this.oneWire;
-			}
-		}
-
-		/// <summary>
-		/// Returns the native NETMF OutputPort that the OneWire interface is using.
-		/// </summary>
-		public OutputPort Port
-		{
-			get
-			{
-				return this.port;
 			}
 		}
 	}
