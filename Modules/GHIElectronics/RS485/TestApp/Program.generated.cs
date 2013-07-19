@@ -15,9 +15,13 @@ namespace TestApp {
     
     public partial class Program : Gadgeteer.Program {
         
+        private Gadgeteer.Modules.GHIElectronics.Button button;
+        
+        private Gadgeteer.Modules.GHIElectronics.LED7C led7c;
+        
         public static void Main() {
             // Important to initialize the Mainboard first
-            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZCerberus();
+            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();
             Program p = new Program();
             p.InitializeModules();
             p.ProgramStarted();
@@ -26,6 +30,8 @@ namespace TestApp {
         }
         
         private void InitializeModules() {
+            this.led7c = new GTM.GHIElectronics.LED7C(6);
+            this.button = new GTM.GHIElectronics.Button(10);
         }
     }
 }

@@ -50,7 +50,13 @@
   <ItemGroup>
     <Reference Include="Gadgeteer" />
     <Reference Include="Gadgeteer.Serial, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="GHIElectronics.Gadgeteer.FEZCerberus, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GTM.GHIElectronics.Button, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GTM.GHIElectronics.LED7C, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
