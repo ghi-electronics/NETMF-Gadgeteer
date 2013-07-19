@@ -312,7 +312,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             //DateTime startTime = DateTime.Now;
             do
             {
-                int bytesRead = serialPort.Read(data, offset, count);
+				int bytesRead = serialPort.Read(data, offset, count);
                 offset += bytesRead;
                 count -= bytesRead;
 
@@ -321,7 +321,12 @@ namespace Gadgeteer.Modules.GHIElectronics
                     
                 //   throw new Exception();
                 //}
-                if (bytesRead == 0) break;
+				if (bytesRead == 0)
+				{
+					serialPort.DiscardInBuffer();
+					break;
+				}
+				Thread.Sleep(1);
             } while (count > 0);
 
             if (count != 0) throw new Exception();
