@@ -1,6 +1,7 @@
 ﻿using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.Interfaces;
+using System;
 using System.Threading;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -145,6 +146,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             return pos;
         }
+
+		/// <summary>
+		/// Gets the joystick position. Use GetPosition() instead.
+		/// </summary>
+		/// <returns></returns>
+		[Obsolete] public Position GetJoystickPosition()
+		{
+			return this.GetPosition();
+		}
 
 		/// <summary>
 		/// Calibrates the joystick such that the current position is interpreted as 0.
