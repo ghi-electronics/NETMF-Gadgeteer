@@ -46,7 +46,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RS485_42\RS485_42.csproj" />
+    <ProjectReference Include="..\RS485_42\RS485_42.csproj">
+      <Project>{F4A506DB-60FD-49DD-B33D-93C526BE70B1}</Project>
+      <Name>RS485_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

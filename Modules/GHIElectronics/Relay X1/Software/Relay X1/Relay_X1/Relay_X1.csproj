@@ -48,8 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Relay_X1_42\Relay_X1_42.csproj" />
-    <ProjectReference Include="..\Relay_X1_43\Relay_X1_43.csproj" />
+    <ProjectReference Include="..\Relay_X1_42\Relay_X1_42.csproj">
+      <Project>{79792455-B48C-499D-BD2E-3FDE4FF26BDB}</Project>
+      <Name>Relay_X1_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

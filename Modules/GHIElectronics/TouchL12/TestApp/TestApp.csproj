@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D63459EF-8A6B-4157-973D-L12BB65C7F622}</ProjectGuid>
+    <ProjectGuid>{D63459EF-8A6B-4157-973D-000000000000}</ProjectGuid>
     <!--This is an executable-->
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -99,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Software\TouchL12\TouchL12_42\TouchL12_42.csproj">
-      <Project>{AE622B1E-4B0E-40A7-8336-C04B428A9FA0}</Project>
+      <Project>{0B4CD139-5E88-4B81-9A75-DB903744E558}</Project>
       <Name>TouchL12_42</Name>
     </ProjectReference>
   </ItemGroup>

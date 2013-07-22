@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Display_N7_42\Display_N7_42.csproj" />
+    <ProjectReference Include="..\Display_N7_42\Display_N7_42.csproj">
+      <Project>{527A658C-513B-4930-BE9C-449F351DA4C9}</Project>
+      <Name>Display_N7_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

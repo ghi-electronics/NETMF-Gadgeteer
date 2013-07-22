@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OneWire_X1_42\OneWire_X1_42.csproj" />
+    <ProjectReference Include="..\OneWire_X1_42\OneWire_X1_42.csproj">
+      <Project>{78D05244-4BB8-4CE3-9E06-4200D4DC9527}</Project>
+      <Name>OneWire_X1_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

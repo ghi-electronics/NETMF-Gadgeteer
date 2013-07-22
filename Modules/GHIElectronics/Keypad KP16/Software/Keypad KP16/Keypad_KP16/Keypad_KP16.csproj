@@ -48,8 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Keypad_KP16_42\Keypad_KP16_42.csproj" />
-    <ProjectReference Include="..\Keypad_KP16_43\Keypad_KP16_43.csproj" />
+    <ProjectReference Include="..\Keypad_KP16_42\Keypad_KP16_42.csproj">
+      <Project>{02F4DB2E-E54C-46D5-A655-522A036BFF80}</Project>
+      <Name>Keypad_KP16_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

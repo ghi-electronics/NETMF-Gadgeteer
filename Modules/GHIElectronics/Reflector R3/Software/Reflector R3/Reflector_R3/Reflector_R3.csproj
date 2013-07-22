@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Reflector_R3_42\Reflector_R3_42.csproj" />
+    <ProjectReference Include="..\Reflector_R3_42\Reflector_R3_42.csproj">
+      <Project>{28A5A52C-7E92-490A-A4AF-E85BD8961B36}</Project>
+      <Name>Reflector_R3_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

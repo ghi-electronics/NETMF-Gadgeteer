@@ -46,7 +46,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BreadBoard_X1_42\BreadBoard_X1_42.csproj" />
+    <ProjectReference Include="..\BreadBoard_X1_42\BreadBoard_X1_42.csproj">
+      <Project>{13FCBE82-7C9C-426C-BECB-B2313849A0FC}</Project>
+      <Name>BreadBoard_X1_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
