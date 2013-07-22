@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 
 // These numbers must be changed whenever a new version of this dll is released, to allow upgrades to proceed correctly.
 // Suggestion: Use a version number X.Y.Z.0 where X.Y.Z is the same as the installer version found in common.wxi
-[assembly: AssemblyFileVersion("1.0.0.0")]
-[assembly: AssemblyInformationalVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("4.2.16.0")]
+[assembly: AssemblyInformationalVersion("4.2.16.0")]
 
 // Alternatively, if this module is included as part of a kit installer and you want to synchronize version numbers to the kit's,
 // follow the instructions in the kit's readme to include the kit's AssemblyInfoGlobal.cs version numbers, and comment out 
