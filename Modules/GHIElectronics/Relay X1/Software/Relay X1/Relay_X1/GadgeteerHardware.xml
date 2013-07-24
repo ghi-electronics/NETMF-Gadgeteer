@@ -8,7 +8,7 @@
                   UniqueId="e3c23cdc-3c51-424c-aff9-f1a4148b4b62"
                   Manufacturer="GHI Electronics"
                   Description="A Relay X1 module"
-                  InstanceName="Relay_X1"
+                  InstanceName="relay_X1"
                   Type="Gadgeteer.Modules.GHIElectronics.Relay_X1"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"

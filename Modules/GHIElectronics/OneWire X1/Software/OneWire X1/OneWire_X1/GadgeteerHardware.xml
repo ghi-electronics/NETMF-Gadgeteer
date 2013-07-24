@@ -8,7 +8,7 @@
                   UniqueId="ee60b727-e8d2-4f66-a454-3b475e075650"
                   Manufacturer="GHI Electronics"
                   Description="A OneWire X1 module"
-                  InstanceName="OneWire_X1"
+                  InstanceName="oneWire_X1"
                   Type="Gadgeteer.Modules.GHIElectronics.OneWire_X1"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"

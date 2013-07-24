@@ -8,7 +8,7 @@
 					  UniqueId="8ae94023-2bbc-42fe-892e-81a3df84a304"
 					  Manufacturer="GHI Electronics"
 					  Description="A Reflector R3 module"
-					  InstanceName="Reflector_R3"
+					  InstanceName="reflector_R3"
 					  Type="Gadgeteer.Modules.GHIElectronics.Reflector_R3"
 					  ModuleSuppliesPower="false"
 					  HardwareVersion="1.0"

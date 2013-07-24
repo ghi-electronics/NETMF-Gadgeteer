@@ -8,7 +8,7 @@
                   UniqueId="679622e3-6cfc-44b0-a941-c72f7da7040a"
                   Manufacturer="GHI Electronics"
                   Description="A RS485 module"
-                  InstanceName="RS485"
+                  InstanceName="rs485"
                   Type="Gadgeteer.Modules.GHIElectronics.RS485"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"

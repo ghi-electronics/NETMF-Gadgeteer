@@ -8,7 +8,7 @@
                   UniqueId="755e74c0-74a0-4715-bb74-c07f003a8839"
                   Manufacturer="GHI Electronics"
                   Description="A Display N7 module"
-                  InstanceName="Display_N7"
+                  InstanceName="display_N7"
                   Type="Gadgeteer.Modules.GHIElectronics.Display_N7"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"
