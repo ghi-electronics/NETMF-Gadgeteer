@@ -208,6 +208,7 @@
 			<Merge Id="id_FEZCobraII_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCobra II\Software\FEZCobra II\FEZCobra_II\bin\Release\Installer\FEZCobra_II.msm" DiskId="1" />
 			<Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
 			<Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
+			<Merge Id="id_FEZCerbuinoNet_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoNet\Software\FEZCerbuinoNet\FEZCerbuinoNet\bin\Release\Installer\FEZCerbuinoNet.msm" DiskId="1" />
 		</Directory>
 
 		<Feature Id="main" Title="Main" Level="1">
@@ -292,6 +293,7 @@
 			<MergeRef Id="id_FEZCobraII_msm" />
 			<MergeRef Id="id_FEZSpiderII_msm" />
 			<MergeRef Id="id_FEZCerbot_msm" />
+			<MergeRef Id="id_FEZCerbuinoNet_msm" />
 
 			<ComponentRef Id="id_sdk_files"/>
 			<ComponentRef Id="id_getting_started_guides_spider"/>
