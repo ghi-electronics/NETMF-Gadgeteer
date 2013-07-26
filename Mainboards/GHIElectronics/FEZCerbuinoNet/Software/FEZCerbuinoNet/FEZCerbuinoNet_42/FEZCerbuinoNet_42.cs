@@ -127,8 +127,8 @@ namespace GHIElectronics.Gadgeteer
 		}
 
 		/// <summary>
-		/// Functionality provided by mainboard to mount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
-		/// This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful.
+		/// Functionality provided by mainboard to ummount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
+		/// This should result in a Microsoft.SPOT.IO.RemovableMedia.Eject event if successful.
 		/// </summary>
 		public override bool MountStorageDevice(string volumeName)
 		{
@@ -139,7 +139,7 @@ namespace GHIElectronics.Gadgeteer
 
 		/// <summary>
 		/// Functionality provided by mainboard to ummount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
-		/// This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Eject"/> event if successful.
+		/// This should result in a Microsoft.SPOT.IO.RemovableMedia.Eject event if successful.
 		/// </summary>
 		public override bool UnmountStorageDevice(string volumeName)
 		{

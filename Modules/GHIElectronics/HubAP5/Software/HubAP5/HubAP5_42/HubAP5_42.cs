@@ -96,7 +96,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 				this.sockets[i].DigitalInputIndirector = (indirectedSocket, indirectedPin, glitchFilterMode, resistorMode, module) => new DigitalInputImplementation(this.GetPin(indirectedSocket, indirectedPin), glitchFilterMode, resistorMode, this.io60);
 				this.sockets[i].DigitalOutputIndirector = (indirectedSocket, indirectedPin, initialState, module) => new DigitalOutputImplementation(this.GetPin(indirectedSocket, indirectedPin), initialState, this.io60);
-				this.sockets[i].DigitalInputOutputIndirector = (indirectedSocket, indirectedPin, initialState, glitchFilterMode, resistorMode, module) => new DigitalInputOutputImplementation(this.GetPin(indirectedSocket, indirectedPin), initialState, glitchFilterMode, resistorMode, this.io60);
+				this.sockets[i].DigitalIOIndirector = (indirectedSocket, indirectedPin, initialState, glitchFilterMode, resistorMode, module) => new DigitalIOImplementation(this.GetPin(indirectedSocket, indirectedPin), initialState, glitchFilterMode, resistorMode, this.io60);
 				this.sockets[i].AnalogInputIndirector = (indirectedSocket, indirectedPin, module) => new AnalogInputImplementation(this.GetPin(indirectedSocket, indirectedPin), this.ads, this.io60);
 				this.sockets[i].PwmOutputIndirector = (indirectedSocket, indirectedPin, invert, module) => new PwmOutputImplementation(this.GetPin(indirectedSocket, indirectedPin), invert, this.io60);
 				this.sockets[i].InterruptIndirector = (indirectedSocket, indirectedPin, glitchFilterMode, resistorMode, interruptMode, module) => new InterruptInputImplementation(this.GetPin(indirectedSocket, indirectedPin), glitchFilterMode, resistorMode, interruptMode, this.io60);
@@ -157,14 +157,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-		private class DigitalInputOutputImplementation : Socket.SocketInterfaces.DigitalInputOutput
+		private class DigitalIOImplementation : Socket.SocketInterfaces.DigitalIO
 		{
 			private IO60P16 io60;
 			private byte pin;
-			private Socket.SocketInterfaces.InputOutputMode mode;
+			private Socket.SocketInterfaces.IOMode mode;
 			private GTI.ResistorMode resistorMode;
 
-			public DigitalInputOutputImplementation(byte pin, bool initialState, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, IO60P16 io60)
+			public DigitalIOImplementation(byte pin, bool initialState, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, IO60P16 io60)
 			{
 				if (glitchFilter != GTI.GlitchFilterMode.Off)
 					throw new NotSupportedException("GlitchFilter must be off");
@@ -172,23 +172,23 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60 = io60;
 				this.pin = pin;
 				this.resistorMode = resistorMode;
-				this.Mode = Socket.SocketInterfaces.InputOutputMode.Input;
+				this.Mode = Socket.SocketInterfaces.IOMode.Input;
 				this.io60.writeDigital(this.pin, initialState);
 			}
 
 			public override bool Read()
 			{
-				this.Mode = Socket.SocketInterfaces.InputOutputMode.Input;
+				this.Mode = Socket.SocketInterfaces.IOMode.Input;
 				return this.io60.readDigital(this.pin);
 			}
 
 			public override void Write(bool state)
 			{
-				this.Mode = Socket.SocketInterfaces.InputOutputMode.Output;
+				this.Mode = Socket.SocketInterfaces.IOMode.Output;
 				this.io60.writeDigital(this.pin, state);
 			}
 
-			public override Socket.SocketInterfaces.InputOutputMode Mode
+			public override Socket.SocketInterfaces.IOMode Mode
 			{
 				get
 				{
@@ -197,7 +197,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				set
 				{
 					this.mode = value;
-					this.io60.setIOMode(this.pin, this.mode == Socket.SocketInterfaces.InputOutputMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
+					this.io60.setIOMode(this.pin, this.mode == Socket.SocketInterfaces.IOMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
 				}
 			}
 		}
@@ -322,17 +322,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			private IO60P16 io60;
 			private byte pin;
-			private Socket.SocketInterfaces.InterruptEventHandler interruptHandler;
 
-			public override event Socket.SocketInterfaces.InterruptEventHandler Interrupt;
-
-			private void OnInterrupt(Socket.SocketInterfaces.InterruptInput sender, bool state)
+			protected override void OnInterruptFirstSubscribed()
 			{
-				if (this.interruptHandler == null)
-					this.interruptHandler = new Socket.SocketInterfaces.InterruptEventHandler(this.OnInterrupt);
+				
+			}
 
-				if (Program.CheckAndInvoke(this.Interrupt, this.interruptHandler, sender, state))
-					this.Interrupt(sender, state);
+			protected override void OnInterruptLastUnsubscribed()
+			{
+				
 			}
 
 			public InterruptInputImplementation(byte pin, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode, IO60P16 io60)
@@ -344,7 +342,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.pin = pin;
 
 				this.io60.setIOMode(this.pin, IO60P16.IOState.InputInterrupt, resistorMode);
-				this.io60.registerInterruptHandler(this.pin, interruptMode, (state) => { this.OnInterrupt(this, state); });
+				this.io60.registerInterruptHandler(this.pin, interruptMode, this.RaiseInterrupt);
 			}
 
 			public override bool Read()

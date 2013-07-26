@@ -18,7 +18,7 @@ namespace TestApp
 
         void ProgramStarted()
         {
-            //GT.Interfaces.InterruptInput interrupt;
+            GT.Interfaces.InterruptInput interrupt;
 			GTM.GHIElectronics.HubAP5 hubAP5 = new GTM.GHIElectronics.HubAP5(2);
 			//GTM.GHIElectronics.LED_Strip led_Strip = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket1);
 			//GTM.GHIElectronics.LED_Strip led_Strip1 = new GTM.GHIElectronics.LED_Strip(hubAP5.HubSocket2);
@@ -161,11 +161,11 @@ namespace TestApp
 			//	}
 			//}).Start();
 			//
-            //interrupt = new GT.Interfaces.InterruptInput(GT.Socket.GetSocket(hubAP5.HubSocket1, true, null, null), GT.Socket.Pin.Three, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, GT.Interfaces.InterruptMode.RisingAndFallingEdge, null);
-            //interrupt.Interrupt += (sender, state) =>
-            //{
-            //    Debug.Print(DateTime.Now.ToString() + " " + state.ToString() + " " + Program.CheckAndInvoke(null, null).ToString());
-            //};
+            interrupt = new GT.Interfaces.InterruptInput(GT.Socket.GetSocket(hubAP5.HubSocket1, true, null, null), GT.Socket.Pin.Three, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, GT.Interfaces.InterruptMode.RisingAndFallingEdge, null);
+            interrupt.Interrupt += (sender, state) =>
+            {
+                Debug.Print(DateTime.Now.ToString() + " " + state.ToString() + " " + Program.CheckAndInvoke(null, null).ToString());
+            };
         }
     }
 }

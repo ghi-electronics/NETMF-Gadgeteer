@@ -16,12 +16,13 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class Display_N18 : GTM.Module.DisplayModule
     {
-        private GTI.SPI _spi;
-        private GTI.SPI.Configuration _spiConfig;
-        private GT.Socket _socket;
-        private GTI.DigitalOutput _resetPin;
-        private GTI.DigitalOutput _backlightPin;
-		private GTI.DigitalOutput _rs;
+        private GTI.SPI spi;
+        private GTI.SPI.Configuration spiConfig;
+		private SPI.Configuration netMFSpiConfig;
+        private GT.Socket socket;
+        private GTI.DigitalOutput resetPin;
+        private GTI.DigitalOutput backlightPin;
+		private GTI.DigitalOutput rs;
 
 		private byte[] byteArray;
 		private ushort[] shortArray;
@@ -49,30 +50,24 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.byteArray = new byte[1];
 			this.shortArray = new ushort[2];
 
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+            this.socket = Socket.GetSocket(socketNumber, true, this, null);
+            this.socket.EnsureTypeIsSupported('S', this);
 
-            socket.EnsureTypeIsSupported('S', this);
+			this.resetPin = new GTI.DigitalOutput(this.socket, Socket.Pin.Three, false, this);
+			this.backlightPin = new GTI.DigitalOutput(this.socket, Socket.Pin.Four, false, this);
+			this.rs = new GTI.DigitalOutput(this.socket, Socket.Pin.Five, false, this);
 
-            this._socket = socket;
+			this.spiConfig = new GTI.SPI.Configuration(false, 0, 0, false, true, 12000);
+			this.netMFSpiConfig = new SPI.Configuration(this.socket.CpuPins[6], this.spiConfig.ChipSelectActiveState, this.spiConfig.ChipSelectSetupTime, this.spiConfig.ChipSelectHoldTime, this.spiConfig.ClockIdleState, this.spiConfig.ClockEdge, this.spiConfig.ClockRateKHz, this.socket.SPIModule);
+			this.spi = new GTI.SPI(this.socket, this.spiConfig, GTI.SPI.Sharing.Shared, this.socket, Socket.Pin.Six, this);
 
-            this._resetPin = new GTI.DigitalOutput(socket, Socket.Pin.Three, false, this);
-            this._backlightPin = new GTI.DigitalOutput(socket, Socket.Pin.Four, true, this);
-            this._rs = new GTI.DigitalOutput(socket, Socket.Pin.Five, false, this);
+			this.Reset();
 
-            this.ConfigureDisplay();
+			this.ConfigureDisplay();
 
-			this.Initialize(12000);
-        }
+			this.Clear();
 
-		/// <summary>
-		/// Resets the module.
-		/// </summary>
-		public void Reset()
-		{
-			this._resetPin.Write(false);
-			Thread.Sleep(300);
-			this._resetPin.Write(true);
-			Thread.Sleep(500);
+			this.SetBacklight(true);
 		}
 
 		/// <summary>
@@ -81,7 +76,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="state">The state to set the backlight to.</param>
 		public void SetBacklight(bool state)
 		{
-			this._backlightPin.Write(state);
+			this.backlightPin.Write(state);
 		}
 
 		/// <summary>
@@ -111,17 +106,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
 		/// <summary>
-		/// Draws an image to the screen.
-		/// </summary>
-		/// <param name="tb">The tiny bitmap to be drawn to the screen</param>
-		/// <param name="x">Starting X position of the image.</param>
-		/// <param name="y">Starting Y position of the image.</param>
-		public void Draw(TinyBitmap tb, uint x = 0, uint y = 0)
-		{
-			this.DrawRaw(tb.Data, tb.Width, tb.Height, x, y);
-		}
-
-		/// <summary>
 		/// Draws an image to the specified position on the screen.
 		/// </summary>
 		/// <param name="rawData">Raw Bitmap data to be drawn to the screen.</param>
@@ -129,9 +113,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="y">Starting Y position of the image.</param>
 		/// <param name="width">Width of the image.</param>
 		/// <param name="height">Height of the image.</param>
-		public void DrawRaw(byte[] rawData, uint width, uint height, uint x, uint y)
+		public void DrawRaw(byte[] rawData, uint x, uint y, uint width, uint height)
 		{
-			
 			if (x > this.Width || y > this.Height)
 				return;
 
@@ -153,7 +136,17 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			try
 			{
-				this.Draw(bitmap);
+				if (Mainboard.NativeBitmapCopyToSpi != null)
+				{
+					this.SetClippingArea(0, 0, (uint)bitmap.Width - 1, (uint)bitmap.Height - 1);
+					this.WriteCommand(0x2C);
+					this.rs.Write(true);
+					Mainboard.NativeBitmapCopyToSpi(bitmap, this.netMFSpiConfig, 0, 0, bitmap.Width, bitmap.Height, GT.Mainboard.BPP.BPP16_BGR_BE);
+				}
+				else
+				{
+					this.Draw(bitmap);
+				}
 			}
 			catch
 			{
@@ -161,13 +154,24 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-        private void Initialize(uint spiClockRateKHz)
-        {
-            this._spiConfig = new GTI.SPI.Configuration(false, 0, 0, false, true, spiClockRateKHz);
-            this._spi = new GTI.SPI(this._socket, this._spiConfig, GTI.SPI.Sharing.Shared, this._socket, Socket.Pin.Six, this);
+		private void Reset()
+		{
+			this.resetPin.Write(false);
+			Thread.Sleep(300);
+			this.resetPin.Write(true);
+			Thread.Sleep(500);
+		}
 
-            this.Reset();
+        private void ConfigureDisplay()
+		{
+			Mainboard.LCDConfiguration lcdConfig = new Mainboard.LCDConfiguration();
 
+			lcdConfig.LCDControllerEnabled = false;
+			lcdConfig.Width = Width;
+			lcdConfig.Height = Height;
+
+			DisplayModule.SetLCDConfig(lcdConfig);
+	
 			this.WriteCommand(0x11);//Sleep exit 
             Thread.Sleep(120);
 
@@ -237,18 +241,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteData(0x05);
 
 			this.WriteCommand(0x29);//Display on
-
-			this.Clear();
-        }
-
-        private void ConfigureDisplay()
-        {
-            Mainboard.LCDConfiguration lcdConfig = new Mainboard.LCDConfiguration();
-
-            lcdConfig.LCDControllerEnabled = false;
-            lcdConfig.Width = Width;
-            lcdConfig.Height = Height;
-            DisplayModule.SetLCDConfig(lcdConfig);
         }
 
 		private void SetClippingArea(uint x, uint y, uint w, uint h)
@@ -268,8 +260,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
 			this.byteArray[0] = command;
 
-			this._rs.Write(false);
-			this._spi.Write(this.byteArray);
+			this.rs.Write(false);
+			this.spi.Write(this.byteArray);
         }
 
         private void WriteData(byte data)
@@ -280,69 +272,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private void WriteData(byte[] data)
         {
-			this._rs.Write(true);
-			this._spi.Write(data);
+			this.rs.Write(true);
+			this.spi.Write(data);
         }
 
 		private void WriteData(ushort[] data)
 		{
-			this._rs.Write(true);
-			this._spi.Write(data);
-		}
-
-		/// <summary>
-		/// A class that stores an image in the format the device expects.
-		/// </summary>
-		public class TinyBitmap
-		{
-			/// <summary>
-			/// The raw byte data to be sent to the device.
-			/// </summary>
-			public byte[] Data;
-
-			/// <summary>
-			/// The width of the image.
-			/// </summary>
-			public uint Width;
-
-			/// <summary>
-			/// The height of the image.
-			/// </summary>
-			public uint Height;
-
-			/// <summary>
-			/// Constructs a TinyBitmap from a preexisting bitmap.
-			/// </summary>
-			/// <param name="bitmap">The bitmap to construct from.</param>
-			public TinyBitmap(Bitmap bitmap)
-			{
-				this.Width = (uint)bitmap.Width;
-				this.Height = (uint)bitmap.Height;
-				this.Data = new byte[this.Width * this.Height * 2];
-				Mainboard.NativeBitmapConverter(bitmap.GetBitmap(), this.Data, GT.Mainboard.BPP.BPP16_BGR_BE);
-			}
-
-			/// <summary>
-			/// Constructs a TinyBitmap from the raw pre-decoded bytes.
-			/// </summary>
-			/// <param name="data">The bitmap data.</param>
-			/// <param name="width">The width of the bitmap.</param>
-			/// <param name="height">The height of the bitmap.</param>
-			public TinyBitmap(byte[] data, uint width, uint height)
-			{
-				this.Width = width;
-				this.Height = height;
-				this.Data = data;
-			}
-
-			/// <summary>
-			/// Constructs a TinyBitmap from a byte array with length and width ints at the beginning.
-			/// </summary>
-			/// <param name="data">The bitmap data. The first 4 bytes represent the width, the next four bytes represent the height, and the remainder represent the bitmap.</param>
-			public TinyBitmap(byte[] data) : this(Utility.ExtractRangeFromArray(data, 8, data.Length - 8), Utility.ExtractValueFromArray(data, 0, 4), Utility.ExtractValueFromArray(data, 4, 4))
-			{
-
-			}
+			this.rs.Write(true);
+			this.spi.Write(data);
 		}
     }
 }

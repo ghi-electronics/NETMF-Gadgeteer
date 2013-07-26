@@ -46,10 +46,7 @@
     <Compile Include="FEZCerberus_42.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Gadgeteer, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <Private>False</Private>
-    </Reference>
+    <Reference Include="Gadgeteer, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHI.Hardware.FEZCerb, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
@@ -58,6 +55,7 @@
       <SpecificVersion>False</SpecificVersion>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="mscorlib" />
   </ItemGroup>
