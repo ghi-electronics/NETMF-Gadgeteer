@@ -93,6 +93,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// The maximum amount of lux the sensor can detect before becoming saturated.
 		/// </summary>
-		public const double MAX_ILLUMINANCE = 750;
+		public const double MAX_ILLUMINANCE = 1000;
     }
 }
