@@ -303,10 +303,10 @@ namespace GHIElectronics.Gadgeteer
             if (!this.configSet)
 			{
 				Util.SetSpecialDisplayConfig(1, 1); //Type
-				Util.SetSpecialDisplayConfig(5, config.ChipSelect_Port); //CS Pin
-				Util.SetSpecialDisplayConfig(8, config.Clock_Edge); //Valid Edge
-				Util.SetSpecialDisplayConfig(9, config.Clock_RateKHz); //Clock Rate
-				Util.SetSpecialDisplayConfig(12, config.SPI_mod); //SPI Module
+				Util.SetSpecialDisplayConfig(5, (int)config.ChipSelect_Port); //CS Pin
+				Util.SetSpecialDisplayConfig(8, config.Clock_Edge ? 1 : 0); //Valid Edge
+				Util.SetSpecialDisplayConfig(9, (int)config.Clock_RateKHz); //Clock Rate
+				Util.SetSpecialDisplayConfig(12, (int)config.SPI_mod); //SPI Module
 
                 this.configSet = true;
             }
