@@ -243,8 +243,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>Returns true if notes were not playing and they were started. False if notes were already being played.</returns>
 		public bool Play()
 		{
-			if (this.running)
-				return false;
+            if (this.running)
+                this.Stop();
 
 			// Make sure the queue is not empty and we are not currently playing it.
 			if (playList.NotesRemaining > 0)
@@ -287,7 +287,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			tunePWM.Active = false;
 
-			if (tone == Tone.Rest)
+			if (tone.freq == 0)
 			{
 				tunePWM.Active = false;
 				return;
@@ -302,7 +302,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public void Stop()
 		{
-			this.running = false;
+            this.playbackThread.Abort();
+            this.running = false;
+            this.tunePWM.Active = false;
 		}
 
 		/// <summary>
