@@ -88,7 +88,7 @@
           <Types>
             <Type>C</Type>
             <Type>S</Type>
-            <Type>Y</Type>
+            <Type>X</Type>
           </Types>
         </ProvidedSocket>
         <ProvidedSocket Label="7" Left="51.35" Top="19.25" Orientation="0" ConstructorParameter="7">
@@ -110,14 +110,13 @@
             <Type>O</Type>
             <Type>S</Type>
             <Type>U</Type>
-            <Type>Y</Type>
+            <Type>X</Type>
           </Types>
         </ProvidedSocket>
         <ProvidedSocket Label="10" Left="38.25" Top="33.34" Orientation="0" ConstructorParameter="10">
           <Types>
             <Type>A</Type>
             <Type>I</Type>
-            <Type>T</Type>
             <Type>X</Type>
           </Types>
           <SharedPinMaps>

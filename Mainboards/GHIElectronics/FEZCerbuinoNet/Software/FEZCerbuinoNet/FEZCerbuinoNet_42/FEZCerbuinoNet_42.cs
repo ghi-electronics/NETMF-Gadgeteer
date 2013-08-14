@@ -24,7 +24,7 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 1
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
-			socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'Y' };
+			socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'X' };
 			socket.CpuPins[3] = FEZCerb_Pins.PC13;
 			socket.CpuPins[4] = FEZCerb_Pins.PC6;
 			socket.CpuPins[5] = FEZCerb_Pins.PC7;

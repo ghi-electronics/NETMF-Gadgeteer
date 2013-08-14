@@ -300,7 +300,7 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 10
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
-			socket.SupportedTypes = new char[] { 'A', 'I', 'T', 'X' };
+			socket.SupportedTypes = new char[] { 'A', 'I', 'X' };
 			socket.CpuPins[3] = G120.Pin.P0_25;
 			socket.CpuPins[4] = G120.Pin.P0_24;
 			socket.CpuPins[5] = G120.Pin.P0_23;
@@ -316,9 +316,6 @@ namespace GHIElectronics.Gadgeteer
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
 
 			// I
-			// N/A
-
-			// T
 			// N/A
 
 			// X
@@ -339,8 +336,8 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = G120.Pin.P1_11;
 
 			// P
-			socket.PWM7 = Cpu.PWMChannel.PWM_1;
-			socket.PWM8 = Cpu.PWMChannel.PWM_0;
+			socket.PWM7 = Cpu.PWMChannel.PWM_0;
+			socket.PWM8 = Cpu.PWMChannel.PWM_1;
 			socket.PWM9 = Cpu.PWMChannel.PWM_5;
 
 			// U
@@ -530,7 +527,7 @@ namespace GHIElectronics.Gadgeteer
 				//config.PixelClockDivider = lcdConfig.PixelClockDivider;
 
 				// added
-				config.PixelClockRateKHz = (uint)(72000 / lcdConfig.PixelClockDivider);
+				config.PixelClockRateKHz = (uint)(120000 / lcdConfig.PixelClockDivider);
 
 				config.PixelPolarity = lcdConfig.PixelPolarity;
 
