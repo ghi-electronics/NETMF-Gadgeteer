@@ -209,6 +209,7 @@
 			<Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
 			<Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
 			<Merge Id="id_FEZCerbuinoNet_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoNet\Software\FEZCerbuinoNet\FEZCerbuinoNet\bin\Release\Installer\FEZCerbuinoNet.msm" DiskId="1" />
+			<Merge Id="id_FEZRaptor_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZRaptor\Software\FEZRaptor\FEZRaptor\bin\Release\Installer\FEZRaptor.msm" DiskId="1" />
 		</Directory>
 
 		<Feature Id="main" Title="Main" Level="1">
@@ -277,13 +278,13 @@
 			<MergeRef Id="id_Relay_X1_msm"/>
 			<MergeRef Id="id_BreadBoard_X1_msm"/>
 			<MergeRef Id="id_OneWire_X1_msm"/>
-			<MergeRef Id="id_RotaryH1_X1_msm"/>
+			<MergeRef Id="id_RotaryH1_msm"/>
 			<MergeRef Id="id_PulseCount_msm"/>
 			<MergeRef Id="id_TouchC8_msm"/>
 			<MergeRef Id="id_TouchL12_msm"/>
 			<MergeRef Id="id_Reflector_R3_msm"/>
 			<MergeRef Id="id_RS485_msm"/>
-			<MergeRef Id="id_DisplayN7_msm"/>
+			<MergeRef Id="id_Display_N7_msm"/>
 			<MergeRef Id="id_Breakout_TB10_msm"/>
 
 			<MergeRef Id="id_FEZHydra_msm" />
@@ -294,6 +295,7 @@
 			<MergeRef Id="id_FEZSpiderII_msm" />
 			<MergeRef Id="id_FEZCerbot_msm" />
 			<MergeRef Id="id_FEZCerbuinoNet_msm" />
+			<MergeRef Id="id_FEZRaptor_msm" />
 
 			<ComponentRef Id="id_sdk_files"/>
 			<ComponentRef Id="id_getting_started_guides_spider"/>
