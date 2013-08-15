@@ -130,13 +130,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 LEDs[i] = color;
                 LEDs[i + 1] = color;
-                //LEDs[i + 2] = color;
-                //LEDs[i + 3] = color;
                 
                 _spi.Write(LEDs[i].GetForRender());
                 _spi.Write(LEDs[i + 1].GetForRender());
-                //_spi.Write(LEDs[i + 2].GetForRender());
-                //_spi.Write(LEDs[i + 3].GetForRender());
             }
 
             _spi.Write(_zeros);
@@ -151,17 +147,13 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (colorArr.Length > LEDs.Length)
                 throw new ArgumentOutOfRangeException("colorArr", "is larger than expected!");
 
-            for (int i = 0; i < LEDs.Length; i += 4)
+            for (int i = 0; i < LEDs.Length; i += 2)
             {
                 SetLED(colorArr[i], i);
                 SetLED(colorArr[i + 1], i + 1);
-                SetLED(colorArr[i + 2], i + 2);
-                SetLED(colorArr[i + 3], i + 3); 
                 
                 _spi.Write(LEDs[i].GetForRender());
                 _spi.Write(LEDs[i + 1].GetForRender());
-                _spi.Write(LEDs[i + 2].GetForRender());
-                _spi.Write(LEDs[i + 3].GetForRender());
             }
 
             _spi.Write(_zeros);
@@ -207,8 +199,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 _spi.Write(LEDs[i].GetForRender());
                 _spi.Write(LEDs[i + 1].GetForRender());
-                //_spi.Write(LEDs[i + 2].GetForRender());
-                //_spi.Write(LEDs[i + 3].GetForRender());
             }
 
             _spi.Write(_zeros);
