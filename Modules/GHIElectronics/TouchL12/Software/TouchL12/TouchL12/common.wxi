@@ -32,23 +32,23 @@
   <?define ProjectPath = "TouchL12" ?>
 
   <!-- These two should be copied over if upgrading from an older template -->
-  <?define guid_msi_upgrade_code =  "a92a0166-996e-4021-afbf-38ba802e3f93" ?>
-  <?define guid_msm_package_id = "aaca857c-a178-427e-aa9a-c717b6474f8b" ?>
+	<?define guid_msi_upgrade_code =  "1ae0fe39-0d2b-4756-b147-0ce6e83b1505" ?>
+	<?define guid_msm_package_id = "d32ae14d-a427-4bbd-a9a3-3604015742ef" ?>
 
-  <?define guid_msm_comp_resources_id = "e0114fd3-ee6c-45cc-b287-76c1f20c0d08" ?>
-  <?define guid_msm_comp_registry_id = "25385519-477f-49f2-820b-eaeec8fa9e78" ?>
-  <?define guid_msm_comp_gadgeteerhardware_id = "990c202b-b583-48a2-b3bb-f6dbed7934f8"?>
+	<?define guid_msm_comp_resources_id = "1b23042b-18db-49fa-b847-3bd11792cb9e" ?>
+	<?define guid_msm_comp_registry_id = "70d915fd-d51c-432e-9b31-b0e748181daa" ?>
+	<?define guid_msm_comp_gadgeteerhardware_id = "d50afa6b-1e15-48a9-a4e2-1abd5ec2241c"?>
 
-  <?define guid_msm_comp_files_id_41 = "e907edc1-bc1b-4072-a7bb-d43804670b13" ?>
-  <?define guid_msm_comp_files_be_id_41 = "b0abade7-5abe-475c-88d5-a9c3ac72655f" ?>
-  <?define guid_msm_comp_files_le_id_41 = "6a4c80c1-5200-47b0-bc60-705d81a7f08c" ?>
+	<?define guid_msm_comp_files_id_41 = "64d25577-ab68-4a73-86e8-2972fa7b764e" ?>
+	<?define guid_msm_comp_files_be_id_41 = "0b826cb7-4768-49c1-8de2-386ed1021120" ?>
+	<?define guid_msm_comp_files_le_id_41 = "17d90a35-027a-4014-8b69-3e9e7fc4dd9b" ?>
 
-  <?define guid_msm_comp_files_id_42 = "3c0ca835-150b-42d1-8897-a6b23a629ab0" ?>
-  <?define guid_msm_comp_files_be_id_42 = "958df4af-2ea2-45f8-950c-ce70877bd2b5" ?>
-  <?define guid_msm_comp_files_le_id_42 = "5055d409-270e-4749-8e5c-209eee74f525" ?>
+	<?define guid_msm_comp_files_id_42 = "bc8da201-cb2c-4e78-817e-c63266285331" ?>
+	<?define guid_msm_comp_files_be_id_42 = "d8f51ef0-7740-4ed3-8fe7-454debd935ac" ?>
+	<?define guid_msm_comp_files_le_id_42 = "c5e0b4a2-ff9b-49f7-a631-22ccc0b6dfd2" ?>
 
-  <?define guid_msm_comp_files_id_43 = "36c55b57-11aa-418d-919f-e5568297dad3" ?>
-  <?define guid_msm_comp_files_be_id_43 = "a8560f94-8c99-4a8f-a9ce-d94258ace765" ?>
-  <?define guid_msm_comp_files_le_id_43 = "640d8cec-2f71-4510-9c37-8470337ccde0" ?>
+	<?define guid_msm_comp_files_id_43 = "d2fcfe2c-e4f7-4535-a1f9-5834285572ea" ?>
+	<?define guid_msm_comp_files_be_id_43 = "8f1c49bf-3670-4b64-9647-3bf4082d6054" ?>
+	<?define guid_msm_comp_files_le_id_43 = "9f9d13ae-6e4b-49bf-bc10-bc39bf3d3089" ?>
 </Include>
 
