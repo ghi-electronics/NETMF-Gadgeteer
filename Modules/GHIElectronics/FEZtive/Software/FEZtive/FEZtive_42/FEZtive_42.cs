@@ -126,17 +126,17 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             _spi.Write(_zeros);
 
-            for (int i = 0; i < LEDs.Length; i += 4)
+            for (int i = 0; i < LEDs.Length; i += 2)
             {
                 LEDs[i] = color;
                 LEDs[i + 1] = color;
-                LEDs[i + 2] = color;
-                LEDs[i + 3] = color;
+                //LEDs[i + 2] = color;
+                //LEDs[i + 3] = color;
                 
                 _spi.Write(LEDs[i].GetForRender());
                 _spi.Write(LEDs[i + 1].GetForRender());
-                _spi.Write(LEDs[i + 2].GetForRender());
-                _spi.Write(LEDs[i + 3].GetForRender());
+                //_spi.Write(LEDs[i + 2].GetForRender());
+                //_spi.Write(LEDs[i + 3].GetForRender());
             }
 
             _spi.Write(_zeros);
@@ -203,12 +203,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             _spi.Write(_zeros);
 
-            for (int i = 0; i < LEDs.Length; i += 4)
+            for (int i = 0; i < LEDs.Length; i += 2)
             {
                 _spi.Write(LEDs[i].GetForRender());
                 _spi.Write(LEDs[i + 1].GetForRender());
-                _spi.Write(LEDs[i + 2].GetForRender());
-                _spi.Write(LEDs[i + 3].GetForRender());
+                //_spi.Write(LEDs[i + 2].GetForRender());
+                //_spi.Write(LEDs[i + 3].GetForRender());
             }
 
             _spi.Write(_zeros);
