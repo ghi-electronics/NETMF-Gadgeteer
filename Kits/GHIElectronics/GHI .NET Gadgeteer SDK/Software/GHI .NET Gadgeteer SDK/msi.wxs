@@ -200,14 +200,17 @@
 			<Merge Id="id_RS485_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS485\Software\RS485\RS485\bin\Release\Installer\RS485.msm" DiskId="1" />
 			<Merge Id="id_Display_N7_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N7\Software\Display N7\Display_N7\bin\Release\Installer\Display_N7.msm" DiskId="1" />
 			<Merge Id="id_Breakout_TB10_msm"		Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout TB10\Software\Breakout TB10\Breakout_TB10\bin\Release\Installer\Breakout_TB10.msm" DiskId="1" />
+			<Merge Id="id_FEZtive_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FEZtive\Software\FEZtive\FEZtive\bin\Release\Installer\FEZtive.msm" DiskId="1" />
 
 			<Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
 			<Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
 			<Merge Id="id_FEZSpider_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider\bin\Release\Installer\FEZSpider.msm" DiskId="1" />
 			<Merge Id="id_FEZ_Cerbuino_Bee_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoBee\Software\FEZ Cerbuino Bee\FEZ Cerbuino Bee\bin\Release\Installer\FEZ_Cerbuino_Bee.msm" DiskId="1" />
 			<Merge Id="id_FEZCobraII_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCobra II\Software\FEZCobra II\FEZCobra_II\bin\Release\Installer\FEZCobra_II.msm" DiskId="1" />
-			<Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
+			<Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\Software\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
 			<Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
+			<Merge Id="id_FEZCerbuinoNet_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoNet\Software\FEZCerbuinoNet\FEZCerbuinoNet\bin\Release\Installer\FEZCerbuinoNet.msm" DiskId="1" />
+			<Merge Id="id_FEZRaptor_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZRaptor\Software\FEZRaptor\FEZRaptor\bin\Release\Installer\FEZRaptor.msm" DiskId="1" />
 		</Directory>
 
 		<Feature Id="main" Title="Main" Level="1">
@@ -276,14 +279,15 @@
 			<MergeRef Id="id_Relay_X1_msm"/>
 			<MergeRef Id="id_BreadBoard_X1_msm"/>
 			<MergeRef Id="id_OneWire_X1_msm"/>
-			<MergeRef Id="id_RotaryH1_X1_msm"/>
+			<MergeRef Id="id_RotaryH1_msm"/>
 			<MergeRef Id="id_PulseCount_msm"/>
 			<MergeRef Id="id_TouchC8_msm"/>
 			<MergeRef Id="id_TouchL12_msm"/>
 			<MergeRef Id="id_Reflector_R3_msm"/>
 			<MergeRef Id="id_RS485_msm"/>
-			<MergeRef Id="id_DisplayN7_msm"/>
+			<MergeRef Id="id_Display_N7_msm"/>
 			<MergeRef Id="id_Breakout_TB10_msm"/>
+			<MergeRef Id="id_FEZtive_msm"/>
 
 			<MergeRef Id="id_FEZHydra_msm" />
 			<MergeRef Id="id_FEZCerberus_msm" />
@@ -292,6 +296,8 @@
 			<MergeRef Id="id_FEZCobraII_msm" />
 			<MergeRef Id="id_FEZSpiderII_msm" />
 			<MergeRef Id="id_FEZCerbot_msm" />
+			<MergeRef Id="id_FEZCerbuinoNet_msm" />
+			<MergeRef Id="id_FEZRaptor_msm" />
 
 			<ComponentRef Id="id_sdk_files"/>
 			<ComponentRef Id="id_getting_started_guides_spider"/>

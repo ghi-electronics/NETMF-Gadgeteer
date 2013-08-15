@@ -33,6 +33,9 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <Compile Include="..\..\..\..\..\..\Kits\GHIElectronics\GHI .NET Gadgeteer SDK\Software\GHI .NET Gadgeteer SDK\AssemblyInfoGlobal.cs">
+      <Link>AssemblyInfoGlobal.cs</Link>
+    </Compile>
     <Compile Include="ElmDriver.cs" />
     <Compile Include="ObdModes\AbstractObdMode.cs" />
     <Compile Include="ObdModes\ObdGenericMode09.cs" />

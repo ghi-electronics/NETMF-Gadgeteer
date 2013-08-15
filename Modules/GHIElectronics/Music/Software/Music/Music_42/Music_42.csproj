@@ -43,6 +43,7 @@
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+	<Compile Include="..\..\..\..\..\..\Kits\GHIElectronics\GHI .NET Gadgeteer SDK\Software\GHI .NET Gadgeteer SDK\AssemblyInfoGlobal.cs" />
     <Compile Include="Music_42.cs" />
   </ItemGroup>
   <ItemGroup>

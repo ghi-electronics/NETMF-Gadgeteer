@@ -243,15 +243,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>Returns true if notes were not playing and they were started. False if notes were already being played.</returns>
 		public bool Play()
 		{
-			if (this.running)
-				return false;
+            if (this.running)
+                this.Stop();
 
 			// Make sure the queue is not empty and we are not currently playing it.
 			if (playList.NotesRemaining > 0)
 			{
 				this.running = true;
 
-				playbackThread = new Thread(playbackThreadStart);
+				playbackThread = new Thread(PlaybackThread);
 				playbackThread.Start();
 			}
 
@@ -261,7 +261,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// The function that runs when the playback thread is started. Returns (ends the thread) when playback is finished or Stop() is called.
 		/// </summary>
-		void playbackThreadStart()
+		private void PlaybackThread()
 		{
 			while (this.running && playList.NotesRemaining > 0)
 			{
@@ -287,8 +287,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			tunePWM.Active = false;
 
-			if (tone == Tone.Rest)
+			if (tone.freq == 0)
+			{
+				tunePWM.Active = false;
 				return;
+			}
 
 			tunePWM.Set((int)tone.freq, 0.5);
 			tunePWM.Active = true;
@@ -297,19 +300,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Stops note playback. Returns if it made any change.
 		/// </summary>
-		/// <returns>Returns true if notes were playing and they were stopped. False if playback was already stopped.</returns>
-		public bool Stop()
+		public void Stop()
 		{
-			if (this.running)
-			{
-				this.running = false;
-
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+            this.playbackThread.Abort();
+            this.running = false;
+            this.tunePWM.Active = false;
 		}
 
 		/// <summary>

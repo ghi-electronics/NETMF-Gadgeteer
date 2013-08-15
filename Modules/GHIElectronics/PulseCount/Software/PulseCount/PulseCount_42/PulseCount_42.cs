@@ -51,11 +51,24 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.Initialize();
         }
 
+		/// <summary>
+		/// Creates an input on the input port on  the module.
+		/// </summary>
+		/// <param name="glitchFilterMode">The glitch filter mode for the input.</param>
+		/// <param name="resistorMode">The resistor mode for the input.</param>
+		/// <returns>The new input.</returns>
 		public GTI.DigitalInput CreateInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode)
 		{
 			return new GTI.DigitalInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, this);
 		}
 
+		/// <summary>
+		/// Creates an interrrupt input on the input port on  the module.
+		/// </summary>
+		/// <param name="glitchFilterMode">The glitch filter mode for the input.</param>
+		/// <param name="resistorMode">The resistor mode for the input.</param>
+		/// <param name="interruptMode">The interrupt mode for the input.</param>
+		/// <returns>The new input.</returns>
 		public GTI.InterruptInput CreateInterruptInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode)
 		{
 			return new GTI.InterruptInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, interruptMode, this);

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCerbuinoNet_42", "FEZCerbuinoNet\FEZCerbuinoNet_42\FEZCerbuinoNet_42.csproj", "{15125D6A-9768-41F2-91D3-C0E5FBFB6EC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCerbuinoNet", "FEZCerbuinoNet\FEZCerbuinoNet\FEZCerbuinoNet.csproj", "{F7A016E3-5E81-4F5F-91F3-C228DFAC15BA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{15125D6A-9768-41F2-91D3-C0E5FBFB6EC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15125D6A-9768-41F2-91D3-C0E5FBFB6EC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15125D6A-9768-41F2-91D3-C0E5FBFB6EC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15125D6A-9768-41F2-91D3-C0E5FBFB6EC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7A016E3-5E81-4F5F-91F3-C228DFAC15BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7A016E3-5E81-4F5F-91F3-C228DFAC15BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7A016E3-5E81-4F5F-91F3-C228DFAC15BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7A016E3-5E81-4F5F-91F3-C228DFAC15BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

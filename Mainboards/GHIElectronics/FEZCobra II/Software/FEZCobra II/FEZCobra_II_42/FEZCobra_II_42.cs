@@ -568,7 +568,7 @@ namespace GHIElectronics.Gadgeteer
 				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCobra_II_AnalogOut.MIN_VOLTAGE.ToString() + "V");
 
 			if (voltage > FEZCobra_II_AnalogOut.MAX_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCobra_II_AnalogOut.MAX_VOLTAGE.ToString() + "V");
+				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZCobra_II_AnalogOut.MAX_VOLTAGE.ToString() + "V");
 
 			this.aout.Write(voltage);
 		}

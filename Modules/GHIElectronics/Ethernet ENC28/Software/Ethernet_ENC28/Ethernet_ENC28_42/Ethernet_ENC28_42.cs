@@ -20,7 +20,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// An Ethernet_ENC28 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Ethernet_ENC28 : GTM.Module//.NetworkModule
+    public class Ethernet_ENC28 : GTM.Module.NetworkModule
     {
         /// <summary>
         /// The class that will be used to interface with the ethernet module. This member will handle everything from initialization to joining networks.
@@ -67,31 +67,31 @@ namespace Gadgeteer.Modules.GHIElectronics
         //    GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
         //}
 
-        ///// <summary>
-        ///// Gets a value that indicates whether this ethernet module is physically connected to a network device.
-        ///// </summary>
-        ///// <remarks>
-        ///// <para>
-        /////  This property enables you to determine if the <see cref="Ethernet_ENC28"/> module is
-        /////  physically connected to a network device, such as a router. 
-        /////  When this property is <b>true</b>, it does not necessarily mean that the network connection is usable. 
-        /////  You must also check the <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> property. 
-        /////  <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> returns <b>true</b> 
-        /////  if the network connection is both connected and configured for Internet Protocol (IP) communication tasks. 
-        ///// </para>
-        ///// <note>
-        /////  When <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> is <b>true</b>, it does not necessarily mean 
-        /////  that the network connection is functional. The IP configuration
-        /////  for the network connection may be invalid for the network that it is connected to.
-        ///// </note>
-        ///// </remarks>
-        //public override bool IsNetworkConnected
-        //{
-        //    get
-        //    {
-        //        return Interface.IsCableConnected;
-        //    }
-        //}
+        /// <summary>
+        /// Gets a value that indicates whether this ethernet module is physically connected to a network device.
+        /// </summary>
+        /// <remarks>
+        /// <para>
+        ///  This property enables you to determine if the <see cref="Ethernet_ENC28"/> module is
+        ///  physically connected to a network device, such as a router. 
+        ///  When this property is <b>true</b>, it does not necessarily mean that the network connection is usable. 
+        ///  You must also check the <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> property. 
+        ///  <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> returns <b>true</b> 
+        ///  if the network connection is both connected and configured for Internet Protocol (IP) communication tasks. 
+        /// </para>
+        /// <note>
+        ///  When <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> is <b>true</b>, it does not necessarily mean 
+        ///  that the network connection is functional. The IP configuration
+        ///  for the network connection may be invalid for the network that it is connected to.
+        /// </note>
+        /// </remarks>
+        public override bool IsNetworkConnected
+        {
+            get
+            {
+                return Interface.IsCableConnected;
+            }
+        }
 
     }
 }
