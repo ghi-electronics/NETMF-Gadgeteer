@@ -200,6 +200,7 @@
 			<Merge Id="id_RS485_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS485\Software\RS485\RS485\bin\Release\Installer\RS485.msm" DiskId="1" />
 			<Merge Id="id_Display_N7_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N7\Software\Display N7\Display_N7\bin\Release\Installer\Display_N7.msm" DiskId="1" />
 			<Merge Id="id_Breakout_TB10_msm"		Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout TB10\Software\Breakout TB10\Breakout_TB10\bin\Release\Installer\Breakout_TB10.msm" DiskId="1" />
+			<Merge Id="id_FEZtive_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FEZtive\Software\FEZtive\FEZtive\bin\Release\Installer\FEZtive.msm" DiskId="1" />
 
 			<Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
 			<Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
@@ -286,6 +287,7 @@
 			<MergeRef Id="id_RS485_msm"/>
 			<MergeRef Id="id_Display_N7_msm"/>
 			<MergeRef Id="id_Breakout_TB10_msm"/>
+			<MergeRef Id="id_FEZtive_msm"/>
 
 			<MergeRef Id="id_FEZHydra_msm" />
 			<MergeRef Id="id_FEZCerberus_msm" />
