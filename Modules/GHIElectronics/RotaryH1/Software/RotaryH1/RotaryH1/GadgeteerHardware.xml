@@ -8,7 +8,7 @@
                   UniqueId="a90b8716-63b1-4a2c-a068-d45127ea5348"
                   Manufacturer="GHI Electronics"
                   Description="A RotaryH1 module"
-                  InstanceName="rotaryEncoder"
+                  InstanceName="rotaryH1"
                   Type="Gadgeteer.Modules.GHIElectronics.RotaryH1"
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"

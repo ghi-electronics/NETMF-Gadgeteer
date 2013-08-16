@@ -213,13 +213,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		public enum Direction : byte
 		{
 			/// <summary>
-			/// The count is going up.
+			/// The encoder is moving in a counter-clockwise direction.
 			/// </summary>
-			Up,
+			CounterClockwise,
 			/// <summary>
-			/// The count is going down.
+			/// The encoder is moving in a clockwise direction.
 			/// </summary>
-			Down
+			Clockwise
 		}
 
 		private enum Commands : byte

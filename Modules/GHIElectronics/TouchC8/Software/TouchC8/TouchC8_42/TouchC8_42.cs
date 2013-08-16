@@ -205,18 +205,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.socket = GT.Socket.GetSocket(socketNumber, false, this, "I");
 
-			Thread.Sleep(1000);
-
 			this.reset = new GTI.DigitalOutput(this.socket, GT.Socket.Pin.Six, true, this);
 
-			Thread.Sleep(1000);
 
 			this.Reset();
 
-			Thread.Sleep(1000);
 			this.device = new GTI.I2CBus(this.socket, TouchC8.I2C_ADDRESS, TouchC8.I2C_CLOCK_RATE, this);
-
-			Thread.Sleep(1000);
 
 			this.interrupt = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.FallingEdge, this);
 			this.interrupt.Interrupt += new GTI.InterruptInput.InterruptEventHandler(OnInterrupt);
@@ -228,7 +222,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.previousButton2Touched = false;
 			this.previousButton3Touched = false;
 
-			Thread.Sleep(1000);
+			Thread.Sleep(250);
 
 			this.ConfigureSPM();
 		}
@@ -284,6 +278,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private void Reset()
 		{
+			Thread.Sleep(100);
 			this.reset.Write(false);
 			Thread.Sleep(100);
 			this.reset.Write(true);

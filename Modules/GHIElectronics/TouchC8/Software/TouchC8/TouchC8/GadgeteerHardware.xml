@@ -5,7 +5,7 @@
     <!-- The Unique ID is auto-generated and does not usually need to be modified. -->
     <!-- For file paths, do not use forward slash (/), use backslash (\) or it fails in Windows XP. -->
     <ModuleDefinition Name="TouchC8"
-                  UniqueId="6fe9394f-68ef-431f-be79-69b4e8553040"
+                  UniqueId="A3E489D3-C558-4C0D-AE57-C8026A6E2DD4"
                   Manufacturer="GHI Electronics"
                   Description="A TouchC8 module"
                   InstanceName="touchC8"

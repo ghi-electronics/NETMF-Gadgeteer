@@ -1,253 +1,253 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
-  <MainboardDefinitions>
-	<!-- This mainboard definition should be filled in.  Mouse over any attribute name to get more help about that attribute. -->
-	<!-- For file paths, do not use forward slash (/), use backslash (\) or it fails in Windows XP. -->
-	<MainboardDefinition
-			Name="FEZRaptor"
-			Type="GHIElectronics.Gadgeteer.FEZRaptor"
-			HardwareVersion="1.0"
-			Image="Resources\Image.jpg"
-			BoardWidth="102"
-			BoardHeight="87"
-			MinimumGadgeteerCoreVersion="2.42.500"
-			HelpUrl="https://www.ghielectronics.com/catalog/product/499"
+	<MainboardDefinitions>
+		<!-- This mainboard definition should be filled in.  Mouse over any attribute name to get more help about that attribute. -->
+		<!-- For file paths, do not use forward slash (/), use backslash (\) or it fails in Windows XP. -->
+		<MainboardDefinition
+				Name="FEZRaptor"
+				Type="GHIElectronics.Gadgeteer.FEZRaptor"
+				HardwareVersion="1.0"
+				Image="Resources\Image.jpg"
+				BoardWidth="102"
+				BoardHeight="87"
+				MinimumGadgeteerCoreVersion="2.42.500"
+				HelpUrl="https://www.ghielectronics.com/catalog/product/499"
 			>
 
-	  <!-- Assemblies listed here are added to the project as references by the designer whenever this module is instantiated.  -->
-	  <!-- This functionality is used to -->
-	  <!--   (1) include the output assemblies of this template -->
-	  <!--   (2) include other custom assemblies that the mainboard relies on (NB you must edit msm.wxs so these are installed too) -->
-	  <!-- Some examples are provided inline: -->
+			<!-- Assemblies listed here are added to the project as references by the designer whenever this module is instantiated.  -->
+			<!-- This functionality is used to -->
+			<!--   (1) include the output assemblies of this template -->
+			<!--   (2) include other custom assemblies that the mainboard relies on (NB you must edit msm.wxs so these are installed too) -->
+			<!-- Some examples are provided inline: -->
 
-	  <Assemblies>
-		<!-- This lists the assemblies which provides the API to this mainboard, i.e. the output assemblies of this template. -->
-		<!-- If you do not provide support for both NETMF 4.1 and 4.2, the relevant lines should be removed -->
-		<!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
-		<!-- <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor"/> -->
-		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
-		<!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor"/> -->
+			<Assemblies>
+				<!-- This lists the assemblies which provides the API to this mainboard, i.e. the output assemblies of this template. -->
+				<!-- If you do not provide support for both NETMF 4.1 and 4.2, the relevant lines should be removed -->
+				<!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
+				<!-- <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor"/> -->
+				<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
+				<!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor"/> -->
 
-		<!-- If your mainboard driver relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
-		<!--
+				<!-- If your mainboard driver relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
+				<!--
 		<Assembly MFVersion="4.1" Name="GHIElectronics.CustomAssembly"/>
 		<Assembly MFVersion="4.2" Name="GHIElectronics.CustomAssembly"/>
 		-->
-	  </Assemblies>
+			</Assemblies>
 
-	  <!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->
-	  <ProvidedSockets>
+			<!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->
+			<ProvidedSockets>
 
-		  <ProvidedSocket Label="1" Left="21" Top="6.5" Orientation="90" ConstructorParameter="1">
-			  <Types>
-				  <Type>S</Type>
-				  <Type>U</Type>
-				  <Type>Y</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="SPI2_MOSI" SocketPin="7"/>
-				  <SharedPinMap NetId="SPI2_MISO" SocketPin="8"/>
-				  <SharedPinMap NetId="SPI2_SCK" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="1" Left="21" Top="6" Orientation="90" ConstructorParameter="1">
+					<Types>
+						<Type>S</Type>
+						<Type>U</Type>
+						<Type>Y</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="SPI2_MOSI" SocketPin="7"/>
+						<SharedPinMap NetId="SPI2_MISO" SocketPin="8"/>
+						<SharedPinMap NetId="SPI2_SCK" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="2" Left="44.5" Top="6.5" Orientation="90" ConstructorParameter="1">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>I</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="2" Left="44.5" Top="6" Orientation="90" ConstructorParameter="1">
+					<Types>
+						<Type>A</Type>
+						<Type>I</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="3" Left="58" Top="6.5" Orientation="90" ConstructorParameter="1">
-			  <Types>
-				  <Type>S</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
-				  <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
-				  <SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="3" Left="58" Top="6" Orientation="90" ConstructorParameter="1">
+					<Types>
+						<Type>S</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+						<SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+						<SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="4" Left="81.5" Top="6.5" Orientation="90" ConstructorParameter="1">
-			  <Types>
-				  <Type>I</Type>
-				  <Type>K</Type>
-				  <Type>U</Type>
-				  <Type>C</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="4" Left="81.5" Top="6" Orientation="90" ConstructorParameter="1">
+					<Types>
+						<Type>I</Type>
+						<Type>K</Type>
+						<Type>U</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="5" Left="95.5" Top="15.5" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>Z</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="5" Left="95.5" Top="15.5" Orientation="0" ConstructorParameter="1">
+					<Types>
+						<Type>Z</Type>
+					</Types>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="6" Left="95.5" Top="29.5" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>H</Type>
-				  <Type>I</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="6" Left="95.5" Top="29.5" Orientation="0" ConstructorParameter="1">
+					<Types>
+						<Type>H</Type>
+						<Type>I</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="7" Left="95.5" Top="43.5" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>H</Type>
-				  <Type>I</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="7" Left="95.5" Top="43.5" Orientation="0" ConstructorParameter="1">
+					<Types>
+						<Type>H</Type>
+						<Type>I</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="8" Left="95.5" Top="57.5" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>D</Type>
-				  <Type>I</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="8" Left="95.5" Top="57.5" Orientation="0" ConstructorParameter="1">
+					<Types>
+						<Type>D</Type>
+						<Type>I</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="9" Left="95.5" Top="71.5" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>F</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="9" Left="95.5" Top="71.5" Orientation="0" ConstructorParameter="1">
+					<Types>
+						<Type>F</Type>
+						<Type>Y</Type>
+					</Types>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="10" Left="81.5" Top="79.5" Orientation="270" ConstructorParameter="1">
-			  <Types>
-				  <Type>C</Type>
-				  <Type>I</Type>
-				  <Type>U</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="10" Left="81.5" Top="81" Orientation="270" ConstructorParameter="1">
+					<Types>
+						<Type>C</Type>
+						<Type>I</Type>
+						<Type>U</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="11" Left="58" Top="79.5" Orientation="270" ConstructorParameter="1">
-			  <Types>
-				  <Type>C</Type>
-				  <Type>S</Type>
-				  <Type>U</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
-				  <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
-				  <SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="11" Left="58" Top="81" Orientation="270" ConstructorParameter="1">
+					<Types>
+						<Type>C</Type>
+						<Type>S</Type>
+						<Type>U</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+						<SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+						<SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="12" Left="44.5" Top="79.5" Orientation="270" ConstructorParameter="1">
-			  <Types>
-				  <Type>I</Type>
-				  <Type>U</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="12" Left="44.5" Top="81" Orientation="270" ConstructorParameter="1">
+					<Types>
+						<Type>I</Type>
+						<Type>U</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="13" Left="21" Top="79.5" Orientation="270" ConstructorParameter="1">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>I</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="13" Left="21" Top="81" Orientation="270" ConstructorParameter="1">
+					<Types>
+						<Type>A</Type>
+						<Type>I</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="14" Left="6.5" Top="71.5" Orientation="180" ConstructorParameter="1">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>I</Type>
-				  <Type>T</Type>
-				  <Type>X</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="14" Left="6.5" Top="71.5" Orientation="180" ConstructorParameter="1">
+					<Types>
+						<Type>A</Type>
+						<Type>I</Type>
+						<Type>T</Type>
+						<Type>X</Type>
+					</Types>
+					<SharedPinMaps>
+						<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+						<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+					</SharedPinMaps>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="15" Left="6.5" Top="57.5" Orientation="180" ConstructorParameter="1">
-			  <Types>
-				  <Type>R</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="15" Left="6.5" Top="57.5" Orientation="180" ConstructorParameter="1">
+					<Types>
+						<Type>R</Type>
+						<Type>Y</Type>
+					</Types>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="16" Left="6.5" Top="43.5" Orientation="180" ConstructorParameter="1">
-			  <Types>
-				  <Type>G</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="16" Left="6.5" Top="43.5" Orientation="180" ConstructorParameter="1">
+					<Types>
+						<Type>G</Type>
+						<Type>Y</Type>
+					</Types>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="17" Left="6.5" Top="29.5" Orientation="180" ConstructorParameter="1">
-			  <Types>
-				  <Type>B</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="17" Left="6.5" Top="29.5" Orientation="180" ConstructorParameter="1">
+					<Types>
+						<Type>B</Type>
+						<Type>Y</Type>
+					</Types>
+				</ProvidedSocket>
 
-		  <ProvidedSocket Label="18" Left="6.5" Top="15.5" Orientation="180" ConstructorParameter="1">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>P</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+				<ProvidedSocket Label="18" Left="6.5" Top="15.5" Orientation="180" ConstructorParameter="1">
+					<Types>
+						<Type>A</Type>
+						<Type>P</Type>
+						<Type>Y</Type>
+					</Types>
+				</ProvidedSocket>
 
-	  </ProvidedSockets>
+			</ProvidedSockets>
 
-	  <LibrariesProvided>
-		<!-- This should be filled in with a list of assemblies provided by the mainboard which are not the standard NETMF assemblies.  Delete the example "CustomMFAssembly" below. -->
-		<!-- Providing this list allows the designer to automatically determine when a module that only works with specific mainboards is compatible with the current mainboard. -->
-		<!--
+			<LibrariesProvided>
+				<!-- This should be filled in with a list of assemblies provided by the mainboard which are not the standard NETMF assemblies.  Delete the example "CustomMFAssembly" below. -->
+				<!-- Providing this list allows the designer to automatically determine when a module that only works with specific mainboards is compatible with the current mainboard. -->
+				<!--
 		<Assembly MFVersion="4.1" Name="CustomMFAssembly"/>
 		<Assembly MFVersion="4.2" Name="CustomMFAssembly"/>
 		<Assembly MFVersion="4.3" Name="CustomMFAssembly"/>
 		-->
 
-		<!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
-		<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
-		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
-		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
-	  </LibrariesProvided>
+				<!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
+				<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
+				<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
+				<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
+			</LibrariesProvided>
 
-	  <!-- Uncomment to specify power consumption data for use by the VS designer. -->
-	  <!-- Do not partially fill this in - either fill it all in or leave it out totally. -->
-	  <!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
-	  <!--
+			<!-- Uncomment to specify power consumption data for use by the VS designer. -->
+			<!-- Do not partially fill this in - either fill it all in or leave it out totally. -->
+			<!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
+			<!--
 	  <Power>
 		<PowerRequirements Voltage="3.3">
 		  <TypicalCurrent>0.123</TypicalCurrent>
@@ -260,6 +260,6 @@
 	  </Power>
 	  -->
 
-	</MainboardDefinition>
-  </MainboardDefinitions>
+		</MainboardDefinition>
+	</MainboardDefinitions>
 </GadgeteerDefinitions>

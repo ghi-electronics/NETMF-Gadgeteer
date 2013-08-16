@@ -12,8 +12,8 @@
                   ModuleSuppliesPower="false"
                   HardwareVersion="1.0"
                   Image="Resources\Image.jpg"
-                  BoardHeight="22"
-                  BoardWidth="44"
+                  BoardHeight="25"
+                  BoardWidth="135"
                   MinimumGadgeteerCoreVersion="2.42.500"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/409"
       			>
@@ -63,13 +63,15 @@
       <Sockets>
 
         <!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
-        <Socket Left="10" Top="10" Orientation="90" ConstructorOrder="1" TypesLabel="S">
+        <Socket Left="111" Top="20" Orientation="90" ConstructorOrder="1" TypesLabel="S">
           <Types>
             <Type>S</Type>
           </Types>
           <Pins>
-            <Pin Shared="false">3</Pin>
-            <Pin Shared="false">4</Pin>
+			  <Pin Shared="false">6</Pin>
+			  <Pin Shared="true">7</Pin>
+			  <Pin Shared="true">8</Pin>
+			  <Pin Shared="true">9</Pin>
           </Pins>
         </Socket>
       </Sockets>
