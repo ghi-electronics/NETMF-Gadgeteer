@@ -55,9 +55,9 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Display T35\Software\Display T35\Display T35_42\Display T35_42.csproj">
-      <Project>{D3EC7CBD-38A0-4682-82DB-CD5067A9EB60}</Project>
-      <Name>Display T35_42</Name>
+    <ProjectReference Include="..\Display_TE35_42\Display_TE35_42.csproj">
+      <Project>{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}</Project>
+      <Name>Display_TE35_42</Name>
     </ProjectReference>
   </ItemGroup>
   <!--Stuff for wix-->

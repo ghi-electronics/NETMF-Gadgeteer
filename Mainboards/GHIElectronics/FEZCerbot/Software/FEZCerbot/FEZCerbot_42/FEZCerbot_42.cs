@@ -14,6 +14,7 @@ namespace GHIElectronics.Gadgeteer
 	/// </summary>
 	public class FEZCerbot : GT.Mainboard
 	{
+		private bool configSet = false;
 		// The mainboard constructor gets called before anything else in Gadgeteer (module constructors, etc), 
 		// so it can set up fields in Gadgeteer.dll specifying socket types supported, etc.
 
@@ -27,6 +28,7 @@ namespace GHIElectronics.Gadgeteer
 			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(NativeI2CWriteRead);
 
 			this.NativeBitmapConverter = new BitmapConvertBPP(BitmapConverter);
+			this.NativeBitmapCopyToSpi = this.NativeSPIBitmapPaint;
 
 			GT.Socket socket;
 
@@ -172,6 +174,22 @@ namespace GHIElectronics.Gadgeteer
 		bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
 		{
 			return GHI.OSHW.Hardware.SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
+		}
+
+		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
+		{
+			if (!this.configSet)
+			{
+				Util.SetSpecialDisplayConfig(1, 1); //Type
+				Util.SetSpecialDisplayConfig(5, (int)config.ChipSelect_Port); //CS Pin
+				Util.SetSpecialDisplayConfig(8, config.Clock_Edge ? 1 : 0); //Valid Edge
+				Util.SetSpecialDisplayConfig(9, (int)config.Clock_RateKHz); //Clock Rate
+				Util.SetSpecialDisplayConfig(12, (int)config.SPI_mod); //SPI Module
+
+				this.configSet = true;
+			}
+
+			bitmap.Flush(xSrc, ySrc, width, height);
 		}
 
 		void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)

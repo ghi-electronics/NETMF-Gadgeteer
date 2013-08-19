@@ -94,6 +94,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="frequency">The frequency that the buzzer will buzz in hertz.</param>
 		/// <param name="duration">The duration the buzzer will buzz for in milliseconds.</param>
+		/// <param name="dutyCycle">The duty cycle for the buzzer.</param>
 		/// <remarks>If duration is 0, the buzzer will buzz indefinitely. If it is non-zero, then this call will block for as many milliseconds as specified in duration, then return.</remarks>
 		public void StartBuzzer(double frequency, uint duration = 0, double dutyCycle = 0.5)
 		{

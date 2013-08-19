@@ -74,7 +74,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>The direction the encoder count is going.</returns>
 		public Direction GetDirection()
 		{
-			return ((this.ReadStatusReg() & 0x2) >> 1) > 0 ? Direction.Up : Direction.Down;
+			return ((this.ReadStatusReg() & 0x2) >> 1) > 0 ? Direction.CounterClockwise : Direction.Clockwise;
 		}
 
         private void Initialize()

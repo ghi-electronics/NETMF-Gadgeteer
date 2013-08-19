@@ -1,5 +1,6 @@
 ﻿using System;
 using GHI.OSHW.Hardware;
+using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using FEZCerb_Pins = GHI.Hardware.FEZCerb.Pin;
 using GT = Gadgeteer;
@@ -11,6 +12,8 @@ namespace GHIElectronics.Gadgeteer
 	/// </summary>
 	public class FEZCerbuinoNet : GT.Mainboard
 	{
+		private bool configSet = false;
+
 		/// <summary>
 		/// Instantiates a new FEZCerbuinoNet mainboard
 		/// </summary>
@@ -19,6 +22,7 @@ namespace GHIElectronics.Gadgeteer
 			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(this.NativeI2CWriteRead);
 
 			this.NativeBitmapConverter = new BitmapConvertBPP(this.BitmapConverter);
+			this.NativeBitmapCopyToSpi = this.NativeSPIBitmapPaint;
 
 			GT.Socket socket;
 
@@ -114,6 +118,22 @@ namespace GHIElectronics.Gadgeteer
 		private bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
 		{
 			return GHI.OSHW.Hardware.SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
+		}
+
+		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
+		{
+			if (!this.configSet)
+			{
+				Util.SetSpecialDisplayConfig(1, 1); //Type
+				Util.SetSpecialDisplayConfig(5, (int)config.ChipSelect_Port); //CS Pin
+				Util.SetSpecialDisplayConfig(8, config.Clock_Edge ? 1 : 0); //Valid Edge
+				Util.SetSpecialDisplayConfig(9, (int)config.Clock_RateKHz); //Clock Rate
+				Util.SetSpecialDisplayConfig(12, (int)config.SPI_mod); //SPI Module
+
+				this.configSet = true;
+			}
+
+			bitmap.Flush(xSrc, ySrc, width, height);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD" };

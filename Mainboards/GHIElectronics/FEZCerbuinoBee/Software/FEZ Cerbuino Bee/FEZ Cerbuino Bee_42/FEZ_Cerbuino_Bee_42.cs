@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 
 using GT = Gadgeteer;
@@ -14,6 +15,7 @@ namespace GHIElectronics.Gadgeteer
 	/// </summary>
 	public class FEZCerbuinoBee : GT.Mainboard
 	{
+		private bool configSet = false;
 		// The mainboard constructor gets called before anything else in Gadgeteer (module constructors, etc), 
 		// so it can set up fields in Gadgeteer.dll specifying socket types supported, etc.
 
@@ -27,6 +29,7 @@ namespace GHIElectronics.Gadgeteer
 			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(NativeI2CWriteRead);
 
 			this.NativeBitmapConverter = new BitmapConvertBPP(BitmapConverter);
+			this.NativeBitmapCopyToSpi = this.NativeSPIBitmapPaint;
 
 			GT.Socket socket;
 
@@ -184,6 +187,22 @@ namespace GHIElectronics.Gadgeteer
 			//numRead = 0;
 			//numWritten = 0;
 			//return false;
+		}
+
+		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
+		{
+			if (!this.configSet)
+			{
+				Util.SetSpecialDisplayConfig(1, 1); //Type
+				Util.SetSpecialDisplayConfig(5, (int)config.ChipSelect_Port); //CS Pin
+				Util.SetSpecialDisplayConfig(8, config.Clock_Edge ? 1 : 0); //Valid Edge
+				Util.SetSpecialDisplayConfig(9, (int)config.Clock_RateKHz); //Clock Rate
+				Util.SetSpecialDisplayConfig(12, (int)config.SPI_mod); //SPI Module
+
+				this.configSet = true;
+			}
+
+			bitmap.Flush(xSrc, ySrc, width, height);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD" };

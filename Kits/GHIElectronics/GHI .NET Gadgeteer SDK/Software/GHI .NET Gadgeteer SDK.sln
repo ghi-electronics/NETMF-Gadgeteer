@@ -245,6 +245,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZ Cerbuino Bee_42", "..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoBee\Software\FEZ Cerbuino Bee\FEZ Cerbuino Bee_42\FEZ Cerbuino Bee_42.csproj", "{CEFD2559-385F-4DDB-9DD7-2211C67BF036}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IR Receiver", "..\..\..\..\Modules\GHIElectronics\IR Receiver\Software\IR Receiver\IR Receiver\IR Receiver.csproj", "{FCB41E58-415E-488D-B488-5C55E4C07416}"
+	ProjectSection(ProjectDependencies) = postProject
+		{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3} = {EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IR Receiver_42", "..\..\..\..\Modules\GHIElectronics\IR Receiver\Software\IR Receiver\IR Receiver_42\IR Receiver_42.csproj", "{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}"
 EndProject
@@ -262,7 +265,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerCam_42", "..\..\..\..\Mo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35", "..\..\..\..\Modules\GHIElectronics\Display TE35\Software\Display TE35\Display_TE35\Display_TE35.csproj", "{90675549-3299-4AD6-A544-D7764E71CACD}"
 	ProjectSection(ProjectDependencies) = postProject
-		{D3EC7CBD-38A0-4682-82DB-CD5067A9EB60} = {D3EC7CBD-38A0-4682-82DB-CD5067A9EB60}
+		{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC} = {7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_TE35_42", "..\..\..\..\Modules\GHIElectronics\Display TE35\Software\Display TE35\Display_TE35_42\Display_TE35_42.csproj", "{7B83AC80-DEFB-4DD5-B44B-7D0295F82EAC}"
