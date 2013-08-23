@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerbotController_42", "Cerb
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerbotController", "CerbotController\CerbotController\CerbotController.csproj", "{3FC064D8-0B07-49D1-86C1-91F3B87F0E2F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "..\TestApp\TestApp.csproj", "{78CDBB00-539B-4134-A008-0BE274FAE2CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,12 @@ Global
 		{3FC064D8-0B07-49D1-86C1-91F3B87F0E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3FC064D8-0B07-49D1-86C1-91F3B87F0E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3FC064D8-0B07-49D1-86C1-91F3B87F0E2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

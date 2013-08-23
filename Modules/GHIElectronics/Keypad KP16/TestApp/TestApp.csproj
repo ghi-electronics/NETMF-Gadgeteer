@@ -54,7 +54,7 @@
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="GHIElectronics.Gadgeteer.FEZCerberus, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider, Version=4.2.100.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GTM.GHIElectronics.Keypad_KP16, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -82,11 +82,5 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Software\Keypad KP16\Keypad_KP16_42\Keypad_KP16_42.csproj">
-      <Project>{02F4DB2E-E54C-46D5-A655-522A036BFF80}</Project>
-      <Name>Keypad_KP16_42</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

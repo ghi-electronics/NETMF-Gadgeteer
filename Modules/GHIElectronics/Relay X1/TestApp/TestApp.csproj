@@ -54,7 +54,7 @@
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="GHIElectronics.Gadgeteer.FEZCerberus, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider, Version=4.2.100.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GTM.GHIElectronics.Relay_X1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -82,11 +82,5 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Software\Relay X1\Relay_X1_42\Relay_X1_42.csproj">
-      <Project>{79792455-B48C-499D-BD2E-3FDE4FF26BDB}</Project>
-      <Name>Relay_X1_42</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

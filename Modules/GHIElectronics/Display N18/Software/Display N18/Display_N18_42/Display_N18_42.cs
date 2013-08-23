@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.SPI spi;
         private GTI.SPI.Configuration spiConfig;
 		private SPI.Configuration netMFSpiConfig;
-        private GT.Socket socket;
+		private GT.Socket socket;
         private GTI.DigitalOutput resetPin;
         private GTI.DigitalOutput backlightPin;
 		private GTI.DigitalOutput rs;
@@ -113,7 +113,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="y">Starting Y position of the image.</param>
 		/// <param name="width">Width of the image.</param>
 		/// <param name="height">Height of the image.</param>
-		public void DrawRaw(byte[] rawData, uint x, uint y, uint width, uint height)
+		public void DrawRaw(byte[] rawData, uint width, uint height, uint x, uint y)
 		{
 			if (x > this.Width || y > this.Height)
 				return;
@@ -157,9 +157,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private void Reset()
 		{
 			this.resetPin.Write(false);
-			Thread.Sleep(300);
+			Thread.Sleep(150);
 			this.resetPin.Write(true);
-			Thread.Sleep(500);
 		}
 
         private void ConfigureDisplay()

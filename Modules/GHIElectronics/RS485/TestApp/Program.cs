@@ -7,34 +7,32 @@ namespace TestApp
 {
 	public partial class Program
 	{
-		RS485 socket4 = new RS485(4);
-		RS485 socket8 = new RS485(8);
 
 		void ProgramStarted()
 		{
-			this.socket4.Initialize();
-			this.socket8.Initialize();
+			this.rs485.Initialize();
+			this.rs4852.Initialize();
 
-			this.socket4.Port.DataReceived += (sender, data) =>
+			this.rs485.Port.DataReceived += (sender, data) =>
 			{
 				if (sender.ReadByte() == (byte)'X')
 				{
-					this.led7c.SetColor(GT.Modules.GHIElectronics.LED7C.LEDColor.White);
+					this.led_Strip.TurnAllLedsOn();
 					Thread.Sleep(1000);
 				}
 
-				this.led7c.SetColor(GT.Modules.GHIElectronics.LED7C.LEDColor.Off);
+				this.led_Strip.TurnAllLedsOff();
 			};
 
-			this.socket8.Port.DataReceived += (sender, data) =>
+			this.rs4852.Port.DataReceived += (sender, data) =>
 			{
 				if (sender.ReadByte() == (byte)'Q')
-					this.socket8.Port.Write((byte)'X');
+					this.rs4852.Port.Write((byte)'X');
 			};
 			
 			this.button.ButtonReleased += (sender, e) =>
 			{
-				this.socket4.Port.Write((byte)'Q');
+				this.rs485.Port.Write((byte)'Q');
 			};
 		}
 	}

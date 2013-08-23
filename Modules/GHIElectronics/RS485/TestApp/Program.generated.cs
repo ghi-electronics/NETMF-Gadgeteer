@@ -15,10 +15,29 @@ namespace TestApp {
     
     public partial class Program : Gadgeteer.Program {
         
+        /// <summary>The Button module using socket 10 of the mainboard.</summary>
         private Gadgeteer.Modules.GHIElectronics.Button button;
         
-        private Gadgeteer.Modules.GHIElectronics.LED7C led7c;
+        /// <summary>The RS485 module using socket 4 of the mainboard.</summary>
+        private Gadgeteer.Modules.GHIElectronics.RS485 rs485;
         
+        /// <summary>The RS485 module using socket 8 of the mainboard.</summary>
+        private Gadgeteer.Modules.GHIElectronics.RS485 rs4852;
+        
+        /// <summary>The LED Strip module using socket 5 of the mainboard.</summary>
+        private Gadgeteer.Modules.GHIElectronics.LED_Strip led_Strip;
+        
+        /// <summary>This property provides access to the Mainboard API. This is normally not necessary for an end user program.</summary>
+        protected new static GHIElectronics.Gadgeteer.FEZSpider Mainboard {
+            get {
+                return ((GHIElectronics.Gadgeteer.FEZSpider)(Gadgeteer.Program.Mainboard));
+            }
+            set {
+                Gadgeteer.Program.Mainboard = value;
+            }
+        }
+        
+        /// <summary>This method runs automatically when the device is powered, and calls ProgramStarted.</summary>
         public static void Main() {
             // Important to initialize the Mainboard first
             Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();
@@ -30,8 +49,10 @@ namespace TestApp {
         }
         
         private void InitializeModules() {
-            this.led7c = new GTM.GHIElectronics.LED7C(6);
             this.button = new GTM.GHIElectronics.Button(10);
+            this.rs485 = new GTM.GHIElectronics.RS485(4);
+            this.rs4852 = new GTM.GHIElectronics.RS485(8);
+            this.led_Strip = new GTM.GHIElectronics.LED_Strip(5);
         }
     }
 }

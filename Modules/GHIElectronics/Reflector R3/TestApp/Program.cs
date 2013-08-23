@@ -11,6 +11,7 @@ using Microsoft.SPOT.Touch;
 using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using Gadgeteer.Modules.GHIElectronics;
 
 namespace TestApp
 {
@@ -19,7 +20,7 @@ namespace TestApp
 		// This method is run when the mainboard is powered up or reset.   
 		void ProgramStarted()
 		{
-			var reflector = new Gadgeteer.Modules.GHIElectronics.Reflector_R3(2);
+			var reflector = reflector_R3;
 			new Thread(() =>
 			{
 				while (true)

@@ -47,7 +47,9 @@
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="msm.wxs" />
+    <None Include="msm.wxs">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="en-us.wxl" />
     <None Include="common.wxi" />
     <None Include="msi.wxs" />

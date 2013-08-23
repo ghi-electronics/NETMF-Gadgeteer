@@ -18,7 +18,7 @@ namespace TestApp
 	{
 		void ProgramStarted()
 		{
-			DisplayDriver driver = new DisplayDriver(new GTM.GHIElectronics.TouchC8(3), display_T35);
+			DisplayDriver driver = new DisplayDriver(touchC8, display_T35);
 		}
 	}
 	

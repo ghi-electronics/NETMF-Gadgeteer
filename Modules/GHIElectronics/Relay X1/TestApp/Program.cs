@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 
 using GTM = Gadgeteer.Modules;
+using Gadgeteer.Modules.GHIElectronics;
 
 namespace TestApp
 {

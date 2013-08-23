@@ -65,6 +65,9 @@
     <Reference Include="GTM.GHIElectronics.Display_T35, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="GTM.GHIElectronics.TouchL12, Version=4.2.100.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Hardware.SerialPort" />
@@ -96,11 +99,5 @@
     </None>
     <None Include="Resources\NinaB.tinyfnt" />
     <None Include="Resources\small.tinyfnt" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Software\TouchL12\TouchL12_42\TouchL12_42.csproj">
-      <Project>{0B4CD139-5E88-4B81-9A75-DB903744E558}</Project>
-      <Name>TouchL12_42</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>

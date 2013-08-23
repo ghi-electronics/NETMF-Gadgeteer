@@ -178,13 +178,12 @@ namespace GHIElectronics.Gadgeteer
 
 		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
 		{
+			if (bpp != BPP.BPP16_BGR_BE)
+				throw new ArgumentException("Invalid BPP");
+
 			if (!this.configSet)
 			{
-				Util.SetSpecialDisplayConfig(1, 1); //Type
-				Util.SetSpecialDisplayConfig(5, (int)config.ChipSelect_Port); //CS Pin
-				Util.SetSpecialDisplayConfig(8, config.Clock_Edge ? 1 : 0); //Valid Edge
-				Util.SetSpecialDisplayConfig(9, (int)config.Clock_RateKHz); //Clock Rate
-				Util.SetSpecialDisplayConfig(12, (int)config.SPI_mod); //SPI Module
+				Util.SetSpecialDisplayConfig(config, Util.BPP_Type.BPP16_BGR_LE);
 
 				this.configSet = true;
 			}

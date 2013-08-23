@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadgeteerDSLDiagram dslVersion="1.0.0.0" Id="01f6a964-f581-4845-9f5f-af35dde6d6ca" absoluteBounds="0, 0, 11, 8.5" name="Program">
+  <gadgeteerModelMoniker Id="91820fda-57fb-4560-9527-760bbe8f84cd" />
+  <nestedChildShapes>
+    <mainboardShape Id="61c59db0-5bd3-4176-97d6-28b103c6e4a7" absoluteBounds="2.74, 4.5, 5.9055118110236222, 3.5433070866141736">
+      <mainboardMoniker Id="f23de5e5-44ef-4814-a4d8-53f7769e5bf2" />
+      <nestedChildShapes>
+        <socketShape Id="2d3389e0-b415-4e6c-ae47-ce209ff02be9" absoluteBounds="4.28, 6.96, 0.25, 0.25">
+          <socketMoniker Id="38bd1487-28d8-4b92-bcbe-7a8b2e1acc3b" />
+        </socketShape>
+        <socketShape Id="0d40fb64-992b-4d88-9f75-e1216ecacb74" absoluteBounds="4.28, 6.36, 0.25, 0.25">
+          <socketMoniker Id="19b1f5b7-8600-45a4-9bae-386130531339" />
+        </socketShape>
+        <socketShape Id="c48876c0-06a8-4d96-998f-789d0a8e738b" absoluteBounds="4.28, 5.74, 0.25, 0.25">
+          <socketMoniker Id="ef739937-979f-44ef-adb2-2d0eb82cef4c" />
+        </socketShape>
+        <socketShape Id="fcb83dbb-bad3-4997-a647-00ce15cabd88" absoluteBounds="6.9, 5.74, 0.25, 0.25">
+          <socketMoniker Id="0e4551c1-c979-45c4-817a-5bb306be069b" />
+        </socketShape>
+        <socketShape Id="cbb3ec4d-56df-4a1e-8f36-37c50c0d42ae" absoluteBounds="6.9, 6.36, 0.25, 0.25">
+          <socketMoniker Id="ddcc26a6-6683-4ce9-b081-fa1606836302" />
+        </socketShape>
+        <socketShape Id="f3e070ae-ad61-4cdb-add6-d8c26ce65f72" absoluteBounds="6.9, 6.96, 0.25, 0.25">
+          <socketMoniker Id="c9fb2d1b-eca3-41f3-a5aa-c74ed9e5a751" />
+        </socketShape>
+      </nestedChildShapes>
+    </mainboardShape>
+    <commentBoxShape Id="3dfbbdf8-2d70-4e2d-8b79-d6eae935d28b" absoluteBounds="0.5, 4.5, 1.75, 1.375">
+      <commentMoniker Id="c0f85936-7e28-4970-b445-93caf4d97255" />
+    </commentBoxShape>
+    <moduleShape Id="ce86ac74-212f-4037-b047-fcf14796cb19" absoluteBounds="4.88, 0.64, 1.1811023622047245, 1.2114173228346457">
+      <moduleMoniker Id="0e167e75-b106-4b98-8ba1-8556f37e98d1" />
+      <relativeChildShapes />
+    </moduleShape>
+  </nestedChildShapes>
+</gadgeteerDSLDiagram>

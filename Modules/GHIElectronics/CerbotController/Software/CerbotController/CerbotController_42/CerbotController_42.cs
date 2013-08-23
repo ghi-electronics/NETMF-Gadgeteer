@@ -66,7 +66,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public CerbotController()
 		{
-			this.buzzer = new PWM(Cpu.PWMChannel.PWM_0, 1000, 0.5, false);
+			this.buzzer = new PWM(Cpu.PWMChannel.PWM_0, 1000, 0, false);
 
 			this.leftSensor = new AnalogInput((Cpu.AnalogChannel)8);
 			this.rightSensor = new AnalogInput(Cpu.AnalogChannel.ANALOG_6);

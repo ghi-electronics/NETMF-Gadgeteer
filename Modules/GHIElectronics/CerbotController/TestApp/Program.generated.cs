@@ -15,16 +15,13 @@ namespace TestApp {
     
     public partial class Program : Gadgeteer.Program {
         
-        /// <summary>The Display_T35 module using sockets 14, 13, 12 and 10 of the mainboard.</summary>
-        private Gadgeteer.Modules.GHIElectronics.Display_T35 display_T35;
-        
-        /// <summary>The TouchL12 module using socket 4 of the mainboard.</summary>
-        private Gadgeteer.Modules.GHIElectronics.TouchL12 touchL12;
+        /// <summary>The CerbotController module (no sockets).</summary>
+        private Gadgeteer.Modules.GHIElectronics.CerbotController cerbotController;
         
         /// <summary>This property provides access to the Mainboard API. This is normally not necessary for an end user program.</summary>
-        protected new static GHIElectronics.Gadgeteer.FEZSpider Mainboard {
+        protected new static GHIElectronics.Gadgeteer.FEZCerbot Mainboard {
             get {
-                return ((GHIElectronics.Gadgeteer.FEZSpider)(Gadgeteer.Program.Mainboard));
+                return ((GHIElectronics.Gadgeteer.FEZCerbot)(Gadgeteer.Program.Mainboard));
             }
             set {
                 Gadgeteer.Program.Mainboard = value;
@@ -34,7 +31,7 @@ namespace TestApp {
         /// <summary>This method runs automatically when the device is powered, and calls ProgramStarted.</summary>
         public static void Main() {
             // Important to initialize the Mainboard first
-            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();
+            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZCerbot();
             Program p = new Program();
             p.InitializeModules();
             p.ProgramStarted();
@@ -43,8 +40,7 @@ namespace TestApp {
         }
         
         private void InitializeModules() {
-            this.display_T35 = new GTM.GHIElectronics.Display_T35(14, 13, 12, 10);
-            this.touchL12 = new GTM.GHIElectronics.TouchL12(4);
+            this.cerbotController = new GTM.GHIElectronics.CerbotController();
         }
     }
 }

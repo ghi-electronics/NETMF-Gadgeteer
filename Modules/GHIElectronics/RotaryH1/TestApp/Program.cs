@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using GTM = Gadgeteer.Modules;
+using Gadgeteer.Modules.GHIElectronics;
 
 namespace TestApp
 {
@@ -7,7 +8,7 @@ namespace TestApp
     {
         void ProgramStarted()
 		{
-			var rotary = new GTM.GHIElectronics.RotaryH1(2);
+			var rotary = rotaryH1;
 
 			new Thread(() =>
 			{
@@ -15,7 +16,7 @@ namespace TestApp
 				{
 					char_Display.Clear();
 					char_Display.CursorHome();
-					char_Display.PrintString(rotary.GetDirection() == GTM.GHIElectronics.RotaryH1.Direction.Up ? "Up" : "Down");
+					char_Display.PrintString(rotary.GetDirection() == GTM.GHIElectronics.RotaryH1.Direction.CounterClockwise ? "CounterClockwise" : "Clockwise");
 					char_Display.SetCursor(1, 0);
 					char_Display.PrintString(rotary.GetCount().ToString());
 

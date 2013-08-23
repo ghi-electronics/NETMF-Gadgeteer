@@ -18,7 +18,7 @@ namespace TestApp
 	{
 		void ProgramStarted()
 		{
-			DisplayDriver driver = new DisplayDriver(new GTM.GHIElectronics.TouchL12(3), display_T35);
+			DisplayDriver driver = new DisplayDriver(touchL12, display_T35);
 		}
 	}
 	
@@ -75,7 +75,7 @@ namespace TestApp
 			if (this.position != this.previousPosition || this.touched != this.previousTouched)
 			{
 				this.display.SimpleGraphics.Clear();
-				this.display.SimpleGraphics.DisplayRectangle(GT.Color.Blue, 2, GT.Color.Blue, DisplayDriver.SLIDER_CENTER_X - 6 * DisplayDriver.SLIDER_CAP_WIDTH, DisplayDriver.SLIDER_CENTER_Y, 12 * DisplayDriver.SLIDER_CAP_WIDTH, 5);
+				this.display.SimpleGraphics.DisplayRectangle(GT.Color.Blue, 2, GT.Color.Blue, DisplayDriver.SLIDER_CENTER_X - 6 * DisplayDriver.SLIDER_CAP_WIDTH, DisplayDriver.SLIDER_CENTER_Y, 11 * DisplayDriver.SLIDER_CAP_WIDTH, 5);
 
 				this.DrawCircle(GT.Color.Red, (uint)((this.position - 6) * DisplayDriver.SLIDER_CAP_WIDTH + DisplayDriver.SLIDER_CENTER_X), SLIDER_CENTER_Y + 3, 10);
 
