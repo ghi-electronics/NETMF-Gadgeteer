@@ -99,20 +99,20 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 1
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
-			socket.SupportedTypes = new char[] { 'D', 'I' };
-			socket.CpuPins[3] = G120.Pin.P2_11;
-			socket.CpuPins[4] = special;
-			socket.CpuPins[5] = special;
-			socket.CpuPins[6] = G120.Pin.P1_8;
-			socket.CpuPins[7] = G120.Pin.P1_9;
-			socket.CpuPins[8] = I2C_SDA;
-			socket.CpuPins[9] = I2C_SCL;
+			socket.SupportedTypes = new char[] { 'F', 'Y' };
+			socket.CpuPins[3] = G120.Pin.P0_18;
+			socket.CpuPins[4] = G120.Pin.P1_6;
+			socket.CpuPins[5] = G120.Pin.P1_7;
+			socket.CpuPins[6] = G120.Pin.P1_3;
+			socket.CpuPins[7] = G120.Pin.P1_11;
+			socket.CpuPins[8] = G120.Pin.P1_12;
+			socket.CpuPins[9] = G120.Pin.P1_2;
 
-			// D
+			// F
 			// N/A
 
-			// I
-			// N/A
+			// Y
+			socket.NativeI2CWriteRead = nativeI2C;
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion
@@ -136,20 +136,23 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 3
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
-			socket.SupportedTypes = new char[] { 'H', 'I' };
-			socket.CpuPins[3] = G120.Pin.P0_5;
-			socket.CpuPins[4] = special;
-			socket.CpuPins[5] = special;
-			socket.CpuPins[6] = G120.Pin.P1_10;
+			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
+			socket.CpuPins[3] = G120.Pin.P0_15;
+			socket.CpuPins[4] = G120.Pin.P0_2;
+			socket.CpuPins[5] = G120.Pin.P0_3;
+			socket.CpuPins[6] = G120.Pin.P1_9;
 			socket.CpuPins[7] = NotConnected;
 			socket.CpuPins[8] = I2C_SDA;
 			socket.CpuPins[9] = I2C_SCL;
 
-			// H
-			// N/A
-
 			// I
 			// N/A
+
+			// U
+			socket.SerialPortName = "COM1";
+
+			// X
+			socket.NativeI2CWriteRead = nativeI2C;
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
@@ -158,7 +161,7 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 4
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
-			socket.CpuPins[3] = G120.Pin.P2_21;
+			socket.CpuPins[3] = G120.Pin.P0_1;
 			socket.CpuPins[4] = G120.Pin.P2_0;
 			socket.CpuPins[5] = G120.Pin.P0_16;
 			socket.CpuPins[6] = G120.Pin.P0_6;
@@ -180,31 +183,11 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 5
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
-			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P0_10;
-			socket.CpuPins[4] = G120.Pin.P1_6;
-			socket.CpuPins[5] = G120.Pin.P1_7;
-			socket.CpuPins[6] = G120.Pin.P1_3;
-			socket.CpuPins[7] = G120.Pin.P1_11;
-			socket.CpuPins[8] = G120.Pin.P1_12;
-			socket.CpuPins[9] = G120.Pin.P1_2;
-
-			// F
-			// N/A
-
-			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion
-
-			#region Socket 6
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'C', 'S', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_11;
-			socket.CpuPins[4] = G120.Pin.P0_1;
-			socket.CpuPins[5] = G120.Pin.P0_0;
-			socket.CpuPins[6] = G120.Pin.P1_19;
+			socket.CpuPins[3] = G120.Pin.P2_10;
+			socket.CpuPins[4] = G120.Pin.P0_5;
+			socket.CpuPins[5] = G120.Pin.P0_4;
+			socket.CpuPins[6] = G120.Pin.P1_16;
 			socket.CpuPins[7] = (Cpu.Pin)9;
 			socket.CpuPins[8] = (Cpu.Pin)8;
 			socket.CpuPins[9] = (Cpu.Pin)7;
@@ -221,86 +204,9 @@ namespace GHIElectronics.Gadgeteer
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion
 
-			#region Socket 7
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
-			socket.SupportedTypes = new char[] { 'X', 'I' };
-			socket.CpuPins[3] = G120.Pin.P2_10;
-			socket.CpuPins[4] = G120.Pin.P1_4;
-			socket.CpuPins[5] = G120.Pin.P1_14;
-			socket.CpuPins[6] = G120.Pin.P1_15;
-			socket.CpuPins[7] = NotConnected;
-			socket.CpuPins[8] = I2C_SDA;
-			socket.CpuPins[9] = I2C_SCL;
-
-			// X
-			socket.NativeI2CWriteRead = nativeI2C;
-
-			// I
-			// N/A
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion
-
-			#region Socket 8
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
-			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P0_4;
-			socket.CpuPins[4] = G120.Pin.P4_28;
-			socket.CpuPins[5] = G120.Pin.P4_29;
-			socket.CpuPins[6] = G120.Pin.P1_30;
-			socket.CpuPins[7] = G120.Pin.P3_26;
-			socket.CpuPins[8] = G120.Pin.P3_25;
-			socket.CpuPins[9] = G120.Pin.P3_24;
-
-			// P
-			socket.PWM7 = (Cpu.PWMChannel)8;
-			socket.PWM8 = Cpu.PWMChannel.PWM_7;
-			socket.PWM9 = Cpu.PWMChannel.PWM_6;
-
-			// U
-			socket.SerialPortName = "COM4";
-
-			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion
-
-			#region Socket 9
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
-			socket.SupportedTypes = new char[] { 'A', 'O', 'S', 'U', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_12;
-			socket.CpuPins[4] = G120.Pin.P1_31;
-			socket.CpuPins[5] = G120.Pin.P0_26;
-			socket.CpuPins[6] = G120.Pin.P1_5;
-			socket.CpuPins[7] = G120.Pin.P0_18;
-			socket.CpuPins[8] = G120.Pin.P0_17;
-			socket.CpuPins[9] = G120.Pin.P0_15;
-
-			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 10);
-			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
-			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_5;
-			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
-
-			// O
-			socket.AnalogOutput = new FEZSpider_II_AnalogOut((Cpu.Pin)socket.CpuPins[5]);
-
-			// S
-			socket.SPIModule = SPI.SPI_module.SPI1;
-
-			// U
-			socket.SerialPortName = "COM4";
-
-			// X
-			socket.NativeI2CWriteRead = nativeI2C;
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion
-
-			#region Socket 10
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
-			socket.SupportedTypes = new char[] { 'A', 'I', 'X' };
+			#region Socket 6
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
+			socket.SupportedTypes = new char[] { 'A', 'I', 'T', 'X' };
 			socket.CpuPins[3] = G120.Pin.P0_25;
 			socket.CpuPins[4] = G120.Pin.P0_24;
 			socket.CpuPins[5] = G120.Pin.P0_23;
@@ -318,7 +224,107 @@ namespace GHIElectronics.Gadgeteer
 			// I
 			// N/A
 
+			// T
+			// N/A
+
 			// X
+			socket.NativeI2CWriteRead = nativeI2C;
+
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+			#endregion
+
+			#region Socket 7
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
+			socket.SupportedTypes = new char[] { 'D', 'I' };
+			socket.CpuPins[3] = G120.Pin.P0_13;
+			socket.CpuPins[4] = special;
+			socket.CpuPins[5] = special;
+			socket.CpuPins[6] = G120.Pin.P1_10;
+			socket.CpuPins[7] = G120.Pin.P1_4;
+			socket.CpuPins[8] = I2C_SDA;
+			socket.CpuPins[9] = I2C_SCL;
+
+			// D
+			// N/A
+
+			// I
+			// N/A
+
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+			#endregion
+
+			#region Socket 8
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
+			socket.SupportedTypes = new char[] { 'S', 'U', 'X' };
+			socket.CpuPins[3] = G120.Pin.P2_11;
+			socket.CpuPins[4] = G120.Pin.P0_10;
+			socket.CpuPins[5] = G120.Pin.P0_11;
+			socket.CpuPins[6] = G120.Pin.P1_14;
+			socket.CpuPins[7] = (Cpu.Pin)9;
+			socket.CpuPins[8] = (Cpu.Pin)8;
+			socket.CpuPins[9] = (Cpu.Pin)7;
+
+			// S
+			socket.SPIModule = SPI.SPI_module.SPI2;
+
+			// U
+			socket.SerialPortName = "COM3";
+
+			// X
+			socket.NativeI2CWriteRead = nativeI2C;
+
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+			#endregion
+
+			#region Socket 9
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
+			socket.SupportedTypes = new char[] { 'A', 'I', 'O', 'X' };
+			socket.CpuPins[3] = G120.Pin.P0_12;
+			socket.CpuPins[4] = G120.Pin.P1_30;
+			socket.CpuPins[5] = G120.Pin.P0_26;
+			socket.CpuPins[6] = G120.Pin.P1_17;
+			socket.CpuPins[7] = NotConnected;
+			socket.CpuPins[8] = I2C_SDA;
+			socket.CpuPins[9] = I2C_SCL;
+
+			// A
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 10);
+			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
+			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
+			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
+
+			// I
+			// N/A
+
+			// O
+			socket.AnalogOutput = new FEZSpider_II_AnalogOut(socket.CpuPins[5]);
+
+			// X
+			socket.NativeI2CWriteRead = nativeI2C;
+
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+			#endregion
+
+			#region Socket 10
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
+			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
+			socket.CpuPins[3] = G120.Pin.P0_0;
+			socket.CpuPins[4] = G120.Pin.P4_28;
+			socket.CpuPins[5] = G120.Pin.P4_29;
+			socket.CpuPins[6] = G120.Pin.P1_31;
+			socket.CpuPins[7] = G120.Pin.P3_24;
+			socket.CpuPins[8] = G120.Pin.P3_25;
+			socket.CpuPins[9] = G120.Pin.P3_26;
+
+			// P
+			socket.PWM7 = Cpu.PWMChannel.PWM_6;
+			socket.PWM8 = Cpu.PWMChannel.PWM_7;
+			socket.PWM9 = (Cpu.PWMChannel)8;
+
+			// U
+			socket.SerialPortName = "COM4";
+
+			// Y
 			socket.NativeI2CWriteRead = nativeI2C;
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -326,25 +332,20 @@ namespace GHIElectronics.Gadgeteer
 
 			#region Socket 11
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(11);
-			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P0_13;
-			socket.CpuPins[4] = G120.Pin.P0_2;
-			socket.CpuPins[5] = G120.Pin.P0_3;
-			socket.CpuPins[6] = G120.Pin.P1_16;
-			socket.CpuPins[7] = G120.Pin.P1_2;
-			socket.CpuPins[8] = G120.Pin.P1_3;
-			socket.CpuPins[9] = G120.Pin.P1_11;
+			socket.SupportedTypes = new char[] { 'H', 'I' };
+			socket.CpuPins[3] = G120.Pin.P2_21;
+			socket.CpuPins[4] = special;
+			socket.CpuPins[5] = special;
+			socket.CpuPins[6] = G120.Pin.P1_19;
+			socket.CpuPins[7] = NotConnected;
+			socket.CpuPins[8] = I2C_SDA;
+			socket.CpuPins[9] = I2C_SCL;
 
-			// P
-			socket.PWM7 = Cpu.PWMChannel.PWM_0;
-			socket.PWM8 = Cpu.PWMChannel.PWM_1;
-			socket.PWM9 = Cpu.PWMChannel.PWM_5;
+			// H
+			// N/A
 
-			// U
-			socket.SerialPortName = "COM1";
-
-			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			// I
+			// N/A
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion
@@ -378,7 +379,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[6] = G120.Pin.P1_23;
 			socket.CpuPins[7] = G120.Pin.P1_24;
 			socket.CpuPins[8] = G120.Pin.P1_25;
-			socket.CpuPins[9] = G120.Pin.P1_17;
+			socket.CpuPins[9] = G120.Pin.P1_5;
 
 			// G
 			// N/A
@@ -396,6 +397,9 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = G120.Pin.P2_9;
 			socket.CpuPins[8] = G120.Pin.P2_3;
 			socket.CpuPins[9] = G120.Pin.P2_5;
+
+			// R
+			// N/A
 
 			// Y
 			socket.NativeI2CWriteRead = nativeI2C;
@@ -562,7 +566,7 @@ namespace GHIElectronics.Gadgeteer
 		}
 
 		// change the below to the debug led pin on this mainboard
-		private const Cpu.Pin DebugLedPin = G120.Pin.P2_1;
+		private const Cpu.Pin DebugLedPin = G120.Pin.P1_8;
 
 		// NOTE: This is set to true because of the hardware design of the FEZSpider II. Low = led on, High = off.
 		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(DebugLedPin, true);

@@ -117,9 +117,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public DigitalInputImplementation(byte pin, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, IO60P16 io60)
 			{
-				if (glitchFilter != GTI.GlitchFilterMode.Off)
-					throw new NotSupportedException("GlitchFilter must be off");
-
 				this.io60 = io60;
 				this.pin = pin;
 
@@ -166,9 +163,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public DigitalIOImplementation(byte pin, bool initialState, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, IO60P16 io60)
 			{
-				if (glitchFilter != GTI.GlitchFilterMode.Off)
-					throw new NotSupportedException("GlitchFilter must be off");
-
 				this.io60 = io60;
 				this.pin = pin;
 				this.resistorMode = resistorMode;
@@ -335,9 +329,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public InterruptInputImplementation(byte pin, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode, IO60P16 io60)
 			{
-				if (glitchFilter != GTI.GlitchFilterMode.Off)
-					throw new NotSupportedException("GlitchFilter must be off");
-
 				this.io60 = io60;
 				this.pin = pin;
 

@@ -43,7 +43,9 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Content Include="GadgeteerHardware.xml" />
+    <Content Include="GadgeteerHardware.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
