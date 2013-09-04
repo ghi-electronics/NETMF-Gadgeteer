@@ -233,10 +233,10 @@
 				<!-- This should be filled in with a list of assemblies provided by the mainboard which are not the standard NETMF assemblies.  Delete the example "CustomMFAssembly" below. -->
 				<!-- Providing this list allows the designer to automatically determine when a module that only works with specific mainboards is compatible with the current mainboard. -->
 				<!--
-		<Assembly MFVersion="4.1" Name="CustomMFAssembly"/>
-		<Assembly MFVersion="4.2" Name="CustomMFAssembly"/>
-		<Assembly MFVersion="4.3" Name="CustomMFAssembly"/>
-		-->
+				<Assembly MFVersion="4.1" Name="CustomMFAssembly"/>
+				<Assembly MFVersion="4.2" Name="CustomMFAssembly"/>
+				<Assembly MFVersion="4.3" Name="CustomMFAssembly"/>
+				-->
 
 				<!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
 				<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
@@ -247,18 +247,17 @@
 			<!-- Uncomment to specify power consumption data for use by the VS designer. -->
 			<!-- Do not partially fill this in - either fill it all in or leave it out totally. -->
 			<!-- Values are in Volts or Amps respectively.  Use the special value Infinity, e.g. if the maximum current is unknown (such as for a motor). -->
-			<!--
-	  <Power>
-		<PowerRequirements Voltage="3.3">
-		  <TypicalCurrent>0.123</TypicalCurrent>
-		  <MaximumCurrent>0.456</MaximumCurrent>
-		</PowerRequirements>
-		<PowerRequirements Voltage="5.0">
-		  <TypicalCurrent>0.789</TypicalCurrent>
-		  <MaximumCurrent>Infinity</MaximumCurrent>
-		</PowerRequirements>
-	  </Power>
-	  -->
+
+			<Power>
+				<PowerRequirements Voltage="3.3">
+					<TypicalCurrent>0.089</TypicalCurrent>
+					<MaximumCurrent>0.154</MaximumCurrent>
+				</PowerRequirements>
+				<PowerRequirements Voltage="5.0">
+					<TypicalCurrent>0</TypicalCurrent>
+					<MaximumCurrent>0</MaximumCurrent>
+				</PowerRequirements>
+			</Power>
 
 		</MainboardDefinition>
 	</MainboardDefinitions>
