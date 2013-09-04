@@ -51,7 +51,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="2" Left="44.5" Top="6" Orientation="90" ConstructorParameter="1">
+				<ProvidedSocket Label="2" Left="44.5" Top="6" Orientation="90" ConstructorParameter="2">
 					<Types>
 						<Type>A</Type>
 						<Type>I</Type>
@@ -63,7 +63,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="3" Left="58" Top="6" Orientation="90" ConstructorParameter="1">
+				<ProvidedSocket Label="3" Left="58" Top="6" Orientation="90" ConstructorParameter="3">
 					<Types>
 						<Type>S</Type>
 						<Type>X</Type>
@@ -75,7 +75,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="4" Left="81.5" Top="6" Orientation="90" ConstructorParameter="1">
+				<ProvidedSocket Label="4" Left="81.5" Top="6" Orientation="90" ConstructorParameter="4">
 					<Types>
 						<Type>I</Type>
 						<Type>K</Type>
@@ -88,13 +88,13 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="5" Left="95.5" Top="15.5" Orientation="0" ConstructorParameter="1">
+				<ProvidedSocket Label="5" Left="95.5" Top="15.5" Orientation="0" ConstructorParameter="5">
 					<Types>
 						<Type>Z</Type>
 					</Types>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="6" Left="95.5" Top="29.5" Orientation="0" ConstructorParameter="1">
+				<ProvidedSocket Label="6" Left="95.5" Top="29.5" Orientation="0" ConstructorParameter="6">
 					<Types>
 						<Type>H</Type>
 						<Type>I</Type>
@@ -105,7 +105,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="7" Left="95.5" Top="43.5" Orientation="0" ConstructorParameter="1">
+				<ProvidedSocket Label="7" Left="95.5" Top="43.5" Orientation="0" ConstructorParameter="7">
 					<Types>
 						<Type>H</Type>
 						<Type>I</Type>
@@ -116,7 +116,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="8" Left="95.5" Top="57.5" Orientation="0" ConstructorParameter="1">
+				<ProvidedSocket Label="8" Left="95.5" Top="57.5" Orientation="0" ConstructorParameter="8">
 					<Types>
 						<Type>D</Type>
 						<Type>I</Type>
@@ -127,14 +127,14 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="9" Left="95.5" Top="71.5" Orientation="0" ConstructorParameter="1">
+				<ProvidedSocket Label="9" Left="95.5" Top="71.5" Orientation="0" ConstructorParameter="9">
 					<Types>
 						<Type>F</Type>
 						<Type>Y</Type>
 					</Types>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="10" Left="81.5" Top="81" Orientation="270" ConstructorParameter="1">
+				<ProvidedSocket Label="10" Left="81.5" Top="81" Orientation="270" ConstructorParameter="10">
 					<Types>
 						<Type>C</Type>
 						<Type>I</Type>
@@ -147,7 +147,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="11" Left="58" Top="81" Orientation="270" ConstructorParameter="1">
+				<ProvidedSocket Label="11" Left="58" Top="81" Orientation="270" ConstructorParameter="11">
 					<Types>
 						<Type>C</Type>
 						<Type>S</Type>
@@ -161,7 +161,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="12" Left="44.5" Top="81" Orientation="270" ConstructorParameter="1">
+				<ProvidedSocket Label="12" Left="44.5" Top="81" Orientation="270" ConstructorParameter="12">
 					<Types>
 						<Type>I</Type>
 						<Type>U</Type>
@@ -173,7 +173,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="13" Left="21" Top="81" Orientation="270" ConstructorParameter="1">
+				<ProvidedSocket Label="13" Left="21" Top="81" Orientation="270" ConstructorParameter="13">
 					<Types>
 						<Type>A</Type>
 						<Type>I</Type>
@@ -185,7 +185,7 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="14" Left="6.5" Top="71.5" Orientation="180" ConstructorParameter="1">
+				<ProvidedSocket Label="14" Left="6.5" Top="71.5" Orientation="180" ConstructorParameter="14">
 					<Types>
 						<Type>A</Type>
 						<Type>I</Type>
@@ -198,28 +198,28 @@
 					</SharedPinMaps>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="15" Left="6.5" Top="57.5" Orientation="180" ConstructorParameter="1">
+				<ProvidedSocket Label="15" Left="6.5" Top="57.5" Orientation="180" ConstructorParameter="15">
 					<Types>
 						<Type>R</Type>
 						<Type>Y</Type>
 					</Types>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="16" Left="6.5" Top="43.5" Orientation="180" ConstructorParameter="1">
+				<ProvidedSocket Label="16" Left="6.5" Top="43.5" Orientation="180" ConstructorParameter="16">
 					<Types>
 						<Type>G</Type>
 						<Type>Y</Type>
 					</Types>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="17" Left="6.5" Top="29.5" Orientation="180" ConstructorParameter="1">
+				<ProvidedSocket Label="17" Left="6.5" Top="29.5" Orientation="180" ConstructorParameter="17">
 					<Types>
 						<Type>B</Type>
 						<Type>Y</Type>
 					</Types>
 				</ProvidedSocket>
 
-				<ProvidedSocket Label="18" Left="6.5" Top="15.5" Orientation="180" ConstructorParameter="1">
+				<ProvidedSocket Label="18" Left="6.5" Top="15.5" Orientation="180" ConstructorParameter="18">
 					<Types>
 						<Type>A</Type>
 						<Type>P</Type>
@@ -237,6 +237,13 @@
 				<Assembly MFVersion="4.2" Name="CustomMFAssembly"/>
 				<Assembly MFVersion="4.3" Name="CustomMFAssembly"/>
 				-->
+				<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware.G400"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.System"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.Native"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.Net"/>
+				<Assembly MFVersion="4.2" Name="GHI.Premium.USBHost"/>
 
 				<!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
 				<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
