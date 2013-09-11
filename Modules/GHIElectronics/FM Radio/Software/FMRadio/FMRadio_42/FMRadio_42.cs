@@ -17,6 +17,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         private string currentRadioText = "N/A";
         private GTI.SoftwareI2C i2cBus;
         private GTI.DigitalOutput resetPin;
+		private int spacingDivisor = 2;
+		private int baseChannel = 875;
 
         private ushort[] registers = new ushort[16];
 
@@ -62,16 +64,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         private const byte BIT_STEREO = 8;
 
         /// <summary>
-        /// The maximum Channel the radio and be tuned to.
-        /// </summary>
-        public const double MAX_CHANNEL = 107.5;
-
-        /// <summary>
-        /// The minimum Channel the radio can be tunnel to.
-        /// </summary>
-        public const double MIN_CHANNEL = 87.5;
-
-        /// <summary>
         /// The Channel returned by <see cref="Seek"/> when no Channel is found.
         /// </summary>
         public const double INVALID_CHANNEL = -1.0;
@@ -98,7 +90,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.InitializeDevice();
 
-            this.Channel = FMRadio.MIN_CHANNEL;
+			this.SetChannelConfiguration(Spacing.USAAustrailia, Band.USAEurope);
+
+            this.Channel = this.MinChannel;
             this.Volume = FMRadio.MIN_VOLUME;
 
             this.radioTextWorkerThread = new Thread(this.RadioTextWorker);
@@ -171,6 +165,25 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
+		/// <summary>
+		/// The maximum channel the radio and be tuned to.
+		/// </summary>
+		public double MaxChannel
+		{
+			private set;
+			get;
+		}
+
+
+		/// <summary>
+		/// The minimum channel the radio and be tuned to.
+		/// </summary>
+		public double MinChannel
+		{
+			private set;
+			get;
+		}
+
         /// <summary>
         /// Gets or sets the Channel of the radio.
         /// </summary>
@@ -182,12 +195,100 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
             set
             {
-                if (value > FMRadio.MAX_CHANNEL || value < FMRadio.MIN_CHANNEL) throw new ArgumentOutOfRangeException("value", "The Channel provided was outside the allowed range.");
+				if (value > this.MaxChannel || value < this.MinChannel) throw new ArgumentOutOfRangeException("value", "The Channel provided was outside the allowed range.");
 
                 this.SetDeviceChannel((int)(value * 10));
                 this.currentRadioText = "N/A";
             }
         }
+
+		/// <summary>
+		/// The radio frequency band.
+		/// </summary>
+		public enum Band
+		{
+			/// <summary>
+			/// The band used in the United States and Europe (87.5-108MHz).
+			/// </summary>
+			USAEurope,
+			/// <summary>
+			/// The wide band used in the Japan (76-108MHz).
+			/// </summary>
+			JapanWide,
+			/// <summary>
+			/// The band used in Japan (76-90MHz).
+			/// </summary>
+			Japan
+		}
+
+		/// <summary>
+		/// The radio channel spacing.
+		/// </summary>
+		public enum Spacing
+		{
+			/// <summary>
+			/// Spacing in USA and Austrailia (200KHz).
+			/// </summary>
+			USAAustrailia,
+			/// <summary>
+			/// Spacing in Europe and Japan (100KHz).
+			/// </summary>
+			EuropeJapan
+		}
+
+		/// <summary>
+		/// Sets the channel spacing and band of the device.
+		/// </summary>
+		/// <param name="spacing">The channel spacing.</param>
+		/// <param name="band">The channel base band.</param>
+		public void SetChannelConfiguration(Spacing spacing, Band band)
+		{
+			this.ReadRegisters();
+
+
+			if (spacing == Spacing.USAAustrailia)
+			{
+				this.registers[FMRadio.REGISTER_SYSCONFIG2] &= 0xFFCF;
+				this.spacingDivisor = 2;
+			}
+			else if (spacing == Spacing.EuropeJapan)
+			{
+				this.registers[FMRadio.REGISTER_SYSCONFIG2] &= 0xFFDF;
+				this.spacingDivisor = 1;
+			}
+			else
+			{
+				throw new ArgumentException("Spacing");
+			}
+
+			if (band == Band.USAEurope)
+			{
+				this.registers[FMRadio.REGISTER_SYSCONFIG2] &= 0xFF3F;
+				this.baseChannel = 875;
+				this.MinChannel = 87.5;
+				this.MaxChannel = 107.5;
+			} 
+			else if (band == Band.JapanWide)
+			{
+				this.registers[FMRadio.REGISTER_SYSCONFIG2] &= 0xFF7F;
+				this.baseChannel = 760;
+				this.MinChannel = 76;
+				this.MaxChannel = 108;
+			}
+			else if (band == Band.Japan)
+			{
+				this.registers[FMRadio.REGISTER_SYSCONFIG2] &= 0xFFBF;
+				this.baseChannel = 760;
+				this.MinChannel = 76;
+				this.MaxChannel = 90;
+			}
+			else
+			{
+				throw new ArgumentException("Band");
+			}
+
+			this.UpdateRegisters();
+		}
 
         /// <summary>
         /// Gets the current Radio Text.
@@ -394,7 +495,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.i2cBus.Write(FMRadio.I2C_ADDRESS, data, GTI.SoftwareI2C.LengthErrorBehavior.ThrowException);
         }
-
+		
         private void SetDeviceVolume(ushort Volume)
         {
             this.ReadRegisters();
@@ -409,13 +510,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             int Channel = this.registers[FMRadio.REGISTER_READCHAN] & 0x03FF;
 
-            return Channel * 2 + 875;
+			return Channel * this.spacingDivisor + this.baseChannel;
         }
 
         private void SetDeviceChannel(int newChannel)
         {
-            newChannel -= 875;
-            newChannel /= 2;
+            newChannel -= this.baseChannel;
+			newChannel /= this.spacingDivisor;
 
             this.ReadRegisters();
             this.registers[FMRadio.REGISTER_CHANNEL] &= 0xFE00; //Clear out the Channel bits
