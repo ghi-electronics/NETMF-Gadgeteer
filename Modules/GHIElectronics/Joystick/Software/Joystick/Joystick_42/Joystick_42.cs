@@ -185,13 +185,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			double total = 0;
 
-			for (int i = 0; i < 25; i++)
-			{
+			for (int i = 0; i < 10; i++)
 				total += input.ReadProportion();
-				Thread.Sleep(1);
-			}
 
-			return total / 25;
+			return total / 10;
 		}
     }
 }
