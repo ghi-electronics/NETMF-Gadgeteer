@@ -276,13 +276,15 @@ namespace Gadgeteer.Modules.GHIElectronics
             m_cmdBuffer[2] = 0;
             m_cmdBuffer[3] = 0;
 
-            //m_SPI.WriteRead(m_cmdBuffer, m_cmdBuffer, 2);
-            m_SPICmd.WriteRead(m_cmdBuffer, m_cmdBuffer, 2);
+			byte[] readBuffer = new byte[4];
 
-            temp = m_cmdBuffer[0];
+            //m_SPI.WriteRead(m_cmdBuffer, m_cmdBuffer, 2);
+            m_SPICmd.WriteRead(m_cmdBuffer, readBuffer);
+
+            temp = readBuffer[2];
             temp <<= 8;
 
-            temp += m_cmdBuffer[1];
+            temp += readBuffer[3];
 
             m_bPlayLocked = true;
 
