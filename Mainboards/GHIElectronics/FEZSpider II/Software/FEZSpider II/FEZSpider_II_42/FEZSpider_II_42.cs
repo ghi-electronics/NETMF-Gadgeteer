@@ -216,7 +216,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = I2C_SCL;
 
 			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 10);
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 12);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_1;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
@@ -288,7 +288,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = I2C_SCL;
 
 			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 10);
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 12);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
