@@ -72,7 +72,7 @@
 			<Sockets>
 
 				<!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
-				<Socket Left="33.5" Top="82" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
+				<Socket Left="33" Top="83" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
 					<Types>
 						<Type>Y</Type>
 					</Types>

@@ -14,12 +14,14 @@ namespace TestApp {
     
     
     public partial class Program : Gadgeteer.Program {
-		private GTM.GHIElectronics.ButtonS7 ButtonS7;
-
+        
+        /// <summary>The ButtonS7 module (not connected).</summary>
+        private Gadgeteer.Modules.GHIElectronics.ButtonS7 buttonS7;
+        
         /// <summary>This property provides access to the Mainboard API. This is normally not necessary for an end user program.</summary>
-        protected new static GHIElectronics.Gadgeteer.FEZSpider Mainboard {
+        protected new static GHIElectronics.Gadgeteer.FEZSpider_II Mainboard {
             get {
-                return ((GHIElectronics.Gadgeteer.FEZSpider)(Gadgeteer.Program.Mainboard));
+                return ((GHIElectronics.Gadgeteer.FEZSpider_II)(Gadgeteer.Program.Mainboard));
             }
             set {
                 Gadgeteer.Program.Mainboard = value;
@@ -29,7 +31,7 @@ namespace TestApp {
         /// <summary>This method runs automatically when the device is powered, and calls ProgramStarted.</summary>
         public static void Main() {
             // Important to initialize the Mainboard first
-            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider();
+            Program.Mainboard = new GHIElectronics.Gadgeteer.FEZSpider_II();
             Program p = new Program();
             p.InitializeModules();
             p.ProgramStarted();
@@ -38,7 +40,7 @@ namespace TestApp {
         }
         
         private void InitializeModules() {
-			this.ButtonS7 = new GTM.GHIElectronics.ButtonS7(5);
+            Microsoft.SPOT.Debug.Print("The module \'buttonS7\' was not connected in the designer and will be null.");
         }
     }
 }

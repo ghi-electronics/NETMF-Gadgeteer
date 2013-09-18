@@ -59,7 +59,7 @@
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
     </Reference>
-    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="GHIElectronics.Gadgeteer.FEZSpider_II, Version=4.2.100.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GTM.GHIElectronics.Display_T35, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">

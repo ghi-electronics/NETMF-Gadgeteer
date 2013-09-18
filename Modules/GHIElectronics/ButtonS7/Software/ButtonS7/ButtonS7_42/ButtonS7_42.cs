@@ -18,10 +18,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		public ButtonS7(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported('Y', this);
 
 			this.buttons = new GTI.DigitalInput[6];
 			for (int i = 0; i < 6; i++)
-				this.buttons[i] = new GTI.DigitalInput(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, this);
+				this.buttons[i] = new GTI.DigitalInput(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
 
 			this.enter = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
 			this.enter.Interrupt += this.OnInterrupt;
@@ -52,9 +53,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		public bool IsPressed(Buttons button)
 		{
 			if (button == Buttons.Enter)
-				return this.enter.Read();
+				return !this.enter.Read();
 
-			return this.buttons[(int)button].Read();
+			return !this.buttons[(int)button].Read();
 		}
 
 		/// <summary>
