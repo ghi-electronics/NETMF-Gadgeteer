@@ -41,7 +41,6 @@
     <None Include="GadgeteerHardware.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="ReadMe.txt" />
     <None Include="msm.wxs" />
     <None Include="en-us.wxl" />
     <None Include="common.wxi" />

@@ -46,7 +46,6 @@
     <Content Include="GadgeteerHardware.xml">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="msm.wxs" />

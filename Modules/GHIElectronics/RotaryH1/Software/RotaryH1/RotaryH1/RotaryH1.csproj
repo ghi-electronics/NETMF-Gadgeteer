@@ -38,7 +38,6 @@
 	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 	<ItemGroup>
 		<None Include="GadgeteerHardware.xml" />
-		<None Include="ReadMe.txt" />
 		<None Include="msm.wxs" />
 		<None Include="en-us.wxl" />
 		<None Include="common.wxi" />

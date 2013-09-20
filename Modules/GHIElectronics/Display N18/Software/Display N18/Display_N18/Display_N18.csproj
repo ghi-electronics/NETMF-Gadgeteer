@@ -44,7 +44,6 @@
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
     <Content Include="GadgeteerHardware.xml" />
-    <Content Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="msm.wxs" />
