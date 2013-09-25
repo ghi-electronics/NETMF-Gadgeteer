@@ -37,9 +37,6 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="en-us.wxl" />
     <None Include="common.wxi">
       <SubType>Designer</SubType>

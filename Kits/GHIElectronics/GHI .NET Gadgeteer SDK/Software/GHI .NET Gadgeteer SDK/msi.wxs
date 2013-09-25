@@ -1,125 +1,125 @@
 <?xml version="1.0"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<?include version.wxi?>
-	<?include common.wxi?>
-	<Product Name='!(loc.KitName) !(loc.ForGadgeteer)'
-			 Id='*'
-			 UpgradeCode='$(var.guid_msi_upgrade_code)'
-			 Language='1033' Codepage='1252'
-			 Version='$(var.KitVersion)'
-			 Manufacturer='!(loc.DistributorFull)'>
+  <?include version.wxi?>
+  <?include common.wxi?>
+  <Product Name='!(loc.KitName) !(loc.ForGadgeteer)'
+		   Id='*'
+		   UpgradeCode='$(var.guid_msi_upgrade_code)'
+		   Language='1033' Codepage='1252'
+		   Version='$(var.KitVersion)'
+		   Manufacturer='!(loc.DistributorFull)'>
 
-		<Package Id='*'
-				 Manufacturer='!(loc.DistributorFull)'
-				 InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252'
-				 InstallPrivileges='elevated'/>
+	<Package Id='*'
+			 Manufacturer='!(loc.DistributorFull)'
+			 InstallerVersion='100' Languages='1033' Compressed='yes' SummaryCodepage='1252'
+			 InstallPrivileges='elevated'/>
 
-		<!-- Upgrade related stuff-->
-		<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
-		<Property Id="SAMEVERSIONINSTALLED" Secure="yes"/>
-		<Upgrade Id="$(var.guid_msi_upgrade_code)">
-			<UpgradeVersion Maximum="$(var.KitVersion)"
-							Property="PREVIOUSVERSIONSINSTALLED"
-							IncludeMinimum="yes"
-							IncludeMaximum="no"
-							OnlyDetect="no"/>
+	<!-- Upgrade related stuff-->
+	<Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+	<Property Id="SAMEVERSIONINSTALLED" Secure="yes"/>
+	<Upgrade Id="$(var.guid_msi_upgrade_code)">
+	  <UpgradeVersion Maximum="$(var.KitVersion)"
+					  Property="PREVIOUSVERSIONSINSTALLED"
+					  IncludeMinimum="yes"
+					  IncludeMaximum="no"
+					  OnlyDetect="no"/>
 
-			<UpgradeVersion Minimum="$(var.KitVersion)"
-							Property="NEWERVERSIONINSTALLED"
-							IncludeMinimum="no"
-							OnlyDetect="yes"/>
+	  <UpgradeVersion Minimum="$(var.KitVersion)"
+					  Property="NEWERVERSIONINSTALLED"
+					  IncludeMinimum="no"
+					  OnlyDetect="yes"/>
 
-			<UpgradeVersion Minimum="$(var.KitVersion)"
-							IncludeMinimum="yes"
-							Maximum="$(var.KitVersion)"
-							IncludeMaximum="yes"
-							Property="SAMEVERSIONINSTALLED"
-							OnlyDetect="yes"/>
+	  <UpgradeVersion Minimum="$(var.KitVersion)"
+					  IncludeMinimum="yes"
+					  Maximum="$(var.KitVersion)"
+					  IncludeMaximum="yes"
+					  Property="SAMEVERSIONINSTALLED"
+					  OnlyDetect="yes"/>
 
-		</Upgrade>
+	</Upgrade>
 
-		<!-- Error conditions -->
-		<CustomAction Id='NoDowngrade' Error='!(loc.NewerVersionFoundPrefix) !(loc.KitName) !(loc.NewerVersionFoundSuffix)' />
-		<CustomAction Id='SameVersionError' Error='!(loc.SameVersionInstalledPrefix) !(loc.KitName) !(loc.SameVersionInstalledSuffix)'/>
-		<CustomAction Id='GadgeteerCoreNotInstalledError' Error='!(loc.GadgeteerCoreIsNotInstalled)'/>
-		<Property Id="GADGETEER_CORE_INSTALLED">
-			<ComponentSearch Id="id_GadgeteerCoreInstalledComponentSearch" Guid="20CDFFF1-2E36-45CE-A4C1-1DFA1FB123CC" Type="file"/>
-		</Property>
+	<!-- Error conditions -->
+	<CustomAction Id='NoDowngrade' Error='!(loc.NewerVersionFoundPrefix) !(loc.KitName) !(loc.NewerVersionFoundSuffix)' />
+	<CustomAction Id='SameVersionError' Error='!(loc.SameVersionInstalledPrefix) !(loc.KitName) !(loc.SameVersionInstalledSuffix)'/>
+	<CustomAction Id='GadgeteerCoreNotInstalledError' Error='!(loc.GadgeteerCoreIsNotInstalled)'/>
+	<Property Id="GADGETEER_CORE_INSTALLED">
+	  <ComponentSearch Id="id_GadgeteerCoreInstalledComponentSearch" Guid="20CDFFF1-2E36-45CE-A4C1-1DFA1FB123CC" Type="file"/>
+	</Property>
 
-		<!--ARP stuff (Add/Remove Programs)-->
-		<Property Id="ARPNOMODIFY" Value="1" />
-		<Property Id="ARPNOREPAIR" Value="1" />
+	<!--ARP stuff (Add/Remove Programs)-->
+	<Property Id="ARPNOMODIFY" Value="1" />
+	<Property Id="ARPNOREPAIR" Value="1" />
 
-		<!-- Files -->
-		<Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
+	<!-- Files -->
+	<Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
 
-		<Directory Id='TARGETDIR' Name='SourceDir'>
+	<Directory Id='TARGETDIR' Name='SourceDir'>
 
-			<!-- Getting Started Guide & files-->
-			<Directory Id='ProgramFilesFolder' Name='PFiles'>
-				<Directory Id='id_dir_distr_msi' Name='!(loc.DistributorFull)'>
-					<Directory Id='id_dir_gdgtr_msi' Name='!(loc.KitName)'>
+	  <!-- Getting Started Guide & files-->
+	  <Directory Id='ProgramFilesFolder' Name='PFiles'>
+		<Directory Id='id_dir_distr_msi' Name='!(loc.DistributorFull)'>
+		  <Directory Id='id_dir_gdgtr_msi' Name='!(loc.KitName)'>
 
-						<Component Id='id_sdk_files' Guid='$(var.guid_sdk_files_id)'>
-							<File Id="id_file_release_notes" Source="$(var.SourcePath)GHI .NET Gadgeteer Release Notes.rtf" KeyPath="yes">
-								<Shortcut Id="ReleaseNotesShortcut" Advertise="yes" Directory="ProgramMenuSDKSubFolder" Name="GHI .NET Gadgeteer Release Notes">
-									<Icon Id="RNIcon.exe" SourceFile="G.ico" />
-								</Shortcut>
-							</File>
-						</Component>
+			<Component Id='id_sdk_files' Guid='$(var.guid_sdk_files_id)'>
+			  <File Id="id_file_release_notes" Source="$(var.SourcePath)GHI .NET Gadgeteer Release Notes.rtf" KeyPath="yes">
+				<Shortcut Id="ReleaseNotesShortcut" Advertise="yes" Directory="ProgramMenuSDKSubFolder" Name="GHI .NET Gadgeteer Release Notes">
+				  <Icon Id="RNIcon.exe" SourceFile="G.ico" />
+				</Shortcut>
+			  </File>
+			</Component>
 
-						<!--Getting Started Guides-->
-						<Directory Id='id_dir_getting_started_guides' Name='!(loc.GettingStartedGuideDirectoryName)' FileSource='..\Getting Started Guides'>
-							<Component Id='id_getting_started_guides_spider' Guid="$(var.guid_getting_started_guides_id_spider)">
-								<!--FEZSpider Getting Started Guide-->
-								<File Name="FEZSpider Starter Kit Guide.pdf"/>
-								<Shortcut Id="FEZSpiderGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZSpider Starter Kit Guide">
-									<Icon Id ="SpiderGuideIcon.exe" SourceFile="G.ico"/>
-								</Shortcut>
-							</Component>
-							<!--End FEZSpider Getting Started Guide-->
+			<!--Getting Started Guides-->
+			<Directory Id='id_dir_getting_started_guides' Name='!(loc.GettingStartedGuideDirectoryName)' FileSource='..\Getting Started Guides'>
+			  <Component Id='id_getting_started_guides_spider' Guid="$(var.guid_getting_started_guides_id_spider)">
+				<!--FEZSpider Getting Started Guide-->
+				<File Name="FEZSpider Starter Kit Guide.pdf"/>
+				<Shortcut Id="FEZSpiderGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZSpider Starter Kit Guide">
+				  <Icon Id ="SpiderGuideIcon.exe" SourceFile="G.ico"/>
+				</Shortcut>
+			  </Component>
+			  <!--End FEZSpider Getting Started Guide-->
 
-							<Component Id='id_getting_started_guides_hydra' Guid="$(var.guid_getting_started_guides_id_hydra)">
-								<!--FEZHydra Getting Started Guide-->
-								<File Name="FEZHydra Basic Kit Guide.pdf"/>
-								<Shortcut Id="FEZHydraGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZHydra Basic Kit Guide">
-									<Icon Id ="HydraGuideIcon.exe" SourceFile="G.ico"/>
-								</Shortcut>
-							</Component>
-							<!--End FEZHydra Getting Started Guide-->
+			  <Component Id='id_getting_started_guides_hydra' Guid="$(var.guid_getting_started_guides_id_hydra)">
+				<!--FEZHydra Getting Started Guide-->
+				<File Name="FEZHydra Basic Kit Guide.pdf"/>
+				<Shortcut Id="FEZHydraGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZHydra Basic Kit Guide">
+				  <Icon Id ="HydraGuideIcon.exe" SourceFile="G.ico"/>
+				</Shortcut>
+			  </Component>
+			  <!--End FEZHydra Getting Started Guide-->
 
-							<Component Id='id_getting_started_guides_cerberus' Guid="$(var.guid_getting_started_guides_id_cerberus)">
-								<!--FEZCerberus Getting Started Guide-->
-								<File Name="FEZCerberus Basic Kit Guide.pdf"/>
-								<Shortcut Id="FEZCerberusGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZCerberus Basic Kit Guide">
-									<Icon Id ="CerberusGuideIcon.exe" SourceFile="G.ico"/>
-								</Shortcut>
-								<!--End FEZCerberus Getting Started Guide-->
+			  <Component Id='id_getting_started_guides_cerberus' Guid="$(var.guid_getting_started_guides_id_cerberus)">
+				<!--FEZCerberus Getting Started Guide-->
+				<File Name="FEZCerberus Basic Kit Guide.pdf"/>
+				<Shortcut Id="FEZCerberusGuideShortcut" Advertise="yes" Directory="ProgramMenuSubFolderGuides" Name="FEZCerberus Basic Kit Guide">
+				  <Icon Id ="CerberusGuideIcon.exe" SourceFile="G.ico"/>
+				</Shortcut>
+				<!--End FEZCerberus Getting Started Guide-->
 
-								<!--<RemoveFolder Id="ProgramMenuSubFolderRemove" Directory="ProgramMenuSubFolderFirmware" On="uninstall" />-->
-								<RemoveFolder Id="ProgramMenuSDKSubFolderRemove" Directory="ProgramMenuSDKSubFolder" On="uninstall" />
-								<RemoveFolder Id="ProgramMenuMfrSubFolderRemove" Directory="ProgramMenuMfrSubFolder" On="uninstall" />
-								<RemoveFolder Id="ProgramMenuSubFolderGuidesRemove" Directory="ProgramMenuSubFolderGuides" On="uninstall" />
+				<!--<RemoveFolder Id="ProgramMenuSubFolderRemove" Directory="ProgramMenuSubFolderFirmware" On="uninstall" />-->
+				<RemoveFolder Id="ProgramMenuSDKSubFolderRemove" Directory="ProgramMenuSDKSubFolder" On="uninstall" />
+				<RemoveFolder Id="ProgramMenuMfrSubFolderRemove" Directory="ProgramMenuMfrSubFolder" On="uninstall" />
+				<RemoveFolder Id="ProgramMenuSubFolderGuidesRemove" Directory="ProgramMenuSubFolderGuides" On="uninstall" />
 
-							</Component>
-						</Directory>
-						<!--End Getting Started Guides-->
-
-					</Directory>
-				</Directory>
+			  </Component>
 			</Directory>
+			<!--End Getting Started Guides-->
 
-			<!--Getting Started Guide Start menu folder-->
-			<Directory Id="ProgramMenuFolder">
-				<Directory Id="ProgramMenuMfrSubFolder" Name="!(loc.DistributorFull)">
-					<Directory Id="ProgramMenuSDKSubFolder" Name="!(loc.KitName)">
-						<!--<Directory Id="ProgramMenuSubFolderFirmware" Name="!(loc.FirmwareUpdaterDirectoryName) !(loc.ForGadgeteer)"/>-->
-						<Directory Id="ProgramMenuSubFolderGuides" Name ="!(loc.GettingStartedGuideDirectoryName)"/>
-					</Directory>
-				</Directory>
-			</Directory>
+		  </Directory>
+		</Directory>
+	  </Directory>
 
-			<!-- List merge modules for mainboard(s) and module(s) here
+	  <!--Getting Started Guide Start menu folder-->
+	  <Directory Id="ProgramMenuFolder">
+		<Directory Id="ProgramMenuMfrSubFolder" Name="!(loc.DistributorFull)">
+		  <Directory Id="ProgramMenuSDKSubFolder" Name="!(loc.KitName)">
+			<!--<Directory Id="ProgramMenuSubFolderFirmware" Name="!(loc.FirmwareUpdaterDirectoryName) !(loc.ForGadgeteer)"/>-->
+			<Directory Id="ProgramMenuSubFolderGuides" Name ="!(loc.GettingStartedGuideDirectoryName)"/>
+		  </Directory>
+		</Directory>
+	  </Directory>
+
+	  <!-- List merge modules for mainboard(s) and module(s) here
 	  Useful tip: copy one of the lines below, select it, Ctrl-H (Quick Replace), set "Look In" to "Selection", and replace "Button" with the name of the module. Also replace "MSR" with the right manufacturer name
 	  NB the relative path reference below should work if your local directory structure matches the source control repository at http://gadgeteer.codeplex.com/ 
 	  
@@ -127,206 +127,208 @@
 	  <Merge Id="id_MainboardName_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\MSR\MainboardName\Software\MainboardName\MainboardName\bin\Release\Installer\MainboardName.msm" DiskId="1" />
 	  -->
 
-			<Merge Id="id_Bluetooth_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Bluetooth\Software\Bluetooth\Bluetooth\bin\Release\Installer\Bluetooth.msm" DiskId="1" />
-			<Merge Id="id_Button_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Button\Software\Button\Button\bin\Release\Installer\Button.msm" DiskId="1" />
-			<Merge Id="id_Camera_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Camera\Software\Camera\Camera\bin\Release\Installer\Camera.msm" DiskId="1" />
-			<Merge Id="id_CAN_DW_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CAN_DW\Software\CAN_DW\CAN_DW\bin\Release\Installer\CAN_DW.msm" DiskId="1" />
-			<Merge Id="id_Display_T35_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T35\Software\Display T35\Display T35\bin\Release\Installer\Display_T35.msm" DiskId="1" />
-			<Merge Id="id_Display_HD44780_msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_HD44780\Software\Display_HD44780\Display_HD44780\bin\Release\Installer\Display_HD44780.msm" DiskId="1" />
-			<Merge Id="id_Ethernet_J11D_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet_J11D\Software\Ethernet_J11D\Ethernet_J11D\bin\Release\Installer\Ethernet_J11D.msm" DiskId="1" />
-			<Merge Id="id_Extender_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Extender\Software\Extender\Extender\bin\Release\Installer\Extender.msm" DiskId="1" />
-			<Merge Id="id_GenericDaisylink_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GenericDaisylink\Software\GenericDaisylink\GenericDaisylink\bin\Release\Installer\GenericDaisylink.msm" DiskId="1" />
-			<Merge Id="id_IO60P16_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\IO60P16\Software\IO60P16\IO60P16\bin\Release\Installer\IO60P16.msm" DiskId="1" />
-			<Merge Id="id_IR_Receiver_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\IR receiver\Software\IR receiver\IR receiver\bin\Release\Installer\IR_Reciever.msm" DiskId="1" />
-			<Merge Id="id_Joystick_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Joystick\Software\Joystick\Joystick\bin\Release\Installer\Joystick.msm" DiskId="1" />
-			<Merge Id="id_LED7R_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED7R\Software\LED7R\LED7R\bin\Release\Installer\LED7R.msm" DiskId="1" />
-			<Merge Id="id_LightSensor_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LightSensor\Software\LightSensor\LightSensor\bin\Release\Installer\LightSensor.msm" DiskId="1" />
-			<Merge Id="id_Load_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Load\Software\Load\Load\bin\Release\Installer\Load.msm" DiskId="1" />
-			<Merge Id="id_MaxO_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MaxO\Software\MaxO\MaxO\bin\Release\Installer\MaxO.msm" DiskId="1" />
-			<Merge Id="id_Motion_Sensor_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Motion Sensor\Software\Motion Sensor\Motion Sensor\bin\Release\Installer\Motion_Sensor.msm" DiskId="1" />
-			<Merge Id="id_MotorControllerL298_msm"  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MotorControllerL298\Software\MotorControllerL298\MotorControllerL298\bin\Release\Installer\MotorControllerL298.msm" DiskId="1" />
-			<Merge Id="id_MulticolorLed_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MulticolorLed\Software\MulticolorLed\MulticolorLed\bin\Release\Installer\MulticolorLed.msm" DiskId="1" />
-			<Merge Id="id_Music_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Music\Software\Music\Music\bin\Release\Installer\Music.msm" DiskId="1" />
-			<Merge Id="id_OBD_II_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\OBD II\Software\OBD II\OBD II\bin\Release\Installer\OBD_II.msm" DiskId="1" />
-			<Merge Id="id_Potentiometer_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Potentiometer\Software\Potentiometer\Potentiometer\bin\Release\Installer\Potentiometer.msm" DiskId="1" />
-			<Merge Id="id_SDCard_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SDCard\Software\SDCard\SDCard\bin\Release\Installer\SDCard.msm" DiskId="1" />
-			<Merge Id="id_UsbClientDP_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbClientDP\Software\UsbClientDP\UsbClientDP\bin\Release\Installer\UsbClientDP.msm" DiskId="1" />
-			<Merge Id="id_UsbClientSP_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbClientSP\Software\UsbClientSP\UsbClientSP\bin\Release\Installer\UsbClientSP.msm" DiskId="1" />
-			<Merge Id="id_UsbHost_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbHost\Software\UsbHost\UsbHost\bin\Release\Installer\UsbHost.msm" DiskId="1" />
-			<Merge Id="id_Video_Out_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Video_Out\Software\Video_Out\Video_Out\bin\Release\Installer\Video_Out.msm" DiskId="1" />
-			<Merge Id="id_WiFi_RS21_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\WiFi_RS21\Software\WiFi_RS21\WiFi_RS21\bin\Release\Installer\WiFi_RS21.msm" DiskId="1" />
-			<Merge Id="id_XBee_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\XBee\Software\XBee\XBee\bin\Release\Installer\XBee.msm" DiskId="1" />
-			<Merge Id="id_RS232_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS232\Software\RS232\RS232\bin\Release\Installer\RS232.msm" DiskId="1" />
-			<Merge Id="id_UsbSerial_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbSerial\Software\UsbSerial\UsbSerial\bin\Release\Installer\UsbSerial.msm" DiskId="1" />
-			<Merge Id="id_LEDMatrix_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LEDMatrix\Software\LEDMatrix\LEDMatrix\bin\Release\Installer\LEDMatrix.msm" DiskId="1" />
-			<Merge Id="id_ParallelCNC_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ParallelCNC\Software\ParallelCNC\ParallelCNC\bin\Release\Installer\ParallelCNC.msm" DiskId="1" />
-			<Merge Id="id_RFID_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RFID\Software\RFID\RFID\bin\Release\Installer\RFID.msm" DiskId="1" />
-			<Merge Id="id_Display_CP7_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_CP7\Software\Display_CP7\Display_CP7\bin\Release\Installer\Display_CP7.msm" DiskId="1" />
-			<Merge Id="id_SerCam_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SerCam\Software\SerCam\SerCam\bin\Release\Installer\SerCam.msm" DiskId="1" />
-			<Merge Id="id_Display_TE35.msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display TE35\Software\Display TE35\Display_TE35\bin\Release\Installer\Display_TE35.msm" DiskId="1" />
-			<Merge Id="id_Current_ACS712.msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Current ACS712\Software\Current ACS712\Current_ACS712\bin\Release\Installer\Current_ACS712.msm" DiskId="1" />
-			<Merge Id="id_FLASH.msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FLASH\Software\FLASH\FLASH\bin\Release\Installer\FLASH.msm" DiskId="1" />
-			<Merge Id="id_GasSense.msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GasSense\Software\GasSense\GasSense\bin\Release\Installer\GasSense.msm" DiskId="1" />
-			<Merge Id="id_PulseInOut.msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseInOut\Software\PulseInOut\PulseInOut\bin\Release\Installer\PulseInOut.msm" DiskId="1" />
-			<Merge Id="id_RelayISOx16.msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RelayISOx16\Software\RelayISOx16\RelayISOx16\bin\Release\Installer\RelayISOx16.msm" DiskId="1" />
-			<Merge Id="id_UC_Battery_4xAA.msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UC Battery 4xAA\Software\UC Battery 4xAA\UC_Battery_4xAA\bin\Release\Installer\UC_Battery_4xAA.msm" DiskId="1" />
-			<Merge Id="id_Thermocouple.msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Thermocouple\Software\Thermocouple\Thermocouple\bin\Release\Installer\Thermocouple.msm" DiskId="1" />
-			<Merge Id="id_Ethernet_ENC28_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet ENC28\Software\Ethernet_ENC28\Ethernet_ENC28\bin\Release\Installer\Ethernet_ENC28.msm" DiskId="1" />
-			<Merge Id="id_Breakout_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout\Software\Breakout\Breakout\bin\Release\Installer\Breakout.msm" DiskId="1" />
-			<Merge Id="id_Stepper_L6470_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Stepper_L6470\Software\Stepper_L6470\Stepper_L6470\bin\Release\Installer\Stepper_L6470.msm" DiskId="1" />
-			<Merge Id="id_ColorSense_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ColorSense\Software\ColorSense\ColorSense\bin\Release\Installer\ColorSense.msm" DiskId="1" />
-			<Merge Id="id_Display_N18_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N18\Software\Display N18\Display_N18\bin\Release\Installer\Display_N18.msm" DiskId="1" />
-			<Merge Id="id_Display_T43_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T43\Software\Display T43\Display_T43\bin\Release\Installer\Display_T43.msm" DiskId="1" />
-			<Merge Id="id_LED7C_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED7C\Software\LED7C\LED7C\bin\Release\Installer\LED7C.msm" DiskId="1" />
-			<Merge Id="id_Tunes_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Tunes\Software\Tunes\Tunes\bin\Release\Installer\Tunes.msm" DiskId="1" />
-			<Merge Id="id_Distance_US3_msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Distance US3\Software\Distance US3\Distance_US3\bin\Release\Installer\Distance_US3.msm" DiskId="1" />
-			<Merge Id="id_Radio_FM1_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FM Radio\Software\FMRadio\FMRadio\bin\Release\Installer\FMRadio.msm" DiskId="1" />
-			<Merge Id="id_USB_Serial_SP_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbSerialSP\Software\UsbSerialSP\UsbSerialSP\bin\Release\Installer\UsbSerialSP.msm" DiskId="1" />
-			<Merge Id="id_Amp_M35_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Amp M35\Software\Amp M35\Amp_M35\bin\Release\Installer\Amp_M35.msm" DiskId="1" />
-			<Merge Id="id_Accel_G248_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Accel G248\Software\Accel G248\Accel_G248\bin\Release\Installer\Accel_G248.msm" DiskId="1" />
-			<Merge Id="id_LED_Strip_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED Strip\Software\LED Strip\LED_Strip\bin\Release\Installer\LED_Strip.msm" DiskId="1" />
-			<Merge Id="id_WiFi_RN171_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\WiFi RN171\Software\WiFi RN171\WiFi_RN171\bin\Release\Installer\WiFi_RN171.msm" DiskId="1" />
-			<Merge Id="id_FEZCerbot_Controller_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CerbotController\Software\CerbotController\CerbotController\bin\Release\Installer\CerbotController.msm" DiskId="1" />
-			<Merge Id="id_Keypad_KP16_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Keypad KP16\Software\Keypad KP16\Keypad_KP16\bin\Release\Installer\Keypad_KP16.msm" DiskId="1" />
-			<Merge Id="id_HubAP5_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\HubAP5\Software\HubAP5\HubAP5\bin\Release\Installer\HubAP5.msm" DiskId="1" />
-			<Merge Id="id_Relay_X1_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Relay X1\Software\Relay X1\Relay_X1\bin\Release\Installer\Relay_X1.msm" DiskId="1" />
-			<Merge Id="id_BreadBoard_X1_msm"		Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\BreadBoard X1\Software\BreadBoard X1\BreadBoard_X1\bin\Release\Installer\BreadBoard_X1.msm" DiskId="1" />
-			<Merge Id="id_OneWire_X1_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\OneWire X1\Software\OneWire X1\OneWire_X1\bin\Release\Installer\OneWire_X1.msm" DiskId="1" />
-			<Merge Id="id_RotaryH1_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RotaryH1\Software\RotaryH1\RotaryH1\bin\Release\Installer\RotaryH1.msm" DiskId="1" />
-			<Merge Id="id_PulseCount_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseCount\Software\PulseCount\PulseCount\bin\Release\Installer\PulseCount.msm" DiskId="1" />
-			<Merge Id="id_TouchC8_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchC8\Software\TouchC8\TouchC8\bin\Release\Installer\TouchC8.msm" DiskId="1" />
-			<Merge Id="id_TouchL12_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchL12\Software\TouchL12\TouchL12\bin\Release\Installer\TouchL12.msm" DiskId="1" />
-			<Merge Id="id_Reflector_R3_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Reflector R3\Software\Reflector R3\Reflector_R3\bin\Release\Installer\Reflector_R3.msm" DiskId="1" />
-			<Merge Id="id_RS485_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS485\Software\RS485\RS485\bin\Release\Installer\RS485.msm" DiskId="1" />
-			<Merge Id="id_Display_N7_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N7\Software\Display N7\Display_N7\bin\Release\Installer\Display_N7.msm" DiskId="1" />
-			<Merge Id="id_Breakout_TB10_msm"		Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout TB10\Software\Breakout TB10\Breakout_TB10\bin\Release\Installer\Breakout_TB10.msm" DiskId="1" />
-			<Merge Id="id_FEZtive_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FEZtive\Software\FEZtive\FEZtive\bin\Release\Installer\FEZtive.msm" DiskId="1" />
-			<Merge Id="id_SPlus_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SPlus\Software\SPlus\SPlus\bin\Release\Installer\SPlus.msm" DiskId="1" />
-			<Merge Id="id_ButtonS7_msm"				Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ButtonS7\Software\ButtonS7\ButtonS7\bin\Release\Installer\ButtonS7.msm" DiskId="1" />
+	  <Merge Id="id_Bluetooth_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Bluetooth\Software\Bluetooth\Bluetooth\bin\Release\Installer\Bluetooth.msm" DiskId="1" />
+	  <Merge Id="id_Button_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Button\Software\Button\Button\bin\Release\Installer\Button.msm" DiskId="1" />
+	  <Merge Id="id_Camera_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Camera\Software\Camera\Camera\bin\Release\Installer\Camera.msm" DiskId="1" />
+	  <Merge Id="id_CAN_DW_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CAN_DW\Software\CAN_DW\CAN_DW\bin\Release\Installer\CAN_DW.msm" DiskId="1" />
+	  <Merge Id="id_Display_T35_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T35\Software\Display T35\Display T35\bin\Release\Installer\Display_T35.msm" DiskId="1" />
+	  <Merge Id="id_Display_HD44780_msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_HD44780\Software\Display_HD44780\Display_HD44780\bin\Release\Installer\Display_HD44780.msm" DiskId="1" />
+	  <Merge Id="id_Ethernet_J11D_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet_J11D\Software\Ethernet_J11D\Ethernet_J11D\bin\Release\Installer\Ethernet_J11D.msm" DiskId="1" />
+	  <Merge Id="id_Extender_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Extender\Software\Extender\Extender\bin\Release\Installer\Extender.msm" DiskId="1" />
+	  <Merge Id="id_GenericDaisylink_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GenericDaisylink\Software\GenericDaisylink\GenericDaisylink\bin\Release\Installer\GenericDaisylink.msm" DiskId="1" />
+	  <Merge Id="id_IO60P16_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\IO60P16\Software\IO60P16\IO60P16\bin\Release\Installer\IO60P16.msm" DiskId="1" />
+	  <Merge Id="id_IR_Receiver_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\IR receiver\Software\IR receiver\IR receiver\bin\Release\Installer\IR_Reciever.msm" DiskId="1" />
+	  <Merge Id="id_Joystick_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Joystick\Software\Joystick\Joystick\bin\Release\Installer\Joystick.msm" DiskId="1" />
+	  <Merge Id="id_LED7R_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED7R\Software\LED7R\LED7R\bin\Release\Installer\LED7R.msm" DiskId="1" />
+	  <Merge Id="id_LightSensor_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LightSensor\Software\LightSensor\LightSensor\bin\Release\Installer\LightSensor.msm" DiskId="1" />
+	  <Merge Id="id_Load_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Load\Software\Load\Load\bin\Release\Installer\Load.msm" DiskId="1" />
+	  <Merge Id="id_MaxO_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MaxO\Software\MaxO\MaxO\bin\Release\Installer\MaxO.msm" DiskId="1" />
+	  <Merge Id="id_Motion_Sensor_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Motion Sensor\Software\Motion Sensor\Motion Sensor\bin\Release\Installer\Motion_Sensor.msm" DiskId="1" />
+	  <Merge Id="id_MotorControllerL298_msm"  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MotorControllerL298\Software\MotorControllerL298\MotorControllerL298\bin\Release\Installer\MotorControllerL298.msm" DiskId="1" />
+	  <Merge Id="id_MulticolorLed_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\MulticolorLed\Software\MulticolorLed\MulticolorLed\bin\Release\Installer\MulticolorLed.msm" DiskId="1" />
+	  <Merge Id="id_Music_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Music\Software\Music\Music\bin\Release\Installer\Music.msm" DiskId="1" />
+	  <Merge Id="id_OBD_II_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\OBD II\Software\OBD II\OBD II\bin\Release\Installer\OBD_II.msm" DiskId="1" />
+	  <Merge Id="id_Potentiometer_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Potentiometer\Software\Potentiometer\Potentiometer\bin\Release\Installer\Potentiometer.msm" DiskId="1" />
+	  <Merge Id="id_SDCard_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SDCard\Software\SDCard\SDCard\bin\Release\Installer\SDCard.msm" DiskId="1" />
+	  <Merge Id="id_UsbClientDP_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbClientDP\Software\UsbClientDP\UsbClientDP\bin\Release\Installer\UsbClientDP.msm" DiskId="1" />
+	  <Merge Id="id_UsbClientSP_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbClientSP\Software\UsbClientSP\UsbClientSP\bin\Release\Installer\UsbClientSP.msm" DiskId="1" />
+	  <Merge Id="id_UsbHost_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbHost\Software\UsbHost\UsbHost\bin\Release\Installer\UsbHost.msm" DiskId="1" />
+	  <Merge Id="id_Video_Out_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Video_Out\Software\Video_Out\Video_Out\bin\Release\Installer\Video_Out.msm" DiskId="1" />
+	  <Merge Id="id_WiFi_RS21_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\WiFi_RS21\Software\WiFi_RS21\WiFi_RS21\bin\Release\Installer\WiFi_RS21.msm" DiskId="1" />
+	  <Merge Id="id_XBee_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\XBee\Software\XBee\XBee\bin\Release\Installer\XBee.msm" DiskId="1" />
+	  <Merge Id="id_RS232_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS232\Software\RS232\RS232\bin\Release\Installer\RS232.msm" DiskId="1" />
+	  <Merge Id="id_UsbSerial_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbSerial\Software\UsbSerial\UsbSerial\bin\Release\Installer\UsbSerial.msm" DiskId="1" />
+	  <Merge Id="id_LEDMatrix_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LEDMatrix\Software\LEDMatrix\LEDMatrix\bin\Release\Installer\LEDMatrix.msm" DiskId="1" />
+	  <Merge Id="id_ParallelCNC_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ParallelCNC\Software\ParallelCNC\ParallelCNC\bin\Release\Installer\ParallelCNC.msm" DiskId="1" />
+	  <Merge Id="id_RFID_msm"                 Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RFID\Software\RFID\RFID\bin\Release\Installer\RFID.msm" DiskId="1" />
+	  <Merge Id="id_Display_CP7_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display_CP7\Software\Display_CP7\Display_CP7\bin\Release\Installer\Display_CP7.msm" DiskId="1" />
+	  <Merge Id="id_SerCam_msm"               Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SerCam\Software\SerCam\SerCam\bin\Release\Installer\SerCam.msm" DiskId="1" />
+	  <Merge Id="id_Display_TE35.msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display TE35\Software\Display TE35\Display_TE35\bin\Release\Installer\Display_TE35.msm" DiskId="1" />
+	  <Merge Id="id_Current_ACS712.msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Current ACS712\Software\Current ACS712\Current_ACS712\bin\Release\Installer\Current_ACS712.msm" DiskId="1" />
+	  <Merge Id="id_FLASH.msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FLASH\Software\FLASH\FLASH\bin\Release\Installer\FLASH.msm" DiskId="1" />
+	  <Merge Id="id_GasSense.msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\GasSense\Software\GasSense\GasSense\bin\Release\Installer\GasSense.msm" DiskId="1" />
+	  <Merge Id="id_PulseInOut.msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseInOut\Software\PulseInOut\PulseInOut\bin\Release\Installer\PulseInOut.msm" DiskId="1" />
+	  <Merge Id="id_RelayISOx16.msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RelayISOx16\Software\RelayISOx16\RelayISOx16\bin\Release\Installer\RelayISOx16.msm" DiskId="1" />
+	  <Merge Id="id_UC_Battery_4xAA.msm"      Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UC Battery 4xAA\Software\UC Battery 4xAA\UC_Battery_4xAA\bin\Release\Installer\UC_Battery_4xAA.msm" DiskId="1" />
+	  <Merge Id="id_Thermocouple.msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Thermocouple\Software\Thermocouple\Thermocouple\bin\Release\Installer\Thermocouple.msm" DiskId="1" />
+	  <Merge Id="id_Ethernet_ENC28_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Ethernet ENC28\Software\Ethernet_ENC28\Ethernet_ENC28\bin\Release\Installer\Ethernet_ENC28.msm" DiskId="1" />
+	  <Merge Id="id_Breakout_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout\Software\Breakout\Breakout\bin\Release\Installer\Breakout.msm" DiskId="1" />
+	  <Merge Id="id_Stepper_L6470_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Stepper_L6470\Software\Stepper_L6470\Stepper_L6470\bin\Release\Installer\Stepper_L6470.msm" DiskId="1" />
+	  <Merge Id="id_ColorSense_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ColorSense\Software\ColorSense\ColorSense\bin\Release\Installer\ColorSense.msm" DiskId="1" />
+	  <Merge Id="id_Display_N18_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N18\Software\Display N18\Display_N18\bin\Release\Installer\Display_N18.msm" DiskId="1" />
+	  <Merge Id="id_Display_T43_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display T43\Software\Display T43\Display_T43\bin\Release\Installer\Display_T43.msm" DiskId="1" />
+	  <Merge Id="id_LED7C_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED7C\Software\LED7C\LED7C\bin\Release\Installer\LED7C.msm" DiskId="1" />
+	  <Merge Id="id_Tunes_msm"                Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Tunes\Software\Tunes\Tunes\bin\Release\Installer\Tunes.msm" DiskId="1" />
+	  <Merge Id="id_Distance_US3_msm"         Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Distance US3\Software\Distance US3\Distance_US3\bin\Release\Installer\Distance_US3.msm" DiskId="1" />
+	  <Merge Id="id_Radio_FM1_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FM Radio\Software\FMRadio\FMRadio\bin\Release\Installer\FMRadio.msm" DiskId="1" />
+	  <Merge Id="id_USB_Serial_SP_msm"        Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\UsbSerialSP\Software\UsbSerialSP\UsbSerialSP\bin\Release\Installer\UsbSerialSP.msm" DiskId="1" />
+	  <Merge Id="id_Amp_M35_msm"              Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Amp M35\Software\Amp M35\Amp_M35\bin\Release\Installer\Amp_M35.msm" DiskId="1" />
+	  <Merge Id="id_Accel_G248_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Accel G248\Software\Accel G248\Accel_G248\bin\Release\Installer\Accel_G248.msm" DiskId="1" />
+	  <Merge Id="id_LED_Strip_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\LED Strip\Software\LED Strip\LED_Strip\bin\Release\Installer\LED_Strip.msm" DiskId="1" />
+	  <Merge Id="id_WiFi_RN171_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\WiFi RN171\Software\WiFi RN171\WiFi_RN171\bin\Release\Installer\WiFi_RN171.msm" DiskId="1" />
+	  <Merge Id="id_FEZCerbot_Controller_msm" Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\CerbotController\Software\CerbotController\CerbotController\bin\Release\Installer\CerbotController.msm" DiskId="1" />
+	  <Merge Id="id_Keypad_KP16_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Keypad KP16\Software\Keypad KP16\Keypad_KP16\bin\Release\Installer\Keypad_KP16.msm" DiskId="1" />
+	  <Merge Id="id_HubAP5_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\HubAP5\Software\HubAP5\HubAP5\bin\Release\Installer\HubAP5.msm" DiskId="1" />
+	  <Merge Id="id_Relay_X1_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Relay X1\Software\Relay X1\Relay_X1\bin\Release\Installer\Relay_X1.msm" DiskId="1" />
+	  <Merge Id="id_BreadBoard_X1_msm"		  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\BreadBoard X1\Software\BreadBoard X1\BreadBoard_X1\bin\Release\Installer\BreadBoard_X1.msm" DiskId="1" />
+	  <Merge Id="id_OneWire_X1_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\OneWire X1\Software\OneWire X1\OneWire_X1\bin\Release\Installer\OneWire_X1.msm" DiskId="1" />
+	  <Merge Id="id_RotaryH1_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RotaryH1\Software\RotaryH1\RotaryH1\bin\Release\Installer\RotaryH1.msm" DiskId="1" />
+	  <Merge Id="id_PulseCount_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\PulseCount\Software\PulseCount\PulseCount\bin\Release\Installer\PulseCount.msm" DiskId="1" />
+	  <Merge Id="id_TouchC8_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchC8\Software\TouchC8\TouchC8\bin\Release\Installer\TouchC8.msm" DiskId="1" />
+	  <Merge Id="id_TouchL12_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\TouchL12\Software\TouchL12\TouchL12\bin\Release\Installer\TouchL12.msm" DiskId="1" />
+	  <Merge Id="id_Reflector_R3_msm"		  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Reflector R3\Software\Reflector R3\Reflector_R3\bin\Release\Installer\Reflector_R3.msm" DiskId="1" />
+	  <Merge Id="id_RS485_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\RS485\Software\RS485\RS485\bin\Release\Installer\RS485.msm" DiskId="1" />
+	  <Merge Id="id_Display_N7_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Display N7\Software\Display N7\Display_N7\bin\Release\Installer\Display_N7.msm" DiskId="1" />
+	  <Merge Id="id_Breakout_TB10_msm"		  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\Breakout TB10\Software\Breakout TB10\Breakout_TB10\bin\Release\Installer\Breakout_TB10.msm" DiskId="1" />
+	  <Merge Id="id_FEZtive_msm"		  	  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FEZtive\Software\FEZtive\FEZtive\bin\Release\Installer\FEZtive.msm" DiskId="1" />
+	  <Merge Id="id_SPlus_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SPlus\Software\SPlus\SPlus\bin\Release\Installer\SPlus.msm" DiskId="1" />
+	  <Merge Id="id_ButtonS7_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ButtonS7\Software\ButtonS7\ButtonS7\bin\Release\Installer\ButtonS7.msm" DiskId="1" />
+	  <Merge Id="id_ButtonS7_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\DAQ_8B\Software\DAQ_8B\DAQ_8B\bin\Release\Installer\DAQ_8B.msm" DiskId="1" />
 
-			<Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
-			<Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
-			<Merge Id="id_FEZSpider_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider\bin\Release\Installer\FEZSpider.msm" DiskId="1" />
-			<Merge Id="id_FEZ_Cerbuino_Bee_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoBee\Software\FEZ Cerbuino Bee\FEZ Cerbuino Bee\bin\Release\Installer\FEZ_Cerbuino_Bee.msm" DiskId="1" />
-			<Merge Id="id_FEZCobraII_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCobra II\Software\FEZCobra II\FEZCobra_II\bin\Release\Installer\FEZCobra_II.msm" DiskId="1" />
-			<Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\Software\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
-			<Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
-			<Merge Id="id_FEZCerbuinoNet_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoNet\Software\FEZCerbuinoNet\FEZCerbuinoNet\bin\Release\Installer\FEZCerbuinoNet.msm" DiskId="1" />
-			<Merge Id="id_FEZRaptor_msm"			Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZRaptor\Software\FEZRaptor\FEZRaptor\bin\Release\Installer\FEZRaptor.msm" DiskId="1" />
-		</Directory>
+	  <Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
+	  <Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />
+	  <Merge Id="id_FEZSpider_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider\Software\FEZSpider\FEZSpider\bin\Release\Installer\FEZSpider.msm" DiskId="1" />
+	  <Merge Id="id_FEZ_Cerbuino_Bee_msm"     Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoBee\Software\FEZ Cerbuino Bee\FEZ Cerbuino Bee\bin\Release\Installer\FEZ_Cerbuino_Bee.msm" DiskId="1" />
+	  <Merge Id="id_FEZCobraII_msm"           Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCobra II\Software\FEZCobra II\FEZCobra_II\bin\Release\Installer\FEZCobra_II.msm" DiskId="1" />
+	  <Merge Id="id_FEZSpiderII_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZSpider II\Software\FEZSpider II\FEZSpider_II\bin\Release\Installer\FEZSpider_II.msm" DiskId="1" />
+	  <Merge Id="id_FEZCerbot_msm"            Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbot\Software\FEZCerbot\FEZCerbot\bin\Release\Installer\FEZCerbot.msm" DiskId="1" />
+	  <Merge Id="id_FEZCerbuinoNet_msm"       Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerbuinoNet\Software\FEZCerbuinoNet\FEZCerbuinoNet\bin\Release\Installer\FEZCerbuinoNet.msm" DiskId="1" />
+	  <Merge Id="id_FEZRaptor_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZRaptor\Software\FEZRaptor\FEZRaptor\bin\Release\Installer\FEZRaptor.msm" DiskId="1" />
+	</Directory>
 
-		<Feature Id="main" Title="Main" Level="1">
-			<MergeRef Id="id_Bluetooth_msm" />
-			<MergeRef Id="id_Button_msm" />
-			<MergeRef Id="id_Camera_msm" />
-			<MergeRef Id="id_CAN_DW_msm" />
-			<MergeRef Id="id_Display_T35_msm" />
-			<MergeRef Id="id_Display_HD44780_msm" />
-			<MergeRef Id="id_Ethernet_J11D_msm" />
-			<MergeRef Id="id_Extender_msm" />
-			<MergeRef Id="id_GenericDaisylink_msm" />
-			<MergeRef Id="id_IO60P16_msm" />
-			<MergeRef Id="id_IR_Receiver_msm" />
-			<MergeRef Id="id_Joystick_msm" />
-			<MergeRef Id="id_LED7R_msm" />
-			<MergeRef Id="id_LightSensor_msm" />
-			<MergeRef Id="id_Load_msm" />
-			<MergeRef Id="id_MaxO_msm" />
-			<MergeRef Id="id_Motion_Sensor_msm" />
-			<MergeRef Id="id_MotorControllerL298_msm" />
-			<MergeRef Id="id_MulticolorLed_msm" />
-			<MergeRef Id="id_Music_msm" />
-			<MergeRef Id="id_OBD_II_msm" />
-			<MergeRef Id="id_Potentiometer_msm" />
-			<MergeRef Id="id_SDCard_msm" />
-			<MergeRef Id="id_UsbClientDP_msm" />
-			<MergeRef Id="id_UsbClientSP_msm" />
-			<MergeRef Id="id_UsbHost_msm" />
-			<MergeRef Id="id_Video_Out_msm" />
-			<MergeRef Id="id_WiFi_RS21_msm" />
-			<MergeRef Id="id_XBee_msm" />
-			<MergeRef Id="id_RS232_msm" />
-			<MergeRef Id="id_UsbSerial_msm" />
-			<MergeRef Id="id_LEDMatrix_msm"/>
-			<MergeRef Id="id_ParallelCNC_msm" />
-			<MergeRef Id="id_RFID_msm" />
-			<MergeRef Id="id_Display_CP7_msm"/>
-			<MergeRef Id="id_SerCam_msm"/>
-			<MergeRef Id="id_Display_TE35.msm"/>
-			<MergeRef Id="id_Current_ACS712.msm"/>
-			<MergeRef Id="id_FLASH.msm"/>
-			<MergeRef Id="id_GasSense.msm"/>
-			<MergeRef Id="id_PulseInOut.msm"/>
-			<MergeRef Id="id_RelayISOx16.msm"/>
-			<MergeRef Id="id_UC_Battery_4xAA.msm"/>
-			<MergeRef Id="id_Thermocouple.msm"/>
-			<MergeRef Id="id_Ethernet_ENC28_msm"/>
-			<MergeRef Id="id_Breakout_msm"/>
-			<MergeRef Id="id_Stepper_L6470_msm"/>
-			<MergeRef Id="id_ColorSense_msm"/>
-			<MergeRef Id="id_Display_N18_msm" />
-			<MergeRef Id="id_Display_T43_msm" />
-			<MergeRef Id="id_LED7C_msm" />
-			<MergeRef Id="id_Tunes_msm" />
-			<MergeRef Id="id_Distance_US3_msm" />
-			<MergeRef Id="id_Radio_FM1_msm" />
-			<MergeRef Id="id_USB_Serial_SP_msm"/>
-			<MergeRef Id="id_Amp_M35_msm"/>
-			<MergeRef Id="id_Accel_G248_msm"/>
-			<MergeRef Id="id_LED_Strip_msm"/>
-			<MergeRef Id="id_WiFi_RN171_msm"/>
-			<MergeRef Id="id_FEZCerbot_Controller_msm" />
-			<MergeRef Id="id_Keypad_KP16_msm"/>
-			<MergeRef Id="id_HubAP5_msm"/>
-			<MergeRef Id="id_Relay_X1_msm"/>
-			<MergeRef Id="id_BreadBoard_X1_msm"/>
-			<MergeRef Id="id_OneWire_X1_msm"/>
-			<MergeRef Id="id_RotaryH1_msm"/>
-			<MergeRef Id="id_PulseCount_msm"/>
-			<MergeRef Id="id_TouchC8_msm"/>
-			<MergeRef Id="id_TouchL12_msm"/>
-			<MergeRef Id="id_Reflector_R3_msm"/>
-			<MergeRef Id="id_RS485_msm"/>
-			<MergeRef Id="id_Display_N7_msm"/>
-			<MergeRef Id="id_Breakout_TB10_msm"/>
-			<MergeRef Id="id_FEZtive_msm"/>
-			<MergeRef Id="id_SPlus_msm"/>
-			<MergeRef Id="id_ButtonS7_msm"/>
+	<Feature Id="main" Title="Main" Level="1">
+	  <MergeRef Id="id_Bluetooth_msm" />
+	  <MergeRef Id="id_Button_msm" />
+	  <MergeRef Id="id_Camera_msm" />
+	  <MergeRef Id="id_CAN_DW_msm" />
+	  <MergeRef Id="id_Display_T35_msm" />
+	  <MergeRef Id="id_Display_HD44780_msm" />
+	  <MergeRef Id="id_Ethernet_J11D_msm" />
+	  <MergeRef Id="id_Extender_msm" />
+	  <MergeRef Id="id_GenericDaisylink_msm" />
+	  <MergeRef Id="id_IO60P16_msm" />
+	  <MergeRef Id="id_IR_Receiver_msm" />
+	  <MergeRef Id="id_Joystick_msm" />
+	  <MergeRef Id="id_LED7R_msm" />
+	  <MergeRef Id="id_LightSensor_msm" />
+	  <MergeRef Id="id_Load_msm" />
+	  <MergeRef Id="id_MaxO_msm" />
+	  <MergeRef Id="id_Motion_Sensor_msm" />
+	  <MergeRef Id="id_MotorControllerL298_msm" />
+	  <MergeRef Id="id_MulticolorLed_msm" />
+	  <MergeRef Id="id_Music_msm" />
+	  <MergeRef Id="id_OBD_II_msm" />
+	  <MergeRef Id="id_Potentiometer_msm" />
+	  <MergeRef Id="id_SDCard_msm" />
+	  <MergeRef Id="id_UsbClientDP_msm" />
+	  <MergeRef Id="id_UsbClientSP_msm" />
+	  <MergeRef Id="id_UsbHost_msm" />
+	  <MergeRef Id="id_Video_Out_msm" />
+	  <MergeRef Id="id_WiFi_RS21_msm" />
+	  <MergeRef Id="id_XBee_msm" />
+	  <MergeRef Id="id_RS232_msm" />
+	  <MergeRef Id="id_UsbSerial_msm" />
+	  <MergeRef Id="id_LEDMatrix_msm"/>
+	  <MergeRef Id="id_ParallelCNC_msm" />
+	  <MergeRef Id="id_RFID_msm" />
+	  <MergeRef Id="id_Display_CP7_msm"/>
+	  <MergeRef Id="id_SerCam_msm"/>
+	  <MergeRef Id="id_Display_TE35.msm"/>
+	  <MergeRef Id="id_Current_ACS712.msm"/>
+	  <MergeRef Id="id_FLASH.msm"/>
+	  <MergeRef Id="id_GasSense.msm"/>
+	  <MergeRef Id="id_PulseInOut.msm"/>
+	  <MergeRef Id="id_RelayISOx16.msm"/>
+	  <MergeRef Id="id_UC_Battery_4xAA.msm"/>
+	  <MergeRef Id="id_Thermocouple.msm"/>
+	  <MergeRef Id="id_Ethernet_ENC28_msm"/>
+	  <MergeRef Id="id_Breakout_msm"/>
+	  <MergeRef Id="id_Stepper_L6470_msm"/>
+	  <MergeRef Id="id_ColorSense_msm"/>
+	  <MergeRef Id="id_Display_N18_msm" />
+	  <MergeRef Id="id_Display_T43_msm" />
+	  <MergeRef Id="id_LED7C_msm" />
+	  <MergeRef Id="id_Tunes_msm" />
+	  <MergeRef Id="id_Distance_US3_msm" />
+	  <MergeRef Id="id_Radio_FM1_msm" />
+	  <MergeRef Id="id_USB_Serial_SP_msm"/>
+	  <MergeRef Id="id_Amp_M35_msm"/>
+	  <MergeRef Id="id_Accel_G248_msm"/>
+	  <MergeRef Id="id_LED_Strip_msm"/>
+	  <MergeRef Id="id_WiFi_RN171_msm"/>
+	  <MergeRef Id="id_FEZCerbot_Controller_msm" />
+	  <MergeRef Id="id_Keypad_KP16_msm"/>
+	  <MergeRef Id="id_HubAP5_msm"/>
+	  <MergeRef Id="id_Relay_X1_msm"/>
+	  <MergeRef Id="id_BreadBoard_X1_msm"/>
+	  <MergeRef Id="id_OneWire_X1_msm"/>
+	  <MergeRef Id="id_RotaryH1_msm"/>
+	  <MergeRef Id="id_PulseCount_msm"/>
+	  <MergeRef Id="id_TouchC8_msm"/>
+	  <MergeRef Id="id_TouchL12_msm"/>
+	  <MergeRef Id="id_Reflector_R3_msm"/>
+	  <MergeRef Id="id_RS485_msm"/>
+	  <MergeRef Id="id_Display_N7_msm"/>
+	  <MergeRef Id="id_Breakout_TB10_msm"/>
+	  <MergeRef Id="id_FEZtive_msm"/>
+	  <MergeRef Id="id_SPlus_msm"/>
+	  <MergeRef Id="id_ButtonS7_msm"/>
+	  <MergeRef Id="id_DAQ_8B_msm"/>
 
-			<MergeRef Id="id_FEZHydra_msm" />
-			<MergeRef Id="id_FEZCerberus_msm" />
-			<MergeRef Id="id_FEZSpider_msm" />
-			<MergeRef Id="id_FEZ_Cerbuino_Bee_msm" />
-			<MergeRef Id="id_FEZCobraII_msm" />
-			<MergeRef Id="id_FEZSpiderII_msm" />
-			<MergeRef Id="id_FEZCerbot_msm" />
-			<MergeRef Id="id_FEZCerbuinoNet_msm" />
-			<MergeRef Id="id_FEZRaptor_msm" />
+	  <MergeRef Id="id_FEZHydra_msm" />
+	  <MergeRef Id="id_FEZCerberus_msm" />
+	  <MergeRef Id="id_FEZSpider_msm" />
+	  <MergeRef Id="id_FEZ_Cerbuino_Bee_msm" />
+	  <MergeRef Id="id_FEZCobraII_msm" />
+	  <MergeRef Id="id_FEZSpiderII_msm" />
+	  <MergeRef Id="id_FEZCerbot_msm" />
+	  <MergeRef Id="id_FEZCerbuinoNet_msm" />
+	  <MergeRef Id="id_FEZRaptor_msm" />
 
-			<ComponentRef Id="id_sdk_files"/>
-			<ComponentRef Id="id_getting_started_guides_spider"/>
-			<ComponentRef Id="id_getting_started_guides_hydra"/>
-			<ComponentRef Id="id_getting_started_guides_cerberus"/>
-		</Feature>
+	  <ComponentRef Id="id_sdk_files"/>
+	  <ComponentRef Id="id_getting_started_guides_spider"/>
+	  <ComponentRef Id="id_getting_started_guides_hydra"/>
+	  <ComponentRef Id="id_getting_started_guides_cerberus"/>
+	</Feature>
 
-		<Icon Id="AppAddRemoveIcon" SourceFile="$(var.SourcePath)\G.ico"/>
-		<Property Id="ARPPRODUCTICON" Value="AppAddRemoveIcon"/>
+	<Icon Id="AppAddRemoveIcon" SourceFile="$(var.SourcePath)\G.ico"/>
+	<Property Id="ARPPRODUCTICON" Value="AppAddRemoveIcon"/>
 
-		<!--Sequences-->
-		<InstallExecuteSequence>
+	<!--Sequences-->
+	<InstallExecuteSequence>
 
-			<!--In case this is a newer version then remove the existing product-->
-			<RemoveExistingProducts Before="InstallInitialize"/>
+	  <!--In case this is a newer version then remove the existing product-->
+	  <RemoveExistingProducts Before="InstallInitialize"/>
 
-			<!--In case you're installing an older version tell the user and exit -->
-			<Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERVERSIONINSTALLED</Custom>
+	  <!--In case you're installing an older version tell the user and exit -->
+	  <Custom Action="NoDowngrade" After="FindRelatedProducts">NEWERVERSIONINSTALLED</Custom>
 
-			<!--Display an error if overwriting the same version-->
-			<Custom Action="SameVersionError" After="FindRelatedProducts">SAMEVERSIONINSTALLED</Custom>
+	  <!--Display an error if overwriting the same version-->
+	  <Custom Action="SameVersionError" After="FindRelatedProducts">SAMEVERSIONINSTALLED</Custom>
 
-			<!--Display an error if gadgeteer core is not installed-->
-			<Custom Action="GadgeteerCoreNotInstalledError" Before="InstallInitialize">&amp;main&gt;2 AND NOT GADGETEER_CORE_INSTALLED</Custom>
-		</InstallExecuteSequence>
+	  <!--Display an error if gadgeteer core is not installed-->
+	  <Custom Action="GadgeteerCoreNotInstalledError" Before="InstallInitialize">&amp;main&gt;2 AND NOT GADGETEER_CORE_INSTALLED</Custom>
+	</InstallExecuteSequence>
 
-	</Product>
+  </Product>
 </Wix>
