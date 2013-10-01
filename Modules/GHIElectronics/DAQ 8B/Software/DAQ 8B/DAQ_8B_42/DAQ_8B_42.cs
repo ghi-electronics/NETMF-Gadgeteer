@@ -34,35 +34,35 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <summary>
 			/// The channel marked P1 on the board.
 			/// </summary>
-			P1 = 0x00,
+			P1 = 0x0200,
 			/// <summary>
 			/// The channel marked P2 on the board.
 			/// </summary>
-			P2 = 0x01,
+			P2 = 0x0400,
 			/// <summary>
 			/// The channel marked P3 on the board.
 			/// </summary>
-			P3 = 0x02,
+			P3 = 0x0600,
 			/// <summary>
 			/// The channel marked P4 on the board.
 			/// </summary>
-			P4 = 0x03,
+			P4 = 0x0800,
 			/// <summary>
 			/// The channel marked P5 on the board.
 			/// </summary>
-			P5 = 0x04,
+			P5 = 0x0A00,
 			/// <summary>
 			/// The channel marked P6 on the board.
 			/// </summary>
-			P6 = 0x05,
+			P6 = 0x0C00,
 			/// <summary>
 			/// The channel marked P7 on the board.
 			/// </summary>
-			P7 = 0x06,
+			P7 = 0x0E00,
 			/// <summary>
 			/// The channel marked P8 on the board.
 			/// </summary>
-			P8 = 0x07
+			P8 = 0x0000
 		}
 
 		/// <summary>
@@ -72,7 +72,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>The voltage on the given channel between 0 and 4.096V.</returns>
 		public double GetReading(Channel channel)
 		{
-			this.SPIWriteRead((ushort)(0xF124 | ((int)channel << 9)));
+			this.SPIWriteRead((ushort)(0xF124 | (int)channel));
 			return 4.096 * (double)this.SPIWriteRead(0x0000) / 65535.0;
 		}
 
