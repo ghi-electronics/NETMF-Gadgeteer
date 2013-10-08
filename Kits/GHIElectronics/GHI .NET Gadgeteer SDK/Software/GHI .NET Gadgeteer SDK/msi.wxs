@@ -203,7 +203,7 @@
 	  <Merge Id="id_FEZtive_msm"		  	  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\FEZtive\Software\FEZtive\FEZtive\bin\Release\Installer\FEZtive.msm" DiskId="1" />
 	  <Merge Id="id_SPlus_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\SPlus\Software\SPlus\SPlus\bin\Release\Installer\SPlus.msm" DiskId="1" />
 	  <Merge Id="id_ButtonS7_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\ButtonS7\Software\ButtonS7\ButtonS7\bin\Release\Installer\ButtonS7.msm" DiskId="1" />
-	  <Merge Id="id_ButtonS7_msm"			  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\DAQ_8B\Software\DAQ_8B\DAQ_8B\bin\Release\Installer\DAQ_8B.msm" DiskId="1" />
+	  <Merge Id="id_DAQ_8B_msm"				  Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Modules\GHIElectronics\DAQ 8B\Software\DAQ 8B\DAQ_8B\bin\Release\Installer\DAQ_8B.msm" DiskId="1" />
 
 	  <Merge Id="id_FEZHydra_msm"             Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZHydra\Software\FEZHydra\FEZHydra\bin\Release\Installer\FEZHydra.msm" DiskId="1" />
 	  <Merge Id="id_FEZCerberus_msm"          Language="1033" SourceFile="$(var.SourcePath)\..\..\..\..\..\Mainboards\GHIElectronics\FEZCerberus\Software\FEZCerberus\FEZCerberus\bin\Release\Installer\FEZCerberus.msm" DiskId="1" />

@@ -251,7 +251,7 @@ namespace GHIElectronics.Gadgeteer
 			// N/A
 
 			// K/U
-			socket.SerialPortName = "COM3";
+			socket.SerialPortName = "COM2";
 
 			// X
 			socket.NativeI2CWriteRead = nativeI2C;
