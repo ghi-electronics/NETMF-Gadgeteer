@@ -107,7 +107,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			lcdConfig.VerticalFrontPorch = 7;
 
 			// NOTE: This is used for ChipworkX, comment if using EMX.
-			lcdConfig.PixelClockDivider = 3;
+			lcdConfig.PixelClockDivider = 5;
 			//lcdConfig.PixelClockRate = 25000;
 
 			// Set configs

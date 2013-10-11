@@ -121,7 +121,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         break;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ErrorPrint("Unable to identify USB Host device.");
             }
