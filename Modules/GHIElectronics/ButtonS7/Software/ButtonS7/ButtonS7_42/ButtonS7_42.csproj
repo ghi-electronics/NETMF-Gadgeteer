@@ -49,15 +49,17 @@
     <Compile Include="ButtonS7_42.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Gadgeteer">
-      <SpecificVersion>false</SpecificVersion>
-      <Private>false</Private>
-    </Reference>
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.IO" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\GadgeteerCore\Gadgeteer42\Gadgeteer42.csproj">
+      <Project>{16F46F9A-6FA2-4E4C-A0DD-5C53319DBCAB}</Project>
+      <Name>Gadgeteer42</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
