@@ -42,7 +42,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-            Echo = new GTI.DigitalInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullDown, this);
+            Echo = new GTI.DigitalInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
             Trigger = new GTI.DigitalOutput(socket, Socket.Pin.Four, false, this);
         }
 
