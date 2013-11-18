@@ -6,6 +6,7 @@ using GT = Gadgeteer;
 using GHI.Hardware.G400;
 using GHI.Premium.IO;
 using GHI.Premium.Hardware;
+using GHI.Premium.System;
 
 namespace GHIElectronics.Gadgeteer
 {
@@ -19,6 +20,8 @@ namespace GHIElectronics.Gadgeteer
 		/// </summary>
 		public FEZRaptor()
 		{
+			this.NativeBitmapConverter = this.BitmapConverter;
+
 			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(this.NativeI2CWriteRead);
 			
 			GT.Socket socket;
@@ -281,6 +284,14 @@ namespace GHIElectronics.Gadgeteer
 			socket.PWM9 = Cpu.PWMChannel.PWM_2;
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+		}
+
+		void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+		{
+			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
+				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
+
+			Util.BitmapConvertBPP(bitmapBytes, pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
 		}
 
 		bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
