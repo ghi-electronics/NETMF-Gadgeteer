@@ -44,10 +44,11 @@
         <!-- so that the designer automatically includes it when your module is included - e.g. by uncommenting the lines below -->
         <!-- These .NET Gadgeteer assemblies were separated out for NETMF 4.2, so don't need to be listed for NETMF 4.1 as separate -->
         <!-- Uncomment any of the below that you require for this module. -->
-
+		<!--
 		<Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
 		<Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
 		<Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
+		-->
 		<!--
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />

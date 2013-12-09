@@ -54,12 +54,12 @@
         <!-- These .NET Gadgeteer assemblies were separated out for NETMF 4.2, so don't need to be listed for NETMF 4.1 as separate -->
         <!-- Uncomment any of the below that you require for this module. -->
         <!--
-        -->
         <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
         <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
         <Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
+        -->
 
-        <!-- If this is a networking module, then uncomment all four lines below to include Gadgeteer's web client/web server libraries -->
+		<!-- If this is a networking module, then uncomment all four lines below to include Gadgeteer's web client/web server libraries -->
         <!-- 
         <Assembly MFVersion="4.1" Name="Gadgeteer.WebClient" />
         <Assembly MFVersion="4.1" Name="Gadgeteer.WebServer" />
