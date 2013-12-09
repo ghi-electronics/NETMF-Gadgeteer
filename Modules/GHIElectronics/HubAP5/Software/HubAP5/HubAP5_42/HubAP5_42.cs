@@ -517,7 +517,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 							pwm = this.pwms[i + 1];
 
 					this.writeRegister(IO60P16.PWM_SELECT_REGISTER, pwm);
-					this.writeRegister(IO60P16.PWM_CONFIG, IO60P16.CLOCK_SOURCE); //93.75KHz clock
+                    this.writeRegister(IO60P16.PWM_CONFIG, IO60P16.CLOCK_SOURCE); //93.75KHz clock
+
+                    val = this.readRegister(IO60P16.PIN_STRONG_DRIVE);
+                    this.writeRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
 				}
 				else
 				{

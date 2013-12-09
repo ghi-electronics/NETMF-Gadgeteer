@@ -525,6 +525,10 @@ namespace Gadgeteer.Modules.GHIElectronics
                 _io60p16.WriteRegister(SELECT_CLOCK_SRC, (byte)_tickWidth);
                 _io60p16.WriteRegister(PERIOD_REGISTER, _periodTicks);      // (Period rising : 255)
                 _io60p16.WriteRegister(PULSE_WIDTH_REGISTER, _highPulseWidthTicks);        //(DutyCycle )
+
+                byte b = _io60p16.ReadRegister((byte)ResistorMode.StrongDrive);
+                b |= (byte)((1 << _pinId));
+                _io60p16.WriteRegister((byte)ResistorMode.StrongDrive, b);
             }
 
             // the frequency is automatically set to source ticks x 255
