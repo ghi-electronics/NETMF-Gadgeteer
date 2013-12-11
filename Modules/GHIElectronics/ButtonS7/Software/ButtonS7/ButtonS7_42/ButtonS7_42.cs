@@ -22,9 +22,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.buttons = new GTI.DigitalInput[6];
 			for (int i = 0; i < 6; i++)
-				this.buttons[i] = new GTI.DigitalInput(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
+				this.buttons[i] = new GTI.DigitalInput(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
 
-			this.enter = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+			this.enter = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingAndFallingEdge, this);
 			this.enter.Interrupt += this.OnInterrupt;
 		}
 

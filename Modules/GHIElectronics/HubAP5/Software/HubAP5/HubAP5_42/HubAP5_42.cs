@@ -433,17 +433,28 @@ namespace Gadgeteer.Modules.GHIElectronics
 				return result;
 			}
 
+            private byte[] readRegisters(byte register, uint count)
+            {
+                byte[] result = new byte[count];
+
+                lock (this.io60Chip)
+                {
+                    write1[0] = register;
+                    this.io60Chip.WriteRead(write1, result, 250);
+                }
+
+                return result;
+            }
+
 			private void OnInterrupt(GTI.InterruptInput sender, bool value)
 			{
 				ArrayList interruptedPins = new ArrayList();
 
+                byte[] intPorts = this.readRegisters(IO60P16.INTERRUPT_PORT_0_REGISTER, 8);
 				for (byte i = 0; i < 8; i++)
-				{
-					byte val = this.readRegister((byte)(IO60P16.INTERRUPT_PORT_0_REGISTER + i));
 					for (int j = 1, k = 0; j <= 128; j <<= 1, k++)
-						if ((val & j) != 0)
+                        if ((intPorts[i] & j) != 0)
 							interruptedPins.Add((i << 4) | k);
-				}
 
 				foreach (int pin in interruptedPins)
 				{
@@ -466,14 +477,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			{
 				this.io60Chip = new GTI.I2CBus(socket, 0x20, 100, null);
 
-				//Disable all interrupts by default
-				for (byte i = 0; i < 8; i++)
-				{
-					this.writeRegister(IO60P16.PORT_SELECT_REGISTER, i);
-					this.writeRegister(IO60P16.INTERRUPT_MASK_REGISTER, 0xFF);
-				}
-
-				this.interrupt = new GTI.InterruptInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullDown, GTI.InterruptMode.RisingEdge, null);
+				this.interrupt = new GTI.InterruptInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, null);
 				this.interrupt.Interrupt += this.OnInterrupt;
 			}
 
@@ -525,7 +529,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				else
 				{
 					this.writeRegister(IO60P16.ENABLE_PWM_REGISTER, (byte)(val & ~mask));
-					val = this.readRegister(IO60P16.PIN_DIRECTION_REGISTER);
+                    val = this.readRegister(IO60P16.PIN_DIRECTION_REGISTER);
 
 					if (state == IOState.Output)
 					{
@@ -538,12 +542,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 					{
 						this.writeRegister(IO60P16.PIN_DIRECTION_REGISTER, (byte)(val | mask));
 
-						val = this.readRegister((byte)resistorMode);
+                        val = this.readRegister((byte)resistorMode);
 						this.writeRegister((byte)resistorMode, (byte)(val | mask));
 					}
 				}
 
-				val = this.readRegister(IO60P16.INTERRUPT_MASK_REGISTER);
+                val = this.readRegister(IO60P16.INTERRUPT_MASK_REGISTER);
 				if (state == IOState.InputInterrupt)
 					this.writeRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val & ~mask));
 				else
