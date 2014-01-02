@@ -29,8 +29,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private ushort ledMask;
 		private PWM enableFaderPin;
-		private SPI forwardLEDs;
-		private SPI.Configuration spiConfig;
+		private GTI.SPI forwardLEDs;
+		private GTI.SPI.Configuration spiConfig;
 
 		private bool leftInverted;
 		private bool rightInverted;
@@ -82,8 +82,22 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.servoConfigured = false;
 
-			this.spiConfig = new SPI.Configuration(FEZCerberus.Pin.PB2, false, 0, 0, false, true, 2000, SPI.SPI_module.SPI1);
-			this.forwardLEDs = new SPI(this.spiConfig);
+            var spiSocket = GT.Socket.GetSocket(3, true, null, null);
+            var tempSocket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
+            tempSocket.SupportedTypes = new char[] { 'S' };
+            tempSocket.CpuPins[3] = FEZCerberus.Pin.PB2;
+            tempSocket.CpuPins[4] = FEZCerberus.Pin.PB2;
+            tempSocket.CpuPins[5] = FEZCerberus.Pin.PB2;
+            tempSocket.CpuPins[6] = FEZCerberus.Pin.PB2;
+            tempSocket.CpuPins[7] = spiSocket.CpuPins[7];
+            tempSocket.CpuPins[8] = spiSocket.CpuPins[8];
+            tempSocket.CpuPins[9] = spiSocket.CpuPins[9];
+            tempSocket.SPIModule = spiSocket.SPIModule;
+            GT.Socket.SocketInterfaces.RegisterSocket(tempSocket);
+
+            this.spiConfig = new GTI.SPI.Configuration(false, 0, 0, false, true, 2000);
+            this.forwardLEDs = new GTI.SPI(tempSocket, this.spiConfig, GTI.SPI.Sharing.Shared, tempSocket, Socket.Pin.Six, null);
+
 			this.enableFaderPin = new PWM((Cpu.PWMChannel)13, 500, 500, PWM.ScaleFactor.Microseconds, true);
 			this.enableFaderPin.Start();
 			this.SetLEDBitmask(0x0);
