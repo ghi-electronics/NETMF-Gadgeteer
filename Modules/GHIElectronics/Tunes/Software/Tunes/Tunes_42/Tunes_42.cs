@@ -302,7 +302,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public void Stop()
 		{
-            this.playbackThread.Abort();
+            if (this.playbackThread != null)
+            {
+                this.playbackThread.Abort();
+                this.playbackThread = null;
+            }
+
             this.running = false;
             this.tunePWM.Active = false;
 		}
