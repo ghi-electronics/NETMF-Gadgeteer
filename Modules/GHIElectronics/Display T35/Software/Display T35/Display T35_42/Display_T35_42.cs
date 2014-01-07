@@ -190,7 +190,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             Socket tsocket = Socket.GetSocket(touchSocketNumber, true, this, "T");
 
             tsocket.EnsureTypeIsSupported('T', this);
-            tsocket.ReservePin(Socket.Pin.Three, this);
             tsocket.ReservePin(Socket.Pin.Four, this);
             tsocket.ReservePin(Socket.Pin.Five, this);
             tsocket.ReservePin(Socket.Pin.Six, this);
