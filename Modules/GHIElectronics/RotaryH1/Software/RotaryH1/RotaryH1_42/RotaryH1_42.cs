@@ -17,6 +17,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private byte[] read2 = new byte[2];
 		private byte[] read4 = new byte[4];
 
+        private GTI.DigitalOutput Enable;
+
 #if USE_SOFTWARE_SPI
         private GTI.DigitalInput MISO;
         private GTI.DigitalOutput MOSI;
@@ -46,6 +48,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.config = new GTI.SPI.Configuration(false, 0, 0, false, true, 1000);
 			this.spi = new GTI.SPI(socket, this.config, GTI.SPI.Sharing.Shared, socket, GT.Socket.Pin.Six, this);
 #endif
+
+            this.Enable = new GTI.DigitalOutput(socket, Socket.Pin.Five, true, this);
             
 			this.Initialize();
 		}
