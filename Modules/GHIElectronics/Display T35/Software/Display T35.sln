@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display T35_42", "Display T35\Display T35_42\Display T35_42.csproj", "{D3EC7CBD-38A0-4682-82DB-CD5067A9EB60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display T35", "Display T35\Display T35\Display T35.csproj", "{8484815B-A265-480C-BA3F-EFFACBDCDBB9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display T35_43", "Display T35\Display T35_43\Display T35_43.csproj", "{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{8484815B-A265-480C-BA3F-EFFACBDCDBB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8484815B-A265-480C-BA3F-EFFACBDCDBB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8484815B-A265-480C-BA3F-EFFACBDCDBB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

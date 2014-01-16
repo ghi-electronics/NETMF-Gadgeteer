@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxO_43", "MaxO\MaxO_43\MaxO_43.csproj", "{1f160d07-9331-432d-9d62-d7fbedb74cee}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxO_42", "MaxO\MaxO_42\MaxO_42.csproj", "{BE67B8B4-58F9-4693-A424-E4856E14DC63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxO", "MaxO\MaxO\MaxO.csproj", "{191E47DF-DD68-4325-86A1-B7E1D2211F49}"
@@ -19,6 +21,10 @@ Global
 		{191E47DF-DD68-4325-86A1-B7E1D2211F49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{191E47DF-DD68-4325-86A1-B7E1D2211F49}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{191E47DF-DD68-4325-86A1-B7E1D2211F49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1f160d07-9331-432d-9d62-d7fbedb74cee}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1f160d07-9331-432d-9d62-d7fbedb74cee}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1f160d07-9331-432d-9d62-d7fbedb74cee}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1f160d07-9331-432d-9d62-d7fbedb74cee}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

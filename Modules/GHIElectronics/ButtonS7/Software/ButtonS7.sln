@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7_43", "ButtonS7\ButtonS7_43\ButtonS7_43.csproj", "{4de9d6e8-7a0f-41f4-86b8-f03bbc57cdce}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7_42", "ButtonS7\ButtonS7_42\ButtonS7_42.csproj", "{AD00B3E6-5912-479E-9685-258F48A0E068}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7", "ButtonS7\ButtonS7\ButtonS7.csproj", "{35226EF0-55AB-4B02-82D7-E65D0534FDB3}"
@@ -27,6 +29,10 @@ Global
 		{BE170549-BF0C-4AFE-9ACA-2049AB8C4AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE170549-BF0C-4AFE-9ACA-2049AB8C4AD7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BE170549-BF0C-4AFE-9ACA-2049AB8C4AD7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{4de9d6e8-7a0f-41f4-86b8-f03bbc57cdce}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4de9d6e8-7a0f-41f4-86b8-f03bbc57cdce}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4de9d6e8-7a0f-41f4-86b8-f03bbc57cdce}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4de9d6e8-7a0f-41f4-86b8-f03bbc57cdce}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

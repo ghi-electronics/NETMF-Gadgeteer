@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchL12_43", "TouchL12\TouchL12_43\TouchL12_43.csproj", "{47eed093-a7cf-448c-97f7-29e341345d99}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchL12_42", "TouchL12\TouchL12_42\TouchL12_42.csproj", "{0B4CD139-5E88-4B81-9A75-DB903744E558}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchL12", "TouchL12\TouchL12\TouchL12.csproj", "{B5694EC9-56DD-4D41-AFB4-4F80E09CAF12}"
@@ -27,6 +29,10 @@ Global
 		{D63459EF-8A6B-4157-973D-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D63459EF-8A6B-4157-973D-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D63459EF-8A6B-4157-973D-000000000000}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{47eed093-a7cf-448c-97f7-29e341345d99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47eed093-a7cf-448c-97f7-29e341345d99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47eed093-a7cf-448c-97f7-29e341345d99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47eed093-a7cf-448c-97f7-29e341345d99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

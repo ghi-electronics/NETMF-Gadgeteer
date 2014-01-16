@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbSerial_43", "UsbSerial\UsbSerial_43\UsbSerial_43.csproj", "{48a918c1-d509-4a7c-b815-b7d572527866}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbSerial_42", "UsbSerial\UsbSerial_42\UsbSerial_42.csproj", "{3D36DE9F-EE82-4F02-816D-C63EF0993FA4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsbSerial", "UsbSerial\UsbSerial\UsbSerial.csproj", "{BB3D5699-6A1B-41FB-9EE0-8AD4682E1CFF}"
@@ -19,6 +21,10 @@ Global
 		{BB3D5699-6A1B-41FB-9EE0-8AD4682E1CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB3D5699-6A1B-41FB-9EE0-8AD4682E1CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB3D5699-6A1B-41FB-9EE0-8AD4682E1CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48a918c1-d509-4a7c-b815-b7d572527866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48a918c1-d509-4a7c-b815-b7d572527866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48a918c1-d509-4a7c-b815-b7d572527866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48a918c1-d509-4a7c-b815-b7d572527866}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

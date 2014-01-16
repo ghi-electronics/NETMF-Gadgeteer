@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider_43", "FEZSpider\FEZSpider_43\FEZSpider_43.csproj", "{fdf179a1-eae6-4196-adbb-4795b72e0de1}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider_42", "FEZSpider\FEZSpider_42\FEZSpider_42.csproj", "{F71ABEB3-49AC-4E9D-9892-1306F35DEF3B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZSpider", "FEZSpider\FEZSpider\FEZSpider.csproj", "{293A9835-65A1-4D0E-B2D4-C448E4204E5E}"
@@ -19,6 +21,10 @@ Global
 		{293A9835-65A1-4D0E-B2D4-C448E4204E5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{293A9835-65A1-4D0E-B2D4-C448E4204E5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{293A9835-65A1-4D0E-B2D4-C448E4204E5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{fdf179a1-eae6-4196-adbb-4795b72e0de1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{fdf179a1-eae6-4196-adbb-4795b72e0de1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{fdf179a1-eae6-4196-adbb-4795b72e0de1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{fdf179a1-eae6-4196-adbb-4795b72e0de1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

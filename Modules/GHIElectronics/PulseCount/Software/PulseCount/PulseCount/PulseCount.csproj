@@ -9,7 +9,7 @@
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
     <OutputName>Ignore</OutputName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <FileAlignment>512</FileAlignment>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -50,6 +50,7 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PulseCount_43\PulseCount_43.csproj" />
     <ProjectReference Include="..\PulseCount_42\PulseCount_42.csproj">
       <Project>{7CC76766-D064-43DC-B6C3-DD08215A7373}</Project>
       <Name>PulseCount_42</Name>

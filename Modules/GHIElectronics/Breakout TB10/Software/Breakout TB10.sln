@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout_TB10_43", "Breakout TB10\Breakout_TB10_43\Breakout_TB10_43.csproj", "{eb460c55-7586-4085-81ff-172a795477fa}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout_TB10_42", "Breakout TB10\Breakout_TB10_42\Breakout_TB10_42.csproj", "{BA70301D-4931-4499-BD3E-26FC3797F914}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Breakout_TB10", "Breakout TB10\Breakout_TB10\Breakout_TB10.csproj", "{DAE340AC-7C1D-4B62-B7F7-D0414C097A56}"
@@ -19,6 +21,10 @@ Global
 		{DAE340AC-7C1D-4B62-B7F7-D0414C097A56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DAE340AC-7C1D-4B62-B7F7-D0414C097A56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DAE340AC-7C1D-4B62-B7F7-D0414C097A56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{eb460c55-7586-4085-81ff-172a795477fa}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{eb460c55-7586-4085-81ff-172a795477fa}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{eb460c55-7586-4085-81ff-172a795477fa}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{eb460c55-7586-4085-81ff-172a795477fa}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

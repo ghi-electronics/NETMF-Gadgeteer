@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCerberus_43", "FEZCerberus\FEZCerberus_43\FEZCerberus_43.csproj", "{2A8B3630-EB07-4964-BE4F-934F7B254F42}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCerberus_42", "FEZCerberus\FEZCerberus_42\FEZCerberus_42.csproj", "{C3DAEFE2-B19E-4189-A8A1-B6823772401F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCerberus", "FEZCerberus\FEZCerberus\FEZCerberus.csproj", "{043A4D70-37CE-4731-8E2A-D46B2E96BBF3}"
@@ -11,6 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2A8B3630-EB07-4964-BE4F-934F7B254F42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A8B3630-EB07-4964-BE4F-934F7B254F42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A8B3630-EB07-4964-BE4F-934F7B254F42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A8B3630-EB07-4964-BE4F-934F7B254F42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C3DAEFE2-B19E-4189-A8A1-B6823772401F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C3DAEFE2-B19E-4189-A8A1-B6823772401F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3DAEFE2-B19E-4189-A8A1-B6823772401F}.Release|Any CPU.ActiveCfg = Release|Any CPU

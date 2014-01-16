@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RN171_43", "WiFi RN171\WiFi_RN171_43\WiFi_RN171_43.csproj", "{badecdcd-c6c0-4ace-905f-4acee2a45272}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RN171_42", "WiFi RN171\WiFi_RN171_42\WiFi_RN171_42.csproj", "{34B038D5-E442-41CF-B8C4-456301485830}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RN171", "WiFi RN171\WiFi_RN171\WiFi_RN171.csproj", "{8462BC1E-AC5B-4C7B-9AD1-1B88AA302B23}"
@@ -19,6 +21,10 @@ Global
 		{8462BC1E-AC5B-4C7B-9AD1-1B88AA302B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8462BC1E-AC5B-4C7B-9AD1-1B88AA302B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8462BC1E-AC5B-4C7B-9AD1-1B88AA302B23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{badecdcd-c6c0-4ace-905f-4acee2a45272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{badecdcd-c6c0-4ace-905f-4acee2a45272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{badecdcd-c6c0-4ace-905f-4acee2a45272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{badecdcd-c6c0-4ace-905f-4acee2a45272}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

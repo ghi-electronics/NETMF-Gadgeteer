@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip_43", "LED Strip\LED_Strip_43\LED_Strip_43.csproj", "{1f257581-753c-486c-bd2b-db3f6bc2bfca}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip_42", "LED Strip\LED_Strip_42\LED_Strip_42.csproj", "{5F26F4FA-F8E2-4E8B-8A38-5095A1B8912F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LED_Strip", "LED Strip\LED_Strip\LED_Strip.csproj", "{6FCEAEBC-BE24-4EB9-BDFD-BCE5A5105E7D}"
@@ -27,6 +29,10 @@ Global
 		{5F41A18D-7183-48D7-B2B1-55BB5FA78110}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F41A18D-7183-48D7-B2B1-55BB5FA78110}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F41A18D-7183-48D7-B2B1-55BB5FA78110}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{1f257581-753c-486c-bd2b-db3f6bc2bfca}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1f257581-753c-486c-bd2b-db3f6bc2bfca}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1f257581-753c-486c-bd2b-db3f6bc2bfca}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1f257581-753c-486c-bd2b-db3f6bc2bfca}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

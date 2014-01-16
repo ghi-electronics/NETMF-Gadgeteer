@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tunes_43", "Tunes\Tunes_43\Tunes_43.csproj", "{57753a15-9c14-494c-bc23-1cb2dc25b00f}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tunes_42", "Tunes\Tunes_42\Tunes_42.csproj", "{C5010C4C-50AF-4BCC-AE8D-43BB7FF58B44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tunes", "Tunes\Tunes\Tunes.csproj", "{6234BFA1-AC45-4384-AD00-F825CA4553BD}"
@@ -27,6 +29,10 @@ Global
 		{49A184D5-F265-4929-A70F-4C47D7D9E899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49A184D5-F265-4929-A70F-4C47D7D9E899}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49A184D5-F265-4929-A70F-4C47D7D9E899}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{57753a15-9c14-494c-bc23-1cb2dc25b00f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57753a15-9c14-494c-bc23-1cb2dc25b00f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57753a15-9c14-494c-bc23-1cb2dc25b00f}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57753a15-9c14-494c-bc23-1cb2dc25b00f}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

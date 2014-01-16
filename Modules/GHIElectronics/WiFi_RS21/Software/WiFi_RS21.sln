@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21_43", "WiFi_RS21\WiFi_RS21_43\WiFi_RS21_43.csproj", "{bc775060-f507-40a8-b376-f5f7fe5a13b1}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21_42", "WiFi_RS21\WiFi_RS21_42\WiFi_RS21_42.csproj", "{D232475E-CB64-49C1-8154-52060B88DE83}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFi_RS21", "WiFi_RS21\WiFi_RS21\WiFi_RS21.csproj", "{F565F4F1-C836-4BE7-8692-A70E797E8745}"
@@ -27,6 +29,10 @@ Global
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D1AEF7ED-C3AC-48E9-8A42-1B349F135F50}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{bc775060-f507-40a8-b376-f5f7fe5a13b1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{bc775060-f507-40a8-b376-f5f7fe5a13b1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{bc775060-f507-40a8-b376-f5f7fe5a13b1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{bc775060-f507-40a8-b376-f5f7fe5a13b1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

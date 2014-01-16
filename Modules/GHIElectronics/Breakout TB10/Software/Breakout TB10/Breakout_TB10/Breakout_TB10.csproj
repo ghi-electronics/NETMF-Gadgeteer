@@ -9,7 +9,7 @@
 		<RootNamespace>Ignore</RootNamespace>
 		<AssemblyName>Ignore</AssemblyName>
 		<OutputName>Ignore</OutputName>
-		<TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+		<TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
 		<ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
 		<FileAlignment>512</FileAlignment>
 		<WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -46,7 +46,8 @@
 		<None Include="Image.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Breakout_TB10_42\Breakout_TB10_42.csproj">
+		<ProjectReference Include="..\Breakout_TB10_43\Breakout_TB10_43.csproj" />
+    <ProjectReference Include="..\Breakout_TB10_42\Breakout_TB10_42.csproj">
 			<Project>{BA70301D-4931-4499-BD3E-26FC3797F914}</Project>
 			<Name>Breakout_TB10_42</Name>
 		</ProjectReference>

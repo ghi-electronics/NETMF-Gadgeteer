@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadBoard_X1_43", "BreadBoard X1\BreadBoard_X1_43\BreadBoard_X1_43.csproj", "{14e38890-b41f-439d-95de-21c687f2e14d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadBoard_X1_42", "BreadBoard X1\BreadBoard_X1_42\BreadBoard_X1_42.csproj", "{13FCBE82-7C9C-426C-BECB-B2313849A0FC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadBoard_X1", "BreadBoard X1\BreadBoard_X1\BreadBoard_X1.csproj", "{ADE40DFD-7ACB-4A54-9888-17D10119FBD5}"
@@ -19,6 +21,10 @@ Global
 		{ADE40DFD-7ACB-4A54-9888-17D10119FBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADE40DFD-7ACB-4A54-9888-17D10119FBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADE40DFD-7ACB-4A54-9888-17D10119FBD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14e38890-b41f-439d-95de-21c687f2e14d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14e38890-b41f-439d-95de-21c687f2e14d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14e38890-b41f-439d-95de-21c687f2e14d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14e38890-b41f-439d-95de-21c687f2e14d}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

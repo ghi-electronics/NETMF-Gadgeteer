@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -56,6 +56,7 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RelayISOx16_43\RelayISOx16_43.csproj" />
     <ProjectReference Include="..\RelayISOx16_42\RelayISOx16_42.csproj">
       <Project>{787FE82C-3DC6-4E77-8D81-A3DE23E147DA}</Project>
       <Name>RelayISOx16_42</Name>

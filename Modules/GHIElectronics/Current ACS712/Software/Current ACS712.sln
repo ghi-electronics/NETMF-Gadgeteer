@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Current_ACS712_43", "Current ACS712\Current_ACS712_43\Current_ACS712_43.csproj", "{cd626413-959f-4b16-b229-c5222615b765}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Current_ACS712_42", "Current ACS712\Current_ACS712_42\Current_ACS712_42.csproj", "{DA3E91B8-900E-4559-95CD-69638B018A88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Current_ACS712", "Current ACS712\Current_ACS712\Current_ACS712.csproj", "{941F3B17-0A52-4E1D-94F8-3F69384EA8CC}"
@@ -27,6 +29,10 @@ Global
 		{C0C26D67-2E91-413C-B67B-8169851BBF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0C26D67-2E91-413C-B67B-8169851BBF85}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0C26D67-2E91-413C-B67B-8169851BBF85}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{cd626413-959f-4b16-b229-c5222615b765}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{cd626413-959f-4b16-b229-c5222615b765}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{cd626413-959f-4b16-b229-c5222615b765}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{cd626413-959f-4b16-b229-c5222615b765}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelayISOx16_43", "RelayISOx16\RelayISOx16_43\RelayISOx16_43.csproj", "{37c488f6-487b-4aaa-aec3-24184cd1bd49}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelayISOx16_42", "RelayISOx16\RelayISOx16_42\RelayISOx16_42.csproj", "{787FE82C-3DC6-4E77-8D81-A3DE23E147DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelayISOx16", "RelayISOx16\RelayISOx16\RelayISOx16.csproj", "{2237056A-9E55-4302-80DE-C7E721D9EE5C}"
@@ -27,6 +29,10 @@ Global
 		{2F478435-7EE9-4832-AD0D-F13B2DCDE617}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F478435-7EE9-4832-AD0D-F13B2DCDE617}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F478435-7EE9-4832-AD0D-F13B2DCDE617}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{37c488f6-487b-4aaa-aec3-24184cd1bd49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37c488f6-487b-4aaa-aec3-24184cd1bd49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37c488f6-487b-4aaa-aec3-24184cd1bd49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37c488f6-487b-4aaa-aec3-24184cd1bd49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -43,6 +43,7 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
+    <ProjectReference Include="..\WiFi_RS21_43\WiFi_RS21_43.csproj" />
     <ProjectReference Include="..\WiFi_RS21_42\WiFi_RS21_42.csproj">
       <Project>{D232475E-CB64-49C1-8154-52060B88DE83}</Project>
       <Name>WiFi_RS21_42</Name>

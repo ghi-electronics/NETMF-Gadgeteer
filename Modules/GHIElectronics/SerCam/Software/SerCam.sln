@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerCam_43", "SerCam\SerCam_43\SerCam_43.csproj", "{9d993ec3-0455-40b0-bb93-e033efc6854a}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerCam_42", "SerCam\SerCam_42\SerCam_42.csproj", "{F1CD2A58-4E36-406E-939C-7590F53F1158}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerCam", "SerCam\SerCam\SerCam.csproj", "{95C01C4C-88B1-4A91-A081-D63EBD4CEABF}"
@@ -27,6 +29,10 @@ Global
 		{F868F937-21B3-41AE-963B-2C7EBA94648A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F868F937-21B3-41AE-963B-2C7EBA94648A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F868F937-21B3-41AE-963B-2C7EBA94648A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9d993ec3-0455-40b0-bb93-e033efc6854a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9d993ec3-0455-40b0-bb93-e033efc6854a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9d993ec3-0455-40b0-bb93-e033efc6854a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9d993ec3-0455-40b0-bb93-e033efc6854a}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

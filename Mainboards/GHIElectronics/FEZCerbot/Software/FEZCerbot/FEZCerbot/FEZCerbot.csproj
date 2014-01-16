@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -58,6 +58,7 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FEZCerbot_43\FEZCerbot_43.csproj" />
     <ProjectReference Include="..\FEZCerbot_42\FEZCerbot_42.csproj">
       <Project>{7F300F07-FF9F-4B36-B298-0CE57C1845F4}</Project>
       <Name>FEZCerbot_42</Name>

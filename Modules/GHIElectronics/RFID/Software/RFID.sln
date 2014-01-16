@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFID_43", "RFID\RFID_43\RFID_43.csproj", "{5ae6f78c-c164-4c5e-b143-3a7f87dc77c0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFID_42", "RFID\RFID_42\RFID_42.csproj", "{EB6C0748-66CF-498B-938C-6785617DE188}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RFID", "RFID\RFID\RFID.csproj", "{CB4F6122-5102-43C6-8883-A34F649142DC}"
@@ -27,6 +29,10 @@ Global
 		{804780F1-1A07-45E3-B8AB-5EDE05DE1EA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{804780F1-1A07-45E3-B8AB-5EDE05DE1EA2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{804780F1-1A07-45E3-B8AB-5EDE05DE1EA2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5ae6f78c-c164-4c5e-b143-3a7f87dc77c0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5ae6f78c-c164-4c5e-b143-3a7f87dc77c0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5ae6f78c-c164-4c5e-b143-3a7f87dc77c0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5ae6f78c-c164-4c5e-b143-3a7f87dc77c0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

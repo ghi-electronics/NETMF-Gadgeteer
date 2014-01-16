@@ -9,7 +9,7 @@
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
     <OutputName>Ignore</OutputName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,7 +49,11 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ButtonS7_42\ButtonS7_42.csproj" />
+    <ProjectReference Include="..\ButtonS7_43\ButtonS7_43.csproj" />
+    <ProjectReference Include="..\ButtonS7_42\ButtonS7_42.csproj">
+      <Project>{AD00B3E6-5912-479E-9685-258F48A0E068}</Project>
+      <Name>ButtonS7_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

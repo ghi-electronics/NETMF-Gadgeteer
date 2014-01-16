@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28_43", "Ethernet_ENC28\Ethernet_ENC28_43\Ethernet_ENC28_43.csproj", "{ea70b3c3-bc29-4cd8-bb3c-377ef5281833}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28_42", "Ethernet_ENC28\Ethernet_ENC28_42\Ethernet_ENC28_42.csproj", "{0B8B7B11-EEE7-4C09-943C-DE5ABD065F60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ethernet_ENC28", "Ethernet_ENC28\Ethernet_ENC28\Ethernet_ENC28.csproj", "{766B22F0-6E1A-4EC7-B596-A2B08CBAD744}"
@@ -27,6 +29,10 @@ Global
 		{40EE9846-16A4-492A-B5DD-2E4F60340EA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{40EE9846-16A4-492A-B5DD-2E4F60340EA4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{40EE9846-16A4-492A-B5DD-2E4F60340EA4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{ea70b3c3-bc29-4cd8-bb3c-377ef5281833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ea70b3c3-bc29-4cd8-bb3c-377ef5281833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ea70b3c3-bc29-4cd8-bb3c-377ef5281833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ea70b3c3-bc29-4cd8-bb3c-377ef5281833}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{AFDF8229-73B1-46B5-AA70-2B8A336B12EF}</ProjectGuid>
+    <ProjectGuid>{cdda17c2-0bd8-4342-95a9-a11a87e5b65c}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Gadgeteer.Modules.GHIElectronics</RootNamespace>
@@ -42,7 +42,9 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\..\..\..\..\Kits\GHIElectronics\GHI .NET Gadgeteer SDK\Software\GHI .NET Gadgeteer SDK\AssemblyInfoGlobal.cs">
+      <Link>AssemblyInfoGlobal.cs</Link>
+    </Compile>
     <Compile Include="SPlus_43.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -56,5 +58,8 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.IO" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 </Project>

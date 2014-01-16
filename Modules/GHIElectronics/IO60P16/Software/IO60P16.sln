@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO60P16_43", "IO60P16\IO60P16_43\IO60P16_43.csproj", "{6d2b7648-a66f-461d-9fa2-2c8dc6650b02}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO60P16_42", "IO60P16\IO60P16_42\IO60P16_42.csproj", "{E9AC04BD-5BAA-4513-8C7E-C0153676CB13}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IO60P16", "IO60P16\IO60P16\IO60P16.csproj", "{909FB2DA-1878-4CC3-A1A7-C960578FF735}"
@@ -27,6 +29,10 @@ Global
 		{7E0C78D6-D14D-4126-8A6D-EF6D0BA1BEC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E0C78D6-D14D-4126-8A6D-EF6D0BA1BEC2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7E0C78D6-D14D-4126-8A6D-EF6D0BA1BEC2}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{6d2b7648-a66f-461d-9fa2-2c8dc6650b02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6d2b7648-a66f-461d-9fa2-2c8dc6650b02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6d2b7648-a66f-461d-9fa2-2c8dc6650b02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6d2b7648-a66f-461d-9fa2-2c8dc6650b02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

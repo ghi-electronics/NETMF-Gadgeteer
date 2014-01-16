@@ -1,9 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IR Receiver", "IR Receiver\IR Receiver\IR Receiver.csproj", "{FCB41E58-415E-488D-B488-5C55E4C07416}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IR Receiver_42", "IR Receiver\IR Receiver_42\IR Receiver_42.csproj", "{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IR Receiver_43", "IR Receiver\IR Receiver_43\IR Receiver_43.csproj", "{7C64258D-2316-4E71-8E0D-7C2BEBAAB77A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,6 +21,10 @@ Global
 		{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EADCA96B-54A4-4BB1-9239-D1A6E3DDF0A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C64258D-2316-4E71-8E0D-7C2BEBAAB77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C64258D-2316-4E71-8E0D-7C2BEBAAB77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C64258D-2316-4E71-8E0D-7C2BEBAAB77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C64258D-2316-4E71-8E0D-7C2BEBAAB77A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

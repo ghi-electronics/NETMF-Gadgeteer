@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard_43", "SDCard\SDCard_43\SDCard_43.csproj", "{1b2c0955-0a92-4629-af12-cd2c2cb7c01a}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard_42", "SDCard\SDCard_42\SDCard_42.csproj", "{4ADEB7C6-8F80-4E7A-8D20-1B41E1D2351C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDCard", "SDCard\SDCard\SDCard.csproj", "{9824E858-BDD0-48F2-8297-CA6D75EAED19}"
@@ -19,6 +21,10 @@ Global
 		{9824E858-BDD0-48F2-8297-CA6D75EAED19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9824E858-BDD0-48F2-8297-CA6D75EAED19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9824E858-BDD0-48F2-8297-CA6D75EAED19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1b2c0955-0a92-4629-af12-cd2c2cb7c01a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1b2c0955-0a92-4629-af12-cd2c2cb7c01a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1b2c0955-0a92-4629-af12-cd2c2cb7c01a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1b2c0955-0a92-4629-af12-cd2c2cb7c01a}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

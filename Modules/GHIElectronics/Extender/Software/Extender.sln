@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender_43", "Extender\Extender_43\Extender_43.csproj", "{1bc3e4da-2511-4bba-a527-92a2654c1128}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender_42", "Extender\Extender_42\Extender_42.csproj", "{162045F4-704B-485F-BA07-0660DA2EC53F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extender", "Extender\Extender\Extender.csproj", "{A5B9DE21-8732-4114-8DD7-23F7010FB82B}"
@@ -19,6 +21,10 @@ Global
 		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5B9DE21-8732-4114-8DD7-23F7010FB82B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1bc3e4da-2511-4bba-a527-92a2654c1128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1bc3e4da-2511-4bba-a527-92a2654c1128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1bc3e4da-2511-4bba-a527-92a2654c1128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1bc3e4da-2511-4bba-a527-92a2654c1128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

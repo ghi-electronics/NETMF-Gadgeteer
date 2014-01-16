@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keypad_KP16_43", "Keypad KP16\Keypad_KP16_43\Keypad_KP16_43.csproj", "{d1b603f4-c1e5-43d7-9891-5ca1adca185e}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keypad_KP16_42", "Keypad KP16\Keypad_KP16_42\Keypad_KP16_42.csproj", "{02F4DB2E-E54C-46D5-A655-522A036BFF80}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Keypad_KP16", "Keypad KP16\Keypad_KP16\Keypad_KP16.csproj", "{69FD4069-DD4A-4C0C-AB1D-06AC66A17217}"
@@ -27,6 +29,10 @@ Global
 		{C0B5BAFD-D9B2-4052-AC24-510D71F96139}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0B5BAFD-D9B2-4052-AC24-510D71F96139}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0B5BAFD-D9B2-4052-AC24-510D71F96139}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{d1b603f4-c1e5-43d7-9891-5ca1adca185e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d1b603f4-c1e5-43d7-9891-5ca1adca185e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d1b603f4-c1e5-43d7-9891-5ca1adca185e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d1b603f4-c1e5-43d7-9891-5ca1adca185e}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

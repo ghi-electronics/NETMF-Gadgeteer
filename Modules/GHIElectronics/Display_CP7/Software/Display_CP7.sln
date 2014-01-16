@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_CP7_43", "Display_CP7\Display_CP7_43\Display_CP7_43.csproj", "{d4977b24-52f5-4c7d-b774-b7f670d67a8a}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_CP7_42", "Display_CP7\Display_CP7_42\Display_CP7_42.csproj", "{BCFA9885-A25B-4F3F-86AC-10A1FF378725}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_CP7", "Display_CP7\Display_CP7\Display_CP7.csproj", "{36AC3DAE-1654-405C-B271-892965180A32}"
@@ -19,6 +21,10 @@ Global
 		{36AC3DAE-1654-405C-B271-892965180A32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36AC3DAE-1654-405C-B271-892965180A32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36AC3DAE-1654-405C-B271-892965180A32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{d4977b24-52f5-4c7d-b774-b7f670d67a8a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d4977b24-52f5-4c7d-b774-b7f670d67a8a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d4977b24-52f5-4c7d-b774-b7f670d67a8a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d4977b24-52f5-4c7d-b774-b7f670d67a8a}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

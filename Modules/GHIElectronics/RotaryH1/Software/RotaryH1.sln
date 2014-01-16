@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryH1_43", "RotaryH1\RotaryH1_43\RotaryH1_43.csproj", "{0d65bd34-677e-48f8-b21c-7a8301fee278}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryH1_42", "RotaryH1\RotaryH1_42\RotaryH1_42.csproj", "{B9DCC667-072D-461E-BC84-B8070269DC0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RotaryH1", "RotaryH1\RotaryH1\RotaryH1.csproj", "{DA8DFABA-A5D9-42CD-9E38-38FB9DCC391E}"
@@ -27,6 +29,10 @@ Global
 		{B150CE72-EC07-4ACE-940C-A4C86D85E25D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B150CE72-EC07-4ACE-940C-A4C86D85E25D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B150CE72-EC07-4ACE-940C-A4C86D85E25D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{0d65bd34-677e-48f8-b21c-7a8301fee278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0d65bd34-677e-48f8-b21c-7a8301fee278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0d65bd34-677e-48f8-b21c-7a8301fee278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0d65bd34-677e-48f8-b21c-7a8301fee278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

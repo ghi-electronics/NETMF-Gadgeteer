@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_T43_43", "Display T43\Display_T43_43\Display_T43_43.csproj", "{4208454c-e6a0-4210-948d-0ad1f9d2e298}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_T43_42", "Display T43\Display_T43_42\Display_T43_42.csproj", "{62E2D4C4-B0BF-4610-A760-F8450272B2E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Display_T43", "Display T43\Display_T43\Display_T43.csproj", "{46B4632B-627F-4A62-889C-5E060A37DFE3}"
@@ -19,6 +21,10 @@ Global
 		{46B4632B-627F-4A62-889C-5E060A37DFE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46B4632B-627F-4A62-889C-5E060A37DFE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46B4632B-627F-4A62-889C-5E060A37DFE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4208454c-e6a0-4210-948d-0ad1f9d2e298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4208454c-e6a0-4210-948d-0ad1f9d2e298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4208454c-e6a0-4210-948d-0ad1f9d2e298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4208454c-e6a0-4210-948d-0ad1f9d2e298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW_43", "CAN_DW\CAN_DW_43\CAN_DW_43.csproj", "{0848ad0f-9673-40e4-8b4e-666bad4a7adf}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW_42", "CAN_DW\CAN_DW_42\CAN_DW_42.csproj", "{EF4F3340-28C6-4524-9943-B0069C2988A1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CAN_DW", "CAN_DW\CAN_DW\CAN_DW.csproj", "{E60A3D70-3D2D-4FD4-8860-EED931744E93}"
@@ -19,6 +21,10 @@ Global
 		{E60A3D70-3D2D-4FD4-8860-EED931744E93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E60A3D70-3D2D-4FD4-8860-EED931744E93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E60A3D70-3D2D-4FD4-8860-EED931744E93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0848ad0f-9673-40e4-8b4e-666bad4a7adf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0848ad0f-9673-40e4-8b4e-666bad4a7adf}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0848ad0f-9673-40e4-8b4e-666bad4a7adf}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0848ad0f-9673-40e4-8b4e-666bad4a7adf}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

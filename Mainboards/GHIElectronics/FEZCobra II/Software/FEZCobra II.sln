@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCobra_II_43", "FEZCobra II\FEZCobra_II_43\FEZCobra_II_43.csproj", "{75507c89-8a0d-46b3-99cd-1db8406d8690}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCobra_II_42", "FEZCobra II\FEZCobra_II_42\FEZCobra_II_42.csproj", "{FDF837FF-040A-4CBD-B81F-567E1AABB346}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FEZCobra_II", "FEZCobra II\FEZCobra_II\FEZCobra_II.csproj", "{0BD08C57-9EB9-453E-8482-CF4F27A96F26}"
@@ -19,6 +21,10 @@ Global
 		{0BD08C57-9EB9-453E-8482-CF4F27A96F26}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BD08C57-9EB9-453E-8482-CF4F27A96F26}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BD08C57-9EB9-453E-8482-CF4F27A96F26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75507c89-8a0d-46b3-99cd-1db8406d8690}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75507c89-8a0d-46b3-99cd-1db8406d8690}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75507c89-8a0d-46b3-99cd-1db8406d8690}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75507c89-8a0d-46b3-99cd-1db8406d8690}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

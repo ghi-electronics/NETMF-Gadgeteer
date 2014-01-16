@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -58,6 +58,7 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CAN_DW_43\CAN_DW_43.csproj" />
     <ProjectReference Include="..\CAN_DW_42\CAN_DW_42.csproj">
       <Project>{EF4F3340-28C6-4524-9943-B0069C2988A1}</Project>
       <Name>CAN_DW_42</Name>

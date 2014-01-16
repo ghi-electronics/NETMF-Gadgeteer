@@ -11,7 +11,7 @@
 		<AppDesignerFolder>Properties</AppDesignerFolder>
 		<RootNamespace>Ignore</RootNamespace>
 		<AssemblyName>Ignore</AssemblyName>
-		<TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+		<TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
 		<FileAlignment>512</FileAlignment>
 		<!--Identify this as a MicroFramework, CSharp project-->
 		<ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -55,7 +55,8 @@
 		<None Include="Image.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\HubAP5_42\HubAP5_42.csproj">
+		<ProjectReference Include="..\HubAP5_43\HubAP5_43.csproj" />
+    <ProjectReference Include="..\HubAP5_42\HubAP5_42.csproj">
 			<Project>{BA977E00-3853-4A05-B373-C24EB6329029}</Project>
 			<Name>HubAP5_42</Name>
 		</ProjectReference>

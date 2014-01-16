@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerbotController_43", "CerbotController\CerbotController_43\CerbotController_43.csproj", "{7ed2d798-77f7-4f50-bddd-e51785f6b117}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerbotController_42", "CerbotController\CerbotController_42\CerbotController_42.csproj", "{850A0F66-88A9-44A7-B5C2-1C0A84573F68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CerbotController", "CerbotController\CerbotController\CerbotController.csproj", "{3FC064D8-0B07-49D1-86C1-91F3B87F0E2F}"
@@ -27,6 +29,10 @@ Global
 		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78CDBB00-539B-4134-A008-0BE274FAE2CC}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7ed2d798-77f7-4f50-bddd-e51785f6b117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ed2d798-77f7-4f50-bddd-e51785f6b117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ed2d798-77f7-4f50-bddd-e51785f6b117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ed2d798-77f7-4f50-bddd-e51785f6b117}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA_43", "UC Battery 4xAA\UC_Battery_4xAA_43\UC_Battery_4xAA_43.csproj", "{f5b98784-c7e4-4331-8175-d7cb5e760d2d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA_42", "UC Battery 4xAA\UC_Battery_4xAA_42\UC_Battery_4xAA_42.csproj", "{8F40A973-0B17-4B4A-80ED-C05E52C2759C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UC_Battery_4xAA", "UC Battery 4xAA\UC_Battery_4xAA\UC_Battery_4xAA.csproj", "{18C72E51-A4B0-4A1E-AADC-0A0BE8DDD27A}"
@@ -19,6 +21,10 @@ Global
 		{18C72E51-A4B0-4A1E-AADC-0A0BE8DDD27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18C72E51-A4B0-4A1E-AADC-0A0BE8DDD27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18C72E51-A4B0-4A1E-AADC-0A0BE8DDD27A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{f5b98784-c7e4-4331-8175-d7cb5e760d2d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f5b98784-c7e4-4331-8175-d7cb5e760d2d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f5b98784-c7e4-4331-8175-d7cb5e760d2d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{f5b98784-c7e4-4331-8175-d7cb5e760d2d}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

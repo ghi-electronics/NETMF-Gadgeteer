@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix_43", "LEDMatrix\LEDMatrix_43\LEDMatrix_43.csproj", "{56686c53-aee1-4292-a72b-ee4334c9c18c}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix_42", "LEDMatrix\LEDMatrix_42\LEDMatrix_42.csproj", "{2827FEF2-7C66-4E48-B378-C471CA3A99DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LEDMatrix", "LEDMatrix\LEDMatrix\LEDMatrix.csproj", "{DF4E99DB-8C41-4851-8638-24D0DC2BCE66}"
@@ -19,6 +21,10 @@ Global
 		{DF4E99DB-8C41-4851-8638-24D0DC2BCE66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF4E99DB-8C41-4851-8638-24D0DC2BCE66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF4E99DB-8C41-4851-8638-24D0DC2BCE66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56686c53-aee1-4292-a72b-ee4334c9c18c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56686c53-aee1-4292-a72b-ee4334c9c18c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56686c53-aee1-4292-a72b-ee4334c9c18c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56686c53-aee1-4292-a72b-ee4334c9c18c}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed_43", "MulticolorLed\MulticolorLed_43\MulticolorLed_43.csproj", "{babfc2c3-29d8-448a-b8c0-0b2f99a68f27}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed_42", "MulticolorLed\MulticolorLed_42\MulticolorLed_42.csproj", "{F97AA9C7-BA57-46C3-9529-FB84996D20D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MulticolorLed", "MulticolorLed\MulticolorLed\MulticolorLed.csproj", "{2EBC8058-E210-4103-8E21-A1879A3749F8}"
@@ -19,6 +21,10 @@ Global
 		{2EBC8058-E210-4103-8E21-A1879A3749F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2EBC8058-E210-4103-8E21-A1879A3749F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2EBC8058-E210-4103-8E21-A1879A3749F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{babfc2c3-29d8-448a-b8c0-0b2f99a68f27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{babfc2c3-29d8-448a-b8c0-0b2f99a68f27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{babfc2c3-29d8-448a-b8c0-0b2f99a68f27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{babfc2c3-29d8-448a-b8c0-0b2f99a68f27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

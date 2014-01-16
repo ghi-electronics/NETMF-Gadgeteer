@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflector_R3_43", "Reflector R3\Reflector_R3_43\Reflector_R3_43.csproj", "{7516acd1-37d0-4ae1-8d2d-5c75f8d7328e}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflector_R3_42", "Reflector R3\Reflector_R3_42\Reflector_R3_42.csproj", "{28A5A52C-7E92-490A-A4AF-E85BD8961B36}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reflector_R3", "Reflector R3\Reflector_R3\Reflector_R3.csproj", "{A6B25D01-4D54-4B69-B2B1-EE99FBDDCF51}"
@@ -27,6 +29,10 @@ Global
 		{34F04457-2664-4036-9BDB-CC38F6601A4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{34F04457-2664-4036-9BDB-CC38F6601A4E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{34F04457-2664-4036-9BDB-CC38F6601A4E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{7516acd1-37d0-4ae1-8d2d-5c75f8d7328e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7516acd1-37d0-4ae1-8d2d-5c75f8d7328e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7516acd1-37d0-4ae1-8d2d-5c75f8d7328e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7516acd1-37d0-4ae1-8d2d-5c75f8d7328e}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

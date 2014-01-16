@@ -11,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
-    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -46,6 +46,10 @@
     <ProjectReference Include="..\OBD II_42\OBD II_42.csproj">
       <Project>{B314DD82-A006-402F-BF22-5C17BC362350}</Project>
       <Name>OBD II_42</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OBD II_43\OBD II_43.csproj">
+      <Project>{615C9A3C-1E74-4836-9BFB-DE72ACF42D4A}</Project>
+      <Name>OBD II_43</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

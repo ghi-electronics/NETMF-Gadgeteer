@@ -9,7 +9,7 @@
 		<RootNamespace>Ignore</RootNamespace>
 		<AssemblyName>Ignore</AssemblyName>
 		<OutputName>Ignore</OutputName>
-		<TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+		<TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
 		<ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
 		<FileAlignment>512</FileAlignment>
 		<WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
@@ -48,7 +48,8 @@
 		<None Include="Image.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\OneWire_X1_42\OneWire_X1_42.csproj">
+		<ProjectReference Include="..\OneWire_X1_43\OneWire_X1_43.csproj" />
+    <ProjectReference Include="..\OneWire_X1_42\OneWire_X1_42.csproj">
 			<Project>{78D05244-4BB8-4CE3-9E06-4200D4DC9527}</Project>
 			<Name>OneWire_X1_42</Name>
 		</ProjectReference>

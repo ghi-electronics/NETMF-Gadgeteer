@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSense_43", "ColorSense\ColorSense_43\ColorSense_43.csproj", "{1a3077b4-bc1e-4de3-baf7-98e0e5b04970}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSense_42", "ColorSense\ColorSense_42\ColorSense_42.csproj", "{591FBA8A-DFC9-4ECA-A47A-2F187D28F83A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSense", "ColorSense\ColorSense\ColorSense.csproj", "{5FA2CF77-5D44-4E19-8E5A-A0ADBB390BE9}"
@@ -19,6 +21,10 @@ Global
 		{5FA2CF77-5D44-4E19-8E5A-A0ADBB390BE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FA2CF77-5D44-4E19-8E5A-A0ADBB390BE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FA2CF77-5D44-4E19-8E5A-A0ADBB390BE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1a3077b4-bc1e-4de3-baf7-98e0e5b04970}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1a3077b4-bc1e-4de3-baf7-98e0e5b04970}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1a3077b4-bc1e-4de3-baf7-98e0e5b04970}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1a3077b4-bc1e-4de3-baf7-98e0e5b04970}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

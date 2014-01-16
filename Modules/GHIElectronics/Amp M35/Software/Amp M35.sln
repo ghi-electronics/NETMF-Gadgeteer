@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amp_M35_43", "Amp M35\Amp_M35_43\Amp_M35_43.csproj", "{72719826-2ab4-4bc2-b420-a4820aa05459}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amp_M35_42", "Amp M35\Amp_M35_42\Amp_M35_42.csproj", "{4D153532-C3E5-44A3-A428-B33C3E2414C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Amp_M35", "Amp M35\Amp_M35\Amp_M35.csproj", "{48A79AF6-A19F-40F8-A11E-D7D3078F2FB8}"
@@ -19,6 +21,10 @@ Global
 		{48A79AF6-A19F-40F8-A11E-D7D3078F2FB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48A79AF6-A19F-40F8-A11E-D7D3078F2FB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48A79AF6-A19F-40F8-A11E-D7D3078F2FB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72719826-2ab4-4bc2-b420-a4820aa05459}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72719826-2ab4-4bc2-b420-a4820aa05459}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72719826-2ab4-4bc2-b420-a4820aa05459}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72719826-2ab4-4bc2-b420-a4820aa05459}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
