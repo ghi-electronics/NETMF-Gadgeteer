@@ -57,7 +57,7 @@
     <Reference Include="System.IO" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\GadgeteerCore\Gadgeteer42\Gadgeteer42.csproj">
+    <Reference Include="Gadgeteer, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
       <Project>{16F46F9A-6FA2-4E4C-A0DD-5C53319DBCAB}</Project>
       <Name>Gadgeteer42</Name>
     </ProjectReference>
