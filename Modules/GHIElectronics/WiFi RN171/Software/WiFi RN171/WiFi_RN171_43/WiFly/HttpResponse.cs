@@ -151,7 +151,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             HTTPVersionNotSupported = 505
         }
 
-        private Gadgeteer.Interfaces.Serial _stream;
+        private Gadgeteer.SocketInterfaces.Serial _stream;
 		/// <summary>
 		/// The header data of the response.
 		/// </summary>
@@ -177,7 +177,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// Constructs a new response from a stream.
 		/// </summary>
 		/// <param name="stream">The stream to use.</param>
-        public HttpResponse(Gadgeteer.Interfaces.Serial stream)
+        public HttpResponse(Gadgeteer.SocketInterfaces.Serial stream)
         {
             if (stream == null)
                 throw new ArgumentNullException();

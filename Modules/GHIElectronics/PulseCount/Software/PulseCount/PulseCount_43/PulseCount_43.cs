@@ -2,7 +2,7 @@
 
 using System.Threading;
 using GT = Gadgeteer;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -24,8 +24,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.DigitalOutput CLOCK;
         private GTI.DigitalOutput CS;
 #else
-        private GTI.SPI.Configuration config;
-        private GTI.SPI spi;
+        private GTI.SpiConfiguration config;
+        private GTI.Spi spi;
 #endif
 
         /// <summary>Constructs a new PulseCount instance.</summary>
@@ -37,15 +37,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 #if USE_SOFTWARE_SPI
 			this.socket.EnsureTypeIsSupported('Y', this);
 
-			this.CS = new GTI.DigitalOutput(this.socket, Socket.Pin.Six, true, this);
-			this.MISO = new GTI.DigitalInput(this.socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-			this.MOSI = new GTI.DigitalOutput(this.socket, Socket.Pin.Seven, false, this);
-			this.CLOCK = new GTI.DigitalOutput(this.socket, Socket.Pin.Nine, false, this);
+			this.CS = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Six, true, this);
+			this.MISO = GTI.DigitalInputFactory.Create(this.socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.MOSI = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Seven, false, this);
+			this.CLOCK = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Nine, false, this);
 #else
             socket.EnsureTypeIsSupported('S', this);
 
-            this.config = new GTI.SPI.Configuration(false, 0, 0, false, true, 1000);
-			this.spi = new GTI.SPI(socket, this.config, GTI.SPI.Sharing.Shared, socket, GT.Socket.Pin.Six, this);
+            this.config = new GTI.SpiConfiguration(false, 0, 0, false, true, 1000);
+			this.spi = GTI.SpiFactory.Create(socket, this.config, GTI.SpiSharing.Shared, socket, GT.Socket.Pin.Six, this);
 #endif
 
 			this.Initialize();
@@ -59,7 +59,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>The new input.</returns>
 		public GTI.DigitalInput CreateInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode)
 		{
-			return new GTI.DigitalInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, this);
+			return GTI.DigitalInputFactory.Create(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, this);
 		}
 
 		/// <summary>
@@ -71,7 +71,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>The new input.</returns>
 		public GTI.InterruptInput CreateInterruptInput(GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode)
 		{
-			return new GTI.InterruptInput(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, interruptMode, this);
+			return GTI.InterruptInputFactory.Create(this.socket, Socket.Pin.Three, glitchFilterMode, resistorMode, interruptMode, this);
 		}
 
 		private void Initialize()

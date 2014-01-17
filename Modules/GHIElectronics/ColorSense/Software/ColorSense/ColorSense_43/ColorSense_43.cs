@@ -3,12 +3,12 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     public class ColorSense : GTM.Module
     {
         private static GTI.DigitalOutput LEDControl;
-        private static GTI.SoftwareI2C softwareI2C;
+        private static GTI.SoftwareI2CBus softwareI2C;
         private static byte[] readRegisterData = new byte[2];
         private const byte colorAddress = 0x39;
 
@@ -32,13 +32,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported(new char[] {'X', 'Y'}, this);
 
-            LEDControl = new GTI.DigitalOutput(socket, Socket.Pin.Three, false, this);
+            LEDControl = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
 
-            softwareI2C = new GTI.SoftwareI2C(socket, Socket.Pin.Five, Socket.Pin.Four, this);
+            softwareI2C = new GTI.SoftwareI2CBus(socket, Socket.Pin.Five, Socket.Pin.Four, colorAddress, 100, this);
 
            // Send COMMAND to access control register for chip power-up
            // Send to power-up chip
-            softwareI2C.Write(colorAddress, new byte[] { 0x80, 0x03 });
+            softwareI2C.Write(new byte[] { 0x80, 0x03 });
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private byte[] readWord(byte address, byte[] CommandBytes)
         {
-            softwareI2C.WriteRead(colorAddress, CommandBytes, readRegisterData);
+            softwareI2C.WriteRead(CommandBytes, readRegisterData);
             return readRegisterData;
         }
 

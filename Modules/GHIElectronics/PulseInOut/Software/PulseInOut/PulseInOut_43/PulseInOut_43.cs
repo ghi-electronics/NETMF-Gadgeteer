@@ -51,7 +51,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     public class PulseInOut : GTM.DaisyLinkModule
     {
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
         // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
         // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
         // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -109,11 +109,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             byte register_period = (byte)(REGISTER_PERIOD_PWM012_FREQUENCY - REGISTER_OFFSET);
             byte register_highTime = (byte)(REGISTER_PWM_PULSE - REGISTER_OFFSET + (pwm_id - 1) * 4);
 
-            WriteParams((byte)(register_period + 0 + DaisyLinkOffset), (byte)period_microsec,
+            Write((byte)(register_period + 0 + DaisyLinkOffset), (byte)period_microsec,
                 (byte)(period_microsec >> 8),
                 (byte)(period_microsec >> 16),
                 (byte)(period_microsec >> 24));
-            WriteParams((byte)(register_highTime + 0 + DaisyLinkOffset), (byte)highTime_microse,
+            Write((byte)(register_highTime + 0 + DaisyLinkOffset), (byte)highTime_microse,
                (byte)(highTime_microse >> 8),
                (byte)(highTime_microse >> 16),
                (byte)(highTime_microse >> 24));
@@ -133,7 +133,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             //WriteRegister((byte)(register + 2), (byte)(pulse_microsec >> 16));
             //WriteRegister((byte)(register + 3), (byte)(pulse_microsec >> 24));
 
-            WriteParams((byte)(register + 0 + DaisyLinkOffset), (byte)highTime_microse,
+            Write((byte)(register + 0 + DaisyLinkOffset), (byte)highTime_microse,
                 (byte)(highTime_microse >> 8),
                 (byte)(highTime_microse >> 16),
                 (byte)(highTime_microse >> 24));
@@ -163,7 +163,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="writebuffer">Byte to write.</param>
         private void WriteRegister(byte address, byte writebuffer)
         {
-            WriteParams((byte)(DaisyLinkOffset + address), (byte)writebuffer);
+            Write((byte)(DaisyLinkOffset + address), (byte)writebuffer);
         }
 
         /// <summary>

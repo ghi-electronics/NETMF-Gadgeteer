@@ -1,11 +1,11 @@
 ﻿using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -64,10 +64,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             // This creates an GTI.InterruptInput interface. The interfaces under the GTI namespace provide easy ways to build common modules.
             // This also generates user-friendly error messages automatically, e.g. if the user chooses a socket incompatible with an interrupt input.
-            this.m_motionDetect = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+            this.m_motionDetect = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
 
             // This registers a handler for the interrupt event of the interrupt input (which is below)
-            this.m_motionDetect.Interrupt += new GTI.InterruptInput.InterruptEventHandler(this._input_Interrupt);
+            this.m_motionDetect.Interrupt += (this._input_Interrupt);
         }
 
         private void _input_Interrupt(GTI.InterruptInput input, bool value)

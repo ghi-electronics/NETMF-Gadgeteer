@@ -3,12 +3,12 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -25,8 +25,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// If it is not called before first use, then the following defaults will be used and cannot be changed afterwards:
         /// <list type="bullet">
         ///  <item>Baud Rate - 115200</item>
-        ///  <item>Parity - <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial.SerialParity">SerialParity.None</see></item>
-        ///  <item>Stop Bits - <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial.SerialStopBits">SerialStopBits.One</see></item>
+        ///  <item>Parity - <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.Serial.SerialParity">SerialParity.None</see></item>
+        ///  <item>Stop Bits - <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.Serial.SerialStopBits">SerialStopBits.One</see></item>
         ///  <item>Data Bits - 8</item>
         /// </list>
         /// </remarks>
@@ -45,7 +45,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private Socket socket;
 
         /// <summary>
-        /// Gets the <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial"/> device associated with this instance.
+        /// Gets the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.Serial"/> device associated with this instance.
         /// </summary>
         public GTI.Serial SerialLine
         {
@@ -53,7 +53,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 if (_SerialLine == null)
                 {
-                    Configure(115200, GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits.One, 8);
+                    Configure(115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8);
                 }
                 return _SerialLine;
             }
@@ -67,17 +67,17 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Configures this serial line.  This should be called at most once.
         /// </summary>
         /// <param name="baudRate">The baud rate.</param>
-        /// <param name="parity">A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial.SerialParity"/> enumeration that specifies the parity.</param>
-        /// <param name="stopBits">A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial.SerialStopBits"/> enumeration that specifies the number of stop bits.</param>
+        /// <param name="parity">A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.Serial.SerialParity"/> enumeration that specifies the parity.</param>
+        /// <param name="stopBits">A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.Serial.SerialStopBits"/> enumeration that specifies the number of stop bits.</param>
         /// <param name="dataBits">The number of data bits.</param>
-        public void Configure(int baudRate, GTI.Serial.SerialParity parity, GTI.Serial.SerialStopBits stopBits, int dataBits)
+        public void Configure(int baudRate, GTI.SerialParity parity, GTI.SerialStopBits stopBits, int dataBits)
         {
             if (_SerialLine != null)
             {
                 throw new Exception("UsbSerial.Configure can only be called once");
             }
             // TODO: check if HW flow control should be used
-            _SerialLine = new GTI.Serial(socket, baudRate, parity, stopBits, dataBits, GTI.Serial.HardwareFlowControl.NotRequired, this);
+            _SerialLine = GTI.SerialFactory.Create(socket, baudRate, parity, stopBits, dataBits, GTI.HardwareFlowControl.NotRequired, this);
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private TimeSpan _glitchTime = new TimeSpan(0, 0, 3); // catch glitches until a full second has passed without any event
         private Gadgeteer.Timer _glitchdt;
 
-        private void _SleepBar_Interrupt(Interfaces.InterruptInput input, bool value)
+        private void _SleepBar_Interrupt(SocketInterfaces.InterruptInput input, bool value)
         {
             lock (_lock)
             {

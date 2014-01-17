@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -40,7 +40,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             for (int i = 0; i < 7; i++)
             {
-                this.LEDs[i] = new GTI.DigitalOutput(socket, Socket.Pin.Three + i, false, this);
+                this.LEDs[i] = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three + i, false, this);
             }
         }
 

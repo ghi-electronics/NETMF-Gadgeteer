@@ -1,6 +1,6 @@
 ﻿using Microsoft.SPOT;
 using GT = Gadgeteer;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="rgbSocketNumber1">The first R,G,B socket</param>
 		/// <param name="rgbSocketNumber2">The second R,G,B socket</param>
 		/// <param name="rgbSocketNumber3">The third R,G,B socket</param>
-		public Display_N7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3) : base(WPFRenderOptions.Ignore)
+		public Display_N7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3) : base(WpfMode.PassThrough)
 		{
 			this.backlightState = false;
 			this.ReserveLCDPins(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3);
@@ -58,7 +58,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				{
 					gotG = true;
 
-					backlightPin = new GTI.DigitalOutput(rgbSocket, Socket.Pin.Nine, true, this);
+					backlightPin = GTI.DigitalOutputFactory.Create(rgbSocket, Socket.Pin.Nine, true, this);
 				}
 				else if (!gotB && rgbSocket.SupportsType('B'))
 				{
@@ -82,22 +82,22 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private void ConfigureLCD()
 		{
-			Mainboard.LCDConfiguration lcdConfig = new Mainboard.LCDConfiguration();
+			DisplayModule.TimingRequirements lcdConfig = new DisplayModule.TimingRequirements();
 
-			lcdConfig.LCDControllerEnabled = true;
+			
 
-			lcdConfig.Width = Width;
-			lcdConfig.Height = Height;
+			lcdConfig.CommonSyncPinIsActiveHigh = false;
+			lcdConfig.UsesCommonSyncPin = false;
 
-			// Only use if needed, see documentation.
-			//lcdConfig.PriorityEnable = true;
+            // Only use if needed, see documentation.
+            lcdConfig.PixelDataIsActiveHigh = true; //not the proper property, but we needed it for PriorityEnable
 
-			lcdConfig.OutputEnableIsFixed = true;
-			lcdConfig.OutputEnablePolarity = true;
+            lcdConfig.UsesCommonSyncPin = true; //not the proper property, but we needed it for OutputEnableIsFixed
+            lcdConfig.CommonSyncPinIsActiveHigh = true; //not the proper property, but we needed it for OutputEnablePolarity
 
-			lcdConfig.HorizontalSyncPolarity = true;
-			lcdConfig.VerticalSyncPolarity = true;
-			lcdConfig.PixelPolarity = false;
+			lcdConfig.HorizontalSyncPulseIsActiveHigh = true;
+            lcdConfig.VerticalSyncPulseIsActiveHigh = true;
+            lcdConfig.PixelDataIsValidOnClockRisingEdge = true;
 
 			lcdConfig.HorizontalSyncPulseWidth = 1;
 			lcdConfig.HorizontalBackPorch = 46;
@@ -107,38 +107,26 @@ namespace Gadgeteer.Modules.GHIElectronics
 			lcdConfig.VerticalFrontPorch = 7;
 
 			// NOTE: This is used for ChipworkX, comment if using EMX.
-			lcdConfig.PixelClockDivider = 5;
-			//lcdConfig.PixelClockRate = 25000;
+			//lcdConfig.PixelClockDivider = 5;
+			lcdConfig.MaximumClockSpeed = 24000;
 
 			// Set configs
-			DisplayModule.SetLCDConfig(lcdConfig);
+			base.OnDisplayConnected("Display N7", 800, 480, DisplayOrientation.Normal, lcdConfig);
 		}
-
-		/// <summary>
-		/// Gets the width of the display.
-		/// </summary>
-		/// <remarks>
-		/// This property always returns 800.
-		/// </remarks>
-		public override uint Width { get { return 800; } }
-
-		/// <summary>
-		/// Gets the height of the display.
-		/// </summary>
-		/// <remarks>
-		/// This property always returns 480.
-		/// </remarks>
-		public override uint Height { get { return 480; } }
 
 		/// <summary>
 		/// Renders display data on the display device. 
 		/// </summary>
-		/// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
-		protected override void Paint(Bitmap bitmap)
+        /// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
+        /// <param name="x">The start x coordinate of the dirty area.</param>
+        /// <param name="y">The start y coordinate of the dirty area.</param>
+        /// <param name="width">The width of the dirty area.</param>
+        /// <param name="height">The height of the dirty area.</param>
+        protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
 		{
 			try
 			{
-				bitmap.Flush();
+				bitmap.Flush(x, y, width, height);
 			}
 			catch
 			{

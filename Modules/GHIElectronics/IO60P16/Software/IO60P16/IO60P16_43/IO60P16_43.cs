@@ -5,15 +5,15 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 using System;
-using Gadgeteer.Interfaces;
+using Gadgeteer.SocketInterfaces;
 using Microsoft.SPOT;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -26,7 +26,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </example>
     public class IO60P16 : GTM.Module
     {
-        private GTI.SoftwareI2C softwareI2C;
+        private GTI.SoftwareI2CBus softwareI2C;
 
         private const byte DEV_ADDR = 0x0020;
         private const int I2C_CLOCKRATE = 400; // KHz
@@ -55,7 +55,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-            softwareI2C = new SoftwareI2C(socket, Socket.Pin.Five, Socket.Pin.Four, this);
+            softwareI2C = new GTI.SoftwareI2CBus(socket, Socket.Pin.Five, Socket.Pin.Four, DEV_ADDR, I2C_CLOCKRATE, this);
             //softwareI2C = new SoftwareI2C(socket, Socket.Pin.Eight, Socket.Pin.Nine, this);
 
             Reset();
@@ -84,7 +84,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             byte[] data = new byte[] { reg, value };
 
-            int send = softwareI2C.Write(DEV_ADDR, data);
+            int send = softwareI2C.Write(data);
         }
 
         private byte ReadRegister(byte reg)
@@ -94,7 +94,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             //int numread = 0;
 
             //softwareI2C.WriteRead(new byte[] { reg }, 0, 1, data, 0, data.Length, out numwrite, out numread);
-            softwareI2C.WriteRead(DEV_ADDR, new byte[] { reg }, data);
+            softwareI2C.WriteRead(new byte[] { reg }, data);
 
             return data[0];
         }

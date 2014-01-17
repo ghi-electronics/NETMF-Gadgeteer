@@ -1,12 +1,12 @@
 ﻿using System;
 
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -55,8 +55,8 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </example>
     public class MaxO : GTM.Module
     {
-        private static GTI.SPI spi;
-        private static GTI.SPI.Configuration config;
+        private static GTI.Spi spi;
+        private static GTI.SpiConfiguration config;
 
         private static GTI.DigitalOutput Enable;
         private static GTI.DigitalOutput CLR;
@@ -111,11 +111,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('S', this);
 
-            config = new GTI.SPI.Configuration(false, 0, 0, false, true, 1000);
-            spi = new GTI.SPI(socket, config, GTI.SPI.Sharing.Shared, socket, Socket.Pin.Five, this);
+            config = new GTI.SpiConfiguration(false, 0, 0, false, true, 1000);
+            spi = GTI.SpiFactory.Create(socket, config, GTI.SpiSharing.Shared, socket, Socket.Pin.Five, this);
 
-            Enable = new GTI.DigitalOutput(socket, Socket.Pin.Three, false, this);
-            CLR = new GTI.DigitalOutput(socket, Socket.Pin.Four, true, this);
+            Enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
+            CLR = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, true, this);
 
             numBoards = 0;
         }

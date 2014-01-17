@@ -4,6 +4,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using FEZCerb_Pins = GHI.Hardware.FEZCerb.Pin;
 using GT = Gadgeteer;
+using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
 {
@@ -18,8 +19,8 @@ namespace GHIElectronics.Gadgeteer
 		/// Instantiates a new FEZCerbuinoNet mainboard
 		/// </summary>
 		public FEZCerbuinoNet()
-		{
-			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(this.NativeI2CWriteRead);
+        {
+            GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
 
 			this.NativeBitmapConverter = new BitmapConvertBPP(this.BitmapConverter);
 			this.NativeBitmapCopyToSpi = this.NativeSPIBitmapPaint;
@@ -49,7 +50,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.SerialPortName = "COM6";
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion Socket 1
@@ -78,7 +79,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.SerialPortName = "COM2";
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion Socket 2
@@ -100,8 +101,8 @@ namespace GHIElectronics.Gadgeteer
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;
 
-			// O
-			socket.AnalogOutput = new FEZCerbuinoNet_AnalogOut(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0);
+            // O
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
 
 			// P
 			socket.PWM7 = (Cpu.PWMChannel)14;
@@ -109,15 +110,10 @@ namespace GHIElectronics.Gadgeteer
 			socket.PWM9 = (Cpu.PWMChannel)15;
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion Socket 3
-		}
-
-		private bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
-		{
-			return GHI.OSHW.Hardware.SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
 		}
 
 		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
@@ -175,25 +171,30 @@ namespace GHIElectronics.Gadgeteer
 		{
 		}
 
-		/// <summary>
-		/// This sets the LCD configuration.  If the value GT.Mainboard.LCDConfiguration.HeadlessConfig (=null) is specified, no display support should be active.
-		/// If a non-null value is specified but the property LCDControllerEnabled is false, the LCD controller should be disabled if present,
-		/// though the Bitmap width/height for WPF should be modified to the Width and Height parameters.  This must reboot if the LCD configuration changes require a reboot.
-		/// </summary>
-		/// <param name="lcdConfig">The LCD Configuration</param>
-		public override void SetLCDConfiguration(GT.Mainboard.LCDConfiguration lcdConfig)
-		{
-		}
+        /// <summary>
+        /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        /// <param name="displayModel">Display model name.</param>
+        /// <param name="width">Display physical width in pixels, ignoring the orientation setting.</param>
+        /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
+        /// <param name="orientationDeg">Display orientation in degrees.</param>
+        /// <param name="timing">The required timings from an LCD controller.</param>
+        protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements timing)
+        {
+            throw new NotSupportedException();
+        }
 
-		/// <summary>
-		/// Configures rotation in the LCD controller. This must reboot if performing the LCD rotation requires a reboot.
-		/// </summary>
-		/// <param name="rotation">The LCD rotation to use</param>
-		/// <returns>true if the rotation is supported</returns>
-		public override bool SetLCDRotation(GT.Modules.Module.DisplayModule.LCDRotation rotation)
-		{
-			return false;
-		}
+        /// <summary>
+        /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, or it is not possible to disable the onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        public override void EnsureRgbSocketPinsAvailable()
+        {
+            throw new NotSupportedException("This mainboard does not support an onboard display controller.");
+        }
 
 		private const Cpu.Pin DebugLedPin = FEZCerb_Pins.PB2;
 
@@ -231,79 +232,35 @@ namespace GHIElectronics.Gadgeteer
 			get { return "1.0"; }
 		}
 
-		private void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+		private void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
 		{
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			GHI.OSHW.Hardware.Util.BitmapConvertBPP(bitmapBytes, pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
-		}
-	}
-
-	internal class FEZCerbuinoNet_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
-	{
-		private AnalogOutput aout = null;
-
-		Cpu.AnalogOutputChannel pin;
-		const double MIN_VOLTAGE = 0;
-		const double MAX_VOLTAGE = 3.3;
-
-		public FEZCerbuinoNet_AnalogOut(Cpu.AnalogOutputChannel pin)
-		{
-			this.pin = pin;
+			GHI.OSHW.Hardware.Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
 		}
 
-		public double MinOutputVoltage
-		{
-			get
-			{
-				return FEZCerbuinoNet_AnalogOut.MIN_VOLTAGE;
-			}
-		}
+        private class InteropI2CBus : GT.SocketInterfaces.I2CBus
+        {
+            public override ushort Address { get; set; }
+            public override int Timeout { get; set; }
+            public override int ClockRateKHz { get; set; }
 
-		public double MaxOutputVoltage
-		{
-			get
-			{
-				return FEZCerbuinoNet_AnalogOut.MAX_VOLTAGE;
-			}
-		}
+            private Cpu.Pin sdaPin;
+            private Cpu.Pin sclPin;
 
-		public bool Active
-		{
-			get
-			{
-				return this.aout != null;
-			}
-			set
-			{
-				if (value == this.Active)
-					return;
+            public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
+            {
+                this.sdaPin = socket.CpuPins[(int)sdaPin];
+                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.Address = address;
+                this.ClockRateKHz = clockRateKHz;
+            }
 
-				if (value)
-				{
-					this.aout = new AnalogOutput(this.pin, 1 / FEZCerbuinoNet_AnalogOut.MAX_VOLTAGE, 0, 10);
-					this.SetVoltage(FEZCerbuinoNet_AnalogOut.MIN_VOLTAGE);
-				}
-				else
-				{
-					this.aout.Dispose();
-					this.aout = null;
-				}
-			}
-		}
-
-		public void SetVoltage(double voltage)
-		{
-			this.Active = true;
-
-			if (voltage < FEZCerbuinoNet_AnalogOut.MIN_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCerbuinoNet_AnalogOut.MIN_VOLTAGE.ToString() + "V");
-
-			if (voltage > FEZCerbuinoNet_AnalogOut.MAX_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZCerbuinoNet_AnalogOut.MAX_VOLTAGE.ToString() + "V");
-
-			this.aout.Write(voltage);
-		}
+            public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
+            {
+                GHI.OSHW.Hardware.SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+            }
+        }
 	}
 }

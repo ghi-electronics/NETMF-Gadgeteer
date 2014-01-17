@@ -3,14 +3,14 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using System.Threading;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -20,15 +20,15 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class Stepper_L6470 : GTM.Module
     {
-        private GT.Interfaces.SPI.Configuration spiConfig;
-        private GT.Interfaces.SPI spi;
+        private GT.SocketInterfaces.SpiConfiguration spiConfig;
+        private GT.SocketInterfaces.Spi spi;
 
-        private GT.Interfaces.DigitalInput busyPin;
-        private GT.Interfaces.DigitalOutput resetPin;
+        private GT.SocketInterfaces.DigitalInput busyPin;
+        private GT.SocketInterfaces.DigitalOutput resetPin;
 		/// <summary>
 		/// The step clock.
 		/// </summary>
-        public GT.Interfaces.DigitalOutput stepClock;
+        public GT.SocketInterfaces.DigitalOutput stepClock;
 
         private RegsStruct regsStruct;
 
@@ -42,13 +42,13 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.EnsureTypeIsSupported('S', this);
 
             // Initialize SPI
-            spiConfig = new GTI.SPI.Configuration(false, 1000, 1000, true, true, 5000);
-            spi = new GTI.SPI(socket, spiConfig, GTI.SPI.Sharing.Shared, socket, Socket.Pin.Six, this);
+            spiConfig = new GTI.SpiConfiguration(false, 1000, 1000, true, true, 5000);
+            spi = GTI.SpiFactory.Create(socket, spiConfig, GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
 
             // Initialize pins
-            busyPin = new GTI.DigitalInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
-            resetPin = new GTI.DigitalOutput(socket, Socket.Pin.Four, true, this);
-            stepClock = new GTI.DigitalOutput(socket, Socket.Pin.Five, false, this);
+            busyPin = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
+            resetPin = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, true, this);
+            stepClock = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
 
             // Initialize chip registers
             InitializeChip();

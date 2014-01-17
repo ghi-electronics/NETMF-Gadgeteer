@@ -26,7 +26,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     public class UC_Battery_4xAA : GTM.Module
     {
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
         // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
         // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
         // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.

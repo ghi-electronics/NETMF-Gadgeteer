@@ -5,7 +5,7 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -505,7 +505,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             // send the parameters with mode off to avoid side effects of previous mode
             if (GreenBlueSwapped)
             {
-                WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x00,
+                Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x00,
                             color1.R, color1.B, color1.G,
                             color2.R, color2.B, color2.G,
                             (byte)(time1 >> 0), (byte)(time1 >> 8), (byte)(time1 >> 16), (byte)(time1 >> 24),
@@ -513,14 +513,14 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
             else
             {
-                WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x00,
+                Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x00,
                             color1.R, color1.G, color1.B,
                             color2.R, color2.G, color2.B,
                             (byte)(time1 >> 0), (byte)(time1 >> 8), (byte)(time1 >> 16), (byte)(time1 >> 24),
                             (byte)(time2 >> 0), (byte)(time2 >> 8), (byte)(time2 >> 16), (byte)(time2 >> 24));
             }
             // now activate the correct mode
-            WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)mode, 0x1);
+            Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)mode, 0x1);
         }
 
 
@@ -530,14 +530,14 @@ namespace Gadgeteer.Modules.GHIElectronics
             // send the parameters with mode off to avoid side effects of previous mode
             if (GreenBlueSwapped)
             {
-                WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x0, color.R, color.B, color.G);
+                Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x0, color.R, color.B, color.G);
             }
             else
             {
-                WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x0, color.R, color.G, color.B);
+                Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Off, 0x0, color.R, color.G, color.B);
             }
             // now activate the correct mode
-            WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)mode, 0x1);
+            Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)mode, 0x1);
         }
 
 
@@ -549,12 +549,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 if (GreenBlueSwapped)
                 {
-                    WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Constant, 0x1, color.R,
+                    Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Constant, 0x1, color.R,
                                 color.B, color.G);
                 }
                 else
                 {
-                    WriteParams((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Constant, 0x1, color.R,
+                    Write((byte)(DaisyLinkOffset + Registers.Configuration), (byte)Mode.Constant, 0x1, color.R,
                                 color.G, color.B);
                 }
             }
@@ -562,11 +562,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 if (GreenBlueSwapped)
                 {
-                    WriteParams((byte)(DaisyLinkOffset + Registers.Color1), color.R, color.B, color.G);
+                    Write((byte)(DaisyLinkOffset + Registers.Color1), color.R, color.B, color.G);
                 }
                 else
                 {
-                    WriteParams((byte)(DaisyLinkOffset + Registers.Color1), color.R, color.G, color.B);
+                    Write((byte)(DaisyLinkOffset + Registers.Color1), color.R, color.G, color.B);
                 }
             }
         }

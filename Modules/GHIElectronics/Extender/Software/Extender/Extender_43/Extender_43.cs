@@ -3,7 +3,7 @@
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -37,7 +37,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="pin">The pin to assign to the interface.</param>
         /// <param name="glitchFilterMode">
-        ///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+        ///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
         ///  whether to enable the glitch filter on this interface.
         /// </param>
         /// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -45,9 +45,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <exception cref="System.Exception">
         ///  The specified pin has already been reserved on this module.
         /// </exception>
-        public Interfaces.DigitalInput SetupDigitalInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
+        public SocketInterfaces.DigitalInput SetupDigitalInput(Socket.Pin pin, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode)
         {
-            return new Interfaces.DigitalInput(ExtenderSocket, pin, glitchFilterMode, resistorMode, this);
+            return SocketInterfaces.DigitalInputFactory.Create(ExtenderSocket, pin, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -59,9 +59,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <exception cref="System.Exception">
         ///  The specified pin has already been reserved on this module.
         /// </exception>
-        public Interfaces.DigitalOutput SetupDigitalOutput(Socket.Pin pin, bool initialState)
+        public SocketInterfaces.DigitalOutput SetupDigitalOutput(Socket.Pin pin, bool initialState)
         {
-            return new Interfaces.DigitalOutput(ExtenderSocket, pin, initialState, this);
+            return SocketInterfaces.DigitalOutputFactory.Create(ExtenderSocket, pin, initialState, this);
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         ///  this value becomes effective as soon as the port is enabled as an output port.
         /// </param>
         /// <param name="glitchFilterMode">
-        ///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+        ///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
         ///  whether to enable the glitch filter on this interface.
         /// </param>
         /// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -81,9 +81,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <exception cref="System.Exception">
         ///  The specified pin has already been reserved on this module.
         /// </exception>
-        public Interfaces.DigitalIO SetupDigitalIO(Socket.Pin pin, bool initialState, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
+        public SocketInterfaces.DigitalIO SetupDigitalIO(Socket.Pin pin, bool initialState, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode)
         {
-            return new Interfaces.DigitalIO(ExtenderSocket, pin, initialState, glitchFilterMode, resistorMode, this);
+            return SocketInterfaces.DigitalIOFactory.Create(ExtenderSocket, pin, initialState, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="pin">The pin to assign to the interface.</param>
         /// <param name="glitchFilterMode">
-        ///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+        ///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
         ///  whether to enable the glitch filter on this interface.
         /// </param>
         /// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -100,9 +100,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <exception cref="System.Exception">
         ///  The specified pin has already been reserved on this module.
         /// </exception>
-        public Interfaces.InterruptInput SetupInterruptInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode, Interfaces.InterruptMode interruptMode)
+        public SocketInterfaces.InterruptInput SetupInterruptInput(Socket.Pin pin, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode, SocketInterfaces.InterruptMode interruptMode)
         {
-            return new Interfaces.InterruptInput(ExtenderSocket, pin, glitchFilterMode, resistorMode, interruptMode, this);
+            return SocketInterfaces.InterruptInputFactory.Create(ExtenderSocket, pin, glitchFilterMode, resistorMode, interruptMode, this);
         }
 
         /// <summary>
@@ -110,12 +110,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="pin">The pin to assign to the interface.</param>
         /// <returns>The interface.</returns>
-        public Interfaces.AnalogInput SetupAnalogInput(Socket.Pin pin)
+        public SocketInterfaces.AnalogInput SetupAnalogInput(Socket.Pin pin)
         {
-            return new Interfaces.AnalogInput(ExtenderSocket, pin, this);
+            return SocketInterfaces.AnalogInputFactory.Create(ExtenderSocket, pin, this);
         }
 
-        // TODO:  Determine whether AnalogOutput should be added to Gadgeteer.Interfaces
+        // TODO:  Determine whether AnalogOutput should be added to Gadgeteer.SocketInterfaces
 
 
         /// <summary>
@@ -123,9 +123,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="pin">The pin to assign to the interface.</param>
         /// <returns>The interface.</returns>
-        public Interfaces.AnalogOutput SetupAnalogOutput(Socket.Pin pin)
+        public SocketInterfaces.AnalogOutput SetupAnalogOutput(Socket.Pin pin)
         {
-            return new Interfaces.AnalogOutput(ExtenderSocket, pin, this);
+            return SocketInterfaces.AnalogOutputFactory.Create(ExtenderSocket, pin, this);
         }
 
         /// <summary>
@@ -133,9 +133,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="pin">The pin to use for the PWM interface.</param>
         /// <returns>The PWM interface.</returns>
-        public Interfaces.PWMOutput SetupPWMOutput(Socket.Pin pin)
+        public SocketInterfaces.PwmOutput SetupPWMOutput(Socket.Pin pin)
         {
-            return new Interfaces.PWMOutput(ExtenderSocket, pin, false, this);
+            return SocketInterfaces.PwmOutputFactory.Create(ExtenderSocket, pin, false, this);
         }
     }
 }

@@ -2,7 +2,7 @@
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using System.Threading;
 using Microsoft.SPOT;
@@ -14,8 +14,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// </summary>
     public class MotorControllerL298 : GTM.Module
     {
-        GTI.PWMOutput m_Pwm1;
-        GTI.PWMOutput m_Pwm2;
+        GTI.PwmOutput m_Pwm1;
+        GTI.PwmOutput m_Pwm2;
 
         GTI.DigitalOutput m_Direction1;
         GTI.DigitalOutput m_Direction2;
@@ -39,11 +39,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported(new char[] { 'P' }, this);
 
-            m_Pwm1 = new GTI.PWMOutput(socket, Socket.Pin.Seven, false, this);
-            m_Pwm2 = new GTI.PWMOutput(socket, Socket.Pin.Eight, false, this);
+            m_Pwm1 = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
+            m_Pwm2 = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Eight, false, this);
 
-            m_Direction1 = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
-            m_Direction2 = new GTI.DigitalOutput(socket, Socket.Pin.Six, false, this);
+            m_Direction1 = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
+            m_Direction2 = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
 
             m_Pwm1.Set(Frequency, 0);
             m_Pwm2.Set(Frequency, 0);

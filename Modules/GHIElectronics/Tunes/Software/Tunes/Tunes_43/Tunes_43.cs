@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using System.Collections;
 
 using System.Threading;
@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// </summary>
 	public class Tunes : GTM.Module
 	{
-		private GT.Interfaces.PWMOutput tunePWM;
+		private GT.SocketInterfaces.PwmOutput tunePWM;
 		private Melody playList;
 		private bool running = false;
 		private Thread playbackThread;
@@ -202,7 +202,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			socket.EnsureTypeIsSupported('P', this);
 
-			tunePWM = new GTI.PWMOutput(socket, Socket.Pin.Nine, false, this);
+			tunePWM = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
 
 			playList = new Melody();
 		}
@@ -285,16 +285,16 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="tone"></param>
 		private void SetTone(Tone tone)
 		{
-			tunePWM.Active = false;
+			tunePWM.IsActive = false;
 
 			if (tone.freq == 0)
 			{
-				tunePWM.Active = false;
+				tunePWM.IsActive = false;
 				return;
 			}
 
 			tunePWM.Set((int)tone.freq, 0.5);
-			tunePWM.Active = true;
+			tunePWM.IsActive = true;
 		}
 
 		/// <summary>
@@ -309,7 +309,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
 
             this.running = false;
-            this.tunePWM.Active = false;
+            this.tunePWM.IsActive = false;
 		}
 
 		/// <summary>

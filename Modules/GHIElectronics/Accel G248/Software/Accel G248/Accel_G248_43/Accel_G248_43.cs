@@ -3,12 +3,12 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -28,7 +28,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             socket.EnsureTypeIsSupported('I', this);
 
-            i2c = new GTI.I2CBus(socket, 0x1C, 400, this);
+            i2c = GTI.I2CBusFactory.Create(socket, 0x1C, 400, this);
 
             WriteRegister(0x2A, 1);
         }
@@ -36,7 +36,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void WriteRegister(byte reg, byte value)
         {
             byte[] RegisterNum = new byte[2] { reg, value };
-            i2c.Write(RegisterNum, 1000);
+            i2c.Write(RegisterNum);
         }
 
         private byte[] ReadRegister(byte reg, int readcount)
@@ -50,7 +50,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             //int out_num_read = 0;
 
             //i2cdev.WriteRead(RegisterNum, 0, 1, RegisterValue, 0, readcount, out out_num_write, out out_num_read);
-            i2c.WriteRead(RegisterNum, RegisterValue, 1000);
+            i2c.WriteRead(RegisterNum, RegisterValue);
 
             return RegisterValue;
         }

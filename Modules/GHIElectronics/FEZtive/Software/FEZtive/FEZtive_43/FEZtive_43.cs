@@ -3,14 +3,14 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using Microsoft.SPOT.Presentation;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -22,8 +22,8 @@ namespace Gadgeteer.Modules.GHIElectronics
     {
         // Gadgeteer module driver variables
         private GT.Socket _socket;
-        private GTI.SPI _spi;
-        private GTI.SPI.Configuration _spiConfig;
+        private GTI.Spi _spi;
+        private GTI.SpiConfiguration _spiConfig;
 
         // Array of color structures that represent the LEDs connected to the module
         // One Color object represents one LED on the strip
@@ -102,9 +102,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="spiClockRateKHZ">The SPI clock rate in KHz.</param>
         public void Initialize(int numLEDS = 80, uint spiClockRateKHZ = 1000)
         {
-            _spiConfig = new GTI.SPI.Configuration(true, 0, 0, false, true, spiClockRateKHZ);
+            _spiConfig = new GTI.SpiConfiguration(true, 0, 0, false, true, spiClockRateKHZ);
 
-            _spi = new GTI.SPI(_socket, _spiConfig, GTI.SPI.Sharing.Shared, this);
+            _spi = GTI.SpiFactory.Create(_socket, _spiConfig, GTI.SpiSharing.Shared, _socket, Socket.Pin.Six, this);
 
             LEDs = new Color[numLEDS];
 

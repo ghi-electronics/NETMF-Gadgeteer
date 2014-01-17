@@ -2,14 +2,14 @@
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using Microsoft.SPOT.Hardware;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -133,7 +133,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="touchSocketNumber">Optional: the mainboard socket that has the display's T socket connected to it. 
         /// This enables the touch panel capabilities.</param>
         public Display_T35(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int touchSocketNumber)
-            : base(WPFRenderOptions.Ignore)
+            : base(WpfMode.PassThrough)
         {
             ReserveLCDPins(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3);
             ConfigureLCD();
@@ -162,7 +162,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 {
                     gotG = true;
                     greenSocket = rgbSocket;
-                    backlightPin = new GTI.DigitalOutput(greenSocket, Socket.Pin.Nine, true, this);
+                    backlightPin = GTI.DigitalOutputFactory.Create(greenSocket, Socket.Pin.Nine, true, this);
                 }
                 else if (!gotB && rgbSocket.SupportsType('B'))
                 {
@@ -198,22 +198,22 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void ConfigureLCD()
         {
-            Mainboard.LCDConfiguration lcdConfig = new Mainboard.LCDConfiguration();
+            DisplayModule.TimingRequirements lcdConfig = new DisplayModule.TimingRequirements();
 
-            lcdConfig.LCDControllerEnabled = true;
+            
 
-            lcdConfig.Width = Width;
-            lcdConfig.Height = Height;
+            lcdConfig.CommonSyncPinIsActiveHigh = false;
+            lcdConfig.UsesCommonSyncPin = false;
 
             // Only use if needed, see documentation.
-            lcdConfig.PriorityEnable = false;
+            lcdConfig.PixelDataIsActiveHigh = false; //not the proper property, but we needed it for PriorityEnable
 
-            lcdConfig.OutputEnableIsFixed = true;
-            lcdConfig.OutputEnablePolarity = true;
+            lcdConfig.UsesCommonSyncPin = true; //not the proper property, but we needed it for OutputEnableIsFixed
+            lcdConfig.CommonSyncPinIsActiveHigh = true; //not the proper property, but we needed it for OutputEnablePolarity
 
-            lcdConfig.HorizontalSyncPolarity = false;
-            lcdConfig.VerticalSyncPolarity = false;
-            lcdConfig.PixelPolarity = true;
+            lcdConfig.HorizontalSyncPulseIsActiveHigh = false;
+            lcdConfig.VerticalSyncPulseIsActiveHigh = false;
+            lcdConfig.PixelDataIsValidOnClockRisingEdge = true;
 
             lcdConfig.HorizontalSyncPulseWidth = 41;
             lcdConfig.HorizontalBackPorch = 27;
@@ -221,11 +221,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             lcdConfig.VerticalSyncPulseWidth = 10;
             lcdConfig.VerticalBackPorch = 8;
             lcdConfig.VerticalFrontPorch = 16;
-            
-            lcdConfig.PixelClockDivider = 8;
+
+            //lcdConfig.PixelClockDivider = 8;
+            lcdConfig.MaximumClockSpeed = 15000;
 
             // Set configs
-            DisplayModule.SetLCDConfig(lcdConfig);
+            base.OnDisplayConnected("Display T35", 320, 240, DisplayOrientation.Normal, lcdConfig);
         }
 
         private void EnableTouchPanel()
@@ -239,30 +240,18 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Gets the width of the display.
-        /// </summary>
-        /// <remarks>
-        /// This property always returns 320.
-        /// </remarks>
-        public override uint Width { get { return 320; } }
-
-        /// <summary>
-        /// Gets the height of the display.
-        /// </summary>
-        /// <remarks>
-        /// This property always returns 240.
-        /// </remarks>
-        public override uint Height { get { return 240; } }
-
-        /// <summary>
         /// Renders display data on the display device. 
         /// </summary>
         /// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
-        protected override void Paint(Bitmap bitmap)
+        /// <param name="x">The start x coordinate of the dirty area.</param>
+        /// <param name="y">The start y coordinate of the dirty area.</param>
+        /// <param name="width">The width of the dirty area.</param>
+        /// <param name="height">The height of the dirty area.</param>
+        protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
         {
             try
             {
-                bitmap.Flush();
+                bitmap.Flush(x, y, width, height);
             }
             catch
             {

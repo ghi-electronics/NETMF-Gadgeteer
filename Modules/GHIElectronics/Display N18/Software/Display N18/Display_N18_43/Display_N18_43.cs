@@ -2,7 +2,7 @@
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using System.Threading;
 using Microsoft.SPOT;
@@ -16,8 +16,8 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class Display_N18 : GTM.Module.DisplayModule
     {
-        private GTI.SPI spi;
-        private GTI.SPI.Configuration spiConfig;
+        private GTI.Spi spi;
+        private GTI.SpiConfiguration spiConfig;
 		private SPI.Configuration netMFSpiConfig;
 		private GT.Socket socket;
         private GTI.DigitalOutput resetPin;
@@ -27,25 +27,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private byte[] byteArray;
 		private ushort[] shortArray;
 
-		/// <summary>
-		/// Gets the width of the display.
-		/// </summary>
-		/// <remarks>
-		/// This property always returns 128.
-		/// </remarks>
-		public override uint Width { get { return 128; } }
-
-		/// <summary>
-		/// Gets the height of the display.
-		/// </summary>
-		/// <remarks>
-		/// This property always returns 160.
-		/// </remarks>
-		public override uint Height { get { return 160; } }
-
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Display_N18(int socketNumber) : base(WPFRenderOptions.Intercept)
+        public Display_N18(int socketNumber) : base(WpfMode.Separate)
         {
 			this.byteArray = new byte[1];
 			this.shortArray = new ushort[2];
@@ -53,13 +37,13 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.socket = Socket.GetSocket(socketNumber, true, this, null);
             this.socket.EnsureTypeIsSupported('S', this);
 
-			this.resetPin = new GTI.DigitalOutput(this.socket, Socket.Pin.Three, false, this);
-			this.backlightPin = new GTI.DigitalOutput(this.socket, Socket.Pin.Four, false, this);
-			this.rs = new GTI.DigitalOutput(this.socket, Socket.Pin.Five, false, this);
+			this.resetPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Three, false, this);
+			this.backlightPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Four, false, this);
+			this.rs = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Five, false, this);
 
-			this.spiConfig = new GTI.SPI.Configuration(false, 0, 0, false, true, 12000);
-			this.netMFSpiConfig = new SPI.Configuration(this.socket.CpuPins[6], this.spiConfig.ChipSelectActiveState, this.spiConfig.ChipSelectSetupTime, this.spiConfig.ChipSelectHoldTime, this.spiConfig.ClockIdleState, this.spiConfig.ClockEdge, this.spiConfig.ClockRateKHz, this.socket.SPIModule);
-			this.spi = new GTI.SPI(this.socket, this.spiConfig, GTI.SPI.Sharing.Shared, this.socket, Socket.Pin.Six, this);
+			this.spiConfig = new GTI.SpiConfiguration(false, 0, 0, false, true, 12000);
+            this.netMFSpiConfig = new SPI.Configuration(this.socket.CpuPins[6], this.spiConfig.IsChipSelectActiveHigh, this.spiConfig.ChipSelectSetupTime, this.spiConfig.ChipSelectHoldTime, this.spiConfig.IsClockIdleHigh, this.spiConfig.IsClockSamplingEdgeRising, this.spiConfig.ClockRateKHz, this.socket.SPIModule);
+			this.spi = GTI.SpiFactory.Create(this.socket, this.spiConfig, GTI.SpiSharing.Shared, this.socket, Socket.Pin.Six, this);
 
 			this.Reset();
 
@@ -67,7 +51,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.Clear();
 
-			this.SetBacklight(true);
+            this.SetBacklight(true);
+
+            base.OnDisplayConnected("Display N18", 128, Height, DisplayOrientation.Normal, null);
 		}
 
 		/// <summary>
@@ -98,11 +84,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="bmp">The bitmap to be drawn to the screen</param>
 		/// <param name="x">Starting X position of the image.</param>
 		/// <param name="y">Starting Y position of the image.</param>
-		public void Draw(Bitmap bmp, uint x = 0, uint y = 0)
+        public void Draw(Bitmap bmp, int x = 0, int y = 0)
 		{
 			byte[] vram = new byte[bmp.Width * bmp.Height * 2];
-			GTM.Module.Mainboard.NativeBitmapConverter(bmp.GetBitmap(), vram, Mainboard.BPP.BPP16_BGR_BE);
-			this.DrawRaw(vram, (uint)bmp.Width, (uint)bmp.Height, x, y);
+			GTM.Module.Mainboard.NativeBitmapConverter(bmp, vram, Mainboard.BPP.BPP16_BGR_BE);
+            this.DrawRaw(vram, bmp.Width, bmp.Height, x, y);
 		}
 
 		/// <summary>
@@ -113,7 +99,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="y">Starting Y position of the image.</param>
 		/// <param name="width">Width of the image.</param>
 		/// <param name="height">Height of the image.</param>
-		public void DrawRaw(byte[] rawData, uint width, uint height, uint x, uint y)
+		public void DrawRaw(byte[] rawData, int width, int height, int x, int y)
 		{
 			if (x > this.Width || y > this.Height)
 				return;
@@ -131,14 +117,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Renders Bitmap data on the display device. 
 		/// </summary>
-		/// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
-		protected override void Paint(Bitmap bitmap)
+        /// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
+        /// <param name="x">The start x coordinate of the dirty area.</param>
+        /// <param name="y">The start y coordinate of the dirty area.</param>
+        /// <param name="width">The width of the dirty area.</param>
+        /// <param name="height">The height of the dirty area.</param>
+		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
 		{
 			try
 			{
 				if (Mainboard.NativeBitmapCopyToSpi != null)
 				{
-					this.SetClippingArea(0, 0, (uint)bitmap.Width - 1, (uint)bitmap.Height - 1);
+					this.SetClippingArea(0, 0, bitmap.Width - 1, bitmap.Height - 1);
 					this.WriteCommand(0x2C);
 					this.rs.Write(true);
 					Mainboard.NativeBitmapCopyToSpi(bitmap, this.netMFSpiConfig, 0, 0, bitmap.Width, bitmap.Height, GT.Mainboard.BPP.BPP16_BGR_BE);
@@ -154,6 +144,24 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
+        /// <summary>
+        /// Sets the orientation.
+        /// </summary>
+        /// <param name="orientation">The orientation.</param>
+        protected override void SetOrientationOverride(Module.DisplayModule.DisplayOrientation orientation) 
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// Checks if the orientation is supported.
+        /// </summary>
+        /// <param name="orientation">The orientation.</param>
+        protected override bool SupportsOrientationOverride(Module.DisplayModule.DisplayOrientation orientation)
+        {
+            throw new NotSupportedException();
+        }
+
 		private void Reset()
 		{
 			this.resetPin.Write(false);
@@ -162,15 +170,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
         private void ConfigureDisplay()
-		{
-			Mainboard.LCDConfiguration lcdConfig = new Mainboard.LCDConfiguration();
-
-			lcdConfig.LCDControllerEnabled = false;
-			lcdConfig.Width = Width;
-			lcdConfig.Height = Height;
-
-			DisplayModule.SetLCDConfig(lcdConfig);
-	
+		{	
 			this.WriteCommand(0x11);//Sleep exit 
             Thread.Sleep(120);
 
@@ -242,7 +242,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteCommand(0x29);//Display on
         }
 
-		private void SetClippingArea(uint x, uint y, uint w, uint h)
+        private void SetClippingArea(int x, int y, int w, int h)
 		{
 			this.shortArray[0] = (ushort)x;
 			this.shortArray[1] = (ushort)(x + w);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private bool radioTextWorkerRunning = true;
         private Thread radioTextWorkerThread;
         private string currentRadioText = "N/A";
-        private GTI.SoftwareI2C i2cBus;
+        private GTI.SoftwareI2CBus i2cBus;
         private GTI.DigitalOutput resetPin;
 		private int spacingDivisor = 2;
 		private int baseChannel = 875;
@@ -85,8 +85,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported(new char[] { 'Y' }, this);
 
-            this.resetPin = new GTI.DigitalOutput(socket, Socket.Pin.Five, false, this);
-            this.i2cBus = new GTI.SoftwareI2C(socket, Socket.Pin.Eight, Socket.Pin.Nine, this);
+            this.resetPin = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
+            this.i2cBus = new GTI.SoftwareI2CBus(socket, Socket.Pin.Eight, Socket.Pin.Nine, FMRadio.I2C_ADDRESS, 100, this);
+            this.i2cBus.LengthErrorBehavior = GTI.ErrorBehavior.ThrowException;
 
             this.InitializeDevice();
 
@@ -474,7 +475,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             byte[] data = new byte[32];
 
-            this.i2cBus.Read(FMRadio.I2C_ADDRESS, data, GTI.SoftwareI2C.LengthErrorBehavior.ThrowException);
+            this.i2cBus.Read(data);
 
             for (int i = 0, x = 0xA; i < 12; i += 2, ++x)
                 this.registers[x] = (ushort)((data[i] << 8) | (data[i + 1]));
@@ -493,7 +494,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 data[i + 1] = (byte)(this.registers[x] & 0x00FF);
             }
 
-            this.i2cBus.Write(FMRadio.I2C_ADDRESS, data, GTI.SoftwareI2C.LengthErrorBehavior.ThrowException);
+            this.i2cBus.Write(data);
         }
 		
         private void SetDeviceVolume(ushort Volume)

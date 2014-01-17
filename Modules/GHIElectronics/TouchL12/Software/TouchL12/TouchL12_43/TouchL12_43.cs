@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -115,14 +115,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.socket = GT.Socket.GetSocket(socketNumber, false, this, "I");
 
-			this.reset = new GTI.DigitalOutput(this.socket, GT.Socket.Pin.Six, true, this);
+			this.reset = GTI.DigitalOutputFactory.Create(this.socket, GT.Socket.Pin.Six, true, this);
 
 			this.Reset();
 
-			this.device = new GTI.I2CBus(this.socket, TouchL12.I2C_ADDRESS, TouchL12.I2C_CLOCK_RATE, this);
+			this.device = GTI.I2CBusFactory.Create(this.socket, TouchL12.I2C_ADDRESS, TouchL12.I2C_CLOCK_RATE, this);
 
-			this.interrupt = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.FallingEdge, this);
-			this.interrupt.Interrupt += new GTI.InterruptInput.InterruptEventHandler(OnInterrupt);
+			this.interrupt = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.FallingEdge, this);
+			this.interrupt.Interrupt += (OnInterrupt);
 
 			this.previousSliderDirection = (Direction)(-1);
 			this.previousSliderPosition = 0;
@@ -207,7 +207,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x0D, 0x10);
 			this.WriteRegister(0x0E, address);
 
-			this.device.Write(values, 100); //needs to begin with a 0 representing the I2C address of 0.
+			this.device.Write(values); //needs to begin with a 0 representing the I2C address of 0.
 
 			this.WriteRegister(0x0D, 0x00);
 		}
@@ -216,13 +216,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			this.writeBuffer[0] = address;
 			this.writeBuffer[1] = value;
-			this.device.Write(this.writeBuffer, 100);
+			this.device.Write(this.writeBuffer);
 		}
 
 		private byte ReadRegister(byte address)
 		{
 			this.addressBuffer[0] = address;
-			this.device.WriteRead(this.addressBuffer, this.readBuffer, 100);
+			this.device.WriteRead(this.addressBuffer, this.readBuffer);
 			return this.readBuffer[0];
 		}
 	}

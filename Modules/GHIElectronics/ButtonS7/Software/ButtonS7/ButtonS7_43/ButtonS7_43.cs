@@ -1,5 +1,5 @@
 ﻿using GT = Gadgeteer;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -22,9 +22,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.buttons = new GTI.DigitalInput[6];
 			for (int i = 0; i < 6; i++)
-				this.buttons[i] = new GTI.DigitalInput(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+				this.buttons[i] = GTI.DigitalInputFactory.Create(socket, (Socket.Pin)(i + 4), GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
 
-			this.enter = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingAndFallingEdge, this);
+			this.enter = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingAndFallingEdge, this);
 			this.enter.Interrupt += this.OnInterrupt;
 		}
 

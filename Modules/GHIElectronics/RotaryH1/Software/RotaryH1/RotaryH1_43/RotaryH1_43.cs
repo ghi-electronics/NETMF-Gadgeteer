@@ -2,7 +2,7 @@
 
 using System.Threading;
 using GT = Gadgeteer;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -25,8 +25,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.DigitalOutput CLOCK;
         private GTI.DigitalOutput CS;
 #else
-        private readonly GTI.SPI.Configuration config;
-        private readonly GTI.SPI spi;
+        private readonly GTI.SpiConfiguration config;
+        private readonly GTI.Spi spi;
 #endif
 
 		/// <summary>Constructs a new instance of the RotaryH1 module.</summary>
@@ -38,18 +38,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 #if USE_SOFTWARE_SPI
             socket.EnsureTypeIsSupported('Y', this);
 
-			this.CS = new GTI.DigitalOutput(socket, Socket.Pin.Six, true, this);
-			this.MISO = new GTI.DigitalInput(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-			this.MOSI = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
-			this.CLOCK = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
+			this.CS = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
+			this.MISO = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.MOSI = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
+			this.CLOCK = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
 #else
             socket.EnsureTypeIsSupported('S', this);
 
-            this.config = new GTI.SPI.Configuration(false, 0, 0, false, true, 1000);
-			this.spi = new GTI.SPI(socket, this.config, GTI.SPI.Sharing.Shared, socket, GT.Socket.Pin.Six, this);
+            this.config = new GTI.SpiConfiguration(false, 0, 0, false, true, 1000);
+			this.spi = GTI.SpiFactory.Create(socket, this.config, GTI.SpiSharing.Shared, socket, GT.Socket.Pin.Six, this);
 #endif
 
-            this.Enable = new GTI.DigitalOutput(socket, Socket.Pin.Five, true, this);
+            this.Enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, true, this);
             
 			this.Initialize();
 		}

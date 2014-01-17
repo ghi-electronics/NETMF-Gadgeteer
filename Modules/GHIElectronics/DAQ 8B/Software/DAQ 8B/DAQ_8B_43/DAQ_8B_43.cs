@@ -1,4 +1,4 @@
-﻿using GTI = Gadgeteer.Interfaces;
+﻿using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -20,10 +20,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('S', this);
 
-			this.CS = new GTI.DigitalOutput(socket, Socket.Pin.Six, true, this);
-			this.MISO = new GTI.DigitalInput(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-			this.MOSI = new GTI.DigitalOutput(socket, Socket.Pin.Seven, false, this);
-			this.CLOCK = new GTI.DigitalOutput(socket, Socket.Pin.Nine, false, this);
+			this.CS = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
+			this.MISO = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.MOSI = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
+			this.CLOCK = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
 		}
 
 		/// <summary>

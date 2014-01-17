@@ -17,7 +17,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="request">The http request the stream will represent.</param>
 		/// <param name="stream">The stream of serial data.</param>
-        public HttpStream(HttpRequest request, Gadgeteer.Interfaces.Serial stream)
+        public HttpStream(HttpRequest request, Gadgeteer.SocketInterfaces.Serial stream)
         {
             _request = request;
             _response = new HttpResponse(stream);

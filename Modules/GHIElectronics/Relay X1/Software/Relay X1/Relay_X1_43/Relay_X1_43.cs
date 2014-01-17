@@ -1,4 +1,4 @@
-﻿using GTI = Gadgeteer.Interfaces;
+﻿using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-			this.enable = new GTI.DigitalOutput(socket, Socket.Pin.Five, false, this);
+			this.enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
 
 		}
 

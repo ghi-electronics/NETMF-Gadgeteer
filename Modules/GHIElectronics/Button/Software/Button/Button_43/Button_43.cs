@@ -1,6 +1,6 @@
 ﻿using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -62,9 +62,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
             // These calls will throw GT.Socket.InvalidSocketException if a pin conflict or error is encountered
-            this.input = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
-            this.input.Interrupt += new GTI.InterruptInput.InterruptEventHandler(this._input_Interrupt);
-            this.led = new GTI.DigitalOutput(socket, GT.Socket.Pin.Four, false, this);
+            this.input = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+            this.input.Interrupt += (this._input_Interrupt);
+            this.led = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Four, false, this);
 
             LEDMode = LEDModes.Off;
         }

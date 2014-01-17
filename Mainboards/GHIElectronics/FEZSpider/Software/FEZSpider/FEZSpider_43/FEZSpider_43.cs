@@ -9,6 +9,7 @@ using EMX = GHI.Hardware.EMX;
 using GHI.Premium.Hardware;
 using GHI.Premium.System;
 using GHI.Premium.IO;
+using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
 {
@@ -26,8 +27,9 @@ namespace GHIElectronics.Gadgeteer
 		public FEZSpider()
 		{
 			// uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
-			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
-			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(NativeI2CWriteRead);
+            // otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
+            GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
+			
 
 			this.NativeBitmapConverter = new BitmapConvertBPP(BitmapConverter);
 
@@ -55,7 +57,7 @@ namespace GHIElectronics.Gadgeteer
 			//socket.CpuPins[7] = (Cpu.Pin)34;
 			//socket.CpuPins[8] = (Cpu.Pin)5;
 			//socket.CpuPins[9] = (Cpu.Pin)7;
-			//socket.NativeI2CWriteRead = nativeI2C;
+			//
 			//socket.SerialPortName = "COM1";
 			//socket.SPIModule = SPI.SPI_module.SPI1;
 			//GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -74,7 +76,7 @@ namespace GHIElectronics.Gadgeteer
 			//// Pin 7 not connected on this socket, so it is left unspecified
 			//socket.CpuPins[8] = (Cpu.Pin)59;
 			//socket.CpuPins[9] = (Cpu.Pin)18;
-			//socket.NativeI2CWriteRead = nativeI2C;
+			//
 			//socket.AnalogOutput = new FEZSpider_AnalogOut((Cpu.Pin)14);
 			//GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 1, 2, 10);
 			//socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
@@ -136,7 +138,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO11;
 
 			// X
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// K/U
 			socket.SerialPortName = "COM2";
@@ -152,7 +154,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = EMX.Pin.IO40;
 			socket.CpuPins[8] = EMX.Pin.IO39;
 			socket.CpuPins[9] = EMX.Pin.IO42;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
@@ -167,7 +169,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO35;
 			
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// S
 			socket.SPIModule = SPI.SPI_module.SPI2;
@@ -196,7 +198,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO49;
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// U
 			socket.SerialPortName = "COM3";
@@ -219,16 +221,16 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO27;
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// U
 			socket.SerialPortName = "COM4";
 			
 			// S
 			socket.SPIModule = SPI.SPI_module.SPI1;
-			
-			// O
-			socket.AnalogOutput = new FEZSpider_AnalogOut((Cpu.Pin)socket.CpuPins[5]);
+
+            // O
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
 			
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -249,7 +251,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO11;
 
 			// X
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -270,7 +272,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO50;
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			// U
 			socket.SerialPortName = "COM1";
@@ -293,7 +295,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO61;
 
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
@@ -320,25 +322,18 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = EMX.Pin.IO64;
 			
 			// Y
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 			#endregion
 		}
 
-		bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
-		{
-			// implement this method if you support NativeI2CWriteRead for faster DaisyLink performance
-			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code. 
-			return SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
-		}
-
-		void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+		void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
 		{
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			Util.BitmapConvertBPP(bitmapBytes, pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
+			Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
 		}
 		
 		private PersistentStorage _storage;
@@ -389,94 +384,82 @@ namespace GHIElectronics.Gadgeteer
 			// This is an advanced API that we don't expect people to call much.
 		}
 
-
-		/// <summary>
-		/// This sets the LCD configuration.  If the value GT.Mainboard.LCDConfiguration.HeadlessConfig (=null) is specified, no display support should be active.
-		/// If a non-null value is specified but the property LCDControllerEnabled is false, the LCD controller should be disabled if present,
-		/// though the Bitmap width/height for WPF should be modified to the Width and Height parameters.  This must reboot if the LCD configuration changes require a reboot.
-		/// </summary>
-		/// <param name="lcdConfig">The LCD Configuration</param>
-		public override void SetLCDConfiguration(GT.Mainboard.LCDConfiguration lcdConfig)
+        /// <summary>
+        /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        /// <param name="displayModel">Display model name.</param>
+        /// <param name="width">Display physical width in pixels, ignoring the orientation setting.</param>
+        /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
+        /// <param name="orientationDeg">Display orientation in degrees.</param>
+        /// <param name="lcdConfig">The required timings from an LCD controller.</param>
+		protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
 		{
-			if (lcdConfig.LCDControllerEnabled == false)
+			var config = new Configuration.LCD.Configurations();
+
+			//if (lcdConfig.LCDControllerEnabled == false)
+			//{
+			//    // EMX firmware has PixelClockDivider 0xFF as special value meaning "don't run"
+			//    config.PixelClockDivider = 0xff;
+			//}
+
+			config.Height = (uint)height;
+			config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
+			config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
+			config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
+			config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
+            config.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
+            config.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+				
+			// removed
+			//config.PixelClockDivider = lcdConfig.PixelClockDivider;
+
+            // added
+            config.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
+
+            config.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
+				
+			// removed
+			//config.PriorityEnable = lcdConfig.PriorityEnable;
+			
+			config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
+			config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
+			config.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
+			config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
+			config.Width = (uint)width;
+
+			if (Configuration.LCD.Set(config))
 			{
-				//Configuration.LCD.Set(Configuration.LCD.HeadlessConfig);
-				var config = new Configuration.LCD.Configurations();
-				config = Configuration.LCD.HeadlessConfig;
+				Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
+				Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
 
-				config.Width = lcdConfig.Width;
-				config.Height = lcdConfig.Height;
-
-				// removed
-				//config.PixelClockDivider = 0xFF;
-
-				// added
-				config.PixelClockRateKHz = 0;
-
-				if (Configuration.LCD.Set(config))
-				{
-					Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
-					Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
-
-					// A new configuration was set, so we must reboot
-					Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
-				}
-			}
-			else
-			{
-				var config = new Configuration.LCD.Configurations();
-
-				//if (lcdConfig.LCDControllerEnabled == false)
-				//{
-				//    // EMX firmware has PixelClockDivider 0xFF as special value meaning "don't run"
-				//    config.PixelClockDivider = 0xff;
-				//}
-
-				config.Height = lcdConfig.Height;
-				config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
-				config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
-				config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPolarity;
-				config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
-				config.OutputEnableIsFixed = lcdConfig.OutputEnableIsFixed;
-				config.OutputEnablePolarity = lcdConfig.OutputEnablePolarity;
-				
-				// removed
-				//config.PixelClockDivider = lcdConfig.PixelClockDivider;
-				
-				// added
-				config.PixelClockRateKHz = (uint)(72000 / lcdConfig.PixelClockDivider);
-
-				config.PixelPolarity = lcdConfig.PixelPolarity;
-				
-				// removed
-				//config.PriorityEnable = lcdConfig.PriorityEnable;
-				
-				config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
-				config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
-				config.VerticalSyncPolarity = lcdConfig.VerticalSyncPolarity;
-				config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
-				config.Width = lcdConfig.Width;
-
-				if (Configuration.LCD.Set(config))
-				{
-					Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
-					Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
-
-					// A new configuration was set, so we must reboot
-					Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
-				}
+				// A new configuration was set, so we must reboot
+				Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
 			}
 		}
 
-		/// <summary>
-		/// Configures rotation in the LCD controller. This must reboot if performing the LCD rotation requires a reboot.
-		/// </summary>
-		/// <param name="rotation">The LCD rotation to use</param>
-		/// <returns>true if the rotation is supported</returns>
-		public override bool SetLCDRotation(GT.Modules.Module.DisplayModule.LCDRotation rotation)
-		{
-			return false;
-		}
+        /// <summary>
+        /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, or it is not possible to disable the onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        public override void EnsureRgbSocketPinsAvailable()
+        {
+            var config = new Configuration.LCD.Configurations();
+            config = Configuration.LCD.HeadlessConfig;
+            config.Width = 0;
+            config.Height = 0;
+            config.PixelClockRateKHz = 0;
+
+            if (Configuration.LCD.Set(config))
+            {
+                Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
+                Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
+
+                Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
+            }
+        }
 
 		// change the below to the debug led pin on this mainboard
 		private const Cpu.Pin DebugLedPin = EMX.Pin.IO47;
@@ -514,6 +497,29 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get { return "1.0"; }
 		}
+
+        private class InteropI2CBus : GT.SocketInterfaces.I2CBus
+        {
+            public override ushort Address { get; set; }
+            public override int Timeout { get; set; }
+            public override int ClockRateKHz { get; set; }
+
+            private Cpu.Pin sdaPin;
+            private Cpu.Pin sclPin;
+
+            public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
+            {
+                this.sdaPin = socket.CpuPins[(int)sdaPin];
+                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.Address = address;
+                this.ClockRateKHz = clockRateKHz;
+            }
+
+            public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
+            {
+                SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+            }
+        }
 	   
 		enum SpecialPurposePin
 		{
@@ -540,73 +546,6 @@ namespace GHIElectronics.Gadgeteer
 			TMS = -21,
 			TRST = -22,
 			TDI = -23,
-		}
-	}
-
-	internal class FEZSpider_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
-	{
-		private AnalogOutput aout = null;
-
-		Cpu.Pin pin;
-		const double MIN_VOLTAGE = 0;
-		const double MAX_VOLTAGE = 3.3;
-
-		public FEZSpider_AnalogOut(Cpu.Pin pin)
-		{
-			this.pin = pin;
-		}
-
-		public double MinOutputVoltage
-		{
-			get
-			{
-				return FEZSpider_AnalogOut.MIN_VOLTAGE;
-			}
-		}
-
-		public double MaxOutputVoltage
-		{
-			get
-			{
-				return FEZSpider_AnalogOut.MAX_VOLTAGE;
-			}
-		}
-
-		public bool Active
-		{
-			get
-			{
-				return this.aout != null;
-			}
-			set
-			{
-				if (value == this.Active) 
-					return;
-
-				if (value)
-				{
-					this.aout = new AnalogOutput(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0, 1 / FEZSpider_AnalogOut.MAX_VOLTAGE, 0, 10);
-					this.SetVoltage(FEZSpider_AnalogOut.MIN_VOLTAGE);
-				}
-				else
-				{
-					this.aout.Dispose();
-					this.aout = null;
-				}
-			}
-		}
-
-		public void SetVoltage(double voltage)
-		{
-			this.Active = true;
-
-			if (voltage < FEZSpider_AnalogOut.MIN_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZSpider_AnalogOut.MIN_VOLTAGE.ToString() + "V");
-
-			if (voltage > FEZSpider_AnalogOut.MAX_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZSpider_AnalogOut.MAX_VOLTAGE.ToString() + "V");
-
-			this.aout.Write(voltage);
 		}
 	}
 }

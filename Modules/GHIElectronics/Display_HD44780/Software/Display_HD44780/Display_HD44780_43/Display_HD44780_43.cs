@@ -47,15 +47,15 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </example>
     public class Display_HD44780 : GTM.Module
     {
-        private GT.Interfaces.DigitalOutput LCD_RS;
-        private GT.Interfaces.DigitalOutput LCD_E;
+        private GT.SocketInterfaces.DigitalOutput LCD_RS;
+        private GT.SocketInterfaces.DigitalOutput LCD_E;
 
-        private GT.Interfaces.DigitalOutput LCD_D4;
-        private GT.Interfaces.DigitalOutput LCD_D5;
-        private GT.Interfaces.DigitalOutput LCD_D6;
-        private GT.Interfaces.DigitalOutput LCD_D7;
+        private GT.SocketInterfaces.DigitalOutput LCD_D4;
+        private GT.SocketInterfaces.DigitalOutput LCD_D5;
+        private GT.SocketInterfaces.DigitalOutput LCD_D6;
+        private GT.SocketInterfaces.DigitalOutput LCD_D7;
 
-        private GT.Interfaces.DigitalOutput BackLight;
+        private GT.SocketInterfaces.DigitalOutput BackLight;
 
         const byte DISP_ON = 0xC;    //Turn visible LCD on
         const byte CLR_DISP = 1;      //Clear display
@@ -85,14 +85,14 @@ namespace Gadgeteer.Modules.GHIElectronics
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('Y', this);
 
-            LCD_RS = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Four, false, null);
-            LCD_E = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Three, false, null);
-            LCD_D4 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Five, false, null);
-            LCD_D5 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Seven, false, null);
-            LCD_D6 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Nine, false, null);
-            LCD_D7 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Six, false, null);
+            LCD_RS = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Four, false, null);
+            LCD_E = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, false, null);
+            LCD_D4 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Five, false, null);
+            LCD_D5 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Seven, false, null);
+            LCD_D6 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Nine, false, null);
+            LCD_D7 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Six, false, null);
 
-            BackLight = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Eight, true, null);
+            BackLight = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Eight, true, null);
 
             Initialize();
         }

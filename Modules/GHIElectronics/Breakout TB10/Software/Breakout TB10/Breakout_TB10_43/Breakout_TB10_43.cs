@@ -21,7 +21,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="pin">The pin to assign to the interface.</param>
 		/// <param name="glitchFilterMode">
-		///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+		///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
 		///  whether to enable the glitch filter on this interface.
 		/// </param>
 		/// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -29,9 +29,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <exception cref="System.Exception">
 		///  The specified pin has already been reserved on this module.
 		/// </exception>
-		public Interfaces.DigitalInput SetupDigitalInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
+		public SocketInterfaces.DigitalInput SetupDigitalInput(Socket.Pin pin, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode)
 		{
-			return new Interfaces.DigitalInput(BreakoutSocket, pin, glitchFilterMode, resistorMode, this);
+			return SocketInterfaces.DigitalInputFactory.Create(BreakoutSocket, pin, glitchFilterMode, resistorMode, this);
 		}
 
 		/// <summary>
@@ -43,9 +43,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <exception cref="System.Exception">
 		///  The specified pin has already been reserved on this module.
 		/// </exception>
-		public Interfaces.DigitalOutput SetupDigitalOutput(Socket.Pin pin, bool initialState)
+		public SocketInterfaces.DigitalOutput SetupDigitalOutput(Socket.Pin pin, bool initialState)
 		{
-			return new Interfaces.DigitalOutput(BreakoutSocket, pin, initialState, this);
+			return SocketInterfaces.DigitalOutputFactory.Create(BreakoutSocket, pin, initialState, this);
 		}
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		///  this value becomes effective as soon as the port is enabled as an output port.
 		/// </param>
 		/// <param name="glitchFilterMode">
-		///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+		///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
 		///  whether to enable the glitch filter on this interface.
 		/// </param>
 		/// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -65,9 +65,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <exception cref="System.Exception">
 		///  The specified pin has already been reserved on this module.
 		/// </exception>
-		public Interfaces.DigitalIO SetupDigitalIO(Socket.Pin pin, bool initialState, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
+		public SocketInterfaces.DigitalIO SetupDigitalIO(Socket.Pin pin, bool initialState, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode)
 		{
-			return new Interfaces.DigitalIO(BreakoutSocket, pin, initialState, glitchFilterMode, resistorMode, this);
+			return SocketInterfaces.DigitalIOFactory.Create(BreakoutSocket, pin, initialState, glitchFilterMode, resistorMode, this);
 		}
 
 		/// <summary>
@@ -75,7 +75,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="pin">The pin to assign to the interface.</param>
 		/// <param name="glitchFilterMode">
-		///  A value from the <see cref="T:Microsoft.Gadgeteer.Interfaces.GlitchFilterMode"/> enumeration that specifies 
+		///  A value from the <see cref="T:Microsoft.Gadgeteer.SocketInterfaces.GlitchFilterMode"/> enumeration that specifies 
 		///  whether to enable the glitch filter on this interface.
 		/// </param>
 		/// <param name="resistorMode">The resistor mode for the interface port.</param>
@@ -84,9 +84,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <exception cref="System.Exception">
 		///  The specified pin has already been reserved on this module.
 		/// </exception>
-		public Interfaces.InterruptInput SetupInterruptInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode, Interfaces.InterruptMode interruptMode)
+		public SocketInterfaces.InterruptInput SetupInterruptInput(Socket.Pin pin, SocketInterfaces.GlitchFilterMode glitchFilterMode, SocketInterfaces.ResistorMode resistorMode, SocketInterfaces.InterruptMode interruptMode)
 		{
-			return new Interfaces.InterruptInput(BreakoutSocket, pin, glitchFilterMode, resistorMode, interruptMode, this);
+			return SocketInterfaces.InterruptInputFactory.Create(BreakoutSocket, pin, glitchFilterMode, resistorMode, interruptMode, this);
 		}
 
 		/// <summary>
@@ -94,12 +94,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="pin">The pin to assign to the interface.</param>
 		/// <returns>The interface.</returns>
-		public Interfaces.AnalogInput SetupAnalogInput(Socket.Pin pin)
+		public SocketInterfaces.AnalogInput SetupAnalogInput(Socket.Pin pin)
 		{
-			return new Interfaces.AnalogInput(BreakoutSocket, pin, this);
+			return SocketInterfaces.AnalogInputFactory.Create(BreakoutSocket, pin, this);
 		}
 
-		// TODO:  Determine whether AnalogOutput should be added to Gadgeteer.Interfaces
+		// TODO:  Determine whether AnalogOutput should be added to Gadgeteer.SocketInterfaces
 
 
 		/// <summary>
@@ -107,9 +107,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="pin">The pin to assign to the interface.</param>
 		/// <returns>The interface.</returns>
-		public Interfaces.AnalogOutput SetupAnalogOutput(Socket.Pin pin)
+		public SocketInterfaces.AnalogOutput SetupAnalogOutput(Socket.Pin pin)
 		{
-			return new Interfaces.AnalogOutput(BreakoutSocket, pin, this);
+			return SocketInterfaces.AnalogOutputFactory.Create(BreakoutSocket, pin, this);
 		}
 
 		/// <summary>
@@ -117,9 +117,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="pin">The pin to use for the PWM interface.</param>
 		/// <returns>The PWM interface.</returns>
-		public Interfaces.PWMOutput SetupPWMOutput(Socket.Pin pin)
+		public SocketInterfaces.PwmOutput SetupPWMOutput(Socket.Pin pin)
 		{
-			return new Interfaces.PWMOutput(BreakoutSocket, pin, false, this);
+			return SocketInterfaces.PwmOutputFactory.Create(BreakoutSocket, pin, false, this);
 		}
 	}
 }

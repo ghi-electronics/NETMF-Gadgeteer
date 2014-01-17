@@ -6,7 +6,7 @@ using Microsoft.SPOT.Hardware;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using GHI.OSHW.Hardware;
 using FEZCerberus = GHI.Hardware.FEZCerb;
@@ -29,8 +29,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private ushort ledMask;
 		private PWM enableFaderPin;
-		private GTI.SPI forwardLEDs;
-		private GTI.SPI.Configuration spiConfig;
+		private GTI.Spi forwardLEDs;
+		private GTI.SpiConfiguration spiConfig;
 
 		private bool leftInverted;
 		private bool rightInverted;
@@ -95,8 +95,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             tempSocket.SPIModule = spiSocket.SPIModule;
             GT.Socket.SocketInterfaces.RegisterSocket(tempSocket);
 
-            this.spiConfig = new GTI.SPI.Configuration(false, 0, 0, false, true, 2000);
-            this.forwardLEDs = new GTI.SPI(tempSocket, this.spiConfig, GTI.SPI.Sharing.Shared, tempSocket, Socket.Pin.Six, null);
+            this.spiConfig = new GTI.SpiConfiguration(false, 0, 0, false, true, 2000);
+            this.forwardLEDs = GTI.SpiFactory.Create(tempSocket, this.spiConfig, GTI.SpiSharing.Shared, tempSocket, Socket.Pin.Six, null);
 
 			this.enableFaderPin = new PWM((Cpu.PWMChannel)13, 500, 500, PWM.ScaleFactor.Microseconds, true);
 			this.enableFaderPin.Start();

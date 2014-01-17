@@ -3,7 +3,7 @@ using Microsoft.SPOT;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -27,12 +27,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			socket.EnsureTypeIsSupported('Y', this);
 
-			this.out1 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Three, true, null);
-			this.out2 = new GT.Interfaces.DigitalOutput(socket, GT.Socket.Pin.Four, true, null);
-			this.in1 = new GT.Interfaces.DigitalInput(socket, GT.Socket.Pin.Five, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, null);
-			this.in2 = new GT.Interfaces.DigitalInput(socket, GT.Socket.Pin.Six, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, null);
-			this.in3 = new GT.Interfaces.DigitalInput(socket, GT.Socket.Pin.Seven, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, null);
-			this.in4 = new GT.Interfaces.DigitalInput(socket, GT.Socket.Pin.Eight, GT.Interfaces.GlitchFilterMode.Off, GT.Interfaces.ResistorMode.PullUp, null);
+			this.out1 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, true, null);
+			this.out2 = GT.SocketInterfaces.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Four, true, null);
+			this.in1 = GT.SocketInterfaces.DigitalInputFactory.Create(socket, GT.Socket.Pin.Five, GT.SocketInterfaces.GlitchFilterMode.Off, GT.SocketInterfaces.ResistorMode.PullUp, null);
+			this.in2 = GT.SocketInterfaces.DigitalInputFactory.Create(socket, GT.Socket.Pin.Six, GT.SocketInterfaces.GlitchFilterMode.Off, GT.SocketInterfaces.ResistorMode.PullUp, null);
+			this.in3 = GT.SocketInterfaces.DigitalInputFactory.Create(socket, GT.Socket.Pin.Seven, GT.SocketInterfaces.GlitchFilterMode.Off, GT.SocketInterfaces.ResistorMode.PullUp, null);
+			this.in4 = GT.SocketInterfaces.DigitalInputFactory.Create(socket, GT.Socket.Pin.Eight, GT.SocketInterfaces.GlitchFilterMode.Off, GT.SocketInterfaces.ResistorMode.PullUp, null);
 		}
 
 		/// <summary>

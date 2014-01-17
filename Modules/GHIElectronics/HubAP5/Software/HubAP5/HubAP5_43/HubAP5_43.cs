@@ -5,7 +5,7 @@ using System.Collections;
 
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -110,7 +110,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			return this.pinMap[(int)(this.socketMap[socket.SocketNumber]) * 7 + (int)(pin) - 3];
 		}
 
-		private class DigitalInputImplementation : Socket.SocketInterfaces.DigitalInput
+		private class DigitalInputImplementation : GTI.DigitalInput
 		{
 			private IO60P16 io60;
 			private byte pin;
@@ -129,7 +129,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-		private class DigitalOutputImplementation : Socket.SocketInterfaces.DigitalOutput
+        private class DigitalOutputImplementation : GTI.DigitalOutput
 		{
 			private IO60P16 io60;
 			private byte pin;
@@ -154,11 +154,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-		private class DigitalIOImplementation : Socket.SocketInterfaces.DigitalIO
+        private class DigitalIOImplementation : GTI.DigitalIO
 		{
 			private IO60P16 io60;
 			private byte pin;
-			private Socket.SocketInterfaces.IOMode mode;
+			private GTI.IOMode mode;
 			private GTI.ResistorMode resistorMode;
 
 			public DigitalIOImplementation(byte pin, bool initialState, GTI.GlitchFilterMode glitchFilter, GTI.ResistorMode resistorMode, IO60P16 io60)
@@ -166,23 +166,23 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60 = io60;
 				this.pin = pin;
 				this.resistorMode = resistorMode;
-				this.Mode = Socket.SocketInterfaces.IOMode.Input;
+				this.Mode = GTI.IOMode.Input;
 				this.io60.writeDigital(this.pin, initialState);
 			}
 
 			public override bool Read()
 			{
-				this.Mode = Socket.SocketInterfaces.IOMode.Input;
+				this.Mode = GTI.IOMode.Input;
 				return this.io60.readDigital(this.pin);
 			}
 
 			public override void Write(bool state)
 			{
-				this.Mode = Socket.SocketInterfaces.IOMode.Output;
+				this.Mode = GTI.IOMode.Output;
 				this.io60.writeDigital(this.pin, state);
 			}
 
-			public override Socket.SocketInterfaces.IOMode Mode
+			public override GTI.IOMode Mode
 			{
 				get
 				{
@@ -191,12 +191,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 				set
 				{
 					this.mode = value;
-					this.io60.setIOMode(this.pin, this.mode == Socket.SocketInterfaces.IOMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
+					this.io60.setIOMode(this.pin, this.mode == GTI.IOMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
 				}
 			}
 		}
 
-		private class AnalogInputImplementation : Socket.SocketInterfaces.AnalogInput
+        private class AnalogInputImplementation : GTI.AnalogInput
 		{
 			private ADS7830 ads;
 			private IO60P16 io60;
@@ -246,7 +246,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-		private class PwmOutputImplementation : Socket.SocketInterfaces.PwmOutput
+        private class PwmOutputImplementation : GTI.PwmOutput
 		{
 			private IO60P16 io60;
 			private byte pin;
@@ -269,7 +269,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60.setPWM(this.pin, frequency, dutyCycle);
 			}
 
-			public override void Set(uint period, uint highTime, Socket.SocketInterfaces.PwmScaleFactor factor)
+			public override void Set(uint period, uint highTime, GTI.PwmScaleFactor factor)
 			{
 				if (period == 0) throw new ArgumentException("period");
 				if (highTime > period) throw new ArgumentException("highTime");
@@ -278,9 +278,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 				switch (factor)
 				{
-					case Socket.SocketInterfaces.PwmScaleFactor.Milliseconds: frequency = 1000 / period; break;
-					case Socket.SocketInterfaces.PwmScaleFactor.Microseconds: frequency = 1000000 / period; break;
-					case Socket.SocketInterfaces.PwmScaleFactor.Nanoseconds: frequency = 1000000000 / period; break;
+					case GTI.PwmScaleFactor.Milliseconds: frequency = 1000 / period; break;
+					case GTI.PwmScaleFactor.Microseconds: frequency = 1000000 / period; break;
+					case GTI.PwmScaleFactor.Nanoseconds: frequency = 1000000000 / period; break;
 				}
 
 				this.Set(frequency, (double)highTime / (double)period);
@@ -312,7 +312,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
-		private class InterruptInputImplementation : Socket.SocketInterfaces.InterruptInput
+        private class InterruptInputImplementation : GTI.InterruptInput
 		{
 			private IO60P16 io60;
 			private byte pin;
@@ -415,7 +415,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				{
 					write2[0] = register;
 					write2[1] = value;
-					this.io60Chip.Write(write2, 250);
+					this.io60Chip.Write(write2);
 				}
 			}
 
@@ -426,7 +426,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				lock (this.io60Chip)
 				{
 					write1[0] = register;
-					this.io60Chip.WriteRead(write1, read1, 250);
+					this.io60Chip.WriteRead(write1, read1);
 					result = read1[0];
 				}
 
@@ -440,7 +440,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 lock (this.io60Chip)
                 {
                     write1[0] = register;
-                    this.io60Chip.WriteRead(write1, result, 250);
+                    this.io60Chip.WriteRead(write1, result);
                 }
 
                 return result;
@@ -475,9 +475,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public IO60P16(Socket socket)
 			{
-				this.io60Chip = new GTI.I2CBus(socket, 0x20, 100, null);
+				this.io60Chip = GTI.I2CBusFactory.Create(socket, 0x20, 100, null);
 
-				this.interrupt = new GTI.InterruptInput(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, null);
+				this.interrupt = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, null);
 				this.interrupt.Interrupt += this.OnInterrupt;
 			}
 
@@ -604,7 +604,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public ADS7830(Socket socket)
 			{
-				this.i2c = new GTI.I2CBus(socket, ADS7830.I2C_ADDRESS, 400, null);
+				this.i2c = GTI.I2CBusFactory.Create(socket, ADS7830.I2C_ADDRESS, 400, null);
 			}
 
 			public double ReadVoltage(byte channel)
@@ -618,7 +618,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				command[0] |= (byte)((channel % 2 == 0 ? channel / 2 : (channel - 1) / 2 + 4) << 4);
 
 				lock (this.i2c)
-					this.i2c.WriteRead(command, read, 250);
+					this.i2c.WriteRead(command, read);
 
 				return (double)read[0] / 255 * 3.3;
 			}

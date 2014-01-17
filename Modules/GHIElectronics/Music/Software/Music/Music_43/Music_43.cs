@@ -2,7 +2,7 @@
 using Microsoft.SPOT;
 
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.Interfaces;
+using GTI = Gadgeteer.SocketInterfaces;
 
 using System.Threading;
 using Microsoft.SPOT.Hardware;
@@ -11,7 +11,7 @@ using System.IO;
 namespace Gadgeteer.Modules.GHIElectronics
 {
     // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
+    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
     // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
     // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
@@ -69,10 +69,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         private InputPort m_dreq;
 
         // Define SPI Configuration for MP3 decoder
-        GTI.SPI m_SPICmd;
-        GTI.SPI m_SPIData;
-        private GTI.SPI.Configuration m_dataConfig2;
-        private GTI.SPI.Configuration m_cmdConfig2;
+        GTI.Spi m_SPICmd;
+        GTI.Spi m_SPIData;
+        private GTI.SpiConfiguration m_dataConfig2;
+        private GTI.SpiConfiguration m_cmdConfig2;
 
         //SPI m_SPI;
         //private SPI.Configuration m_dataConfig;
@@ -389,16 +389,16 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             // Set up our SPI 
             //m_dataConfig = new SPI.Configuration(socket.CpuPins[5], false, 0, 0, false, true, 2000, socket.SPIModule, socket.CpuPins[3], false);
-            m_dataConfig2 = new GTI.SPI.Configuration(false, 0, 0, false, true, 2000);
+            m_dataConfig2 = new GTI.SpiConfiguration(false, 0, 0, false, true, 2000);
 
             //m_cmdConfig = new SPI.Configuration(socket.CpuPins[6], false, 0, 0, false, true, 2000, socket.SPIModule, socket.CpuPins[3], false);
-            m_cmdConfig2 = new GTI.SPI.Configuration(false, 0, 0, false, true, 2000);
+            m_cmdConfig2 = new GTI.SpiConfiguration(false, 0, 0, false, true, 2000);
 
             m_dreq = new InputPort(socket.CpuPins[3], false, Port.ResistorMode.PullUp);
 
             //m_SPI = new SPI(m_dataConfig);
-            m_SPIData = new GTI.SPI(socket, m_dataConfig2, GTI.SPI.Sharing.Shared, socket, Socket.Pin.Five, this);
-            m_SPICmd = new GTI.SPI(socket, m_cmdConfig2, GTI.SPI.Sharing.Shared, socket, Socket.Pin.Six, this);
+            m_SPIData = GTI.SpiFactory.Create(socket, m_dataConfig2, GTI.SpiSharing.Shared, socket, Socket.Pin.Five, this);
+            m_SPICmd = GTI.SpiFactory.Create(socket, m_cmdConfig2, GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
 
             Reset();
 
@@ -415,10 +415,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             // This creates an GTI.InterruptInput interface. The interfaces under the GTI namespace provide easy ways to build common modules.
             // This also generates user-friendly error messages automatically, e.g. if the user chooses a socket incompatible with an interrupt input.
-            //this.input = new GTI.InterruptInput(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+            //this.input = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
 
             // This registers a handler for the interrupt event of the interrupt input (which is below)
-            //this.input.Interrupt += new GTI.InterruptInput.InterruptEventHandler(this._input_Interrupt);
+            //this.input.Interrupt += (this._input_Interrupt);
         }
 
         /// <summary>

@@ -7,6 +7,7 @@ using GHI.Hardware.G400;
 using GHI.Premium.IO;
 using GHI.Premium.Hardware;
 using GHI.Premium.System;
+using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
 {
@@ -22,7 +23,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			this.NativeBitmapConverter = this.BitmapConverter;
 
-			GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(this.NativeI2CWriteRead);
+            GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
 			
 			GT.Socket socket;
 
@@ -37,7 +38,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = Pin.PA23;
 			socket.SPIModule = SPI.SPI_module.SPI2;
 			socket.SerialPortName = "COM4";
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -49,7 +50,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[6] = Pin.PB18;
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
@@ -69,7 +70,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = Pin.PA11;
 			socket.CpuPins[9] = Pin.PA13;
 			socket.SPIModule = SPI.SPI_module.SPI1;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -83,7 +84,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
 			socket.SerialPortName = "COM2";
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -142,7 +143,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PA19;
 			socket.CpuPins[8] = Pin.PA20;
 			socket.CpuPins[9] = Pin.PA17;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -155,7 +156,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
 			socket.SerialPortName = "COM1";
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -170,7 +171,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = Pin.PA13;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			socket.SerialPortName = "COM3";
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -183,7 +184,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
 			socket.SerialPortName = "COM6";
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -195,7 +196,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[6] = Pin.PC22;
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
@@ -214,7 +215,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PD2;
 			socket.CpuPins[8] = Pin.PA30;
 			socket.CpuPins[9] = Pin.PA31;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_0;
@@ -233,7 +234,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PC15;
 			socket.CpuPins[8] = Pin.PC27;
 			socket.CpuPins[9] = Pin.PC28;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -246,7 +247,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PC9;
 			socket.CpuPins[8] = Pin.PC10;
 			socket.CpuPins[9] = Pin.PC21;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -259,7 +260,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PC4;
 			socket.CpuPins[8] = Pin.PC29;
 			socket.CpuPins[9] = Pin.PC30;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
@@ -272,7 +273,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[7] = Pin.PC18;
 			socket.CpuPins[8] = Pin.PC19;
 			socket.CpuPins[9] = Pin.PC20;
-			socket.NativeI2CWriteRead = nativeI2C;
+			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
 			socket.AnalogInput3 = (Cpu.AnalogChannel)9;
@@ -286,17 +287,12 @@ namespace GHIElectronics.Gadgeteer
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 		}
 
-		void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+		void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
 		{
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			Util.BitmapConvertBPP(bitmapBytes, pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
-		}
-
-		bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
-		{
-			return SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
+			Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD", "USB Mass Storage" };
@@ -343,41 +339,34 @@ namespace GHIElectronics.Gadgeteer
 			throw new NotSupportedException();
 		}
 
-
-		/// <summary>
-		/// This sets the LCD configuration.  If the value GT.Mainboard.LCDConfiguration.HeadlessConfig (=null) is specified, no display support should be active.
-		/// If a non-null value is specified but the property LCDControllerEnabled is false, the LCD controller should be disabled if present,
-		/// though the Bitmap width/height for WPF should be modified to the Width and Height parameters.  This must reboot if the LCD configuration changes require a reboot.
-		/// </summary>
-		/// <param name="lcdConfig">The LCD Configuration</param>
-		public override void SetLCDConfiguration(GT.Mainboard.LCDConfiguration lcdConfig)
+        /// <summary>
+        /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        /// <param name="displayModel">Display model name.</param>
+        /// <param name="width">Display physical width in pixels, ignoring the orientation setting.</param>
+        /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
+        /// <param name="orientationDeg">Display orientation in degrees.</param>
+        /// <param name="lcdConfig">The required timings from an LCD controller.</param>
+        protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
 		{
 			var config = new Configuration.LCD.Configurations();
 			
-			if (lcdConfig.LCDControllerEnabled)
-			{
-				config.Height = lcdConfig.Height;
-				config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
-				config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
-				config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPolarity;
-				config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
-				config.OutputEnableIsFixed = lcdConfig.OutputEnableIsFixed;
-				config.OutputEnablePolarity = lcdConfig.OutputEnablePolarity;
-				config.PixelClockRateKHz = (uint)(133000 / lcdConfig.PixelClockDivider);
-				config.PixelPolarity = lcdConfig.PixelPolarity;
-				config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
-				config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
-				config.VerticalSyncPolarity = lcdConfig.VerticalSyncPolarity;
-				config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
-				config.Width = lcdConfig.Width;
-			}
-			else
-			{
-				config = Configuration.LCD.HeadlessConfig;
-				config.Width = lcdConfig.Width;
-				config.Height = lcdConfig.Height;
-				config.PixelClockRateKHz = 0;
-			}
+			config.Height = (uint)height;
+			config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
+			config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
+			config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
+			config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
+            config.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
+            config.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            config.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
+            config.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
+			config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
+			config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
+			config.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
+			config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
+			config.Width = (uint)width;
 
 			if (Configuration.LCD.Set(config))
 			{
@@ -388,15 +377,27 @@ namespace GHIElectronics.Gadgeteer
 			}
 		}
 
-		/// <summary>
-		/// Configures rotation in the LCD controller. This must reboot if performing the LCD rotation requires a reboot.
-		/// </summary>
-		/// <param name="rotation">The LCD rotation to use</param>
-		/// <returns>true if the rotation is supported</returns>
-		public override bool SetLCDRotation(GT.Modules.Module.DisplayModule.LCDRotation rotation)
-		{
-			return false;
-		}
+        /// <summary>
+        /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
+        /// If doing this requires rebooting, then the method must reboot and not return.
+        /// If there is no onboard display controller, or it is not possible to disable the onboard display controller, then NotSupportedException must be thrown.
+        /// </summary>
+        public override void EnsureRgbSocketPinsAvailable()
+        {
+            var config = new Configuration.LCD.Configurations();
+            config = Configuration.LCD.HeadlessConfig;
+            config.Width = 0;
+            config.Height = 0;
+            config.PixelClockRateKHz = 0;
+
+            if (Configuration.LCD.Set(config))
+            {
+                Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
+                Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
+
+                Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
+            }
+        }
 
 		// change the below to the debug led pin on this mainboard
 		private const Cpu.Pin DebugLedPin = Pin.PD3;
@@ -434,6 +435,29 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get { return "1.0"; }
 		}
+
+        private class InteropI2CBus : GT.SocketInterfaces.I2CBus
+        {
+            public override ushort Address { get; set; }
+            public override int Timeout { get; set; }
+            public override int ClockRateKHz { get; set; }
+
+            private Cpu.Pin sdaPin;
+            private Cpu.Pin sclPin;
+
+            public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
+            {
+                this.sdaPin = socket.CpuPins[(int)sdaPin];
+                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.Address = address;
+                this.ClockRateKHz = clockRateKHz;
+            }
+
+            public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
+            {
+                SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+            }
+        }
 
 		private enum SpecialPurposePin
 		{
