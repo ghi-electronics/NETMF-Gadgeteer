@@ -25,6 +25,7 @@
   <!-- These define which versions of NETMF are supported - comment out or delete any unsupported NETMF versions. -->
   <!-- <?define NETMF41Supported ?> -->
   <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
 
 
   <!-- No need to change anything below this line. -->
@@ -45,7 +46,11 @@
 	<?define guid_msm_comp_files_id_42 = "ecfcc3ea-ec3c-49e5-a3ee-b1425ebf33b8" ?>
 	<?define guid_msm_comp_files_be_id_42 = "4dcf4dd4-e263-40c7-b50b-d2af50c2f3b0" ?>
 	<?define guid_msm_comp_files_le_id_42 = "38f438f5-1587-444d-9cda-e62075b215b9" ?>
-	
+	  <?define guid_msm_comp_files_id_43 = "82bdeab0-2d6f-477e-9a71-69abbd5fe212" ?>
+  <?define guid_msm_comp_files_be_id_43 = "e0e4124d-5744-4f2c-bef9-fa8539d09060" ?>
+  <?define guid_msm_comp_files_le_id_43 = "1ca681b6-8dc0-4409-9f45-1d7e9561017d" ?>
+
+
 	
 </Include>
 
