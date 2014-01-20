@@ -42,11 +42,13 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
         <!--<Assembly MFVersion="4.1" Name="GTM.GHIElectronics.CAN_DW"/>-->
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.CAN_DW"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CAN_DW"/>
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         
         <!--<Assembly MFVersion="4.1" Name="GHIElectronics.NETMF.Hardware"/>-->
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Hardware"/>
         
         
         <!-- If your module either relies upon or is often used with a .NET Gadgeteer assembly other than Gadgeteer.dll, then list it here -->
@@ -91,7 +93,8 @@
       <!-- Use the ExtraLibrariesRequired element if this module requires specific firmware libraries to be provided by the mainboard, and so is limited to a subset of mainboards. -->
       <ExtraLibrariesRequired>
         <!--<Assembly MFVersion="4.1" Name="GHIElectronics.NETMF.Hardware" ErrorMessage="A required library could not be found."/>-->
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware" ErrorMessage="A required library could not be found."/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware" ErrorMessage="A required library could not be found."/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Hardware" ErrorMessage="A required library could not be found."/>
       </ExtraLibrariesRequired>
 
 

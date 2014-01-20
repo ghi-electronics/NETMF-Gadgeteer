@@ -30,6 +30,7 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
         <!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.CerbotController"/> -->
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.CerbotController"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CerbotController"/>
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--
@@ -75,7 +76,8 @@
       <!-- Also use the ExtraLibrariesRequired element if this module represents built-in functionality in a mainboard, listing the mainboard's driver as the required assembly. -->
       
       <ExtraLibrariesRequired>
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" ErrorMessage="This module is built-in to the FEZCerbot mainboard, and cannot be used with any other mainboard." />
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" ErrorMessage="This module is built-in to the FEZCerbot mainboard, and cannot be used with any other mainboard." />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" ErrorMessage="This module is built-in to the FEZCerbot mainboard, and cannot be used with any other mainboard." />
       </ExtraLibrariesRequired>
       
       

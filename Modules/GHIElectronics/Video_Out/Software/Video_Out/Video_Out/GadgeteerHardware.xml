@@ -42,6 +42,7 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
         <!--<Assembly MFVersion="4.1" Name="GTM.GHIElectronics.Video_Out"/>-->
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.Video_Out"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Video_Out"/>
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--

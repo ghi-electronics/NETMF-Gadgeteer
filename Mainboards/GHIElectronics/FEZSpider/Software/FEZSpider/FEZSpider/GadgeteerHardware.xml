@@ -30,8 +30,9 @@
       <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
       <Assemblies>
         <!--<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZSpider" />-->
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider" />
-      </Assemblies>
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider" />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider" />
+	  </Assemblies>
       
       <!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->
       <ProvidedSockets>
@@ -167,18 +168,27 @@
         <Assembly MFVersion="4.1" Name="GHIElectronics.NETMF.W5100"/>
         <Assembly MFVersion="4.1" Name="GHIElectronics.NETMF.W5100.Http"/>
 
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware.EMX"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.System"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Native"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.Net"/>
-        <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Hardware.EMX"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.System"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Native"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.Net"/>
+		<Assembly MFVersion="4.2" Name="GHI.Premium.USBHost"/>
+
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Hardware"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Hardware.EMX"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.System"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.IO"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Native"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.Net"/>
+		<Assembly MFVersion="4.3" Name="GHI.Premium.USBHost"/>
 
         <!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
         <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZSpider" />
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider" />
-      </LibrariesProvided>
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider" />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider" />
+	  </LibrariesProvided>
       
     </MainboardDefinition>
   </MainboardDefinitions>

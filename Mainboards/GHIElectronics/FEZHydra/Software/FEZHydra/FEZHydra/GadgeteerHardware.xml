@@ -18,8 +18,9 @@
       <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
       <Assemblies>
         <!--<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZHydra" />-->
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
-      </Assemblies>
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+	  </Assemblies>
       
       <!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->
       <ProvidedSockets>
@@ -154,9 +155,10 @@
         -->
         
         <!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
-        <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZHydra" />
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
-      </LibrariesProvided>
+		<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+	  </LibrariesProvided>
       
     </MainboardDefinition>
   </MainboardDefinitions>

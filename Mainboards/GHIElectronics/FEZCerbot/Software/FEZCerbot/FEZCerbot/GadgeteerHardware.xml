@@ -36,8 +36,9 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1 and NETMF 4.2 versions, since this will make it easier for users to change framework versions -->
 		<!-- <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>-->
 		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
 
-        <!-- If your mainboard driver relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
+		<!-- If your mainboard driver relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--
         <Assembly MFVersion="4.1" Name="GHIElectronics.CustomAssembly"/>
         <Assembly MFVersion="4.2" Name="GHIElectronics.CustomAssembly"/>
@@ -119,8 +120,9 @@
         
         <!-- The mainboard assembly itself (as listed under <Assemblies> above) should also be listed here, to enable modules representing built-in functionality of a mainboard.-->
         <!-- <Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZCerbot" />-->
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
-      </LibrariesProvided>
+		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
+		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
+	  </LibrariesProvided>
       
     </MainboardDefinition>
   </MainboardDefinitions>
