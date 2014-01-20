@@ -43,10 +43,13 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <ProjectReference Include="..\Motion_Sensor_43\Motion_Sensor_43.csproj" />
     <ProjectReference Include="..\Motion Sensor_42\Motion Sensor_42.csproj">
       <Project>{367B3ACB-4CA9-413C-B24A-7912B3E22AC0}</Project>
       <Name>Motion Sensor_42</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Motion Sensor_43\Motion Sensor_43.csproj">
+      <Project>{1E161C2D-490A-448B-91CF-4A81702129FA}</Project>
+      <Name>Motion Sensor_43</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

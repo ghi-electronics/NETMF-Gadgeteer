@@ -3,6 +3,6 @@
 
   <!-- Change this whenever releasing a new kit installer.  The fourth number is ignored, so change one of the top three.
   Otherwise, users will not be able to upgrade properly; Windows Installer will exit with an error instead of upgrading. -->
-  <?define KitVersion = "4.2.101.0" ?>
+  <?define KitVersion = "4.2.102.0" ?>
 
 </Include>

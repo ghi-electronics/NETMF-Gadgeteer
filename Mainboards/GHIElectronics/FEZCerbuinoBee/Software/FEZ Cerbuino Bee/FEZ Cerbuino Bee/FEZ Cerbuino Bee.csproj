@@ -58,7 +58,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FEZ_Cerbuino_Bee_43\FEZ_Cerbuino_Bee_43.csproj" />
+    <ProjectReference Include="..\FEZ Cerbuino Bee_43\FEZ Cerbuino Bee_43.csproj">
+      <Project>{E2E302DC-71B9-4E7E-861A-59A5D57852E2}</Project>
+      <Name>FEZ Cerbuino Bee_43</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEZ Cerbuino Bee_42\FEZ Cerbuino Bee_42.csproj">
       <Project>{CEFD2559-385F-4DDB-9DD7-2211C67BF036}</Project>
       <Name>FEZ Cerbuino Bee_42</Name>

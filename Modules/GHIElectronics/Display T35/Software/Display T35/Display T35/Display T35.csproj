@@ -54,7 +54,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Display_T35_43\Display_T35_43.csproj" />
+    <ProjectReference Include="..\Display T35_43\Display T35_43.csproj">
+      <Project>{B705549F-4B7A-45DD-BC85-5FE0502FF1DF}</Project>
+      <Name>Display T35_43</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Display T35_42\Display T35_42.csproj">
       <Project>{D3EC7CBD-38A0-4682-82DB-CD5067A9EB60}</Project>
       <Name>Display T35_42</Name>
