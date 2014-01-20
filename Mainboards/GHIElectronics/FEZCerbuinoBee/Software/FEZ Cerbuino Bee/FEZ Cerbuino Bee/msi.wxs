@@ -56,7 +56,7 @@
     <Media Id="1" Cabinet="product.cab" EmbedCab="yes" />
 
     <Directory Id='TARGETDIR' Name='SourceDir'>
-      <Merge Id="id_msm" Language="1033" SourceFile="$(var.BinPath)\..\Installer\$(var.SafeProjectName).msm" DiskId="1" />
+      <Merge Id="id_msm" Language="1033" SourceFile="$(var.BinPath)\..\Installer\$(var.SafeMainboardName).msm" DiskId="1" />
     </Directory>
 
     <Feature Id="main" Title="Main" Level="1">
