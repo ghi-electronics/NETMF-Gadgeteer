@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GHI Electronics")]
 [assembly: AssemblyProduct("DAQ 8B")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Copyright © GHI Electronics 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

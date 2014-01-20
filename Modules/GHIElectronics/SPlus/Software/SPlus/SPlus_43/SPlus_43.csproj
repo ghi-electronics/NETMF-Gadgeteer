@@ -42,8 +42,8 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\Kits\GHIElectronics\GHI .NET Gadgeteer SDK\Software\GHI .NET Gadgeteer SDK\AssemblyInfoGlobal.cs">
-      <Link>AssemblyInfoGlobal.cs</Link>
+    <Compile Include="..\..\..\..\..\..\Kits\GHIElectronics\GHI .NET Gadgeteer SDK\Software\GHI .NET Gadgeteer SDK\AssemblyInfoGlobal43.cs">
+      <Link>AssemblyInfoGlobal43.cs</Link>
     </Compile>
     <Compile Include="SPlus_43.cs" />
   </ItemGroup>

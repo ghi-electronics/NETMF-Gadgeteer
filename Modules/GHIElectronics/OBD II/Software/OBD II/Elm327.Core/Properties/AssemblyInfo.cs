@@ -9,7 +9,7 @@
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GHI Electronics")]
 [assembly: AssemblyProduct("Elm327.Core")]
-[assembly: AssemblyCopyright("Copyright © GHI Electronics 2013")]
+[assembly: AssemblyCopyright("Copyright © GHI Electronics 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,5 +20,7 @@
 //      Build Number
 //      Revision
 //
-// [assembly: AssemblyVersion"1.0.0.0")]
-// [assembly: AssemblyFileVersion"1.0.0.0")]
+
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyInformationalVersion("1.0.0.0")]

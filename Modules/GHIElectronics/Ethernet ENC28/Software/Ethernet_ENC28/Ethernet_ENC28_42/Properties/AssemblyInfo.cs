@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("GHI Electronics")]
 [assembly: AssemblyProduct("Ethernet_ENC28")]
-[assembly: AssemblyCopyright("Copyright © GHI Electronics 2013")]
+[assembly: AssemblyCopyright("Copyright © GHI Electronics 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

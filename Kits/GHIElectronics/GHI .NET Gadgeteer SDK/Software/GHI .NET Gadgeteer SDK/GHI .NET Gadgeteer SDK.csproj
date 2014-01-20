@@ -49,7 +49,8 @@
     <None Include="version.wxi">
       <SubType>Designer</SubType>
     </None>
-    <None Include="AssemblyInfoGlobal.cs" />
+    <None Include="AssemblyInfoGlobal42.cs" />
+    <None Include="AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
