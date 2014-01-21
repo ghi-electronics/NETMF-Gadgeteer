@@ -19,7 +19,6 @@
       <Assemblies>
         <!--<Assembly MFVersion="4.1" Name="GHIElectronics.Gadgeteer.FEZHydra" />-->
 		<Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
-		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZHydra" />
 	  </Assemblies>
       
       <!-- This is a list of sockets provided by this mainboard for modules to be attached to. -->

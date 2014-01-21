@@ -48,7 +48,6 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FEZRaptor_43\FEZRaptor_43.csproj" />
     <ProjectReference Include="..\FEZRaptor_42\FEZRaptor_42.csproj">
       <Project>{C10FA0F6-DD91-4C38-B32B-5CA20886315D}</Project>
       <Name>FEZRaptor_42</Name>

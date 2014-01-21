@@ -25,7 +25,7 @@
   <!-- These define which versions of NETMF are supported - comment out or delete any unsupported NETMF versions. -->
   <!--<?define NETMF41Supported ?>-->
   <?define NETMF42Supported ?>
-  <?define NETMF43Supported ?>
+  <!-- <?define NETMF43Supported ?> -->
 
 
   <!-- No need to change anything below this line. -->
