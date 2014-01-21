@@ -43,9 +43,10 @@
 	<?define guid_msm_comp_files_id_42 = "0c9e2677-f8a3-4fb2-922c-75eb9119169b" ?>
 	<?define guid_msm_comp_files_be_id_42 = "84cea33c-adb9-4203-84ae-7c957b268461" ?>
 	<?define guid_msm_comp_files_le_id_42 = "e54394ba-9fce-4313-9938-419fc322f639" ?>
-</  <?define guid_msm_comp_files_id_43 = "e0cee08a-ce05-42ca-bbf6-5ff88d00112a" ?>
+
+  <?define guid_msm_comp_files_id_43 = "e0cee08a-ce05-42ca-bbf6-5ff88d00112a" ?>
   <?define guid_msm_comp_files_be_id_43 = "f5b5ecea-585d-4b02-8e3d-712cecab6add" ?>
   <?define guid_msm_comp_files_le_id_43 = "32c5106d-fde2-48b7-aafd-d41176213cf1" ?>
 
-Include>
+</Include>
 

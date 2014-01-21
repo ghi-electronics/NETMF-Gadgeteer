@@ -11,15 +11,13 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
     <AssemblyName>Ignore</AssemblyName>
+    <OutputName>Ignore</OutputName>
     <TargetFrameworkVersion>v4.3</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <!--Identify this as a MicroFramework, CSharp project-->
     <ProjectTypeGuids>{b69e3092-b931-443c-abe7-7e7b65f2a37f};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <!--This entry seems to be specific to NET MF projects-->
-    <NetMfTargetsBaseDir Condition="'$(NetMfTargetsBaseDir)'==''">$(MSBuildExtensionsPath32)\Microsoft\.NET Micro Framework\</NetMfTargetsBaseDir>
-    <!-- Default transport and device-->
-    <DeployDevice>Gadgeteer</DeployDevice>
-    <DeployTransport>USB</DeployTransport>
+    <WixTargetsPath Condition="	'$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition="	'$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,7 +39,7 @@
   <PropertyGroup>
     <RunPostBuildEvent>Always</RunPostBuildEvent>
   </PropertyGroup>
-  <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\GenericDaisylink_43\GenericDaisylink_43.csproj" />
     <ProjectReference Include="..\GenericDaisylink_42\GenericDaisylink_42.csproj">
@@ -61,12 +59,8 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <!--Stuff for wix-->
+  <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <WixTasksPath Condition=" '$(WixTasksPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\WixTasks.dll</WixTasksPath>
-    <WixTasksPath Condition=" '$(WixTasksPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\WixTasks.dll</WixTasksPath>
-    <WixToolPath Condition=" '$(WixToolPath)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
-    <WixToolPath Condition=" '$(WixToolPath)' == ''">$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows Installer XML\3.5@InstallRoot)</WixToolPath>
-    <WixExtDir Condition=" '$(WixExtDir)' == ''">$(WixToolPath)</WixExtDir>
     <WixIntermediateFolderPath>$(IntermediateOutputPath)\..\Installer</WixIntermediateFolderPath>
     <WixOutputFolderPath>$(OutDir)\..\Installer</WixOutputFolderPath>
     <IsInstallerBuildEnabled Condition="! $(DefineConstants.Contains('DEBUG'))">true</IsInstallerBuildEnabled>

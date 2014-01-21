@@ -31,7 +31,7 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1, NETMF 4.2 and NETMF 4.3 versions, since this will make it easier for users to change framework versions -->
         <!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.BreadBoard_X1"/> -->
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.BreadBoard_X1"/>
-        <!-- <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.BreadBoard_X1"/> -->
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.BreadBoard_X1"/>
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--
@@ -44,12 +44,12 @@
         <!-- so that the designer automatically includes it when your module is included - e.g. by uncommenting the lines below -->
         <!-- These .NET Gadgeteer assemblies were separated out for NETMF 4.2, so don't need to be listed for NETMF 4.1 as separate -->
         <!-- Uncomment any of the below that you require for this module. -->
-		<!--
+        <!--
 		<Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
 		<Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
 		<Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
 		-->
-		<!--
+        <!--
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
@@ -74,38 +74,38 @@
 
         <!-- This example socket is compatible with socket types XY which has electrical connections to pins 3 and 4 -->
         <Socket Left="77" Top="26" Orientation="180" ConstructorOrder="1" TypesLabel="">
-			<Types>
-				<Type>A</Type>
-				<Type>B</Type>
-				<Type>C</Type>
-				<Type>D</Type>
-				<Type>E</Type>
-				<Type>F</Type>
-				<Type>G</Type>
-				<Type>H</Type>
-				<Type>I</Type>
-				<Type>J</Type>
-				<Type>K</Type>
-				<Type>L</Type>
-				<Type>M</Type>
-				<Type>N</Type>
-				<Type>O</Type>
-				<Type>P</Type>
-				<Type>Q</Type>
-				<Type>R</Type>
-				<Type>S</Type>
-				<Type>T</Type>
-				<Type>U</Type>
-				<Type>V</Type>
-				<Type>W</Type>
-				<Type>X</Type>
-				<Type>Y</Type>
-				<Type>Z</Type>
-				<Type>*</Type>
-			</Types>
+          <Types>
+            <Type>A</Type>
+            <Type>B</Type>
+            <Type>C</Type>
+            <Type>D</Type>
+            <Type>E</Type>
+            <Type>F</Type>
+            <Type>G</Type>
+            <Type>H</Type>
+            <Type>I</Type>
+            <Type>J</Type>
+            <Type>K</Type>
+            <Type>L</Type>
+            <Type>M</Type>
+            <Type>N</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Q</Type>
+            <Type>R</Type>
+            <Type>S</Type>
+            <Type>T</Type>
+            <Type>U</Type>
+            <Type>V</Type>
+            <Type>W</Type>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>Z</Type>
+            <Type>*</Type>
+          </Types>
 
-			<Pins>
-			</Pins>
+          <Pins>
+          </Pins>
         </Socket>
 
       </Sockets>

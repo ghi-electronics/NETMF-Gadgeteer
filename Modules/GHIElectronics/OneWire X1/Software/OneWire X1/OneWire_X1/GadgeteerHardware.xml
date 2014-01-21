@@ -31,14 +31,15 @@
         <!-- NB you should use the same name for the same assembly's NETMF 4.1, NETMF 4.2 and NETMF 4.3 versions, since this will make it easier for users to change framework versions -->
 		<!-- <Assembly MFVersion="4.1" Name="GTM.GHIElectronics.OneWire_X1"/> -->
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.OneWire_X1"/>
-        <!--  <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OneWire_X1"/> -->
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OneWire_X1"/>
 
         <!-- If your module relies on another assembly, then list it here (and see the msm.wxs file since you need to include it in the installer too), e.g.: -->
         <!--
         <Assembly MFVersion="4.1" Name="GHIElectronics.CustomAssembly"/>
         <Assembly MFVersion="4.3" Name="GHIElectronics.CustomAssembly"/>
         -->
-		<Assembly MFVersion="4.2" Name="Microsoft.SPOT.Hardware.OneWire"/>
+        <Assembly MFVersion="4.2" Name="Microsoft.SPOT.Hardware.OneWire"/>
+        <Assembly MFVersion="4.3" Name="Microsoft.SPOT.Hardware.OneWire"/>
 
         <!-- If your module either relies upon or is often used with a .NET Gadgeteer assembly other than Gadgeteer.dll, then list it here -->
         <!-- so that the designer automatically includes it when your module is included - e.g. by uncommenting the lines below -->
