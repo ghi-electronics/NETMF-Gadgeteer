@@ -34,9 +34,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
 
             if(this["Request"] != "")
-                header = this["Request"] + header + "\r\n";
+                header = this["Request"] + "\r\n" + header + "\r\n";
             else if (this["Status"] != "")
-                header = this["Status"] + header + "\r\n";
+                header = this["Status"] + "\r\n" + header + "\r\n";
 
             return header;
         }
