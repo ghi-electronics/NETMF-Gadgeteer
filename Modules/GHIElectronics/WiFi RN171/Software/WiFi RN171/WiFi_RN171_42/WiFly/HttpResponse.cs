@@ -191,11 +191,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// Sends a response.
 		/// </summary>
 		/// <param name="document">The body of the response.</param>
-        public void Send(byte[] document)
+        public void Send(byte[] document, bool sendHeader = true)
         {
-            byte[] header = System.Text.Encoding.UTF8.GetBytes(this.HeaderData.ToString());
-
-            _stream.Write(header, 0, header.Length);
+            if (sendHeader)
+            {
+                byte[] header = System.Text.Encoding.UTF8.GetBytes(this.HeaderData.ToString());
+                _stream.Write(header, 0, header.Length);
+            }
 
             _stream.Write(document, 0, document.Length);
         }

@@ -27,24 +27,38 @@ namespace Gadgeteer.Modules.GHIElectronics
         public WiFi_RN171(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-
-            socket.EnsureTypeIsSupported(new char[] {'U', 'K'}, this);
-
-            LocalIP = "0.0.0.0";
-
-            Reset = new GTI.DigitalOutput(socket, Socket.Pin.Three, true, this);
-
             string t_Command_Init = "$$$";
+
+            _baud = 115200; //Changed from datasheet
+            LocalIP = "0.0.0.0";
             _Command_Init = System.Text.Encoding.UTF8.GetBytes(t_Command_Init);
+            _Port_Name = socket.SerialPortName;
 
-            int baud = 115200; //Changed from datasheet
+            try
+            {
+                socket.EnsureTypeIsSupported(new char[] { 'K' }, this);
+                _wifly = new GTI.Serial(socket, _baud, GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits.One, 8, GTI.Serial.HardwareFlowControl.Required, this);
+                
+                _Flow_Control_Enable = true;
 
-            _wifly = new GTI.Serial(socket, baud, GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits.One, 8, GTI.Serial.HardwareFlowControl.NotRequired, this);
+                Debug.Print("Using hardware flow control");
+            }
+            catch
+            {
+                try
+                {
+                    socket.EnsureTypeIsSupported(new char[] { 'U' }, this);
+                    _wifly = new GTI.Serial(socket, _baud, GTI.Serial.SerialParity.None, GTI.Serial.SerialStopBits.One, 8, GTI.Serial.HardwareFlowControl.NotRequired, this);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception("Socket type is not supported", e);
+                }
+            }
+
             _wifly.Open();
 
-            _Port_Name = socket.SerialPortName;
-            _baud = baud;
-
+            Reset = new GTI.DigitalOutput(socket, Socket.Pin.Three, true, this);
             RTS = new GTI.DigitalOutput(socket, Socket.Pin.Six, false, this);
         }
 
@@ -224,6 +238,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private bool _DHCP = false;
         private bool _Command_Mode_Response_Complete = true;
         private bool _Command_Mode_Response_Okay = true;
+        private bool _Flow_Control_Enable = false;
 
         //Pin declarations
         private GTI.DigitalOutput Reset;
@@ -401,8 +416,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Reboot the module
         /// </summary>
-        public bool Reboot()
+        public void Reboot()
         {
+            _wifly.DiscardInBuffer();
+            _wifly.DiscardOutBuffer();
+
+            _device_ready = false;
 
             //Reset the module
             Reset.Write(false);
@@ -410,7 +429,17 @@ namespace Gadgeteer.Modules.GHIElectronics
             Reset.Write(true);
             Thread.Sleep(250);
 
-            return true;
+            //Wait for the device to be ready
+            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
+            while (!_device_ready)
+            {
+                if (_TimeOutDate <= DateTime.Now)
+                    throw new Exception("Time out waiting for device to ready");
+
+                Thread.Sleep(1);
+            }
+
+            Debug.Print("Device is ready");
         }
 
         /// <summary>
@@ -459,13 +488,17 @@ namespace Gadgeteer.Modules.GHIElectronics
             if(!_Command_Execute("set comm remote 0"))
                 return false;
 
-            //Setup hand-shaking
-            if (!_Command_Execute("set uart flow 0x21"))
-                return false;
+            //Setup hardware flow control
+            if (_Flow_Control_Enable)
+            {
+                if (!_Command_Execute("set uart flow 1"))
+                    return false;
+            }
 
-            if (!_Command_Execute("set uart raw 115200"))
-                return false;
+            //if (!_Command_Execute("set uart baud 115200"))
+            //    return false;
 
+            //Enable TX pin
             if (!_Command_Execute("set uart tx 1"))
                 return false;
 
@@ -776,75 +809,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="data">Data</param>
         public void Send(byte[] data)
         {
+            while (_wifly.BytesToWrite > 0)
+                Thread.Sleep(10);
 
-            if (data.Length <= _wifly.BaudRate)
-            {
-                //Write-out directly
-                _wifly.Write(data, 0, data.Length);
-            }
-            else
-            {
-                int baud_rate = _wifly.BaudRate;
-                int iterations = data.Length / baud_rate;
-                int exceeding = data.Length % baud_rate;
-                int segment_start = 0;
-
-                for (int i = 0; i < iterations; i++)
-                {
-                    //Calculate segment range
-                    segment_start = i * baud_rate;
-
-                    //Write the current segment
-                    _wifly.Write(data, segment_start, baud_rate);
-
-                    //Write the remaining segment
-                    if (i == (iterations - 1) && exceeding > 0)
-                    {
-                        _wifly.Write(data, segment_start, exceeding);
-                    }
-                }
-            }
-
-            return;
-        }
-
-        /// <summary>
-        /// Send data to the currently connected client
-        /// </summary>
-        /// <param name="data">Data</param>
-        public void Send(ref string data)
-        {
-            //Convert string to byte array
-            byte[] _data = System.Text.Encoding.UTF8.GetBytes(data);
-            data = "";
-
-            if (_data.Length <= _wifly.BaudRate)
-            {
-                //Write-out
-                _wifly.Write(_data, 0, _data.Length);
-            }
-            else
-            {
-                int baud_rate = _wifly.BaudRate;
-                int iterations = data.Length / baud_rate;
-                int exceeding = data.Length % baud_rate;
-                int segment_start = 0;
-
-                for (int i = 0; i < iterations; i++)
-                {
-                    //Calculate segment range
-                    segment_start = i * baud_rate;
-
-                    //Write the current segment
-                    _wifly.Write(_data, segment_start, baud_rate);
-
-                    //Write the remaining segment
-                    if (i == (iterations - 1) && exceeding > 0)
-                    {
-                        _wifly.Write(_data, segment_start, exceeding);
-                    }
-                }
-            }
+            _wifly.Write(data, 0, data.Length);
 
             return;
         }
@@ -1425,6 +1393,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         #endregion
 
         #region "Serial Communications"
+
+        public GTI.Serial SerialPort
+        {
+            get
+            {
+                return _wifly;
+            }
+        }
 
         //Threaded listener for incomming data
         private void _Serial_Listen()
