@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "LightSense" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "LightSense" ?>
+
+  <?define guid_msi_upgrade_code =  "9c0aea8c-8007-4f75-a2d0-6fc8cd78f506" ?>
+  <?define guid_msm_package_id = "7614a3a4-bd21-48d6-b000-9392217d1510" ?>
+
+  <?define guid_msm_comp_resources_id = "e6abe4cf-46b5-4245-8fd5-220655151138" ?>
+  <?define guid_msm_comp_registry_id = "ade4b823-b569-452f-8913-312a558e7b15" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "68787e9a-0f7c-4493-a101-35391349501f"?>
+
+  <?define guid_msm_comp_files_id_43 = "4d523e99-32a7-4be9-af67-cfd2fba70e6e" ?>
+  <?define guid_msm_comp_files_be_id_43 = "35a51b0f-7ca4-41f6-8a79-e64f29c88334" ?>
+  <?define guid_msm_comp_files_le_id_43 = "a478a4c1-2c20-4c1b-be0b-d6d8aebc8584" ?>
+</Include>
+

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="DisplayCP7"
+                  UniqueId="92f0d77c-81d1-4bc7-b048-2fab2714f08a"
+                  Manufacturer="GHI Electronics"
+                  Description="A DisplayCP7 module"
+                  InstanceName="DisplayCP7"
+                  Type="Gadgeteer.Modules.GHIElectronics.DisplayCP7"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="116"
+                  BoardWidth="42"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/425">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayCP7"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="61" Top="4" Orientation="270" ConstructorOrder="1" TypesLabel="R">
+          <Types>
+            <Type>R</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.050</TypicalCurrent>
+          <MaximumCurrent>0.050</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.700</TypicalCurrent>
+          <MaximumCurrent>0.700</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

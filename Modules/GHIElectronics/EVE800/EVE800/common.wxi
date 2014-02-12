@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "EVE800" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "EVE800" ?>
+
+  <?define guid_msi_upgrade_code =  "384cc1d8-0415-46f4-a221-e271ab134642" ?>
+  <?define guid_msm_package_id = "2ce5d982-b519-4cf1-b155-1e62ab51e05a" ?>
+
+  <?define guid_msm_comp_resources_id = "413a2ad1-4fd7-4db6-94dc-015d4d809506" ?>
+  <?define guid_msm_comp_registry_id = "6a2f9b99-dc56-49fd-9c32-1ead731d47a0" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "747501c0-c596-42c3-8969-6112031ec1d6"?>
+
+  <?define guid_msm_comp_files_id_43 = "1dcc0eeb-7969-4193-a2ac-f1cd6bec9201" ?>
+  <?define guid_msm_comp_files_be_id_43 = "459333f2-66ac-4c56-8c1b-dd018f2d73bd" ?>
+  <?define guid_msm_comp_files_le_id_43 = "0930f4e1-351b-4b58-9512-0e3696c62b98" ?>
+</Include>
+

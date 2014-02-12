@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{57d8b913-c1c0-45f8-87d7-7f71849a1114}") = "BreakoutTB10", "BreakoutTB10\BreakoutTB10.csproj", "{93dc42dd-40b0-40d2-9bec-f2ddc73cb153}"
+EndProject
+Project("{57d8b913-c1c0-45f8-87d7-7f71849a1114}") = "BreakoutTB10_43", "BreakoutTB10_43\BreakoutTB10_43.csproj", "{9ce093e2-490a-4a98-b714-18f081fc9f5a}"
+EndProject
+Project("{57d8b913-c1c0-45f8-87d7-7f71849a1114}") = "BreakoutTB10_Tester", "BreakoutTB10_Tester\BreakoutTB10_Tester.csproj", "{f90c1e01-f8c9-4976-9046-7f6e02254a80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93dc42dd-40b0-40d2-9bec-f2ddc73cb153}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93dc42dd-40b0-40d2-9bec-f2ddc73cb153}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93dc42dd-40b0-40d2-9bec-f2ddc73cb153}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93dc42dd-40b0-40d2-9bec-f2ddc73cb153}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9ce093e2-490a-4a98-b714-18f081fc9f5a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9ce093e2-490a-4a98-b714-18f081fc9f5a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9ce093e2-490a-4a98-b714-18f081fc9f5a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9ce093e2-490a-4a98-b714-18f081fc9f5a}.Release|Any CPU.Build.0 = Release|Any CPU
+		{f90c1e01-f8c9-4976-9046-7f6e02254a80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f90c1e01-f8c9-4976-9046-7f6e02254a80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f90c1e01-f8c9-4976-9046-7f6e02254a80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{f90c1e01-f8c9-4976-9046-7f6e02254a80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

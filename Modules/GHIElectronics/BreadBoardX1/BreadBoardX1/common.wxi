@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "BreadBoardX1" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "BreadBoardX1" ?>
+
+  <?define guid_msi_upgrade_code =  "ad32bcc7-a1b6-4df8-9ac5-ef97a95445dc" ?>
+  <?define guid_msm_package_id = "cbc004c2-2a16-48d0-a24f-845087405d2f" ?>
+
+  <?define guid_msm_comp_resources_id = "f393c3ba-c662-41ff-a455-65a88bb72f33" ?>
+  <?define guid_msm_comp_registry_id = "0d1c6393-f1ac-4907-a368-541026be2f1b" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "d3b4cd61-4e55-49dd-bd55-857ae6bc84a9"?>
+
+  <?define guid_msm_comp_files_id_43 = "5124e375-6ca6-4ddb-a2de-f68e8e68218e" ?>
+  <?define guid_msm_comp_files_be_id_43 = "2bddb2b6-2d55-40b2-bed6-f4cbf106283e" ?>
+  <?define guid_msm_comp_files_le_id_43 = "032c3999-49c9-491e-adc6-14676defad67" ?>
+</Include>
+

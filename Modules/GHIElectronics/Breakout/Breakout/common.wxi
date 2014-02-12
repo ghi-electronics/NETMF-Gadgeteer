@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Breakout" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Breakout" ?>
+
+  <?define guid_msi_upgrade_code =  "1a6109c1-1297-43a4-8dd1-b387012b890f" ?>
+  <?define guid_msm_package_id = "5edb7f63-f922-46fb-a552-557712885691" ?>
+
+  <?define guid_msm_comp_resources_id = "875a1f27-ef43-4be9-9a71-40877e8f4ff8" ?>
+  <?define guid_msm_comp_registry_id = "1e25f2cc-747f-4a17-b68d-84275ea2ad15" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "65e0d51c-3c49-417e-abc5-99c5ba1ed281"?>
+
+  <?define guid_msm_comp_files_id_43 = "fbaffe81-f8e2-405a-95f8-41019cf9ded8" ?>
+  <?define guid_msm_comp_files_be_id_43 = "8cf32fdc-f7a6-4366-895a-f198c6dc1cf3" ?>
+  <?define guid_msm_comp_files_le_id_43 = "707be89e-7cfb-4730-93db-247bd12b1a10" ?>
+</Include>
+

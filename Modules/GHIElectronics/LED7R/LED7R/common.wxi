@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "LED7R" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "LED7R" ?>
+
+  <?define guid_msi_upgrade_code =  "588bf70e-8b32-4cab-8783-b5b4f0e036e7" ?>
+  <?define guid_msm_package_id = "16e792ed-2d24-4abb-a62e-ff700e221ff1" ?>
+
+  <?define guid_msm_comp_resources_id = "d04714c3-5692-47b8-84fe-e9f956502454" ?>
+  <?define guid_msm_comp_registry_id = "de250c2c-5851-41f5-844f-276b8e960a5b" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "e02d1a16-af13-4c5f-b47b-22e1dc110330"?>
+
+  <?define guid_msm_comp_files_id_43 = "aefe7a90-557a-4e8a-8ac0-b22be8f18c15" ?>
+  <?define guid_msm_comp_files_be_id_43 = "b53c9dba-9170-459b-a419-3c16cee79942" ?>
+  <?define guid_msm_comp_files_le_id_43 = "e1f1e3f9-717b-4938-8c9e-a706f809dcd6" ?>
+</Include>
+

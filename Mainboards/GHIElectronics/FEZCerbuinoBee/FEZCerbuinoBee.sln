@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{920434ab-aca5-4b04-bbf7-2bf18f72b1b6}") = "FEZCerbuinoBee", "FEZCerbuinoBee\FEZCerbuinoBee.csproj", "{1f205ff0-cfe3-4182-ad0c-a3328538283d}"
+EndProject
+Project("{920434ab-aca5-4b04-bbf7-2bf18f72b1b6}") = "FEZCerbuinoBee_43", "FEZCerbuinoBee_43\FEZCerbuinoBee_43.csproj", "{1e7bbc98-127d-4e96-ae2b-05ddc5bc1dba}"
+EndProject
+Project("{920434ab-aca5-4b04-bbf7-2bf18f72b1b6}") = "FEZCerbuinoBee_Tester", "FEZCerbuinoBee_Tester\FEZCerbuinoBee_Tester.csproj", "{64a02f56-bcc3-4f94-ad49-9df87eecbc99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1f205ff0-cfe3-4182-ad0c-a3328538283d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1f205ff0-cfe3-4182-ad0c-a3328538283d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1f205ff0-cfe3-4182-ad0c-a3328538283d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1f205ff0-cfe3-4182-ad0c-a3328538283d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1e7bbc98-127d-4e96-ae2b-05ddc5bc1dba}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1e7bbc98-127d-4e96-ae2b-05ddc5bc1dba}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1e7bbc98-127d-4e96-ae2b-05ddc5bc1dba}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1e7bbc98-127d-4e96-ae2b-05ddc5bc1dba}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64a02f56-bcc3-4f94-ad49-9df87eecbc99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64a02f56-bcc3-4f94-ad49-9df87eecbc99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64a02f56-bcc3-4f94-ad49-9df87eecbc99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64a02f56-bcc3-4f94-ad49-9df87eecbc99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

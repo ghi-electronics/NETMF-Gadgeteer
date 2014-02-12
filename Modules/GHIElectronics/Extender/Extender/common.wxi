@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Extender" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Extender" ?>
+
+  <?define guid_msi_upgrade_code =  "0699c5ad-b09c-426c-9d9a-e4940fb0b3dd" ?>
+  <?define guid_msm_package_id = "9e89e81f-3f60-40cc-a000-14f93bc87e28" ?>
+
+  <?define guid_msm_comp_resources_id = "f4947233-88e3-46e2-97e1-9cec3dcfe3f4" ?>
+  <?define guid_msm_comp_registry_id = "a253375e-da1a-4123-a171-8c979547b76a" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "9a6ebabd-9fec-4dfd-b22f-0799aca9438f"?>
+
+  <?define guid_msm_comp_files_id_43 = "45e47deb-a2da-456e-ad11-159aa22b7f41" ?>
+  <?define guid_msm_comp_files_be_id_43 = "d99934a9-a621-419c-b926-9616d149810e" ?>
+  <?define guid_msm_comp_files_le_id_43 = "353308ee-ef7e-46a8-8ec1-9b71d586d9bf" ?>
+</Include>
+

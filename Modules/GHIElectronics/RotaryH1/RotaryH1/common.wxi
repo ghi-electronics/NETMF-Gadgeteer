@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "RotaryH1" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "RotaryH1" ?>
+
+  <?define guid_msi_upgrade_code =  "a2794585-b5cf-4483-891c-59954183d212" ?>
+  <?define guid_msm_package_id = "762c8a66-0d79-4364-8d83-ef1494eb9397" ?>
+
+  <?define guid_msm_comp_resources_id = "d0ba3972-2605-4aeb-bc4a-97efd0046b98" ?>
+  <?define guid_msm_comp_registry_id = "51a1719d-3dda-49a1-a0c6-ce678cda1965" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "be675e08-3d60-41e5-87c3-73edce86f111"?>
+
+  <?define guid_msm_comp_files_id_43 = "5f6241d1-a9a3-4bd7-a24f-7e3dc6b45da6" ?>
+  <?define guid_msm_comp_files_be_id_43 = "160240e4-df75-43fd-a598-ebf243af297d" ?>
+  <?define guid_msm_comp_files_le_id_43 = "241d8739-efae-4b49-b8d9-2afb1f22c4ea" ?>
+</Include>
+

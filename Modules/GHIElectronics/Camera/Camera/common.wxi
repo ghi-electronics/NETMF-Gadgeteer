@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Camera" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Camera" ?>
+
+  <?define guid_msi_upgrade_code =  "37bab8a9-1049-4029-87ba-bc02c26cce84" ?>
+  <?define guid_msm_package_id = "30077ce2-76df-42f3-8ae1-57d8d8b838a7" ?>
+
+  <?define guid_msm_comp_resources_id = "e6eca545-8d63-4c1c-ba57-5647af1ff4e7" ?>
+  <?define guid_msm_comp_registry_id = "f8d75a98-b1f1-4899-8aee-412948d179a8" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "abab7cf9-76c3-4a16-b3ff-b498437200e4"?>
+
+  <?define guid_msm_comp_files_id_43 = "b68e9047-8aea-49cc-80f9-fd7467d7395e" ?>
+  <?define guid_msm_comp_files_be_id_43 = "a79fa53d-333e-4738-89c3-6f459eebdf4d" ?>
+  <?define guid_msm_comp_files_le_id_43 = "4ae3ce96-9430-4f35-be88-ef8989652b7b" ?>
+</Include>
+

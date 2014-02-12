@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{97cafd07-0b06-4c73-8ab3-ea1be8fee57a}") = "UCBattery4xAA", "UCBattery4xAA\UCBattery4xAA.csproj", "{70e090c1-e9ec-4d8f-a654-314bbd89324c}"
+EndProject
+Project("{97cafd07-0b06-4c73-8ab3-ea1be8fee57a}") = "UCBattery4xAA_43", "UCBattery4xAA_43\UCBattery4xAA_43.csproj", "{0c43092f-d913-4bc7-97a8-ab8f9bd25899}"
+EndProject
+Project("{97cafd07-0b06-4c73-8ab3-ea1be8fee57a}") = "UCBattery4xAA_Tester", "UCBattery4xAA_Tester\UCBattery4xAA_Tester.csproj", "{2004f458-392e-4bbd-9f0b-c6baf2bf833c}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{70e090c1-e9ec-4d8f-a654-314bbd89324c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70e090c1-e9ec-4d8f-a654-314bbd89324c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70e090c1-e9ec-4d8f-a654-314bbd89324c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70e090c1-e9ec-4d8f-a654-314bbd89324c}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0c43092f-d913-4bc7-97a8-ab8f9bd25899}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0c43092f-d913-4bc7-97a8-ab8f9bd25899}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0c43092f-d913-4bc7-97a8-ab8f9bd25899}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0c43092f-d913-4bc7-97a8-ab8f9bd25899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2004f458-392e-4bbd-9f0b-c6baf2bf833c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2004f458-392e-4bbd-9f0b-c6baf2bf833c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2004f458-392e-4bbd-9f0b-c6baf2bf833c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2004f458-392e-4bbd-9f0b-c6baf2bf833c}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

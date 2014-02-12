@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{1f1d5985-e8ff-4ce7-9424-a942a0d1494c}") = "GasSense", "GasSense\GasSense.csproj", "{93ea14ff-90bc-4812-9c1a-56f7b75d8468}"
+EndProject
+Project("{1f1d5985-e8ff-4ce7-9424-a942a0d1494c}") = "GasSense_43", "GasSense_43\GasSense_43.csproj", "{65b70d17-4801-4a6c-bbc0-cdd062db9d7e}"
+EndProject
+Project("{1f1d5985-e8ff-4ce7-9424-a942a0d1494c}") = "GasSense_Tester", "GasSense_Tester\GasSense_Tester.csproj", "{1770c221-f7a6-4d12-aaf5-3c45adb1c13f}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93ea14ff-90bc-4812-9c1a-56f7b75d8468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93ea14ff-90bc-4812-9c1a-56f7b75d8468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93ea14ff-90bc-4812-9c1a-56f7b75d8468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93ea14ff-90bc-4812-9c1a-56f7b75d8468}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65b70d17-4801-4a6c-bbc0-cdd062db9d7e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65b70d17-4801-4a6c-bbc0-cdd062db9d7e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65b70d17-4801-4a6c-bbc0-cdd062db9d7e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65b70d17-4801-4a6c-bbc0-cdd062db9d7e}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1770c221-f7a6-4d12-aaf5-3c45adb1c13f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1770c221-f7a6-4d12-aaf5-3c45adb1c13f}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1770c221-f7a6-4d12-aaf5-3c45adb1c13f}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1770c221-f7a6-4d12-aaf5-3c45adb1c13f}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

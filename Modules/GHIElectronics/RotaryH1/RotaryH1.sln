@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{be517725-c878-4ddc-8d35-8bef20546ad8}") = "RotaryH1", "RotaryH1\RotaryH1.csproj", "{7c243502-217f-4f1b-b9d7-b6843c54f70d}"
+EndProject
+Project("{be517725-c878-4ddc-8d35-8bef20546ad8}") = "RotaryH1_43", "RotaryH1_43\RotaryH1_43.csproj", "{31e4fa94-fff5-4f0d-8cb8-919509bd09ea}"
+EndProject
+Project("{be517725-c878-4ddc-8d35-8bef20546ad8}") = "RotaryH1_Tester", "RotaryH1_Tester\RotaryH1_Tester.csproj", "{ec47020d-abf2-4fc5-8459-a1c554ef7d11}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7c243502-217f-4f1b-b9d7-b6843c54f70d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7c243502-217f-4f1b-b9d7-b6843c54f70d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7c243502-217f-4f1b-b9d7-b6843c54f70d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7c243502-217f-4f1b-b9d7-b6843c54f70d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31e4fa94-fff5-4f0d-8cb8-919509bd09ea}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31e4fa94-fff5-4f0d-8cb8-919509bd09ea}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31e4fa94-fff5-4f0d-8cb8-919509bd09ea}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31e4fa94-fff5-4f0d-8cb8-919509bd09ea}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ec47020d-abf2-4fc5-8459-a1c554ef7d11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ec47020d-abf2-4fc5-8459-a1c554ef7d11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ec47020d-abf2-4fc5-8459-a1c554ef7d11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ec47020d-abf2-4fc5-8459-a1c554ef7d11}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

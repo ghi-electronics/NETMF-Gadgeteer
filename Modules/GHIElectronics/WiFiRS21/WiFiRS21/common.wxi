@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "WiFiRS21" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "WiFiRS21" ?>
+
+  <?define guid_msi_upgrade_code =  "558c778c-6c1c-4ee5-a29d-e42ac94dca3c" ?>
+  <?define guid_msm_package_id = "af8159b5-f33d-48a0-b77d-a7ac0075a750" ?>
+
+  <?define guid_msm_comp_resources_id = "90f2c286-b910-4b14-95a9-415c92759ab3" ?>
+  <?define guid_msm_comp_registry_id = "4967e788-8589-480a-b53a-e75e35d8f673" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "472d84de-fa37-41a7-93b6-dc4109a717d9"?>
+
+  <?define guid_msm_comp_files_id_43 = "2ea73395-8e35-4c4f-989e-21f01570058a" ?>
+  <?define guid_msm_comp_files_be_id_43 = "5df81700-0a21-4770-b31d-92ff4a6b866b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "11eb70b7-453f-42c5-ab55-c9035e48cbbe" ?>
+</Include>
+

@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{bc59ec39-0b73-4713-940e-6bfd5003b193}") = "Button", "Button\Button.csproj", "{19acb680-49c6-49ad-a28d-ca4e02afc333}"
+EndProject
+Project("{bc59ec39-0b73-4713-940e-6bfd5003b193}") = "Button_43", "Button_43\Button_43.csproj", "{82ac8347-394c-4863-9e23-847e28136a51}"
+EndProject
+Project("{bc59ec39-0b73-4713-940e-6bfd5003b193}") = "Button_Tester", "Button_Tester\Button_Tester.csproj", "{b509fe40-ae54-41b0-a3de-c1afaa1c0bfe}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19acb680-49c6-49ad-a28d-ca4e02afc333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19acb680-49c6-49ad-a28d-ca4e02afc333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19acb680-49c6-49ad-a28d-ca4e02afc333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19acb680-49c6-49ad-a28d-ca4e02afc333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82ac8347-394c-4863-9e23-847e28136a51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82ac8347-394c-4863-9e23-847e28136a51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82ac8347-394c-4863-9e23-847e28136a51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82ac8347-394c-4863-9e23-847e28136a51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{b509fe40-ae54-41b0-a3de-c1afaa1c0bfe}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b509fe40-ae54-41b0-a3de-c1afaa1c0bfe}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b509fe40-ae54-41b0-a3de-c1afaa1c0bfe}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{b509fe40-ae54-41b0-a3de-c1afaa1c0bfe}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

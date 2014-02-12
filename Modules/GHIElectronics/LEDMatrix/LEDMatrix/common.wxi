@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "LEDMatrix" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "LEDMatrix" ?>
+
+  <?define guid_msi_upgrade_code =  "776d5c7a-121c-4b62-bdbe-327ee5d77226" ?>
+  <?define guid_msm_package_id = "f3039e72-1e54-4257-a3b9-91b895f82d4e" ?>
+
+  <?define guid_msm_comp_resources_id = "0e3fbbe2-f6fc-4a3b-a9f9-933b056426e7" ?>
+  <?define guid_msm_comp_registry_id = "cd023673-25af-4386-a2d5-f43703db5b3f" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "3fe7c38c-efad-4f7e-b6c1-0992faf09916"?>
+
+  <?define guid_msm_comp_files_id_43 = "0279b83c-7f0f-4c19-868f-bb2ebe5b94fc" ?>
+  <?define guid_msm_comp_files_be_id_43 = "8ffe5456-4a27-444f-baff-827e2c2df11b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "6062387f-2c38-4b0c-83f2-fde25d7092f6" ?>
+</Include>
+

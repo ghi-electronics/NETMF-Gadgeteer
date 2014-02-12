@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{9f2d6898-0001-445a-aed8-65a229625cea}") = "AccelG248", "AccelG248\AccelG248.csproj", "{d659b943-7c78-48d0-af63-12581198dcf7}"
+EndProject
+Project("{9f2d6898-0001-445a-aed8-65a229625cea}") = "AccelG248_43", "AccelG248_43\AccelG248_43.csproj", "{007020a7-5efa-4ba6-872f-6b569eb6efd8}"
+EndProject
+Project("{9f2d6898-0001-445a-aed8-65a229625cea}") = "AccelG248_Tester", "AccelG248_Tester\AccelG248_Tester.csproj", "{15970351-9dd7-410f-b2cd-335a50d1c3b2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{d659b943-7c78-48d0-af63-12581198dcf7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d659b943-7c78-48d0-af63-12581198dcf7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d659b943-7c78-48d0-af63-12581198dcf7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d659b943-7c78-48d0-af63-12581198dcf7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{007020a7-5efa-4ba6-872f-6b569eb6efd8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{007020a7-5efa-4ba6-872f-6b569eb6efd8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{007020a7-5efa-4ba6-872f-6b569eb6efd8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{007020a7-5efa-4ba6-872f-6b569eb6efd8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15970351-9dd7-410f-b2cd-335a50d1c3b2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15970351-9dd7-410f-b2cd-335a50d1c3b2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15970351-9dd7-410f-b2cd-335a50d1c3b2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15970351-9dd7-410f-b2cd-335a50d1c3b2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

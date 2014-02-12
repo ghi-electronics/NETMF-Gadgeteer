@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{1c3d3a30-ddab-49de-ac94-500702b75db2}") = "SerialCameraL2", "SerialCameraL2\SerialCameraL2.csproj", "{fd3d8641-4a3e-4bd6-a078-56f1f342c8a3}"
+EndProject
+Project("{1c3d3a30-ddab-49de-ac94-500702b75db2}") = "SerialCameraL2_43", "SerialCameraL2_43\SerialCameraL2_43.csproj", "{be2dcecb-df7a-43a6-ab9b-ad61d417f05d}"
+EndProject
+Project("{1c3d3a30-ddab-49de-ac94-500702b75db2}") = "SerialCameraL2_Tester", "SerialCameraL2_Tester\SerialCameraL2_Tester.csproj", "{89bcf5fb-58a1-4d64-a7bd-e42e433ec69e}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{fd3d8641-4a3e-4bd6-a078-56f1f342c8a3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{fd3d8641-4a3e-4bd6-a078-56f1f342c8a3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{fd3d8641-4a3e-4bd6-a078-56f1f342c8a3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{fd3d8641-4a3e-4bd6-a078-56f1f342c8a3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{be2dcecb-df7a-43a6-ab9b-ad61d417f05d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{be2dcecb-df7a-43a6-ab9b-ad61d417f05d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{be2dcecb-df7a-43a6-ab9b-ad61d417f05d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{be2dcecb-df7a-43a6-ab9b-ad61d417f05d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89bcf5fb-58a1-4d64-a7bd-e42e433ec69e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89bcf5fb-58a1-4d64-a7bd-e42e433ec69e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89bcf5fb-58a1-4d64-a7bd-e42e433ec69e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89bcf5fb-58a1-4d64-a7bd-e42e433ec69e}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

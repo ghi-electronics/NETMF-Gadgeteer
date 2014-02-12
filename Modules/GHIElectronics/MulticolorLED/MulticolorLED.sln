@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{cf7d63ff-d6c7-4eca-841b-e578d3582583}") = "MulticolorLED", "MulticolorLED\MulticolorLED.csproj", "{96d2cbb0-2b1c-4df0-b944-3bd78d6269b9}"
+EndProject
+Project("{cf7d63ff-d6c7-4eca-841b-e578d3582583}") = "MulticolorLED_43", "MulticolorLED_43\MulticolorLED_43.csproj", "{e9484d23-481e-406f-88ec-b0de3343f1d7}"
+EndProject
+Project("{cf7d63ff-d6c7-4eca-841b-e578d3582583}") = "MulticolorLED_Tester", "MulticolorLED_Tester\MulticolorLED_Tester.csproj", "{a76f691e-93d0-4657-8ecd-cc4491e1364a}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96d2cbb0-2b1c-4df0-b944-3bd78d6269b9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96d2cbb0-2b1c-4df0-b944-3bd78d6269b9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96d2cbb0-2b1c-4df0-b944-3bd78d6269b9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96d2cbb0-2b1c-4df0-b944-3bd78d6269b9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{e9484d23-481e-406f-88ec-b0de3343f1d7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e9484d23-481e-406f-88ec-b0de3343f1d7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e9484d23-481e-406f-88ec-b0de3343f1d7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{e9484d23-481e-406f-88ec-b0de3343f1d7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{a76f691e-93d0-4657-8ecd-cc4491e1364a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{a76f691e-93d0-4657-8ecd-cc4491e1364a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{a76f691e-93d0-4657-8ecd-cc4491e1364a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{a76f691e-93d0-4657-8ecd-cc4491e1364a}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

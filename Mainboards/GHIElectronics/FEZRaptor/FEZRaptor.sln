@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{fdd21107-06ce-4459-aa66-9c9e4c3fa2a9}") = "FEZRaptor", "FEZRaptor\FEZRaptor.csproj", "{71816b76-29c9-4375-aba3-d6011a36e8e5}"
+EndProject
+Project("{fdd21107-06ce-4459-aa66-9c9e4c3fa2a9}") = "FEZRaptor_43", "FEZRaptor_43\FEZRaptor_43.csproj", "{cd4d4386-9162-4e3a-829e-29de1b0519dd}"
+EndProject
+Project("{fdd21107-06ce-4459-aa66-9c9e4c3fa2a9}") = "FEZRaptor_Tester", "FEZRaptor_Tester\FEZRaptor_Tester.csproj", "{5384330a-1585-4b87-a09f-4c17bb0674f7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{71816b76-29c9-4375-aba3-d6011a36e8e5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71816b76-29c9-4375-aba3-d6011a36e8e5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71816b76-29c9-4375-aba3-d6011a36e8e5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71816b76-29c9-4375-aba3-d6011a36e8e5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{cd4d4386-9162-4e3a-829e-29de1b0519dd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{cd4d4386-9162-4e3a-829e-29de1b0519dd}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{cd4d4386-9162-4e3a-829e-29de1b0519dd}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{cd4d4386-9162-4e3a-829e-29de1b0519dd}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5384330a-1585-4b87-a09f-4c17bb0674f7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5384330a-1585-4b87-a09f-4c17bb0674f7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5384330a-1585-4b87-a09f-4c17bb0674f7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5384330a-1585-4b87-a09f-4c17bb0674f7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

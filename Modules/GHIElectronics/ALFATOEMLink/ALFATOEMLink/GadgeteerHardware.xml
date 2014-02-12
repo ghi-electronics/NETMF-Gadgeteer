@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="ALFATOEMLink"
+                  UniqueId="138fa40e-888a-47fd-9d5b-a2c246040088"
+                  Manufacturer="GHI Electronics"
+                  Description="An ALFATOEMLink module"
+                  InstanceName="ALFATOEMLink"
+                  Type="Gadgeteer.Modules.GHIElectronics.ALFATOEMLink"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="[WIDTH]"
+                  BoardWidth="[HEIGHT]"
+                  HardwareVersion="[HARDWARE]"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/389">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.ALFATOEMLink"/>
+      </Assemblies>
+
+      <Sockets>
+        [SOCKET]
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>[3TYP]</TypicalCurrent>
+          <MaximumCurrent>[3MAX]</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>[5TYP]</TypicalCurrent>
+          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

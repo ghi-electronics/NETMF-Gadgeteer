@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{8086c03c-f0b9-4309-b358-41204bae636f}") = "PulseInOut", "PulseInOut\PulseInOut.csproj", "{63cae4d8-2cf7-4f7a-b3db-df9f4a5481a2}"
+EndProject
+Project("{8086c03c-f0b9-4309-b358-41204bae636f}") = "PulseInOut_43", "PulseInOut_43\PulseInOut_43.csproj", "{3dcfa38a-5bae-472c-945f-b27e03ff3da9}"
+EndProject
+Project("{8086c03c-f0b9-4309-b358-41204bae636f}") = "PulseInOut_Tester", "PulseInOut_Tester\PulseInOut_Tester.csproj", "{6998fb54-cab7-4d86-baa6-901dfa809c06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{63cae4d8-2cf7-4f7a-b3db-df9f4a5481a2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63cae4d8-2cf7-4f7a-b3db-df9f4a5481a2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63cae4d8-2cf7-4f7a-b3db-df9f4a5481a2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63cae4d8-2cf7-4f7a-b3db-df9f4a5481a2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3dcfa38a-5bae-472c-945f-b27e03ff3da9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3dcfa38a-5bae-472c-945f-b27e03ff3da9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3dcfa38a-5bae-472c-945f-b27e03ff3da9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3dcfa38a-5bae-472c-945f-b27e03ff3da9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6998fb54-cab7-4d86-baa6-901dfa809c06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6998fb54-cab7-4d86-baa6-901dfa809c06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6998fb54-cab7-4d86-baa6-901dfa809c06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6998fb54-cab7-4d86-baa6-901dfa809c06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

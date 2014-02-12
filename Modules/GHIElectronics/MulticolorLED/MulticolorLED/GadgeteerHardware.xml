@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="MulticolorLED"
+                  UniqueId="65ecff76-0731-4edc-ac49-cdac5b6f9057"
+                  Manufacturer="GHI Electronics"
+                  Description="A MulticolorLED module"
+                  InstanceName="MulticolorLED"
+                  Type="Gadgeteer.Modules.GHIElectronics.MulticolorLED"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="21"
+                  BoardWidth="22"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/395">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.MulticolorLED"/>
+		
+        <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="4.61" Top="13.15" Orientation="0" ConstructorOrder="1" TypesLabel="XY*">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>*</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="true">4</Pin>
+            <Pin Shared="true">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.020</TypicalCurrent>
+          <MaximumCurrent>0.040</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

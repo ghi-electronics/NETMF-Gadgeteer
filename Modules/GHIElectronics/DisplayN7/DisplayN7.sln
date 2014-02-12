@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{dfb96d9a-16ff-4d58-82d7-f3f741f3b297}") = "DisplayN7", "DisplayN7\DisplayN7.csproj", "{46c37221-2c9a-4647-8218-a13552ed2b12}"
+EndProject
+Project("{dfb96d9a-16ff-4d58-82d7-f3f741f3b297}") = "DisplayN7_43", "DisplayN7_43\DisplayN7_43.csproj", "{4ca0189a-a3ab-45c7-8d7f-f7d826afb98d}"
+EndProject
+Project("{dfb96d9a-16ff-4d58-82d7-f3f741f3b297}") = "DisplayN7_Tester", "DisplayN7_Tester\DisplayN7_Tester.csproj", "{7521d0e4-c18c-48a3-9d21-c0c7f2605414}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{46c37221-2c9a-4647-8218-a13552ed2b12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46c37221-2c9a-4647-8218-a13552ed2b12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46c37221-2c9a-4647-8218-a13552ed2b12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46c37221-2c9a-4647-8218-a13552ed2b12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4ca0189a-a3ab-45c7-8d7f-f7d826afb98d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4ca0189a-a3ab-45c7-8d7f-f7d826afb98d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4ca0189a-a3ab-45c7-8d7f-f7d826afb98d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4ca0189a-a3ab-45c7-8d7f-f7d826afb98d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7521d0e4-c18c-48a3-9d21-c0c7f2605414}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7521d0e4-c18c-48a3-9d21-c0c7f2605414}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7521d0e4-c18c-48a3-9d21-c0c7f2605414}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7521d0e4-c18c-48a3-9d21-c0c7f2605414}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

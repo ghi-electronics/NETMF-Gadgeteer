@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="XBeeAdapter"
+                  UniqueId="e939cc81-9f4b-48ff-a14d-96d9f9753b22"
+                  Manufacturer="GHI Electronics"
+                  Description="A XBeeAdapter module"
+                  InstanceName="XBeeAdapter"
+                  Type="Gadgeteer.Modules.GHIElectronics.XBeeAdapter"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="[WIDTH]"
+                  BoardWidth="[HEIGHT]"
+                  HardwareVersion="[HARDWARE]"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/314">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.XBeeAdapter"/>
+      </Assemblies>
+
+      <Sockets>
+        [SOCKET]
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>[3TYP]</TypicalCurrent>
+          <MaximumCurrent>[3MAX]</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>[5TYP]</TypicalCurrent>
+          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

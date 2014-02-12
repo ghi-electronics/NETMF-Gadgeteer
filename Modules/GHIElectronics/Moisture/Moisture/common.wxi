@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Moisture" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Moisture" ?>
+
+  <?define guid_msi_upgrade_code =  "e8e66962-d84a-41b9-8352-9ac17eb0a317" ?>
+  <?define guid_msm_package_id = "ca5e9432-deb2-4ee6-8301-0fdc78258769" ?>
+
+  <?define guid_msm_comp_resources_id = "9f431f2f-94db-457f-954b-1d6d789e8695" ?>
+  <?define guid_msm_comp_registry_id = "6d828112-b98a-4e33-b01a-a8e64150f358" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "f356264c-481b-47b6-99a2-aad59b236923"?>
+
+  <?define guid_msm_comp_files_id_43 = "fd82f510-a9b7-4b34-9498-faae608e87e1" ?>
+  <?define guid_msm_comp_files_be_id_43 = "6e3b9867-ce16-4819-af8b-10290d9d02e7" ?>
+  <?define guid_msm_comp_files_le_id_43 = "1a6be45f-f391-4176-be35-0295085a2ebd" ?>
+</Include>
+

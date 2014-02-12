@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Gyro" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Gyro" ?>
+
+  <?define guid_msi_upgrade_code =  "005429aa-4126-46f0-ad49-e13827ed197d" ?>
+  <?define guid_msm_package_id = "85233107-4e62-4a15-a591-19ec9beed6e5" ?>
+
+  <?define guid_msm_comp_resources_id = "bf109129-92d2-433f-9edb-91c74a6f90a0" ?>
+  <?define guid_msm_comp_registry_id = "77c750b4-f64a-41c2-9a84-4ede650015b7" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "2db1f784-1a5c-46d8-ad7b-97e4273ed16c"?>
+
+  <?define guid_msm_comp_files_id_43 = "01676583-558d-4d6b-a976-21d92a87ab4d" ?>
+  <?define guid_msm_comp_files_be_id_43 = "5177d72c-e0ad-4c6c-a884-4563614b972c" ?>
+  <?define guid_msm_comp_files_le_id_43 = "2d40d2b4-0b12-45d1-811c-623d540ad378" ?>
+</Include>
+

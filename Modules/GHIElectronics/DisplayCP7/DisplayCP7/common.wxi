@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "DisplayCP7" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "DisplayCP7" ?>
+
+  <?define guid_msi_upgrade_code =  "31dc8e62-dd9d-42e8-8fbc-b6541a1785f0" ?>
+  <?define guid_msm_package_id = "24f55f30-905f-4874-bbd8-7acb6354de8c" ?>
+
+  <?define guid_msm_comp_resources_id = "03c79e21-612c-4178-b952-0a38c6419021" ?>
+  <?define guid_msm_comp_registry_id = "7fce5c6f-e94b-47ef-9756-8caa2553b4cf" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "28fec6a2-b2e2-40ba-83c2-3bc671589a59"?>
+
+  <?define guid_msm_comp_files_id_43 = "784abcf4-34ce-4fcf-8d88-8c8a8f0bb562" ?>
+  <?define guid_msm_comp_files_be_id_43 = "87a60ca9-faf3-4ee4-876c-4b475e0e3c70" ?>
+  <?define guid_msm_comp_files_le_id_43 = "f1ee507c-c8bc-4248-a4ee-7f054877a83e" ?>
+</Include>
+

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="RotaryH1"
+                  UniqueId="4f679806-10b7-424a-b6a2-4412a5f3a81d"
+                  Manufacturer="GHI Electronics"
+                  Description="A RotaryH1 module"
+                  InstanceName="RotaryH1"
+                  Type="Gadgeteer.Modules.GHIElectronics.RotaryH1"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="32.6"
+                  BoardWidth="47"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/463">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RotaryH1"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="16" Top="43" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
+          <Types>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.00086</TypicalCurrent>
+          <MaximumCurrent>0.00096</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.000</TypicalCurrent>
+          <MaximumCurrent>0.000</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

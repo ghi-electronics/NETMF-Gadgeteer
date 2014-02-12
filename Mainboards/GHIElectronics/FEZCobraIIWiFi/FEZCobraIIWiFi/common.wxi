@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define MainboardSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeMainboardName = "FEZCobraIIWiFi" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "$(var.SafeManufacturer).Gadgeteer.$(var.SafeMainboardName)"?>
+  <?define ProjectPath = "FEZCobraIIWiFi" ?>
+
+  <?define guid_msi_upgrade_code =  "fc05ef54-755d-4379-9d14-354c5e4ab273" ?>
+  <?define guid_msm_package_id = "f4a4264e-3d5f-4467-bb7c-9c5a309c0416" ?>
+
+  <?define guid_msm_comp_resources_id = "bc6f0f0c-3081-42cc-80dd-bde82ca83cfa" ?>
+  <?define guid_msm_comp_registry_id = "963f6044-e25b-4061-a03e-8a4f2d817459" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "a3dc64a7-25b3-4e2d-9477-1cf89bcfe58e"?>
+
+  <?define guid_msm_comp_files_id_43 = "ed42535a-85bd-4d6a-a717-7f3e3798e8af" ?>
+  <?define guid_msm_comp_files_be_id_43 = "d7a44f5e-fa28-4969-8b97-6ae75106a552" ?>
+  <?define guid_msm_comp_files_le_id_43 = "7be44bb7-6f9c-4bd8-8eaa-48b4a7fde086" ?>
+</Include>
+

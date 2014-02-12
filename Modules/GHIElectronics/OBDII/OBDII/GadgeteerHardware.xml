@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="OBDII"
+                  UniqueId="dc732d71-9e76-4b21-b04b-0ab185097371"
+                  Manufacturer="GHI Electronics"
+                  Description="An OBDII module"
+                  InstanceName="OBDII"
+                  Type="Gadgeteer.Modules.GHIElectronics.OBDII"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="91.5"
+                  BoardWidth="76.5"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/355">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OBDII"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="48" Top="71" Orientation="90" ConstructorOrder="1" TypesLabel="UK">
+          <Types>
+            <Type>U</Type>
+            <Type>K</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.007</TypicalCurrent>
+          <MaximumCurrent>0.007</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

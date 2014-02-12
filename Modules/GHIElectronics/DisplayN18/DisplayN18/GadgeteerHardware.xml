@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="DisplayN18"
+                  UniqueId="0d86c514-cfd7-41be-88f7-577b80d5fbbc"
+                  Manufacturer="GHI Electronics"
+                  Description="A DisplayN18 module"
+                  InstanceName="DisplayN18"
+                  Type="Gadgeteer.Modules.GHIElectronics.DisplayN18"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="55"
+                  BoardWidth="34"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/421">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayN18"/>
+		
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="50" Top="17" Orientation="180" ConstructorOrder="1" TypesLabel="S">
+          <Types>
+            <Type>S</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="true">7</Pin>
+            <Pin Shared="true">8</Pin>
+            <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.150</TypicalCurrent>
+          <MaximumCurrent>0.150</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

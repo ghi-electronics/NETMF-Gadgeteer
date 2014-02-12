@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="USBSerial"
+                  UniqueId="7b529b63-fb23-4998-9840-232fb1276518"
+                  Manufacturer="GHI Electronics"
+                  Description="An USBSerial module"
+                  InstanceName="USBSerial"
+                  Type="Gadgeteer.Modules.GHIElectronics.USBSerial"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="30"
+                  BoardWidth="26.38"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/311">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.USBSerial"/>
+
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="15.49" Top="4.07" Orientation="270" ConstructorOrder="1" TypesLabel="U">
+          <Types>
+            <Type>U</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.000</TypicalCurrent>
+          <MaximumCurrent>0.020</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

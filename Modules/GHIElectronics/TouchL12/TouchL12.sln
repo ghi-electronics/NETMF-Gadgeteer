@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{920cd940-2b08-4c21-bf8f-b8c932c95f9b}") = "TouchL12", "TouchL12\TouchL12.csproj", "{68e2f9c7-9822-414e-ac2c-c74969efb3bf}"
+EndProject
+Project("{920cd940-2b08-4c21-bf8f-b8c932c95f9b}") = "TouchL12_43", "TouchL12_43\TouchL12_43.csproj", "{e0cbb728-e822-4b1f-9f2a-22ea86cbba48}"
+EndProject
+Project("{920cd940-2b08-4c21-bf8f-b8c932c95f9b}") = "TouchL12_Tester", "TouchL12_Tester\TouchL12_Tester.csproj", "{577cebef-a829-4b44-81c3-5a568f80ca3c}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{68e2f9c7-9822-414e-ac2c-c74969efb3bf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68e2f9c7-9822-414e-ac2c-c74969efb3bf}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68e2f9c7-9822-414e-ac2c-c74969efb3bf}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68e2f9c7-9822-414e-ac2c-c74969efb3bf}.Release|Any CPU.Build.0 = Release|Any CPU
+		{e0cbb728-e822-4b1f-9f2a-22ea86cbba48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e0cbb728-e822-4b1f-9f2a-22ea86cbba48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e0cbb728-e822-4b1f-9f2a-22ea86cbba48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{e0cbb728-e822-4b1f-9f2a-22ea86cbba48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{577cebef-a829-4b44-81c3-5a568f80ca3c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{577cebef-a829-4b44-81c3-5a568f80ca3c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{577cebef-a829-4b44-81c3-5a568f80ca3c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{577cebef-a829-4b44-81c3-5a568f80ca3c}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

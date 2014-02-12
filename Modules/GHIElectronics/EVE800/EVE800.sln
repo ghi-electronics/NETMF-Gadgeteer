@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{1c10058a-cd6a-484b-b3b4-ff199c8d3e96}") = "EVE800", "EVE800\EVE800.csproj", "{3f70e4b4-143f-4f0c-a7d0-35bfe10b5f55}"
+EndProject
+Project("{1c10058a-cd6a-484b-b3b4-ff199c8d3e96}") = "EVE800_43", "EVE800_43\EVE800_43.csproj", "{641c8ad1-c6d7-41e8-857b-8c52505bf411}"
+EndProject
+Project("{1c10058a-cd6a-484b-b3b4-ff199c8d3e96}") = "EVE800_Tester", "EVE800_Tester\EVE800_Tester.csproj", "{f9a675cb-f5f1-4daf-a8d4-e12933fbc473}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3f70e4b4-143f-4f0c-a7d0-35bfe10b5f55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3f70e4b4-143f-4f0c-a7d0-35bfe10b5f55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3f70e4b4-143f-4f0c-a7d0-35bfe10b5f55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3f70e4b4-143f-4f0c-a7d0-35bfe10b5f55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{641c8ad1-c6d7-41e8-857b-8c52505bf411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{641c8ad1-c6d7-41e8-857b-8c52505bf411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{641c8ad1-c6d7-41e8-857b-8c52505bf411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{641c8ad1-c6d7-41e8-857b-8c52505bf411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{f9a675cb-f5f1-4daf-a8d4-e12933fbc473}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f9a675cb-f5f1-4daf-a8d4-e12933fbc473}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f9a675cb-f5f1-4daf-a8d4-e12933fbc473}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{f9a675cb-f5f1-4daf-a8d4-e12933fbc473}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

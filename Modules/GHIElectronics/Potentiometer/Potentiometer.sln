@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{029dcdab-ecae-4d0c-8436-f946f649223a}") = "Potentiometer", "Potentiometer\Potentiometer.csproj", "{dd17c0f6-0f13-48ca-b6ac-59e16f91d441}"
+EndProject
+Project("{029dcdab-ecae-4d0c-8436-f946f649223a}") = "Potentiometer_43", "Potentiometer_43\Potentiometer_43.csproj", "{9f959f61-31bc-49fb-b1b9-9a16f7f907f1}"
+EndProject
+Project("{029dcdab-ecae-4d0c-8436-f946f649223a}") = "Potentiometer_Tester", "Potentiometer_Tester\Potentiometer_Tester.csproj", "{40ea904d-7343-4bd1-9e80-a9968c38613a}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{dd17c0f6-0f13-48ca-b6ac-59e16f91d441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{dd17c0f6-0f13-48ca-b6ac-59e16f91d441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{dd17c0f6-0f13-48ca-b6ac-59e16f91d441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{dd17c0f6-0f13-48ca-b6ac-59e16f91d441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9f959f61-31bc-49fb-b1b9-9a16f7f907f1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9f959f61-31bc-49fb-b1b9-9a16f7f907f1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9f959f61-31bc-49fb-b1b9-9a16f7f907f1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9f959f61-31bc-49fb-b1b9-9a16f7f907f1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40ea904d-7343-4bd1-9e80-a9968c38613a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40ea904d-7343-4bd1-9e80-a9968c38613a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40ea904d-7343-4bd1-9e80-a9968c38613a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40ea904d-7343-4bd1-9e80-a9968c38613a}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

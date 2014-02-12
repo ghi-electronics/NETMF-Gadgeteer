@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "RFIDReader" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "RFIDReader" ?>
+
+  <?define guid_msi_upgrade_code =  "545722bf-b498-4e30-a1c5-d822c361b374" ?>
+  <?define guid_msm_package_id = "5f17469c-8993-4c0f-8c3a-5f92a16d687e" ?>
+
+  <?define guid_msm_comp_resources_id = "3e896858-cb07-4650-9775-f2f0a7e56edf" ?>
+  <?define guid_msm_comp_registry_id = "9b646fa8-4756-4823-b744-4639e36f96e8" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "4be90b34-5e19-4cf6-b852-1827a753d6b1"?>
+
+  <?define guid_msm_comp_files_id_43 = "086a48df-4869-4a90-a3f6-b8af0c6d50bb" ?>
+  <?define guid_msm_comp_files_be_id_43 = "91ff98e6-5a22-40d2-8435-04196a9e9a35" ?>
+  <?define guid_msm_comp_files_le_id_43 = "ff300d38-ca9d-4e15-848d-ff8636bf1c46" ?>
+</Include>
+

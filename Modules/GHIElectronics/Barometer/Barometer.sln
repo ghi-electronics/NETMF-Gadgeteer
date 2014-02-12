@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{7bd80ea2-6799-4e7d-a766-89cf34be71b5}") = "Barometer", "Barometer\Barometer.csproj", "{d3c377e1-1ed2-4275-b1a5-e40ebf47ca5b}"
+EndProject
+Project("{7bd80ea2-6799-4e7d-a766-89cf34be71b5}") = "Barometer_43", "Barometer_43\Barometer_43.csproj", "{010f2c46-9eb2-46d1-992b-f55e26dadf19}"
+EndProject
+Project("{7bd80ea2-6799-4e7d-a766-89cf34be71b5}") = "Barometer_Tester", "Barometer_Tester\Barometer_Tester.csproj", "{6fa122ca-d989-45d7-b8b5-b430f12f1bfb}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{d3c377e1-1ed2-4275-b1a5-e40ebf47ca5b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d3c377e1-1ed2-4275-b1a5-e40ebf47ca5b}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d3c377e1-1ed2-4275-b1a5-e40ebf47ca5b}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d3c377e1-1ed2-4275-b1a5-e40ebf47ca5b}.Release|Any CPU.Build.0 = Release|Any CPU
+		{010f2c46-9eb2-46d1-992b-f55e26dadf19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{010f2c46-9eb2-46d1-992b-f55e26dadf19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{010f2c46-9eb2-46d1-992b-f55e26dadf19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{010f2c46-9eb2-46d1-992b-f55e26dadf19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6fa122ca-d989-45d7-b8b5-b430f12f1bfb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6fa122ca-d989-45d7-b8b5-b430f12f1bfb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6fa122ca-d989-45d7-b8b5-b430f12f1bfb}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6fa122ca-d989-45d7-b8b5-b430f12f1bfb}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

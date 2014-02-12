@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define MainboardSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeMainboardName = "FEZSpider" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "$(var.SafeManufacturer).Gadgeteer.$(var.SafeMainboardName)"?>
+  <?define ProjectPath = "FEZSpider" ?>
+
+  <?define guid_msi_upgrade_code =  "1ee1eebd-db4a-403a-a077-87901fac6140" ?>
+  <?define guid_msm_package_id = "45cf3bc9-a978-40cd-bc7c-13f3101ab3ad" ?>
+
+  <?define guid_msm_comp_resources_id = "efb91a56-f9ca-4e96-828a-3122f1b5a047" ?>
+  <?define guid_msm_comp_registry_id = "a3c3ac5e-be9f-49d8-b033-9305753f1927" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "d0006785-2bcc-42ef-9794-785bb9f0ec8d"?>
+
+  <?define guid_msm_comp_files_id_43 = "1a316cfe-8db4-4e49-bf71-03c336ed0172" ?>
+  <?define guid_msm_comp_files_be_id_43 = "b0f45ab7-45c9-4a55-8dbb-45a6d534463b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "78fcd625-4a6f-4b10-a320-5013b0f264f0" ?>
+</Include>
+

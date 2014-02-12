@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define MainboardSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeMainboardName = "FEZCerbuinoBee" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "$(var.SafeManufacturer).Gadgeteer.$(var.SafeMainboardName)"?>
+  <?define ProjectPath = "FEZCerbuinoBee" ?>
+
+  <?define guid_msi_upgrade_code =  "ae467044-8c51-4b66-864e-cd6511a6a34c" ?>
+  <?define guid_msm_package_id = "1ae73b06-0c05-40c7-bf92-1e69e1ca7b45" ?>
+
+  <?define guid_msm_comp_resources_id = "42bfcd71-ce95-43f6-b3aa-5eade1924c37" ?>
+  <?define guid_msm_comp_registry_id = "8d7936fa-59b0-4c06-9550-9dc5df57673e" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "383babc4-9709-4e40-8ecc-e3d5a5b60138"?>
+
+  <?define guid_msm_comp_files_id_43 = "6cff5065-83ac-4d5e-bd53-1222cd024453" ?>
+  <?define guid_msm_comp_files_be_id_43 = "e30ec95f-54ad-4bb5-badc-1684f402f7a7" ?>
+  <?define guid_msm_comp_files_le_id_43 = "ee32a1d3-9c8f-4cfd-9f6d-8ed80b6a8cfa" ?>
+</Include>
+

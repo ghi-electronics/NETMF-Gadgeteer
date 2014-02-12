@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "SPlus" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "SPlus" ?>
+
+  <?define guid_msi_upgrade_code =  "7397175f-3707-4dc5-b0ff-2019075c5e2a" ?>
+  <?define guid_msm_package_id = "5385cc6b-3d24-46e6-911a-101891ef9f11" ?>
+
+  <?define guid_msm_comp_resources_id = "1d040ac0-d391-4a40-8544-9250585c89d4" ?>
+  <?define guid_msm_comp_registry_id = "182de259-2c88-473d-9a78-62e770902efd" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "f1389d83-ae08-42e4-8517-570f7ca4318f"?>
+
+  <?define guid_msm_comp_files_id_43 = "2c210af5-b42a-40a2-9fe4-4d2e7d54e5c1" ?>
+  <?define guid_msm_comp_files_be_id_43 = "f1c03564-17f3-4f78-8972-ba28c14fd83e" ?>
+  <?define guid_msm_comp_files_le_id_43 = "92093255-a049-4477-919a-5d7472eb8de9" ?>
+</Include>
+

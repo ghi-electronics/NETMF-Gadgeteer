@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "UCBattery4xAA" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "UCBattery4xAA" ?>
+
+  <?define guid_msi_upgrade_code =  "5853ebdf-3259-4643-bca3-3b363f132f31" ?>
+  <?define guid_msm_package_id = "4760c3ba-4190-4158-9c6c-d5912a27c1be" ?>
+
+  <?define guid_msm_comp_resources_id = "3d0aa8b6-d15d-4702-83ba-b973c49d479f" ?>
+  <?define guid_msm_comp_registry_id = "6c66bf19-d508-4398-a369-34c45a97948a" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "3fcb5c9a-6b5d-4124-b906-6b042eb38bf9"?>
+
+  <?define guid_msm_comp_files_id_43 = "d5d42277-a020-4cd7-94a5-9b57e5247136" ?>
+  <?define guid_msm_comp_files_be_id_43 = "890c0548-25e3-425e-9fd0-a2d88f68782c" ?>
+  <?define guid_msm_comp_files_le_id_43 = "2fb5bf29-677a-4d74-9b37-055baa30ede7" ?>
+</Include>
+

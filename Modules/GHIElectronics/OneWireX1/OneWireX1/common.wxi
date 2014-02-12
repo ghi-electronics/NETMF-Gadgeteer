@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "OneWireX1" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "OneWireX1" ?>
+
+  <?define guid_msi_upgrade_code =  "a2602f23-ac93-42c0-98ec-8276ed450cac" ?>
+  <?define guid_msm_package_id = "4e8ff8e6-31aa-40c9-a369-44d0cd0957ae" ?>
+
+  <?define guid_msm_comp_resources_id = "20687c57-4bc8-4ab4-9a4e-37d64bbd72b9" ?>
+  <?define guid_msm_comp_registry_id = "28be585f-b4d5-473f-8ff8-aadcf4ec0886" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "eca3a3d7-158d-4ccf-a43c-fb5c0864fd52"?>
+
+  <?define guid_msm_comp_files_id_43 = "ea357ead-e0c3-4db0-9dbb-8e6ee313403e" ?>
+  <?define guid_msm_comp_files_be_id_43 = "de2648ee-1f08-45aa-97d4-0763d4a0f161" ?>
+  <?define guid_msm_comp_files_le_id_43 = "73939d94-7c53-4798-bbd1-379d584ff352" ?>
+</Include>
+

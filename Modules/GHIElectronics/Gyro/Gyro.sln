@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{f98b2b0a-c472-4461-b736-d000de6e4650}") = "Gyro", "Gyro\Gyro.csproj", "{61d1a45b-e4cb-4978-8f72-b55291af5cab}"
+EndProject
+Project("{f98b2b0a-c472-4461-b736-d000de6e4650}") = "Gyro_43", "Gyro_43\Gyro_43.csproj", "{cc76e4c5-e676-4fa6-8046-585ab7cdd844}"
+EndProject
+Project("{f98b2b0a-c472-4461-b736-d000de6e4650}") = "Gyro_Tester", "Gyro_Tester\Gyro_Tester.csproj", "{3e7d0f34-5b85-4308-84d8-2e9d1d7aa448}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61d1a45b-e4cb-4978-8f72-b55291af5cab}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61d1a45b-e4cb-4978-8f72-b55291af5cab}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61d1a45b-e4cb-4978-8f72-b55291af5cab}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61d1a45b-e4cb-4978-8f72-b55291af5cab}.Release|Any CPU.Build.0 = Release|Any CPU
+		{cc76e4c5-e676-4fa6-8046-585ab7cdd844}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{cc76e4c5-e676-4fa6-8046-585ab7cdd844}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{cc76e4c5-e676-4fa6-8046-585ab7cdd844}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{cc76e4c5-e676-4fa6-8046-585ab7cdd844}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3e7d0f34-5b85-4308-84d8-2e9d1d7aa448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3e7d0f34-5b85-4308-84d8-2e9d1d7aa448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3e7d0f34-5b85-4308-84d8-2e9d1d7aa448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3e7d0f34-5b85-4308-84d8-2e9d1d7aa448}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

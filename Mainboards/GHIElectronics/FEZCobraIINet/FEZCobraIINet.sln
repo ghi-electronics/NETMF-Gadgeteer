@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{9007c04c-d434-46f2-ab3d-30b1388600a7}") = "FEZCobraIINet", "FEZCobraIINet\FEZCobraIINet.csproj", "{2d2a819b-8978-40cf-b25f-f5b796135bdb}"
+EndProject
+Project("{9007c04c-d434-46f2-ab3d-30b1388600a7}") = "FEZCobraIINet_43", "FEZCobraIINet_43\FEZCobraIINet_43.csproj", "{5f325b47-3a3d-4679-87aa-591dabafc848}"
+EndProject
+Project("{9007c04c-d434-46f2-ab3d-30b1388600a7}") = "FEZCobraIINet_Tester", "FEZCobraIINet_Tester\FEZCobraIINet_Tester.csproj", "{32e130cd-0b22-4102-8a97-8c5f6a2cb7f6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2d2a819b-8978-40cf-b25f-f5b796135bdb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2d2a819b-8978-40cf-b25f-f5b796135bdb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2d2a819b-8978-40cf-b25f-f5b796135bdb}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2d2a819b-8978-40cf-b25f-f5b796135bdb}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5f325b47-3a3d-4679-87aa-591dabafc848}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5f325b47-3a3d-4679-87aa-591dabafc848}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5f325b47-3a3d-4679-87aa-591dabafc848}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5f325b47-3a3d-4679-87aa-591dabafc848}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32e130cd-0b22-4102-8a97-8c5f6a2cb7f6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32e130cd-0b22-4102-8a97-8c5f6a2cb7f6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32e130cd-0b22-4102-8a97-8c5f6a2cb7f6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32e130cd-0b22-4102-8a97-8c5f6a2cb7f6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

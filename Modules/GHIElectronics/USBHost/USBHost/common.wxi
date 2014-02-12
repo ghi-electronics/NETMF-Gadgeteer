@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "USBHost" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "USBHost" ?>
+
+  <?define guid_msi_upgrade_code =  "59770b89-909f-41fa-9205-f4218aa63b29" ?>
+  <?define guid_msm_package_id = "35660a19-e85a-4b5c-af07-0ec278744797" ?>
+
+  <?define guid_msm_comp_resources_id = "9e7f8087-22c2-4f34-b1ab-045db2051387" ?>
+  <?define guid_msm_comp_registry_id = "b5d540d6-5b42-46ec-a7f0-d567b74cbfcf" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "ae1a28e4-85f3-4d94-959b-3e63179a5002"?>
+
+  <?define guid_msm_comp_files_id_43 = "0f217086-d274-4317-a451-418d2f52ae5e" ?>
+  <?define guid_msm_comp_files_be_id_43 = "61c660cd-4f6a-4af4-a4dc-8ab4260c565d" ?>
+  <?define guid_msm_comp_files_le_id_43 = "d9d6b2bc-80df-463c-87e3-15f9f59037de" ?>
+</Include>
+

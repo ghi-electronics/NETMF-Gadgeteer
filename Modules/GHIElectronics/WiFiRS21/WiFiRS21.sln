@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21", "WiFiRS21\WiFiRS21.csproj", "{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}"
+EndProject
+Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21_43", "WiFiRS21_43\WiFiRS21_43.csproj", "{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}"
+EndProject
+Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21_Tester", "WiFiRS21_Tester\WiFiRS21_Tester.csproj", "{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

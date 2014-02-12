@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Thermocouple" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Thermocouple" ?>
+
+  <?define guid_msi_upgrade_code =  "b4ad272c-df34-4afa-9fb3-f980a53805c6" ?>
+  <?define guid_msm_package_id = "9cd94451-ed32-41cd-a4cc-b378b3265559" ?>
+
+  <?define guid_msm_comp_resources_id = "43e77ca4-0653-410b-b3ae-19c86654500a" ?>
+  <?define guid_msm_comp_registry_id = "fea6912b-dd89-4cf1-8222-ee43f0c3e76a" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "9cd8e362-d580-4a28-b2e0-e4f31188560b"?>
+
+  <?define guid_msm_comp_files_id_43 = "0e8373a0-fd7e-41af-91b3-d5eb8fc9c8af" ?>
+  <?define guid_msm_comp_files_be_id_43 = "b6a8232e-846d-4fe2-a6be-f2b237d66d91" ?>
+  <?define guid_msm_comp_files_le_id_43 = "b29aecae-9751-48cf-b589-04eb808933a8" ?>
+</Include>
+

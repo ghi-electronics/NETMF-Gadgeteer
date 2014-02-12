@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "GasSense" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "GasSense" ?>
+
+  <?define guid_msi_upgrade_code =  "5643dfe1-f95c-4299-813a-8a3aa62fb41a" ?>
+  <?define guid_msm_package_id = "fd761d2a-841b-425b-8d65-52d16f6f25ad" ?>
+
+  <?define guid_msm_comp_resources_id = "c011a8e3-a331-4963-b596-4aa8ca311ba2" ?>
+  <?define guid_msm_comp_registry_id = "513601ee-7df1-4aa5-812a-887e000e3f5f" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "b89f347b-97fb-430d-8b47-99b7148b15a1"?>
+
+  <?define guid_msm_comp_files_id_43 = "cdf2d70f-630e-44c5-9fdc-e3b48216a7e2" ?>
+  <?define guid_msm_comp_files_be_id_43 = "6af8899e-3b8a-47b8-8e05-9088bc1819fd" ?>
+  <?define guid_msm_comp_files_le_id_43 = "8b8769d4-b4a7-4fbe-b4e0-2105296c3616" ?>
+</Include>
+

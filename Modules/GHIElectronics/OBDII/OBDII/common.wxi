@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "OBDII" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "OBDII" ?>
+
+  <?define guid_msi_upgrade_code =  "c300bc37-1b9d-474d-8f3d-1dcbebe6695c" ?>
+  <?define guid_msm_package_id = "1d0289e5-92f5-4932-81d5-bb37d7edd742" ?>
+
+  <?define guid_msm_comp_resources_id = "f51f3593-bc58-4e1b-bc92-75912069ea0d" ?>
+  <?define guid_msm_comp_registry_id = "31e010a4-654a-4ceb-bc98-c6bf29bf6dec" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "6960b4f2-4a60-4552-a33f-b4c774d35776"?>
+
+  <?define guid_msm_comp_files_id_43 = "9f482e7d-0e87-496c-9c8e-a5ee56a6871c" ?>
+  <?define guid_msm_comp_files_be_id_43 = "4da5f766-ed5d-4aaf-9e0b-000fb7d53b48" ?>
+  <?define guid_msm_comp_files_le_id_43 = "ef668f74-079b-451b-96c1-27e6896041c1" ?>
+</Include>
+

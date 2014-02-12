@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "PulseCount" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "PulseCount" ?>
+
+  <?define guid_msi_upgrade_code =  "72bb064b-5221-405c-adc0-775c3ebba769" ?>
+  <?define guid_msm_package_id = "41543169-97d7-4bac-81d1-6acbc8cdb9f8" ?>
+
+  <?define guid_msm_comp_resources_id = "00ce1cd2-fbbe-48c5-a0f6-e3fd61a94d9a" ?>
+  <?define guid_msm_comp_registry_id = "21c4103d-22bd-4824-8a9b-45ffa18eaed5" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "c8402294-95f3-4034-85c1-041f5c7d972a"?>
+
+  <?define guid_msm_comp_files_id_43 = "465bb992-aced-4d97-a1fa-304744585da8" ?>
+  <?define guid_msm_comp_files_be_id_43 = "fe2a4694-95b2-4a40-9cfb-532bf834200d" ?>
+  <?define guid_msm_comp_files_le_id_43 = "36e55dc2-fbdb-40ba-85c7-6ecf37c6d469" ?>
+</Include>
+

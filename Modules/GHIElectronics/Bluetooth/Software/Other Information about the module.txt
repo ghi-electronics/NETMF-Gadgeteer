@@ -1,3 +1,0 @@
-Disable Echo: \r\n+STECHO=0\r\n
-
-http://www.seeedstudio.com/wiki/index.php?title=Serial_port_bluetooth_module_(Master/Slave)

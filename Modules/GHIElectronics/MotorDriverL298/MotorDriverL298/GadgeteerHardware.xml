@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="MotorDriverL298"
+                  UniqueId="2ef96cfa-44be-4e34-bf4e-aea37e321153"
+                  Manufacturer="GHI Electronics"
+                  Description="A MotorDriverL298 module"
+                  InstanceName="MotorDriverL298"
+                  Type="Gadgeteer.Modules.GHIElectronics.MotorDriverL298"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="[WIDTH]"
+                  BoardWidth="[HEIGHT]"
+                  HardwareVersion="[HARDWARE]"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/392">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.MotorDriverL298"/>
+      </Assemblies>
+
+      <Sockets>
+        [SOCKET]
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>[3TYP]</TypicalCurrent>
+          <MaximumCurrent>[3MAX]</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>[5TYP]</TypicalCurrent>
+          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

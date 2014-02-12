@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "CurrentACS712" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "CurrentACS712" ?>
+
+  <?define guid_msi_upgrade_code =  "9ef95be2-a00b-4752-8782-f94eae8a2292" ?>
+  <?define guid_msm_package_id = "aeac9ce2-93b0-4012-95c9-09097e694e84" ?>
+
+  <?define guid_msm_comp_resources_id = "11fd1b51-a833-44a4-9f67-3fa8cc4c9999" ?>
+  <?define guid_msm_comp_registry_id = "cf6fdba7-d9bc-49fa-9e17-bed12bc866b9" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "562c22bf-38d8-4952-976c-47ca9ced7bc0"?>
+
+  <?define guid_msm_comp_files_id_43 = "05f01b1b-8dd4-4af0-8489-8f803f9c7d36" ?>
+  <?define guid_msm_comp_files_be_id_43 = "23429aa6-fa95-489e-a8d8-2433575128eb" ?>
+  <?define guid_msm_comp_files_le_id_43 = "48bb9466-98a7-445b-a68c-a59fe44bf932" ?>
+</Include>
+

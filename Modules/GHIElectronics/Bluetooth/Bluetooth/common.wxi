@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Bluetooth" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Bluetooth" ?>
+
+  <?define guid_msi_upgrade_code =  "fb6f3877-4fde-4562-a4cc-1df062a60c69" ?>
+  <?define guid_msm_package_id = "465ceaf4-b586-448b-af35-9240443edd8e" ?>
+
+  <?define guid_msm_comp_resources_id = "06c67fa7-2785-434a-8a76-9090bd3fc5d2" ?>
+  <?define guid_msm_comp_registry_id = "5c8afd90-7781-4c2b-91a0-f3387a76ba03" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "7f052866-8bf5-4fde-8eda-bec11bc5b5f3"?>
+
+  <?define guid_msm_comp_files_id_43 = "60e61be9-76ad-4062-89b6-b2c5f4f816cc" ?>
+  <?define guid_msm_comp_files_be_id_43 = "90046994-8729-4a29-aa72-47754195b4b4" ?>
+  <?define guid_msm_comp_files_le_id_43 = "8626d873-4d16-4b45-835e-a10eb4981dca" ?>
+</Include>
+

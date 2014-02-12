@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{e9332f34-91be-4765-bdfd-a42c9ae4bb0c}") = "BreadBoardX1", "BreadBoardX1\BreadBoardX1.csproj", "{104770a3-dd60-4d4d-97ac-dc7368202f0e}"
+EndProject
+Project("{e9332f34-91be-4765-bdfd-a42c9ae4bb0c}") = "BreadBoardX1_43", "BreadBoardX1_43\BreadBoardX1_43.csproj", "{f80034b8-ff03-4805-a11e-f5f007b19a8a}"
+EndProject
+Project("{e9332f34-91be-4765-bdfd-a42c9ae4bb0c}") = "BreadBoardX1_Tester", "BreadBoardX1_Tester\BreadBoardX1_Tester.csproj", "{ae9a9c1c-8f9b-4446-8921-6f739e7f1f5c}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{104770a3-dd60-4d4d-97ac-dc7368202f0e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{104770a3-dd60-4d4d-97ac-dc7368202f0e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{104770a3-dd60-4d4d-97ac-dc7368202f0e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{104770a3-dd60-4d4d-97ac-dc7368202f0e}.Release|Any CPU.Build.0 = Release|Any CPU
+		{f80034b8-ff03-4805-a11e-f5f007b19a8a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f80034b8-ff03-4805-a11e-f5f007b19a8a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{f80034b8-ff03-4805-a11e-f5f007b19a8a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{f80034b8-ff03-4805-a11e-f5f007b19a8a}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ae9a9c1c-8f9b-4446-8921-6f739e7f1f5c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ae9a9c1c-8f9b-4446-8921-6f739e7f1f5c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ae9a9c1c-8f9b-4446-8921-6f739e7f1f5c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ae9a9c1c-8f9b-4446-8921-6f739e7f1f5c}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

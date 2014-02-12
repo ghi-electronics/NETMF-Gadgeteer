@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "MaxO" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "MaxO" ?>
+
+  <?define guid_msi_upgrade_code =  "a7db45a6-b945-4fcd-be7b-6fa936f7c10c" ?>
+  <?define guid_msm_package_id = "ceaba7b2-09e9-4997-8a0e-bb88289a0150" ?>
+
+  <?define guid_msm_comp_resources_id = "957ed70d-f852-4bf1-bcd1-79a731228535" ?>
+  <?define guid_msm_comp_registry_id = "221b3000-07f3-498a-82a7-5a314b4e637b" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "9934baae-5c29-42f5-bad6-2c59177967b0"?>
+
+  <?define guid_msm_comp_files_id_43 = "9ee0addc-60f9-450c-88be-d1097fd5f1f0" ?>
+  <?define guid_msm_comp_files_be_id_43 = "3b9a80f3-006b-410a-bcfa-b4cedbd94fbd" ?>
+  <?define guid_msm_comp_files_le_id_43 = "c006f7df-cd05-471e-8c71-79df726519d5" ?>
+</Include>
+

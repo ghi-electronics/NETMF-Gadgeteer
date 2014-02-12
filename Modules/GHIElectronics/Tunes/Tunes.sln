@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{e642d45b-6fcc-42bd-9cfe-91725a3b8a74}") = "Tunes", "Tunes\Tunes.csproj", "{4d3a12df-5349-45a3-908b-92caa5b8cce2}"
+EndProject
+Project("{e642d45b-6fcc-42bd-9cfe-91725a3b8a74}") = "Tunes_43", "Tunes_43\Tunes_43.csproj", "{248d4928-2e90-48f4-a05a-2153c8c4962d}"
+EndProject
+Project("{e642d45b-6fcc-42bd-9cfe-91725a3b8a74}") = "Tunes_Tester", "Tunes_Tester\Tunes_Tester.csproj", "{870a1045-d119-4153-b762-b6316433955e}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4d3a12df-5349-45a3-908b-92caa5b8cce2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4d3a12df-5349-45a3-908b-92caa5b8cce2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4d3a12df-5349-45a3-908b-92caa5b8cce2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4d3a12df-5349-45a3-908b-92caa5b8cce2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{248d4928-2e90-48f4-a05a-2153c8c4962d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{248d4928-2e90-48f4-a05a-2153c8c4962d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{248d4928-2e90-48f4-a05a-2153c8c4962d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{248d4928-2e90-48f4-a05a-2153c8c4962d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{870a1045-d119-4153-b762-b6316433955e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{870a1045-d119-4153-b762-b6316433955e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{870a1045-d119-4153-b762-b6316433955e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{870a1045-d119-4153-b762-b6316433955e}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

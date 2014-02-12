@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{16a0c4b5-df7d-4042-8b02-08c90b338866}") = "RelayX1", "RelayX1\RelayX1.csproj", "{ba984ec7-8ce2-4643-8012-72c3d703ad16}"
+EndProject
+Project("{16a0c4b5-df7d-4042-8b02-08c90b338866}") = "RelayX1_43", "RelayX1_43\RelayX1_43.csproj", "{4e28786f-c6a8-4fad-9acd-1bfba04aa232}"
+EndProject
+Project("{16a0c4b5-df7d-4042-8b02-08c90b338866}") = "RelayX1_Tester", "RelayX1_Tester\RelayX1_Tester.csproj", "{5faec475-3f47-411c-a8d4-6586df2be21e}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ba984ec7-8ce2-4643-8012-72c3d703ad16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ba984ec7-8ce2-4643-8012-72c3d703ad16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ba984ec7-8ce2-4643-8012-72c3d703ad16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ba984ec7-8ce2-4643-8012-72c3d703ad16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4e28786f-c6a8-4fad-9acd-1bfba04aa232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4e28786f-c6a8-4fad-9acd-1bfba04aa232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4e28786f-c6a8-4fad-9acd-1bfba04aa232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4e28786f-c6a8-4fad-9acd-1bfba04aa232}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5faec475-3f47-411c-a8d4-6586df2be21e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5faec475-3f47-411c-a8d4-6586df2be21e}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5faec475-3f47-411c-a8d4-6586df2be21e}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5faec475-3f47-411c-a8d4-6586df2be21e}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

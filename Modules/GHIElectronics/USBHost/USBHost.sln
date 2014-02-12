@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost", "USBHost\USBHost.csproj", "{b7543f6b-6849-4676-baf3-5b8ca81efeef}"
+EndProject
+Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost_43", "USBHost_43\USBHost_43.csproj", "{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}"
+EndProject
+Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost_Tester", "USBHost_Tester\USBHost_Tester.csproj", "{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Release|Any CPU.Build.0 = Release|Any CPU
+		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

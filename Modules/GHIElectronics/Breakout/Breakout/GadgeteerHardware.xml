@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Breakout"
+                  UniqueId="6dab6643-da15-4665-8c2d-97f7d1d5f9a8"
+                  Manufacturer="GHI Electronics"
+                  Description="A Breakout module"
+                  InstanceName="Breakout"
+                  Type="Gadgeteer.Modules.GHIElectronics.Breakout"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="25"
+                  BoardWidth="11"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/485">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Breakout"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="12.9" Top="7" Orientation="270" ConstructorOrder="1" TypesLabel="">
+          <Types>
+            <Type>A</Type>
+            <Type>B</Type>
+            <Type>C</Type>
+            <Type>D</Type>
+            <Type>E</Type>
+            <Type>F</Type>
+            <Type>G</Type>
+            <Type>H</Type>
+            <Type>I</Type>
+            <Type>J</Type>
+            <Type>K</Type>
+            <Type>L</Type>
+            <Type>M</Type>
+            <Type>N</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Q</Type>
+            <Type>R</Type>
+            <Type>S</Type>
+            <Type>T</Type>
+            <Type>U</Type>
+            <Type>V</Type>
+            <Type>W</Type>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>Z</Type>
+            <Type>*</Type>
+          </Types>
+          
+          <Pins>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

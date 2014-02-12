@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "WiFiRN171" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "WiFiRN171" ?>
+
+  <?define guid_msi_upgrade_code =  "c4efbb95-a77b-4dc7-a09a-22b8863120ff" ?>
+  <?define guid_msm_package_id = "a3c7d153-b1f3-4bbb-b2a3-127fc0b24280" ?>
+
+  <?define guid_msm_comp_resources_id = "fc35ca09-7a30-4206-8121-ef46bc6e2d3e" ?>
+  <?define guid_msm_comp_registry_id = "c079c67c-a9d1-440c-8128-daafd59855dc" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "671e70fd-7afe-4f0f-87db-4e0a0e1cc862"?>
+
+  <?define guid_msm_comp_files_id_43 = "495e43cd-95bf-42d9-9945-11b9eee21ab3" ?>
+  <?define guid_msm_comp_files_be_id_43 = "73a2dff8-634c-4ecb-901f-4dd11bf9c671" ?>
+  <?define guid_msm_comp_files_le_id_43 = "b95adf36-dd0e-4bc8-b6a5-1558ee36eb2a" ?>
+</Include>
+

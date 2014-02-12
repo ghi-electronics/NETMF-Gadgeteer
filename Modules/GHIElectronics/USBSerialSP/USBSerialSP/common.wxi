@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "USBSerialSP" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "USBSerialSP" ?>
+
+  <?define guid_msi_upgrade_code =  "84057529-aec7-42ec-b406-48c592279300" ?>
+  <?define guid_msm_package_id = "e6787550-0f73-4426-8feb-4024ec90d8f5" ?>
+
+  <?define guid_msm_comp_resources_id = "8e4d1645-1c10-44fd-8147-6e9c5309311f" ?>
+  <?define guid_msm_comp_registry_id = "1cbcdd67-26e4-4ba8-874c-1ff26ba73110" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "fb839aea-81ca-475c-baec-5aa02e11d64f"?>
+
+  <?define guid_msm_comp_files_id_43 = "6d30a3f1-500b-4f11-aafc-04121803ae10" ?>
+  <?define guid_msm_comp_files_be_id_43 = "e27ea17f-47a6-4675-bc41-883dbb70b229" ?>
+  <?define guid_msm_comp_files_le_id_43 = "26364726-2952-4a11-be91-9357b2b930bc" ?>
+</Include>
+

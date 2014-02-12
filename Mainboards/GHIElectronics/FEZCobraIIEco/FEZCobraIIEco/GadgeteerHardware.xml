@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <MainboardDefinitions>
+    <MainboardDefinition
+            Name="FEZCobraIIEco"
+            Type="GHIElectronics.Gadgeteer.FEZCobraIIEco"
+            HardwareVersion="1.0"
+            Image="Resources\Image.jpg"
+            BoardWidth="77"
+            BoardHeight="67"
+            MinimumGadgeteerCoreVersion="2.43.800"
+            HelpUrl="http://www.ghielectronics.com/catalog/product/399">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIEco"/>
+      </Assemblies>
+
+      <ProvidedSockets>
+
+		<!--Left Side of Board-->
+		<ProvidedSocket Label="1" Left="28.5" Top="48.0" Orientation="180" ConstructorParameter="1">
+		  <Types>
+			<Type>B</Type>
+			<Type>Y</Type>
+		  </Types>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="2" Left="28.7" Top="62.4" Orientation="180" ConstructorParameter="2">
+		  <Types>
+			<Type>G</Type>
+		  </Types>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="3" Left="28.7" Top="78.2" Orientation="180" ConstructorParameter="3">
+		  <Types>
+			<Type>R</Type>
+			<Type>Y</Type>
+		  </Types>
+		</ProvidedSocket>
+
+
+		<!--Right Side of Board-->
+		<ProvidedSocket Label="4" Left="105" Top="60.0" Orientation="0" ConstructorParameter="4">
+		  <Types>
+			<Type>A</Type>
+			<Type>I</Type>
+			<Type>T</Type>
+			<Type>X</Type>
+		  </Types>
+		  <SharedPinMaps>
+			<SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+			<SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+		  </SharedPinMaps>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="5" Left="105" Top="75.6" Orientation="0" ConstructorParameter="5">
+		  <Types>
+			<Type>U</Type>
+			<Type>X</Type>
+		  </Types>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="6" Left="104.4" Top="91.5" Orientation="0" ConstructorParameter="6">
+		  <Types>
+			<Type>S</Type>
+			<Type>X</Type>
+		  </Types>
+		</ProvidedSocket>
+
+		<!--Extender Board-->
+		<ProvidedSocket Label="7" Left="94.4" Top="26.5" Orientation="90" ConstructorParameter="7">
+		  <Types>
+			<Type>P</Type>
+			<Type>U</Type>
+			<Type>Y</Type>
+		  </Types>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="8" Left="74.2" Top="26.5" Orientation="90" ConstructorParameter="8">
+		  <Types>
+			<Type>I</Type>
+			<Type>K</Type>
+			<Type>U</Type>
+			<Type>X</Type>
+		  </Types>
+		  <SharedPinMaps>
+			<SharedPinMap NetId="P0.17" SocketPin="7" SharedOnly="false" />
+		  </SharedPinMaps>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="9" Left="32.7" Top="26.4" Orientation="90" ConstructorParameter="9">
+		  <Types>
+			<Type>A</Type>
+			<Type>O</Type>
+			<Type>S</Type>
+			<Type>X</Type>
+		  </Types>
+		  <SharedPinMaps>
+			<SharedPinMap NetId="P0.17" SocketPin="8" SharedOnly="false" />
+		  </SharedPinMaps>
+		</ProvidedSocket>
+
+		<ProvidedSocket Label="10" Left="12.4" Top="26.5" Orientation="90" ConstructorParameter="10">
+		  <Types>
+			<Type>C</Type>
+			<Type>I</Type>
+			<Type>X</Type>
+		  </Types>
+		</ProvidedSocket>
+
+	  </ProvidedSockets>
+
+      <LibrariesProvided>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIEco" />
+
+		<Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
+		<Assembly MFVersion="4.3" Name="GHI.IO"/>
+		<Assembly MFVersion="4.3" Name="GHI.Net"/>
+		<Assembly MFVersion="4.3" Name="GHI.System"/>
+		<Assembly MFVersion="4.3" Name="GHI.USBHost"/>
+      </LibrariesProvided>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.085</TypicalCurrent>
+          <MaximumCurrent>0.140</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </MainboardDefinition>
+  </MainboardDefinitions>
+</GadgeteerDefinitions>

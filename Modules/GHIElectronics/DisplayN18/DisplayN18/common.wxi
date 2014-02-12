@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "DisplayN18" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "DisplayN18" ?>
+
+  <?define guid_msi_upgrade_code =  "412e58fe-0b6a-4943-aae1-88b9e504251a" ?>
+  <?define guid_msm_package_id = "eed43c8f-57f0-41f2-bb72-bc79ee88d36f" ?>
+
+  <?define guid_msm_comp_resources_id = "18e6233d-a267-4fe9-9563-877c11f9e29f" ?>
+  <?define guid_msm_comp_registry_id = "6b4cd2b2-d533-4292-a701-5c3f9ba896d4" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "04d25eda-9720-4908-b1c3-e4a19f07b218"?>
+
+  <?define guid_msm_comp_files_id_43 = "c69f9622-3ada-4fff-be28-9c49fcda7578" ?>
+  <?define guid_msm_comp_files_be_id_43 = "0f97f3a1-d1fc-43e6-b877-4b93a6d82d09" ?>
+  <?define guid_msm_comp_files_le_id_43 = "79c8af43-9f3a-42f4-a5c9-2d8d54ad3f19" ?>
+</Include>
+

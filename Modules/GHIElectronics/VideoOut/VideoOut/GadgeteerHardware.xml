@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="VideoOut"
+                  UniqueId="a9fd73ff-68b2-4456-8afa-42cb7e4a1c8f"
+                  Manufacturer="GHI Electronics"
+                  Description="A VideoOut module"
+                  InstanceName="VideoOut"
+                  Type="Gadgeteer.Modules.GHIElectronics.VideoOut"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="57.15"
+                  BoardWidth="72.15"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/444">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.VideoOut"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="13" Top="68" Orientation="90" ConstructorOrder="1" TypesLabel="R">
+          <Types>
+            <Type>R</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.065</TypicalCurrent>
+          <MaximumCurrent>0.065</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.080</TypicalCurrent>
+          <MaximumCurrent>0.080</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

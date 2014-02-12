@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "AccelG248" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "AccelG248" ?>
+
+  <?define guid_msi_upgrade_code =  "d7650ba4-2be7-4de6-956c-93890c455458" ?>
+  <?define guid_msm_package_id = "8de10501-3365-4fb6-b008-b16f23163506" ?>
+
+  <?define guid_msm_comp_resources_id = "d211e7cf-1b31-4c0e-9000-b1432a0e4166" ?>
+  <?define guid_msm_comp_registry_id = "d19d924b-a205-4b0a-9236-377494c3e969" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "8b7808cd-6133-473e-b473-337f1462d611"?>
+
+  <?define guid_msm_comp_files_id_43 = "9e723075-6338-4a87-acd1-87793796a484" ?>
+  <?define guid_msm_comp_files_be_id_43 = "a05ebe8f-8281-4cab-bcc3-3c1f7d5c5f0b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "08148064-ebaf-4177-8e9f-a8e9d1392bfa" ?>
+</Include>
+

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "CharacterDisplay" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "CharacterDisplay" ?>
+
+  <?define guid_msi_upgrade_code =  "1ed923a4-4bb9-4b8e-8d84-cbb6a01aafe7" ?>
+  <?define guid_msm_package_id = "20ab9427-5793-4e6d-b087-b58675e06a5e" ?>
+
+  <?define guid_msm_comp_resources_id = "6865990e-a9e4-4556-995d-66a19d7a392f" ?>
+  <?define guid_msm_comp_registry_id = "45612864-a3f3-4934-af11-4440f93dff84" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "ebc4150c-cc77-4912-b61b-335a355c66b1"?>
+
+  <?define guid_msm_comp_files_id_43 = "4db03e6b-3357-4344-af5c-b97b8b4a42ef" ?>
+  <?define guid_msm_comp_files_be_id_43 = "9bb77814-d85f-4630-b1c2-da3da79bc16b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "e63465fe-ef68-4bd4-adca-880ff461232b" ?>
+</Include>
+

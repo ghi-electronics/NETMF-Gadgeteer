@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "XBeeAdapter" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "XBeeAdapter" ?>
+
+  <?define guid_msi_upgrade_code =  "b4a5db19-5286-4b38-9a09-9728d9249e64" ?>
+  <?define guid_msm_package_id = "135d0b64-33c5-4bbc-b4d4-6af364246261" ?>
+
+  <?define guid_msm_comp_resources_id = "8895b85e-79e5-4aab-8d85-7c4015baa4d6" ?>
+  <?define guid_msm_comp_registry_id = "3712f9da-ee38-4209-8627-292595bf6a13" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "a805afbb-b1fe-4abc-ab15-ced1e076fabb"?>
+
+  <?define guid_msm_comp_files_id_43 = "8c066f94-cfb2-4298-bdc0-7a3cccbdff42" ?>
+  <?define guid_msm_comp_files_be_id_43 = "13dafe77-bd4b-483a-b149-c0bcb8c6e000" ?>
+  <?define guid_msm_comp_files_le_id_43 = "10d02f35-95eb-4911-a15e-dcde1b44cc80" ?>
+</Include>
+
