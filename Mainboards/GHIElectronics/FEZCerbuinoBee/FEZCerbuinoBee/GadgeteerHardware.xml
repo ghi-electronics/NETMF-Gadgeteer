@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZCerbuinoBee"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="85"
+            BoardHeight="57"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/351">
 
@@ -17,7 +17,6 @@
       </Assemblies>
 
       <ProvidedSockets>
-
         <ProvidedSocket Label="1" Left="79.5" Top="16" Orientation="180" ConstructorParameter="1">
           <Types>
             <Type>P</Type>
@@ -25,11 +24,6 @@
             <Type>U</Type>
             <Type>Y</Type>
           </Types>
-          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
-          <!--<SharedPinMaps>
-            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-          </SharedPinMaps>-->
         </ProvidedSocket>
 
         <ProvidedSocket Label="2" Left="79.5" Top="30" Orientation="180" ConstructorParameter="2">
@@ -53,12 +47,7 @@
             <Type>P</Type>
             <Type>Y</Type>
           </Types>
-          <!--<SharedPinMaps>
-            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
-            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
-          </SharedPinMaps>-->
         </ProvidedSocket>
-
       </ProvidedSockets>
 
       <LibrariesProvided>

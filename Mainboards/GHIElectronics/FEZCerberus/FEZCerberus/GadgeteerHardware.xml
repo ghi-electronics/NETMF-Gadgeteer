@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZCerberus"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="57"
+            BoardHeight="47"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/349">
 
@@ -17,13 +17,11 @@
       </Assemblies>
 
       <ProvidedSockets>
-
         <ProvidedSocket Label="1" Left="14" Top="6.5" Orientation="90" ConstructorParameter="1">
           <Types>
             <Type>H</Type>
             <Type>I</Type>
           </Types>
-          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
           <SharedPinMaps>
             <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
             <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
@@ -38,7 +36,6 @@
             <Type>U</Type>
             <Type>Y</Type>
           </Types>
-          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
           <SharedPinMaps>
             <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
             <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
@@ -70,7 +67,6 @@
             <Type>P</Type>
             <Type>X</Type>
           </Types>
-          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
           <SharedPinMaps>
             <SharedPinMap NetId="SPI1_MOSI" SocketPin="8"/>
             <SharedPinMap NetId="SPI1_MISO" SocketPin="9"/>
@@ -84,7 +80,6 @@
             <Type>P</Type>
             <Type>X</Type>
           </Types>
-          <!-- If mainboard sockets share pins (e.g. for I2C, SPI, or just shared GPIOs), then this should be specified using the SharedPinMaps element as for I2C below. -->
           <SharedPinMaps>
             <SharedPinMap NetId="SPI1_MOSI" SocketPin="8"/>
             <SharedPinMap NetId="SPI1_MISO" SocketPin="9"/>
@@ -104,7 +99,6 @@
             <Type>Z</Type>
           </Types>
         </ProvidedSocket>
-
       </ProvidedSockets>
 
       <LibrariesProvided>

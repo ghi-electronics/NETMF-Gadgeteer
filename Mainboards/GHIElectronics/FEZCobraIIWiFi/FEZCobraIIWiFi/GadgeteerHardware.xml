@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZCobraIIWiFi"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+			      BoardWidth="112"
+			      BoardHeight="122"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/398">
 
@@ -17,8 +17,6 @@
       </Assemblies>
 
       <ProvidedSockets>
-
-		<!--Left Side of Board-->
 		<ProvidedSocket Label="1" Left="28.5" Top="48.0" Orientation="180" ConstructorParameter="1">
 		  <Types>
 			<Type>B</Type>
@@ -39,8 +37,6 @@
 		  </Types>
 		</ProvidedSocket>
 
-
-		<!--Right Side of Board-->
 		<ProvidedSocket Label="4" Left="105" Top="60.0" Orientation="0" ConstructorParameter="4">
 		  <Types>
 			<Type>A</Type>
@@ -68,7 +64,6 @@
 		  </Types>
 		</ProvidedSocket>
 
-		<!--Extender Board-->
 		<ProvidedSocket Label="7" Left="94.4" Top="26.5" Orientation="90" ConstructorParameter="7">
 		  <Types>
 			<Type>P</Type>
@@ -108,7 +103,6 @@
 			<Type>X</Type>
 		  </Types>
 		</ProvidedSocket>
-
 	  </ProvidedSockets>
 
       <LibrariesProvided>

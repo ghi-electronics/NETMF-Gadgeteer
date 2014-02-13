@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZCerbot"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="150"
+            BoardHeight="90"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/403">
 
@@ -17,7 +17,6 @@
       </Assemblies>
 
       <ProvidedSockets>
-
 			<ProvidedSocket Label="1" Left="42.44" Top="65.80" Orientation="180" ConstructorParameter="1">
 				<Types>
 					<Type>F</Type>
@@ -77,7 +76,6 @@
 					<Type>P</Type>
 				</Types>
 			</ProvidedSocket>
-
 		</ProvidedSockets>
 
       <LibrariesProvided>
@@ -97,7 +95,7 @@
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
           <TypicalCurrent>0.0</TypicalCurrent>
-          <MaximumCurrent>0.0</MaximumCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </MainboardDefinition>

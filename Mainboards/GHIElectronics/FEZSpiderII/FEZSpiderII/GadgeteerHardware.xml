@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZSpiderII"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="57.15"
+            BoardHeight="61.07"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/432">
 

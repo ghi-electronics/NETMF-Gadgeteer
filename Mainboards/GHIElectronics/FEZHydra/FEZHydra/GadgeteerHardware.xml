@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZHydra"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="86.868"
+            BoardHeight="61.976"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/328">
 
@@ -17,7 +17,6 @@
       </Assemblies>
 
       <ProvidedSockets>
-
         <ProvidedSocket Label="1" Left="15.07" Top="6.13" Orientation="90" ConstructorParameter="1">
           <Types>
             <Type>Z</Type>
@@ -136,7 +135,6 @@
             <Type>X</Type>
           </Types>
         </ProvidedSocket>
-
       </ProvidedSockets>
 
       <LibrariesProvided>

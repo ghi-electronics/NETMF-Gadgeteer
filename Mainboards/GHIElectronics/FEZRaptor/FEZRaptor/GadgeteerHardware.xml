@@ -7,8 +7,8 @@
             Type="GHIElectronics.Gadgeteer.FEZRaptor"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
-            BoardWidth="77"
-            BoardHeight="67"
+            BoardWidth="102"
+            BoardHeight="87"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/499">
 
@@ -17,7 +17,6 @@
       </Assemblies>
 
       <ProvidedSockets>
-
 		<ProvidedSocket Label="1" Left="21" Top="6" Orientation="90" ConstructorParameter="1">
 		  <Types>
 			<Type>S</Type>
@@ -206,7 +205,6 @@
 			<Type>Y</Type>
 		  </Types>
 		</ProvidedSocket>
-
 	  </ProvidedSockets>
 
       <LibrariesProvided>
