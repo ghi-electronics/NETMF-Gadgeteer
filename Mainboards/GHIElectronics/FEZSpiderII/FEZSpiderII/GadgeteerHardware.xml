@@ -149,10 +149,10 @@
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpiderII" />
 
 		<Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
-		<Assembly MFVersion="4.3" Name="GHI.IO"/>
-		<Assembly MFVersion="4.3" Name="GHI.Net"/>
-		<Assembly MFVersion="4.3" Name="GHI.System"/>
-		<Assembly MFVersion="4.3" Name="GHI.USBHost"/>
+		<Assembly MFVersion="4.3" Name="GHI_IO"/>
+		<Assembly MFVersion="4.3" Name="GHI_Net"/>
+		<Assembly MFVersion="4.3" Name="GHI_System"/>
+		<Assembly MFVersion="4.3" Name="GHI_USBHost"/>
       </LibrariesProvided>
 
       <Power>

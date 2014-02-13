@@ -23,11 +23,11 @@
         <Assembly MFVersion="4.3" Name="Gadgeteer.WebClient" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.WebServer" />
 		
-		<Assembly MFVersion="4.3" Name="GHI.Net" ErrorMessage="GHI.Net could not be found."/>
+		<Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
-		<Assembly MFVersion="4.3" Name="GHI.Net" ErrorMessage="GHI.Net could not be found."/>
+		<Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
       </ExtraLibrariesRequired>
 
       <Sockets>

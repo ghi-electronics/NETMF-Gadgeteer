@@ -19,11 +19,11 @@
       <Assemblies>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CANDW"/>
 		
-		<Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
+		<Assembly MFVersion="4.3" Name="GHI_Hardware" ErrorMessage="GHI.Hardware could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
-		<Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
+		<Assembly MFVersion="4.3" Name="GHI_Hardware" ErrorMessage="GHI.Hardware could not be found."/>
       </ExtraLibrariesRequired>
 
       <Sockets>

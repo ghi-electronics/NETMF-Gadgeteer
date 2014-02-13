@@ -51,8 +51,8 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHI.System, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="GHI.USBHost, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GHI_System, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GHI_USBHost, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
