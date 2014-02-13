@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.KeypadKP16"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="69"
-                  BoardWidth="75"
+                  BoardHeight="75"
+                  BoardWidth="69"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/345">

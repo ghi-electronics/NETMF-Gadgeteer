@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.RadioFM1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="27"
-                  BoardWidth="36"
+                  BoardHeight="36"
+                  BoardWidth="27"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/434">

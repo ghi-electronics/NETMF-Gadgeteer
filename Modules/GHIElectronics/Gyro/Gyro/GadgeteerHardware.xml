@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.Gyro"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="17.2"
-                  BoardWidth="32.2"
+                  BoardHeight="32.2"
+                  BoardWidth="17.2"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/336">

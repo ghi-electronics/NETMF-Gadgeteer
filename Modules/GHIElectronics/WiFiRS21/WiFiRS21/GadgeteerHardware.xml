@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.WiFiRS21"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="44"
-                  BoardWidth="42"
+                  BoardHeight="42"
+                  BoardWidth="44"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/381">

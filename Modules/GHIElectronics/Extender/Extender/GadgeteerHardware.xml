@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.Extender"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="29"
-                  BoardWidth="27"
+                  BoardHeight="27"
+                  BoardWidth="29"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/319">

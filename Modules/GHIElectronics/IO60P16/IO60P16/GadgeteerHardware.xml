@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.IO60P16"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="63"
-                  BoardWidth="48"
+                  BoardHeight="48"
+                  BoardWidth="63"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/364">

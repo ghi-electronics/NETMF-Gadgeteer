@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayCP7"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="116"
-                  BoardWidth="42"
+                  BoardHeight="42"
+                  BoardWidth="116"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/425">

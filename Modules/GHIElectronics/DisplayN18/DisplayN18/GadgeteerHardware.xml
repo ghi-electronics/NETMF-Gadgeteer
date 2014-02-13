@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayN18"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="55"
-                  BoardWidth="34"
+                  BoardHeight="34"
+                  BoardWidth="55"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/421">

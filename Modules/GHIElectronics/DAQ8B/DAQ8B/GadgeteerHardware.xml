@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.DAQ8B"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="71"
-                  BoardWidth="116"
+                  BoardHeight="116"
+                  BoardWidth="71"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/510">

@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.EVE800"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="[WIDTH]"
-                  BoardWidth="[HEIGHT]"
+                  BoardHeight="[HEIGHT]"
+                  BoardWidth="[WIDTH]"
                   HardwareVersion="[HARDWARE]"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/471">

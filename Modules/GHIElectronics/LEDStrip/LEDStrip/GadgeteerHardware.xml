@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.LEDStrip"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="37"
-                  BoardWidth="13"
+                  BoardHeight="13"
+                  BoardWidth="37"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/318">

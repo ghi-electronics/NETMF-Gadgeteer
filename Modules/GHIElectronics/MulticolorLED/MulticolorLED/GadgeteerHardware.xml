@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.MulticolorLED"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="21"
-                  BoardWidth="22"
+                  BoardHeight="22"
+                  BoardWidth="21"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/395">

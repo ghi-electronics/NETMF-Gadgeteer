@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.Music"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="50"
-                  BoardWidth="39"
+                  BoardHeight="39"
+                  BoardWidth="50"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/443">

@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.CerbotController"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="30.00"
-                  BoardWidth="30.77"
+                  BoardHeight="30.77"
+                  BoardWidth="30.00"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/403">

@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.CharacterDisplay"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="87"
-                  BoardWidth="37"
+                  BoardHeight="37"
+                  BoardWidth="87"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/376">

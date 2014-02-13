@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.BreakoutTB10"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="46"
-                  BoardWidth="19"
+                  BoardHeight="19"
+                  BoardWidth="46"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/375">

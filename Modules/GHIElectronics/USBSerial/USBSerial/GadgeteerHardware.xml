@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.USBSerial"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="30"
-                  BoardWidth="26.38"
+                  BoardHeight="26.38"
+                  BoardWidth="30"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/311">

@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayTE35"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="78"
-                  BoardWidth="83"
+                  BoardHeight="83"
+                  BoardWidth="78"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/449">

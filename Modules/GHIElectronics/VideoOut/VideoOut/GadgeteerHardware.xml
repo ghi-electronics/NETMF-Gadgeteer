@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.VideoOut"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="57.15"
-                  BoardWidth="72.15"
+                  BoardHeight="72.15"
+                  BoardWidth="57.15"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/444">

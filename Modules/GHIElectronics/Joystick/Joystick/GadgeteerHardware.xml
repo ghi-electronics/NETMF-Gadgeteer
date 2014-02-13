@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.Joystick"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="37"
-                  BoardWidth="32"
+                  BoardHeight="32"
+                  BoardWidth="37"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/275">

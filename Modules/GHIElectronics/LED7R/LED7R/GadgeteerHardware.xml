@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.LED7R"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="16.8"
-                  BoardWidth="21.8"
+                  BoardHeight="21.8"
+                  BoardWidth="16.8"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/356">
