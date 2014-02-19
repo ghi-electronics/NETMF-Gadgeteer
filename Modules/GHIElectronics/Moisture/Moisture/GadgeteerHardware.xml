@@ -6,7 +6,7 @@
                   UniqueId="f9866123-6e15-4e83-8bc0-6aff208c56bf"
                   Manufacturer="GHI Electronics"
                   Description="A Moisture module"
-                  InstanceName="Moisture"
+                  InstanceName="moisture"
                   Type="Gadgeteer.Modules.GHIElectronics.Moisture"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

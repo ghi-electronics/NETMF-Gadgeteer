@@ -6,7 +6,7 @@
                   UniqueId="e8323968-d331-44bd-8e7c-225de173dcfb"
                   Manufacturer="GHI Electronics"
                   Description="An USBHost module"
-                  InstanceName="USBHost"
+                  InstanceName="usbHost"
                   Type="Gadgeteer.Modules.GHIElectronics.USBHost"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

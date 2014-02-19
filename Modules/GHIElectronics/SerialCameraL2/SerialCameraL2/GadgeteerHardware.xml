@@ -6,7 +6,7 @@
                   UniqueId="9e363613-5342-4c51-a7b5-288627d176bc"
                   Manufacturer="GHI Electronics"
                   Description="A SerialCameraL2 module"
-                  InstanceName="SerialCameraL2"
+                  InstanceName="serialCameraL2"
                   Type="Gadgeteer.Modules.GHIElectronics.SerialCameraL2"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

@@ -6,7 +6,7 @@
                   UniqueId="eae507ea-a1ff-4156-971b-4ab19cd3c8ca"
                   Manufacturer="GHI Electronics"
                   Description="A LightSense module"
-                  InstanceName="LightSense"
+                  InstanceName="lightSense"
                   Type="Gadgeteer.Modules.GHIElectronics.LightSense"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

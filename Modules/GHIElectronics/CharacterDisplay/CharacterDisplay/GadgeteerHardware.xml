@@ -6,7 +6,7 @@
                   UniqueId="aceb557c-f235-406b-af48-a402b8f29066"
                   Manufacturer="GHI Electronics"
                   Description="A CharacterDisplay module"
-                  InstanceName="CharacterDisplay"
+                  InstanceName="characterDisplay"
                   Type="Gadgeteer.Modules.GHIElectronics.CharacterDisplay"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

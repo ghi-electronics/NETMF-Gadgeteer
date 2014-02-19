@@ -6,7 +6,7 @@
                   UniqueId="4f679806-10b7-424a-b6a2-4412a5f3a81d"
                   Manufacturer="GHI Electronics"
                   Description="A RotaryH1 module"
-                  InstanceName="RotaryH1"
+                  InstanceName="rotaryH1"
                   Type="Gadgeteer.Modules.GHIElectronics.RotaryH1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

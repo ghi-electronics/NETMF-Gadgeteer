@@ -6,7 +6,7 @@
                   UniqueId="f1a0e327-ec8c-4a85-b8b1-0fd562abb6ce"
                   Manufacturer="GHI Electronics"
                   Description="A LED7R module"
-                  InstanceName="LED7R"
+                  InstanceName="led7R"
                   Type="Gadgeteer.Modules.GHIElectronics.LED7R"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

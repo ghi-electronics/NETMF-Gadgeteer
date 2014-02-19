@@ -6,7 +6,7 @@
                   UniqueId="7a777662-597e-463f-93ce-47e744080dc5"
                   Manufacturer="GHI Electronics"
                   Description="A FEZtive module"
-                  InstanceName="FEZtive"
+                  InstanceName="feztive"
                   Type="Gadgeteer.Modules.GHIElectronics.FEZtive"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

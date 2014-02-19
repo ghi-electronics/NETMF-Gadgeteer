@@ -6,7 +6,7 @@
                   UniqueId="ec06226c-9297-4c36-bc75-aa1bd26ad2a1"
                   Manufacturer="GHI Electronics"
                   Description="A Gyro module"
-                  InstanceName="Gyro"
+                  InstanceName="gyro"
                   Type="Gadgeteer.Modules.GHIElectronics.Gyro"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

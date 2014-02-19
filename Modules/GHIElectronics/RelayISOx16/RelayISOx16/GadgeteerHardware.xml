@@ -6,7 +6,7 @@
                   UniqueId="3175a095-c782-460b-a4cc-5d26925bbf6e"
                   Manufacturer="GHI Electronics"
                   Description="A RelayISOx16 module"
-                  InstanceName="RelayISOx16"
+                  InstanceName="relayISOx16"
                   Type="Gadgeteer.Modules.GHIElectronics.RelayISOx16"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

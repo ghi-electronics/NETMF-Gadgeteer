@@ -6,7 +6,7 @@
                   UniqueId="138fa40e-888a-47fd-9d5b-a2c246040088"
                   Manufacturer="GHI Electronics"
                   Description="An ALFATOEMLink module"
-                  InstanceName="ALFATOEMLink"
+                  InstanceName="alfatOEMLink"
                   Type="Gadgeteer.Modules.GHIElectronics.ALFATOEMLink"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

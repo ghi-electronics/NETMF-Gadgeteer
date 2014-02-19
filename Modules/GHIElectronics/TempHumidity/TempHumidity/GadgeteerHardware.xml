@@ -6,7 +6,7 @@
                   UniqueId="82fa8ac6-3975-4c9b-8b6a-470d6c7e8fe2"
                   Manufacturer="GHI Electronics"
                   Description="A TempHumidity module"
-                  InstanceName="TempHumidity"
+                  InstanceName="tempHumidity"
                   Type="Gadgeteer.Modules.GHIElectronics.TempHumidity"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

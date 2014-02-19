@@ -6,7 +6,7 @@
                   UniqueId="65ecff76-0731-4edc-ac49-cdac5b6f9057"
                   Manufacturer="GHI Electronics"
                   Description="A MulticolorLED module"
-                  InstanceName="MulticolorLED"
+                  InstanceName="multicolorLED"
                   Type="Gadgeteer.Modules.GHIElectronics.MulticolorLED"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

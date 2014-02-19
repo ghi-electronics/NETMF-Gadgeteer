@@ -6,7 +6,7 @@
                   UniqueId="eb388a33-bde1-47c2-b0a4-2ad7b22faab7"
                   Manufacturer="GHI Electronics"
                   Description="A Tunes module"
-                  InstanceName="Tunes"
+                  InstanceName="tunes"
                   Type="Gadgeteer.Modules.GHIElectronics.Tunes"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

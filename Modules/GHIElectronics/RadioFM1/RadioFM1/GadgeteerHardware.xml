@@ -6,7 +6,7 @@
                   UniqueId="12c1bcff-31fe-4eca-aff2-f99bc9edeae9"
                   Manufacturer="GHI Electronics"
                   Description="A RadioFM1 module"
-                  InstanceName="RadioFM1"
+                  InstanceName="radioFM1"
                   Type="Gadgeteer.Modules.GHIElectronics.RadioFM1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

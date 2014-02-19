@@ -6,7 +6,7 @@
                   UniqueId="b1da61a6-eebb-4fa6-a2e8-b406982ec791"
                   Manufacturer="GHI Electronics"
                   Description="A Camera module"
-                  InstanceName="Camera"
+                  InstanceName="camera"
                   Type="Gadgeteer.Modules.GHIElectronics.Camera"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

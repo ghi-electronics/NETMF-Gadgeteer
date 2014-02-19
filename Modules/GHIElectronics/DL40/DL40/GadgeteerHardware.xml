@@ -6,7 +6,7 @@
                   UniqueId="79f74532-b4a1-45e7-932e-dc954fd4958a"
                   Manufacturer="GHI Electronics"
                   Description="A DL40 module"
-                  InstanceName="DL40"
+                  InstanceName="dl40"
                   Type="Gadgeteer.Modules.GHIElectronics.DL40"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

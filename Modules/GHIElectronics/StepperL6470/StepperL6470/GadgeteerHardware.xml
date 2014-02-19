@@ -6,7 +6,7 @@
                   UniqueId="c7cc0dc6-de7f-4ed2-b639-a9da8a42c264"
                   Manufacturer="GHI Electronics"
                   Description="A StepperL6470 module"
-                  InstanceName="StepperL6470"
+                  InstanceName="stepperL6470"
                   Type="Gadgeteer.Modules.GHIElectronics.StepperL6470"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

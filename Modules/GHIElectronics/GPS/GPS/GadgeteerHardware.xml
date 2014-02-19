@@ -6,7 +6,7 @@
                   UniqueId="74a325ab-d8a3-4124-9835-daaac6f23372"
                   Manufacturer="GHI Electronics"
                   Description="A GPS module"
-                  InstanceName="GPS"
+                  InstanceName="gps"
                   Type="Gadgeteer.Modules.GHIElectronics.GPS"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

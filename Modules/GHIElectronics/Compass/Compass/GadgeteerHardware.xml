@@ -6,7 +6,7 @@
                   UniqueId="56874d17-76c5-4df4-a85c-97d7a80aacb8"
                   Manufacturer="GHI Electronics"
                   Description="A Compass module"
-                  InstanceName="Compass"
+                  InstanceName="compass"
                   Type="Gadgeteer.Modules.GHIElectronics.Compass"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

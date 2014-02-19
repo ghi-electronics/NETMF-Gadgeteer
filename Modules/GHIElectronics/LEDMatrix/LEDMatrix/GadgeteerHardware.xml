@@ -6,7 +6,7 @@
                   UniqueId="cfd90d12-7be3-4823-ab41-0bf65f959a2d"
                   Manufacturer="GHI Electronics"
                   Description="A LEDMatrix module"
-                  InstanceName="LEDMatrix"
+                  InstanceName="ledMatrix"
                   Type="Gadgeteer.Modules.GHIElectronics.LEDMatrix"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

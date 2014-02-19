@@ -6,7 +6,7 @@
                   UniqueId="64d78cd8-6fce-48a8-b112-ba6dc71b2a73"
                   Manufacturer="GHI Electronics"
                   Description="A RS232 module"
-                  InstanceName="RS232"
+                  InstanceName="rs232"
                   Type="Gadgeteer.Modules.GHIElectronics.RS232"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

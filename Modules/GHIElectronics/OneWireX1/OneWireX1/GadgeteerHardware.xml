@@ -6,7 +6,7 @@
                   UniqueId="8fb06201-b748-4d29-90d3-0a823d643c1b"
                   Manufacturer="GHI Electronics"
                   Description="An OneWireX1 module"
-                  InstanceName="OneWireX1"
+                  InstanceName="oneWireX1"
                   Type="Gadgeteer.Modules.GHIElectronics.OneWireX1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

@@ -6,7 +6,7 @@
                   UniqueId="5711d913-2f74-4a1b-bfe9-9835ffdcf586"
                   Manufacturer="GHI Electronics"
                   Description="A CurrentACS712 module"
-                  InstanceName="CurrentACS712"
+                  InstanceName="currentACS712"
                   Type="Gadgeteer.Modules.GHIElectronics.CurrentACS712"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

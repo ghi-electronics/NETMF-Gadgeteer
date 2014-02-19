@@ -6,7 +6,7 @@
                   UniqueId="5eac9ff1-9c47-4aea-b320-39ced3134bb1"
                   Manufacturer="GHI Electronics"
                   Description="An AccelG248 module"
-                  InstanceName="AccelG248"
+                  InstanceName="accelG248"
                   Type="Gadgeteer.Modules.GHIElectronics.AccelG248"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

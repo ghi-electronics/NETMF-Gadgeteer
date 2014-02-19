@@ -6,7 +6,7 @@
                   UniqueId="d291b966-5185-498a-8ef7-9e98b4479f1c"
                   Manufacturer="GHI Electronics"
                   Description="A BreadBoardX1 module"
-                  InstanceName="BreadBoardX1"
+                  InstanceName="breadBoardX1"
                   Type="Gadgeteer.Modules.GHIElectronics.BreadBoardX1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

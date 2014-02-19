@@ -6,7 +6,7 @@
                   UniqueId="96109d88-d7db-4487-886d-52a529052a04"
                   Manufacturer="GHI Electronics"
                   Description="A DistanceUS3 module"
-                  InstanceName="DistanceUS3"
+                  InstanceName="distanceUS3"
                   Type="Gadgeteer.Modules.GHIElectronics.DistanceUS3"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

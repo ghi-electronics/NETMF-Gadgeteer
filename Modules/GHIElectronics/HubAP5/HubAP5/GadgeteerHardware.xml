@@ -6,7 +6,7 @@
                   UniqueId="5f41a8b9-427d-4dd5-9e67-093e22e0fca8"
                   Manufacturer="GHI Electronics"
                   Description="A HubAP5 module"
-                  InstanceName="HubAP5"
+                  InstanceName="hubAP5"
                   Type="Gadgeteer.Modules.GHIElectronics.HubAP5"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

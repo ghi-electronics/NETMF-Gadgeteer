@@ -6,7 +6,7 @@
                   UniqueId="2c51b2ec-2747-43cd-bd52-d2366835230b"
                   Manufacturer="GHI Electronics"
                   Description="A Music module"
-                  InstanceName="Music"
+                  InstanceName="music"
                   Type="Gadgeteer.Modules.GHIElectronics.Music"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

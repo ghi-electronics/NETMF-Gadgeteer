@@ -6,7 +6,7 @@
                   UniqueId="78197eb6-ea07-47da-b63b-7dafa352dede"
                   Manufacturer="GHI Electronics"
                   Description="An EthernetJ11D module"
-                  InstanceName="EthernetJ11D"
+                  InstanceName="ethernetJ11D"
                   Type="Gadgeteer.Modules.GHIElectronics.EthernetJ11D"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

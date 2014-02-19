@@ -6,7 +6,7 @@
                   UniqueId="6dab6643-da15-4665-8c2d-97f7d1d5f9a8"
                   Manufacturer="GHI Electronics"
                   Description="A Breakout module"
-                  InstanceName="Breakout"
+                  InstanceName="breakout"
                   Type="Gadgeteer.Modules.GHIElectronics.Breakout"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

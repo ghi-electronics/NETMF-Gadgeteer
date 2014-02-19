@@ -6,7 +6,7 @@
                   UniqueId="d189880a-9289-465f-9f05-d2acf977ad54"
                   Manufacturer="GHI Electronics"
                   Description="A TouchL12 module"
-                  InstanceName="TouchL12"
+                  InstanceName="touchL12"
                   Type="Gadgeteer.Modules.GHIElectronics.TouchL12"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

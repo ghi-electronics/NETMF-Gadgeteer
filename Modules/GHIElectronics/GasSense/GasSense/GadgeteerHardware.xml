@@ -6,7 +6,7 @@
                   UniqueId="f55c7e04-4ba5-4bde-b0b8-301e6cfc320d"
                   Manufacturer="GHI Electronics"
                   Description="A GasSense module"
-                  InstanceName="GasSense"
+                  InstanceName="gasSense"
                   Type="Gadgeteer.Modules.GHIElectronics.GasSense"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

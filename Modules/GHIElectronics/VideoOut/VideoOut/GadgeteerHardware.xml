@@ -6,7 +6,7 @@
                   UniqueId="a9fd73ff-68b2-4456-8afa-42cb7e4a1c8f"
                   Manufacturer="GHI Electronics"
                   Description="A VideoOut module"
-                  InstanceName="VideoOut"
+                  InstanceName="videoOut"
                   Type="Gadgeteer.Modules.GHIElectronics.VideoOut"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

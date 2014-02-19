@@ -6,7 +6,7 @@
                   UniqueId="34dd111a-c369-47be-b15d-bac362c805b0"
                   Manufacturer="GHI Electronics"
                   Description="A CerbotController module"
-                  InstanceName="CerbotController"
+                  InstanceName="cerbotController"
                   Type="Gadgeteer.Modules.GHIElectronics.CerbotController"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

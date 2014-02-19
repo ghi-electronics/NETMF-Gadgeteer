@@ -6,7 +6,7 @@
                   UniqueId="98628b92-618e-420c-8911-a651ed910324"
                   Manufacturer="GHI Electronics"
                   Description="A NullModem module"
-                  InstanceName="NullModem"
+                  InstanceName="nullModem"
                   Type="Gadgeteer.Modules.GHIElectronics.NullModem"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

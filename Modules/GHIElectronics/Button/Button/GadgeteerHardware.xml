@@ -6,7 +6,7 @@
                   UniqueId="8367136d-c1d7-41ae-89c7-30ed035b758b"
                   Manufacturer="GHI Electronics"
                   Description="A Button module"
-                  InstanceName="Button"
+                  InstanceName="button"
                   Type="Gadgeteer.Modules.GHIElectronics.Button"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

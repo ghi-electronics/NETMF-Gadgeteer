@@ -6,7 +6,7 @@
                   UniqueId="6c73904a-8e11-44e9-8cae-77b48d2b0c6b"
                   Manufacturer="GHI Electronics"
                   Description="A WiFiRS21 module"
-                  InstanceName="WiFiRS21"
+                  InstanceName="wifiRS21"
                   Type="Gadgeteer.Modules.GHIElectronics.WiFiRS21"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

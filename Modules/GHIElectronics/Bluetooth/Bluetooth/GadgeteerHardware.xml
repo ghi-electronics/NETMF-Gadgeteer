@@ -6,7 +6,7 @@
                   UniqueId="742ae696-3967-4446-9947-fe17cf4ea85e"
                   Manufacturer="GHI Electronics"
                   Description="A Bluetooth module"
-                  InstanceName="Bluetooth"
+                  InstanceName="bluetooth"
                   Type="Gadgeteer.Modules.GHIElectronics.Bluetooth"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

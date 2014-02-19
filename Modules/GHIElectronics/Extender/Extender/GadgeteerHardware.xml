@@ -6,7 +6,7 @@
                   UniqueId="081b90ab-db49-4237-89b7-776958fcb91b"
                   Manufacturer="GHI Electronics"
                   Description="An Extender module"
-                  InstanceName="Extender"
+                  InstanceName="extender"
                   Type="Gadgeteer.Modules.GHIElectronics.Extender"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

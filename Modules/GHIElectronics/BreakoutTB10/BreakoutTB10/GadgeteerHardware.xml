@@ -6,7 +6,7 @@
                   UniqueId="777ea013-614a-4e09-be22-dbea46b4f8b4"
                   Manufacturer="GHI Electronics"
                   Description="A BreakoutTB10 module"
-                  InstanceName="BreakoutTB10"
+                  InstanceName="breakoutTB10"
                   Type="Gadgeteer.Modules.GHIElectronics.BreakoutTB10"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

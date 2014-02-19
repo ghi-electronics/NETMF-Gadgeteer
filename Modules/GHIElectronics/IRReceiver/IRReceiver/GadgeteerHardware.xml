@@ -6,7 +6,7 @@
                   UniqueId="32263bd7-ff7b-4cb4-b59f-2fbfa4dbf479"
                   Manufacturer="GHI Electronics"
                   Description="An IRReceiver module"
-                  InstanceName="IRReceiver"
+                  InstanceName="irReceiver"
                   Type="Gadgeteer.Modules.GHIElectronics.IRReceiver"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

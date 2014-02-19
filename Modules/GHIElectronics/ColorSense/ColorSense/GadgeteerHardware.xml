@@ -6,7 +6,7 @@
                   UniqueId="9f8ce325-cc4e-4d62-a34f-356656f72721"
                   Manufacturer="GHI Electronics"
                   Description="A ColorSense module"
-                  InstanceName="ColorSense"
+                  InstanceName="colorSense"
                   Type="Gadgeteer.Modules.GHIElectronics.ColorSense"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

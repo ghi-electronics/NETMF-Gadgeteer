@@ -6,7 +6,7 @@
                   UniqueId="5b9e85d1-3325-4e0b-8f70-9650df9f44b1"
                   Manufacturer="GHI Electronics"
                   Description="A PIR module"
-                  InstanceName="PIR"
+                  InstanceName="pir"
                   Type="Gadgeteer.Modules.GHIElectronics.PIR"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

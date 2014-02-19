@@ -6,7 +6,7 @@
                   UniqueId="7b529b63-fb23-4998-9840-232fb1276518"
                   Manufacturer="GHI Electronics"
                   Description="An USBSerial module"
-                  InstanceName="USBSerial"
+                  InstanceName="usbSerial"
                   Type="Gadgeteer.Modules.GHIElectronics.USBSerial"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

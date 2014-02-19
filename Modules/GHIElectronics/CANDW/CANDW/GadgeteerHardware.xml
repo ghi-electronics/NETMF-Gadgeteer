@@ -6,7 +6,7 @@
                   UniqueId="adec4987-e1b3-4586-a2e2-ccd34837c5b1"
                   Manufacturer="GHI Electronics"
                   Description="A CANDW module"
-                  InstanceName="CANDW"
+                  InstanceName="canDW"
                   Type="Gadgeteer.Modules.GHIElectronics.CANDW"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

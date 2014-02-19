@@ -6,7 +6,7 @@
                   UniqueId="326c1514-f121-4da6-a2c8-2af20380967d"
                   Manufacturer="GHI Electronics"
                   Description="A ParallelCNC module"
-                  InstanceName="ParallelCNC"
+                  InstanceName="parallelCNC"
                   Type="Gadgeteer.Modules.GHIElectronics.ParallelCNC"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

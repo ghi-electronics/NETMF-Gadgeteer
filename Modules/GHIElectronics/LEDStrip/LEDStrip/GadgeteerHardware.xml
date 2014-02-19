@@ -6,7 +6,7 @@
                   UniqueId="908f0a93-727a-4ad1-92a8-b09573aec253"
                   Manufacturer="GHI Electronics"
                   Description="A LEDStrip module"
-                  InstanceName="LEDStrip"
+                  InstanceName="ledStrip"
                   Type="Gadgeteer.Modules.GHIElectronics.LEDStrip"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

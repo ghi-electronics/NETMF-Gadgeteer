@@ -6,7 +6,7 @@
                   UniqueId="6c5868f1-035f-4394-a165-9921472e9e8f"
                   Manufacturer="GHI Electronics"
                   Description="A TouchC8 module"
-                  InstanceName="TouchC8"
+                  InstanceName="touchC8"
                   Type="Gadgeteer.Modules.GHIElectronics.TouchC8"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

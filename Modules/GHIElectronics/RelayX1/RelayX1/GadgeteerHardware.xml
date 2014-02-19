@@ -6,7 +6,7 @@
                   UniqueId="b6be21b7-a86a-49dc-adb2-2f60634f03ad"
                   Manufacturer="GHI Electronics"
                   Description="A RelayX1 module"
-                  InstanceName="RelayX1"
+                  InstanceName="relayX1"
                   Type="Gadgeteer.Modules.GHIElectronics.RelayX1"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

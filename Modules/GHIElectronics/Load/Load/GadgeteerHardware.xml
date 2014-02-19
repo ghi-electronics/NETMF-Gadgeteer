@@ -6,7 +6,7 @@
                   UniqueId="4721aa22-2db4-440c-b7fb-9c4e1c67f31b"
                   Manufacturer="GHI Electronics"
                   Description="A Load module"
-                  InstanceName="Load"
+                  InstanceName="load"
                   Type="Gadgeteer.Modules.GHIElectronics.Load"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

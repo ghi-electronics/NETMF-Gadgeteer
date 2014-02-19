@@ -6,7 +6,7 @@
                   UniqueId="2ef96cfa-44be-4e34-bf4e-aea37e321153"
                   Manufacturer="GHI Electronics"
                   Description="A MotorDriverL298 module"
-                  InstanceName="MotorDriverL298"
+                  InstanceName="motorDriverL298"
                   Type="Gadgeteer.Modules.GHIElectronics.MotorDriverL298"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

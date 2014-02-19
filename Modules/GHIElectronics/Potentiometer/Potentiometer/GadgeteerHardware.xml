@@ -6,7 +6,7 @@
                   UniqueId="d905159f-122d-413e-8176-937618973d7f"
                   Manufacturer="GHI Electronics"
                   Description="A Potentiometer module"
-                  InstanceName="Potentiometer"
+                  InstanceName="potentiometer"
                   Type="Gadgeteer.Modules.GHIElectronics.Potentiometer"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

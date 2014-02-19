@@ -6,7 +6,7 @@
                   UniqueId="efb787c4-aae6-477d-ab8b-ef59dcf2b420"
                   Manufacturer="GHI Electronics"
                   Description="An USBSerialSP module"
-                  InstanceName="USBSerialSP"
+                  InstanceName="usbSerialSP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBSerialSP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

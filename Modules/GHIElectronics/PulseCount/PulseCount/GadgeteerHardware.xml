@@ -6,7 +6,7 @@
                   UniqueId="e891bf8a-6dc6-4786-8bb3-911d3645f379"
                   Manufacturer="GHI Electronics"
                   Description="A PulseCount module"
-                  InstanceName="PulseCount"
+                  InstanceName="pulseCount"
                   Type="Gadgeteer.Modules.GHIElectronics.PulseCount"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

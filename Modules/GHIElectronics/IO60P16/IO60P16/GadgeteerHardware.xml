@@ -6,7 +6,7 @@
                   UniqueId="df940797-1081-4830-8cd6-d977052314c5"
                   Manufacturer="GHI Electronics"
                   Description="An IO60P16 module"
-                  InstanceName="IO60P16"
+                  InstanceName="io60P16"
                   Type="Gadgeteer.Modules.GHIElectronics.IO60P16"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

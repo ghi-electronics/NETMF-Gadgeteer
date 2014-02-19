@@ -6,7 +6,7 @@
                   UniqueId="ec60bf64-ef5f-471e-bba1-98bf545d5166"
                   Manufacturer="GHI Electronics"
                   Description="A SPlus module"
-                  InstanceName="SPlus"
+                  InstanceName="sPlus"
                   Type="Gadgeteer.Modules.GHIElectronics.SPlus"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

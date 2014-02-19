@@ -6,7 +6,7 @@
                   UniqueId="cab62291-8a54-4a55-935a-a62bc7cc2a20"
                   Manufacturer="GHI Electronics"
                   Description="An EthernetENC28 module"
-                  InstanceName="EthernetENC28"
+                  InstanceName="ethernetENC28"
                   Type="Gadgeteer.Modules.GHIElectronics.EthernetENC28"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

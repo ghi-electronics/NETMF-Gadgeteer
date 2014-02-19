@@ -6,7 +6,7 @@
                   UniqueId="ab12a851-8b8f-44e5-9c9e-323bbe1414ca"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayTE35 module"
-                  InstanceName="DisplayTE35"
+                  InstanceName="displayTE35"
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayTE35"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

@@ -6,7 +6,7 @@
                   UniqueId="cf53d5cc-8e22-4e05-8088-b0668449c469"
                   Manufacturer="GHI Electronics"
                   Description="An EBlockExpansion module"
-                  InstanceName="EBlockExpansion"
+                  InstanceName="eBlockExpansion"
                   Type="Gadgeteer.Modules.GHIElectronics.EBlockExpansion"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

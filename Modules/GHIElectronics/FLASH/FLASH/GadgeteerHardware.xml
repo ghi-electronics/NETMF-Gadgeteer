@@ -6,7 +6,7 @@
                   UniqueId="bc663245-5f0c-4459-a0b0-21fb680fa894"
                   Manufacturer="GHI Electronics"
                   Description="A FLASH module"
-                  InstanceName="FLASH"
+                  InstanceName="flash"
                   Type="Gadgeteer.Modules.GHIElectronics.FLASH"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

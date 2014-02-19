@@ -6,7 +6,7 @@
                   UniqueId="7fa77e40-694e-4fc6-81c7-281d8db39152"
                   Manufacturer="GHI Electronics"
                   Description="A WiFiRN171 module"
-                  InstanceName="WiFiRN171"
+                  InstanceName="wifiRN171"
                   Type="Gadgeteer.Modules.GHIElectronics.WiFiRN171"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

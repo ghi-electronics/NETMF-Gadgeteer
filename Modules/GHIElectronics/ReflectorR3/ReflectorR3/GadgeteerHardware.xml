@@ -6,7 +6,7 @@
                   UniqueId="494f0f2e-c020-4e07-bf53-bfca94582de1"
                   Manufacturer="GHI Electronics"
                   Description="A ReflectorR3 module"
-                  InstanceName="ReflectorR3"
+                  InstanceName="reflectorR3"
                   Type="Gadgeteer.Modules.GHIElectronics.ReflectorR3"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

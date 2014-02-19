@@ -6,7 +6,7 @@
                   UniqueId="0bbb5417-43ca-420b-901f-2792a25e7a34"
                   Manufacturer="GHI Electronics"
                   Description="A MaxO module"
-                  InstanceName="MaxO"
+                  InstanceName="maxO"
                   Type="Gadgeteer.Modules.GHIElectronics.MaxO"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

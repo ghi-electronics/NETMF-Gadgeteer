@@ -6,7 +6,7 @@
                   UniqueId="4dabebd0-6737-4c08-b493-41d3f0467c93"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayT43 module"
-                  InstanceName="DisplayT43"
+                  InstanceName="displayT43"
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayT43"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

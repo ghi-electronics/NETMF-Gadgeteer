@@ -6,7 +6,7 @@
                   UniqueId="0b4ff55d-63c3-4188-9594-9efdda4a7bc9"
                   Manufacturer="GHI Electronics"
                   Description="A Barometer module"
-                  InstanceName="Barometer"
+                  InstanceName="barometer"
                   Type="Gadgeteer.Modules.GHIElectronics.Barometer"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

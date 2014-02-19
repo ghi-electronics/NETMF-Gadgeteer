@@ -6,7 +6,7 @@
                   UniqueId="71b7dedb-29b0-4175-b295-bd153b56cd32"
                   Manufacturer="GHI Electronics"
                   Description="An USBClientSP module"
-                  InstanceName="USBClientSP"
+                  InstanceName="usbClientSP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBClientSP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

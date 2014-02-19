@@ -6,7 +6,7 @@
                   UniqueId="88bf9ca0-ddb6-4008-8d67-2e23f76e2698"
                   Manufacturer="GHI Electronics"
                   Description="A Thermocouple module"
-                  InstanceName="Thermocouple"
+                  InstanceName="thermocouple"
                   Type="Gadgeteer.Modules.GHIElectronics.Thermocouple"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

@@ -6,7 +6,7 @@
                   UniqueId="664915c0-4f8f-4e49-9457-bffa3a151cb1"
                   Manufacturer="GHI Electronics"
                   Description="A PulseInOut module"
-                  InstanceName="PulseInOut"
+                  InstanceName="pulseInOut"
                   Type="Gadgeteer.Modules.GHIElectronics.PulseInOut"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

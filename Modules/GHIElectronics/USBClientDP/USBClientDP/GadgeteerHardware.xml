@@ -6,7 +6,7 @@
                   UniqueId="4f21fe56-9794-4f0f-a8b8-d74ce4dc93d0"
                   Manufacturer="GHI Electronics"
                   Description="An USBClientDP module"
-                  InstanceName="USBClientDP"
+                  InstanceName="usbClientDP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBClientDP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

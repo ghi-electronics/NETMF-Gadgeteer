@@ -6,7 +6,7 @@
                   UniqueId="f15e29bc-6a08-442c-98f8-0f1f720d1ee6"
                   Manufacturer="GHI Electronics"
                   Description="A DAQ8B module"
-                  InstanceName="DAQ8B"
+                  InstanceName="daq8B"
                   Type="Gadgeteer.Modules.GHIElectronics.DAQ8B"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

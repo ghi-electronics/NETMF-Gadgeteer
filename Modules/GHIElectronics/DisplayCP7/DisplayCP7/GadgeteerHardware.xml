@@ -6,7 +6,7 @@
                   UniqueId="92f0d77c-81d1-4bc7-b048-2fab2714f08a"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayCP7 module"
-                  InstanceName="DisplayCP7"
+                  InstanceName="displayCP7"
                   Type="Gadgeteer.Modules.GHIElectronics.DisplayCP7"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

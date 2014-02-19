@@ -6,7 +6,7 @@
                   UniqueId="81ddcd6d-4a54-4f98-a042-aa726d3a75b0"
                   Manufacturer="GHI Electronics"
                   Description="A KeypadKP16 module"
-                  InstanceName="KeypadKP16"
+                  InstanceName="keypadKP16"
                   Type="Gadgeteer.Modules.GHIElectronics.KeypadKP16"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

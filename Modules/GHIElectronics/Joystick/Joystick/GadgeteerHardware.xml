@@ -6,7 +6,7 @@
                   UniqueId="4ef2835f-1ee5-4a2c-a556-544c870e1ba0"
                   Manufacturer="GHI Electronics"
                   Description="A Joystick module"
-                  InstanceName="Joystick"
+                  InstanceName="joystick"
                   Type="Gadgeteer.Modules.GHIElectronics.Joystick"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

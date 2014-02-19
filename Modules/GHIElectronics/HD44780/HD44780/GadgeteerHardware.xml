@@ -6,7 +6,7 @@
                   UniqueId="c9f51571-8c8f-4511-8383-8840882ac668"
                   Manufacturer="GHI Electronics"
                   Description="A HD44780 module"
-                  InstanceName="HD44780"
+                  InstanceName="hd44780"
                   Type="Gadgeteer.Modules.GHIElectronics.HD44780"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

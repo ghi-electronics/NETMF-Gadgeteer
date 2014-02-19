@@ -6,7 +6,7 @@
                   UniqueId="8b0aa8df-a40d-48bd-8ef7-0a1fc23f70e4"
                   Manufacturer="GHI Electronics"
                   Description="A RFIDReader module"
-                  InstanceName="RFIDReader"
+                  InstanceName="rfidReader"
                   Type="Gadgeteer.Modules.GHIElectronics.RFIDReader"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"

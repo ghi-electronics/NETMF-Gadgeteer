@@ -6,7 +6,7 @@
                   UniqueId="717014f7-a853-40d8-828e-dbf2cb407edc"
                   Manufacturer="GHI Electronics"
                   Description="A MicroSDCard module"
-                  InstanceName="MicroSDCard"
+                  InstanceName="microSDCard"
                   Type="Gadgeteer.Modules.GHIElectronics.MicroSDCard"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
