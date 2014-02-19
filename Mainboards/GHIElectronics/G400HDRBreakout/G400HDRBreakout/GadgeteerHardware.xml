@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <MainboardDefinitions>
+    <MainboardDefinition
+            Name="G400HDRBreakout"
+            Type="GHIElectronics.Gadgeteer.G400HDRBreakout"
+            HardwareVersion="1.0"
+            Image="Resources\Image.jpg"
+            BoardWidth="77"
+            BoardHeight="67"
+            MinimumGadgeteerCoreVersion="2.43.800"
+            HelpUrl="http://www.ghielectronics.com/catalog/product/416">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G400HDRBreakout"/>
+      </Assemblies>
+
+      <ProvidedSockets>
+
+      </ProvidedSockets>
+
+      <LibrariesProvided>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G400HDRBreakout" />
+
+        <Assembly MFVersion="4.3" Name="GHI.Hardware.G400"/>
+        <Assembly MFVersion="4.3" Name="GHI_IO"/>
+        <Assembly MFVersion="4.3" Name="GHI_Net"/>
+        <Assembly MFVersion="4.3" Name="GHI_System"/>
+        <Assembly MFVersion="4.3" Name="GHI_USBHost"/>
+      </LibrariesProvided>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>[3TYP]</TypicalCurrent>
+          <MaximumCurrent>[3MAX]</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>[5TYP]</TypicalCurrent>
+          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </MainboardDefinition>
+  </MainboardDefinitions>
+</GadgeteerDefinitions>

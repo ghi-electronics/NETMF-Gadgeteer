@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<gadgeteerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="a6ec24a6-bf3c-4865-81af-572c8d0c0da4" newModel="false" xmlns="http://schemas.microsoft.com/dsltools/GadgeteerDSL">
+  <comments>
+    <gadgeteerModelHasComments Id="6819cbbe-e714-4661-bae4-4ab48cc769fd">
+      <comment Id="ef53fc86-fd08-43e6-94e0-ecd96a28b722" text="Tip: To have the designer connect all modules for you, right-click the diagram, and then click 'Connect all modules'." />
+    </gadgeteerModelHasComments>
+  </comments>
+</gadgeteerModel>

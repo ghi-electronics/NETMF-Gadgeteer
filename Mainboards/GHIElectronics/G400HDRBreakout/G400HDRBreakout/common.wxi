@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define MainboardSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeMainboardName = "G400HDRBreakout" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "$(var.SafeManufacturer).Gadgeteer.$(var.SafeMainboardName)"?>
+  <?define ProjectPath = "G400HDRBreakout" ?>
+
+  <?define guid_msi_upgrade_code =  "5d7a4739-278a-4e20-b895-5607dc0a0cf2" ?>
+  <?define guid_msm_package_id = "26d55882-a5f0-45f9-bdfa-d833f9d88a60" ?>
+
+  <?define guid_msm_comp_resources_id = "ac7ba629-ec93-4d06-85a7-fee7cebe0ede" ?>
+  <?define guid_msm_comp_registry_id = "27719765-2261-4a7f-837f-3b9b2f4405b7" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "06026f7b-5689-4e88-91a0-77f24fa94716"?>
+
+  <?define guid_msm_comp_files_id_43 = "e8960b04-3e6b-4d9a-9917-9ec8c8f16d38" ?>
+  <?define guid_msm_comp_files_be_id_43 = "2a3dcbc3-543f-41be-874b-a9908a52706b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "242b578b-f485-4bc6-869b-bd5446a4e436" ?>
+</Include>
+
