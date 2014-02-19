@@ -14,7 +14,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A Display N18 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Display_N18 : GTM.Module.DisplayModule
+    public class DisplayN18 : GTM.Module.DisplayModule
     {
         private GTI.SPI spi;
         private GTI.SPI.Configuration spiConfig;
@@ -45,7 +45,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Display_N18(int socketNumber) : base(WPFRenderOptions.Intercept)
+        public DisplayN18(int socketNumber) : base(WPFRenderOptions.Intercept)
         {
 			this.byteArray = new byte[1];
 			this.shortArray = new ushort[2];

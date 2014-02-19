@@ -6,7 +6,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A Reflector R3 module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class Reflector_R3 : GTM.Module
+	public class ReflectorR3 : GTM.Module
 	{
 		private GTI.AnalogInput left;
 		private GTI.AnalogInput center;
@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		/// <summary></summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public Reflector_R3(int socketNumber)
+		public ReflectorR3(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

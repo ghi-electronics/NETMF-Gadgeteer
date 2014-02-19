@@ -18,9 +18,9 @@ namespace Gadgeteer.Modules.GHIElectronics
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
 
     /// <summary>
-    /// An Ethernet_ENC28 module for Microsoft .NET Gadgeteer
+    /// An EthernetENC28 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Ethernet_ENC28 : GTM.Module.NetworkModule
+    public class EthernetENC28 : GTM.Module.NetworkModule
     {
         /// <summary>
         /// The class that will be used to interface with the ethernet module. This member will handle everything from initialization to joining networks.
@@ -30,7 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Ethernet_ENC28(int socketNumber)
+        public EthernetENC28(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
@@ -72,7 +72,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <remarks>
         /// <para>
-        ///  This property enables you to determine if the <see cref="Ethernet_ENC28"/> module is
+        ///  This property enables you to determine if the <see cref="EthernetENC28"/> module is
         ///  physically connected to a network device, such as a router. 
         ///  When this property is <b>true</b>, it does not necessarily mean that the network connection is usable. 
         ///  You must also check the <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> property. 

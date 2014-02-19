@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
 
     /// <summary>
-    /// A OBD_II module for Microsoft .NET Gadgeteer.
+    /// A OBDII module for Microsoft .NET Gadgeteer.
     /// </summary>
     /// <example>
     /// <para>
@@ -60,7 +60,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// }
     ///</code>
     /// </example>
-    public class OBD_II : GTM.Module
+    public class OBDII : GTM.Module
     {
         /// <summary>
         /// The underlying class that handles all of the communication with the ELM327 chip.
@@ -80,7 +80,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor for this module. Initializes the ELM327 Core driver.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public OBD_II(int socketNumber)
+        public OBDII(int socketNumber)
         {
             // This finds the Socket instance from the user-specified socket number.  
             // This will generate user-friendly error messages if the socket is invalid.

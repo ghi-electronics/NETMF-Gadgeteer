@@ -17,7 +17,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A Amp M35 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Amp_M35 : GTM.Module
+    public class AMPM35 : GTM.Module
     {
         /// <summary>
         /// AnalogOutput class to write values to the module.
@@ -26,7 +26,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Amp_M35(int socketNumber)
+        public AMPM35(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

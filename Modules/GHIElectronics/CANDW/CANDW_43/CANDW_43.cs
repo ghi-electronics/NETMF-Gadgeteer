@@ -12,19 +12,19 @@ namespace Gadgeteer.Modules.GHIElectronics
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
 
 #if WAITING_FOR_ASSEMBLIES
-    public class CAN_DW : GTM.Module
+    public class CANDW : GTM.Module
     {
     }
 }
 #else
     /// <summary>
-    /// A CAN_DW module for Microsoft .NET Gadgeteer
+    /// A CANDW module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class CAN_DW : GTM.Module
+    public class CANDW : GTM.Module
     {
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public CAN_DW(int socketNumber)
+        public CANDW(int socketNumber)
         {
             // This finds the Socket instance from the user-specified socket number.  
             // This will generate user-friendly error messages if the socket is invalid.
@@ -213,7 +213,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Represents the state of the <see cref="CAN_DW"/> while attempting to post messages.
+        /// Represents the state of the <see cref="CANDW"/> while attempting to post messages.
         /// </summary>
         public enum CAN_PostState
         {

@@ -8,7 +8,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A 7 inch display module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class Display_N7 : GTM.Module.DisplayModule
+	public class DisplayN7 : GTM.Module.DisplayModule
 	{
 		private GTI.DigitalOutput backlightPin;
 		private bool backlightState;
@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="rgbSocketNumber1">The first R,G,B socket</param>
 		/// <param name="rgbSocketNumber2">The second R,G,B socket</param>
 		/// <param name="rgbSocketNumber3">The third R,G,B socket</param>
-		public Display_N7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3) : base(WPFRenderOptions.Ignore)
+		public DisplayN7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3) : base(WPFRenderOptions.Ignore)
 		{
 			this.backlightState = false;
 			this.ReserveLCDPins(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3);

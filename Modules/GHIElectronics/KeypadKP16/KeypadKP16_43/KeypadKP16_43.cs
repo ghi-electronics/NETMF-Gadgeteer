@@ -10,7 +10,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A Keypad KP16 module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class Keypad_KP16 : GTM.Module
+	public class KeypadKP16 : GTM.Module
 	{
 		private GTI.DigitalOutput out1;
 		private GTI.DigitalOutput out2;
@@ -21,7 +21,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public Keypad_KP16(int socketNumber)
+		public KeypadKP16(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

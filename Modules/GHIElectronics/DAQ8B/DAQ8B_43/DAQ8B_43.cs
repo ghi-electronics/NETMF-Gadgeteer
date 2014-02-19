@@ -6,7 +6,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A DAQ 8B module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class DAQ_8B : GTM.Module
+	public class DAQ8B : GTM.Module
 	{
 		private GTI.DigitalInput MISO;
 		private GTI.DigitalOutput MOSI;
@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		/// <summary>Constructs a new instance of a DAQ 8B module.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public DAQ_8B(int socketNumber)
+		public DAQ8B(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('S', this);

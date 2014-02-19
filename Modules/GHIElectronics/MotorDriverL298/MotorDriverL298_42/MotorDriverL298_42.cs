@@ -12,7 +12,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A motor controller used to control two different motors.
 	/// </summary>
-    public class MotorControllerL298 : GTM.Module
+    public class MotorDriverL298 : GTM.Module
     {
         GTI.PWMOutput m_Pwm1;
         GTI.PWMOutput m_Pwm2;
@@ -31,7 +31,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public MotorControllerL298(int socketNumber)
+        public MotorDriverL298(int socketNumber)
         {
 			this.Frequency = 25000;
 
@@ -50,16 +50,16 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Represents the state of the <see cref="MotorControllerL298"/> object.
+        /// Represents the state of the <see cref="MotorDriverL298"/> object.
         /// </summary>
         public enum MotorControllerL298State
         {
             /// <summary>
-            /// The state of MotorControllerL298 is low.
+            /// The state of MotorDriverL298 is low.
             /// </summary>
             Low = 0,
             /// <summary>
-            /// The state of MotorControllerL298 is high.
+            /// The state of MotorDriverL298 is high.
             /// </summary>
             High = 1
         }

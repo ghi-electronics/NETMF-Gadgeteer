@@ -15,12 +15,12 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZCobra II for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class FEZCobra_II : GT.Mainboard
+	public class FEZCobraIIEco : GT.Mainboard
 	{
 		/// <summary>
 		/// Instantiates a new GHI Electronics FEZCobra II mainboard
 		/// </summary>
-		public FEZCobra_II()
+		public FEZCobraIIEco()
 		{
 			// uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
 			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
@@ -74,7 +74,7 @@ namespace GHIElectronics.Gadgeteer
 			//socket.CpuPins[8] = (Cpu.Pin)59;
 			//socket.CpuPins[9] = (Cpu.Pin)18;
 			//socket.NativeI2CWriteRead = nativeI2C;
-			//socket.AnalogOutput = new FEZCobra_II_AnalogOut((Cpu.Pin)14);
+			//socket.AnalogOutput = new FEZCobraII_AnalogOut((Cpu.Pin)14);
 			//GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 1, 2, 10);
 			//socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
 			//socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_3;
@@ -277,7 +277,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
 
 			// O
-			socket.AnalogOutput = new FEZCobra_II_AnalogOut((Cpu.Pin)socket.CpuPins[5]);
+			socket.AnalogOutput = new FEZCobraII_AnalogOut((Cpu.Pin)socket.CpuPins[5]);
 
 			// S
 			socket.SPIModule = SPI.SPI_module.SPI1;
@@ -507,7 +507,7 @@ namespace GHIElectronics.Gadgeteer
 
 	}
 
-	internal class FEZCobra_II_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
+	internal class FEZCobraII_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
 	{
 		private AnalogOutput aout = null;
 
@@ -515,7 +515,7 @@ namespace GHIElectronics.Gadgeteer
 		const double MIN_VOLTAGE = 0;
 		const double MAX_VOLTAGE = 3.3;
 
-		public FEZCobra_II_AnalogOut(Cpu.Pin pin)
+		public FEZCobraII_AnalogOut(Cpu.Pin pin)
 		{
 			this.pin = pin;
 		}
@@ -524,7 +524,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return FEZCobra_II_AnalogOut.MIN_VOLTAGE;
+				return FEZCobraII_AnalogOut.MIN_VOLTAGE;
 			}
 		}
 
@@ -532,7 +532,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return FEZCobra_II_AnalogOut.MAX_VOLTAGE;
+				return FEZCobraII_AnalogOut.MAX_VOLTAGE;
 			}
 		}
 
@@ -549,8 +549,8 @@ namespace GHIElectronics.Gadgeteer
 
 				if (value)
 				{
-					this.aout = new AnalogOutput(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0, 1 / FEZCobra_II_AnalogOut.MAX_VOLTAGE, 0, 10);
-					this.SetVoltage(FEZCobra_II_AnalogOut.MIN_VOLTAGE);
+					this.aout = new AnalogOutput(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0, 1 / FEZCobraII_AnalogOut.MAX_VOLTAGE, 0, 10);
+					this.SetVoltage(FEZCobraII_AnalogOut.MIN_VOLTAGE);
 				}
 				else
 				{
@@ -564,11 +564,11 @@ namespace GHIElectronics.Gadgeteer
 		{
 			this.Active = true;
 
-			if (voltage < FEZCobra_II_AnalogOut.MIN_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCobra_II_AnalogOut.MIN_VOLTAGE.ToString() + "V");
+			if (voltage < FEZCobraII_AnalogOut.MIN_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZCobraII_AnalogOut.MIN_VOLTAGE.ToString() + "V");
 
-			if (voltage > FEZCobra_II_AnalogOut.MAX_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZCobra_II_AnalogOut.MAX_VOLTAGE.ToString() + "V");
+			if (voltage > FEZCobraII_AnalogOut.MAX_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZCobraII_AnalogOut.MAX_VOLTAGE.ToString() + "V");
 
 			this.aout.Write(voltage);
 		}

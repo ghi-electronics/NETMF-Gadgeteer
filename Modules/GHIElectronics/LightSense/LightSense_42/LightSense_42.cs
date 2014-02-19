@@ -13,7 +13,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// A light sensor module for Microsoft .NET Gadgeteer.
     /// </summary>
     /// <example>
-    /// <para>The following example uses a <see cref="LightSensor"/> object to read and display the current amount of light to the output window. 
+    /// <para>The following example uses a <see cref="LightSense"/> object to read and display the current amount of light to the output window. 
     /// </para>
     /// <code>
     /// using System;
@@ -44,11 +44,11 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// }
     /// </code>
     /// </example>
-    public class LightSensor : GTM.Module
+    public class LightSense : GTM.Module
     {
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public LightSensor(int socketNumber)
+        public LightSense(int socketNumber)
         {
             // This finds the Socket instance from the user-specified socket number.  
             // This will generate user-friendly error messages if the socket is invalid.
@@ -87,7 +87,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>A reading in lux between 0 and MAX_ILLUMINANCE.</returns>
 		public double GetIlluminance()
 		{
-			return this.input.ReadProportion() * LightSensor.MAX_ILLUMINANCE;
+			return this.input.ReadProportion() * LightSense.MAX_ILLUMINANCE;
 		}
 
 		/// <summary>

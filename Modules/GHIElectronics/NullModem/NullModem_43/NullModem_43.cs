@@ -8,17 +8,17 @@ using GTI = Gadgeteer.SocketInterfaces;
 namespace Gadgeteer.Modules.GHIElectronics
 {
     /// <summary>
-    /// A TemplateModule module for Microsoft .NET Gadgeteer
+    /// A NullModem module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class TemplateModule : GTM.Module
+    public class NullModem : GTM.Module
     {
         // This example implements a driver in managed code for a simple Gadgeteer module.  This module uses a 
         // single GTI.InterruptInput to interact with a button that can be in either of two states: pressed or released.
         // The example code shows the recommended code pattern for exposing a property (IsPressed). 
         // The example also uses the recommended code pattern for exposing two events: Pressed and Released. 
         // The triple-slash "///" comments shown will be used in the build process to create an XML file named
-        // GTM.GHIElectronics.TemplateModule. This file will provide IntelliSense and documentation for the
-        // interface and make it easier for developers to use the TemplateModule module.        
+        // GTM.GHIElectronics.NullModem. This file will provide IntelliSense and documentation for the
+        // interface and make it easier for developers to use the NullModem module.        
 
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 and higher --
         // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
@@ -30,7 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         /// <param name="socketNumberTwo">The second socket that this module is plugged in to.</param>
-        public TemplateModule(int socketNumber, int socketNumberTwo)
+        public NullModem(int socketNumber, int socketNumberTwo)
         {
             // This finds the Socket instance from the user-specified socket number.  
             // This will generate user-friendly error messages if the socket is invalid.
@@ -54,7 +54,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.InterruptInput input;
 
         /// <summary>
-        /// Gets a value that indicates whether the button of the TemplateModule is pressed.
+        /// Gets a value that indicates whether the button of the NullModem is pressed.
         /// </summary>
         public bool IsPressed
         {
@@ -65,7 +65,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Represents the state of button of the <see cref="TemplateModule"/>.
+        /// Represents the state of button of the <see cref="NullModem"/>.
         /// </summary>
         public enum ButtonState
         {
@@ -83,12 +83,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Represents the delegate that is used to handle the <see cref="ButtonPressed"/>
         /// and <see cref="ButtonReleased"/> events.
         /// </summary>
-        /// <param name="sender">The <see cref="TemplateModule"/> object that raised the event.</param>
-        /// <param name="state">The state of the button of the <see cref="TemplateModule"/></param>
-        public delegate void ButtonEventHandler(TemplateModule sender, ButtonState state);
+        /// <param name="sender">The <see cref="NullModem"/> object that raised the event.</param>
+        /// <param name="state">The state of the button of the <see cref="NullModem"/></param>
+        public delegate void ButtonEventHandler(NullModem sender, ButtonState state);
 
         /// <summary>
-        /// Raised when the button of the <see cref="TemplateModule"/> is pressed.
+        /// Raised when the button of the <see cref="NullModem"/> is pressed.
         /// </summary>
         /// <remarks>
         /// Implement this event handler and/or the <see cref="ButtonReleased"/> event handler
@@ -99,7 +99,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public event ButtonEventHandler ButtonPressed;
 
         /// <summary>
-        /// Raised when the button of the <see cref="TemplateModule"/> is released.
+        /// Raised when the button of the <see cref="NullModem"/> is released.
         /// </summary>
         /// <remarks>
         /// Implement this event handler and/or the <see cref="ButtonPressed"/> event handler
@@ -114,9 +114,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="ButtonPressed"/> or <see cref="ButtonReleased"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="TemplateModule"/> that raised the event.</param>
+        /// <param name="sender">The <see cref="NullModem"/> that raised the event.</param>
         /// <param name="buttonState">The state of the button.</param>
-        protected virtual void OnButtonEvent(TemplateModule sender, ButtonState buttonState)
+        protected virtual void OnButtonEvent(NullModem sender, ButtonState buttonState)
         {
             if (this.onButton == null)
             {

@@ -20,11 +20,11 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A WiFi RN171 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class WiFi_RN171 : GTM.Module
+    public class WiFiRN171 : GTM.Module
     {
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public WiFi_RN171(int socketNumber)
+        public WiFiRN171(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

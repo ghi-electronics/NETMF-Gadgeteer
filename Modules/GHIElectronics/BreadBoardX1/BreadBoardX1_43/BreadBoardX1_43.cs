@@ -3,15 +3,15 @@
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
-	/// Represents a BreadBoard_X1 module to interface with custom electronics.
+	/// Represents a BreadBoardX1 module to interface with custom electronics.
 	/// </summary>
-	public class BreadBoard_X1 : GTM.Module
+	public class BreadBoardX1 : GTM.Module
 	{
 		private Socket socket;
 
 		/// <summary></summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public BreadBoard_X1(int socketNumber)
+		public BreadBoardX1(int socketNumber)
 		{
 			this.socket = Socket.GetSocket(socketNumber, true, this, null);
 		}

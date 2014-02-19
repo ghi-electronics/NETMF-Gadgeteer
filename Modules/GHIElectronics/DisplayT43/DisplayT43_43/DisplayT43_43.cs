@@ -16,7 +16,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A 4.3 inch TFT display module with resistive touch for Microsoft .NET Gadgeteer.
     /// </summary>
-    public class Display_T43 : GTM.Module.DisplayModule
+    public class DisplayT43 : GTM.Module.DisplayModule
     {
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber1">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="rgbSocketNumber2">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="rgbSocketNumber3">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
-        public Display_T43(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3)
+        public DisplayT43(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3)
             : this(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3, Socket.Unused)
         {
             // Intentionally empty
@@ -44,7 +44,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber2">The mainboard socket that has the display's G socket connected to it.</param>
         /// <param name="rgbSocketNumber3">The mainboard socket that has the display's B socket connected to it.</param>
         /// <param name="touchSocketNumber">Optional: the mainboard socket that has the display's T socket connected to it. This enables the touch panel capabilities.</param>
-        public Display_T43(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int touchSocketNumber)
+        public DisplayT43(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int touchSocketNumber)
             :base(WpfMode.PassThrough)
         {
             ReserveLCDPins(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3);

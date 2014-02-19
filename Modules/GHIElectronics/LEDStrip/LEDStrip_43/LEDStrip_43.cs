@@ -10,7 +10,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A LED Strip module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class LED_Strip : GTM.Module
+    public class LEDStrip : GTM.Module
     {
         private GTI.DigitalOutput[] LEDs = new GTI.DigitalOutput[7];
 
@@ -32,7 +32,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public LED_Strip(int socketNumber)
+        public LEDStrip(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

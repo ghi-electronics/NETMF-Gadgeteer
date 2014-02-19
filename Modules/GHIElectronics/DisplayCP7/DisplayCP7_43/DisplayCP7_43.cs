@@ -18,7 +18,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// A 7 inch capacitive touch display module for Microsoft .NET Gadgeteer
     /// </summary>
     /// <example>
-    /// <para>The following example uses a <see cref="Display_CP7"/> object to display the picture taken by a camera module. 
+    /// <para>The following example uses a <see cref="DisplayCP7"/> object to display the picture taken by a camera module. 
     /// First the code initializes a camera object and the button pressed event delegate in which the camera takes a picture.
     /// Then, another delegate is initialized to handle the asynchronous PictureCaptured event.  In this method the display module uses 
     /// the SimpleGraphics class to display the picture captured by the camera.
@@ -72,7 +72,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// 
     /// </code>
     /// </example>
-    public class Display_CP7 : GTM.Module.DisplayModule
+    public class DisplayCP7 : GTM.Module.DisplayModule
     {
         /// <summary>
         /// The I2C bus that the module will use
@@ -86,7 +86,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber2">The second R,G,B socket</param>
         /// <param name="rgbSocketNumber3">The third R,G,B socket</param>
         /// <param name="i2cSocketNumber">The I2C socket</param>
-        public Display_CP7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int i2cSocketNumber)
+        public DisplayCP7(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int i2cSocketNumber)
             : base(WpfMode.PassThrough)
         {
             // This finds the Socket instance from the user-specified socket number.  
@@ -323,38 +323,38 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">The sending module</param>
         /// <param name="touchStatus">The class that holds all of the information about interaction with the screen</param>
-        public delegate void TouchEventHandler(Display_CP7 sender, TouchStatus touchStatus);
+        public delegate void TouchEventHandler(DisplayCP7 sender, TouchStatus touchStatus);
 
         /// <summary>
         /// Represents the delegate for when the screen's home button has been pushed
         /// </summary>
         /// <param name="sender">The sending module</param>
-        public delegate void TouchEventHandlerHomeButton(Display_CP7 sender);
+        public delegate void TouchEventHandlerHomeButton(DisplayCP7 sender);
 
         /// <summary>
         /// Represents the delegate for when the screen's menu button has been pressed
         /// </summary>
         /// <param name="sender">The sending module</param>
-        public delegate void TouchEventHandlerMenuButton(Display_CP7 sender);
+        public delegate void TouchEventHandlerMenuButton(DisplayCP7 sender);
 
         /// <summary>
         /// Represents the delegate for when the screen's back button has been pressed
         /// </summary>
         /// <param name="sender">The sending module</param>
-        public delegate void TouchEventHandlerBackButton(Display_CP7 sender);
+        public delegate void TouchEventHandlerBackButton(DisplayCP7 sender);
 
         /// <summary>
         /// Represents the delegate for when the screen has been released
         /// </summary>
         /// <param name="sender">The sending module</param>
-        public delegate void TouchEventHandlerTouchReleased(Display_CP7 sender);
+        public delegate void TouchEventHandlerTouchReleased(DisplayCP7 sender);
 
         /// <summary>
         /// Represents the delegate for when a touch gestur was detected
         /// </summary>
         /// <param name="sender">The sending module</param>
         /// <param name="id">The ID of the detected gesture</param>
-        public delegate void TouchGestureDetected(Display_CP7 sender, Gesture_ID id);
+        public delegate void TouchGestureDetected(DisplayCP7 sender, Gesture_ID id);
 
         /// <summary>
         /// Raised when the screen detects a touch
@@ -462,7 +462,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">The module that is sending the event</param>
         /// <param name="touchStatus">A class that contains all information about the screen</param>
-        protected virtual void OnTouchEvent(Display_CP7 sender, TouchStatus touchStatus)
+        protected virtual void OnTouchEvent(DisplayCP7 sender, TouchStatus touchStatus)
         {
             int numberOfFingers = (ReadRegister(0x02) & 0xF);
 

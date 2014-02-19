@@ -14,15 +14,15 @@ namespace Gadgeteer.Modules.GHIElectronics
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
 
     /// <summary>
-    /// A Accel G248 module for Microsoft .NET Gadgeteer
+    /// A AccelG248 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Accel_G248 : GTM.Module
+    public class AccelG248 : GTM.Module
     {
         private GTI.I2CBus i2c;
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Accel_G248(int socketNumber)
+        public AccelG248(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

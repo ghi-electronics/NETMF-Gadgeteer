@@ -12,9 +12,9 @@ namespace Gadgeteer.Modules.GHIElectronics
     // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
 
     /// <summary>
-    /// A XBee module for Microsoft .NET Gadgeteer
+    /// A XBeeAdapter module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class XBee : GTM.Module
+    public class XBeeAdapter : GTM.Module
     {
         /// <summary>
         /// Gets the <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial"/> device associated with this instance.
@@ -52,7 +52,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         ///  <item>Data Bits - 8</item>
         /// </list>
         /// </remarks>
-        public XBee(int socketNumber)
+        public XBeeAdapter(int socketNumber)
         {
             // This finds the Socket instance from the user-specified socket number.  
             // This will generate user-friendly error messages if the socket is invalid.

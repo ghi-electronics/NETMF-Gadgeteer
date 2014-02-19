@@ -55,11 +55,11 @@ namespace Gadgeteer.Modules.GHIElectronics
         public enum MotorControllerL298State
         {
             /// <summary>
-            /// The state of MotorControllerL298 is low.
+            /// The state of MotorDriverL298 is low.
             /// </summary>
             Low = 0,
             /// <summary>
-            /// The state of MotorControllerL298 is high.
+            /// The state of MotorDriverL298 is high.
             /// </summary>
             High = 1
         }

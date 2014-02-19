@@ -16,12 +16,12 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZSpider II for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class FEZSpider_II : GT.Mainboard
+	public class FEZSpiderII : GT.Mainboard
 	{
 		/// <summary>
 		/// Instantiates a new FEZSpider II mainboard using the GHI G120 SoM, for Microsoft .NET Gadgeteer
 		/// </summary>
-		public FEZSpider_II()
+		public FEZSpiderII()
 		{
 			// uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
 			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
@@ -86,7 +86,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = (Cpu.Pin)59;
 			socket.CpuPins[9] = (Cpu.Pin)18;
 			
-			socket.AnalogOutput = new FEZSpider_II_AnalogOut((Cpu.Pin)14);
+			socket.AnalogOutput = new FEZSpiderII_AnalogOut((Cpu.Pin)14);
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 1, 2, 10);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_3;

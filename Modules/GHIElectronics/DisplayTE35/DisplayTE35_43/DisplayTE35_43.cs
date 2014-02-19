@@ -18,7 +18,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// A 3.5 inch TFT display module with resistive touch for Microsoft .NET Gadgeteer.
     /// </summary>
     /// <example>
-    /// <para>The following example uses a <see cref="Display_TE35"/> object to display the picture taken by a camera module. 
+    /// <para>The following example uses a <see cref="DisplayTE35"/> object to display the picture taken by a camera module. 
     /// First the code initializes a camera object and the button pressed event delegate in which the camera takes a picture.
     /// Then, another delegate is initialized to handle the asynchronous PictureCaptured event.  In this method the display module uses 
     /// the SimpleGraphics class to display the picture captured by the camera.
@@ -45,7 +45,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     ///         GTM.GHIElectronics.UsbClientDP usbClient = new UsbClientDP(1);
     ///         GTM.GHIElectronics.Button button = new Button(4);
     ///         GTM.GHIElectronics.Camera camera = new Camera(3);
-    ///         GTM.GHIElectronics.Display_TE35 display = new Display_TE35(12, 13, 14);
+    ///         GTM.GHIElectronics.DisplayTE35 display = new DisplayTE35(12, 13, 14);
     ///
     ///         void ProgramStarted()
     ///         {
@@ -72,7 +72,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// 
     /// </code>
     /// </example>
-    public class Display_TE35 : GTM.Module.DisplayModule
+    public class DisplayTE35 : GTM.Module.DisplayModule
     {
         private bool _bBackLightOn = true;
 
@@ -111,7 +111,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber1">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="rgbSocketNumber2">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="rgbSocketNumber3">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
-        public Display_TE35(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3)
+        public DisplayTE35(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3)
             : this(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3, Socket.Unused)
         {
         }
@@ -124,7 +124,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber3">The mainboard socket that has the display's B socket connected to it.</param>
         /// <param name="touchSocketNumber">Optional: the mainboard socket that has the display's T socket connected to it. 
         /// This enables the touch panel capabilities.</param>
-        public Display_TE35(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int touchSocketNumber)
+        public DisplayTE35(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int touchSocketNumber)
             : base(WpfMode.PassThrough)
         {
             ReserveLCDPins(rgbSocketNumber1, rgbSocketNumber2, rgbSocketNumber3);

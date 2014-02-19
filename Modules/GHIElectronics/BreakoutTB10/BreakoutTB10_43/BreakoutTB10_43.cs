@@ -5,13 +5,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// Represents a breakout module to interface with custom electronics.
 	/// </summary>
-	public class Breakout_TB10 : GTM.Module
+	public class BreakoutTB10 : GTM.Module
 	{
 		private Socket BreakoutSocket;
 
 		/// <summary></summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public Breakout_TB10(int socketNumber)
+		public BreakoutTB10(int socketNumber)
 		{
 			BreakoutSocket = Socket.GetSocket(socketNumber, true, this, null);
 		}

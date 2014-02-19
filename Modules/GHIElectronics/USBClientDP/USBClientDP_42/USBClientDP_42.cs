@@ -27,12 +27,12 @@ namespace Gadgeteer.Modules.GHIElectronics
     ///  <item><see cref="T:Gadgeteer.Modules.USBHost"/></item>
     /// </list>
     /// </remarks>
-    public class UsbClientDP : GTM.Module
+    public class USBClientDP : GTM.Module
     {
 
         /// <summary></summary>
         /// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
-        public UsbClientDP(int socketNumber)
+        public USBClientDP(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('D', this);

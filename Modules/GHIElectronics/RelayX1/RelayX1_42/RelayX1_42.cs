@@ -6,14 +6,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A Relay X1 module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class Relay_X1 : GTM.Module
+	public class RelayX1 : GTM.Module
 	{
 		private GTI.DigitalOutput enable;
 		private bool state;
 
-		/// <summary>Constructs a new Relay_X1 instance.</summary>
+		/// <summary>Constructs a new RelayX1 instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public Relay_X1(int socketNumber)
+		public RelayX1(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

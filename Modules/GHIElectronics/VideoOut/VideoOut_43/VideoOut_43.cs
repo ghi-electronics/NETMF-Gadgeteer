@@ -38,7 +38,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     ///     {
     ///         void ProgramStarted()
     ///         {
-    ///             video_Out.SetDisplayConfiguration(Video_Out.Video_Out_InputResolution.Output_800x600_VGA);
+    ///             video_Out.SetDisplayConfiguration(VideoOut.VideoOut_InputResolution.Output_800x600_VGA);
     ///
     ///             video_Out.SimpleGraphics.AutoRedraw = true;
     ///
@@ -48,7 +48,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// }
     ///  </code>
     /// </example>
-    public class Video_Out : GTM.Module.DisplayModule
+    public class VideoOut : GTM.Module.DisplayModule
     {
         //private static GT.SocketInterfaces.I2CBus i2cBus2;
         private static GT.SocketInterfaces.SoftwareI2CBus softwareI2C;
@@ -60,7 +60,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rgbSocketNumber2">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="rgbSocketNumber3">The mainboard socket that has the display's R, G, or B socket connected to it.</param>
         /// <param name="i2cSocketNumber">The mainboard socket that has the display's X socket connected to it.</param>
-        public Video_Out(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int i2cSocketNumber)
+        public VideoOut(int rgbSocketNumber1, int rgbSocketNumber2, int rgbSocketNumber3, int i2cSocketNumber)
             : base(WpfMode.PassThrough)
         {
             // This finds the Socket instance from the user-specified socket number.  
@@ -118,9 +118,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Represents the input resolution of the <see cref="Video_Out"/> object.
+        /// Represents the input resolution of the <see cref="VideoOut"/> object.
         /// </summary>
-        public enum Video_Out_InputResolution
+        public enum VideoOut_InputResolution
         {
             /// <summary>
             /// Represents the values for an RCA display in the NTSC standard with a resolution of 320x240.
@@ -165,14 +165,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <remarks>NOTE: Any time the mainboard display configuration is changed, the board will have to reset to apply the changes. 
         /// If the same resolution is selected (320x240 RCA to 320x240 VGA) the board will not need to reset.</remarks>
         /// <param name="res">The desired output type and resolution.</param>
-        public void SetDisplayConfiguration(Video_Out_InputResolution res)
+        public void SetDisplayConfiguration(VideoOut_InputResolution res)
         {
             DisplayModule.TimingRequirements lcdConfig = new DisplayModule.TimingRequirements();
             
             switch (res)
             {
                 #region 320_240_RCA
-                case Video_Out_InputResolution.Output_320x240_RCA:
+                case VideoOut_InputResolution.Output_320x240_RCA:
                     {
                         m_currWidth = 320;
                         m_currHeight = 240;
@@ -181,7 +181,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                 #endregion
                 #region 640_480_RCA
-                case Video_Out_InputResolution.Output_640x480_RCA:
+                case VideoOut_InputResolution.Output_640x480_RCA:
                     {
                         m_currWidth = 640;
                         m_currHeight = 480;
@@ -190,7 +190,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                 #endregion
                 #region 800_600_RCA
-                case Video_Out_InputResolution.Output_800x600_RCA:
+                case VideoOut_InputResolution.Output_800x600_RCA:
                     {
                         m_currWidth = 800;
                         m_currHeight = 600;
@@ -199,7 +199,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                 #endregion
                 #region 320_240_VGA
-                case Video_Out_InputResolution.Output_320x240_VGA:
+                case VideoOut_InputResolution.Output_320x240_VGA:
                     {
                         m_currWidth = 320;
                         m_currHeight = 240;
@@ -208,7 +208,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                 #endregion
                 #region 640_480_VGA
-                case Video_Out_InputResolution.Output_640x480_VGA:
+                case VideoOut_InputResolution.Output_640x480_VGA:
                     {
                         m_currWidth = 640;
                         m_currHeight = 480;
@@ -217,7 +217,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                 #endregion
                 #region 800_600_VGA
-                case Video_Out_InputResolution.Output_800x600_VGA:
+                case VideoOut_InputResolution.Output_800x600_VGA:
                     {
                         m_currWidth = 800;
                         m_currHeight = 600;
@@ -225,7 +225,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         break;
                     }
                 #endregion
-                case Video_Out_InputResolution.Output_320x240_RCA_PAL:
+                case VideoOut_InputResolution.Output_320x240_RCA_PAL:
                     {
                         m_currWidth = 320;
                         m_currHeight = 240;

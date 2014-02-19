@@ -1,4 +1,4 @@
-﻿//#define WAITING_ON_ASSEMBLIES
+﻿//#define WAITINGONASSEMBLIES
 
 using System;
 

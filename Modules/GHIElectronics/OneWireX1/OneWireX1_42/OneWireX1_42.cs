@@ -6,14 +6,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// <summary>
 	/// A OneWire X1 module for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class OneWire_X1 : GTM.Module
+	public class OneWireX1 : GTM.Module
 	{
 		private OneWire oneWire;
 		private OutputPort port;
 
-		/// <summary>Constructs a new OneWire_X1 module.</summary>
+		/// <summary>Constructs a new OneWireX1 module.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public OneWire_X1(int socketNumber)
+		public OneWireX1(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

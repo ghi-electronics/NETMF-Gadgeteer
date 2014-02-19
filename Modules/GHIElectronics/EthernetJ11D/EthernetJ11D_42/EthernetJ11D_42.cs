@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// 
     /// </summary>
-    public class Ethernet_J11D : GTM.Module.NetworkModule
+    public class EthernetJ11D : GTM.Module.NetworkModule
     {
         /// <summary>
         /// The class that will be used to interface with the ethernet module. This member will handle everything from initialization to joining networks.
@@ -30,7 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// An Ethernet_ENC28 module for Microsoft .NET Gadgeteer
         /// </summary>
         /// <param name="socketNumber"></param>
-        public Ethernet_J11D(int socketNumber)
+        public EthernetJ11D(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
@@ -73,7 +73,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <remarks>
         /// <para>
-        ///  This property enables you to determine if the <see cref="Ethernet_J11D"/> module is
+        ///  This property enables you to determine if the <see cref="EthernetJ11D"/> module is
         ///  physically connected to a network device, such as a router. 
         ///  When this property is <b>true</b>, it does not necessarily mean that the network connection is usable. 
         ///  You must also check the <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> property. 

@@ -15,12 +15,12 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZSpider II for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class FEZSpider_II : GT.Mainboard
+	public class FEZSpiderII : GT.Mainboard
 	{
 		/// <summary>
 		/// Instantiates a new FEZSpider II mainboard using the GHI G120 SoM, for Microsoft .NET Gadgeteer
 		/// </summary>
-		public FEZSpider_II()
+		public FEZSpiderII()
 		{
 			// uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
 			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
@@ -85,7 +85,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[8] = (Cpu.Pin)59;
 			socket.CpuPins[9] = (Cpu.Pin)18;
 			socket.NativeI2CWriteRead = nativeI2C;
-			socket.AnalogOutput = new FEZSpider_II_AnalogOut((Cpu.Pin)14);
+			socket.AnalogOutput = new FEZSpiderII_AnalogOut((Cpu.Pin)14);
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 1, 2, 10);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_3;
@@ -216,7 +216,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = I2C_SCL;
 
 			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 12);
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpiderII_AnalogOut.MAX_VOLTAGE, FEZSpiderII_AnalogOut.MIN_VOLTAGE, 12);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_2;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_1;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
@@ -288,7 +288,7 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[9] = I2C_SCL;
 
 			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpider_II_AnalogOut.MAX_VOLTAGE, FEZSpider_II_AnalogOut.MIN_VOLTAGE, 12);
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, FEZSpiderII_AnalogOut.MAX_VOLTAGE, FEZSpiderII_AnalogOut.MIN_VOLTAGE, 12);
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
@@ -297,7 +297,7 @@ namespace GHIElectronics.Gadgeteer
 			// N/A
 
 			// O
-			socket.AnalogOutput = new FEZSpider_II_AnalogOut(socket.CpuPins[5]);
+			socket.AnalogOutput = new FEZSpiderII_AnalogOut(socket.CpuPins[5]);
 
 			// X
 			socket.NativeI2CWriteRead = nativeI2C;
@@ -606,7 +606,7 @@ namespace GHIElectronics.Gadgeteer
 		}
 	}
 
-	internal class FEZSpider_II_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
+	internal class FEZSpiderII_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
 	{
 		private AnalogOutput aout = null;
 
@@ -614,7 +614,7 @@ namespace GHIElectronics.Gadgeteer
 		public const double MIN_VOLTAGE = 0;
 		public const double MAX_VOLTAGE = 3.3;
 
-		public FEZSpider_II_AnalogOut(Cpu.Pin pin)
+		public FEZSpiderII_AnalogOut(Cpu.Pin pin)
 		{
 			this.pin = pin;
 		}
@@ -623,7 +623,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return FEZSpider_II_AnalogOut.MIN_VOLTAGE;
+				return FEZSpiderII_AnalogOut.MIN_VOLTAGE;
 			}
 		}
 
@@ -631,7 +631,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			get
 			{
-				return FEZSpider_II_AnalogOut.MAX_VOLTAGE;
+				return FEZSpiderII_AnalogOut.MAX_VOLTAGE;
 			}
 		}
 
@@ -648,8 +648,8 @@ namespace GHIElectronics.Gadgeteer
 
 				if (value)
 				{
-					this.aout = new AnalogOutput(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0, 1 / FEZSpider_II_AnalogOut.MAX_VOLTAGE, 0, 10);
-					this.SetVoltage(FEZSpider_II_AnalogOut.MIN_VOLTAGE);
+					this.aout = new AnalogOutput(Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0, 1 / FEZSpiderII_AnalogOut.MAX_VOLTAGE, 0, 10);
+					this.SetVoltage(FEZSpiderII_AnalogOut.MIN_VOLTAGE);
 				}
 				else
 				{
@@ -663,11 +663,11 @@ namespace GHIElectronics.Gadgeteer
 		{
 			this.Active = true;
 
-			if (voltage < FEZSpider_II_AnalogOut.MIN_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZSpider_II_AnalogOut.MIN_VOLTAGE.ToString() + "V");
+			if (voltage < FEZSpiderII_AnalogOut.MIN_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The minimum voltage of the analog output interface is " + FEZSpiderII_AnalogOut.MIN_VOLTAGE.ToString() + "V");
 
-			if (voltage > FEZSpider_II_AnalogOut.MAX_VOLTAGE)
-				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZSpider_II_AnalogOut.MAX_VOLTAGE.ToString() + "V");
+			if (voltage > FEZSpiderII_AnalogOut.MAX_VOLTAGE)
+				throw new ArgumentOutOfRangeException("The maximum voltage of the analog output interface is " + FEZSpiderII_AnalogOut.MAX_VOLTAGE.ToString() + "V");
 
 			this.aout.Write(voltage);
 		}

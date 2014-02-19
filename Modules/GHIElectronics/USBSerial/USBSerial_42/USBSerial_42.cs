@@ -15,7 +15,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A USB Serial module providing both serial communications and sleep detection/wakeup capabilities through a USB cable to a host device.
     /// </summary>
-    public class UsbSerial : GTM.Module
+    public class USBSerial : GTM.Module
     {
         /// <summary>
         /// Gets the <see cref="T:Microsoft.Gadgeteer.Interfaces.Serial"/> device associated with this instance.
@@ -56,7 +56,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         ///  <item>Data Bits - 8</item>
         /// </list>
         /// </remarks>
-        public UsbSerial(int socketNumber)
+        public USBSerial(int socketNumber)
         {
             socket = Socket.GetSocket(socketNumber, true, this, null);
             if (socket.SupportsType('U') == false)
@@ -186,7 +186,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">The <see cref="UsbSerial"/> object that raised the event.</param>
         /// <param name="isAsleep">A value that indicates whether the USB host controller is suspended.</param>
-        public delegate void PowerStateChangedEventHandler(UsbSerial sender, bool isAsleep);
+        public delegate void PowerStateChangedEventHandler(USBSerial sender, bool isAsleep);
 
         /// <summary>
         /// Raised when the USB host controller is suspended or resumed.
@@ -200,7 +200,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">The <see cref="UsbSerial"/> object that raised the event.</param>
         /// <param name="isAsleep">A value that indicates whether the USB host controller is suspended.</param>
-        protected virtual void OnPowerStateChangedEvent(UsbSerial sender, bool isAsleep)
+        protected virtual void OnPowerStateChangedEvent(USBSerial sender, bool isAsleep)
         {
             if (_OnPowerStateChanged == null) _OnPowerStateChanged = new PowerStateChangedEventHandler(OnPowerStateChangedEvent);
             if (Program.CheckAndInvoke(PowerStateChanged, _OnPowerStateChanged, sender, isAsleep))

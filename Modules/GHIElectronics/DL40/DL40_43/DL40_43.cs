@@ -6,7 +6,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// A Generi cDaisylink module used for Microsoft .NET Gadgeteer
     /// </summary>
     /// /// <example>
-    /// <para>The following example uses a <see cref="GenericDaisylink"/> object to turn an LED on. 
+    /// <para>The following example uses a <see cref="DL40"/> object to turn an LED on. 
     /// </para>
     /// <code>
     /// using System;

@@ -17,7 +17,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A Distance US3 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Distance_US3 : GTM.Module
+    public class DistanceUS3 : GTM.Module
     {
         private GTI.DigitalInput Echo;
         private GTI.DigitalOutput Trigger;
@@ -36,7 +36,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Distance_US3(int socketNumber)
+        public DistanceUS3(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 

@@ -6,7 +6,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A Current ACS712 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class Current_ACS712 : GTM.Module
+    public class CurrentACS712 : GTM.Module
     {
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
         // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Current_ACS712(int socketNumber)
+        public CurrentACS712(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
