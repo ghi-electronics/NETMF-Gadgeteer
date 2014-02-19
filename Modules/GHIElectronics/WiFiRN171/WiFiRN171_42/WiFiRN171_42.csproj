@@ -42,21 +42,11 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="..\..\Shared\WiFly\HttpHeaderList.cs">
-      <Link>HttpHeaderList.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\WiFly\HttpRequest.cs">
-      <Link>HttpRequest.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\WiFly\HttpResponse.cs">
-      <Link>HttpResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\WiFly\HttpStream.cs">
-      <Link>HttpStream.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\WiFly\QueryDataList.cs">
-      <Link>QueryDataList.cs</Link>
-    </Compile>
+    <Compile Include="WiFly\HttpHeaderList.cs" />
+    <Compile Include="WiFly\HttpRequest.cs" />
+    <Compile Include="WiFly\HttpResponse.cs" />
+    <Compile Include="WiFly\HttpStream.cs" />
+    <Compile Include="WiFly\QueryDataList.cs" />
     <Compile Include="WiFiRN171_42.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\..\Shared\AssemblyInfoGlobal42.cs" />
@@ -68,6 +58,7 @@
     </Reference>
     <Reference Include="Gadgeteer.Serial, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.Hardware" />
+    <Reference Include="Microsoft.SPOT.Hardware.SerialPort" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />
     <Reference Include="mscorlib" />

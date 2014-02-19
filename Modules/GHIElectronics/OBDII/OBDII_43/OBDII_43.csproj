@@ -42,21 +42,11 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="..\..\Shared\Elm327\ElmDriver.cs">
-      <Link>ElmDriver.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\Elm327\ObdModes\AbstractObdMode.cs">
-      <Link>AbstractObdMode.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\Elm327\ObdModes\ObdGenericMode01.cs">
-      <Link>ObdGenericMode01.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\Elm327\ObdModes\ObdGenericMode09.cs">
-      <Link>ObdGenericMode09.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Shared\Elm327\Util.cs">
-      <Link>Util.cs</Link>
-    </Compile>
+    <Compile Include="Elm327\ElmDriver.cs" />
+    <Compile Include="Elm327\ObdModes\AbstractObdMode.cs" />
+    <Compile Include="Elm327\ObdModes\ObdGenericMode01.cs" />
+    <Compile Include="Elm327\ObdModes\ObdGenericMode09.cs" />
+    <Compile Include="Elm327\Util.cs" />
     <Compile Include="OBDII_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\..\Shared\AssemblyInfoGlobal43.cs" />
