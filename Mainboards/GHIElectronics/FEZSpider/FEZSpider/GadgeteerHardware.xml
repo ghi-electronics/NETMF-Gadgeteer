@@ -13,7 +13,7 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/269">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider"/>
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider"/>
       </Assemblies>
 
@@ -128,18 +128,19 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider" />
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider" />
 
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
+        <Assembly MFVersion="4.2" Name="GHI.Hardware.EMX"/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.Net"/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.System"/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost"/>
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware.EMX"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
         <Assembly MFVersion="4.3" Name="GHI_IO"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
         <Assembly MFVersion="4.3" Name="GHI_Net"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
         <Assembly MFVersion="4.3" Name="GHI_System"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZSpider"/>
         <Assembly MFVersion="4.3" Name="GHI_USBHost"/>
       </LibrariesProvided>
 

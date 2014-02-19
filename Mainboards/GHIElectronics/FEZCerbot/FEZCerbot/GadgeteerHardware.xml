@@ -13,7 +13,7 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/403">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
       </Assemblies>
 
@@ -80,18 +80,15 @@
 		</ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
 
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
+        <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
+		
         <Assembly MFVersion="4.3" Name="GHI.Hardware.FEZCerb"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
         <Assembly MFVersion="4.3" Name="GHI_IO"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
         <Assembly MFVersion="4.3" Name="GHI_Net"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
         <Assembly MFVersion="4.3" Name="GHI_System"/>
-		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZCerbot"/>
         <Assembly MFVersion="4.3" Name="GHI_USBHost"/>
       </LibrariesProvided>
 

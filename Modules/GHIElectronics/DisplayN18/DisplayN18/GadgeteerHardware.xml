@@ -20,7 +20,7 @@
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayN18"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayN18"/>
 		
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayN18"/>
+        <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
       </Assemblies>
 

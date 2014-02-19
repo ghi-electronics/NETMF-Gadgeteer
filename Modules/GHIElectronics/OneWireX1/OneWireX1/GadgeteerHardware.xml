@@ -20,7 +20,7 @@
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.OneWireX1"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OneWireX1"/>
 		
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.OneWireX1"/>
+        <Assembly MFVersion="4.2" Name="Microsoft.SPOT.Hardware.OneWire"/>
         <Assembly MFVersion="4.3" Name="Microsoft.SPOT.Hardware.OneWire"/>
       </Assemblies>
 

@@ -20,7 +20,7 @@
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.PulseInOut"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.PulseInOut"/>
 		
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.PulseInOut"/>
+        <Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
       </Assemblies>
 
