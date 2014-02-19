@@ -51,10 +51,10 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHI.Hardware" />
-    <Reference Include="GHI.Hardware.BOARD" />
-    <Reference Include="GHI.IO" />
-    <Reference Include="GHI.System" />
+    <Reference Include="GHI.Premium.Hardware" />
+    <Reference Include="GHI.Hardware.G120" />
+    <Reference Include="GHI.Premium.IO" />
+    <Reference Include="GHI.Premium.System" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />

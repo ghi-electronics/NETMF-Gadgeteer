@@ -44,13 +44,14 @@
   <ItemGroup>
     <Compile Include="RS232_42.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\Shared\AssemblyInfoGlobal42.cs" />
+    <Compile Include="..\..\Shared\AssemblyInfoGlobal42.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Gadgeteer.Serial, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />
