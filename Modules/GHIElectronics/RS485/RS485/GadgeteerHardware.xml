@@ -17,8 +17,10 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/502">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RS485"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RS485"/>
 		
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RS485"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
       </Assemblies>
 

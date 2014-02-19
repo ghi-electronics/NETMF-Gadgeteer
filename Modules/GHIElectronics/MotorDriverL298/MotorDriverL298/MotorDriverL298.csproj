@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MotorDriverL298_42\MotorDriverL298_42.csproj">
+        <Project>{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}</Project>
+        <Name>MotorDriverL298_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MotorDriverL298_43\MotorDriverL298_43.csproj">
       <Project>{A03B9390-8D84-421A-8C8B-0FF4E3C41285}</Project>
       <Name>MotorDriverL298_43</Name>

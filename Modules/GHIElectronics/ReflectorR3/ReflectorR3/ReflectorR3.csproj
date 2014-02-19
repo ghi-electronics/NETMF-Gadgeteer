@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ReflectorR3_42\ReflectorR3_42.csproj">
+        <Project>{262E3C3E-FB4E-4E5A-9F2D-718C04C2C9F5}</Project>
+        <Name>ReflectorR3_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ReflectorR3_43\ReflectorR3_43.csproj">
       <Project>{8714538A-F496-4471-8249-CB59ECD587EC}</Project>
       <Name>ReflectorR3_43</Name>

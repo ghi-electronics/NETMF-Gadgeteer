@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{17dc7b1f-7405-4a22-86b8-13b2953fcecb}") = "Breakout", "Breakout\Breakout.csproj", "{5ca7cd7e-8fa2-48f3-81a8-e43fa04e791d}"
 EndProject
+Project("{17dc7b1f-7405-4a22-86b8-13b2953fcecb}") = "Breakout_42", "Breakout_42\Breakout_42.csproj", "{F99328A2-AFC6-4137-A54D-C3F115D0E903}"
+EndProject
 Project("{17dc7b1f-7405-4a22-86b8-13b2953fcecb}") = "Breakout_43", "Breakout_43\Breakout_43.csproj", "{10f593d5-f9bd-4b76-852d-7b6bbe440c87}"
 EndProject
 Project("{17dc7b1f-7405-4a22-86b8-13b2953fcecb}") = "Breakout_Tester", "Breakout_Tester\Breakout_Tester.csproj", "{b65d5aef-29bb-4780-9000-1cabf50976bd}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F99328A2-AFC6-4137-A54D-C3F115D0E903}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F99328A2-AFC6-4137-A54D-C3F115D0E903}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F99328A2-AFC6-4137-A54D-C3F115D0E903}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F99328A2-AFC6-4137-A54D-C3F115D0E903}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5ca7cd7e-8fa2-48f3-81a8-e43fa04e791d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5ca7cd7e-8fa2-48f3-81a8-e43fa04e791d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5ca7cd7e-8fa2-48f3-81a8-e43fa04e791d}.Release|Any CPU.ActiveCfg = Release|Any CPU

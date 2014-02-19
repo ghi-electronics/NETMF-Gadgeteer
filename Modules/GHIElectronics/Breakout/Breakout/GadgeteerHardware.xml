@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/485">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.Breakout"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Breakout"/>
       </Assemblies>
 

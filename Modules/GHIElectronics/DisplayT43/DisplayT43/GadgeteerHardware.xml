@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/358">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayT43"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayT43"/>
       </Assemblies>
 

@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/355">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.OBDII"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OBDII"/>
       </Assemblies>
 

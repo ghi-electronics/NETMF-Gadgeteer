@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{268583f7-1a12-4a2f-a06d-b41bb1389c74}") = "Joystick", "Joystick\Joystick.csproj", "{0d82b690-92cc-4990-875e-1948441050fd}"
 EndProject
+Project("{268583f7-1a12-4a2f-a06d-b41bb1389c74}") = "Joystick_42", "Joystick_42\Joystick_42.csproj", "{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}"
+EndProject
 Project("{268583f7-1a12-4a2f-a06d-b41bb1389c74}") = "Joystick_43", "Joystick_43\Joystick_43.csproj", "{8a8c2a8d-d8af-4cda-92a0-e8093a516ab3}"
 EndProject
 Project("{268583f7-1a12-4a2f-a06d-b41bb1389c74}") = "Joystick_Tester", "Joystick_Tester\Joystick_Tester.csproj", "{ec171bba-565a-49c2-993e-995ba6882696}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0d82b690-92cc-4990-875e-1948441050fd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0d82b690-92cc-4990-875e-1948441050fd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0d82b690-92cc-4990-875e-1948441050fd}.Release|Any CPU.ActiveCfg = Release|Any CPU

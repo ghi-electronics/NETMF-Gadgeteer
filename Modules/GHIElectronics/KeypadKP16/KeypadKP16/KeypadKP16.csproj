@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KeypadKP16_42\KeypadKP16_42.csproj">
+        <Project>{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}</Project>
+        <Name>KeypadKP16_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KeypadKP16_43\KeypadKP16_43.csproj">
       <Project>{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}</Project>
       <Name>KeypadKP16_43</Name>

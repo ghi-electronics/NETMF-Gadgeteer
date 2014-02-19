@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{40c67499-992b-4af9-86e6-6c57b4a791ab}") = "MotorDriverL298", "MotorDriverL298\MotorDriverL298.csproj", "{9111c73b-2ad1-497b-86a5-f5a6c9a38496}"
 EndProject
+Project("{40c67499-992b-4af9-86e6-6c57b4a791ab}") = "MotorDriverL298_42", "MotorDriverL298_42\MotorDriverL298_42.csproj", "{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}"
+EndProject
 Project("{40c67499-992b-4af9-86e6-6c57b4a791ab}") = "MotorDriverL298_43", "MotorDriverL298_43\MotorDriverL298_43.csproj", "{a03b9390-8d84-421a-8c8b-0ff4e3c41285}"
 EndProject
 Project("{40c67499-992b-4af9-86e6-6c57b4a791ab}") = "MotorDriverL298_Tester", "MotorDriverL298_Tester\MotorDriverL298_Tester.csproj", "{bbf7a5a6-1fc8-4c2b-8d9b-94e7ec56f5b0}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D42EAD1-FFA7-4549-AFCD-F7BC6B2EC4CC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9111c73b-2ad1-497b-86a5-f5a6c9a38496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9111c73b-2ad1-497b-86a5-f5a6c9a38496}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9111c73b-2ad1-497b-86a5-f5a6c9a38496}.Release|Any CPU.ActiveCfg = Release|Any CPU

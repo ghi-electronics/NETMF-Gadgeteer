@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{7bc2c2f9-0cfd-44dd-8485-d82477cb3639}") = "XBeeAdapter", "XBeeAdapter\XBeeAdapter.csproj", "{a767b51d-7983-4c76-bed7-e3486be3adb8}"
 EndProject
+Project("{7bc2c2f9-0cfd-44dd-8485-d82477cb3639}") = "XBeeAdapter_42", "XBeeAdapter_42\XBeeAdapter_42.csproj", "{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}"
+EndProject
 Project("{7bc2c2f9-0cfd-44dd-8485-d82477cb3639}") = "XBeeAdapter_43", "XBeeAdapter_43\XBeeAdapter_43.csproj", "{40c7110a-be12-41c8-b58d-6537a8df2df0}"
 EndProject
 Project("{7bc2c2f9-0cfd-44dd-8485-d82477cb3639}") = "XBeeAdapter_Tester", "XBeeAdapter_Tester\XBeeAdapter_Tester.csproj", "{30317cd3-fec1-4471-bb96-1f269d797247}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}.Release|Any CPU.Build.0 = Release|Any CPU
 		{a767b51d-7983-4c76-bed7-e3486be3adb8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a767b51d-7983-4c76-bed7-e3486be3adb8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a767b51d-7983-4c76-bed7-e3486be3adb8}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Breakout_42\Breakout_42.csproj">
+        <Project>{F99328A2-AFC6-4137-A54D-C3F115D0E903}</Project>
+        <Name>Breakout_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Breakout_43\Breakout_43.csproj">
       <Project>{10F593D5-F9BD-4B76-852D-7B6BBE440C87}</Project>
       <Name>Breakout_43</Name>

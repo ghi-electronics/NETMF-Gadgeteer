@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{1e586e5f-4802-412f-ad74-d3378e4198db}") = "LEDMatrix", "LEDMatrix\LEDMatrix.csproj", "{6ea20c95-72ef-49fb-86b0-6fe3c93293cc}"
 EndProject
+Project("{1e586e5f-4802-412f-ad74-d3378e4198db}") = "LEDMatrix_42", "LEDMatrix_42\LEDMatrix_42.csproj", "{CCC77910-D00D-4FA9-81FE-83A3DF00F0D9}"
+EndProject
 Project("{1e586e5f-4802-412f-ad74-d3378e4198db}") = "LEDMatrix_43", "LEDMatrix_43\LEDMatrix_43.csproj", "{ced67bb9-88ff-4916-99b2-b1344f901059}"
 EndProject
 Project("{1e586e5f-4802-412f-ad74-d3378e4198db}") = "LEDMatrix_Tester", "LEDMatrix_Tester\LEDMatrix_Tester.csproj", "{540ec571-7c05-4a24-bc83-ed555b593494}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CCC77910-D00D-4FA9-81FE-83A3DF00F0D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCC77910-D00D-4FA9-81FE-83A3DF00F0D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCC77910-D00D-4FA9-81FE-83A3DF00F0D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCC77910-D00D-4FA9-81FE-83A3DF00F0D9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6ea20c95-72ef-49fb-86b0-6fe3c93293cc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6ea20c95-72ef-49fb-86b0-6fe3c93293cc}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ea20c95-72ef-49fb-86b0-6fe3c93293cc}.Release|Any CPU.ActiveCfg = Release|Any CPU

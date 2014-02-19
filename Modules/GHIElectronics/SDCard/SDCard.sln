@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{388adb63-eb9a-4e35-a74b-501ede13b54a}") = "SDCard", "SDCard\SDCard.csproj", "{4d83d815-d5b0-491d-98c9-f4b711f984ad}"
 EndProject
+Project("{388adb63-eb9a-4e35-a74b-501ede13b54a}") = "SDCard_42", "SDCard_42\SDCard_42.csproj", "{B4658784-E626-480D-8C24-C6FB07565E5B}"
+EndProject
 Project("{388adb63-eb9a-4e35-a74b-501ede13b54a}") = "SDCard_43", "SDCard_43\SDCard_43.csproj", "{c2286a66-3705-4f95-a2c2-527e43269aeb}"
 EndProject
 Project("{388adb63-eb9a-4e35-a74b-501ede13b54a}") = "SDCard_Tester", "SDCard_Tester\SDCard_Tester.csproj", "{95990dfb-661c-4797-828f-5673103db34c}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4658784-E626-480D-8C24-C6FB07565E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4658784-E626-480D-8C24-C6FB07565E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4658784-E626-480D-8C24-C6FB07565E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4658784-E626-480D-8C24-C6FB07565E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4d83d815-d5b0-491d-98c9-f4b711f984ad}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4d83d815-d5b0-491d-98c9-f4b711f984ad}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4d83d815-d5b0-491d-98c9-f4b711f984ad}.Release|Any CPU.ActiveCfg = Release|Any CPU

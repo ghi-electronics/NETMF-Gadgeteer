@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/463">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RotaryH1"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RotaryH1"/>
       </Assemblies>
 

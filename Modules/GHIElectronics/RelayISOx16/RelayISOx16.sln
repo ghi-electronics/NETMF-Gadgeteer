@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{26359b76-3dcf-412e-8b92-611729cdf6c9}") = "RelayISOx16", "RelayISOx16\RelayISOx16.csproj", "{4482c7c2-883e-47b4-acb4-2a5ac0cf5b82}"
 EndProject
+Project("{26359b76-3dcf-412e-8b92-611729cdf6c9}") = "RelayISOx16_42", "RelayISOx16_42\RelayISOx16_42.csproj", "{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}"
+EndProject
 Project("{26359b76-3dcf-412e-8b92-611729cdf6c9}") = "RelayISOx16_43", "RelayISOx16_43\RelayISOx16_43.csproj", "{4005f5d6-f5af-42a0-9c75-26905f9b6312}"
 EndProject
 Project("{26359b76-3dcf-412e-8b92-611729cdf6c9}") = "RelayISOx16_Tester", "RelayISOx16_Tester\RelayISOx16_Tester.csproj", "{3b954f00-8106-4e3f-acfe-427023cc5aec}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4482c7c2-883e-47b4-acb4-2a5ac0cf5b82}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4482c7c2-883e-47b4-acb4-2a5ac0cf5b82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4482c7c2-883e-47b4-acb4-2a5ac0cf5b82}.Release|Any CPU.ActiveCfg = Release|Any CPU

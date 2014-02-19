@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Extender_42\Extender_42.csproj">
+        <Project>{80C1EDFB-288B-4525-9133-D65BB80EC4C1}</Project>
+        <Name>Extender_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Extender_43\Extender_43.csproj">
       <Project>{02A841BC-2F06-4EC0-9459-D4AA6F13DD14}</Project>
       <Name>Extender_43</Name>

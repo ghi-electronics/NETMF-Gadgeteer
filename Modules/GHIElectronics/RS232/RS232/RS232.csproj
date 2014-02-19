@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RS232_42\RS232_42.csproj">
+        <Project>{358024CA-4628-4AA2-9CA2-D91E8AD931D3}</Project>
+        <Name>RS232_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RS232_43\RS232_43.csproj">
       <Project>{1731278A-DC16-45A4-ABDB-7D831BFD9DBD}</Project>
       <Name>RS232_43</Name>

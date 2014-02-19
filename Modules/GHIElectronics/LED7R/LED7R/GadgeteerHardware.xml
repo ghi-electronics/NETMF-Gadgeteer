@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/356">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.LED7R"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.LED7R"/>
       </Assemblies>
 

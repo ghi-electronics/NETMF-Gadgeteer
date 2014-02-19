@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CANDW_42\CANDW_42.csproj">
+        <Project>{FC1EC686-1A0C-4720-9588-120E54E1333C}</Project>
+        <Name>CANDW_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CANDW_43\CANDW_43.csproj">
       <Project>{558DE5B9-2EB8-4DC8-B3BB-B8C88F333056}</Project>
       <Name>CANDW_43</Name>

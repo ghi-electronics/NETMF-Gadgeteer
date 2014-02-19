@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{d893d61a-5a86-4c57-a00d-8bd6e4280129}") = "DisplayCP7", "DisplayCP7\DisplayCP7.csproj", "{72b61908-3d1f-4794-8a5e-79ccea810d05}"
 EndProject
+Project("{d893d61a-5a86-4c57-a00d-8bd6e4280129}") = "DisplayCP7_42", "DisplayCP7_42\DisplayCP7_42.csproj", "{93D76D10-BDFF-42EB-9F3A-4639D2708349}"
+EndProject
 Project("{d893d61a-5a86-4c57-a00d-8bd6e4280129}") = "DisplayCP7_43", "DisplayCP7_43\DisplayCP7_43.csproj", "{979cb86c-afc8-4ddc-84eb-38a09d5a2f8e}"
 EndProject
 Project("{d893d61a-5a86-4c57-a00d-8bd6e4280129}") = "DisplayCP7_Tester", "DisplayCP7_Tester\DisplayCP7_Tester.csproj", "{2a928cea-287b-4081-99e2-cf47e353e9d9}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{93D76D10-BDFF-42EB-9F3A-4639D2708349}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D76D10-BDFF-42EB-9F3A-4639D2708349}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D76D10-BDFF-42EB-9F3A-4639D2708349}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D76D10-BDFF-42EB-9F3A-4639D2708349}.Release|Any CPU.Build.0 = Release|Any CPU
 		{72b61908-3d1f-4794-8a5e-79ccea810d05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72b61908-3d1f-4794-8a5e-79ccea810d05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72b61908-3d1f-4794-8a5e-79ccea810d05}.Release|Any CPU.ActiveCfg = Release|Any CPU

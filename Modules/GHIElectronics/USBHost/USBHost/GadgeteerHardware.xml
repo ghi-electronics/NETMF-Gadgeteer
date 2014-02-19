@@ -17,17 +17,24 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/287">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.USBHost"/>
 		
-		<Assembly MFVersion="4.3" Name="GHI_IO" ErrorMessage="GHI.IO could not be found."/>
-		<Assembly MFVersion="4.3" Name="GHI_System" ErrorMessage="GHI.System could not be found."/>
-		<Assembly MFVersion="4.3" Name="GHI_USBHost" ErrorMessage="GHI.USBHost could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_IO" ErrorMessage="GHI.IO could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_System" ErrorMessage="GHI.System could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_USBHost" ErrorMessage="GHI.USBHost could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
-		<Assembly MFVersion="4.3" Name="GHI_IO" ErrorMessage="GHI.IO could not be found."/>
-		<Assembly MFVersion="4.3" Name="GHI_System" ErrorMessage="GHI.System could not be found."/>
-		<Assembly MFVersion="4.3" Name="GHI_USBHost" ErrorMessage="GHI.USBHost could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_IO" ErrorMessage="GHI.IO could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_System" ErrorMessage="GHI.System could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI_USBHost" ErrorMessage="GHI.USBHost could not be found."/>
       </ExtraLibrariesRequired>
 	  
       <Sockets>

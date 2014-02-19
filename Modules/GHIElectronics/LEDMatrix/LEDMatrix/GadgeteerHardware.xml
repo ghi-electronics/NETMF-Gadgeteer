@@ -17,8 +17,10 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/438">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.LEDMatrix"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.LEDMatrix"/>
 		
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.LEDMatrix"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
       </Assemblies>
 

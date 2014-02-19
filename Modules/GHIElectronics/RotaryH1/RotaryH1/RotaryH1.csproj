@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RotaryH1_42\RotaryH1_42.csproj">
+        <Project>{DA16DF9B-1A80-4205-96F5-FE74D2EFA585}</Project>
+        <Name>RotaryH1_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RotaryH1_43\RotaryH1_43.csproj">
       <Project>{31E4FA94-FFF5-4F0D-8CB8-919509BD09EA}</Project>
       <Name>RotaryH1_43</Name>

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{28a1f751-7843-459f-9836-a4ec6439545c}") = "WiFiRN171", "WiFiRN171\WiFiRN171.csproj", "{3390c19a-3979-47cc-be1b-fac2862d60c1}"
 EndProject
+Project("{28a1f751-7843-459f-9836-a4ec6439545c}") = "WiFiRN171_42", "WiFiRN171_42\WiFiRN171_42.csproj", "{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}"
+EndProject
 Project("{28a1f751-7843-459f-9836-a4ec6439545c}") = "WiFiRN171_43", "WiFiRN171_43\WiFiRN171_43.csproj", "{9ccda855-d061-4cc2-9f3e-a69f6edba2d3}"
 EndProject
 Project("{28a1f751-7843-459f-9836-a4ec6439545c}") = "WiFiRN171_Tester", "WiFiRN171_Tester\WiFiRN171_Tester.csproj", "{17c92d6c-cc62-403c-88f0-0c8365e46e7e}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3390c19a-3979-47cc-be1b-fac2862d60c1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3390c19a-3979-47cc-be1b-fac2862d60c1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3390c19a-3979-47cc-be1b-fac2862d60c1}.Release|Any CPU.ActiveCfg = Release|Any CPU

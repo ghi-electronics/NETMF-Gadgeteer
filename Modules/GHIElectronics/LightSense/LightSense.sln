@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{a7ef7a9b-8235-41e9-9de7-f20954f4250e}") = "LightSense", "LightSense\LightSense.csproj", "{59238e30-51e6-40af-9e28-4c2b9bf1ad6f}"
 EndProject
+Project("{a7ef7a9b-8235-41e9-9de7-f20954f4250e}") = "LightSense_42", "LightSense_42\LightSense_42.csproj", "{5A05C20E-8407-470B-BDB4-9F0271518DF0}"
+EndProject
 Project("{a7ef7a9b-8235-41e9-9de7-f20954f4250e}") = "LightSense_43", "LightSense_43\LightSense_43.csproj", "{890244df-004f-4e3e-afe7-de1ce902dec1}"
 EndProject
 Project("{a7ef7a9b-8235-41e9-9de7-f20954f4250e}") = "LightSense_Tester", "LightSense_Tester\LightSense_Tester.csproj", "{b9fe7cc3-1750-4149-8121-2eff4ec8f131}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A05C20E-8407-470B-BDB4-9F0271518DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A05C20E-8407-470B-BDB4-9F0271518DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A05C20E-8407-470B-BDB4-9F0271518DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A05C20E-8407-470B-BDB4-9F0271518DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{59238e30-51e6-40af-9e28-4c2b9bf1ad6f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{59238e30-51e6-40af-9e28-4c2b9bf1ad6f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59238e30-51e6-40af-9e28-4c2b9bf1ad6f}.Release|Any CPU.ActiveCfg = Release|Any CPU

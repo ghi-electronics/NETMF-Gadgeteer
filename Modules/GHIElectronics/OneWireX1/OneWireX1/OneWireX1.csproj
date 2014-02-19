@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OneWireX1_42\OneWireX1_42.csproj">
+        <Project>{B19BF9B4-E96F-41E5-BD3B-A243B9A9A3EC}</Project>
+        <Name>OneWireX1_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OneWireX1_43\OneWireX1_43.csproj">
       <Project>{FD4A0755-ACF1-4847-945F-FF91A2F93659}</Project>
       <Name>OneWireX1_43</Name>

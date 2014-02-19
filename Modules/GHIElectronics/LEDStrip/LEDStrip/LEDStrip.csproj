@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LEDStrip_42\LEDStrip_42.csproj">
+        <Project>{A5BDC8CA-E321-46F7-B53B-E3A37984F429}</Project>
+        <Name>LEDStrip_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LEDStrip_43\LEDStrip_43.csproj">
       <Project>{C0478011-A511-4E24-B054-39A1EA4A8742}</Project>
       <Name>LEDStrip_43</Name>

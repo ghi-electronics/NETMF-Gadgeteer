@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GasSense_42\GasSense_42.csproj">
+        <Project>{FD9F629B-FDD5-4D7E-BA02-90F256610644}</Project>
+        <Name>GasSense_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GasSense_43\GasSense_43.csproj">
       <Project>{65B70D17-4801-4A6C-BBC0-CDD062DB9D7E}</Project>
       <Name>GasSense_43</Name>

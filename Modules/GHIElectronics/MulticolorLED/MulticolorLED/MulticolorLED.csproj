@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MulticolorLED_42\MulticolorLED_42.csproj">
+        <Project>{774AD818-4CD0-4CEE-B54C-854B00900814}</Project>
+        <Name>MulticolorLED_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MulticolorLED_43\MulticolorLED_43.csproj">
       <Project>{E9484D23-481E-406F-88EC-B0DE3343F1D7}</Project>
       <Name>MulticolorLED_43</Name>

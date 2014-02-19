@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{713ff6d7-2074-418f-966f-1f3ca76eeafd}") = "EthernetENC28", "EthernetENC28\EthernetENC28.csproj", "{5b13cc84-0924-4228-9d63-20754f4aede4}"
 EndProject
+Project("{713ff6d7-2074-418f-966f-1f3ca76eeafd}") = "EthernetENC28_42", "EthernetENC28_42\EthernetENC28_42.csproj", "{52EFC62C-375A-4BDF-B0D3-E97D92BD193F}"
+EndProject
 Project("{713ff6d7-2074-418f-966f-1f3ca76eeafd}") = "EthernetENC28_43", "EthernetENC28_43\EthernetENC28_43.csproj", "{4355a74f-c3bf-4b4f-ba87-c807e9546099}"
 EndProject
 Project("{713ff6d7-2074-418f-966f-1f3ca76eeafd}") = "EthernetENC28_Tester", "EthernetENC28_Tester\EthernetENC28_Tester.csproj", "{39d2f740-98a3-4b15-9fa8-896c520b2599}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52EFC62C-375A-4BDF-B0D3-E97D92BD193F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52EFC62C-375A-4BDF-B0D3-E97D92BD193F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52EFC62C-375A-4BDF-B0D3-E97D92BD193F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52EFC62C-375A-4BDF-B0D3-E97D92BD193F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5b13cc84-0924-4228-9d63-20754f4aede4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5b13cc84-0924-4228-9d63-20754f4aede4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5b13cc84-0924-4228-9d63-20754f4aede4}.Release|Any CPU.ActiveCfg = Release|Any CPU

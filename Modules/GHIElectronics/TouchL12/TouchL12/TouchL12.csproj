@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TouchL12_42\TouchL12_42.csproj">
+        <Project>{34944849-3706-4B59-8D30-1066978E14E2}</Project>
+        <Name>TouchL12_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TouchL12_43\TouchL12_43.csproj">
       <Project>{E0CBB728-E822-4B1F-9F2A-22EA86CBBA48}</Project>
       <Name>TouchL12_43</Name>

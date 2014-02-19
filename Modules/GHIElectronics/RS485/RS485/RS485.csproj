@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RS485_42\RS485_42.csproj">
+        <Project>{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}</Project>
+        <Name>RS485_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RS485_43\RS485_43.csproj">
       <Project>{D46C61D7-FEAD-4EA7-AF7D-0F5B2BD362FC}</Project>
       <Name>RS485_43</Name>

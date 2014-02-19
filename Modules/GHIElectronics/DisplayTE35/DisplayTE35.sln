@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{45d1c30d-fac3-4a03-99c5-e10512d5a074}") = "DisplayTE35", "DisplayTE35\DisplayTE35.csproj", "{a83f0461-76e4-4941-991c-8ba2d050d53f}"
 EndProject
+Project("{45d1c30d-fac3-4a03-99c5-e10512d5a074}") = "DisplayTE35_42", "DisplayTE35_42\DisplayTE35_42.csproj", "{D4C32A5E-02A6-4C36-A62B-A69C6DBAB0BF}"
+EndProject
 Project("{45d1c30d-fac3-4a03-99c5-e10512d5a074}") = "DisplayTE35_43", "DisplayTE35_43\DisplayTE35_43.csproj", "{7745985d-921d-4814-b329-a85c67aab531}"
 EndProject
 Project("{45d1c30d-fac3-4a03-99c5-e10512d5a074}") = "DisplayTE35_Tester", "DisplayTE35_Tester\DisplayTE35_Tester.csproj", "{d48ea55f-cd81-4ef7-ba7f-4800942ea2b4}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D4C32A5E-02A6-4C36-A62B-A69C6DBAB0BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4C32A5E-02A6-4C36-A62B-A69C6DBAB0BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4C32A5E-02A6-4C36-A62B-A69C6DBAB0BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4C32A5E-02A6-4C36-A62B-A69C6DBAB0BF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{a83f0461-76e4-4941-991c-8ba2d050d53f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a83f0461-76e4-4941-991c-8ba2d050d53f}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a83f0461-76e4-4941-991c-8ba2d050d53f}.Release|Any CPU.ActiveCfg = Release|Any CPU

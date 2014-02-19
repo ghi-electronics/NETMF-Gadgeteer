@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/464">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RelayISOx16"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RelayISOx16"/>
       </Assemblies>
 

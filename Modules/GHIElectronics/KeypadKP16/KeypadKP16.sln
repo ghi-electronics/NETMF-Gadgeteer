@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{8935233e-0103-426a-8c6c-dd30e4be7f73}") = "KeypadKP16", "KeypadKP16\KeypadKP16.csproj", "{75f8c956-6435-4cb8-91c2-ac31cdaf46cc}"
 EndProject
+Project("{8935233e-0103-426a-8c6c-dd30e4be7f73}") = "KeypadKP16_42", "KeypadKP16_42\KeypadKP16_42.csproj", "{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}"
+EndProject
 Project("{8935233e-0103-426a-8c6c-dd30e4be7f73}") = "KeypadKP16_43", "KeypadKP16_43\KeypadKP16_43.csproj", "{1c9e5fb7-0cfd-461f-bb8f-bcde02ccfc74}"
 EndProject
 Project("{8935233e-0103-426a-8c6c-dd30e4be7f73}") = "KeypadKP16_Tester", "KeypadKP16_Tester\KeypadKP16_Tester.csproj", "{0af0e29b-1577-4487-b4ed-6a3e1e25b6da}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Release|Any CPU.Build.0 = Release|Any CPU
 		{75f8c956-6435-4cb8-91c2-ac31cdaf46cc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{75f8c956-6435-4cb8-91c2-ac31cdaf46cc}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{75f8c956-6435-4cb8-91c2-ac31cdaf46cc}.Release|Any CPU.ActiveCfg = Release|Any CPU

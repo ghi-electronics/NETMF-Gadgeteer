@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StepperL6470_42\StepperL6470_42.csproj">
+        <Project>{3720A00D-BAE8-415E-A828-55F51405A563}</Project>
+        <Name>StepperL6470_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StepperL6470_43\StepperL6470_43.csproj">
       <Project>{D260DE03-EB02-48F6-8397-71F17DF4301C}</Project>
       <Name>StepperL6470_43</Name>

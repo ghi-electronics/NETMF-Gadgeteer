@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EthernetJ11D_42\EthernetJ11D_42.csproj">
+        <Project>{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}</Project>
+        <Name>EthernetJ11D_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EthernetJ11D_43\EthernetJ11D_43.csproj">
       <Project>{3D386857-1FF5-4684-AF68-5B3439A69935}</Project>
       <Name>EthernetJ11D_43</Name>

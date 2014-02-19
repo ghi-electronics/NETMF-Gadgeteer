@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HubAP5_42\HubAP5_42.csproj">
+        <Project>{C0E17CA8-129D-4C5A-84A7-D44BFD3ADF59}</Project>
+        <Name>HubAP5_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HubAP5_43\HubAP5_43.csproj">
       <Project>{30121F91-9F78-45A8-8033-1992DB2E9117}</Project>
       <Name>HubAP5_43</Name>

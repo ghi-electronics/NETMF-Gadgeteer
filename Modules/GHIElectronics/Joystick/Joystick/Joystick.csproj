@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Joystick_42\Joystick_42.csproj">
+        <Project>{0EC2A6C5-0A23-400B-BFD2-7B739FE563F5}</Project>
+        <Name>Joystick_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Joystick_43\Joystick_43.csproj">
       <Project>{8A8C2A8D-D8AF-4CDA-92A0-E8093A516AB3}</Project>
       <Name>Joystick_43</Name>

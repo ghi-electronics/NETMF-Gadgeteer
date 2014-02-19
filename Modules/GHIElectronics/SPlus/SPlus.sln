@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{159227c3-53d3-4c05-bfd9-2f797dc1a610}") = "SPlus", "SPlus\SPlus.csproj", "{a89b4ced-9b21-4a11-87cd-7f0e81e63bf9}"
 EndProject
+Project("{159227c3-53d3-4c05-bfd9-2f797dc1a610}") = "SPlus_42", "SPlus_42\SPlus_42.csproj", "{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}"
+EndProject
 Project("{159227c3-53d3-4c05-bfd9-2f797dc1a610}") = "SPlus_43", "SPlus_43\SPlus_43.csproj", "{dad2c0b5-9d38-42e6-88ba-f2ba46d8364b}"
 EndProject
 Project("{159227c3-53d3-4c05-bfd9-2f797dc1a610}") = "SPlus_Tester", "SPlus_Tester\SPlus_Tester.csproj", "{97cfc686-45e1-4b19-93b0-7674c6a680b6}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{a89b4ced-9b21-4a11-87cd-7f0e81e63bf9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a89b4ced-9b21-4a11-87cd-7f0e81e63bf9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a89b4ced-9b21-4a11-87cd-7f0e81e63bf9}.Release|Any CPU.ActiveCfg = Release|Any CPU

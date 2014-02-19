@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XBeeAdapter_42\XBeeAdapter_42.csproj">
+        <Project>{9A634B90-91C4-4BC6-BCC2-0B5250DC3166}</Project>
+        <Name>XBeeAdapter_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\XBeeAdapter_43\XBeeAdapter_43.csproj">
       <Project>{40C7110A-BE12-41C8-B58D-6537A8DF2DF0}</Project>
       <Name>XBeeAdapter_43</Name>

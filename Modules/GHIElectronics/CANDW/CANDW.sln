@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{694cd1c0-0914-4535-ad00-2d181782a5c9}") = "CANDW", "CANDW\CANDW.csproj", "{95bbd33b-093a-40d4-86ca-fd5542004725}"
 EndProject
+Project("{694cd1c0-0914-4535-ad00-2d181782a5c9}") = "CANDW_42", "CANDW_42\CANDW_42.csproj", "{FC1EC686-1A0C-4720-9588-120E54E1333C}"
+EndProject
 Project("{694cd1c0-0914-4535-ad00-2d181782a5c9}") = "CANDW_43", "CANDW_43\CANDW_43.csproj", "{558de5b9-2eb8-4dc8-b3bb-b8c88f333056}"
 EndProject
 Project("{694cd1c0-0914-4535-ad00-2d181782a5c9}") = "CANDW_Tester", "CANDW_Tester\CANDW_Tester.csproj", "{0fa31b11-765d-47ee-96f3-471a7452640e}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC1EC686-1A0C-4720-9588-120E54E1333C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC1EC686-1A0C-4720-9588-120E54E1333C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC1EC686-1A0C-4720-9588-120E54E1333C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC1EC686-1A0C-4720-9588-120E54E1333C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{95bbd33b-093a-40d4-86ca-fd5542004725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{95bbd33b-093a-40d4-86ca-fd5542004725}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95bbd33b-093a-40d4-86ca-fd5542004725}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{9c42e864-e233-43d2-b350-6764c87da265}") = "DisplayT43", "DisplayT43\DisplayT43.csproj", "{49a3cca1-a18a-4a3d-b05c-f35adb85b3c2}"
 EndProject
+Project("{9c42e864-e233-43d2-b350-6764c87da265}") = "DisplayT43_42", "DisplayT43_42\DisplayT43_42.csproj", "{650737F8-A2AD-4EB0-B22F-16442AF79272}"
+EndProject
 Project("{9c42e864-e233-43d2-b350-6764c87da265}") = "DisplayT43_43", "DisplayT43_43\DisplayT43_43.csproj", "{4a04560c-0fd2-4d91-a3d3-4acbd95d2a4b}"
 EndProject
 Project("{9c42e864-e233-43d2-b350-6764c87da265}") = "DisplayT43_Tester", "DisplayT43_Tester\DisplayT43_Tester.csproj", "{e76c915c-089a-4701-afba-449af9f846cf}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{650737F8-A2AD-4EB0-B22F-16442AF79272}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650737F8-A2AD-4EB0-B22F-16442AF79272}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650737F8-A2AD-4EB0-B22F-16442AF79272}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650737F8-A2AD-4EB0-B22F-16442AF79272}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49a3cca1-a18a-4a3d-b05c-f35adb85b3c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49a3cca1-a18a-4a3d-b05c-f35adb85b3c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49a3cca1-a18a-4a3d-b05c-f35adb85b3c2}.Release|Any CPU.ActiveCfg = Release|Any CPU

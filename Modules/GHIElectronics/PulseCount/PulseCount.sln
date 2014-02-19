@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{0db06bfe-4fc1-42c2-996d-60e4ff4c0d7d}") = "PulseCount", "PulseCount\PulseCount.csproj", "{598d8532-7f6f-4d43-b9c6-515d4e10dba4}"
 EndProject
+Project("{0db06bfe-4fc1-42c2-996d-60e4ff4c0d7d}") = "PulseCount_42", "PulseCount_42\PulseCount_42.csproj", "{A31B50E7-5B61-443D-8DD2-43E6707E39E5}"
+EndProject
 Project("{0db06bfe-4fc1-42c2-996d-60e4ff4c0d7d}") = "PulseCount_43", "PulseCount_43\PulseCount_43.csproj", "{43d1bd73-793f-4d0e-a65d-4241651ca638}"
 EndProject
 Project("{0db06bfe-4fc1-42c2-996d-60e4ff4c0d7d}") = "PulseCount_Tester", "PulseCount_Tester\PulseCount_Tester.csproj", "{af03f3d3-0a41-4ab9-b515-ce44f64d6015}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A31B50E7-5B61-443D-8DD2-43E6707E39E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A31B50E7-5B61-443D-8DD2-43E6707E39E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A31B50E7-5B61-443D-8DD2-43E6707E39E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A31B50E7-5B61-443D-8DD2-43E6707E39E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{598d8532-7f6f-4d43-b9c6-515d4e10dba4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{598d8532-7f6f-4d43-b9c6-515d4e10dba4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{598d8532-7f6f-4d43-b9c6-515d4e10dba4}.Release|Any CPU.ActiveCfg = Release|Any CPU

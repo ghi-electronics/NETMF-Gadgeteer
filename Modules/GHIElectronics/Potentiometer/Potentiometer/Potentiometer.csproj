@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Potentiometer_42\Potentiometer_42.csproj">
+        <Project>{4F130671-B2BE-4957-87FD-86D3B560A1CF}</Project>
+        <Name>Potentiometer_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Potentiometer_43\Potentiometer_43.csproj">
       <Project>{9F959F61-31BC-49FB-B1B9-9A16F7F907F1}</Project>
       <Name>Potentiometer_43</Name>

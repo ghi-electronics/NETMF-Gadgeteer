@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/280">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.SPlus"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.SPlus"/>
       </Assemblies>
 

@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LED7C_42\LED7C_42.csproj">
+        <Project>{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}</Project>
+        <Name>LED7C_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LED7C_43\LED7C_43.csproj">
       <Project>{FAB1BD73-F366-4B77-9F35-9AC6B435BA48}</Project>
       <Name>LED7C_43</Name>

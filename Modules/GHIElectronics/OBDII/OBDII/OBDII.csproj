@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\OBDII_42\OBDII_42.csproj">
+        <Project>{D7C8BD65-F3BA-4179-9896-D5676CB6512F}</Project>
+        <Name>OBDII_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\OBDII_43\OBDII_43.csproj">
       <Project>{54CBC0FD-77F0-402F-B49D-510107BB1D26}</Project>
       <Name>OBDII_43</Name>

@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/375">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.BreakoutTB10"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.BreakoutTB10"/>
       </Assemblies>
 

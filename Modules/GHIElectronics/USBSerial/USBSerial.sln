@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{76e64fe3-1b77-4f87-a273-5ed692ba5273}") = "USBSerial", "USBSerial\USBSerial.csproj", "{94155a86-1e12-4b7c-bf53-aadd34a43ac6}"
 EndProject
+Project("{76e64fe3-1b77-4f87-a273-5ed692ba5273}") = "USBSerial_42", "USBSerial_42\USBSerial_42.csproj", "{5D4AB6B8-E578-4A70-8C64-833D550AABAB}"
+EndProject
 Project("{76e64fe3-1b77-4f87-a273-5ed692ba5273}") = "USBSerial_43", "USBSerial_43\USBSerial_43.csproj", "{8ae71424-55d9-406d-9c98-4e9f954b28c5}"
 EndProject
 Project("{76e64fe3-1b77-4f87-a273-5ed692ba5273}") = "USBSerial_Tester", "USBSerial_Tester\USBSerial_Tester.csproj", "{c512c9bc-2b73-48f1-b34b-d9f504f61e94}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D4AB6B8-E578-4A70-8C64-833D550AABAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D4AB6B8-E578-4A70-8C64-833D550AABAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D4AB6B8-E578-4A70-8C64-833D550AABAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D4AB6B8-E578-4A70-8C64-833D550AABAB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94155a86-1e12-4b7c-bf53-aadd34a43ac6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94155a86-1e12-4b7c-bf53-aadd34a43ac6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94155a86-1e12-4b7c-bf53-aadd34a43ac6}.Release|Any CPU.ActiveCfg = Release|Any CPU

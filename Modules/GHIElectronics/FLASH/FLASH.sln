@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{ef07bcba-58c7-4310-9550-2127962de45a}") = "FLASH", "FLASH\FLASH.csproj", "{f00bddbf-f8c4-44df-93b9-ce9f5d44e8a8}"
 EndProject
+Project("{ef07bcba-58c7-4310-9550-2127962de45a}") = "FLASH_42", "FLASH_42\FLASH_42.csproj", "{A0E90946-D954-4E0F-BF21-100945E9329F}"
+EndProject
 Project("{ef07bcba-58c7-4310-9550-2127962de45a}") = "FLASH_43", "FLASH_43\FLASH_43.csproj", "{7632c510-e82a-4767-b322-d72176aa47cb}"
 EndProject
 Project("{ef07bcba-58c7-4310-9550-2127962de45a}") = "FLASH_Tester", "FLASH_Tester\FLASH_Tester.csproj", "{32d69d3d-8623-468c-9362-855620175c56}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0E90946-D954-4E0F-BF21-100945E9329F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0E90946-D954-4E0F-BF21-100945E9329F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0E90946-D954-4E0F-BF21-100945E9329F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0E90946-D954-4E0F-BF21-100945E9329F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{f00bddbf-f8c4-44df-93b9-ce9f5d44e8a8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{f00bddbf-f8c4-44df-93b9-ce9f5d44e8a8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{f00bddbf-f8c4-44df-93b9-ce9f5d44e8a8}.Release|Any CPU.ActiveCfg = Release|Any CPU

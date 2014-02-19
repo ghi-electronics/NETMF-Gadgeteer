@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SerialCameraL1_42\SerialCameraL1_42.csproj">
+        <Project>{55BDB1A1-DA5F-4423-84FA-40AFB2250C77}</Project>
+        <Name>SerialCameraL1_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SerialCameraL1_43\SerialCameraL1_43.csproj">
       <Project>{4F2E1DEE-4ECC-42FB-A742-976103C25391}</Project>
       <Name>SerialCameraL1_43</Name>

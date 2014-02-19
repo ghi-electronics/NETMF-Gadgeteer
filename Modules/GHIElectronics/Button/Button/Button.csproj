@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Button_42\Button_42.csproj">
+        <Project>{178E6DDB-E55E-4892-8493-1C03AC55AF37}</Project>
+        <Name>Button_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Button_43\Button_43.csproj">
       <Project>{82AC8347-394C-4863-9E23-847E28136A51}</Project>
       <Name>Button_43</Name>

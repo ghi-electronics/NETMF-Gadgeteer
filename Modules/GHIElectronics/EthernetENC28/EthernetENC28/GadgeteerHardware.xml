@@ -17,17 +17,23 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/270">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.EthernetENC28"/>
 
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.WebClient" />
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.WebServer" />
 		
-		<Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
+        <Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
-		<Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EthernetENC28"/>
+        <Assembly MFVersion="4.3" Name="GHI_Net" ErrorMessage="GHI.Net could not be found."/>
       </ExtraLibrariesRequired>
 
       <Sockets>

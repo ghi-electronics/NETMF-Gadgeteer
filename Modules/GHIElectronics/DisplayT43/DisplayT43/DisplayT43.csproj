@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DisplayT43_42\DisplayT43_42.csproj">
+        <Project>{650737F8-A2AD-4EB0-B22F-16442AF79272}</Project>
+        <Name>DisplayT43_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DisplayT43_43\DisplayT43_43.csproj">
       <Project>{4A04560C-0FD2-4D91-A3D3-4ACBD95D2A4B}</Project>
       <Name>DisplayT43_43</Name>

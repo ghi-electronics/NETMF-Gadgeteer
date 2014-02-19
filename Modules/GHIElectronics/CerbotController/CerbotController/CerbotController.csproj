@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CerbotController_42\CerbotController_42.csproj">
+        <Project>{016EE917-B30F-4FBE-A6E0-649D3FA89BC6}</Project>
+        <Name>CerbotController_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CerbotController_43\CerbotController_43.csproj">
       <Project>{A28B7E62-3341-490F-9A54-046B6D448D64}</Project>
       <Name>CerbotController_43</Name>

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{e0c464b0-2443-4b5f-8a2d-0572df3f3555}") = "OBDII", "OBDII\OBDII.csproj", "{2ebfb9ca-9bd7-4187-b60b-49c324ac0aa1}"
 EndProject
+Project("{e0c464b0-2443-4b5f-8a2d-0572df3f3555}") = "OBDII_42", "OBDII_42\OBDII_42.csproj", "{D7C8BD65-F3BA-4179-9896-D5676CB6512F}"
+EndProject
 Project("{e0c464b0-2443-4b5f-8a2d-0572df3f3555}") = "OBDII_43", "OBDII_43\OBDII_43.csproj", "{54cbc0fd-77f0-402f-b49d-510107bb1d26}"
 EndProject
 Project("{e0c464b0-2443-4b5f-8a2d-0572df3f3555}") = "OBDII_Tester", "OBDII_Tester\OBDII_Tester.csproj", "{dbfc0b93-0bd8-42f8-8b3c-689ed125cfc8}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7C8BD65-F3BA-4179-9896-D5676CB6512F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C8BD65-F3BA-4179-9896-D5676CB6512F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C8BD65-F3BA-4179-9896-D5676CB6512F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C8BD65-F3BA-4179-9896-D5676CB6512F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2ebfb9ca-9bd7-4187-b60b-49c324ac0aa1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2ebfb9ca-9bd7-4187-b60b-49c324ac0aa1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ebfb9ca-9bd7-4187-b60b-49c324ac0aa1}.Release|Any CPU.ActiveCfg = Release|Any CPU

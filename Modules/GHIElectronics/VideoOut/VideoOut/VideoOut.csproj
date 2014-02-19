@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\VideoOut_42\VideoOut_42.csproj">
+        <Project>{7DF98FC3-26CF-4566-B370-602E3CFCA74E}</Project>
+        <Name>VideoOut_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\VideoOut_43\VideoOut_43.csproj">
       <Project>{564D7AB2-6ABC-4B90-8912-FD68E5BD678F}</Project>
       <Name>VideoOut_43</Name>

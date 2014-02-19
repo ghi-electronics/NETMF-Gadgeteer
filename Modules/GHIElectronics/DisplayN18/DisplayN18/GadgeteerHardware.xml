@@ -17,8 +17,10 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/421">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayN18"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayN18"/>
 		
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayN18"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
       </Assemblies>
 

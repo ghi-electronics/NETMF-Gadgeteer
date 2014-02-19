@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RadioFM1_42\RadioFM1_42.csproj">
+        <Project>{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}</Project>
+        <Name>RadioFM1_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RadioFM1_43\RadioFM1_43.csproj">
       <Project>{E1F6E1F7-9234-4C7A-8E04-C3C52E24FFC3}</Project>
       <Name>RadioFM1_43</Name>

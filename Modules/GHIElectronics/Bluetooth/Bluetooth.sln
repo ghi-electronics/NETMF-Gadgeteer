@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{e67816a4-be16-4dea-9aa6-09258ada8393}") = "Bluetooth", "Bluetooth\Bluetooth.csproj", "{8d6e0dae-e26d-4cbd-af8e-e31f01a46bff}"
 EndProject
+Project("{e67816a4-be16-4dea-9aa6-09258ada8393}") = "Bluetooth_42", "Bluetooth_42\Bluetooth_42.csproj", "{F1F67740-E67D-4AAD-8697-7D1C32F900EB}"
+EndProject
 Project("{e67816a4-be16-4dea-9aa6-09258ada8393}") = "Bluetooth_43", "Bluetooth_43\Bluetooth_43.csproj", "{3355851c-3acc-44b0-911f-344a89fb126c}"
 EndProject
 Project("{e67816a4-be16-4dea-9aa6-09258ada8393}") = "Bluetooth_Tester", "Bluetooth_Tester\Bluetooth_Tester.csproj", "{bb158746-4676-4c00-8159-e5a3cb00fd38}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1F67740-E67D-4AAD-8697-7D1C32F900EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F67740-E67D-4AAD-8697-7D1C32F900EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F67740-E67D-4AAD-8697-7D1C32F900EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F67740-E67D-4AAD-8697-7D1C32F900EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8d6e0dae-e26d-4cbd-af8e-e31f01a46bff}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8d6e0dae-e26d-4cbd-af8e-e31f01a46bff}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8d6e0dae-e26d-4cbd-af8e-e31f01a46bff}.Release|Any CPU.ActiveCfg = Release|Any CPU

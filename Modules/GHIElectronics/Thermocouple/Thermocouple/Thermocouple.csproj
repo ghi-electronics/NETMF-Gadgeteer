@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Thermocouple_42\Thermocouple_42.csproj">
+        <Project>{8A014F63-880F-45AB-8D07-5D383188012F}</Project>
+        <Name>Thermocouple_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thermocouple_43\Thermocouple_43.csproj">
       <Project>{6E5EBE29-7020-4197-9D3C-CCABD199E358}</Project>
       <Name>Thermocouple_43</Name>

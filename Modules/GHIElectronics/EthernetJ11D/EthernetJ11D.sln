@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{a33b4d65-0670-41ce-9859-30aee84c312f}") = "EthernetJ11D", "EthernetJ11D\EthernetJ11D.csproj", "{331487cc-b183-4845-88b2-031cd3aa0a03}"
 EndProject
+Project("{a33b4d65-0670-41ce-9859-30aee84c312f}") = "EthernetJ11D_42", "EthernetJ11D_42\EthernetJ11D_42.csproj", "{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}"
+EndProject
 Project("{a33b4d65-0670-41ce-9859-30aee84c312f}") = "EthernetJ11D_43", "EthernetJ11D_43\EthernetJ11D_43.csproj", "{3d386857-1ff5-4684-af68-5b3439a69935}"
 EndProject
 Project("{a33b4d65-0670-41ce-9859-30aee84c312f}") = "EthernetJ11D_Tester", "EthernetJ11D_Tester\EthernetJ11D_Tester.csproj", "{3f9e5c89-565d-4434-9cee-659a5a6181bf}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21985A4E-8FD3-4D4E-99FF-7F590F6CE296}.Release|Any CPU.Build.0 = Release|Any CPU
 		{331487cc-b183-4845-88b2-031cd3aa0a03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{331487cc-b183-4845-88b2-031cd3aa0a03}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{331487cc-b183-4845-88b2-031cd3aa0a03}.Release|Any CPU.ActiveCfg = Release|Any CPU

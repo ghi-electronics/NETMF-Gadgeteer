@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SDCard_42\SDCard_42.csproj">
+        <Project>{B4658784-E626-480D-8C24-C6FB07565E5B}</Project>
+        <Name>SDCard_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SDCard_43\SDCard_43.csproj">
       <Project>{C2286A66-3705-4F95-A2C2-527E43269AEB}</Project>
       <Name>SDCard_43</Name>

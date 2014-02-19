@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAQ8B_42\DAQ8B_42.csproj">
+        <Project>{4C26A9EB-7B92-4512-845A-DB7A5F527888}</Project>
+        <Name>DAQ8B_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DAQ8B_43\DAQ8B_43.csproj">
       <Project>{90A231BB-C987-4BCD-BA0F-8723EC1BC930}</Project>
       <Name>DAQ8B_43</Name>

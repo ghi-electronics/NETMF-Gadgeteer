@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FEZCerbot_42\FEZCerbot_42.csproj">
+        <Project>{26034113-16BB-4923-96E9-821B760E892F}</Project>
+        <Name>FEZCerbot_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEZCerbot_43\FEZCerbot_43.csproj">
       <Project>{174B4FCD-BBA3-46D7-8C89-E1013CC33494}</Project>
       <Name>FEZCerbot_43</Name>

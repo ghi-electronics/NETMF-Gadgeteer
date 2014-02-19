@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BreadBoardX1_42\BreadBoardX1_42.csproj">
+        <Project>{AF413C19-6860-4112-8C91-AF15904D236D}</Project>
+        <Name>BreadBoardX1_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BreadBoardX1_43\BreadBoardX1_43.csproj">
       <Project>{F80034B8-FF03-4805-A11E-F5F007B19A8A}</Project>
       <Name>BreadBoardX1_43</Name>

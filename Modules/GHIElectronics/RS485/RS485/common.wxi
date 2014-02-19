@@ -8,6 +8,7 @@
   <?define SafeManufacturer = "GHIElectronics" ?>
   <?define FullManufacturer = "GHI Electronics" ?>
   
+  <?define NETMF42Supported ?>
   <?define NETMF43Supported ?>
 
   <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
@@ -19,6 +20,10 @@
   <?define guid_msm_comp_resources_id = "c26c1696-b93a-4047-ada5-34ccfe1367b5" ?>
   <?define guid_msm_comp_registry_id = "1fa83922-4c97-4eff-90e0-f86cd83e872f" ?>
   <?define guid_msm_comp_gadgeteerhardware_id = "46b1805e-3adc-4164-9a10-a7343246ca7d"?>
+
+  <?define guid_msm_comp_files_id_42 = "541663b2-c36f-4449-b8a4-58ce8fbf4291" ?>
+  <?define guid_msm_comp_files_be_id_42 = "7864343f-4e1f-4f0e-9dfb-693a7e14b252" ?>
+  <?define guid_msm_comp_files_le_id_42 = "501e0013-43f4-4865-9132-4c3f6dcdf942" ?>
 
   <?define guid_msm_comp_files_id_43 = "5713b789-f1a6-40a0-a7a5-27a06788e4c8" ?>
   <?define guid_msm_comp_files_be_id_43 = "aeba07a3-3b3b-47d8-ac71-b8e67fecf819" ?>

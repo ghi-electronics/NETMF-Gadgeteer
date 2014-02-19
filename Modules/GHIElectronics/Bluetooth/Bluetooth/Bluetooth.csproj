@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bluetooth_42\Bluetooth_42.csproj">
+        <Project>{F1F67740-E67D-4AAD-8697-7D1C32F900EB}</Project>
+        <Name>Bluetooth_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bluetooth_43\Bluetooth_43.csproj">
       <Project>{3355851C-3ACC-44B0-911F-344A89FB126C}</Project>
       <Name>Bluetooth_43</Name>

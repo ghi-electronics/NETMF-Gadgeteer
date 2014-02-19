@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FEZHydra_42\FEZHydra_42.csproj">
+        <Project>{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}</Project>
+        <Name>FEZHydra_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FEZHydra_43\FEZHydra_43.csproj">
       <Project>{445B2072-A68D-4AF5-B741-B18D32B70811}</Project>
       <Name>FEZHydra_43</Name>

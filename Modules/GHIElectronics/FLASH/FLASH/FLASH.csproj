@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FLASH_42\FLASH_42.csproj">
+        <Project>{A0E90946-D954-4E0F-BF21-100945E9329F}</Project>
+        <Name>FLASH_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FLASH_43\FLASH_43.csproj">
       <Project>{7632C510-E82A-4767-B322-D72176AA47CB}</Project>
       <Name>FLASH_43</Name>

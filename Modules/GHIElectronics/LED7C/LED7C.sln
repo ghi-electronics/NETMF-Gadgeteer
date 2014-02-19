@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{8f164753-7319-4a35-952d-2ebfa8eb62d4}") = "LED7C", "LED7C\LED7C.csproj", "{8b17a35a-ffbd-4c28-9877-93f58713c71a}"
 EndProject
+Project("{8f164753-7319-4a35-952d-2ebfa8eb62d4}") = "LED7C_42", "LED7C_42\LED7C_42.csproj", "{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}"
+EndProject
 Project("{8f164753-7319-4a35-952d-2ebfa8eb62d4}") = "LED7C_43", "LED7C_43\LED7C_43.csproj", "{fab1bd73-f366-4b77-9f35-9ac6b435ba48}"
 EndProject
 Project("{8f164753-7319-4a35-952d-2ebfa8eb62d4}") = "LED7C_Tester", "LED7C_Tester\LED7C_Tester.csproj", "{90671833-55f7-408f-aba4-674a1e65686d}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FAE6052-C2FF-4F4C-9BEA-0A8C7F109ACF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8b17a35a-ffbd-4c28-9877-93f58713c71a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8b17a35a-ffbd-4c28-9877-93f58713c71a}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8b17a35a-ffbd-4c28-9877-93f58713c71a}.Release|Any CPU.ActiveCfg = Release|Any CPU

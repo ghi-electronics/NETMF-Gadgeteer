@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/434">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RadioFM1"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RadioFM1"/>
       </Assemblies>
 

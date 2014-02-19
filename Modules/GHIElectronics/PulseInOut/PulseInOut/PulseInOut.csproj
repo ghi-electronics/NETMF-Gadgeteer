@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PulseInOut_42\PulseInOut_42.csproj">
+        <Project>{AFFF91EB-3BA4-47B9-BEA0-D0DE354DD68D}</Project>
+        <Name>PulseInOut_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PulseInOut_43\PulseInOut_43.csproj">
       <Project>{3DCFA38A-5BAE-472C-945F-B27E03FF3DA9}</Project>
       <Name>PulseInOut_43</Name>

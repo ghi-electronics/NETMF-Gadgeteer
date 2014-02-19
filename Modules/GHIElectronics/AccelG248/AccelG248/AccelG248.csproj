@@ -50,6 +50,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AccelG248_42\AccelG248_42.csproj">
+        <Project>{7D5DC7EB-9D95-4E79-A276-4E24EFE5C08A}</Project>
+        <Name>AccelG248_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AccelG248_43\AccelG248_43.csproj">
       <Project>{007020A7-5EFA-4BA6-872F-6B569EB6EFD8}</Project>
       <Name>AccelG248_43</Name>

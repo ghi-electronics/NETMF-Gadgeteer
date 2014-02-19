@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{7f24dbf4-27f7-4d24-a80a-ace9bfb958b0}") = "RS485", "RS485\RS485.csproj", "{682947e7-284d-44f5-a9d6-bd662daa12d5}"
 EndProject
+Project("{7f24dbf4-27f7-4d24-a80a-ace9bfb958b0}") = "RS485_42", "RS485_42\RS485_42.csproj", "{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}"
+EndProject
 Project("{7f24dbf4-27f7-4d24-a80a-ace9bfb958b0}") = "RS485_43", "RS485_43\RS485_43.csproj", "{d46c61d7-fead-4ea7-af7d-0f5b2bd362fc}"
 EndProject
 Project("{7f24dbf4-27f7-4d24-a80a-ace9bfb958b0}") = "RS485_Tester", "RS485_Tester\RS485_Tester.csproj", "{16506401-453e-40cc-a274-ada34681c2ab}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C5B4DB9-2424-4ABC-A470-4D44A7CF2520}.Release|Any CPU.Build.0 = Release|Any CPU
 		{682947e7-284d-44f5-a9d6-bd662daa12d5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{682947e7-284d-44f5-a9d6-bd662daa12d5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{682947e7-284d-44f5-a9d6-bd662daa12d5}.Release|Any CPU.ActiveCfg = Release|Any CPU

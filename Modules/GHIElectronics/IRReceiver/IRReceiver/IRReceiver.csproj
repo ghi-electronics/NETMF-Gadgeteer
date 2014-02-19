@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\IRReceiver_42\IRReceiver_42.csproj">
+        <Project>{F66552DC-510B-4875-87B8-5B5CFDABD1EB}</Project>
+        <Name>IRReceiver_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IRReceiver_43\IRReceiver_43.csproj">
       <Project>{AF52165F-C513-4E94-9E35-3AEBC9FBEBE4}</Project>
       <Name>IRReceiver_43</Name>

@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{3a99b136-9ef9-4e2c-a4dc-d20c08be32ac}") = "FEZHydra", "FEZHydra\FEZHydra.csproj", "{a919f02f-d213-46f1-ae89-7eada39eeaf5}"
 EndProject
+Project("{3a99b136-9ef9-4e2c-a4dc-d20c08be32ac}") = "FEZHydra_42", "FEZHydra_42\FEZHydra_42.csproj", "{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}"
+EndProject
 Project("{3a99b136-9ef9-4e2c-a4dc-d20c08be32ac}") = "FEZHydra_43", "FEZHydra_43\FEZHydra_43.csproj", "{445b2072-a68d-4af5-b741-b18d32b70811}"
 EndProject
 Project("{3a99b136-9ef9-4e2c-a4dc-d20c08be32ac}") = "FEZHydra_Tester", "FEZHydra_Tester\FEZHydra_Tester.csproj", "{1c926d87-0526-4dde-a032-9f2e851afff3}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCDD9385-3F36-4053-963C-4CAD1F7E73D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{a919f02f-d213-46f1-ae89-7eada39eeaf5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{a919f02f-d213-46f1-ae89-7eada39eeaf5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{a919f02f-d213-46f1-ae89-7eada39eeaf5}.Release|Any CPU.ActiveCfg = Release|Any CPU

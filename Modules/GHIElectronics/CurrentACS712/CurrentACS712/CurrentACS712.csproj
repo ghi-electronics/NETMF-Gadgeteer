@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CurrentACS712_42\CurrentACS712_42.csproj">
+        <Project>{89AA45DA-03F1-4767-B4B2-266EAF133AFC}</Project>
+        <Name>CurrentACS712_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CurrentACS712_43\CurrentACS712_43.csproj">
       <Project>{008C9460-ACF8-4A8D-B5EF-E630C5E74B87}</Project>
       <Name>CurrentACS712_43</Name>

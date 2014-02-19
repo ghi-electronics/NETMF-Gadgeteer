@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\LightSense_42\LightSense_42.csproj">
+        <Project>{5A05C20E-8407-470B-BDB4-9F0271518DF0}</Project>
+        <Name>LightSense_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LightSense_43\LightSense_43.csproj">
       <Project>{890244DF-004F-4E3E-AFE7-DE1CE902DEC1}</Project>
       <Name>LightSense_43</Name>

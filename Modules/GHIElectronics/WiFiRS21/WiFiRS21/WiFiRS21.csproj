@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WiFiRS21_42\WiFiRS21_42.csproj">
+        <Project>{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}</Project>
+        <Name>WiFiRS21_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WiFiRS21_43\WiFiRS21_43.csproj">
       <Project>{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}</Project>
       <Name>WiFiRS21_43</Name>

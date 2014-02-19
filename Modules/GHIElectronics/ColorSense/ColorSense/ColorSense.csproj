@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ColorSense_42\ColorSense_42.csproj">
+        <Project>{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}</Project>
+        <Name>ColorSense_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ColorSense_43\ColorSense_43.csproj">
       <Project>{724BAA0F-445E-4BDA-A6A0-E06F5620CB23}</Project>
       <Name>ColorSense_43</Name>

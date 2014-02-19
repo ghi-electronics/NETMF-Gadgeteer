@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{5eba122a-0f46-473e-87ad-2aa5bb838281}") = "MaxO", "MaxO\MaxO.csproj", "{9609959a-9bd1-4d57-a2a7-b63f1fdf617d}"
 EndProject
+Project("{5eba122a-0f46-473e-87ad-2aa5bb838281}") = "MaxO_42", "MaxO_42\MaxO_42.csproj", "{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}"
+EndProject
 Project("{5eba122a-0f46-473e-87ad-2aa5bb838281}") = "MaxO_43", "MaxO_43\MaxO_43.csproj", "{cf999f80-d30d-4ba0-977d-b8cfcdb9838f}"
 EndProject
 Project("{5eba122a-0f46-473e-87ad-2aa5bb838281}") = "MaxO_Tester", "MaxO_Tester\MaxO_Tester.csproj", "{6293986b-6423-4f77-9161-2d9f6ae6499c}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9609959a-9bd1-4d57-a2a7-b63f1fdf617d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9609959a-9bd1-4d57-a2a7-b63f1fdf617d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9609959a-9bd1-4d57-a2a7-b63f1fdf617d}.Release|Any CPU.ActiveCfg = Release|Any CPU

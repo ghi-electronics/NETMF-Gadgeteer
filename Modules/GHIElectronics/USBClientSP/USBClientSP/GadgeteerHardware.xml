@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/437">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBClientSP"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.USBClientSP"/>
       </Assemblies>
 

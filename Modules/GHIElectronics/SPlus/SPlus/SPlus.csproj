@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SPlus_42\SPlus_42.csproj">
+        <Project>{26B58617-705A-4FC1-8DBB-78C0B00C9CDA}</Project>
+        <Name>SPlus_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SPlus_43\SPlus_43.csproj">
       <Project>{DAD2C0B5-9D38-42E6-88BA-F2BA46D8364B}</Project>
       <Name>SPlus_43</Name>

@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Music_42\Music_42.csproj">
+        <Project>{88455EE5-1A83-4E14-9DCF-F7EAD3B20E6B}</Project>
+        <Name>Music_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Music_43\Music_43.csproj">
       <Project>{5FD206B4-B08B-43D8-AB8A-F5DBCACA53D2}</Project>
       <Name>Music_43</Name>

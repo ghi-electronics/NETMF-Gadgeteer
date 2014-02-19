@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\RelayISOx16_42\RelayISOx16_42.csproj">
+        <Project>{F3CAB43E-4564-4C8A-89AB-EE9EB85DEE86}</Project>
+        <Name>RelayISOx16_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RelayISOx16_43\RelayISOx16_43.csproj">
       <Project>{4005F5D6-F5AF-42A0-9C75-26905F9B6312}</Project>
       <Name>RelayISOx16_43</Name>

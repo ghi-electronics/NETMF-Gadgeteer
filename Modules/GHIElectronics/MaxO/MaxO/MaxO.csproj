@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MaxO_42\MaxO_42.csproj">
+        <Project>{057D730B-D4A4-4577-8ED8-E2B4752FC3D1}</Project>
+        <Name>MaxO_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MaxO_43\MaxO_43.csproj">
       <Project>{CF999F80-D30D-4BA0-977D-B8CFCDB9838F}</Project>
       <Name>MaxO_43</Name>

@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\USBClientDP_42\USBClientDP_42.csproj">
+        <Project>{FC77F227-E9F6-41DA-A248-F69ED26307AC}</Project>
+        <Name>USBClientDP_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\USBClientDP_43\USBClientDP_43.csproj">
       <Project>{0F4B0125-8135-4321-B250-8E402F22A77B}</Project>
       <Name>USBClientDP_43</Name>

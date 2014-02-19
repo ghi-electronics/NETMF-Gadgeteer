@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AMPM35_42\AMPM35_42.csproj">
+        <Project>{584E1AE2-27BD-405F-A27D-1C7B54CE958A}</Project>
+        <Name>AMPM35_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AMPM35_43\AMPM35_43.csproj">
       <Project>{F648189D-7F09-4D6B-850F-EFAF9AF3557A}</Project>
       <Name>AMPM35_43</Name>

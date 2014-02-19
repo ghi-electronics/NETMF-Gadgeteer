@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{edbcfe37-5428-4699-8f69-dc51ce39b7ac}") = "Load", "Load\Load.csproj", "{784edc95-96a3-41b6-9e6c-787f67c1e54a}"
 EndProject
+Project("{edbcfe37-5428-4699-8f69-dc51ce39b7ac}") = "Load_42", "Load_42\Load_42.csproj", "{BB72FD47-EA49-41BD-B5DD-813D8AFDBB94}"
+EndProject
 Project("{edbcfe37-5428-4699-8f69-dc51ce39b7ac}") = "Load_43", "Load_43\Load_43.csproj", "{7a1c676b-0833-41f7-9491-f6d6cb7857c7}"
 EndProject
 Project("{edbcfe37-5428-4699-8f69-dc51ce39b7ac}") = "Load_Tester", "Load_Tester\Load_Tester.csproj", "{cafc674c-68b4-4e48-8f59-6f29b58cd6cd}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BB72FD47-EA49-41BD-B5DD-813D8AFDBB94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB72FD47-EA49-41BD-B5DD-813D8AFDBB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB72FD47-EA49-41BD-B5DD-813D8AFDBB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB72FD47-EA49-41BD-B5DD-813D8AFDBB94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{784edc95-96a3-41b6-9e6c-787f67c1e54a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{784edc95-96a3-41b6-9e6c-787f67c1e54a}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{784edc95-96a3-41b6-9e6c-787f67c1e54a}.Release|Any CPU.ActiveCfg = Release|Any CPU

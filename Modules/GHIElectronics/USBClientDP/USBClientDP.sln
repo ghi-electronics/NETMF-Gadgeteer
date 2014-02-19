@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{6fbddcdb-7877-4d53-92d5-78ac6d66f059}") = "USBClientDP", "USBClientDP\USBClientDP.csproj", "{2f78f213-336c-473f-889c-275770bf1072}"
 EndProject
+Project("{6fbddcdb-7877-4d53-92d5-78ac6d66f059}") = "USBClientDP_42", "USBClientDP_42\USBClientDP_42.csproj", "{FC77F227-E9F6-41DA-A248-F69ED26307AC}"
+EndProject
 Project("{6fbddcdb-7877-4d53-92d5-78ac6d66f059}") = "USBClientDP_43", "USBClientDP_43\USBClientDP_43.csproj", "{0f4b0125-8135-4321-b250-8e402f22a77b}"
 EndProject
 Project("{6fbddcdb-7877-4d53-92d5-78ac6d66f059}") = "USBClientDP_Tester", "USBClientDP_Tester\USBClientDP_Tester.csproj", "{98cb8722-67f5-4da0-8be2-45f86ecdd229}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC77F227-E9F6-41DA-A248-F69ED26307AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC77F227-E9F6-41DA-A248-F69ED26307AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC77F227-E9F6-41DA-A248-F69ED26307AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC77F227-E9F6-41DA-A248-F69ED26307AC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2f78f213-336c-473f-889c-275770bf1072}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2f78f213-336c-473f-889c-275770bf1072}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2f78f213-336c-473f-889c-275770bf1072}.Release|Any CPU.ActiveCfg = Release|Any CPU

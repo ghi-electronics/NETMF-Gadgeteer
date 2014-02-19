@@ -17,8 +17,10 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/359">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FLASH"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.FLASH"/>
 
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FLASH"/>
         <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
       </Assemblies>
 

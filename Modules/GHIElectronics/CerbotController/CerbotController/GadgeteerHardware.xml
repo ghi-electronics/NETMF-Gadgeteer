@@ -17,11 +17,13 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/403">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.CerbotController"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CerbotController"/>
       </Assemblies>
 
       <ExtraLibrariesRequired>
-		<Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" ErrorMessage="This module is built-in to the FEZCerbot mainboard, and cannot be used with any other mainboard." />
+		<Assembly MFVersion="4.2" Name="GTM.GHIElectronics.CerbotController"/>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" ErrorMessage="This module is built-in to the FEZCerbot mainboard, and cannot be used with any other mainboard." />
       </ExtraLibrariesRequired>
 	  
       <Sockets>

@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PulseCount_42\PulseCount_42.csproj">
+        <Project>{A31B50E7-5B61-443D-8DD2-43E6707E39E5}</Project>
+        <Name>PulseCount_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PulseCount_43\PulseCount_43.csproj">
       <Project>{43D1BD73-793F-4D0E-A65D-4241651CA638}</Project>
       <Name>PulseCount_43</Name>

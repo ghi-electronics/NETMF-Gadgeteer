@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/444">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.VideoOut"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.VideoOut"/>
       </Assemblies>
 

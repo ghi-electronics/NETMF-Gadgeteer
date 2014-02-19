@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{0b19c107-15d8-4c7c-8399-b34050470077}") = "RS232", "RS232\RS232.csproj", "{cf2acb87-d1c8-4897-a434-514a8af2a7ca}"
 EndProject
+Project("{0b19c107-15d8-4c7c-8399-b34050470077}") = "RS232_42", "RS232_42\RS232_42.csproj", "{358024CA-4628-4AA2-9CA2-D91E8AD931D3}"
+EndProject
 Project("{0b19c107-15d8-4c7c-8399-b34050470077}") = "RS232_43", "RS232_43\RS232_43.csproj", "{1731278a-dc16-45a4-abdb-7d831bfd9dbd}"
 EndProject
 Project("{0b19c107-15d8-4c7c-8399-b34050470077}") = "RS232_Tester", "RS232_Tester\RS232_Tester.csproj", "{0acd065b-acdb-40a7-aaa5-a40ad70946a5}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{358024CA-4628-4AA2-9CA2-D91E8AD931D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{358024CA-4628-4AA2-9CA2-D91E8AD931D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{358024CA-4628-4AA2-9CA2-D91E8AD931D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{358024CA-4628-4AA2-9CA2-D91E8AD931D3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{cf2acb87-d1c8-4897-a434-514a8af2a7ca}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{cf2acb87-d1c8-4897-a434-514a8af2a7ca}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{cf2acb87-d1c8-4897-a434-514a8af2a7ca}.Release|Any CPU.ActiveCfg = Release|Any CPU

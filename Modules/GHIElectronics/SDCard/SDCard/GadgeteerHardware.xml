@@ -17,6 +17,7 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/503">
 
       <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.SDCard"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.SDCard"/>
       </Assemblies>
 

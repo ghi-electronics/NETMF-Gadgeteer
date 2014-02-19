@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\UCBattery4xAA_42\UCBattery4xAA_42.csproj">
+        <Project>{6C2AB351-0F66-4D2A-BF97-F09C667E1FD7}</Project>
+        <Name>UCBattery4xAA_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UCBattery4xAA_43\UCBattery4xAA_43.csproj">
       <Project>{0C43092F-D913-4BC7-97A8-AB8F9BD25899}</Project>
       <Name>UCBattery4xAA_43</Name>

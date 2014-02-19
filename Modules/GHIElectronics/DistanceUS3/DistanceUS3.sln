@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{45636f9d-cd0e-45fa-a8db-8e490a385f91}") = "DistanceUS3", "DistanceUS3\DistanceUS3.csproj", "{8c1f0f3b-b133-4927-a4cc-21ce7f057f24}"
 EndProject
+Project("{45636f9d-cd0e-45fa-a8db-8e490a385f91}") = "DistanceUS3_42", "DistanceUS3_42\DistanceUS3_42.csproj", "{30438381-74CB-4475-B0A9-9B7103F6C6DC}"
+EndProject
 Project("{45636f9d-cd0e-45fa-a8db-8e490a385f91}") = "DistanceUS3_43", "DistanceUS3_43\DistanceUS3_43.csproj", "{70316713-0644-42e5-8ac2-47d331128438}"
 EndProject
 Project("{45636f9d-cd0e-45fa-a8db-8e490a385f91}") = "DistanceUS3_Tester", "DistanceUS3_Tester\DistanceUS3_Tester.csproj", "{1a304f23-c904-4f23-a57a-7affd014a61f}"
@@ -13,6 +15,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{30438381-74CB-4475-B0A9-9B7103F6C6DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30438381-74CB-4475-B0A9-9B7103F6C6DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30438381-74CB-4475-B0A9-9B7103F6C6DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30438381-74CB-4475-B0A9-9B7103F6C6DC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8c1f0f3b-b133-4927-a4cc-21ce7f057f24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8c1f0f3b-b133-4927-a4cc-21ce7f057f24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8c1f0f3b-b133-4927-a4cc-21ce7f057f24}.Release|Any CPU.ActiveCfg = Release|Any CPU
