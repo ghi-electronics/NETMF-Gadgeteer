@@ -35,6 +35,35 @@
                   </Component>
                 </Directory>
 
+                <!-- NETMF 4.2 -->
+                <?ifdef NETMF42Supported ?>
+                <Directory Id="id_dir_netmf_42" Name="NETMF 4.2" FileSource="$(var.SourcePath)..\$(var.ProjectPath)_42\bin\Release\">
+                  <Component Id="id_comp_files_42" Guid="$(var.guid_msm_comp_files_id_42)">
+                    <File Id="id_file_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                    <File Id="id_file_pdb_42" Name="$(var.OutputFileName).pdb" />
+                    <File Id="id_file_xml_42" Name="$(var.OutputFileName).XML" />
+                  </Component>
+
+                  <Directory Id="id_dir_be_42" Name="be">
+                    <Component Id="id_comp_files_be_42" Guid="$(var.guid_msm_comp_files_be_id_42)">
+                      <File Id="id_file_be_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                      <File Id="id_file_be_pdb_42" Name="$(var.OutputFileName).pdb" />
+                      <File Id="id_file_be_pdbx_42" Name="$(var.OutputFileName).pdbx" />
+                      <File Id="id_file_be_pe_42" Name="$(var.OutputFileName).pe" />
+                    </Component>
+                  </Directory>
+
+                  <Directory Id="id_dir_le_42" Name="le">
+                    <Component Id="id_comp_files_le_42" Guid="$(var.guid_msm_comp_files_le_id_42)">
+                      <File Id="id_file_le_binary_42" Name="$(var.OutputFileName).dll" KeyPath="yes"/>
+                      <File Id="id_file_le_pdb_42" Name="$(var.OutputFileName).pdb" />
+                      <File Id="id_file_le_pdbx_42" Name="$(var.OutputFileName).pdbx" />
+                      <File Id="id_file_le_pe_42" Name="$(var.OutputFileName).pe" />
+                    </Component>
+                  </Directory>
+                </Directory>
+                <?endif ?>
+
                 <!-- NETMF 4.3 -->
                 <?ifdef NETMF43Supported ?>
                 <Directory Id="id_dir_netmf_43" Name="NETMF 4.3" FileSource="$(var.SourcePath)..\$(var.ProjectPath)_43\bin\Release\">
