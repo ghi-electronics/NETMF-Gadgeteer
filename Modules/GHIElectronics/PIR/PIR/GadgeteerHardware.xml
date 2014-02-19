@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="PIR"
+                  UniqueId="5b9e85d1-3325-4e0b-8f70-9650df9f44b1"
+                  Manufacturer="GHI Electronics"
+                  Description="A PIR module"
+                  InstanceName="PIR"
+                  Type="Gadgeteer.Modules.GHIElectronics.PIR"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="24"
+                  BoardWidth="46"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.42.500"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/357">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.PIR"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="23" Top="12.5" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.010</TypicalCurrent>
+          <MaximumCurrent>0.010</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

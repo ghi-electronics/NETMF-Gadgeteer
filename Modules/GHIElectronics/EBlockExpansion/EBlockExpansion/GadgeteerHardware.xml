@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="EBlockExpansion"
+                  UniqueId="cf53d5cc-8e22-4e05-8088-b0668449c469"
+                  Manufacturer="GHI Electronics"
+                  Description="An EBlockExpansion module"
+                  InstanceName="EBlockExpansion"
+                  Type="Gadgeteer.Modules.GHIElectronics.EBlockExpansion"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="38"
+                  BoardWidth="33.7"
+                  HardwareVersion="1.2"
+                  MinimumGadgeteerCoreVersion="2.42.500"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/0">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.EBlockExpansion"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="30.84" Top="21.66" Orientation="180" ConstructorOrder="1" TypesLabel="">
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>[3TYP]</TypicalCurrent>
+          <MaximumCurrent>[3MAX]</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>[5TYP]</TypicalCurrent>
+          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

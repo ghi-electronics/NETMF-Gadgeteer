@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{e093c700-a7c9-42a8-9c32-6f1679a83538}") = "PIR", "PIR\PIR.csproj", "{a373042f-69c2-4f92-bfd1-653fe8c1431c}"
+EndProject
+Project("{e093c700-a7c9-42a8-9c32-6f1679a83538}") = "PIR_42", "PIR_42\PIR_42.csproj", "{c156b63b-a4a7-45a5-9737-1b6867caec3b}"
+EndProject
+Project("{e093c700-a7c9-42a8-9c32-6f1679a83538}") = "PIR_Tester", "PIR_Tester\PIR_Tester.csproj", "{ed7ab848-479c-4d57-85e0-e772279cdb34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{a373042f-69c2-4f92-bfd1-653fe8c1431c}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{a373042f-69c2-4f92-bfd1-653fe8c1431c}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{a373042f-69c2-4f92-bfd1-653fe8c1431c}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{a373042f-69c2-4f92-bfd1-653fe8c1431c}.Release|Any CPU.Build.0 = Release|Any CPU
+		{c156b63b-a4a7-45a5-9737-1b6867caec3b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c156b63b-a4a7-45a5-9737-1b6867caec3b}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c156b63b-a4a7-45a5-9737-1b6867caec3b}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{c156b63b-a4a7-45a5-9737-1b6867caec3b}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ed7ab848-479c-4d57-85e0-e772279cdb34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ed7ab848-479c-4d57-85e0-e772279cdb34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ed7ab848-479c-4d57-85e0-e772279cdb34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ed7ab848-479c-4d57-85e0-e772279cdb34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

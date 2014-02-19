@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "DisplayT35" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "DisplayT35" ?>
+
+  <?define guid_msi_upgrade_code =  "08cb372c-4afd-4768-a098-1f6318fb5ec7" ?>
+  <?define guid_msm_package_id = "0054fdb9-bd38-40b5-ad54-e998278ef808" ?>
+
+  <?define guid_msm_comp_resources_id = "1796c448-d2f0-4559-80c9-877ec991b8d0" ?>
+  <?define guid_msm_comp_registry_id = "db644567-7a17-48e6-a99c-ac0ffeb350a9" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "9b59df49-a53e-470f-85ea-7d488e088769"?>
+
+  <?define guid_msm_comp_files_id_42 = "ebc79084-abd3-4765-95f3-a031a5910a9e" ?>
+  <?define guid_msm_comp_files_be_id_42 = "439c4b9c-e1f4-4991-aeb8-444360b1d0d9" ?>
+  <?define guid_msm_comp_files_le_id_42 = "f18be8d3-0e53-4ef4-a4cb-8e3e79174db2" ?>
+</Include>
+

@@ -2,23 +2,22 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DisplayTE35"
-                  UniqueId="ab12a851-8b8f-44e5-9c9e-323bbe1414ca"
+    <ModuleDefinition Name="DisplayT35"
+                  UniqueId="663cf4e2-24b1-4c4b-80c9-8f9e9c9550ed"
                   Manufacturer="GHI Electronics"
-                  Description="A DisplayTE35 module"
-                  InstanceName="DisplayTE35"
-                  Type="Gadgeteer.Modules.GHIElectronics.DisplayTE35"
+                  Description="A DisplayT35 module"
+                  InstanceName="DisplayT35"
+                  Type="Gadgeteer.Modules.GHIElectronics.DisplayT35"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
                   BoardHeight="83"
                   BoardWidth="78"
                   HardwareVersion="1.0"
-                  MinimumGadgeteerCoreVersion="2.43.800"
-                  HelpUrl="http://www.ghielectronics.com/catalog/product/449">
+                  MinimumGadgeteerCoreVersion="2.42.500"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/276">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayTE35"/>
-        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayTE35"/>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayT35"/>
       </Assemblies>
 
       <Sockets>
@@ -74,6 +73,7 @@
             <Pin Shared="false">5</Pin>
             <Pin Shared="false">6</Pin>
           </Pins>
+        </Socket>
       </Sockets>
 
       <Power>
@@ -81,7 +81,7 @@
           <TypicalCurrent>0.150</TypicalCurrent>
           <MaximumCurrent>0.150</MaximumCurrent>
         </PowerRequirements>
-        <PowerRequirements Voltage="5.0">
+        <PowerRequirements Voltage="5">
           <TypicalCurrent>0.0</TypicalCurrent>
           <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>

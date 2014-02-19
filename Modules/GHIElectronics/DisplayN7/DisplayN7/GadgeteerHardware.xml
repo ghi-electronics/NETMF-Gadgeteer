@@ -36,6 +36,34 @@
 				  <Pin Shared="false">9</Pin>
 			  </Pins>
 		  </Socket>
+		  <Socket Left="43" Top="5" Orientation="270" ConstructorOrder="2" TypesLabel="G">
+			  <Types>
+				  <Type>G</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+				  <Pin Shared="false">7</Pin>
+				  <Pin Shared="false">8</Pin>
+				  <Pin Shared="false">9</Pin>
+			  </Pins>
+		  </Socket>
+		  <Socket Left="29" Top="5" Orientation="270" ConstructorOrder="3" TypesLabel="B">
+			  <Types>
+				  <Type>B</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+				  <Pin Shared="false">7</Pin>
+				  <Pin Shared="false">8</Pin>
+				  <Pin Shared="false">9</Pin>
+			  </Pins>
+		  </Socket>
       </Sockets>
 
       <Power>
