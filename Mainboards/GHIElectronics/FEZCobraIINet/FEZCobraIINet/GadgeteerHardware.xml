@@ -109,10 +109,10 @@
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIINet" />
 
 		<Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
-		<Assembly MFVersion="4.3" Name="GHI_IO"/>
-		<Assembly MFVersion="4.3" Name="GHI_Net"/>
-		<Assembly MFVersion="4.3" Name="GHI_System"/>
-		<Assembly MFVersion="4.3" Name="GHI_USBHost"/>
+		<Assembly MFVersion="4.3" Name="GHIIO"/>
+		<Assembly MFVersion="4.3" Name="GHINet"/>
+		<Assembly MFVersion="4.3" Name="GHISystem"/>
+		<Assembly MFVersion="4.3" Name="GHIUSBHost"/>
       </LibrariesProvided>
 
       <Power>

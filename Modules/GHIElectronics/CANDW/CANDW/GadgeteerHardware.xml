@@ -21,12 +21,12 @@
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CANDW"/>
 		
         <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware" ErrorMessage="GHI.Premium.Hardware could not be found."/>
-        <Assembly MFVersion="4.3" Name="GHI_Hardware" ErrorMessage="GHI_Hardware could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHIHardware" ErrorMessage="GHIHardware could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
         <Assembly MFVersion="4.2" Name="GHI.Premium.Hardware" ErrorMessage="GHI.Premium.Hardware could not be found."/>
-        <Assembly MFVersion="4.3" Name="GHI_Hardware" ErrorMessage="GHI_Hardware could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHIHardware" ErrorMessage="GHIHardware could not be found."/>
       </ExtraLibrariesRequired>
 
       <Sockets>
