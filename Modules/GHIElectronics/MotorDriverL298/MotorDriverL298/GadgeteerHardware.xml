@@ -10,9 +10,9 @@
                   Type="Gadgeteer.Modules.GHIElectronics.MotorDriverL298"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
-                  BoardHeight="[HEIGHT]"
-                  BoardWidth="[WIDTH]"
-                  HardwareVersion="[HARDWARE]"
+                  BoardHeight="39"
+                  BoardWidth="50"
+                  HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/392">
 
@@ -22,17 +22,25 @@
       </Assemblies>
 
       <Sockets>
-        [SOCKET]
+        <Socket Left="24" Top="35" Orientation="90" ConstructorOrder="1" TypesLabel="P">
+          <Types>
+            <Type>P</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+          </Pins>
+        </Socket>
       </Sockets>
 
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>[3TYP]</TypicalCurrent>
-          <MaximumCurrent>[3MAX]</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
-        <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>[5TYP]</TypicalCurrent>
-          <MaximumCurrent>[5MAX]</MaximumCurrent>
+        <PowerRequirements Voltage="5">
+          <TypicalCurrent>0.035</TypicalCurrent>
+          <MaximumCurrent>0.050</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </ModuleDefinition>

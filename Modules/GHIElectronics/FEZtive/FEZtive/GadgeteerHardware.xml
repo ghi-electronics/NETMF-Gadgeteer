@@ -28,22 +28,22 @@
             <Type>S</Type>
           </Types>
           <Pins>
-			  <Pin Shared="false">6</Pin>
-			  <Pin Shared="true">7</Pin>
-			  <Pin Shared="true">8</Pin>
-			  <Pin Shared="true">9</Pin>
+			      <Pin Shared="false">6</Pin>
+			      <Pin Shared="true">7</Pin>
+			      <Pin Shared="true">8</Pin>
+			      <Pin Shared="true">9</Pin>
           </Pins>
         </Socket>
       </Sockets>
 
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>[3TYP]</TypicalCurrent>
-          <MaximumCurrent>[3MAX]</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>[5TYP]</TypicalCurrent>
-          <MaximumCurrent>[5MAX]</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </ModuleDefinition>

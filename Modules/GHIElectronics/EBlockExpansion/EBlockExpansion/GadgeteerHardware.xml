@@ -22,16 +22,48 @@
 
       <Sockets>
         <Socket Left="30.84" Top="21.66" Orientation="180" ConstructorOrder="1" TypesLabel="">
+          <Types>
+            <Type>A</Type>
+            <Type>B</Type>
+            <Type>C</Type>
+            <Type>D</Type>
+            <Type>E</Type>
+            <Type>F</Type>
+            <Type>G</Type>
+            <Type>H</Type>
+            <Type>I</Type>
+            <Type>J</Type>
+            <Type>K</Type>
+            <Type>L</Type>
+            <Type>M</Type>
+            <Type>N</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Q</Type>
+            <Type>R</Type>
+            <Type>S</Type>
+            <Type>T</Type>
+            <Type>U</Type>
+            <Type>V</Type>
+            <Type>W</Type>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>Z</Type>
+            <Type>*</Type>
+          </Types>
+          <Pins>
+          </Pins>
+        </Socket>
       </Sockets>
 
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>[3TYP]</TypicalCurrent>
-          <MaximumCurrent>[3MAX]</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>[5TYP]</TypicalCurrent>
-          <MaximumCurrent>[5MAX]</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </ModuleDefinition>
