@@ -440,7 +440,7 @@ namespace GHIElectronics.Gadgeteer
 		{
 			// implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
 			_storage = new PersistentStorage(volumeName);
-			_storage.MountFileSystem();
+			_storage.Mount();
 
 			return true;// volumeName == "SD";
 		}
@@ -452,7 +452,7 @@ namespace GHIElectronics.Gadgeteer
 		public override bool UnmountStorageDevice(string volumeName)
 		{
 			// implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Eject"/> event if successful and return true if the volumeName is supported.
-			_storage.UnmountFileSystem();
+			_storage.Unmount();
 			_storage.Dispose();
 
 			return true;// volumeName == "SD";

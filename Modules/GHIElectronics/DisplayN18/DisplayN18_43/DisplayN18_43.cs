@@ -53,7 +53,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.SetBacklight(true);
 
-            base.OnDisplayConnected("Display N18", 128, Height, DisplayOrientation.Normal, null);
+            base.OnDisplayConnected("Display N18", 128, 160, DisplayOrientation.Normal, null);
 		}
 
 		/// <summary>

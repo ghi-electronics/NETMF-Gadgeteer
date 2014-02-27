@@ -313,7 +313,7 @@ namespace GHIElectronics.Gadgeteer
 		public override bool MountStorageDevice(string volumeName)
 		{
 			this.storage = new PersistentStorage(volumeName);
-			this.storage.MountFileSystem();
+			this.storage.Mount();
 
 			return true;
 		}
@@ -324,7 +324,7 @@ namespace GHIElectronics.Gadgeteer
 		/// </summary>
 		public override bool UnmountStorageDevice(string volumeName)
 		{
-			this.storage.UnmountFileSystem();
+			this.storage.Unmount();
 			this.storage.Dispose();
 
 			return true;

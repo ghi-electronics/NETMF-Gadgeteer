@@ -89,7 +89,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         lock (this.storageDevices)
                         {
                             var ps = new PersistentStorage(device);
-                            ps.MountFileSystem();
+                            ps.Mount();
                             this.storageDevices.Add(device.ID, ps);
                         }
 
@@ -138,7 +138,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                             return;
 
                         var ps = (PersistentStorage)this.storageDevices[device.ID];
-                        ps.UnmountFileSystem();
+                        ps.Unmount();
                         ps.Dispose();
                         this.storageDevices.Remove(device.ID);
                     }

@@ -129,7 +129,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 try
                 {
                     //_storage = new PersistentStorage("SD");
-                    //_storage.MountFileSystem();
+                    //_storage.Mount();
                     Mainboard.MountStorageDevice("SD");
                     IsCardMounted = true;
                     Thread.Sleep(500);
@@ -163,7 +163,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 try
                 {
-                    //_storage.UnmountFileSystem();
+                    //_storage.Unmount();
                     //_storage.Dispose();
                     IsCardMounted = false;
                     Mainboard.UnmountStorageDevice("SD");
