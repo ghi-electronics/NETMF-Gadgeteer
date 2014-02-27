@@ -19,7 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     /// <remarks>
     /// <para>
-    /// The <see cref="UsbClientSP"/> class has no programmable functionality other than internally reserving 
+    /// The <see cref="USBClientSP"/> class has no programmable functionality other than internally reserving 
     /// the pins used by the USB Device module, which allows programming of the mainboard.  
     /// Red USB Device modules also provide power to the mainboard and peripherals from the USB power source.  
     /// Important: only plug in one Red module at a time.

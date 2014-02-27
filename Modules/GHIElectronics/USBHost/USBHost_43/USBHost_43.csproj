@@ -51,9 +51,9 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHIIO, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="GHISystem, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="GHIUSBHost, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GHIIO" />
+    <Reference Include="GHISystem" />
+    <Reference Include="GHIUSBHost" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />

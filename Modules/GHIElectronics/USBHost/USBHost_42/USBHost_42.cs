@@ -209,7 +209,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="USBDriveConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="storageDevice">The <see cref="T:Microsoft.Gadgeteer.StorageDevice"/> object associated with the connected USB drive.</param>
         public delegate void USBDriveConnectedEventHandler(USBHost sender, StorageDevice storageDevice);
 
@@ -227,7 +227,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="USBDriveConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="storageDevice">The <see cref="T:Microsoft.Gadgeteer.StorageDevice"/> object associated with the connected USB drive.</param>
         protected virtual void OnUSBDriveConnectedEvent(USBHost sender, StorageDevice storageDevice)
         {
@@ -241,7 +241,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="USBDriveDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         public delegate void USBDriveDisconnectedEventHandler(USBHost sender);
 
         /// <summary>
@@ -258,7 +258,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="USBDriveDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         protected virtual void OnUSBDriveDisconnectedEvent(USBHost sender)
         {
             if (_OnUSBDriveDisconnected == null) _OnUSBDriveDisconnected = new USBDriveDisconnectedEventHandler(OnUSBDriveDisconnectedEvent);
@@ -271,7 +271,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="MouseConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
         public delegate void MouseConnectedEventHandler(USBHost sender, USBH_Mouse mouse);
 
@@ -289,7 +289,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="MouseConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
         protected virtual void OnMouseConnectedEvent(USBHost sender, USBH_Mouse mouse)
         {
@@ -303,7 +303,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="MouseDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
         public delegate void MouseDisconnectedEventHandler(USBHost sender, USBH_Mouse mouse);
 
@@ -321,7 +321,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="MouseDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
         protected virtual void OnMouseDisconnectedEvent(USBHost sender, USBH_Mouse mouse)
         {
@@ -335,7 +335,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used to handle the <see cref="KeyboardConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
         public delegate void KeyboardConnectedEventHandler(USBHost sender, USBH_Keyboard Keyboard);
 
@@ -353,7 +353,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="KeyboardConnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
         protected virtual void OnKeyboardConnectedEvent(USBHost sender, USBH_Keyboard keyboard)
         {
@@ -367,7 +367,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="KeyboardDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
         public delegate void KeyboardDisconnectedEventHandler(USBHost sender, USBH_Keyboard Keyboard);
 
@@ -385,7 +385,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="KeyboardDisconnected"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbHost"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
         protected virtual void OnKeyboardDisconnectedEvent(USBHost sender, USBH_Keyboard Keyboard)
         {

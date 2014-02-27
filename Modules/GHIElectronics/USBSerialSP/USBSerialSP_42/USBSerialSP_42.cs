@@ -180,7 +180,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Represents the delegate that is used for the <see cref="PowerStateChanged"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbSerialSP"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBSerialSP"/> object that raised the event.</param>
         /// <param name="isAsleep">A value that indicates whether the USB host controller is suspended.</param>
         public delegate void PowerStateChangedEventHandler(USBSerialSP sender, bool isAsleep);
 
@@ -194,7 +194,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raises the <see cref="PowerStateChanged"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="UsbSerialSP"/> object that raised the event.</param>
+        /// <param name="sender">The <see cref="USBSerialSP"/> object that raised the event.</param>
         /// <param name="isAsleep">A value that indicates whether the USB host controller is suspended.</param>
         protected virtual void OnPowerStateChangedEvent(USBSerialSP sender, bool isAsleep)
         {
