@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/499">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZRaptor"/>
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZRaptor"/>
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -209,8 +209,8 @@
 	  </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZRaptor" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZRaptor" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.G400"/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>

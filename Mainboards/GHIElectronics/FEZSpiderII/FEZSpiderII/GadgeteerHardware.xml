@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/432">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZSpiderII"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZSpiderII"/> -->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpiderII"/>
+        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpiderII"/> -->
       </Assemblies>
 
       <ProvidedSockets>
@@ -147,8 +147,8 @@
 	  </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZSpiderII" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZSpiderII" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpiderII" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpiderII" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.G120"/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>

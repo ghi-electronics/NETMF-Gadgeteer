@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/473">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerbuinoNet"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerbuinoNet"/> -->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet"/>
+        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet"/> -->
       </Assemblies>
 
       <ProvidedSockets>
@@ -52,8 +52,8 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerbuinoNet" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerbuinoNet" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
 		

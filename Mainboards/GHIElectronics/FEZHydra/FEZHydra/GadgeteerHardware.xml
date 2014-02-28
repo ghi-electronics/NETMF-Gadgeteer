@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/328">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZHydra"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZHydra"/> -->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra"/>
+        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZHydra"/> -->
       </Assemblies>
 
       <ProvidedSockets>
@@ -139,8 +139,8 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZHydra" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZHydra" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZHydra" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZHydra" />
 
         <Assembly MFVersion="4.3" Name="GHI.Hardware.FEZHydra"/>
         <Assembly MFVersion="4.3" Name="GHI.IO"/>

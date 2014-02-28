@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/403">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerbot"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerbot"/> -->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
+        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/> -->
       </Assemblies>
 
       <ProvidedSockets>
@@ -80,8 +80,8 @@
 		</ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerbot" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerbot" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
 		

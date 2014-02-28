@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/349">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerberus"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerberus"/> -->
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerberus"/>
+        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerberus"/> -->
       </Assemblies>
 
       <ProvidedSockets>
@@ -103,8 +103,8 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZCerberus" />
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCerberus" />
+        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerberus" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerberus" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
 		

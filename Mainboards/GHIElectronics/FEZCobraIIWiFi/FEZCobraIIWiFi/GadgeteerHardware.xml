@@ -13,7 +13,7 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/398">
 
       <Assemblies>
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCobraIIWiFi"/>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIWiFi"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -106,7 +106,7 @@
 	  </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZCobraIIWiFi" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIWiFi" />
 
 		<Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
 		<Assembly MFVersion="4.3" Name="GHI.IO"/>

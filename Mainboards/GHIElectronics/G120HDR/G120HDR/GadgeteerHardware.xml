@@ -13,7 +13,7 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/431">
 
       <Assemblies>
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.G120HDR"/>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G120HDR"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -21,7 +21,7 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.G120HDR" />
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G120HDR" />
 
         <Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
         <Assembly MFVersion="4.3" Name="GHI.IO"/>
