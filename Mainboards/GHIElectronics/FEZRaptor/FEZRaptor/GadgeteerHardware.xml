@@ -13,8 +13,8 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/499">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
-        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor"/>
+        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZRaptor"/>
+        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZRaptor"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -209,8 +209,8 @@
 	  </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
-        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZRaptor" />
+        <Assembly MFVersion="4.2" Name="GHI.Electronics.Gadgeteer.FEZRaptor" />
+        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.FEZRaptor" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.G400"/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.IO"/>
@@ -219,10 +219,10 @@
         <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost"/>
 
         <Assembly MFVersion="4.3" Name="GHI.Hardware.G400"/>
-        <Assembly MFVersion="4.3" Name="GHIIO"/>
-        <Assembly MFVersion="4.3" Name="GHINet"/>
-        <Assembly MFVersion="4.3" Name="GHISystem"/>
-        <Assembly MFVersion="4.3" Name="GHIUSBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI.IO"/>
+        <Assembly MFVersion="4.3" Name="GHI.Net"/>
+        <Assembly MFVersion="4.3" Name="GHI.System"/>
+        <Assembly MFVersion="4.3" Name="GHI.USBHost"/>
       </LibrariesProvided>
 
       <Power>

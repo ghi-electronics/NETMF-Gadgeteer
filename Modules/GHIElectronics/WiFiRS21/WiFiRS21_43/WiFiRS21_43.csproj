@@ -52,7 +52,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="Gadgeteer.SPI" />
-    <Reference Include="GHINet" />
+    <Reference Include="GHI.Net" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />

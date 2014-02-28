@@ -51,10 +51,10 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHIHardware" />
+    <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.Hardware.EMX" />
-    <Reference Include="GHIIO" />
-    <Reference Include="GHISystem" />
+    <Reference Include="GHI.IO" />
+    <Reference Include="GHI.System" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />

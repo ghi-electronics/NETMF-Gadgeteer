@@ -13,7 +13,7 @@
             HelpUrl="http://www.ghielectronics.com/catalog/product/416">
 
       <Assemblies>
-        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G400HDRBreakout"/>
+        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.G400HDRBreakout"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -21,13 +21,13 @@
       </ProvidedSockets>
 
       <LibrariesProvided>
-        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.G400HDRBreakout" />
+        <Assembly MFVersion="4.3" Name="GHI.Electronics.Gadgeteer.G400HDRBreakout" />
 
         <Assembly MFVersion="4.3" Name="GHI.Hardware.G400"/>
-        <Assembly MFVersion="4.3" Name="GHIIO"/>
-        <Assembly MFVersion="4.3" Name="GHINet"/>
-        <Assembly MFVersion="4.3" Name="GHISystem"/>
-        <Assembly MFVersion="4.3" Name="GHIUSBHost"/>
+        <Assembly MFVersion="4.3" Name="GHI.IO"/>
+        <Assembly MFVersion="4.3" Name="GHI.Net"/>
+        <Assembly MFVersion="4.3" Name="GHI.System"/>
+        <Assembly MFVersion="4.3" Name="GHI.USBHost"/>
       </LibrariesProvided>
 
       <Power>
