@@ -20,11 +20,11 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A WiFi RN171 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class WiFi_RN171 : GTM.Module
+    public class WiFiRN171 : GTM.Module
     {
         /// <summary>Constructor</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public WiFi_RN171(int socketNumber)
+        public WiFiRN171(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             string t_Command_Init = "$$$";
@@ -1162,31 +1162,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                 if (i > 0)
                 {
-                    string query = buffer.Substring(i + 1, end_index - start_index);
-                    request.URL = buffer.Substring(start_index, i);
+                    string query = buffer.Substring(i + 1, end_index - (i + 1));
+                    request.URL = buffer.Substring(start_index, i - start_index);
 
-                    if (buffer.IndexOf("&") > 0)
-                    {
-                        while ((i = buffer.IndexOf("&")) > 0)
-                        {
-                            int separate_index = buffer.IndexOf("=");
+                    var paras = query.Split('=', '&');
 
-                            //Add the key/value pair
-                            request.QueryData[_UrlDecode(buffer.Substring(0, separate_index))] = _UrlDecode(buffer.Substring(separate_index + 1, i));
-
-                            //shift the buffer forward
-                            buffer = buffer.Substring(i + 1);
-                        }
-                    }
-                    else
-                    {
-                        int separate_index = buffer.IndexOf("=");
-
-                        //Add the key/value pair
-                        request.QueryData[_UrlDecode(buffer.Substring(0, separate_index))] = _UrlDecode(buffer.Substring(separate_index + 1, i));
-                    }
+                    for (int j = 0; j < paras.Length; j += 2)
+                        request.QueryData[_UrlDecode(paras[j])] = _UrlDecode(paras[j + 1]);
                 }
-
                 else
                 {
                     request.URL = buffer.Substring(start_index, end_index - start_index);

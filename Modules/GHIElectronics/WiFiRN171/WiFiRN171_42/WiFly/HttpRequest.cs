@@ -71,6 +71,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public HttpRequest()
         {
             HeaderData = new HttpHeaderList();
+            QueryData = new QueryDataList();
         }
     }
 }
