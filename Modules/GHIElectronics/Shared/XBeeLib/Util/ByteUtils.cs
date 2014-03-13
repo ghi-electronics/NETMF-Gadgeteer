@@ -61,7 +61,7 @@ namespace NETMF.OpenSource.XBee.Util
 
         /// <summary>
         /// Taken from here
-        /// http://code.tinyclr.com/project/100/another-fast-hex-string-to-byte-conversion/
+		/// See GHI's website. Go to Community::Codeshare; search for "conversion"
         /// </summary>
         public static byte FromBase16(string hexNumber)
         {
