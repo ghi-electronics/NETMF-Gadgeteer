@@ -108,7 +108,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Initializes CAN.
         /// </summary>
-        /// <param name="bitRate">The desired bitrate, if known. Otherwise, use the other overload to calculate a bitrate. See http://wiki.tinyclr.com/index.php?title=CAN for more info.</param>
+        /// <param name="bitRate">The desired bitrate, if known. Otherwise, use the other overload to calculate a bitrate. See GHI's website. Go to Support::Documents::CAN for more info.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
         public void InitializeCAN(uint bitRate, int receiveBufferSize)
         {
@@ -121,9 +121,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Initializes CAN.
         /// </summary>
-        /// <param name="T1">See http://wiki.tinyclr.com/index.php?title=CAN for calculation.</param>
-        /// <param name="T2">See http://wiki.tinyclr.com/index.php?title=CAN for calculation.</param>
-        /// <param name="BRP">See http://wiki.tinyclr.com/index.php?title=CAN for calculation.</param>
+        /// <param name="T1">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
+        /// <param name="T2">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
+        /// <param name="BRP">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
         public void InitializeCAN(int T1, int T2, int BRP, int receiveBufferSize = 100)
         {
