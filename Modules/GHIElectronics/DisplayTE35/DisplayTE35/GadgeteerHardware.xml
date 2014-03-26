@@ -74,6 +74,7 @@
             <Pin Shared="false">5</Pin>
             <Pin Shared="false">6</Pin>
           </Pins>
+        </Socket>
       </Sockets>
 
       <Power>
