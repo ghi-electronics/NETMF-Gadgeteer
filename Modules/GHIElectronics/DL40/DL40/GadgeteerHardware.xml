@@ -38,7 +38,15 @@
           </Pins>
         </Socket>
       </Sockets>
-
+      
+      <ProvidedSockets>
+        <ProvidedSocket Label="*" Left="47" Top="10" Orientation="0" ConstructorParameter="DaisyLinkSocketNumber">
+          <Types>
+            <Type>*</Type>
+          </Types>
+        </ProvidedSocket>
+      </ProvidedSockets>
+      
       <Power>
         <PowerRequirements Voltage="3.3">
           <TypicalCurrent>0.012</TypicalCurrent>
