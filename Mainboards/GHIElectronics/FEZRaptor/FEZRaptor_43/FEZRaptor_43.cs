@@ -3,8 +3,8 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 
 using GT = Gadgeteer;
-using GHI.Hardware.G400;
-using GHI.IO;
+using G400 = GHI.Pins.G400;
+using GHI.Hardware.Storage;
 using GHI.Hardware;
 using GHI.System;
 using GTM = Gadgeteer.Modules;
@@ -29,13 +29,13 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'S', 'U', 'Y' };
-			socket.CpuPins[3] = Pin.PB0;
-			socket.CpuPins[4] = Pin.PA7;
-			socket.CpuPins[5] = Pin.PA8;
-			socket.CpuPins[6] = Pin.PB5;
-			socket.CpuPins[7] = Pin.PA22;
-			socket.CpuPins[8] = Pin.PA21;
-			socket.CpuPins[9] = Pin.PA23;
+			socket.CpuPins[3] = G400.PB0;
+			socket.CpuPins[4] = G400.PA7;
+			socket.CpuPins[5] = G400.PA8;
+			socket.CpuPins[6] = G400.PB5;
+			socket.CpuPins[7] = G400.PA22;
+			socket.CpuPins[8] = G400.PA21;
+			socket.CpuPins[9] = G400.PA23;
 			socket.SPIModule = SPI.SPI_module.SPI2;
 			socket.SerialPortName = "COM4";
 			
@@ -44,12 +44,12 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'X' };
-			socket.CpuPins[3] = Pin.PB14;
-			socket.CpuPins[4] = Pin.PB15;
-			socket.CpuPins[5] = Pin.PB16;
-			socket.CpuPins[6] = Pin.PB18;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PB14;
+			socket.CpuPins[4] = G400.PB15;
+			socket.CpuPins[5] = G400.PB16;
+			socket.CpuPins[6] = G400.PB18;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -62,13 +62,13 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'S', 'X' };
-			socket.CpuPins[3] = Pin.PB1;
-			socket.CpuPins[4] = Pin.PC23;
-			socket.CpuPins[5] = Pin.PB3;
-			socket.CpuPins[6] = Pin.PA28;
-			socket.CpuPins[7] = Pin.PA12;
-			socket.CpuPins[8] = Pin.PA11;
-			socket.CpuPins[9] = Pin.PA13;
+			socket.CpuPins[3] = G400.PB1;
+			socket.CpuPins[4] = G400.PC23;
+			socket.CpuPins[5] = G400.PB3;
+			socket.CpuPins[6] = G400.PA28;
+			socket.CpuPins[7] = G400.PA12;
+			socket.CpuPins[8] = G400.PA11;
+			socket.CpuPins[9] = G400.PA13;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -76,13 +76,13 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
-			socket.CpuPins[3] = Pin.PA27;
-			socket.CpuPins[4] = Pin.PA0;
-			socket.CpuPins[5] = Pin.PA1;
-			socket.CpuPins[6] = Pin.PA2;
-			socket.CpuPins[7] = Pin.PA3;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PA27;
+			socket.CpuPins[4] = G400.PA0;
+			socket.CpuPins[5] = G400.PA1;
+			socket.CpuPins[6] = G400.PA2;
+			socket.CpuPins[7] = G400.PA3;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			socket.SerialPortName = "COM2";
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -102,59 +102,59 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'H', 'I' };
-			socket.CpuPins[3] = Pin.PD4;
+			socket.CpuPins[3] = G400.PD4;
 			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_C_DM;
 			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_C_DP;
-			socket.CpuPins[6] = Pin.PA24;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[6] = G400.PA24;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'H', 'I' };
-			socket.CpuPins[3] = Pin.PA25;
+			socket.CpuPins[3] = G400.PA25;
 			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_B_DM;
 			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_B_DP;
-			socket.CpuPins[6] = Pin.PA4;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[6] = G400.PA4;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
 			socket.SupportedTypes = new char[] { 'D', 'I' };
-			socket.CpuPins[3] = Pin.PD6;
+			socket.CpuPins[3] = G400.PD6;
 			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_A_DM;
 			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_A_DP;
-			socket.CpuPins[6] = Pin.PD0;
-			socket.CpuPins[7] = Pin.PD5;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[6] = G400.PD0;
+			socket.CpuPins[7] = G400.PD5;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
 			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = Pin.PD7;
-			socket.CpuPins[4] = Pin.PA15;
-			socket.CpuPins[5] = Pin.PA18;
-			socket.CpuPins[6] = Pin.PA16;
-			socket.CpuPins[7] = Pin.PA19;
-			socket.CpuPins[8] = Pin.PA20;
-			socket.CpuPins[9] = Pin.PA17;
+			socket.CpuPins[3] = G400.PD7;
+			socket.CpuPins[4] = G400.PA15;
+			socket.CpuPins[5] = G400.PA18;
+			socket.CpuPins[6] = G400.PA16;
+			socket.CpuPins[7] = G400.PA19;
+			socket.CpuPins[8] = G400.PA20;
+			socket.CpuPins[9] = G400.PA17;
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
 			socket.SupportedTypes = new char[] { 'C', 'I', 'U', 'X' };
-			socket.CpuPins[3] = Pin.PA29;
-			socket.CpuPins[4] = Pin.PA10;
-			socket.CpuPins[5] = Pin.PA9;
-			socket.CpuPins[6] = Pin.PA26;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PA29;
+			socket.CpuPins[4] = G400.PA10;
+			socket.CpuPins[5] = G400.PA9;
+			socket.CpuPins[6] = G400.PA26;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			socket.SerialPortName = "COM1";
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -162,13 +162,13 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(11);
 			socket.SupportedTypes = new char[] { 'C', 'S', 'U', 'X' };
-			socket.CpuPins[3] = Pin.PC26;
-			socket.CpuPins[4] = Pin.PA5;
-			socket.CpuPins[5] = Pin.PA6;
-			socket.CpuPins[6] = Pin.PB4;
-			socket.CpuPins[7] = Pin.PA12;
-			socket.CpuPins[8] = Pin.PA11;
-			socket.CpuPins[9] = Pin.PA13;
+			socket.CpuPins[3] = G400.PC26;
+			socket.CpuPins[4] = G400.PA5;
+			socket.CpuPins[5] = G400.PA6;
+			socket.CpuPins[6] = G400.PB4;
+			socket.CpuPins[7] = G400.PA12;
+			socket.CpuPins[8] = G400.PA11;
+			socket.CpuPins[9] = G400.PA13;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			socket.SerialPortName = "COM3";
 			
@@ -177,12 +177,12 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(12);
 			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
-			socket.CpuPins[3] = Pin.PC31;
-			socket.CpuPins[4] = Pin.PC16;
-			socket.CpuPins[5] = Pin.PC17;
-			socket.CpuPins[6] = Pin.PB2;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PC31;
+			socket.CpuPins[4] = G400.PC16;
+			socket.CpuPins[5] = G400.PC17;
+			socket.CpuPins[6] = G400.PB2;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			socket.SerialPortName = "COM6";
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -190,12 +190,12 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(13);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'X' };
-			socket.CpuPins[3] = Pin.PB17;
-			socket.CpuPins[4] = Pin.PB6;
-			socket.CpuPins[5] = Pin.PB7;
-			socket.CpuPins[6] = Pin.PC22;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PB17;
+			socket.CpuPins[4] = G400.PB6;
+			socket.CpuPins[5] = G400.PB7;
+			socket.CpuPins[6] = G400.PC22;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -208,13 +208,13 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(14);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'T', 'X' };
-			socket.CpuPins[3] = Pin.PB11;
-			socket.CpuPins[4] = Pin.PB12;
-			socket.CpuPins[5] = Pin.PB13;
-			socket.CpuPins[6] = Pin.PD1;
-			socket.CpuPins[7] = Pin.PD2;
-			socket.CpuPins[8] = Pin.PA30;
-			socket.CpuPins[9] = Pin.PA31;
+			socket.CpuPins[3] = G400.PB11;
+			socket.CpuPins[4] = G400.PB12;
+			socket.CpuPins[5] = G400.PB13;
+			socket.CpuPins[6] = G400.PD1;
+			socket.CpuPins[7] = G400.PD2;
+			socket.CpuPins[8] = G400.PA30;
+			socket.CpuPins[9] = G400.PA31;
 			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -227,52 +227,52 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(15);
 			socket.SupportedTypes = new char[] { 'R', 'Y' };
-			socket.CpuPins[3] = Pin.PC11;
-			socket.CpuPins[4] = Pin.PC12;
-			socket.CpuPins[5] = Pin.PC13;
-			socket.CpuPins[6] = Pin.PC14;
-			socket.CpuPins[7] = Pin.PC15;
-			socket.CpuPins[8] = Pin.PC27;
-			socket.CpuPins[9] = Pin.PC28;
+			socket.CpuPins[3] = G400.PC11;
+			socket.CpuPins[4] = G400.PC12;
+			socket.CpuPins[5] = G400.PC13;
+			socket.CpuPins[6] = G400.PC14;
+			socket.CpuPins[7] = G400.PC15;
+			socket.CpuPins[8] = G400.PC27;
+			socket.CpuPins[9] = G400.PC28;
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(16);
 			socket.SupportedTypes = new char[] { 'G', 'Y' };
-			socket.CpuPins[3] = Pin.PC5;
-			socket.CpuPins[4] = Pin.PC6;
-			socket.CpuPins[5] = Pin.PC7;
-			socket.CpuPins[6] = Pin.PC8;
-			socket.CpuPins[7] = Pin.PC9;
-			socket.CpuPins[8] = Pin.PC10;
-			socket.CpuPins[9] = Pin.PC21;
+			socket.CpuPins[3] = G400.PC5;
+			socket.CpuPins[4] = G400.PC6;
+			socket.CpuPins[5] = G400.PC7;
+			socket.CpuPins[6] = G400.PC8;
+			socket.CpuPins[7] = G400.PC9;
+			socket.CpuPins[8] = G400.PC10;
+			socket.CpuPins[9] = G400.PC21;
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(17);
 			socket.SupportedTypes = new char[] { 'B', 'Y' };
-			socket.CpuPins[3] = Pin.PC0;
-			socket.CpuPins[4] = Pin.PC1;
-			socket.CpuPins[5] = Pin.PC2;
-			socket.CpuPins[6] = Pin.PC3;
-			socket.CpuPins[7] = Pin.PC4;
-			socket.CpuPins[8] = Pin.PC29;
-			socket.CpuPins[9] = Pin.PC30;
+			socket.CpuPins[3] = G400.PC0;
+			socket.CpuPins[4] = G400.PC1;
+			socket.CpuPins[5] = G400.PC2;
+			socket.CpuPins[6] = G400.PC3;
+			socket.CpuPins[7] = G400.PC4;
+			socket.CpuPins[8] = G400.PC29;
+			socket.CpuPins[9] = G400.PC30;
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(18);
 			socket.SupportedTypes = new char[] { 'A', 'P', 'Y' };
-			socket.CpuPins[3] = Pin.PB8;
-			socket.CpuPins[4] = Pin.PB9;
-			socket.CpuPins[5] = Pin.PB10;
-			socket.CpuPins[6] = Pin.PC24;
-			socket.CpuPins[7] = Pin.PC18;
-			socket.CpuPins[8] = Pin.PC19;
-			socket.CpuPins[9] = Pin.PC20;
+			socket.CpuPins[3] = G400.PB8;
+			socket.CpuPins[4] = G400.PB9;
+			socket.CpuPins[5] = G400.PB10;
+			socket.CpuPins[6] = G400.PC24;
+			socket.CpuPins[7] = G400.PC18;
+			socket.CpuPins[8] = G400.PC19;
+			socket.CpuPins[9] = G400.PC20;
 			
 
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -292,11 +292,11 @@ namespace GHIElectronics.Gadgeteer
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
+			GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD", "USB Mass Storage" };
-		private PersistentStorage storage;
+		private Removable storage;
 
 		/// <summary>
 		/// Allows mainboards to support storage device mounting/umounting.  This provides modules with a list of storage device volume names supported by the mainboard. 
@@ -312,7 +312,7 @@ namespace GHIElectronics.Gadgeteer
 		/// </summary>
 		public override bool MountStorageDevice(string volumeName)
 		{
-			this.storage = new PersistentStorage(volumeName);
+			this.storage = new Removable(volumeName);
 			this.storage.Mount();
 
 			return true;
@@ -337,7 +337,7 @@ namespace GHIElectronics.Gadgeteer
 		public override void SetProgrammingMode(GT.Mainboard.ProgrammingInterface programmingInterface)
 		{
 			throw new NotSupportedException();
-		}
+        }
 
         /// <summary>
         /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
@@ -350,32 +350,31 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="orientationDeg">Display orientation in degrees.</param>
         /// <param name="lcdConfig">The required timings from an LCD controller.</param>
         protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
-		{
-			var config = new Configuration.LCD.Configurations();
-			
-			config.Height = (uint)height;
-			config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
-			config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
-			config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
-			config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
-            config.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
-            config.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
-            config.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
-            config.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
-			config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
-			config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
-			config.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
-			config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
-			config.Width = (uint)width;
+        {
+            Configuration.Display.Height = (uint)height;
+            Configuration.Display.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
+            Configuration.Display.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
+            Configuration.Display.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
+            Configuration.Display.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
+            Configuration.Display.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
+            Configuration.Display.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            Configuration.Display.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
+            Configuration.Display.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
+            Configuration.Display.VerticalBackPorch = lcdConfig.VerticalBackPorch;
+            Configuration.Display.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
+            Configuration.Display.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
+            Configuration.Display.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
+            Configuration.Display.Width = (uint)width;
 
-			if (Configuration.LCD.Set(config))
-			{
-				Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
-				Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
+            if (Configuration.Display.Save())
+            {
+                Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
+                Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
 
-				Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
-			}
-		}
+                // A new configuration was set, so we must reboot
+                Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
+            }
+        }
 
         /// <summary>
         /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
@@ -384,13 +383,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            var config = new Configuration.LCD.Configurations();
-            config = Configuration.LCD.HeadlessConfig;
-            config.Width = 0;
-            config.Height = 0;
-            config.PixelClockRateKHz = 0;
-
-            if (Configuration.LCD.Set(config))
+            if (Configuration.Display.Disable())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -400,7 +393,7 @@ namespace GHIElectronics.Gadgeteer
         }
 
 		// change the below to the debug led pin on this mainboard
-		private const Cpu.Pin DebugLedPin = Pin.PD3;
+		private const Cpu.Pin DebugLedPin = G400.PD3;
 
 		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(DebugLedPin, false);
 		/// <summary>
@@ -442,20 +435,18 @@ namespace GHIElectronics.Gadgeteer
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private Cpu.Pin sdaPin;
-            private Cpu.Pin sclPin;
+            private SoftwareI2CBus i2c;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.sdaPin = socket.CpuPins[(int)sdaPin];
-                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.i2c = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
             {
-                SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+                this.i2c.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
         }
 

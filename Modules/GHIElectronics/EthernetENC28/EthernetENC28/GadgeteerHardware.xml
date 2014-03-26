@@ -29,12 +29,12 @@
         <Assembly MFVersion="4.3" Name="Gadgeteer.WebServer" />
 		
         <Assembly MFVersion="4.2" Name="GHI.Premium.Net" ErrorMessage="GHI.Premium.Net could not be found."/>
-        <Assembly MFVersion="4.3" Name="GHI.Net" ErrorMessage="GHI.Net could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Networking" ErrorMessage="GHI.Networking could not be found."/>
       </Assemblies>
 	  
       <ExtraLibrariesRequired>
         <Assembly MFVersion="4.2" Name="GHI.Premium.Net" ErrorMessage="GHI.Premium.Net could not be found."/>
-        <Assembly MFVersion="4.3" Name="GHI.Net" ErrorMessage="GHI.Net could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Networking" ErrorMessage="GHI.Networking could not be found."/>
       </ExtraLibrariesRequired>
 
       <Sockets>

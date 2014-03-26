@@ -5,10 +5,10 @@ using Microsoft.SPOT.Hardware;
 using GT = Gadgeteer;
 
 //using G120 = GHI.Hardware.G120;
-using G120 = GHI.Hardware.G120;
+using G120 = GHI.Pins.G120;
 using GHI.Hardware;
 using GHI.System;
-using GHI.IO;
+using GHI.Hardware.Storage;
 using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
@@ -92,13 +92,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 1
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'B', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P2_13;
-			socket.CpuPins[4] = G120.Pin.P1_26;
-			socket.CpuPins[5] = G120.Pin.P1_27;
-			socket.CpuPins[6] = G120.Pin.P1_28;
-			socket.CpuPins[7] = G120.Pin.P1_29;
-			socket.CpuPins[8] = G120.Pin.P2_4;
-			socket.CpuPins[9] = G120.Pin.P2_2;
+			socket.CpuPins[3] = G120.P2_13;
+			socket.CpuPins[4] = G120.P1_26;
+			socket.CpuPins[5] = G120.P1_27;
+			socket.CpuPins[6] = G120.P1_28;
+			socket.CpuPins[7] = G120.P1_29;
+			socket.CpuPins[8] = G120.P2_4;
+			socket.CpuPins[9] = G120.P2_2;
 
 			// B
 			// N/A
@@ -112,13 +112,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 2
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'G' };
-			socket.CpuPins[3] = G120.Pin.P1_20;
-			socket.CpuPins[4] = G120.Pin.P1_21;
-			socket.CpuPins[5] = G120.Pin.P1_22;
-			socket.CpuPins[6] = G120.Pin.P1_23;
-			socket.CpuPins[7] = G120.Pin.P1_24;
-			socket.CpuPins[8] = G120.Pin.P1_25;
-			socket.CpuPins[9] = G120.Pin.P1_19;
+			socket.CpuPins[3] = G120.P1_20;
+			socket.CpuPins[4] = G120.P1_21;
+			socket.CpuPins[5] = G120.P1_22;
+			socket.CpuPins[6] = G120.P1_23;
+			socket.CpuPins[7] = G120.P1_24;
+			socket.CpuPins[8] = G120.P1_25;
+			socket.CpuPins[9] = G120.P1_19;
 
 			// G
 			// N/A
@@ -129,13 +129,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 3
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'R', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P2_12;
-			socket.CpuPins[4] = G120.Pin.P2_6;
-			socket.CpuPins[5] = G120.Pin.P2_7;
-			socket.CpuPins[6] = G120.Pin.P2_8;
-			socket.CpuPins[7] = G120.Pin.P2_9;
-			socket.CpuPins[8] = G120.Pin.P2_3;
-			socket.CpuPins[9] = G120.Pin.P2_5;
+			socket.CpuPins[3] = G120.P2_12;
+			socket.CpuPins[4] = G120.P2_6;
+			socket.CpuPins[5] = G120.P2_7;
+			socket.CpuPins[6] = G120.P2_8;
+			socket.CpuPins[7] = G120.P2_9;
+			socket.CpuPins[8] = G120.P2_3;
+			socket.CpuPins[9] = G120.P2_5;
 
 			// Y
 			
@@ -146,13 +146,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 4
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'T', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_25;
-			socket.CpuPins[4] = G120.Pin.P0_24;
-			socket.CpuPins[5] = G120.Pin.P0_23;
-			socket.CpuPins[6] = G120.Pin.P1_0;
-			socket.CpuPins[7] = G120.Pin.P1_1;
-			socket.CpuPins[8] = G120.Pin.P0_27;
-			socket.CpuPins[9] = G120.Pin.P0_28;
+			socket.CpuPins[3] = G120.P0_25;
+			socket.CpuPins[4] = G120.P0_24;
+			socket.CpuPins[5] = G120.P0_23;
+			socket.CpuPins[6] = G120.P1_0;
+			socket.CpuPins[7] = G120.P1_1;
+			socket.CpuPins[8] = G120.P0_27;
+			socket.CpuPins[9] = G120.P0_28;
 
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
@@ -175,13 +175,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 5
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'U', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_13;
-			socket.CpuPins[4] = G120.Pin.P0_2;
-			socket.CpuPins[5] = G120.Pin.P0_3;
-			socket.CpuPins[6] = G120.Pin.P1_4;
-			socket.CpuPins[7] = G120.Pin.GPIO_NONE;
-			socket.CpuPins[8] = G120.Pin.GPIO_NONE;
-			socket.CpuPins[9] = G120.Pin.GPIO_NONE;
+			socket.CpuPins[3] = G120.P0_13;
+			socket.CpuPins[4] = G120.P0_2;
+			socket.CpuPins[5] = G120.P0_3;
+			socket.CpuPins[6] = G120.P1_4;
+			socket.CpuPins[7] = G120.GPIO_NONE;
+			socket.CpuPins[8] = G120.GPIO_NONE;
+			socket.CpuPins[9] = G120.GPIO_NONE;
 
 			// U
 			socket.SerialPortName = "COM1";
@@ -195,10 +195,10 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 6
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'S', 'X' };
-			socket.CpuPins[3] = G120.Pin.P2_21;
-			socket.CpuPins[4] = G120.Pin.P1_14;
-			socket.CpuPins[5] = G120.Pin.P1_16;
-			socket.CpuPins[6] = G120.Pin.P1_17;
+			socket.CpuPins[3] = G120.P2_21;
+			socket.CpuPins[4] = G120.P1_14;
+			socket.CpuPins[5] = G120.P1_16;
+			socket.CpuPins[6] = G120.P1_17;
 			socket.CpuPins[7] = (Cpu.Pin)9; //P0.9
 			socket.CpuPins[8] = (Cpu.Pin)8; //P0.8
 			socket.CpuPins[9] = (Cpu.Pin)7; //P0.7
@@ -216,13 +216,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 7
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-			socket.CpuPins[3] = G120.Pin.P0_4;
-			socket.CpuPins[4] = G120.Pin.P4_28;
-			socket.CpuPins[5] = G120.Pin.P4_29;
-			socket.CpuPins[6] = G120.Pin.P1_30;
-			socket.CpuPins[7] = G120.Pin.P3_26;
-			socket.CpuPins[8] = G120.Pin.P3_25;
-			socket.CpuPins[9] = G120.Pin.P3_24;
+			socket.CpuPins[3] = G120.P0_4;
+			socket.CpuPins[4] = G120.P4_28;
+			socket.CpuPins[5] = G120.P4_29;
+			socket.CpuPins[6] = G120.P1_30;
+			socket.CpuPins[7] = G120.P3_26;
+			socket.CpuPins[8] = G120.P3_25;
+			socket.CpuPins[9] = G120.P3_24;
 
 			// P
 			socket.PWM7 = (Cpu.PWMChannel)8;
@@ -241,13 +241,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 8
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
 			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_10;
-			socket.CpuPins[4] = G120.Pin.P2_0;
-			socket.CpuPins[5] = G120.Pin.P0_16;
-			socket.CpuPins[6] = G120.Pin.P0_6;
-			socket.CpuPins[7] = G120.Pin.P0_17;
-			socket.CpuPins[8] = G120.Pin.P0_27;
-			socket.CpuPins[9] = G120.Pin.P0_28;
+			socket.CpuPins[3] = G120.P0_10;
+			socket.CpuPins[4] = G120.P2_0;
+			socket.CpuPins[5] = G120.P0_16;
+			socket.CpuPins[6] = G120.P0_6;
+			socket.CpuPins[7] = G120.P0_17;
+			socket.CpuPins[8] = G120.P0_27;
+			socket.CpuPins[9] = G120.P0_28;
 
 			// I
 			// N/A
@@ -264,13 +264,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 9
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
 			socket.SupportedTypes = new char[] { 'A', 'O', 'S', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_12;
-			socket.CpuPins[4] = G120.Pin.P1_31;
-			socket.CpuPins[5] = G120.Pin.P0_26;
-			socket.CpuPins[6] = G120.Pin.P1_5;
-			socket.CpuPins[7] = G120.Pin.P0_18;
-			socket.CpuPins[8] = G120.Pin.P0_17;
-			socket.CpuPins[9] = G120.Pin.P0_15;
+			socket.CpuPins[3] = G120.P0_12;
+			socket.CpuPins[4] = G120.P1_31;
+			socket.CpuPins[5] = G120.P0_26;
+			socket.CpuPins[6] = G120.P1_5;
+			socket.CpuPins[7] = G120.P0_18;
+			socket.CpuPins[8] = G120.P0_17;
+			socket.CpuPins[9] = G120.P0_15;
 
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
@@ -293,13 +293,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 10
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
 			socket.SupportedTypes = new char[] { 'C', 'I', 'X' };
-			socket.CpuPins[3] = G120.Pin.P0_11;
-			socket.CpuPins[4] = G120.Pin.P0_1;
-			socket.CpuPins[5] = G120.Pin.P0_0;
-			socket.CpuPins[6] = G120.Pin.P0_5;
-			//socket.CpuPins[7] = G120.Pin.P3_26;
-			socket.CpuPins[8] = G120.Pin.P0_27;
-			socket.CpuPins[9] = G120.Pin.P0_28;
+			socket.CpuPins[3] = G120.P0_11;
+			socket.CpuPins[4] = G120.P0_1;
+			socket.CpuPins[5] = G120.P0_0;
+			socket.CpuPins[6] = G120.P0_5;
+			//socket.CpuPins[7] = G120.P3_26;
+			socket.CpuPins[8] = G120.P0_27;
+			socket.CpuPins[9] = G120.P0_28;
 
 			// C
 			// N/A
@@ -323,7 +323,7 @@ namespace GHIElectronics.Gadgeteer
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
+			GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD", "USB Mass Storage" };
@@ -336,7 +336,7 @@ namespace GHIElectronics.Gadgeteer
 			return sdVolumes;
 		}
 
-		private PersistentStorage _storage;
+		private Removable _storage;
 
 		/// <summary>
 		/// Functionality provided by mainboard to mount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
@@ -344,7 +344,7 @@ namespace GHIElectronics.Gadgeteer
 		/// </summary>
 		public override bool MountStorageDevice(string volumeName)
 		{
-			_storage = new PersistentStorage(volumeName);
+			_storage = new Removable(volumeName);
 			_storage.Mount();
 			_storage = null;
 
@@ -385,40 +385,22 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="lcdConfig">The required timings from an LCD controller.</param>
 		protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
 		{
-			var config = new Configuration.LCD.Configurations();
+			Configuration.Display.Height = (uint)height;
+			Configuration.Display.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
+			Configuration.Display.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
+			Configuration.Display.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
+			Configuration.Display.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
+            Configuration.Display.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
+            Configuration.Display.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            Configuration.Display.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
+            Configuration.Display.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
+            Configuration.Display.VerticalBackPorch = lcdConfig.VerticalBackPorch;
+            Configuration.Display.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
+            Configuration.Display.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
+            Configuration.Display.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
+            Configuration.Display.Width = (uint)width;
 
-			//if (lcdConfig.LCDControllerEnabled == false)
-			//{
-			//    // EMX firmware has PixelClockDivider 0xFF as special value meaning "don't run"
-			//    config.PixelClockDivider = 0xff;
-			//}
-
-			config.Height = (uint)height;
-			config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
-			config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
-			config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
-			config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
-            config.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
-            config.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
-
-			// removed
-			//config.PixelClockDivider = lcdConfig.PixelClockDivider;
-
-            // added
-            config.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
-
-            config.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
-
-			// removed
-			//config.PriorityEnable = lcdConfig.PriorityEnable;
-
-			config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
-			config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
-			config.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
-			config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
-            config.Width = (uint)width;
-
-			if (Configuration.LCD.Set(config))
+			if (Configuration.Display.Save())
 			{
 				Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
 				Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -435,13 +417,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            var config = new Configuration.LCD.Configurations();
-            config = Configuration.LCD.HeadlessConfig;
-            config.Width = 0;
-            config.Height = 0;
-            config.PixelClockRateKHz = 0;
-
-            if (Configuration.LCD.Set(config))
+            if (Configuration.Display.Disable())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -451,7 +427,7 @@ namespace GHIElectronics.Gadgeteer
         }
 
 		// change the below to the debug led pin on this mainboard
-		private const Cpu.Pin DebugLedPin = G120.Pin.P1_15;
+		private const Cpu.Pin DebugLedPin = G120.P1_15;
 
 		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(DebugLedPin, false);
 		/// <summary>
@@ -493,20 +469,18 @@ namespace GHIElectronics.Gadgeteer
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private Cpu.Pin sdaPin;
-            private Cpu.Pin sclPin;
+            private SoftwareI2CBus i2c;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.sdaPin = socket.CpuPins[(int)sdaPin];
-                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.i2c = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
             {
-                SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+                this.i2c.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
         }
 

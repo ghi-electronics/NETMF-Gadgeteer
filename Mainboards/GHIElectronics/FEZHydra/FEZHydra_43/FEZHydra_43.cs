@@ -7,8 +7,8 @@ using GT = Gadgeteer;
 using GHIOSHW = GHI.Hardware;
 using GHI.Hardware;
 using GHI.System;
-using GHI.IO;
-using FEZHydra_Pins = GHI.Hardware.FEZHydra.Pin;
+using GHI.Hardware.Storage;
+using GHI.Pins;
 using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
@@ -113,11 +113,11 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 2
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'D' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PB19;
+			socket.CpuPins[3] = Generic.GetPin('B', 19);
 			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_DM;
 			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_DP;
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PB18;
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PB22;
+			socket.CpuPins[6] = Generic.GetPin('B', 18);
+			socket.CpuPins[7] = Generic.GetPin('B', 22);
 			socket.CpuPins[8] = Cpu.Pin.GPIO_NONE;
 			socket.CpuPins[9] = Cpu.Pin.GPIO_NONE;
 
@@ -130,13 +130,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 3
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'S', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PB8; //PWM0
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PB9; //PWM1
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PB12;
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PB13;
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PA26; //MOSI
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PA25; //MISO
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PA27; //SCK
+			socket.CpuPins[3] = Generic.GetPin('B', 8); //PWM0
+			socket.CpuPins[4] = Generic.GetPin('B', 9); //PWM1
+			socket.CpuPins[5] = Generic.GetPin('B', 12);
+			socket.CpuPins[6] = Generic.GetPin('B', 13);
+			socket.CpuPins[7] = Generic.GetPin('A', 26); //MOSI
+			socket.CpuPins[8] = Generic.GetPin('A', 25); //MISO
+			socket.CpuPins[9] = Generic.GetPin('A', 27); //SCK
 			
 			// S
 			socket.SPIModule = SPI.SPI_module.SPI1;
@@ -150,13 +150,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 4
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'S', 'U', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PB2;
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA11; //TXD1
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA12; //RXD1
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PB14;
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PA26; //MOSI
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PA25; //MISO
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PA27; //SCK
+			socket.CpuPins[3] = Generic.GetPin('B', 2);
+			socket.CpuPins[4] = Generic.GetPin('A', 11); //TXD1
+			socket.CpuPins[5] = Generic.GetPin('A', 12); //RXD1
+			socket.CpuPins[6] = Generic.GetPin('B', 14);
+			socket.CpuPins[7] = Generic.GetPin('A', 26); //MOSI
+			socket.CpuPins[8] = Generic.GetPin('A', 25); //MISO
+			socket.CpuPins[9] = Generic.GetPin('A', 27); //SCK
 
 			// S
 			socket.SPIModule = SPI.SPI_module.SPI1;
@@ -173,13 +173,12 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 5
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PA9; //RTS0
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA22; //DTXD
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA21; //DRXD
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PA10; //CTS0
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.GPIO_NONE; // Unused
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PA23; // I2C_SDA
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PA24; // I2C_SCL
+			socket.CpuPins[3] = Generic.GetPin('A', 9); //RTS0
+			socket.CpuPins[4] = Generic.GetPin('A', 22); //DTXD
+			socket.CpuPins[5] = Generic.GetPin('A', 21); //DRXD
+			socket.CpuPins[6] = Generic.GetPin('A', 10); //CTS0
+			socket.CpuPins[8] = Generic.GetPin('A', 23); // I2C_SDA
+			socket.CpuPins[9] = Generic.GetPin('A', 24); // I2C_SCL
 
 			// I
 			// N/A
@@ -196,13 +195,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 6
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD17;
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA13; //TXD2
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA14; //RXD2
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PA29; //TXD2
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PA30; //CTS2
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PA23; //I2C_SDA
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PA24; //I2C_SCL
+			socket.CpuPins[3] = Generic.GetPin('D', 17);
+			socket.CpuPins[4] = Generic.GetPin('A', 13); //TXD2
+			socket.CpuPins[5] = Generic.GetPin('A', 14); //RXD2
+			socket.CpuPins[6] = Generic.GetPin('A', 29); //TXD2
+			socket.CpuPins[7] = Generic.GetPin('A', 30); //CTS2
+			socket.CpuPins[8] = Generic.GetPin('A', 23); //I2C_SDA
+			socket.CpuPins[9] = Generic.GetPin('A', 24); //I2C_SCL
 
 			// I
 			// N/A
@@ -219,13 +218,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 7
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD19;
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA6; //TXD0
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA7; //RXD0
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PD20;
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PD14; //PWM0
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PD15; //PWM1
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PD16; //PWM2
+			socket.CpuPins[3] = Generic.GetPin('D', 19);
+			socket.CpuPins[4] = Generic.GetPin('A', 6); //TXD0
+			socket.CpuPins[5] = Generic.GetPin('A', 7); //RXD0
+			socket.CpuPins[6] = Generic.GetPin('D', 20);
+			socket.CpuPins[7] = Generic.GetPin('D', 14); //PWM0
+			socket.CpuPins[8] = Generic.GetPin('D', 15); //PWM1
+			socket.CpuPins[9] = Generic.GetPin('D', 16); //PWM2
 
 			// P
 			socket.PWM7 = Cpu.PWMChannel.PWM_0;
@@ -244,13 +243,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 8
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
 			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD11;
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA0; //MC_DA0
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA3; //MC_DA1
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PA1; //MC_CDA
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PA4; //MC_DA2
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PA5; //MC_DA3
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PA2; //MC_CK
+			socket.CpuPins[3] = Generic.GetPin('D', 11);
+			socket.CpuPins[4] = Generic.GetPin('A', 0); //MC_DA0
+			socket.CpuPins[5] = Generic.GetPin('A', 3); //MC_DA1
+			socket.CpuPins[6] = Generic.GetPin('A', 1); //MC_CDA
+			socket.CpuPins[7] = Generic.GetPin('A', 4); //MC_DA2
+			socket.CpuPins[8] = Generic.GetPin('A', 5); //MC_DA3
+			socket.CpuPins[9] = Generic.GetPin('A', 2); //MC_CK
 
 			// F
 			// N/A
@@ -264,13 +263,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 9
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
 			socket.SupportedTypes = new char[] { 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD9;
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PD10;
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PD12; //PCK1
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PD1; //AC97_FS
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PD3; //AC97_TX
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PD4; //AC97_RX
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PD2; //AC97_CK
+			socket.CpuPins[3] = Generic.GetPin('D', 9);
+			socket.CpuPins[4] = Generic.GetPin('D', 10);
+			socket.CpuPins[5] = Generic.GetPin('D', 12); //PCK1
+			socket.CpuPins[6] = Generic.GetPin('D', 1); //AC97_FS
+			socket.CpuPins[7] = Generic.GetPin('D', 3); //AC97_TX
+			socket.CpuPins[8] = Generic.GetPin('D', 4); //AC97_RX
+			socket.CpuPins[9] = Generic.GetPin('D', 2); //AC97_CK
 
 			// Y
 			
@@ -281,13 +280,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 10
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
 			socket.SupportedTypes = new char[] { 'R', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PC22;  //LCD_R0
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PC23; //LCD_R1
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PC24; //LCD_R2
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PC25;  //LCD_R3
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PC20;  //LCD_R4
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PC4;  //LCD_VSYNC
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PC5;  //LCD_HSYNC
+			socket.CpuPins[3] = Generic.GetPin('C', 22);  //LCD_R0
+			socket.CpuPins[4] = Generic.GetPin('C', 23); //LCD_R1
+			socket.CpuPins[5] = Generic.GetPin('C', 24); //LCD_R2
+			socket.CpuPins[6] = Generic.GetPin('C', 25);  //LCD_R3
+			socket.CpuPins[7] = Generic.GetPin('C', 20);  //LCD_R4
+			socket.CpuPins[8] = Generic.GetPin('C', 4);  //LCD_VSYNC
+			socket.CpuPins[9] = Generic.GetPin('C', 5);  //LCD_HSYNC
 
 			// R
 			// N/A
@@ -301,13 +300,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 11
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(11);
 			socket.SupportedTypes = new char[] { 'G', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PC15; //LCD_G0
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PC16; //LCD_G1
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PC17; //LCD_G2
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PC18;  //LCD_G3
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PC19;  //LCD_G4
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PC21;  //LCD_G5
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PC3;  //LCD_PWM
+			socket.CpuPins[3] = Generic.GetPin('C', 15); //LCD_G0
+			socket.CpuPins[4] = Generic.GetPin('C', 16); //LCD_G1
+			socket.CpuPins[5] = Generic.GetPin('C', 17); //LCD_G2
+			socket.CpuPins[6] = Generic.GetPin('C', 18);  //LCD_G3
+			socket.CpuPins[7] = Generic.GetPin('C', 19);  //LCD_G4
+			socket.CpuPins[8] = Generic.GetPin('C', 21);  //LCD_G5
+			socket.CpuPins[9] = Generic.GetPin('C', 3);  //LCD_PWM
 
 			// G
 			// N/A
@@ -321,13 +320,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 12
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(12);
 			socket.SupportedTypes = new char[] { 'B', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PC9; //LCD_B0
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PC10; //LCD_B1
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PC11; //LCD_B2
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PC12;  //LCD_B3
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PC13;  //LCD_B4
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PC7;  //LCD_EN
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PC6;  //LCD_CLK
+			socket.CpuPins[3] = Generic.GetPin('C', 9); //LCD_B0
+			socket.CpuPins[4] = Generic.GetPin('C', 10); //LCD_B1
+			socket.CpuPins[5] = Generic.GetPin('C', 11); //LCD_B2
+			socket.CpuPins[6] = Generic.GetPin('C', 12);  //LCD_B3
+			socket.CpuPins[7] = Generic.GetPin('C', 13);  //LCD_B4
+			socket.CpuPins[8] = Generic.GetPin('C', 7);  //LCD_EN
+			socket.CpuPins[9] = Generic.GetPin('C', 6);  //LCD_CLK
 
 			// B
 			// N/A
@@ -341,13 +340,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 13
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(13);
 			socket.SupportedTypes = new char[] { 'A', 'T', 'Y' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD6; //GPAD4
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA20; //AD3YM
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA18; //AD1XM
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PB1; //RXD3
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PB28;
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PB26;
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PB29;
+			socket.CpuPins[3] = Generic.GetPin('D', 6); //GPAD4
+			socket.CpuPins[4] = Generic.GetPin('A', 20); //AD3YM
+			socket.CpuPins[5] = Generic.GetPin('A', 18); //AD1XM
+			socket.CpuPins[6] = Generic.GetPin('B', 1); //RXD3
+			socket.CpuPins[7] = Generic.GetPin('B', 28);
+			socket.CpuPins[8] = Generic.GetPin('B', 26);
+			socket.CpuPins[9] = Generic.GetPin('B', 29);
 
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -367,13 +366,13 @@ namespace GHIElectronics.Gadgeteer
 			#region Socket 14
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(14);
 			socket.SupportedTypes = new char[] { 'A', 'X' };
-			socket.CpuPins[3] = (Cpu.Pin)FEZHydra_Pins.PD7; //GPAD5
-			socket.CpuPins[4] = (Cpu.Pin)FEZHydra_Pins.PA19; //AD2YP
-			socket.CpuPins[5] = (Cpu.Pin)FEZHydra_Pins.PA17; //AD0XP
-			socket.CpuPins[6] = (Cpu.Pin)FEZHydra_Pins.PB0; //TXD3
-			socket.CpuPins[7] = (Cpu.Pin)FEZHydra_Pins.PB30;
-			socket.CpuPins[8] = (Cpu.Pin)FEZHydra_Pins.PB31;
-			socket.CpuPins[9] = (Cpu.Pin)FEZHydra_Pins.PB27;
+			socket.CpuPins[3] = Generic.GetPin('D', 7); //GPAD5
+			socket.CpuPins[4] = Generic.GetPin('A', 19); //AD2YP
+			socket.CpuPins[5] = Generic.GetPin('A', 17); //AD0XP
+			socket.CpuPins[6] = Generic.GetPin('B', 0); //TXD3
+			socket.CpuPins[7] = Generic.GetPin('B', 30);
+			socket.CpuPins[8] = Generic.GetPin('B', 31);
+			socket.CpuPins[9] = Generic.GetPin('B', 27);
 
 			// A
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
@@ -389,7 +388,7 @@ namespace GHIElectronics.Gadgeteer
 		}
 
         private static string[] sdVolumes = new string[] { "SD" };
-        private PersistentStorage _storage;
+        private Removable _storage;
 
 		/// <summary>
 		/// Allows mainboards to support storage device mounting/umounting.  This provides modules with a list of storage device volume names supported by the mainboard. 
@@ -406,7 +405,7 @@ namespace GHIElectronics.Gadgeteer
 		public override bool MountStorageDevice(string volumeName)
         {
             // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
-            _storage = new PersistentStorage(volumeName);
+            _storage = new Removable(volumeName);
             _storage.Mount();
 
             return true;// volumeName == "SD";
@@ -440,8 +439,8 @@ namespace GHIElectronics.Gadgeteer
             if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
                 throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-            Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
-		}
+            GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
+        }
 
         /// <summary>
         /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
@@ -453,37 +452,32 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
         /// <param name="orientationDeg">Display orientation in degrees.</param>
         /// <param name="lcdConfig">The required timings from an LCD controller.</param>
-		protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
+        protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements lcdConfig)
         {
-            var config = new Configuration.LCD.Configurations();
+            Configuration.Display.Height = (uint)height;
+            Configuration.Display.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
+            Configuration.Display.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
+            Configuration.Display.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
+            Configuration.Display.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
+            Configuration.Display.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
+            Configuration.Display.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            Configuration.Display.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
+            Configuration.Display.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
+            Configuration.Display.VerticalBackPorch = lcdConfig.VerticalBackPorch;
+            Configuration.Display.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
+            Configuration.Display.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
+            Configuration.Display.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
+            Configuration.Display.Width = (uint)width;
 
-            config.Height = (uint)height;
-            config.HorizontalBackPorch = lcdConfig.HorizontalBackPorch;
-            config.HorizontalFrontPorch = lcdConfig.HorizontalFrontPorch;
-            config.HorizontalSyncPolarity = lcdConfig.HorizontalSyncPulseIsActiveHigh;
-            config.HorizontalSyncPulseWidth = lcdConfig.HorizontalSyncPulseWidth;
-            config.OutputEnableIsFixed = lcdConfig.UsesCommonSyncPin; //not the proper property, but we needed it;
-            config.OutputEnablePolarity = lcdConfig.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            if (Configuration.Display.Save())
+            {
+                Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
+                Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
 
-            config.PixelClockRateKHz = lcdConfig.MaximumClockSpeed;
-
-            config.PixelPolarity = lcdConfig.PixelDataIsValidOnClockRisingEdge;
-
-            config.VerticalBackPorch = lcdConfig.VerticalBackPorch;
-            config.VerticalFrontPorch = lcdConfig.VerticalFrontPorch;
-            config.VerticalSyncPolarity = lcdConfig.VerticalSyncPulseIsActiveHigh;
-            config.VerticalSyncPulseWidth = lcdConfig.VerticalSyncPulseWidth;
-            config.Width = (uint)width;
-
-			//Reset board if needed
-            if (Configuration.LCD.Set(config))
-			{
-				Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
-				Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
-
-				Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
-			}
-		}
+                // A new configuration was set, so we must reboot
+                Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
+            }
+        }
 
         /// <summary>
         /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
@@ -492,12 +486,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            var config = new Configuration.LCD.Configurations();
-            config.Width = 0;
-            config.Height = 0;
-            config.PixelClockRateKHz = 0;
-
-            if (Configuration.LCD.Set(config))
+            if (Configuration.Display.Disable())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -506,10 +495,7 @@ namespace GHIElectronics.Gadgeteer
             }
         }
 
-		// change the below to the debug led pin on this mainboard
-		private const Cpu.Pin DebugLedPin = FEZHydra_Pins.PD18;
-
-		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(DebugLedPin, false);
+		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(Generic.GetPin('D', 18), false);
 		/// <summary>
 		/// Turns the debug LED on or off
 		/// </summary>
@@ -549,20 +535,18 @@ namespace GHIElectronics.Gadgeteer
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private Cpu.Pin sdaPin;
-            private Cpu.Pin sclPin;
+            private SoftwareI2CBus i2c;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.sdaPin = socket.CpuPins[(int)sdaPin];
-                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.i2c = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
             {
-                GHI.Hardware.SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+                this.i2c.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
         }
 

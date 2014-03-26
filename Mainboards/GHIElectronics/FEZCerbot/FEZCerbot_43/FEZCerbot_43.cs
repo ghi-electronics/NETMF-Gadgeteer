@@ -6,8 +6,8 @@ using GT = Gadgeteer;
 
 using GHI.Hardware;
 using GHI.System;
-using GHI.IO;
-using FEZCerberus = GHI.Hardware.FEZCerb;
+using GHI.Hardware.Storage;
+using GHI.Pins;
 using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
@@ -94,38 +94,38 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PB15;
-			socket.CpuPins[4] = FEZCerberus.Pin.PC8;
-			socket.CpuPins[5] = FEZCerberus.Pin.PC9;
-			socket.CpuPins[6] = FEZCerberus.Pin.PD2;
-			socket.CpuPins[7] = FEZCerberus.Pin.PC10;
-			socket.CpuPins[8] = FEZCerberus.Pin.PC11;
-			socket.CpuPins[9] = FEZCerberus.Pin.PC12;
+			socket.CpuPins[3] = Generic.GetPin('B', 15);
+			socket.CpuPins[4] = Generic.GetPin('C', 8);
+			socket.CpuPins[5] = Generic.GetPin('C', 9);
+			socket.CpuPins[6] = Generic.GetPin('D', 2);
+			socket.CpuPins[7] = Generic.GetPin('C', 10);
+			socket.CpuPins[8] = Generic.GetPin('C', 11);
+			socket.CpuPins[9] = Generic.GetPin('C', 12);
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'I', 'X' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PC5;
-			socket.CpuPins[4] = FEZCerberus.Pin.PA10;
-			socket.CpuPins[5] = FEZCerberus.Pin.PB12;
-			socket.CpuPins[6] = FEZCerberus.Pin.PC7;
-			socket.CpuPins[8] = FEZCerberus.Pin.PB7;
-			socket.CpuPins[9] = FEZCerberus.Pin.PB6;
+			socket.CpuPins[3] = Generic.GetPin('C', 5);
+			socket.CpuPins[4] = Generic.GetPin('A', 10);
+			socket.CpuPins[5] = Generic.GetPin('B', 12);
+			socket.CpuPins[6] = Generic.GetPin('C', 7);
+			socket.CpuPins[8] = Generic.GetPin('B', 7);
+			socket.CpuPins[9] = Generic.GetPin('B', 6);
 			
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'U', 'S', 'X' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PB8;
-			socket.CpuPins[4] = FEZCerberus.Pin.PB10;
-			socket.CpuPins[5] = FEZCerberus.Pin.PB11;
-			socket.CpuPins[6] = FEZCerberus.Pin.PA0;
-			socket.CpuPins[7] = FEZCerberus.Pin.PB5;
-			socket.CpuPins[8] = FEZCerberus.Pin.PB4;
-			socket.CpuPins[9] = FEZCerberus.Pin.PB3;
+			socket.CpuPins[3] = Generic.GetPin('B', 8);
+			socket.CpuPins[4] = Generic.GetPin('B', 10);
+			socket.CpuPins[5] = Generic.GetPin('B', 11);
+			socket.CpuPins[6] = Generic.GetPin('A', 0);
+			socket.CpuPins[7] = Generic.GetPin('B', 5);
+			socket.CpuPins[8] = Generic.GetPin('B', 4);
+			socket.CpuPins[9] = Generic.GetPin('B', 3);
 			
 			socket.SerialPortName = "COM3";
 			socket.SPIModule = SPI.SPI_module.SPI1;
@@ -134,12 +134,12 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'A', 'O', 'I', 'X' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PC0;
-			socket.CpuPins[4] = FEZCerberus.Pin.PC1;
-			socket.CpuPins[5] = FEZCerberus.Pin.PA4;
-			socket.CpuPins[6] = FEZCerberus.Pin.PA1;
-			socket.CpuPins[8] = FEZCerberus.Pin.PB7;
-			socket.CpuPins[9] = FEZCerberus.Pin.PB6;
+			socket.CpuPins[3] = Generic.GetPin('C', 0);
+			socket.CpuPins[4] = Generic.GetPin('C', 1);
+			socket.CpuPins[5] = Generic.GetPin('A', 4);
+			socket.CpuPins[6] = Generic.GetPin('A', 1);
+			socket.CpuPins[8] = Generic.GetPin('B', 7);
+			socket.CpuPins[9] = Generic.GetPin('B', 6);
 
             socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
 			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
@@ -151,12 +151,12 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'U', 'I' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PC14;
-			socket.CpuPins[4] = FEZCerberus.Pin.PA2;
-			socket.CpuPins[5] = FEZCerberus.Pin.PA3;
-			socket.CpuPins[6] = FEZCerberus.Pin.PC15;
-			socket.CpuPins[8] = FEZCerberus.Pin.PB7;
-			socket.CpuPins[9] = FEZCerberus.Pin.PB6;
+			socket.CpuPins[3] = Generic.GetPin('C', 14);
+			socket.CpuPins[4] = Generic.GetPin('A', 2);
+			socket.CpuPins[5] = Generic.GetPin('A', 3);
+			socket.CpuPins[6] = Generic.GetPin('C', 15);
+			socket.CpuPins[8] = Generic.GetPin('B', 7);
+			socket.CpuPins[9] = Generic.GetPin('B', 6);
 			
 			socket.SerialPortName = "COM2";
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
@@ -164,11 +164,11 @@ namespace GHIElectronics.Gadgeteer
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'P' };
-			socket.CpuPins[3] = FEZCerberus.Pin.PC13;
-			socket.CpuPins[6] = FEZCerberus.Pin.PC3;
-			socket.CpuPins[7] = FEZCerberus.Pin.PA9;
-			socket.CpuPins[8] = FEZCerberus.Pin.PB9;
-			socket.CpuPins[9] = FEZCerberus.Pin.PA8;
+			socket.CpuPins[3] = Generic.GetPin('C', 13);
+			socket.CpuPins[6] = Generic.GetPin('C', 3);
+			socket.CpuPins[7] = Generic.GetPin('A', 9);
+			socket.CpuPins[8] = Generic.GetPin('B', 9);
+			socket.CpuPins[9] = Generic.GetPin('A', 8);
 			socket.PWM7 = (Cpu.PWMChannel)12;
 			socket.PWM8 = (Cpu.PWMChannel)15;
 			socket.PWM9 = Cpu.PWMChannel.PWM_3;
@@ -191,17 +191,8 @@ namespace GHIElectronics.Gadgeteer
 			bitmap.Flush(xSrc, ySrc, width, height);
 		}
 
-        void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
-        {
-            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
-                throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
-
-            Util.BitmapConvertBPP(bmp.GetBitmap(), pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
-        }
-
-
         private static string[] sdVolumes = new string[] { "SD" };
-        private PersistentStorage _storage;
+        private Removable _storage;
 
 		/// <summary>
 		/// Allows mainboards to support storage device mounting/umounting.  This provides modules with a list of storage device volume names supported by the mainboard. 
@@ -218,7 +209,7 @@ namespace GHIElectronics.Gadgeteer
         public override bool MountStorageDevice(string volumeName)
         {
             // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
-            _storage = new PersistentStorage(volumeName);
+            _storage = new Removable(volumeName);
             _storage.Mount();
 
             return true;// volumeName == "SD";
@@ -273,7 +264,7 @@ namespace GHIElectronics.Gadgeteer
         }
 
 		// change the below to the debug led pin on this mainboard
-		private const Cpu.Pin DebugLedPin = FEZCerberus.Pin.PA14;
+		private const Cpu.Pin DebugLedPin = (Cpu.Pin)14;
 
 		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(DebugLedPin, false);
 		/// <summary>
@@ -309,26 +300,33 @@ namespace GHIElectronics.Gadgeteer
 			get { return "1.0"; }
 		}
 
+
+        void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+        {
+            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
+                throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
+
+            GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
+        }
+
         private class InteropI2CBus : GT.SocketInterfaces.I2CBus
         {
             public override ushort Address { get; set; }
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private Cpu.Pin sdaPin;
-            private Cpu.Pin sclPin;
+            private SoftwareI2CBus i2c;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.sdaPin = socket.CpuPins[(int)sdaPin];
-                this.sclPin = socket.CpuPins[(int)sclPin];
+                this.i2c = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
             {
-                GHI.Hardware.SoftwareI2CBus.DirectI2CWriteRead(this.sclPin, this.sdaPin, 100, this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+                this.i2c.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
         }
 

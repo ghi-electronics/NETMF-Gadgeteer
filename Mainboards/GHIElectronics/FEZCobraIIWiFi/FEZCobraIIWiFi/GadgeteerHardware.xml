@@ -107,12 +107,12 @@
 
       <LibrariesProvided>
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIWiFi" />
-
-		<Assembly MFVersion="4.3" Name="GHI.Hardware.G120"/>
-		<Assembly MFVersion="4.3" Name="GHI.IO"/>
-		<Assembly MFVersion="4.3" Name="GHI.Net"/>
-		<Assembly MFVersion="4.3" Name="GHI.System"/>
-		<Assembly MFVersion="4.3" Name="GHI.USBHost"/>
+		
+        <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
+        <Assembly MFVersion="4.3" Name="GHI.Networking"/>
+        <Assembly MFVersion="4.3" Name="GHI.Pins"/>
+        <Assembly MFVersion="4.3" Name="GHI.System"/>
+        <Assembly MFVersion="4.3" Name="GHI.Usb"/>
       </LibrariesProvided>
 
       <Power>

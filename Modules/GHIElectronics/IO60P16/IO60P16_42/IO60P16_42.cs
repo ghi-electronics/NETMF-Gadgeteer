@@ -209,21 +209,69 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum PWMPin : byte
         {
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM0 = 0x60,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM1,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM2,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM3,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM4,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM5,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM6,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM7,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM8 = 0x70,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM9,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM10,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM11,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM12,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM13,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM14,
+            /// <summary>
+            /// PWM
+            /// </summary>
             PWM15
         }
 
@@ -232,65 +280,245 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum IOPin : byte
         {
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin0 = 0x00,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port0_Pin7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin0 = 0x10,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port1_Pin7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port2_Pin0 = 0x20,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port2_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port2_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port2_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin0 = 0x30,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port3_Pin7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin0 = 0x40,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port4_Pin7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin0 = 0x50,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port5_Pin7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin0_PWM0 = 0x60,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin1_PWM1,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin2_PWM2,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin3_PWM3,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin4_PWM4,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin5_PWM5,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin6_PWM6,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port6_pin7_PWM7,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin0_PWM8 = 0x70,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin1_PWM9,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin2_PWM10,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin3_PWM11,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin4_PWM12,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin5_PWM13,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin6_PWM14,
+            /// <summary>
+            /// IO
+            /// </summary>
             Port7_pin7_PWM15
         }
 
@@ -299,12 +527,33 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public enum ResistorMode : byte
         {
+            /// <summary>
+            /// Resistor
+            /// </summary>
             ResistivePullUp = 0x1D,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             ResistivePullDown = 0x1E,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             OpenDrainHigh = 0x1F,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             OpenDrainLow = 0x20,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             StrongDrive = 0x21,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             SlowStrongDrive = 0x22,
+            /// <summary>
+            /// Resistor
+            /// </summary>
             HighImpedence = 0x23
         }
 
@@ -454,10 +703,25 @@ namespace Gadgeteer.Modules.GHIElectronics
             /// </summary>
             public enum TickWidth : byte
             {
+                /// <summary>
+                /// TickWidth
+                /// </summary>
                 TickWidth_32KHz_31520ns = 0, // 32KHz
+                /// <summary>
+                /// TickWidth
+                /// </summary>
                 TickWidth_24MHz_42ns, // 24MHz actually 41.66 round to 42
+                /// <summary>
+                /// TickWidth
+                /// </summary>
                 TickWidth_1500KHz_667ns,// 1.5MHz actually 666.67 round to 667
+                /// <summary>
+                /// TickWidth
+                /// </summary>
                 TickWidth_94KHz_10667ns,// 93.75KHz actually 10666.6 round to 10667
+                /// <summary>
+                /// TickWidth
+                /// </summary>
                 TickWidth_Servo_23438hz_42666ns, // 90Hz
             }
 

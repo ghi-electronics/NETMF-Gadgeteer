@@ -51,9 +51,9 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHI.IO" />
+    <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.System" />
-    <Reference Include="GHI.USBHost" />
+    <Reference Include="GHI.Usb" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
     <Reference Include="Microsoft.SPOT.Native" />
