@@ -5,7 +5,8 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using System.Threading;
 
-using GHI.USBHost;
+using GHI.Usb;
+using GHI.Usb.Host;
 using GHI.System;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -98,7 +99,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </example>
     public class Camera : GTM.Module
     {
-        USBH_Webcam _camera;
+        Webcam _camera;
         private DateTime _LastTimeStreamStart;
         private DateTime _LastTimeTakePictureCalled;
 
@@ -153,8 +154,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             _runThread = false;
 
-            USBHostController.DeviceConnectedEvent += new USBH_DeviceConnectionEventHandler(USBHostController_DeviceConnectedEvent);
-            USBHostController.DeviceDisconnectedEvent += new USBH_DeviceConnectionEventHandler(USBHostController_DeviceDisconnectedEvent);
+            Controller.DeviceConnected += USBHostController_DeviceConnectedEvent;
 
             // Reserve the pins used by the USBHost interface
             // These calls will throw PinConflictExcpetion if they are already reserved
@@ -176,13 +176,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         }
 
-        private void USBHostController_DeviceConnectedEvent(USBH_Device device)
+        private void USBHostController_DeviceConnectedEvent(Device device, EventArgs e)
         {
             try
             {
-                if (device.TYPE == USBH_DeviceType.Webcamera)
+                if (device.Type == GHI.Usb.Device.DeviceType.Webcamera)
                 {
-                    _camera = new USBH_Webcam(device);
+                    _camera = new Webcam(device);
 
                     this._cameraThread = new Thread(CameraCommunication);
                     _runThread = true;
@@ -196,34 +196,29 @@ namespace Gadgeteer.Modules.GHIElectronics
             catch
             { }
 
-            if (device.TYPE == USBH_DeviceType.Webcamera)
+            if (device.Type == GHI.Usb.Device.DeviceType.Webcamera)
             {
                 CameraConnectedEvent(this);
             }
 
+            device.Disconnected += USBHostController_DeviceDisconnectedEvent;
         }
 
-        private void USBHostController_DeviceDisconnectedEvent(USBH_Device device)
+        private void USBHostController_DeviceDisconnectedEvent(object sender, EventArgs e)
         {
             try
             {
-                if (device.TYPE == USBH_DeviceType.Webcamera)
-                {
                     _cameraStatus = CameraStatus.Disconnected;
                     _runThread = false;
                     _TakePictureFlag = false;
                     this._camera.StopStreaming();
                     _camera = null;
                     DebugPrint("Camera disconnected.");
-                }
             }
             catch
             { }
 
-            if (device.TYPE == USBH_DeviceType.Webcamera)
-            {
-                OnCameraDisconnectedEvent(this);
-            }
+            OnCameraDisconnectedEvent(this);
         }
 
         /// <summary>
@@ -404,16 +399,16 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public PictureResolution CurrentPictureResolution { get; set; }
 
-        private USBH_Webcam.ImageFormat GetImageFormat(PictureResolution pictureResolution)
+        private Webcam.ImageFormat GetImageFormat(PictureResolution pictureResolution)
         {
-            USBH_Webcam.ImageFormat imageFormat = null;
-            USBH_Webcam.ImageFormat[] imageFormats;
+            Webcam.ImageFormat imageFormat = null;
+            Webcam.ImageFormat[] imageFormats;
 
             if (_camera != null)
             {
                 try
                 {
-                    imageFormats = _camera.GetSupportedFormats();
+                    imageFormats = _camera.SupportedFormats;
                     for (int i = 0; i < imageFormats.Length; i++)
                     {
                         if (imageFormats[i].Width == pictureResolution.Width && imageFormats[i].Height == pictureResolution.Height)
@@ -480,8 +475,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
-        private Bitmap _targetBitmap;
-
         /// <summary>
         /// Starts streaming the bitmap identified by the bitmap parameter.
         /// </summary>
@@ -537,6 +530,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         private bool _runThread;
+        private Bitmap _targetBitmap;
 
         private void CameraCommunication()
         {
@@ -549,13 +543,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                         if (_cameraStatus == CameraStatus.TakePicture || _cameraStatus == CameraStatus.StreamBitmap)
                         {
-                            if (_camera.IsNewImageReady())
+                            if (_camera.IsNewImageAvailable())
                             {
-
                                 _LastTimeStreamStart = DateTime.Now;
-                                if (_cameraStatus == CameraStatus.TakePicture) _targetBitmap = new Bitmap(_camera.CurrentFormat.Width, _camera.CurrentFormat.Height);
+                                if (_cameraStatus == CameraStatus.TakePicture) _targetBitmap = new Bitmap(_camera.CurrentStreamingFormat.Width, _camera.CurrentStreamingFormat.Height);
 
-                                _camera.DrawImage(_targetBitmap, 0, 0, _camera.CurrentFormat.Width, _camera.CurrentFormat.Height);
+                                _camera.GetImage(_targetBitmap);
 
                                 if (_cameraStatus == CameraStatus.StreamBitmap)
                                 {
@@ -568,8 +561,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                                     _takePictureStreamingTimeoutTimeSpan = new TimeSpan(10 * 1000 * _takePictureStreamingTimeout);
                                     _LastTimeTakePictureCalled = DateTime.Now;
 
-                                    byte[] bmpFile = new byte[_targetBitmap.Width * _targetBitmap.Height * 3 + 54];
-                                    Util.BitmapToBMPFile(_targetBitmap.GetBitmap(), _targetBitmap.Width, _targetBitmap.Height, bmpFile);
+                                    byte[] bmpFile = GHI.System.Utilities.BitmapHelpers.ConvertToFile(_targetBitmap);
                                     Picture picture = new Picture(bmpFile, Picture.PictureEncoding.BMP);
                                     OnPictureCapturedEvent(this, picture);
                                     _cameraStatus = CameraStatus.Ready;

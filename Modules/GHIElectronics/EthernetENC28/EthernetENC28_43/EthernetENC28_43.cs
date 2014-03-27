@@ -7,7 +7,7 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.SocketInterfaces;
 
-using GHINet = GHI.Net;
+using GHINet = GHI.Networking;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -44,28 +44,27 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             Interface = new GHINet.EthernetENC28J60(socket.SPIModule, socket.CpuPins[6], socket.CpuPins[3], socket.CpuPins[4], 1000);
 
-            //if (!Interface.IsOpen)
-            //{
-            //    Interface.Open();
-            //}
+            if (GHINet.BaseInterface.ActiveInterface == null)
+                this.Interface.Open();
 
-            //GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
+            Thread.Sleep(500);
 
-            //Thread.Sleep(500);
-
-            //NetworkSettings = Interface.NetworkInterface;
+            NetworkSettings = Interface.NetworkInterface;
         }
+        
+        /// <summary>
+        /// Instructs the Mainboard to use this module for all network communication, and assigns the networking stack to this module.
+        /// </summary>
+        /// <remarks>
+        /// This function is only needed if more than one network module is being used simultaneously. If not, this function should not be used.
+        /// </remarks>
+        public void UseThisNetworkInterface()
+        {
+            if (this.Interface.Opened)
+                return;
 
-        ///// <summary>
-        ///// Instructs the Mainboard to use this module for all network communication, and assigns the networking stack to this module.
-        ///// </summary>
-        ///// <remarks>
-        ///// This function is only needed if more than one network module is being used simultaneously. If not, this function should not be used.
-        ///// </remarks>
-        //public void UseThisNetworkInterface()
-        //{
-        //    GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
-        //}
+            this.Interface.Open();
+        }
 
         /// <summary>
         /// Gets a value that indicates whether this ethernet module is physically connected to a network device.
@@ -89,7 +88,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
-                return Interface.IsCableConnected;
+                return Interface.CableConnected;
             }
         }
 

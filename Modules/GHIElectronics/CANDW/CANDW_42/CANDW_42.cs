@@ -110,9 +110,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="bitRate">The desired bitrate, if known. Otherwise, use the other overload to calculate a bitrate. See GHI's website. Go to Support::Documents::CAN for more info.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
-        public void InitializeCAN(uint bitRate, int receiveBufferSize)
+        /// <param name="channel">The CAN channel to use.</param>
+        public void InitializeCAN(uint bitRate, int receiveBufferSize, CAN.Channel channel = CAN.Channel.Channel_1)
         {
-            m_CAN = new CAN(CAN.Channel.Channel_1, bitRate, receiveBufferSize = 100);
+            m_CAN = new CAN(channel, bitRate, receiveBufferSize = 100);
 
             m_CAN.DataReceivedEvent += new CANDataReceivedEventHandler(m_CAN_DataReceivedEvent);
             m_CAN.ErrorReceivedEvent += new CANErrorReceivedEventHandler(m_CAN_ErrorReceivedEvent);
@@ -125,9 +126,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="T2">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
         /// <param name="BRP">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
-        public void InitializeCAN(int T1, int T2, int BRP, int receiveBufferSize = 100)
+        /// <param name="channel">The CAN channel to use.</param>
+        public void InitializeCAN(int T1, int T2, int BRP, int receiveBufferSize = 100, CAN.Channel channel = CAN.Channel.Channel_1)
         {
-            m_CAN = new CAN(CAN.Channel.Channel_1, (uint)(((T2 - 1) << 20) | ((T1 - 1) << 16) | ((BRP - 1) << 0)), receiveBufferSize);
+            m_CAN = new CAN(channel, (uint)(((T2 - 1) << 20) | ((T1 - 1) << 16) | ((BRP - 1) << 0)), receiveBufferSize);
 
             m_CAN.DataReceivedEvent += new CANDataReceivedEventHandler(m_CAN_DataReceivedEvent);
             m_CAN.ErrorReceivedEvent += new CANErrorReceivedEventHandler(m_CAN_ErrorReceivedEvent);

@@ -5,11 +5,13 @@ using System;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-using GHI.IO;
-using GHI.USBHost;
+using GHI.Hardware;
+using GHI.Usb;
+using GHI.Usb.Host;
 using GHI.System;
 using System.Collections;
 using Microsoft.SPOT.IO;
+using Microsoft.SPOT;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -62,8 +64,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 RemovableMedia.Insert += Insert;
                 RemovableMedia.Eject += Eject;
 
-                USBHostController.DeviceConnectedEvent += new USBH_DeviceConnectionEventHandler(USBHostController_DeviceConnectedEvent);
-                USBHostController.DeviceDisconnectedEvent += new USBH_DeviceConnectionEventHandler(USBHostController_DeviceDisconnectedEvent);
+                Controller.DeviceConnected += (USBHostController_DeviceConnectedEvent);
 
                 // Reserve the pins used by the USB Host interface
                 socket.ReservePin(Socket.Pin.Three, this);
@@ -79,41 +80,41 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
 
-        private void USBHostController_DeviceConnectedEvent(USBH_Device device)
+        private void USBHostController_DeviceConnectedEvent(Device device, EventArgs e)
         {
             try
             {
-                switch (device.TYPE)
+                switch (device.Type)
                 {
-                    case USBH_DeviceType.MassStorage:
+                    case Device.DeviceType.MassStorage:
                         lock (this.storageDevices)
                         {
-                            var ps = new PersistentStorage(device);
+                            var ps = new GHI.Hardware.Storage.Removable(device);
                             ps.Mount();
-                            this.storageDevices.Add(device.ID, ps);
+                            this.storageDevices.Add(device.Id, ps);
                         }
 
                         break;
-                    case USBH_DeviceType.Mouse:
+                    case Device.DeviceType.Mouse:
                         lock (this.mice)
                         {
-                            var mouse = new USBH_Mouse(device);
-                            mouse.SetCursorBounds(int.MinValue, int.MaxValue, int.MinValue, int.MaxValue);
-                            this.mice.Add(device.ID, mouse);
+                            var mouse = new Mouse(device);
+                            mouse.SetCursorBounds(new Position() { X = int.MinValue, Y = int.MinValue }, new Position() { X = int.MaxValue, Y = int.MaxValue });
+                            this.mice.Add(device.Id, mouse);
                             this.OnMouseConnectedEvent(this, mouse);
                         }
 
                         break;
-                    case USBH_DeviceType.Keyboard:
+                    case Device.DeviceType.Keyboard:
                         lock (this.keyboards)
                         {
-                            var keyboard = new USBH_Keyboard(device);
-                            this.keyboards.Add(device.ID, keyboard);
+                            var keyboard = new Keyboard(device);
+                            this.keyboards.Add(device.Id, keyboard);
                             this.OnKeyboardConnectedEvent(this, keyboard);
                         }
 
                         break;
-                    case USBH_DeviceType.Webcamera:
+                    case Device.DeviceType.Webcamera:
                         ErrorPrint("Use GTM.GHIElectronics.Camera for USB WebCamera support.");
                         break;
                     default:
@@ -125,46 +126,48 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 ErrorPrint("Unable to identify USB Host device.");
             }
+
+            device.Disconnected += USBHostController_DeviceDisconnectedEvent;
         }
 
-        private void USBHostController_DeviceDisconnectedEvent(USBH_Device device)
+        private void USBHostController_DeviceDisconnectedEvent(Device device, EventArgs e)
         {
-            switch (device.TYPE)
+            switch (device.Type)
             {
-                case USBH_DeviceType.MassStorage:
+                case Device.DeviceType.MassStorage:
                     lock (this.storageDevices)
                     {
-                        if (!this.storageDevices.Contains(device.ID))
+                        if (!this.storageDevices.Contains(device.Id))
                             return;
 
-                        var ps = (PersistentStorage)this.storageDevices[device.ID];
+                        var ps = (GHI.Hardware.Storage.Removable)this.storageDevices[device.Id];
                         ps.Unmount();
                         ps.Dispose();
-                        this.storageDevices.Remove(device.ID);
+                        this.storageDevices.Remove(device.Id);
                     }
 
                     break;
-                case USBH_DeviceType.Mouse:
+                case Device.DeviceType.Mouse:
                     lock (this.mice)
                     {
-                        if (!this.mice.Contains(device.ID))
+                        if (!this.mice.Contains(device.Id))
                             return;
 
-                        var mouse = (USBH_Mouse)this.mice[device.ID];
+                        var mouse = (Mouse)this.mice[device.Id];
                         this.OnMouseDisconnectedEvent(this, mouse);
-                        this.mice.Remove(device.ID);
+                        this.mice.Remove(device.Id);
                     }
 
                     break;
-                case USBH_DeviceType.Keyboard:
+                case Device.DeviceType.Keyboard:
                     lock (this.keyboards)
                     {
-                        if (!this.keyboards.Contains(device.ID))
+                        if (!this.keyboards.Contains(device.Id))
                             return;
 
-                        var keyboard = (USBH_Keyboard)this.keyboards[device.ID];
+                        var keyboard = (Keyboard)this.keyboards[device.Id];
                         this.OnKeyboardDisconnectedEvent(this, keyboard);
-                        this.keyboards.Remove(device.ID);
+                        this.keyboards.Remove(device.Id);
                     }
 
                     break;
@@ -272,8 +275,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Represents the delegate that is used for the <see cref="MouseConnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
-        public delegate void MouseConnectedEventHandler(USBHost sender, USBH_Mouse mouse);
+        /// <param name="mouse">The <see cref="Mouse"/> object associated with the event.</param>
+        public delegate void MouseConnectedEventHandler(USBHost sender, Mouse mouse);
 
         /// <summary>
         /// Raised when a USB mouse device is connected to the host.
@@ -290,8 +293,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Raises the <see cref="MouseConnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
-        protected virtual void OnMouseConnectedEvent(USBHost sender, USBH_Mouse mouse)
+        /// <param name="mouse">The <see cref="Mouse"/> object associated with the event.</param>
+        protected virtual void OnMouseConnectedEvent(USBHost sender, Mouse mouse)
         {
             if (_OnMouseConnected == null) _OnMouseConnected = new MouseConnectedEventHandler(OnMouseConnectedEvent);
             if (Program.CheckAndInvoke(MouseConnected, _OnMouseConnected, sender, mouse))
@@ -304,8 +307,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Represents the delegate that is used for the <see cref="MouseDisconnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
-        public delegate void MouseDisconnectedEventHandler(USBHost sender, USBH_Mouse mouse);
+        /// <param name="mouse">The <see cref="Mouse"/> object associated with the event.</param>
+        public delegate void MouseDisconnectedEventHandler(USBHost sender, Mouse mouse);
 
         /// <summary>
         /// Raised when a USB mouse device is disconnected to the host.
@@ -322,8 +325,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Raises the <see cref="MouseDisconnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="mouse">The <see cref="USBH_Mouse"/> object associated with the event.</param>
-        protected virtual void OnMouseDisconnectedEvent(USBHost sender, USBH_Mouse mouse)
+        /// <param name="mouse">The <see cref="Mouse"/> object associated with the event.</param>
+        protected virtual void OnMouseDisconnectedEvent(USBHost sender, Mouse mouse)
         {
             if (_OnMouseDisconnected == null) _OnMouseDisconnected = new MouseDisconnectedEventHandler(OnMouseDisconnectedEvent);
             if (Program.CheckAndInvoke(MouseDisconnected, _OnMouseDisconnected, sender, mouse))
@@ -336,8 +339,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Represents the delegate that is used to handle the <see cref="KeyboardConnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
-        public delegate void KeyboardConnectedEventHandler(USBHost sender, USBH_Keyboard Keyboard);
+        /// <param name="Keyboard">The <see cref="Keyboard"/> object associated with the event.</param>
+        public delegate void KeyboardConnectedEventHandler(USBHost sender, Keyboard Keyboard);
 
         /// <summary>
         /// Raised when a USB Keyboard device is connected to the host.
@@ -354,8 +357,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Raises the <see cref="KeyboardConnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
-        protected virtual void OnKeyboardConnectedEvent(USBHost sender, USBH_Keyboard keyboard)
+        /// <param name="keyboard">The <see cref="Keyboard"/> object associated with the event.</param>
+        protected virtual void OnKeyboardConnectedEvent(USBHost sender, Keyboard keyboard)
         {
             if (_OnKeyboardConnected == null) _OnKeyboardConnected = new KeyboardConnectedEventHandler(OnKeyboardConnectedEvent);
             if (Program.CheckAndInvoke(KeyboardConnected, _OnKeyboardConnected, sender, keyboard))
@@ -368,8 +371,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Represents the delegate that is used for the <see cref="KeyboardDisconnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
-        public delegate void KeyboardDisconnectedEventHandler(USBHost sender, USBH_Keyboard Keyboard);
+        /// <param name="Keyboard">The <see cref="Keyboard"/> object associated with the event.</param>
+        public delegate void KeyboardDisconnectedEventHandler(USBHost sender, Keyboard Keyboard);
 
         /// <summary>
         /// Raised when a USB Keyboard device is disconnected to the host.
@@ -386,8 +389,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Raises the <see cref="KeyboardDisconnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="Keyboard">The <see cref="USBH_Keyboard"/> object associated with the event.</param>
-        protected virtual void OnKeyboardDisconnectedEvent(USBHost sender, USBH_Keyboard Keyboard)
+        /// <param name="Keyboard">The <see cref="Keyboard"/> object associated with the event.</param>
+        protected virtual void OnKeyboardDisconnectedEvent(USBHost sender, Keyboard Keyboard)
         {
             if (_OnKeyboardDisconnected == null) _OnKeyboardDisconnected = new KeyboardDisconnectedEventHandler(OnKeyboardDisconnectedEvent);
             if (Program.CheckAndInvoke(KeyboardDisconnected, _OnKeyboardDisconnected, sender, Keyboard))

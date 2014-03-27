@@ -6,7 +6,7 @@ using Microsoft.SPOT.Net.NetworkInformation;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-using GHINet = GHI.Net;
+using GHINet = GHI.Networking;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -45,12 +45,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             Interface = new GHINet.EthernetBuiltIn();
 
-            if (!Interface.IsOpen)
-            {
-                Interface.Open();
-            }
-
-            GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
+            if (GHINet.BaseInterface.ActiveInterface == null)
+                this.Interface.Open();
 
             Thread.Sleep(500);
 
@@ -65,7 +61,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </remarks>
         public void UseThisNetworkInterface()
         {
-            GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
+            if (this.Interface.Opened)
+                return;
+
+            this.Interface.Open();
         }
 
         /// <summary>
@@ -90,7 +89,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
-                return Interface.IsCableConnected;
+                return Interface.CableConnected;
             }
         }
 

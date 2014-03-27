@@ -8,8 +8,6 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.SocketInterfaces;
 
-using FEZCerberus = GHI.Hardware.FEZCerb;
-
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
@@ -69,25 +67,25 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.leftSensor = new AnalogInput((Cpu.AnalogChannel)8);
 			this.rightSensor = new AnalogInput(Cpu.AnalogChannel.ANALOG_6);
-			this.leftIRLED = new OutputPort(FEZCerberus.Pin.PB13, true);
-			this.rightIRLED = new OutputPort(FEZCerberus.Pin.PB14, true);
+			this.leftIRLED = new OutputPort(GHI.Pins.Generic.GetPin('B', 13), true);
+            this.rightIRLED = new OutputPort(GHI.Pins.Generic.GetPin('B', 14), true);
 
 			this.leftInverted = false;
 			this.rightInverted = false;
 			this.leftMotor = new PWM(Cpu.PWMChannel.PWM_4, CerbotController.MOTOR_BASE_FREQUENCY, 0, false);
 			this.rightMotor = new PWM(Cpu.PWMChannel.PWM_5, CerbotController.MOTOR_BASE_FREQUENCY, 0, false);
-			this.leftMotorDirection = new OutputPort(FEZCerberus.Pin.PA6, false);
-			this.rightMotorDirection = new OutputPort(FEZCerberus.Pin.PC4, false);
+            this.leftMotorDirection = new OutputPort(GHI.Pins.Generic.GetPin('A', 6), false);
+            this.rightMotorDirection = new OutputPort(GHI.Pins.Generic.GetPin('C', 4), false);
 
 			this.servoConfigured = false;
 
             var spiSocket = GT.Socket.GetSocket(3, true, null, null);
             var tempSocket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
             tempSocket.SupportedTypes = new char[] { 'S' };
-            tempSocket.CpuPins[3] = FEZCerberus.Pin.PB2;
-            tempSocket.CpuPins[4] = FEZCerberus.Pin.PB2;
-            tempSocket.CpuPins[5] = FEZCerberus.Pin.PB2;
-            tempSocket.CpuPins[6] = FEZCerberus.Pin.PB2;
+            tempSocket.CpuPins[3] = GHI.Pins.Generic.GetPin('B', 2);
+            tempSocket.CpuPins[4] = GHI.Pins.Generic.GetPin('B', 2);
+            tempSocket.CpuPins[5] = GHI.Pins.Generic.GetPin('B', 2);
+            tempSocket.CpuPins[6] = GHI.Pins.Generic.GetPin('B', 2);
             tempSocket.CpuPins[7] = spiSocket.CpuPins[7];
             tempSocket.CpuPins[8] = spiSocket.CpuPins[8];
             tempSocket.CpuPins[9] = spiSocket.CpuPins[9];

@@ -5,7 +5,7 @@ using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.SocketInterfaces;
 
-using GHINet = GHI.Net;
+using GHINet = GHI.Networking;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -44,14 +44,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Six, this);
 
             Interface = new GHINet.WiFiRS9110(socket.SPIModule, socket.CpuPins[6], socket.CpuPins[3], socket.CpuPins[4], 4000);
-            //Interface = new GHINet.WiFiRS9110(Microsoft.SPOT.Hardware.SPI.SPI_module.SPI2, (Microsoft.SPOT.Hardware.Cpu.Pin)16, (Microsoft.SPOT.Hardware.Cpu.Pin)18, (Microsoft.SPOT.Hardware.Cpu.Pin)6, 4000);
 
-            if (!Interface.IsOpen)
-            {
-                Interface.Open();
-            }
-
-            GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
+            if (GHINet.BaseInterface.ActiveInterface == null)
+                this.Interface.Open();
 
             Thread.Sleep(500);
 
@@ -66,7 +61,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </remarks>
         public void UseThisNetworkInterface()
         {
-            GHINet.NetworkInterfaceExtension.AssignNetworkingStackTo(Interface);
+            if (this.Interface.Opened)
+                return;
+
+            this.Interface.Open();
         }
 
         /// <summary>
@@ -91,7 +89,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
-                return Interface.IsLinkConnected;
+                return Interface.LinkConnected;
             }
         }
 

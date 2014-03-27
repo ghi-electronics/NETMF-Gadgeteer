@@ -34,11 +34,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.EnsureTypeIsSupported('C', this);
         }
 
-        void m_CAN_ErrorReceivedEvent(CAN sender, CANErrorReceivedEventArgs args)
+        void m_CAN_ErrorReceivedEvent(Can sender, Can.ErrorReceivedEventArgs args)
         {
             //this._PostDone = new PostMessagesDoneEventHandler(this.OnPostMessagesFinished);
             //this._PostDone(m_numMessagesSent);
-            this._ErrorReceived = new ErrorReceivedEventHandler(this.OnErrorReceived);
+            this._ErrorReceived = this.OnErrorReceived;
             this._ErrorReceived(sender, args);
         }
 
@@ -47,7 +47,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Error args</param>
-        public delegate void ErrorReceivedEventHandler(CAN sender, CANErrorReceivedEventArgs args);
+        public delegate void ErrorReceivedEventHandler(Can sender, Can.ErrorReceivedEventArgs args);
         
         /// <summary>
         /// Event for when an error is received
@@ -61,12 +61,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Error arguments</param>
-        protected virtual void OnErrorReceived(CAN sender, CANErrorReceivedEventArgs args)
+        protected virtual void OnErrorReceived(Can sender, Can.ErrorReceivedEventArgs args)
         {
             this.ErrorReceived(sender, args);
         }
 
-        void m_CAN_DataReceivedEvent(CAN sender, CANDataReceivedEventArgs args)
+        void m_CAN_DataReceivedEvent(Can sender, Can.MessageAvailableEventArgs args)
         {
             this._DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
             this._DataReceived(sender, args);
@@ -77,7 +77,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Data args</param>
-        public delegate void DataReceivedEventHandler(CAN sender, CANDataReceivedEventArgs args);
+        public delegate void DataReceivedEventHandler(Can sender, Can.MessageAvailableEventArgs args);
         
         /// <summary>
         /// Event for when data is received
@@ -91,14 +91,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Data args</param>
-        protected virtual void OnDataReceived(CAN sender, CANDataReceivedEventArgs args)
+        protected virtual void OnDataReceived(Can sender, Can.MessageAvailableEventArgs args)
         {
             if (this.DataReceived == null)
                 this.DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
             this.DataReceived(sender, args);
         }
 
-        private CAN m_CAN;
+        private Can m_CAN;
 
         //public CAN GetCAN
         //{
@@ -108,29 +108,31 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Initializes CAN.
         /// </summary>
-        /// <param name="bitRate">The desired bitrate, if known. Otherwise, use the other overload to calculate a bitrate. See GHI's website. Go to Support::Documents::CAN for more info.</param>
-        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
-        public void InitializeCAN(uint bitRate, int receiveBufferSize)
+        /// <param name="speed">The desired bus speed.</param>
+        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
+        /// <param name="channel">The CAN channel to use.</param>
+        public void InitializeCAN(Can.Channel channel, Can.Speed speed, int receiveBufferSize, Can.Channel channel = Can.Channel.One)
         {
-            m_CAN = new CAN(CAN.Channel.Channel_1, bitRate, receiveBufferSize = 100);
+            m_CAN = new Can(channel, speed);
+            m_CAN.ReceiveBufferSize = receiveBufferSize;
 
-            m_CAN.DataReceivedEvent += new CANDataReceivedEventHandler(m_CAN_DataReceivedEvent);
-            m_CAN.ErrorReceivedEvent += new CANErrorReceivedEventHandler(m_CAN_ErrorReceivedEvent);
+            m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
+            m_CAN.ErrorReceived += (m_CAN_ErrorReceivedEvent);
         }
 
         /// <summary>
         /// Initializes CAN.
         /// </summary>
-        /// <param name="T1">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
-        /// <param name="T2">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
-        /// <param name="BRP">See GHI's website. Go to Support::Documents::CAN for calculation.</param>
-        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages). Defaulted to 100.</param>
-        public void InitializeCAN(int T1, int T2, int BRP, int receiveBufferSize = 100)
+        /// <param name="timings">The desired bus timings.</param>
+        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
+        /// <param name="channel">The CAN channel to use.</param>
+        public void InitializeCAN(Can.Timings timings, int receiveBufferSize, Can.Channel channel = Can.Channel.One)
         {
-            m_CAN = new CAN(CAN.Channel.Channel_1, (uint)(((T2 - 1) << 20) | ((T1 - 1) << 16) | ((BRP - 1) << 0)), receiveBufferSize);
+            m_CAN = new Can(channel, timings);
+            m_CAN.ReceiveBufferSize = receiveBufferSize;
 
-            m_CAN.DataReceivedEvent += new CANDataReceivedEventHandler(m_CAN_DataReceivedEvent);
-            m_CAN.ErrorReceivedEvent += new CANErrorReceivedEventHandler(m_CAN_ErrorReceivedEvent);
+            m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
+            m_CAN.ErrorReceived += (m_CAN_ErrorReceivedEvent);
         }
 
         private System.Threading.Thread m_PostMessagesThread;
@@ -138,7 +140,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// The list of messages to be sent when calling PostMessages.
         /// </summary>
-        public CAN.Message[] msgList;
+        public Can.Message[] msgList;
 
         /// <summary>
         ///  Posts (queues for writing) CAN messages
@@ -176,7 +178,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             while (true)
             {
-                m_numMessagesSent += m_CAN.PostMessages(msgList, m_numMessagesSent, msgList.Length - m_numMessagesSent);
+                m_numMessagesSent += m_CAN.SendMessages(msgList, m_numMessagesSent, msgList.Length - m_numMessagesSent);
 
                 if (m_numMessagesSent == msgList.Length)
                     break;
@@ -233,7 +235,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>A boolean value denoting if all posted (queued for writing) messages are sent.</returns>
         public bool GetPostedMessagesSent()
         {
-            return m_CAN.PostedMessagesSent;
+            return m_CAN.IsTransmitBufferEmpty;
         }
 
         /// <summary>
@@ -242,7 +244,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The number of messages ready to be read.</returns>
         public int GetReceivedMessagesCount()
         {
-            return m_CAN.ReceivedMessagesCount;
+            return m_CAN.AvailableMessages;
         }
 
         /// <summary>
@@ -323,7 +325,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void DisableExplicitFilters()
         {
-            m_CAN.DisableExplicitFilters();
+            m_CAN.SetExplicitFilters(null);
         }
 
         /// <summary>
@@ -331,7 +333,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void DisableGroupFilters()
         {
-            m_CAN.DisableGroupFilters();
+            m_CAN.SetGroupFilters(null, null);
         }
         #endregion Filters
     }
