@@ -4,9 +4,9 @@ using Microsoft.SPOT.Hardware;
 
 using GT = Gadgeteer;
 
-using GHI.Hardware;
-using GHI.System;
-using GHI.Hardware.Storage;
+using GHI.Processor;
+using GHI.IO;
+using GHI.IO.Storage;
 using GHI.Pins;
 using GTM = Gadgeteer.Modules;
 
@@ -308,7 +308,7 @@ namespace GHIElectronics.Gadgeteer
             if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
                 throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-            GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
+            GHI.Utilities.Bitmaps.Convert(bmp, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE);
         }
 
         private class InteropI2CBus : GT.SocketInterfaces.I2CBus

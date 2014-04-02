@@ -7,7 +7,7 @@ using System.Threading;
 
 using GHI.Usb;
 using GHI.Usb.Host;
-using GHI.System;
+using GHI.Processor;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -180,7 +180,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             try
             {
-                if (device.Type == GHI.Usb.Device.DeviceType.Webcamera)
+                if (device.Type == GHI.Usb.Device.DeviceType.Webcam)
                 {
                     _camera = new Webcam(device);
 
@@ -196,7 +196,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             catch
             { }
 
-            if (device.Type == GHI.Usb.Device.DeviceType.Webcamera)
+            if (device.Type == GHI.Usb.Device.DeviceType.Webcam)
             {
                 CameraConnectedEvent(this);
             }
@@ -561,7 +561,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                                     _takePictureStreamingTimeoutTimeSpan = new TimeSpan(10 * 1000 * _takePictureStreamingTimeout);
                                     _LastTimeTakePictureCalled = DateTime.Now;
 
-                                    byte[] bmpFile = GHI.System.Utilities.BitmapHelpers.ConvertToFile(_targetBitmap);
+                                    byte[] bmpFile = GHI.Utilities.Bitmaps.ConvertToFile(_targetBitmap);
                                     Picture picture = new Picture(bmpFile, Picture.PictureEncoding.BMP);
                                     OnPictureCapturedEvent(this, picture);
                                     _cameraStatus = CameraStatus.Ready;

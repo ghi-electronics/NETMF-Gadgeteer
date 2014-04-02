@@ -5,10 +5,10 @@ using System;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-using GHI.Hardware;
+using GHI.Processor;
+using GHI.IO;
 using GHI.Usb;
 using GHI.Usb.Host;
-using GHI.System;
 using System.Collections;
 using Microsoft.SPOT.IO;
 using Microsoft.SPOT;
@@ -89,7 +89,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     case Device.DeviceType.MassStorage:
                         lock (this.storageDevices)
                         {
-                            var ps = new GHI.Hardware.Storage.Removable(device);
+                            var ps = new GHI.IO.Storage.Removable(device);
                             ps.Mount();
                             this.storageDevices.Add(device.Id, ps);
                         }
@@ -114,7 +114,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         }
 
                         break;
-                    case Device.DeviceType.Webcamera:
+                    case Device.DeviceType.Webcam:
                         ErrorPrint("Use GTM.GHIElectronics.Camera for USB WebCamera support.");
                         break;
                     default:
@@ -140,7 +140,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         if (!this.storageDevices.Contains(device.Id))
                             return;
 
-                        var ps = (GHI.Hardware.Storage.Removable)this.storageDevices[device.Id];
+                        var ps = (GHI.IO.Storage.Removable)this.storageDevices[device.Id];
                         ps.Unmount();
                         ps.Dispose();
                         this.storageDevices.Remove(device.Id);

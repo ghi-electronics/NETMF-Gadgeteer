@@ -119,7 +119,6 @@
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <Assembly MFVersion="4.3" Name="GHI.Pins"/>
-        <Assembly MFVersion="4.3" Name="GHI.System"/>
         <Assembly MFVersion="4.3" Name="GHI.Usb"/>
       </LibrariesProvided>
 

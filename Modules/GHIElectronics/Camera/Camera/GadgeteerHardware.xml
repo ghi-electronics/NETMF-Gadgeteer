@@ -23,7 +23,7 @@
         <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
 		
-        <Assembly MFVersion="4.3" Name="GHI.System" ErrorMessage="GHI.System could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
         <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
       </Assemblies>
 	  
@@ -31,7 +31,7 @@
         <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
 		
-        <Assembly MFVersion="4.3" Name="GHI.System" ErrorMessage="GHI.System could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
         <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
       </ExtraLibrariesRequired>
 

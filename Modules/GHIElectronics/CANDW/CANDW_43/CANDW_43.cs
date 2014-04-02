@@ -1,7 +1,7 @@
 ﻿//#define WAITING_FOR_ASSEMBLIES
 using GTM = Gadgeteer.Modules;
 
-using GHI.Hardware;
+using GHI.IO;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -34,7 +34,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.EnsureTypeIsSupported('C', this);
         }
 
-        void m_CAN_ErrorReceivedEvent(Can sender, Can.ErrorReceivedEventArgs args)
+        void m_CAN_ErrorReceivedEvent(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args)
         {
             //this._PostDone = new PostMessagesDoneEventHandler(this.OnPostMessagesFinished);
             //this._PostDone(m_numMessagesSent);
@@ -47,7 +47,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Error args</param>
-        public delegate void ErrorReceivedEventHandler(Can sender, Can.ErrorReceivedEventArgs args);
+        public delegate void ErrorReceivedEventHandler(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args);
         
         /// <summary>
         /// Event for when an error is received
@@ -61,12 +61,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Error arguments</param>
-        protected virtual void OnErrorReceived(Can sender, Can.ErrorReceivedEventArgs args)
+        protected virtual void OnErrorReceived(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args)
         {
             this.ErrorReceived(sender, args);
         }
 
-        void m_CAN_DataReceivedEvent(Can sender, Can.MessageAvailableEventArgs args)
+        void m_CAN_DataReceivedEvent(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args)
         {
             this._DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
             this._DataReceived(sender, args);
@@ -77,7 +77,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Data args</param>
-        public delegate void DataReceivedEventHandler(Can sender, Can.MessageAvailableEventArgs args);
+        public delegate void DataReceivedEventHandler(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args);
         
         /// <summary>
         /// Event for when data is received
@@ -91,14 +91,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="sender">Sending module</param>
         /// <param name="args">Data args</param>
-        protected virtual void OnDataReceived(Can sender, Can.MessageAvailableEventArgs args)
+        protected virtual void OnDataReceived(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args)
         {
             if (this.DataReceived == null)
                 this.DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
             this.DataReceived(sender, args);
         }
 
-        private Can m_CAN;
+        private ControllerAreaNetwork m_CAN;
 
         //public CAN GetCAN
         //{
@@ -111,9 +111,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="speed">The desired bus speed.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
         /// <param name="channel">The CAN channel to use.</param>
-        public void InitializeCAN(Can.Channel channel, Can.Speed speed, int receiveBufferSize, Can.Channel channel = Can.Channel.One)
+        public void InitializeCAN(ControllerAreaNetwork.Speed speed, int receiveBufferSize, ControllerAreaNetwork.Channel channel = ControllerAreaNetwork.Channel.One)
         {
-            m_CAN = new Can(channel, speed);
+            m_CAN = new ControllerAreaNetwork(channel, speed);
             m_CAN.ReceiveBufferSize = receiveBufferSize;
 
             m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
@@ -126,9 +126,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="timings">The desired bus timings.</param>
         /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
         /// <param name="channel">The CAN channel to use.</param>
-        public void InitializeCAN(Can.Timings timings, int receiveBufferSize, Can.Channel channel = Can.Channel.One)
+        public void InitializeCAN(ControllerAreaNetwork.Timings timings, int receiveBufferSize, ControllerAreaNetwork.Channel channel = ControllerAreaNetwork.Channel.One)
         {
-            m_CAN = new Can(channel, timings);
+            m_CAN = new ControllerAreaNetwork(channel, timings);
             m_CAN.ReceiveBufferSize = receiveBufferSize;
 
             m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
@@ -140,7 +140,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// The list of messages to be sent when calling PostMessages.
         /// </summary>
-        public Can.Message[] msgList;
+        public ControllerAreaNetwork.Message[] msgList;
 
         /// <summary>
         ///  Posts (queues for writing) CAN messages

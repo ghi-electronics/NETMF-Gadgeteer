@@ -6,9 +6,9 @@ using GT = Gadgeteer;
 
 //using G120 = GHI.Pins.G120;
 using G120 = GHI.Pins.G120;
-using GHI.Hardware;
-using GHI.System;
-using GHI.Hardware.Storage;
+using GHI.Processor;
+using GHI.IO;
+using GHI.IO.Storage;
 using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
@@ -179,9 +179,6 @@ namespace GHIElectronics.Gadgeteer
 			socket.CpuPins[4] = G120.P0_2;
 			socket.CpuPins[5] = G120.P0_3;
 			socket.CpuPins[6] = G120.P1_4;
-			socket.CpuPins[7] = G120.GPIO_NONE;
-			socket.CpuPins[8] = G120.GPIO_NONE;
-			socket.CpuPins[9] = G120.GPIO_NONE;
 
 			// U
 			socket.SerialPortName = "COM1";
@@ -323,7 +320,7 @@ namespace GHIElectronics.Gadgeteer
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
 				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
 
-			GHI.System.Utilities.BitmapHelpers.Convert(bmp, GHI.System.Utilities.BitmapHelpers.BitsPerPixel.BPP16_BGR_BE);
+			GHI.Utilities.Bitmaps.Convert(bmp, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE);
 		}
 
 		private static string[] sdVolumes = new string[] { "SD", "USB Mass Storage" };

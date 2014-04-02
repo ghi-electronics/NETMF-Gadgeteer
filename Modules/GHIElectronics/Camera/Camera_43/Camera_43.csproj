@@ -51,7 +51,7 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="GHI.System" />
+    <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.Usb" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
