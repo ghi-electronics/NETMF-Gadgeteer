@@ -176,8 +176,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         }
 
-        private void USBHostController_DeviceConnectedEvent(Device device, EventArgs e)
+        private void USBHostController_DeviceConnectedEvent(object sender, Controller.DeviceConnectedEventArgs e)
         {
+            var device = e.Device;
             try
             {
                 if (device.Type == GHI.Usb.Device.DeviceType.Webcam)

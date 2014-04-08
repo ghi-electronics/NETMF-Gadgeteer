@@ -79,9 +79,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
-
-        private void USBHostController_DeviceConnectedEvent(Device device, EventArgs e)
+        private void USBHostController_DeviceConnectedEvent(object sender, Controller.DeviceConnectedEventArgs e)
         {
+            var device = e.Device;
             try
             {
                 switch (device.Type)
@@ -89,7 +89,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     case Device.DeviceType.MassStorage:
                         lock (this.storageDevices)
                         {
-                            var ps = new GHI.IO.Storage.Removable(device);
+                            var ps = new GHI.IO.Storage.UsbMassStorage(device);
                             ps.Mount();
                             this.storageDevices.Add(device.Id, ps);
                         }

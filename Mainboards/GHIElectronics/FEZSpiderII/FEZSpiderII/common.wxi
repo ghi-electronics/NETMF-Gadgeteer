@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 
 <Include>
-  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  <?include $(var.SourcePath)..\..\..\..\Modules\GHIElectronics\Shared\version.wxi ?>
   
   <?define MainboardSoftwareVersion = "$(var.KitVersion)" ?>
   <?define SafeMainboardName = "FEZSpiderII" ?>

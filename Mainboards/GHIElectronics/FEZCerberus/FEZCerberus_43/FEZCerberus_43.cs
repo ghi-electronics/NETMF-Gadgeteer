@@ -329,8 +329,10 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override bool MountStorageDevice(string volumeName)
         {
+            if (volumeName != "SD") throw new ArgumentException("volumeName");
+
             // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
-            _storage = new Removable(volumeName);
+            _storage = new SD(SD.SDInterface.MCI);
             _storage.Mount();
 
             return true;// volumeName == "SD";
