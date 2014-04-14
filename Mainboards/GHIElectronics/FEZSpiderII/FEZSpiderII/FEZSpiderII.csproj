@@ -48,10 +48,6 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FEZSpiderII_42\FEZSpiderII_42.csproj">
-        <Project>{B848A872-F359-4858-925A-5AE0281A5795}</Project>
-        <Name>FEZSpiderII_42</Name>
-    </ProjectReference>
     <ProjectReference Include="..\FEZSpiderII_43\FEZSpiderII_43.csproj">
       <Project>{4B393FF9-4BA9-401A-A7FE-9ADA597DBF57}</Project>
       <Name>FEZSpiderII_43</Name>

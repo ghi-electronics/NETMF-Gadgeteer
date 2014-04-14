@@ -3,9 +3,9 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZHydra"
+            Name="FEZ Hydra"
             Type="GHIElectronics.Gadgeteer.FEZHydra"
-            HardwareVersion="1.0"
+            HardwareVersion="1.2"
             Image="Resources\Image.jpg"
             BoardWidth="86.868"
             BoardHeight="61.976"
@@ -149,12 +149,12 @@
 
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>Infinity</TypicalCurrent>
-          <MaximumCurrent>Infinity</MaximumCurrent>
+          <TypicalCurrent>0.100</TypicalCurrent>
+          <MaximumCurrent>0.125</MaximumCurrent>
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>Infinity</TypicalCurrent>
-          <MaximumCurrent>Infinity</MaximumCurrent>
+          <TypicalCurrent>0</TypicalCurrent>
+          <MaximumCurrent>0</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </MainboardDefinition>

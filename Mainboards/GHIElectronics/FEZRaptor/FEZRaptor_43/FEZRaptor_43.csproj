@@ -51,9 +51,11 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
+    <Reference Include="GHI.Hardware, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHI.Pins">
       <HintPath>..\..\..\..\..\..\MicroFrameworkPK_v4_3\DeviceCode\GHI.Libraries\GHI.Pins\bin\Release\GHI.Pins.dll</HintPath>
     </Reference>
+    <Reference Include="GHI.Usb, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
@@ -61,11 +63,5 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.IO" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\MicroFrameworkPK_v4_3\DeviceCode\GHI.Libraries\GHI.Hardware\GHI.Hardware.csproj">
-      <Project>{40C0E0A2-328A-4F39-B873-89DB2CB191EF}</Project>
-      <Name>GHI.Hardware</Name>
-    </ProjectReference>
   </ItemGroup>
 </Project>
