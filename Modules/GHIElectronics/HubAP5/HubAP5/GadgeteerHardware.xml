@@ -23,16 +23,138 @@
 
       <Sockets>
         <Socket Left="35" Top="5" Orientation="270" ConstructorOrder="1" TypesLabel="I">
-			<Types>
-				<Type>I</Type>
-			</Types>
-			<Pins>
-				<Pin Shared="false">3</Pin>
-				<Pin Shared="true">8</Pin>
-				<Pin Shared="true">9</Pin>
-			</Pins>
-		</Socket>
+          <Types>
+            <Type>I</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="true">8</Pin>
+            <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
       </Sockets>
+
+      <ProvidedSockets>
+        <ProvidedSocket Label="H1" Left="6" Top="16" Orientation="180" ConstructorParameter="HubSocket1">
+          <Types>
+            <Type>A</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S13" SocketPin="3" />
+            <SharedPinMap NetId="S14" SocketPin="4" />
+            <SharedPinMap NetId="S15" SocketPin="5" />
+            <SharedPinMap NetId="S16" SocketPin="6" />
+            <SharedPinMap NetId="S17" SocketPin="7" />
+            <SharedPinMap NetId="S17" SocketPin="8" />
+            <SharedPinMap NetId="S19" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H2" Left="6" Top="30" Orientation="180" ConstructorParameter="HubSocket2">
+          <Types>
+            <Type>A</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S23" SocketPin="3" />
+            <SharedPinMap NetId="S24" SocketPin="4" />
+            <SharedPinMap NetId="S25" SocketPin="5" />
+            <SharedPinMap NetId="S26" SocketPin="6" />
+            <SharedPinMap NetId="S27" SocketPin="7" />
+            <SharedPinMap NetId="S27" SocketPin="8" />
+            <SharedPinMap NetId="S29" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H3" Left="15" Top="45" Orientation="270" ConstructorParameter="HubSocket3">
+          <Types>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S33" SocketPin="3" />
+            <SharedPinMap NetId="S34" SocketPin="4" />
+            <SharedPinMap NetId="S35" SocketPin="5" />
+            <SharedPinMap NetId="S36" SocketPin="6" />
+            <SharedPinMap NetId="S37" SocketPin="7" />
+            <SharedPinMap NetId="S37" SocketPin="8" />
+            <SharedPinMap NetId="S39" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H4" Left="29" Top="45" Orientation="270" ConstructorParameter="HubSocket4">
+          <Types>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S43" SocketPin="3" />
+            <SharedPinMap NetId="S44" SocketPin="4" />
+            <SharedPinMap NetId="S45" SocketPin="5" />
+            <SharedPinMap NetId="S46" SocketPin="6" />
+            <SharedPinMap NetId="S47" SocketPin="7" />
+            <SharedPinMap NetId="S47" SocketPin="8" />
+            <SharedPinMap NetId="S49" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H5" Left="43" Top="45" Orientation="270" ConstructorParameter="HubSocket5">
+          <Types>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S53" SocketPin="3" />
+            <SharedPinMap NetId="S54" SocketPin="4" />
+            <SharedPinMap NetId="S55" SocketPin="5" />
+            <SharedPinMap NetId="S56" SocketPin="6" />
+            <SharedPinMap NetId="S57" SocketPin="7" />
+            <SharedPinMap NetId="S57" SocketPin="8" />
+            <SharedPinMap NetId="S59" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H6" Left="57" Top="45" Orientation="270" ConstructorParameter="HubSocket6">
+          <Types>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S63" SocketPin="3" />
+            <SharedPinMap NetId="S64" SocketPin="4" />
+            <SharedPinMap NetId="S65" SocketPin="5" />
+            <SharedPinMap NetId="S66" SocketPin="6" />
+            <SharedPinMap NetId="S67" SocketPin="7" />
+            <SharedPinMap NetId="S67" SocketPin="8" />
+            <SharedPinMap NetId="S69" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H7" Left="66" Top="30" Orientation="0" ConstructorParameter="HubSocket7">
+          <Types>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S73" SocketPin="3" />
+            <SharedPinMap NetId="S74" SocketPin="4" />
+            <SharedPinMap NetId="S75" SocketPin="5" />
+            <SharedPinMap NetId="S76" SocketPin="6" />
+            <SharedPinMap NetId="S77" SocketPin="7" />
+            <SharedPinMap NetId="S77" SocketPin="8" />
+            <SharedPinMap NetId="S79" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+        <ProvidedSocket Label="H8" Left="66" Top="16" Orientation="0" ConstructorParameter="HubSocket8">
+          <Types>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="S83" SocketPin="3" />
+            <SharedPinMap NetId="S84" SocketPin="4" />
+            <SharedPinMap NetId="S85" SocketPin="5" />
+            <SharedPinMap NetId="S86" SocketPin="6" />
+            <SharedPinMap NetId="S87" SocketPin="7" />
+            <SharedPinMap NetId="S87" SocketPin="8" />
+            <SharedPinMap NetId="S89" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
+      </ProvidedSockets>
 
       <Power>
         <PowerRequirements Voltage="3.3">
