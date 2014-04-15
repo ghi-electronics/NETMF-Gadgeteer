@@ -1,35 +1,19 @@
-﻿using System;
+﻿using GHI.Networking;
 using System.Threading;
-
-using Microsoft.SPOT.Net.NetworkInformation;
-
-using GT = Gadgeteer;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
-
-using GHINet = GHI.Networking;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-    
     /// <summary>
-    /// 
+    /// An EthernetJ11D module for Microsoft .NET Gadgeteer
     /// </summary>
     public class EthernetJ11D : GTM.Module.NetworkModule
     {
-        /// <summary>
-        /// The class that will be used to interface with the ethernet module. This member will handle everything from initialization to joining networks.
-        /// </summary>
-        public GHINet.EthernetBuiltIn Interface;
+        private EthernetBuiltIn networkInterface;
 
-        /// <summary>
-        /// An Ethernet_ENC28 module for Microsoft .NET Gadgeteer
-        /// </summary>
-        /// <param name="socketNumber"></param>
+        /// <summary>Constructs a new instance.</summary>
+        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public EthernetJ11D(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
@@ -43,55 +27,47 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Eight, this);
             socket.ReservePin(Socket.Pin.Nine, this);
 
-            Interface = new GHINet.EthernetBuiltIn();
+            this.networkInterface = new EthernetBuiltIn();
 
-            if (GHINet.BaseInterface.ActiveInterface == null)
-                this.Interface.Open();
+            if (BaseInterface.ActiveInterface == null)
+                this.networkInterface.Open();
 
             Thread.Sleep(500);
 
-            NetworkSettings = Interface.NetworkInterface;
+            this.NetworkSettings = this.networkInterface.NetworkInterface;
         }
 
         /// <summary>
-        /// Instructs the Mainboard to use this module for all network communication, and assigns the networking stack to this module.
+        /// The underlying network interface.
         /// </summary>
-        /// <remarks>
-        /// This function is only needed if more than one network module is being used simultaneously. If not, this function should not be used.
-        /// </remarks>
+        public EthernetBuiltIn NetworkInterface
+        {
+            get
+            {
+                return this.networkInterface;
+            }
+        }
+
+        /// <summary>
+        /// Opens the underlying network interface and assigns the NETMF networking stack to it if it is not already so.
+        /// </summary>
         public void UseThisNetworkInterface()
         {
-            if (this.Interface.Opened)
+            if (this.networkInterface.Opened)
                 return;
 
-            this.Interface.Open();
+            this.networkInterface.Open();
         }
 
         /// <summary>
-        /// Gets a value that indicates whether this ethernet module is physically connected to a network device.
+        /// Whether or not the cable is inserted into the module. Make sure to also check the NetworkUp property to verify network state.
         /// </summary>
-        /// <remarks>
-        /// <para>
-        ///  This property enables you to determine if the <see cref="EthernetJ11D"/> module is
-        ///  physically connected to a network device, such as a router. 
-        ///  When this property is <b>true</b>, it does not necessarily mean that the network connection is usable. 
-        ///  You must also check the <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> property. 
-        ///  <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> returns <b>true</b> 
-        ///  if the network connection is both connected and configured for Internet Proctocol (IP) communication tasks. 
-        /// </para>
-        /// <note>
-        ///  When <see cref="P:Microsoft.Gadgeteer.Modules.NetworkModule.IsNetworkUp"/> is <b>true</b>, it does not necessarily mean 
-        ///  that the network connection is functional. The IP configuration
-        ///  for the network connection may be invalid for the network that it is connected to.
-        /// </note>
-        /// </remarks>
         public override bool IsNetworkConnected
         {
             get
             {
-                return Interface.CableConnected;
+                return this.networkInterface.CableConnected;
             }
         }
-
     }
 }
