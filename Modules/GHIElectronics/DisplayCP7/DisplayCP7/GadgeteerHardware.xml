@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="42"
                   BoardWidth="116"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.2"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/425">
 
@@ -64,7 +64,7 @@
             <Pin Shared="false">9</Pin>
           </Pins>
         </Socket>
-        <Socket Left="16" Top="4" Orientation="270" ConstructorOrder="4" TypesLabel="I">
+        <Socket Left="16" Top="4" Orientation="270" ConstructorOrder="4" TypesLabel="I" Optional="true">
           <Types>
             <Type>I</Type>
           </Types>

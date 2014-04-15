@@ -1,16 +1,13 @@
-﻿using System;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
-
-using System.Threading;
-using Microsoft.SPOT;
+﻿using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
+using System;
+using System.Threading;
+using GT = Gadgeteer;
+using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-
     /// <summary>
     /// A Display N18 module for Microsoft .NET Gadgeteer
     /// </summary>
@@ -22,12 +19,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private GT.Socket socket;
         private GTI.DigitalOutput resetPin;
         private GTI.DigitalOutput backlightPin;
-		private GTI.DigitalOutput rs;
+		private GTI.DigitalOutput rsPin;
 
 		private byte[] byteArray;
 		private ushort[] shortArray;
 
-        /// <summary>Constructor</summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public DisplayN18(int socketNumber) : base(WpfMode.Separate)
         {
@@ -38,8 +35,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.socket.EnsureTypeIsSupported('S', this);
 
 			this.resetPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Three, false, this);
-			this.backlightPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Four, false, this);
-			this.rs = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Five, false, this);
+			this.backlightPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Four, true, this);
+			this.rsPin = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Five, false, this);
 
 			this.spiConfig = new GTI.SpiConfiguration(false, 0, 0, false, true, 12000);
             this.netMFSpiConfig = new SPI.Configuration(this.socket.CpuPins[6], this.spiConfig.IsChipSelectActiveHigh, this.spiConfig.ChipSelectSetupTime, this.spiConfig.ChipSelectHoldTime, this.spiConfig.IsClockIdleHigh, this.spiConfig.IsClockSamplingEdgeRising, this.spiConfig.ClockRateKHz, this.socket.SPIModule);
@@ -51,19 +48,23 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.Clear();
 
-            this.SetBacklight(true);
-
             base.OnDisplayConnected("Display N18", 128, 160, DisplayOrientation.Normal, null);
 		}
 
-		/// <summary>
-		/// Enables or disables the display backlight.
-		/// </summary>
-		/// <param name="state">The state to set the backlight to.</param>
-		public void SetBacklight(bool state)
-		{
-			this.backlightPin.Write(state);
-		}
+        /// <summary>
+        /// Whether or not the backlight is enabled.
+        /// </summary>
+        public bool BacklightEnabled
+        {
+            get
+            {
+                return this.backlightPin.Read();
+            }
+            set
+            {
+                this.backlightPin.Write(value);
+            }
+        }
 
 		/// <summary>
 		/// Clears the display.
@@ -78,34 +79,44 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.DrawRaw(data, 64, 80, 64, 80);
 		}
 
+        /// <summary>
+        /// Draws an image to the screen.
+        /// </summary>
+        /// <param name="bitmap">The bitmap to be drawn to the screen</param>
+        public void Draw(Bitmap bitmap)
+        {
+            this.Draw(bitmap, 0, 0);
+        }
+
 		/// <summary>
 		/// Draws an image to the screen.
 		/// </summary>
-		/// <param name="bmp">The bitmap to be drawn to the screen</param>
+		/// <param name="bitmap">The bitmap to be drawn to the screen</param>
 		/// <param name="x">Starting X position of the image.</param>
 		/// <param name="y">Starting Y position of the image.</param>
-        public void Draw(Bitmap bmp, int x = 0, int y = 0)
+        public void Draw(Bitmap bitmap, int x, int y)
 		{
-			byte[] vram = new byte[bmp.Width * bmp.Height * 2];
-			GTM.Module.Mainboard.NativeBitmapConverter(bmp, vram, Mainboard.BPP.BPP16_BGR_BE);
-            this.DrawRaw(vram, bmp.Width, bmp.Height, x, y);
+			byte[] vram = new byte[bitmap.Width * bitmap.Height * 2];
+			GTM.Module.Mainboard.NativeBitmapConverter(bitmap, vram, Mainboard.BPP.BPP16_BGR_BE);
+            this.DrawRaw(vram, x, y, bitmap.Width, bitmap.Height);
 		}
 
 		/// <summary>
 		/// Draws an image to the specified position on the screen.
 		/// </summary>
-		/// <param name="rawData">Raw Bitmap data to be drawn to the screen.</param>
-		/// <param name="x">Starting X position of the image.</param>
-		/// <param name="y">Starting Y position of the image.</param>
-		/// <param name="width">Width of the image.</param>
-		/// <param name="height">Height of the image.</param>
-		public void DrawRaw(byte[] rawData, int width, int height, int x, int y)
+		/// <param name="rawData">Raw bitmap data to be drawn to the screen.</param>
+		/// <param name="x">Starting x position of the image.</param>
+		/// <param name="y">Starting y position of the image.</param>
+		/// <param name="width">The width of the image.</param>
+		/// <param name="height">The height of the image.</param>
+        public void DrawRaw(byte[] rawData, int x, int y, int width, int height)
 		{
 			if (x > this.Width || y > this.Height)
 				return;
 
 			if (x + width > this.Width)
 				width = this.Width - x;
+
 			if (y + height > this.Height)
 				height = this.Height - y;
 
@@ -114,8 +125,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteData(rawData);
 		}
 
-		/// <summary>
-		/// Renders Bitmap data on the display device. 
+        /// <summary>
+        /// Renders display data on the display device. 
 		/// </summary>
         /// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
         /// <param name="x">The start x coordinate of the dirty area.</param>
@@ -130,7 +141,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				{
 					this.SetClippingArea(0, 0, bitmap.Width - 1, bitmap.Height - 1);
 					this.WriteCommand(0x2C);
-					this.rs.Write(true);
+					this.rsPin.Write(true);
 					Mainboard.NativeBitmapCopyToSpi(bitmap, this.netMFSpiConfig, 0, 0, bitmap.Width, bitmap.Height, GT.Mainboard.BPP.BPP16_BGR_BE);
 				}
 				else
@@ -172,6 +183,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void ConfigureDisplay()
 		{	
 			this.WriteCommand(0x11);//Sleep exit 
+
             Thread.Sleep(120);
 
             //ST7735R Frame Rate
@@ -239,18 +251,18 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteCommand(0x3A); //65k mode 
             this.WriteData(0x05);
 
-			this.WriteCommand(0x29);//Display on
+			this.WriteCommand(0x29); //Display on
         }
 
-        private void SetClippingArea(int x, int y, int w, int h)
+        private void SetClippingArea(int x, int y, int width, int height)
 		{
 			this.shortArray[0] = (ushort)x;
-			this.shortArray[1] = (ushort)(x + w);
+			this.shortArray[1] = (ushort)(x + width);
 			this.WriteCommand(0x2A);
 			this.WriteData(this.shortArray);
 
 			this.shortArray[0] = (ushort)y;
-			this.shortArray[1] = (ushort)(y + h);
+			this.shortArray[1] = (ushort)(y + height);
 			this.WriteCommand(0x2B);
 			this.WriteData(this.shortArray);
 		}
@@ -259,7 +271,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
 			this.byteArray[0] = command;
 
-			this.rs.Write(false);
+			this.rsPin.Write(false);
 			this.spi.Write(this.byteArray);
         }
 
@@ -271,13 +283,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private void WriteData(byte[] data)
         {
-			this.rs.Write(true);
+			this.rsPin.Write(true);
 			this.spi.Write(data);
         }
 
 		private void WriteData(ushort[] data)
 		{
-			this.rs.Write(true);
+			this.rsPin.Write(true);
 			this.spi.Write(data);
 		}
     }
