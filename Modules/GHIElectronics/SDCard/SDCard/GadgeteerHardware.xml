@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="42"
                   BoardWidth="47"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.4"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/503">
 
