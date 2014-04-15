@@ -319,7 +319,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnScreenReleased(DisplayCP7 sender, EventArgs e)
         {
             if (this.onScreenReleased == null)
-                this.onScreenReleased = new EventHandler(this.OnScreenReleased);
+                this.onScreenReleased = this.OnScreenReleased;
 
             if (Program.CheckAndInvoke(this.ScreenReleased, this.onScreenReleased, sender, e))
                 this.ScreenReleased(sender, e);
@@ -328,7 +328,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnHomePressed(DisplayCP7 sender, EventArgs e)
         {
             if (this.onHomePressed == null)
-                this.onHomePressed = new EventHandler(this.OnHomePressed);
+                this.onHomePressed = this.OnHomePressed;
 
             if (Program.CheckAndInvoke(this.HomePressed, this.onHomePressed, sender, e))
                 this.HomePressed(sender, e);
@@ -337,7 +337,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnMenuPressed(DisplayCP7 sender, EventArgs e)
         {
             if (this.onMenuPressed == null)
-                this.onMenuPressed = new EventHandler(this.OnMenuPressed);
+                this.onMenuPressed = this.OnMenuPressed;
 
             if (Program.CheckAndInvoke(this.MenuPressed, this.onMenuPressed, sender, e))
                 this.MenuPressed(sender, e);
@@ -346,7 +346,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnBackPressed(DisplayCP7 sender, EventArgs e)
         {
             if (this.onBackPressed == null)
-                this.onBackPressed = new EventHandler(this.OnBackPressed);
+                this.onBackPressed = this.OnBackPressed;
 
             if (Program.CheckAndInvoke(this.BackPressed, this.onBackPressed, sender, e))
                 this.BackPressed(sender, e);
@@ -355,7 +355,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnGestureDetected(DisplayCP7 sender, GestureDetectedEventArgs e)
         {
             if (this.onGestureDetected == null)
-                this.onGestureDetected = new GestureDetectedEventHandler(this.OnGestureDetected);
+                this.onGestureDetected = this.OnGestureDetected;
 
             if (Program.CheckAndInvoke(this.GestureDetected, this.onGestureDetected, sender, e))
                 this.GestureDetected(sender, e);

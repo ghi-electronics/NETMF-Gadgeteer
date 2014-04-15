@@ -36,11 +36,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Gets a value that indicates whether the given button of the ButtonS7 is pressed.
 		/// </summary>
-		public bool this[Buttons button]
+		public bool this[Button button]
 		{
 			get
 			{
-				if (button == Buttons.Enter)
+				if (button == Button.Enter)
 					return this.enter.Read();
 
 				return this.buttons[(int)button].Read();
@@ -50,18 +50,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Gets a value that indicates whether the given button of the ButtonS7 is pressed.
 		/// </summary>
-		public bool IsPressed(Buttons button)
+		public bool IsPressed(Button button)
 		{
-			if (button == Buttons.Enter)
+			if (button == Button.Enter)
 				return !this.enter.Read();
 
 			return !this.buttons[(int)button].Read();
 		}
 
 		/// <summary>
-		/// Represents the buttons of the <see cref="ButtonS7"/>.
+		/// The buttons on the module.
 		/// </summary>
-		public enum Buttons
+		public enum Button
 		{
 			/// <summary>
 			/// The back button.
@@ -146,7 +146,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		protected virtual void OnEnterEvent(ButtonS7 sender, EnterStates buttonState)
 		{
 			if (this.enterEvent == null)
-				this.enterEvent = new EnterEventHandler(this.OnEnterEvent);
+				this.enterEvent = this.OnEnterEvent;
 
 			if (buttonState == EnterStates.Pressed)
 			{

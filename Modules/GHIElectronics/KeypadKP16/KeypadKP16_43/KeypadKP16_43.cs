@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.SPOT;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
+﻿using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -111,7 +108,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="key">The key whose state we want to check.</param>
 		/// <returns>Whether or not the key is pressed.</returns>
-		public bool IsKeyPressed(Key key)
+		public bool IsPressed(Key key)
 		{
 			bool out1 = false;
 			bool out2 = false;
