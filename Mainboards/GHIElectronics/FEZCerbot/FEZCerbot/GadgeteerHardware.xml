@@ -5,7 +5,7 @@
     <MainboardDefinition
             Name="FEZCerbot"
             Type="GHIElectronics.Gadgeteer.FEZCerbot"
-            HardwareVersion="1.0"
+            HardwareVersion="1.3"
             Image="Resources\Image.jpg"
             BoardWidth="150"
             BoardHeight="90"
@@ -18,73 +18,73 @@
       </Assemblies>
 
       <ProvidedSockets>
-			<ProvidedSocket Label="1" Left="42.44" Top="65.80" Orientation="180" ConstructorParameter="1">
-				<Types>
-					<Type>F</Type>
-					<Type>Y</Type>
-				</Types>
-			</ProvidedSocket>
+        <ProvidedSocket Label="1" Left="42.44" Top="65.80" Orientation="180" ConstructorParameter="1">
+          <Types>
+            <Type>F</Type>
+            <Type>Y</Type>
+          </Types>
+        </ProvidedSocket>
 
-			<ProvidedSocket Label="2" Left="42.44" Top="50.46" Orientation="180" ConstructorParameter="2">
-				<Types>
-					<Type>I</Type>
-					<Type>X</Type>
-				</Types>
-				<SharedPinMaps>
-					<SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
-					<SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
-				</SharedPinMaps>
-			</ProvidedSocket>
+        <ProvidedSocket Label="2" Left="42.44" Top="50.46" Orientation="180" ConstructorParameter="2">
+          <Types>
+            <Type>I</Type>
+            <Type>X</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
 
-			<ProvidedSocket Label="3" Left="42.44" Top="34.82" Orientation="180" ConstructorParameter="3">
-				<Types>
-					<Type>U</Type>
-					<Type>S</Type>
-					<Type>X</Type>
-				</Types>
-				<SharedPinMaps>
-					<SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
-					<SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
-				</SharedPinMaps>
-			</ProvidedSocket>
+        <ProvidedSocket Label="3" Left="42.44" Top="34.82" Orientation="180" ConstructorParameter="3">
+          <Types>
+            <Type>S</Type>
+            <Type>U</Type>
+            <Type>X</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+            <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
 
-			<ProvidedSocket Label="4" Left="109.04" Top="34.82" Orientation="0" ConstructorParameter="4">
-				<Types>
-					<Type>A</Type>
-					<Type>O</Type>
-					<Type>I</Type>
-					<Type>X</Type>
-				</Types>
-				<SharedPinMaps>
-					<SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
-					<SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
-				</SharedPinMaps>
-			</ProvidedSocket>
+        <ProvidedSocket Label="4" Left="109.04" Top="34.82" Orientation="0" ConstructorParameter="4">
+          <Types>
+            <Type>A</Type>
+            <Type>I</Type>
+            <Type>O</Type>
+            <Type>X</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
 
-			<ProvidedSocket Label="5" Left="109.04" Top="50.46" Orientation="0" ConstructorParameter="5">
-				<Types>
-					<Type>U</Type>
-					<Type>I</Type>
-				</Types>
-				<SharedPinMaps>
-					<SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
-					<SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
-				</SharedPinMaps>
-			</ProvidedSocket>
+        <ProvidedSocket Label="5" Left="109.04" Top="50.46" Orientation="0" ConstructorParameter="5">
+          <Types>
+            <Type>I</Type>
+            <Type>U</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8" SharedOnly="true"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9" SharedOnly="true"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
 
-			<ProvidedSocket Label="6" Left="109.04" Top="65.80" Orientation="0" ConstructorParameter="6">
-				<Types>
-					<Type>P</Type>
-				</Types>
-			</ProvidedSocket>
-		</ProvidedSockets>
+        <ProvidedSocket Label="6" Left="109.04" Top="65.80" Orientation="0" ConstructorParameter="6">
+          <Types>
+            <Type>P</Type>
+          </Types>
+        </ProvidedSocket>
+      </ProvidedSockets>
 
       <LibrariesProvided>
         <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
-		
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <Assembly MFVersion="4.3" Name="GHI.Pins"/>

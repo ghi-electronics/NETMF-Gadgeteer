@@ -1,185 +1,171 @@
-﻿using System;
-using GHI.Processor;
-using GHI.IO;
+﻿using GHI.IO;
 using GHI.IO.Storage;
+using GHI.Networking;
+using GHI.Pins;
+using GHI.Processor;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
-using GHI.Pins;
+using System;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer
 {
-	/// <summary>
-	/// Support class for GHI Electronics FEZCerbuinoNet for Microsoft .NET Gadgeteer
-	/// </summary>
-	public class FEZCerbuinoNet : GT.Mainboard
-	{
-		private bool configSet = false;
+    /// <summary>
+    /// The mainboard class for the FEZ Cerbuino Net.
+    /// </summary>
+    public class FEZCerbuinoNet : GT.Mainboard
+    {
+        private bool configSet;
+        private OutputPort debugLed;
+        private Removable[] storageDevices;
+        private EthernetENC28J60 ethernet;
 
-		/// <summary>
-		/// Instantiates a new FEZCerbuinoNet mainboard
-		/// </summary>
-		public FEZCerbuinoNet()
+        /// <summary>
+        /// Constructs a new instance.
+        /// </summary>
+        public FEZCerbuinoNet()
         {
+            this.configSet = false;
+            this.debugLed = null;
+            this.storageDevices = new Removable[1];
+            this.ethernet = null;
+
+            this.NativeBitmapConverter = this.NativeBitmapConvert;
+            this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
+
             GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
+            GT.Socket socket;
 
-			this.NativeBitmapConverter = new BitmapConvertBPP(this.BitmapConverter);
-			this.NativeBitmapCopyToSpi = this.NativeSPIBitmapPaint;
 
-			GT.Socket socket;
-
-			#region Socket 1
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
-			socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('C', 13);
-			socket.CpuPins[4] = Generic.GetPin('C', 6);
-			socket.CpuPins[5] = Generic.GetPin('C', 7);
-			socket.CpuPins[6] = Generic.GetPin('B', 0);
-			socket.CpuPins[7] = Generic.GetPin('B', 5);
-			socket.CpuPins[8] = Generic.GetPin('B', 4);
-			socket.CpuPins[9] = Generic.GetPin('B', 3);
-
-			//P
-			socket.PWM7 = Cpu.PWMChannel.PWM_6;
-			socket.PWM8 = Cpu.PWMChannel.PWM_7;
-			socket.PWM9 = (Cpu.PWMChannel)8;
-
-			// S
-			socket.SPIModule = SPI.SPI_module.SPI1;
-
-			// U
-			socket.SerialPortName = "COM6";
-
-			// Y
-			
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion Socket 1
-
-			#region Socket 2
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
-			socket.SupportedTypes = new char[] { 'A', 'I', 'K', 'U', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('A', 6);
-			socket.CpuPins[4] = Generic.GetPin('A', 2);
-			socket.CpuPins[5] = Generic.GetPin('A', 3);
-			socket.CpuPins[6] = Generic.GetPin('A', 1);
-			socket.CpuPins[7] = Generic.GetPin('A', 0);
-			socket.CpuPins[8] = Generic.GetPin('B', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 6);
-
-			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
-			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_0;
-			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_1;
-			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_2;
-
-			// I
-			// N/A
-
-			// K/U
-			socket.SerialPortName = "COM2";
-
-			// Y
-			
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion Socket 2
-
-			#region Socket 3
-			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
-			socket.SupportedTypes = new char[] { 'A', 'O', 'P', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 0);
-			socket.CpuPins[4] = Generic.GetPin('C', 1);
-			socket.CpuPins[5] = Generic.GetPin('A', 4);
-			socket.CpuPins[6] = Generic.GetPin('C', 5);
-			socket.CpuPins[7] = Generic.GetPin('B', 8);
-			socket.CpuPins[8] = Generic.GetPin('A', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 9);
-
-			// A
-			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
-			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
-			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
-			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;
-
-            // O
+            socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
+            socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'X' };
+            socket.CpuPins[3] = Generic.GetPin('C', 13);
+            socket.CpuPins[4] = Generic.GetPin('C', 6);
+            socket.CpuPins[5] = Generic.GetPin('C', 7);
+            socket.CpuPins[6] = Generic.GetPin('B', 0);
+            socket.CpuPins[7] = Generic.GetPin('B', 5);
+            socket.CpuPins[8] = Generic.GetPin('B', 4);
+            socket.CpuPins[9] = Generic.GetPin('B', 3);
+            socket.I2CBusIndirector = nativeI2C;
+            socket.SerialPortName = "COM6";
+            socket.PWM7 = Cpu.PWMChannel.PWM_6;
+            socket.PWM8 = Cpu.PWMChannel.PWM_7;
+            socket.PWM9 = (Cpu.PWMChannel)8;
+            socket.SPIModule = SPI.SPI_module.SPI1;
+            GT.Socket.SocketInterfaces.RegisterSocket(socket);
+            
+            
+            socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
+            socket.SupportedTypes = new char[] { 'A', 'I', 'K', 'U', 'Y' };
+            socket.CpuPins[3] = Generic.GetPin('A', 6);
+            socket.CpuPins[4] = Generic.GetPin('A', 2);
+            socket.CpuPins[5] = Generic.GetPin('A', 3);
+            socket.CpuPins[6] = Generic.GetPin('A', 1);
+            socket.CpuPins[7] = Generic.GetPin('A', 0);
+            socket.CpuPins[8] = Generic.GetPin('B', 7);
+            socket.CpuPins[9] = Generic.GetPin('B', 6);
+            socket.I2CBusIndirector = nativeI2C;
+            socket.SerialPortName = "COM2";
+            socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_0;
+            socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_1;
+            socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_2;
+            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
+            GT.Socket.SocketInterfaces.RegisterSocket(socket);
+            
+            
+            socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
+            socket.SupportedTypes = new char[] { 'A', 'O', 'P', 'Y' };
+            socket.CpuPins[3] = Generic.GetPin('C', 0);
+            socket.CpuPins[4] = Generic.GetPin('C', 1);
+            socket.CpuPins[5] = Generic.GetPin('A', 4);
+            socket.CpuPins[6] = Generic.GetPin('C', 5);
+            socket.CpuPins[7] = Generic.GetPin('B', 8);
+            socket.CpuPins[8] = Generic.GetPin('A', 7);
+            socket.CpuPins[9] = Generic.GetPin('B', 9);
+            socket.I2CBusIndirector = nativeI2C;
+            socket.PWM7 = (Cpu.PWMChannel)14;
+            socket.PWM8 = Cpu.PWMChannel.PWM_1;
+            socket.PWM9 = (Cpu.PWMChannel)15;
             socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
-
-			// P
-			socket.PWM7 = (Cpu.PWMChannel)14;
-			socket.PWM8 = Cpu.PWMChannel.PWM_1;
-			socket.PWM9 = (Cpu.PWMChannel)15;
-
-			// Y
-			
-
-			GT.Socket.SocketInterfaces.RegisterSocket(socket);
-			#endregion Socket 3
-		}
-
-		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
-		{
-			if (bpp != BPP.BPP16_BGR_BE)
-				throw new ArgumentException("Invalid BPP");
-
-			if (!this.configSet)
-            {
-                throw new Exception("Implement SetSpecialDisplayConfig.");
-                //Util.SetSpecialDisplayConfig(config, Util.BPP_Type.BPP16_BGR_LE);
-
-				//this.configSet = true;
-			}
-
-			bitmap.Flush(xSrc, ySrc, width, height);
-		}
-
-        private static string[] sdVolumes = new string[] { "SD" };
-        private Removable _storage;
-
-		/// <summary>
-		/// Allows mainboards to support storage device mounting/umounting.  This provides modules with a list of storage device volume names supported by the mainboard. 
-		/// </summary>
-		public override string[] GetStorageDeviceVolumeNames()
-		{
-			return sdVolumes;
+            socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
+            socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
+            socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;
+            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
+            GT.Socket.SocketInterfaces.RegisterSocket(socket);
         }
 
         /// <summary>
-        /// Functionality provided by mainboard to mount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
-        /// This should result in a Microsoft.SPOT.IO.RemovableMedia.Insert event if successful.
+        /// The name of the mainboard.
         /// </summary>
+        public override string MainboardName
+        {
+            get { return "GHI Electronics FEZ Cerbuino Net"; }
+        }
+
+        /// <summary>
+        /// The current version of the mainboard hardware.
+        /// </summary>
+        public override string MainboardVersion
+        {
+            get { return "1.0"; }
+        }
+
+        /// <summary>
+        /// The storage device volume names supported by this mainboard.
+        /// </summary>
+        /// <returns>The volume names.</returns>
+        public override string[] GetStorageDeviceVolumeNames()
+        {
+            return new string[] { "SD" };
+        }
+
+        /// <summary>
+        /// Mounts the device with the given name.
+        /// </summary>
+        /// <param name="volumeName">The device to mount.</param>
+        /// <returns>Whether or not the mount was successful.</returns>
         public override bool MountStorageDevice(string volumeName)
         {
-            if (volumeName != "SD") throw new ArgumentException("volumeName");
+            switch (volumeName)
+            {
+                case "SD":
+                    this.storageDevices[0] = new SD(SD.SDInterface.MCI);
+                    this.storageDevices[0].Mount();
 
-            // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
-            _storage = new SD(SD.SDInterface.MCI);
-            _storage.Mount();
+                    break;
 
-            return true;// volumeName == "SD";
+                default:
+                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+            }
+
+            return true;
         }
 
         /// <summary>
-        /// Functionality provided by mainboard to ummount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
-        /// This should result in a Microsoft.SPOT.IO.RemovableMedia.Eject event if successful.
+        /// Unmounts the device with the given name.
         /// </summary>
+        /// <param name="volumeName">The device to unmount.</param>
+        /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Eject"/> event if successful and return true if the volumeName is supported.
-            _storage.Unmount();
-            _storage.Dispose();
+            switch (volumeName)
+            {
+                case "SD":
+                    if (this.storageDevices[0] == null) throw new InvalidOperationException("This volume is not mounted.");
 
-            return true;// volumeName == "SD";
+                    this.storageDevices[0].Unmount();
+                    this.storageDevices[0].Dispose();
+                    this.storageDevices[0] = null;
+
+                    break;
+
+                default:
+                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+            }
+
+            return true;
         }
-
-		/// <summary>
-		/// Changes the programming interafces to the one specified
-		/// </summary>
-		/// <param name="programmingInterface">The programming interface to use</param>
-		public override void SetProgrammingMode(GT.Mainboard.ProgrammingInterface programmingInterface)
-		{
-		}
 
         /// <summary>
         /// Configure the onboard display controller to fulfil the requirements of a display using the RGB sockets.
@@ -191,62 +177,85 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
         /// <param name="orientationDeg">Display orientation in degrees.</param>
         /// <param name="timing">The required timings from an LCD controller.</param>
-        protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GT.Modules.Module.DisplayModule.TimingRequirements timing)
+        protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GTM.Module.DisplayModule.TimingRequirements timing)
         {
             throw new NotSupportedException();
         }
 
         /// <summary>
-        /// Ensures that the pins on R, G and B sockets (which also have other socket types) are available for use for non-display purposes.
-        /// If doing this requires rebooting, then the method must reboot and not return.
-        /// If there is no onboard display controller, or it is not possible to disable the onboard display controller, then NotSupportedException must be thrown.
+        /// Ensures that the RGB socket pins are available by disabling the display controller if needed.
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            throw new NotSupportedException("This mainboard does not support an onboard display controller.");
+            throw new NotSupportedException();
         }
 
-		private Microsoft.SPOT.Hardware.OutputPort debugled = new OutputPort(Generic.GetPin('B', 2), false);
-		/// <summary>
-		/// Turns the debug LED on or off
-		/// </summary>
-		/// <param name="on">True if the debug LED should be on</param>
-		public override void SetDebugLED(bool on)
-		{
-			debugled.Write(on);
-		}
-
-		/// <summary>
-		/// This performs post-initialization tasks for the mainboard.  It is called by Gadgeteer.Program.Run and does not need to be called manually.
-		/// </summary>
-		public override void PostInit()
-		{
-			return;
-		}
-
-		/// <summary>
-		/// The mainboard name, which is printed at startup in the debug window
-		/// </summary>
-		public override string MainboardName
-		{
-			get { return "GHI Electronics FEZCerbuinoNet"; }
-		}
-
-		/// <summary>
-		/// The mainboard version, which is printed at startup in the debug window
-		/// </summary>
-		public override string MainboardVersion
-		{
-			get { return "1.0"; }
-		}
-
-        void BitmapConverter(Bitmap bmp, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+        /// <summary>
+        /// Sets the state of the debug LED.
+        /// </summary>
+        /// <param name="on">The new state.</param>
+        public override void SetDebugLED(bool on)
         {
-            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
-                throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
+            if (this.debugLed == null)
+                this.debugLed = new OutputPort(Generic.GetPin('B', 2), on);
 
-            GHI.Utilities.Bitmaps.Convert(bmp, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE);
+            this.debugLed.Write(on);
         }
+
+        /// <summary>
+        /// Sets the programming mode of the device.
+        /// </summary>
+        /// <param name="programmingInterface">The new programming mode.</param>
+        public override void SetProgrammingMode(GT.Mainboard.ProgrammingInterface programmingInterface)
+        {
+            throw new NotSupportedException();
+        }
+
+        /// <summary>
+        /// This performs post-initialization tasks for the mainboard.  It is called by Gadgeteer.Program.Run and does not need to be called manually.
+        /// </summary>
+        public override void PostInit()
+        {
+
+        }
+
+        /// <summary>
+        /// Represents the ENC28J60 chip on the mainboard.
+        /// </summary>
+        public EthernetENC28J60 Ethernet
+        {
+            get
+            {
+                if (this.ethernet == null)
+                    this.ethernet = new EthernetENC28J60(SPI.SPI_module.SPI1, Generic.GetPin('A', 13), Generic.GetPin('A', 14), Generic.GetPin('B', 10), 4000);
+
+                return this.ethernet;
+            }
+        }
+
+        private void NativeBitmapConvert(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp)
+        {
+            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
+
+            GHI.Utilities.Bitmaps.Convert(bitmap, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE, pixelBytes);
+        }
+
+        private void NativeBitmapSpi(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
+		{
+            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
+
+			if (!this.configSet)
+            {
+                Configuration.Display.Populate(Configuration.Display.GHIDisplay.DisplayN18);
+                Configuration.Display.SpiConfiguration = config;
+                Configuration.Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
+                Configuration.Display.Save();
+
+				this.configSet = true;
+			}
+
+			bitmap.Flush(xSrc, ySrc, width, height);
+		}
 
         private class InteropI2CBus : GT.SocketInterfaces.I2CBus
         {
@@ -254,19 +263,20 @@ namespace GHIElectronics.Gadgeteer
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private SoftwareI2CBus i2c;
+            private SoftwareI2CBus softwareBus;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.i2c = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
+
+                this.softwareBus = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)
             {
-                this.i2c.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
+                this.softwareBus.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
         }
-	}
+    }
 }

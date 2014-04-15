@@ -5,7 +5,7 @@
     <MainboardDefinition
             Name="FEZCerberus"
             Type="GHIElectronics.Gadgeteer.FEZCerberus"
-            HardwareVersion="1.0"
+            HardwareVersion="1.2"
             Image="Resources\Image.jpg"
             BoardWidth="57"
             BoardHeight="47"
@@ -63,9 +63,9 @@
 
         <ProvidedSocket Label="5" Left="44" Top="41" Orientation="270" ConstructorParameter="5">
           <Types>
+            <Type>P</Type>
             <Type>C</Type>
             <Type>S</Type>
-            <Type>P</Type>
             <Type>X</Type>
           </Types>
           <SharedPinMaps>
@@ -76,9 +76,9 @@
 
         <ProvidedSocket Label="6" Left="28" Top="41" Orientation="270" ConstructorParameter="6">
           <Types>
-            <Type>U</Type>
-            <Type>S</Type>
             <Type>P</Type>
+            <Type>S</Type>
+            <Type>U</Type>
             <Type>X</Type>
           </Types>
           <SharedPinMaps>
@@ -107,7 +107,7 @@
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerberus" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
-		
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <Assembly MFVersion="4.3" Name="GHI.Pins"/>

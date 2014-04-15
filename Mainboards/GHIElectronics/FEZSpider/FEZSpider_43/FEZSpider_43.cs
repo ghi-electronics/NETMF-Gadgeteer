@@ -26,6 +26,10 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public FEZSpider()
         {
+            this.debugLed = null;
+            this.storageDevices = new Removable[2];
+            this.usbMassStorageDevice = null;
+
             Controller.DeviceConnected += (a, b) =>
             {
                 if (b.Device.Type == GHI.Usb.Device.DeviceType.MassStorage)
@@ -333,7 +337,7 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="width">Display physical width in pixels, ignoring the orientation setting.</param>
         /// <param name="height">Display physical height in lines, ignoring the orientation setting.</param>
         /// <param name="orientationDeg">Display orientation in degrees.</param>
-        /// <param name="lcdConfig">The required timings from an LCD controller.</param>
+        /// <param name="timing">The required timings from an LCD controller.</param>
         protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GTM.Module.DisplayModule.TimingRequirements timing)
         {
             Configuration.Display.Height = (uint)height;
@@ -414,7 +418,7 @@ namespace GHIElectronics.Gadgeteer
 
         private void BitmapConverter(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp)
         {
-            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
+            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
 
             GHI.Utilities.Bitmaps.Convert(bitmap, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE, pixelBytes);
         }
@@ -425,16 +429,14 @@ namespace GHIElectronics.Gadgeteer
             public override int Timeout { get; set; }
             public override int ClockRateKHz { get; set; }
 
-            private Cpu.Pin sdaPin;
-            private Cpu.Pin sclPin;
             private SoftwareI2CBus softwareBus;
 
             public InteropI2CBus(GT.Socket socket, GT.Socket.Pin sdaPin, GT.Socket.Pin sclPin, ushort address, int clockRateKHz, GTM.Module module)
             {
-                this.sdaPin = socket.CpuPins[(int)sdaPin];
-                this.sclPin = socket.CpuPins[(int)sclPin];
                 this.Address = address;
                 this.ClockRateKHz = clockRateKHz;
+
+                this.softwareBus = new SoftwareI2CBus(socket.CpuPins[(int)sclPin], socket.CpuPins[(int)sdaPin]);
             }
 
             public override void WriteRead(byte[] writeBuffer, int writeOffset, int writeLength, byte[] readBuffer, int readOffset, int readLength, out int numWritten, out int numRead)

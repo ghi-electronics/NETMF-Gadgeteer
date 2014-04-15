@@ -18,37 +18,37 @@
       </Assemblies>
 
       <ProvidedSockets>
-		  <ProvidedSocket Label="1" Left="79.5" Top="14" Orientation="0" ConstructorParameter="1">
-			  <Types>
-				  <Type>P</Type>
-				  <Type>S</Type>
-				  <Type>U</Type>
-				  <Type>X</Type>
-			  </Types>
-		  </ProvidedSocket>
+        <ProvidedSocket Label="1" Left="79.5" Top="14" Orientation="0" ConstructorParameter="1">
+          <Types>
+            <Type>P</Type>
+            <Type>S</Type>
+            <Type>U</Type>
+            <Type>X</Type>
+          </Types>
+        </ProvidedSocket>
 
-		  <ProvidedSocket Label="2" Left="79.5" Top="28" Orientation="0" ConstructorParameter="2">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>I</Type>
-				  <Type>K</Type>
-				  <Type>U</Type>
-				  <Type>Y</Type>
-			  </Types>
-			  <SharedPinMaps>
-				  <SharedPinMap NetId="I2CSDA" SocketPin="8" />
-				  <SharedPinMap NetId="I2CSCL" SocketPin="9" />
-			  </SharedPinMaps>
-		  </ProvidedSocket>
+        <ProvidedSocket Label="2" Left="79.5" Top="28" Orientation="0" ConstructorParameter="2">
+          <Types>
+            <Type>A</Type>
+            <Type>I</Type>
+            <Type>K</Type>
+            <Type>U</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8" />
+            <SharedPinMap NetId="I2CSCL" SocketPin="9" />
+          </SharedPinMaps>
+        </ProvidedSocket>
 
-		  <ProvidedSocket Label="3" Left="79.5" Top="42" Orientation="0" ConstructorParameter="3">
-			  <Types>
-				  <Type>A</Type>
-				  <Type>O</Type>
-				  <Type>P</Type>
-				  <Type>Y</Type>
-			  </Types>
-		  </ProvidedSocket>
+        <ProvidedSocket Label="3" Left="79.5" Top="42" Orientation="0" ConstructorParameter="3">
+          <Types>
+            <Type>A</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+        </ProvidedSocket>
       </ProvidedSockets>
 
       <LibrariesProvided>
@@ -56,7 +56,7 @@
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet" />
 
         <Assembly MFVersion="4.2" Name="GHI.Hardware.FEZCerb"/>
-		
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <Assembly MFVersion="4.3" Name="GHI.Pins"/>

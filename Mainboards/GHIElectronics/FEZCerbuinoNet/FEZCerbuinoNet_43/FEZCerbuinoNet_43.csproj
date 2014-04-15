@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{904a81b3-3df6-4cd8-9bde-c86b33bcb3a6}</ProjectGuid>
+    <ProjectGuid>{904A81B3-3DF6-4CD8-9BDE-C86B33BCB3A6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GHIElectronics.Gadgeteer</RootNamespace>
@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="FEZCerbuinoNet_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal43.cs" />
+    <Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
@@ -52,6 +52,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="GHI.Hardware" />
+    <Reference Include="GHI.Networking, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHI.Pins" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />

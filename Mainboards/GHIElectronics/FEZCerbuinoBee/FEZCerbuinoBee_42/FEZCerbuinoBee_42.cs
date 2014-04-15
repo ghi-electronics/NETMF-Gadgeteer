@@ -274,7 +274,7 @@ namespace GHIElectronics.Gadgeteer
 		void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
 		{
 			if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
-				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_LE supported");
+				throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
 
 			GHI.OSHW.Hardware.Util.BitmapConvertBPP(bitmapBytes, pixelBytes, Util.BPP_Type.BPP16_BGR_BE);
 
