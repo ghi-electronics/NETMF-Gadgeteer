@@ -4,14 +4,13 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
-	/// A Relay X1 module for Microsoft .NET Gadgeteer
+	/// A RelayX1 module for Microsoft .NET Gadgeteer
 	/// </summary>
 	public class RelayX1 : GTM.Module
 	{
 		private GTI.DigitalOutput enable;
-		private bool state;
 
-		/// <summary>Constructs a new RelayX1 instance.</summary>
+		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public RelayX1(int socketNumber)
 		{
@@ -20,22 +19,20 @@ namespace Gadgeteer.Modules.GHIElectronics
 			socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
 			this.enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
-
 		}
 
 		/// <summary>
-		/// Gets or sets whether the relay is on or off.
+		/// Whether the relay is on or off.
 		/// </summary>
 		public bool Enabled
 		{
 			get
 			{
-				return this.state;
+				return this.enable.Read();
 			}
 			set
 			{
 				this.enable.Write(value);
-				this.state = value;
 			}
 		}
 
