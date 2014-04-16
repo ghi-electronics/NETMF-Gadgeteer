@@ -9,28 +9,8 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A FLASH module for Microsoft .NET Gadgeteer
     /// </summary>
-    /// <remarks>
-    /// Chip Details:
-    /// 
-    /// <list type="bullet">
-    /// <item>64 total blocks</item>
-    /// <item>1024 sectors</item>
-    /// <item>4Kb for each sector</item>
-    /// <item>1024 sectrors * 4kb = 4096Kb total memory</item>
-    /// <item>256 bytes mamximum for each transfer</item>
-    /// </list>
-    /// </remarks>
     public class FLASH : GTM.Module
     {
-        // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
-        // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-        // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-        // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-
-        ///////////////////////////////////////////////////////////////////////
-        // Constants
-        ///////////////////////////////////////////////////////////////////////
         private const int MAX_ADDRESS = 0x400000;
         private const byte CMD_GET_IDENTIFICATION = 0x9F;
         private const byte CMD_ERASE_SECTOR = 0x20;
@@ -40,216 +20,190 @@ namespace Gadgeteer.Modules.GHIElectronics
         private const byte CMD_WRITE_ENABLE = 0x6;
         private const byte CMD_READ_STATUS = 0x5;
 
-        private const int SectoreSize = 4 * 1024;
-        private const int BlockSize = 64 * 1024;
-        private const int PageSize = 256; // Max is 256 byte for each block transfer
+        private const int SECTOR_SIZE = 4 * 1024;
+        private const int BLOCK_SIZE = 64 * 1024;
+        private const int PAGE_SIZE = 256;
 
-        const byte ID_MANUFACTURE = 0xC2;
-        const byte ID_DEVICE_0 = 0x20;
-        const byte ID_DEVICE_1 = 0x16;
+        private const byte ID_MANUFACTURER = 0xC2;
+        private const byte ID_DEVICE_0 = 0x20;
+        private const byte ID_DEVICE_1 = 0x16;
 
-        const byte DUMMY_BYTE = 0x00;
-        ///////////////////////////////////////////////////////////////////////
+        private GTI.Spi spi;
+        private GTI.DigitalOutput statusLED;
 
-        GTI.Spi spi;
-        GTI.SpiConfiguration spiConfig;
-        GTI.DigitalOutput statusLED;
-
-        byte[] writeData;
-        byte[] readData;
-
-        /// <summary>Constructor</summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public FLASH(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-
             socket.EnsureTypeIsSupported('S', this);
 
-            statusLED = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
-
-            Initialize(socket);
-        }
-
-        private void Initialize(GT.Socket socket)
-        {
-            spiConfig = new GTI.SpiConfiguration(false, 0, 0, false, true, 4000);
-            spi = GTI.SpiFactory.Create(socket, spiConfig, GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
-
-            ClearBuffers();
+            this.statusLED = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, false, this);
+            this.spi = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 4000), GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
         }
 
         /// <summary>
-        /// Attempts to enable writing to the flash, and returns the result.
+        /// Attempts to enable writing to the flash.
         /// </summary>
-        /// <returns>True is writing is enabled, false if it is not</returns>
+        /// <returns>If writing is enabled or not.</returns>
         public bool WriteEnable()
         {
-            ClearBuffers();
+            var writeData = new byte[1];
+            var readData = new byte[2];
 
-            writeData[0] = CMD_WRITE_ENABLE;
+            this.statusLED.Write(true);
 
-            statusLED.Write(true);
+            writeData[0] = FLASH.CMD_WRITE_ENABLE;
+            this.spi.Write(writeData);
 
-            spi.Write(writeData);
-
-            writeData[0] = CMD_READ_STATUS;
-
-            spi.WriteRead(writeData, readData);
+            writeData[0] = FLASH.CMD_READ_STATUS;
+            this.spi.WriteRead(writeData, readData);
             
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
             return ((readData[1] & 0x2) != 0);
         }
 
         /// <summary>
-        /// Returns the ID of the chip.
+        /// Gets the ID of the chip.
         /// </summary>
-        /// <returns>A byte[] containing the chip ID.</returns>
+        /// <returns>The chip ID.</returns>
         public byte[] GetIdentification()
         {
-            writeData = new byte[1];
-            readData = new byte[4];
-            writeData[0] = CMD_GET_IDENTIFICATION;
+            var writeData = new byte[1];
+            var readData = new byte[4];
             
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
-            spi.WriteRead(writeData, readData);
+            writeData[0] = FLASH.CMD_GET_IDENTIFICATION;
+            this.spi.WriteRead(writeData, readData);
 
-            if ((readData[1] == 0xFF && readData[2] == 0xFF && readData[3] == 0xFF) || (readData[1] == 0 && readData[2] == 0 && readData[3] == 0))
+            if ((readData[1] == 0xFF && readData[2] == 0xFF && readData[3] == 0xFF) || (readData[1] == 0x00 && readData[2] == 0x00 && readData[3] == 0x00))
             {
-                throw new Exception("Can not initialize flash");
+                throw new Exception("The module could not initialize.");
             }
 
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
             return readData;
         }
         
         /// <summary>
-        /// Returns if a write is in progress.
+        /// Checks if a write is in progress.
         /// </summary>
-        /// <returns>True is there is a operation write in progress. False is there is no write operation in progress.</returns>
-        public bool WriteInProgress()
+        /// <returns>Whether or not a write is in progress.</returns>
+        public bool IsWriteInProgress()
         {
-            writeData = new byte[] { 0 };
-            readData = new byte[] { 0, 0 };
-
-            statusLED.Write(true);
+            var writeData = new byte[1];
+            var readData = new byte[2];
+            
+            this.statusLED.Write(true);
 
             readData[1] = 1;
-            writeData[0] = CMD_READ_STATUS;
+            writeData[0] = FLASH.CMD_READ_STATUS;
 
-            spi.WriteRead(writeData, readData);
+            this.spi.WriteRead(writeData, readData);
 
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
             return ((readData[1] & 0x1) != 0);
         }
 
         /// <summary>
-        /// Erases the entire chip. Blocking function.
+        /// Erases the entire chip.
         /// </summary>
         public void EraseChip()
         {
-            while (WriteEnable() == false)
-                Thread.Sleep(0);
+            while (!this.WriteEnable())
+                Thread.Sleep(1);
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
-            writeData = new byte[1];
-            writeData[0] = CMD_ERASE_CHIP;
+            var writeData = new byte[1];
 
-            spi.Write(writeData);
+            writeData[0] = FLASH.CMD_ERASE_CHIP;
+            this.spi.Write(writeData);
 
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
-            while (WriteInProgress() == true)
-                Thread.Sleep(0);
+            while (this.IsWriteInProgress())
+                Thread.Sleep(1);
         }
 
         /// <summary>
-        /// Erases blocks, starting at the passed in block, for the passed in number of blocks. Blocking function.
+        /// Erases the specified blocks.
         /// </summary>
         /// <param name="block">The block to begin erasing at.</param>
-        /// <param name="num">The number of blocks to erase.</param>
-        /// <returns>If the erase was successful.</returns>
-        public bool EraseBlock(int block, int num)
+        /// <param name="count">The number of blocks to erase.</param>
+        public void EraseBlock(int block, int count)
         {
-            if ((block + num) * BlockSize > MAX_ADDRESS)
-            {
-                throw new Exception("Invalid params");
-            }
-         
-            int address = block * BlockSize;
+            if (block < 0) throw new ArgumentOutOfRangeException("block", "block must not be negative.");
+            if (count <= 0) throw new ArgumentOutOfRangeException("count", "count must be positive.");
+            if ((block + count) * FLASH.BLOCK_SIZE > FLASH.MAX_ADDRESS) throw new ArgumentOutOfRangeException("block", "block + count must be less than the total number of blocks.");
+
+            int address = block * FLASH.BLOCK_SIZE;
             int i = 0;
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
-            for (i = 0; i < num; i++)
+            var writeData = new byte[4];
+            for (i = 0; i < count; i++)
             {
-                while (WriteEnable() == false)
-                    Thread.Sleep(0);
+                while (!this.WriteEnable())
+                    Thread.Sleep(1);
 
-                writeData = new byte[4];
-                writeData[0] = CMD_ERASE_BLOCK;
+                writeData[0] = FLASH.CMD_ERASE_BLOCK;
                 writeData[1] = (byte)(address >> 16);
                 writeData[2] = (byte)(address >> 8);
                 writeData[3] = (byte)(address >> 0);
 
-                spi.Write(writeData);
-                
-                address += BlockSize;
+                this.spi.Write(writeData);
 
-                while (WriteInProgress() == true)
-                    Thread.Sleep(0);
+                address += FLASH.BLOCK_SIZE;
+
+                while (this.IsWriteInProgress())
+                    Thread.Sleep(1);
             }
 
-            statusLED.Write(false);
-
-            return i == num;
+            this.statusLED.Write(false);
         }
 
         /// <summary>
-        /// Erases sectors, starting at the passed in sector, for the passed in number of sectors. Blocking function.
+        /// Erases the specified blocks.
         /// </summary>
-        /// <param name="sector">Sector to begin at.</param>
-        /// <param name="num">Number of sectors to erase.</param>
-        /// <returns>If the erase was successful.</returns>
-        public bool EraseSector(int sector, int num)
+        /// <param name="sector">The sector to begin erasing at.</param>
+        /// <param name="count">The number of sectors to erase.</param>
+        public void EraseSector(int sector, int count)
         {
-            if ((sector + num) * SectoreSize > MAX_ADDRESS)
-            {
-                throw new Exception("Invalid params");
-            }
+            if (sector < 0) throw new ArgumentOutOfRangeException("sector", "sector must not be negative.");
+            if (count <= 0) throw new ArgumentOutOfRangeException("count", "count must be positive.");
+            if ((sector + count) * FLASH.SECTOR_SIZE > FLASH.MAX_ADDRESS) throw new ArgumentOutOfRangeException("sector", "sector + count must be less than the total number of blocks.");
 
-            int address = sector * SectoreSize;
+            int address = sector * FLASH.SECTOR_SIZE;
             int i = 0;
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
-            for (i = 0; i < num; i++)
+            var writeData = new byte[4];
+            for (i = 0; i < count; i++)
             {
-                while (WriteEnable() == false)
-                    Thread.Sleep(0);
+                while (!this.WriteEnable())
+                    Thread.Sleep(1);
 
-                writeData = new byte[4];
-                writeData[0] = CMD_ERASE_SECTOR;
+                writeData[0] = FLASH.CMD_ERASE_SECTOR;
                 writeData[1] = (byte)(address >> 16);
                 writeData[2] = (byte)(address >> 8);
                 writeData[3] = (byte)(address >> 0);
-                
-                spi.Write(writeData);
-                
-                address += SectoreSize;
 
-                while (WriteInProgress() == true)
-                    Thread.Sleep(0);
+                this.spi.Write(writeData);
+
+                address += FLASH.SECTOR_SIZE;
+
+                while (this.IsWriteInProgress())
+                    Thread.Sleep(1);
             }
 
-            statusLED.Write(false);
-
-            return i == num;
+            this.statusLED.Write(false);
         }
 
         /// <summary>
@@ -257,148 +211,153 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="address">The address to write to.</param>
         /// <param name="buffer">The data to write.</param>
-        /// <returns>If the write was successful.</returns>
-        public bool WriteData(int address, byte[] buffer)
+        public void Write(int address, byte[] buffer)
         {
-            if (buffer.Length + address > MAX_ADDRESS)
-            {
-                throw new Exception("Invalid params");
-            }
-           
-            int block = buffer.Length / PageSize;
-            int length = buffer.Length;
+            if (buffer == null) throw new ArgumentNullException("buffer");
+
+            this.Write(address, buffer, 0, buffer.Length);
+        }
+
+        /// <summary>
+        /// Writes data to a specific address.
+        /// </summary>
+        /// <param name="address">The address to write to.</param>
+        /// <param name="buffer">The data to write.</param>
+        /// <param name="offset">The offset to begin writing from.</param>
+        /// <param name="count">The nubmer of bytes to write.</param>
+        public void Write(int address, byte[] buffer, int offset, int count)
+        {
+            if (address < 0) throw new ArgumentOutOfRangeException("address", "address must not be negative.");
+            if (offset < 0) throw new ArgumentOutOfRangeException("offset", "offset must not be negative.");
+            if (count <= 0) throw new ArgumentOutOfRangeException("count", "count must be positive.");
+            if (buffer == null) throw new ArgumentNullException("buffer");
+            if (count + address > FLASH.MAX_ADDRESS) throw new ArgumentOutOfRangeException("address", "address + buffer.Length must be less than the total number of blocks.");
+
+            int block = count / FLASH.PAGE_SIZE;
+            int length = count;
             int i = 0;
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
             if (block > 0)
             {
+                var writeData = new byte[FLASH.PAGE_SIZE + 4];
                 for (i = 0; i < block; i++)
                 {
-                    while (WriteEnable() == false)
-                        Thread.Sleep(0);
+                    while (!this.WriteEnable())
+                        Thread.Sleep(1);
 
-                    writeData = new byte[PageSize + 4];
-                    writeData[0] = CMD_WRITE_SECTOR;
+                    writeData[0] = FLASH.CMD_WRITE_SECTOR;
                     writeData[1] = (byte)(address >> 16);
                     writeData[2] = (byte)(address >> 8);
                     writeData[3] = (byte)(address >> 0);
-                    
-                    Array.Copy(buffer, i * PageSize, writeData, 4, PageSize);
-                    
-                    spi.Write(writeData);
 
-                    while (WriteInProgress() == true)
-                        Thread.Sleep(0);
+                    Array.Copy(buffer, i * FLASH.PAGE_SIZE + offset, writeData, 4, FLASH.PAGE_SIZE);
 
-                    address += PageSize;
-                    length -= PageSize;
+                    this.spi.Write(writeData);
+
+                    while (this.IsWriteInProgress())
+                        Thread.Sleep(1);
+
+                    address += FLASH.PAGE_SIZE;
+                    length -= FLASH.PAGE_SIZE;
                 }
             }
 
             if (length > 0)
             {
-                while (WriteEnable() == false)
-                    Thread.Sleep(0);
+                var writeData = new byte[length + 4];
+                while (!this.WriteEnable())
+                    Thread.Sleep(1);
 
-                writeData = new byte[length + 4];
-                writeData[0] = CMD_WRITE_SECTOR;
+                writeData[0] = FLASH.CMD_WRITE_SECTOR;
                 writeData[1] = (byte)(address >> 16);
                 writeData[2] = (byte)(address >> 8);
                 writeData[3] = (byte)(address >> 0);
-                
-                Array.Copy(buffer, i * PageSize, writeData, 4, length);
-                
-                spi.Write(writeData);
 
-                while (WriteInProgress() == true)
-                    Thread.Sleep(0);
+                Array.Copy(buffer, i * FLASH.PAGE_SIZE + offset, writeData, 4, length);
+
+                this.spi.Write(writeData);
+
+                while (this.IsWriteInProgress())
+                    Thread.Sleep(1);
                 
                 address += length;
                 length -= length;
             }
 
-            statusLED.Write(false);
-
-            return length == 0;
+            this.statusLED.Write(false);
         }
 
         /// <summary>
-        /// Reads data from a specific address.
+        /// Reads data from the specific address.
         /// </summary>
         /// <param name="address">The address to read from.</param>
-        /// <param name="length">The length to read.</param>
+        /// <param name="length">The number of bytes to read.</param>
         /// <returns>The data that was read.</returns>
-        public byte[] ReadData(int address, int length)
+        public byte[] Read(int address, int length)
         {
-            if (length + address > MAX_ADDRESS)
-            {
-                throw new Exception("Invalid params");
-            }
+            if (address < 0) throw new ArgumentOutOfRangeException("address", "address must not be negative.");
+            if (length <= 0) throw new ArgumentOutOfRangeException("length", "length must be positive.");
+            if (length + address > FLASH.MAX_ADDRESS) throw new ArgumentOutOfRangeException("address", "address + length must be less than the total number of blocks.");
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
             byte[] buffer = new byte[length];
 
-            while (WriteEnable() == false)
-                Thread.Sleep(0);
+            while (!this.WriteEnable())
+                Thread.Sleep(1);
             
-            writeData = new byte[4];
-            readData = new byte[length + 4];
+            var writeData = new byte[4];
+            var readData = new byte[length + 4];
 
-            writeData[0] = 0x3;
+            writeData[0] = 0x03;
             writeData[1] = (byte)(address >> 16);
             writeData[2] = (byte)(address >> 8);
             writeData[3] = (byte)(address >> 0);
-            
-            spi.WriteRead(writeData, readData);
+
+            this.spi.WriteRead(writeData, readData);
             Array.Copy(readData, 4, buffer, 0, length);
 
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
             return buffer;
         }
+
         /// <summary>
         /// Reads data from a specific address in fast mode.
         /// </summary>
         /// <param name="address">Address to read from.</param>
         /// <param name="length">The length to read.</param>
         /// <returns>The data that was read.</returns>
-        public byte[] ReadData_FastMode(uint address, int length)
+        public byte[] ReadFast(uint address, int length)
         {
-            if (length + address > MAX_ADDRESS)
-            {
-                throw new Exception("Invalid params");
-            }
+            if (address < 0) throw new ArgumentOutOfRangeException("address", "address must not be negative.");
+            if (length <= 0) throw new ArgumentOutOfRangeException("length", "length must be positive.");
+            if (length + address > FLASH.MAX_ADDRESS) throw new ArgumentOutOfRangeException("address", "address + length must be less than the total number of blocks.");
 
-            statusLED.Write(true);
+            this.statusLED.Write(true);
 
             byte[] buffer = new byte[length];
 
-            while (WriteEnable() == false)
-                Thread.Sleep(0);
+            while (!this.WriteEnable())
+                Thread.Sleep(1);
             
-            writeData = new byte[5];
-            readData = new byte[length + 5];
+            var writeData = new byte[5];
+            var readData = new byte[length + 5];
 
-            writeData[0] = 0x3;
+            writeData[0] = 0x03;
             writeData[1] = (byte)(address >> 16);
             writeData[2] = (byte)(address >> 8);
             writeData[3] = (byte)(address >> 0);
-            writeData[4] = DUMMY_BYTE;
-            
-            spi.WriteRead(writeData, readData);
+            writeData[4] = 0x00;
+
+            this.spi.WriteRead(writeData, readData);
             Array.Copy(readData, 5, buffer, 0, length);
 
-            statusLED.Write(false);
+            this.statusLED.Write(false);
 
             return buffer;
-        }
-
-        private void ClearBuffers()
-        {
-            writeData = new byte[] { 0 };
-            readData = new byte[] { 0, 0 };
         }
     }
 }
