@@ -12,25 +12,25 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="27"
                   BoardWidth="47"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/382">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.Camera"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Camera"/>
-		
+
         <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
-		
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
         <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
       </Assemblies>
-	  
+
       <ExtraLibrariesRequired>
         <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
         <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
-		
+
         <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
         <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
       </ExtraLibrariesRequired>

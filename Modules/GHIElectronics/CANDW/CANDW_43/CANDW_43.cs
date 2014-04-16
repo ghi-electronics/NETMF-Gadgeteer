@@ -1,8 +1,8 @@
-﻿using GTM = Gadgeteer.Modules;
-using GHI.IO;
+﻿using GHI.IO;
 using Microsoft.SPOT;
 using System;
 using System.Threading;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -173,6 +173,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
                 return this.can.IsTransmitBufferEmpty;
             }
         }
@@ -184,6 +186,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
                 return this.can.AvailableMessages;
             }
         }
@@ -195,6 +199,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
                 return this.can.ReceiveErrorCount;
             }
         }
@@ -206,6 +212,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
                 return this.can.TransmitErrorCount;
             }
         }
@@ -218,6 +226,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </remarks>
         public void Reset()
         {
+            if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
             this.can.Reset();
         }
 
@@ -230,6 +240,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </remarks>
         public void SetExplicitFilters(uint[] filters)
         {
+            if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
             this.can.SetExplicitFilters(filters);
         }
 
@@ -244,6 +256,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </remarks>
         public void SetGroupFilters(uint[] lowerBounds, uint[] upperBounds)
         {
+            if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
             this.can.SetGroupFilters(lowerBounds, upperBounds);
         }
 
