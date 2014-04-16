@@ -1,341 +1,383 @@
-﻿//#define WAITING_FOR_ASSEMBLIES
-using GTM = Gadgeteer.Modules;
-
+﻿using GTM = Gadgeteer.Modules;
 using GHI.IO;
+using Microsoft.SPOT;
+using System;
+using System.Threading;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-
-#if WAITING_FOR_ASSEMBLIES
-    public class CANDW : GTM.Module
-    {
-    }
-}
-#else
     /// <summary>
     /// A CANDW module for Microsoft .NET Gadgeteer
     /// </summary>
     public class CANDW : GTM.Module
     {
-        /// <summary></summary>
+        private ControllerAreaNetwork can;
+        private Thread workerThread;
+        private object syncRoot;
+        private int sent;
+        private bool running;
+
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public CANDW(int socketNumber)
         {
-            // This finds the Socket instance from the user-specified socket number.  
-            // This will generate user-friendly error messages if the socket is invalid.
-            // If there is more than one socket on this module, then instead of "null" for the last parameter, 
-            // put text that identifies the socket to the user (e.g. "S" if there is a socket type S)
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('C', this);
+
+            this.syncRoot = new object();
+            this.running = false;
+            this.sent = 0;
+            this.can = null;
+            this.workerThread = null;
         }
 
-        void m_CAN_ErrorReceivedEvent(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args)
+        /// <summary>
+        /// The underlying ControllerAreaNetwork object.
+        /// </summary>
+        public ControllerAreaNetwork Can
         {
-            //this._PostDone = new PostMessagesDoneEventHandler(this.OnPostMessagesFinished);
-            //this._PostDone(m_numMessagesSent);
-            this._ErrorReceived = this.OnErrorReceived;
-            this._ErrorReceived(sender, args);
+            get
+            {
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
+                return this.can;
+            }
         }
 
         /// <summary>
-        /// Event delegate
-        /// </summary>
-        /// <param name="sender">Sending module</param>
-        /// <param name="args">Error args</param>
-        public delegate void ErrorReceivedEventHandler(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args);
-        
-        /// <summary>
-        /// Event for when an error is received
-        /// </summary>
-        public event ErrorReceivedEventHandler ErrorReceived;
-        
-        private ErrorReceivedEventHandler _ErrorReceived;
-
-        /// <summary>
-        /// Sends the error event.
-        /// </summary>
-        /// <param name="sender">Sending module</param>
-        /// <param name="args">Error arguments</param>
-        protected virtual void OnErrorReceived(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs args)
-        {
-            this.ErrorReceived(sender, args);
-        }
-
-        void m_CAN_DataReceivedEvent(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args)
-        {
-            this._DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
-            this._DataReceived(sender, args);
-        }
-
-        /// <summary>
-        /// Event delegate
-        /// </summary>
-        /// <param name="sender">Sending module</param>
-        /// <param name="args">Data args</param>
-        public delegate void DataReceivedEventHandler(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args);
-        
-        /// <summary>
-        /// Event for when data is received
-        /// </summary>
-        public event DataReceivedEventHandler DataReceived;
-        
-        private DataReceivedEventHandler _DataReceived;
-
-        /// <summary>
-        /// Sends the data received event
-        /// </summary>
-        /// <param name="sender">Sending module</param>
-        /// <param name="args">Data args</param>
-        protected virtual void OnDataReceived(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs args)
-        {
-            if (this.DataReceived == null)
-                this.DataReceived = new DataReceivedEventHandler(this.OnDataReceived);
-            this.DataReceived(sender, args);
-        }
-
-        private ControllerAreaNetwork m_CAN;
-
-        //public CAN GetCAN
-        //{
-        //    get { return m_CAN; }
-        //}
-
-        /// <summary>
-        /// Initializes CAN.
+        /// Initializes the CAN bus.
         /// </summary>
         /// <param name="speed">The desired bus speed.</param>
-        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
-        /// <param name="channel">The CAN channel to use.</param>
-        public void InitializeCAN(ControllerAreaNetwork.Speed speed, int receiveBufferSize, ControllerAreaNetwork.Channel channel = ControllerAreaNetwork.Channel.One)
+        public void Initialize(ControllerAreaNetwork.Speed speed)
         {
-            m_CAN = new ControllerAreaNetwork(channel, speed);
-            m_CAN.ReceiveBufferSize = receiveBufferSize;
-
-            m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
-            m_CAN.ErrorReceived += (m_CAN_ErrorReceivedEvent);
+            this.Initialize(speed, ControllerAreaNetwork.Channel.One);
         }
 
         /// <summary>
-        /// Initializes CAN.
+        /// Initializes the CAN bus.
         /// </summary>
         /// <param name="timings">The desired bus timings.</param>
-        /// <param name="receiveBufferSize">Specifies the receive buffer size (number of internally buffered CAN messages).</param>
+        public void Initialize(ControllerAreaNetwork.Timings timings)
+        {
+            this.Initialize(timings, ControllerAreaNetwork.Channel.One);
+        }
+
+        /// <summary>
+        /// Initializes the CAN bus.
+        /// </summary>
+        /// <param name="speed">The desired bus speed.</param>
         /// <param name="channel">The CAN channel to use.</param>
-        public void InitializeCAN(ControllerAreaNetwork.Timings timings, int receiveBufferSize, ControllerAreaNetwork.Channel channel = ControllerAreaNetwork.Channel.One)
+        public void Initialize(ControllerAreaNetwork.Speed speed, ControllerAreaNetwork.Channel channel)
         {
-            m_CAN = new ControllerAreaNetwork(channel, timings);
-            m_CAN.ReceiveBufferSize = receiveBufferSize;
+            this.can = new ControllerAreaNetwork(channel, speed);
 
-            m_CAN.MessageAvailable += (m_CAN_DataReceivedEvent);
-            m_CAN.ErrorReceived += (m_CAN_ErrorReceivedEvent);
+            this.can.MessageAvailable += this.OnCanMessagesAvailable;
+            this.can.ErrorReceived += this.OnCanErrorReceived;
+
+            this.can.Enabled = true;
         }
 
-        private System.Threading.Thread m_PostMessagesThread;
-        
         /// <summary>
-        /// The list of messages to be sent when calling PostMessages.
+        /// Initializes the CAN bus.
         /// </summary>
-        public ControllerAreaNetwork.Message[] msgList;
+        /// <param name="timings">The desired bus timings.</param>
+        /// <param name="channel">The CAN channel to use.</param>
+        public void Initialize(ControllerAreaNetwork.Timings timings, ControllerAreaNetwork.Channel channel)
+        {
+            this.can = new ControllerAreaNetwork(channel, timings);
+
+            this.can.MessageAvailable += this.OnCanMessagesAvailable;
+            this.can.ErrorReceived += this.OnCanErrorReceived;
+
+            this.can.Enabled = true;
+        }
 
         /// <summary>
-        ///  Posts (queues for writing) CAN messages
+        /// Sends the given message over the CAN bus.
         /// </summary>
+        /// <param name="message">The message to send.</param>
+        public void SendMessage(ControllerAreaNetwork.Message message)
+        {
+            if (message == null) throw new ArgumentNullException("message");
+
+            this.SendMessages(new ControllerAreaNetwork.Message[] { message });
+        }
+
+        /// <summary>
+        /// Sends the given messages over the CAN bus.
+        /// </summary>
+        /// <param name="messages">The messages to send.</param>
+        public void SendMessages(ControllerAreaNetwork.Message[] messages)
+        {
+            if (messages == null) throw new ArgumentNullException("messages");
+
+            this.SendMessages(messages, 0, messages.Length);
+        }
+
+        /// <summary>
+        /// Sends the given messages over the CAN bus.
+        /// </summary>
+        /// <param name="messages">The messages to send.</param>
         /// <param name="offset">Offset into the buffer to start sending from.</param>
-        /// <param name="count">Number of messages to write.</param>
-        /// <returns></returns>
-        public CAN_PostState PostMessages(int offset, int count)
+        /// <param name="count">Number of messages to send.</param>
+        public void SendMessages(ControllerAreaNetwork.Message[] messages, int offset, int count)
         {
-            if (m_PostMessagesThread != null)
+            lock (this.syncRoot)
             {
-                if (m_PostMessagesThread.IsAlive)
-                    return CAN_PostState.Fail;
+                if (messages == null) throw new ArgumentNullException("messages");
+                if (offset < 0) throw new ArgumentOutOfRangeException("offset", "offset must not be negative.");
+                if (count <= 0) throw new ArgumentOutOfRangeException("offset", "offset must be positive.");
+                if (count + offset > messages.Length) throw new ArgumentOutOfRangeException("messages", "messages.Length must be at least offset + count.");
+                if (this.workerThread != null && this.workerThread.IsAlive) throw new InvalidOperationException("You must wait until all other messages have finished sending.");
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+
+                this.running = true;
+                this.workerThread = new Thread(() => this.DoWork(messages, offset, count));
+                this.workerThread.Start();
             }
-
-            m_PostMessagesThread = new System.Threading.Thread(this._PostMessagesThread);
-            m_PostMessagesThread.Start();
-
-            return CAN_PostState.Success;
         }
-
-        private int m_numMessagesSent = 0;
 
         /// <summary>
-        /// The number of messages sent during the last PostMessages call.
+        /// Cancels sending the messages queued by SendMessages.
         /// </summary>
-        public int NumMessagesSent
+        /// <returns>The number of messages sent so far.</returns>
+        public int CancelSend()
         {
-            get { return m_numMessagesSent; }
-        }
-
-        private void _PostMessagesThread()
-        {
-            m_numMessagesSent = 0;
-
-            while (true)
+            lock (this.syncRoot)
             {
-                m_numMessagesSent += m_CAN.SendMessages(msgList, m_numMessagesSent, msgList.Length - m_numMessagesSent);
+                if (this.can == null) throw new InvalidOperationException("You must call Initialize first.");
+                if (this.workerThread == null || !this.workerThread.IsAlive) throw new InvalidOperationException("There is no send operation in progress.");
 
-                if (m_numMessagesSent == msgList.Length)
-                    break;
+                this.running = false;
+                this.workerThread.Join();
 
-                System.Threading.Thread.Sleep(1);
+                return this.sent;
             }
-
-            //send "im done" event here
-            //if( this._PostDone == null)
-                this._PostDone = new PostMessagesDoneEventHandler(this.OnPostMessagesFinished);
-            this._PostDone(m_numMessagesSent);
         }
 
         /// <summary>
-        /// Event delegate
+        /// Whether or not transmission is currently possible.
         /// </summary>
-        /// <param name="numPosted">Number of messages posted</param>
-        public delegate void PostMessagesDoneEventHandler(int numPosted);
-        
-        /// <summary>
-        /// Event for when messages have been successfully sent
-        /// </summary>
-        public event PostMessagesDoneEventHandler PostDone;
-
-        private PostMessagesDoneEventHandler _PostDone;
-
-        /// <summary>
-        /// Sends the event when messages are successfully sent
-        /// </summary>
-        /// <param name="numPosted">number of messages posted</param>
-        protected virtual void OnPostMessagesFinished(int numPosted)
+        public bool CanSend
         {
-            this.PostDone(m_numMessagesSent);
+            get
+            {
+                return this.can.CanSend;
+            }
         }
 
         /// <summary>
-        /// Represents the state of the <see cref="CANDW"/> while attempting to post messages.
+        /// Whether or not the transmit buffer is empty.
         /// </summary>
-        public enum CAN_PostState
+        public bool IsTransmitBufferEmpty
         {
-            /// <summary>
-            /// Failed to write messages, as it is still busy writing.
-            /// </summary>
-            Fail = -1,
-            /// <summary>
-            /// Successfully began writing messages.
-            /// </summary>
-            Success = 1
+            get
+            {
+                return this.can.IsTransmitBufferEmpty;
+            }
         }
 
         /// <summary>
-        /// A boolean value denoting if all posted (queued for writing) messages are sent.
+        /// The number of received messages available.
         /// </summary>
-        /// <returns>A boolean value denoting if all posted (queued for writing) messages are sent.</returns>
-        public bool GetPostedMessagesSent()
+        public int AvailableMessages
         {
-            return m_CAN.IsTransmitBufferEmpty;
+            get
+            {
+                return this.can.AvailableMessages;
+            }
         }
 
         /// <summary>
-        /// The number of messages ready to be read.
+        /// The number of receive errors encountered.
         /// </summary>
-        /// <returns>The number of messages ready to be read.</returns>
-        public int GetReceivedMessagesCount()
+        public int ReceiveErrorCount
         {
-            return m_CAN.AvailableMessages;
+            get
+            {
+                return this.can.ReceiveErrorCount;
+            }
         }
 
         /// <summary>
-        /// CAN receive error count.
+        /// The number of transmit errors encountered.
         /// </summary>
-        /// <returns>CAN receive error count.</returns>
-        public int GetReceiveErrorCount()
+        public int TransmitErrorCount
         {
-            return m_CAN.ReceiveErrorCount;
+            get
+            {
+                return this.can.TransmitErrorCount;
+            }
         }
 
         /// <summary>
-        ///  CAN transmit error count.
-        /// </summary>
-        /// <returns> CAN transmit error count.</returns>
-        public int GetTransmitErrorCount()
-        {
-            return m_CAN.TransmitErrorCount;
-        }
-
-        /// <summary>
-        /// Resets the CAN controller
+        /// Resets the CAN controller.
         /// </summary>
         /// <remarks>
-        /// This methods resets the CAN controller. This is needed in the Bus Off condition
-        ///     because the controller get disabled automatically.  Note that a reset causes
-        ///     the hardware buffered messages to be lost (On EMX and USBizi, this is 2 for
-        ///     receive and 3 for transmit). The software receive buffer is not affected.
-        ///     The software filters are not affected either.
+        /// All hardware buffered messages will be lost. The software receive buffer is not affected.
         /// </remarks>
         public void Reset()
         {
-            m_CAN.Reset();
+            this.can.Reset();
         }
 
-#region Filters
         /// <summary>
-        /// Sets explicit filters.
+        /// Sets the explicit filters.
         /// </summary>
-        /// <param name="filters">Messages' IDs to filter.</param>
+        /// <param name="filters">The message ids to filter.</param>
         /// <remarks>
-        /// This filters exact matches for message identifiers (standard or extended).
-        ///     The provided filters will be copied internally and searched using an optimized
-        ///     software search.  For example, to only receive messages with these IDs (0x1234,
-        ///     0x5789, 0x12345678), do the following: uint[] explicitIDs = new uint[] {0x1234,
-        ///     0x5789, 0x12345678}; can.SetExplicitFilters(explicitIDs);
+        /// Any id not matching one of the filters is discarded. Pass null to disable the filter.
         /// </remarks>
         public void SetExplicitFilters(uint[] filters)
         {
-            m_CAN.SetExplicitFilters(filters);
+            this.can.SetExplicitFilters(filters);
         }
 
         /// <summary>
-        /// Sets group (range) filters.
+        /// Sets group filters.
         /// </summary>
-        /// <param name="lowerBounds">Group lower bounds for messages' IDs to filter. Each lower bound corresponds to an upper bound.</param>
-        /// <param name="upperBounds">Group upper bounds for messages' IDs to filter. Each upper bound corresponds to a lower bound.</param>
+        /// <param name="lowerBounds">The lower bounds to filter</param>
+        /// <param name="upperBounds">The upper bounds to filter</param>
         /// <remarks>
-        /// This filters a group (range) of message identifiers (standard or extended).
-        ///     The provided filters will be copied internally and searched using an optimized
-        ///     software search.  Every pair of a lower bound at index i and an upper bound
-        ///     at the same index defines a valid group. The provided groups MUST not overlap.
-        ///     Otherwise, the method will throw an argument exception.  For example, to
-        ///     only receive messages with these two groups of IDs [0x1200 to 0x1248] and
-        ///     [0x500 to 0x1000], do the following: uint[] lowerBounds = new uint[] { 0x1200,
-        ///     0x500 }; uint[] upperBounds = new uint[] { 0x1248, 0x1000 }; can.SetGroupFilters(lowerBounds,
-        ///     upperBounds); Note that the bounds' limits are considered valid. In the above
-        ///     example, 0x1200, 0x1248, 0x500 and 0x1000 are valid IDs and will pass through
-        ///     to the receive buffer.
+        /// Each entry in lowerBounds corresponds to the same-indexed entry in upperBounds. The bounds are inclusive, that is the provided bounds are valid ids.
+        /// For example, to only receive messages with these two groups of IDs [0x1200 to 0x1248] and [0x500 to 0x1000], do the following:<br/>
         /// </remarks>
         public void SetGroupFilters(uint[] lowerBounds, uint[] upperBounds)
         {
-            m_CAN.SetGroupFilters(lowerBounds, upperBounds);
+            this.can.SetGroupFilters(lowerBounds, upperBounds);
+        }
+
+        private void DoWork(ControllerAreaNetwork.Message[] messages, int offset, int count)
+        {
+            this.sent = 0;
+
+            while (this.running && this.sent < count)
+            {
+                this.sent += this.can.SendMessages(messages, this.sent + offset, messages.Length - this.sent);
+
+                Thread.Sleep(1);
+            }
+
+            this.running = false;
+
+            this.OnMessagesSent(this, null);
         }
 
         /// <summary>
-        /// Disables the explicit filters.
+        /// Event arguments for the MessagesReceived event.
         /// </summary>
-        public void DisableExplicitFilters()
+        public class MessagesReceivedEventArgs : EventArgs
         {
-            m_CAN.SetExplicitFilters(null);
+            private ControllerAreaNetwork.Message[] messages;
+
+            /// <summary>
+            /// The messages received.
+            /// </summary>
+            public ControllerAreaNetwork.Message[] Messages { get { return this.messages; } }
+
+            /// <summary>
+            /// The number of messages received.
+            /// </summary>
+            public int MessageCount { get; private set; }
+
+            internal MessagesReceivedEventArgs(ControllerAreaNetwork.Message[] messages)
+            {
+                this.messages = messages;
+                this.MessageCount = messages.Length;
+            }
         }
 
         /// <summary>
-        /// Disables the group filters.
+        /// Event arguments for the ErrorReceived event.
         /// </summary>
-        public void DisableGroupFilters()
+        public class ErrorReceivedEventArgs : EventArgs
         {
-            m_CAN.SetGroupFilters(null, null);
+            /// <summary>
+            /// The error received.
+            /// </summary>
+            public ControllerAreaNetwork.Error Error { get; private set; }
+
+            internal ErrorReceivedEventArgs(ControllerAreaNetwork.Error error)
+            {
+                this.Error = error;
+            }
         }
-        #endregion Filters
+
+        /// <summary>
+        /// The delegate that is used to handle the data received event.
+        /// </summary>
+        /// <param name="sender">The <see cref="CANDW"/> object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void MessagesReceivedEventHandler(CANDW sender, MessagesReceivedEventArgs e);
+
+        /// <summary>
+        /// The delegate that is used to handle the error received event.
+        /// </summary>
+        /// <param name="sender">The <see cref="CANDW"/> object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void ErrorReceivedEventHandler(CANDW sender, ErrorReceivedEventArgs e);
+
+        /// <summary>
+        /// The delegate that is used to handle the posted messages done event.
+        /// </summary>
+        /// <param name="sender">The <see cref="CANDW"/> object that raised the event.</param>
+        /// <param name="e">The number of messages posted.</param>
+        public delegate void MessagesSentEventHandler(CANDW sender, EventArgs e);
+
+        /// <summary>
+        /// Raised when data is received.
+        /// </summary>
+        public event MessagesReceivedEventHandler MessagesReceived;
+
+        /// <summary>
+        /// Raised when an error is received.
+        /// </summary>
+        public event ErrorReceivedEventHandler ErrorReceived;
+
+        /// <summary>
+        /// Raised when the messages have been successfully sent.
+        /// </summary>
+        public event MessagesSentEventHandler MessagesSent;
+
+        private MessagesReceivedEventHandler onMessagesReceived;
+        private ErrorReceivedEventHandler onErrorReceived;
+        private MessagesSentEventHandler onMessagesSent;
+
+        private void OnMessagesReceived(CANDW sender, MessagesReceivedEventArgs e)
+        {
+            if (this.onMessagesReceived == null)
+                this.onMessagesReceived = this.OnMessagesReceived;
+
+            if (Program.CheckAndInvoke(this.MessagesReceived, this.onMessagesReceived, sender, e))
+                this.MessagesReceived(sender, e);
+        }
+
+        private void OnErrorReceived(CANDW sender, ErrorReceivedEventArgs e)
+        {
+            if (this.onErrorReceived == null)
+                this.onErrorReceived = this.OnErrorReceived;
+
+            if (Program.CheckAndInvoke(this.ErrorReceived, this.onErrorReceived, sender, e))
+                this.ErrorReceived(sender, e);
+        }
+
+        private void OnMessagesSent(CANDW sender, EventArgs e)
+        {
+            if (this.onMessagesSent == null)
+                this.onMessagesSent = this.OnMessagesSent;
+
+            if (Program.CheckAndInvoke(this.MessagesSent, this.onMessagesSent, sender, e))
+                this.MessagesSent(sender, e);
+        }
+
+        private void OnCanMessagesAvailable(ControllerAreaNetwork sender, ControllerAreaNetwork.MessageAvailableEventArgs e)
+        {
+            this.OnMessagesReceived(this, new MessagesReceivedEventArgs(this.can.ReadMessages()));
+        }
+
+        private void OnCanErrorReceived(ControllerAreaNetwork sender, ControllerAreaNetwork.ErrorReceivedEventArgs e)
+        {
+            this.OnErrorReceived(this, new ErrorReceivedEventArgs(e.Error));
+        }
     }
 }
-#endif

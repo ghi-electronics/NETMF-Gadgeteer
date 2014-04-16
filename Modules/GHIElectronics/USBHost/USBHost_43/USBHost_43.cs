@@ -154,7 +154,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 }
                 else
                 {
-                    this.ErrorPrint("Unable to mount the USB drive. Is drive formatted as FAT32?");
+                    this.ErrorPrint("Unable to mount the USB drive. Is it formatted as FAT32?");
                 }
             }
         }

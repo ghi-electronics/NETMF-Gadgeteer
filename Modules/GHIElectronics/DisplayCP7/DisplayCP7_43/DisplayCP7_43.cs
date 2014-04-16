@@ -219,11 +219,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             /// </summary>
             public int TouchCount { get; private set; }
 
-            /// <summary>
-            /// Constructs a new instance.
-            /// </summary>
-            /// <param name="touchCount">The number of touches.</param>
-            public TouchEventArgs(int touchCount)
+            internal TouchEventArgs(int touchCount)
             {
                 this.TouchCount = touchCount;
                 this.TouchPoints = new Position[touchCount];
@@ -240,17 +236,14 @@ namespace Gadgeteer.Modules.GHIElectronics
             /// </summary>
             public GestureType Gesture { get; private set; }
 
-            /// <summary>
-            /// Constructs a new instance.
-            /// </summary>
-            public GestureDetectedEventArgs(GestureType type)
+            internal GestureDetectedEventArgs(GestureType type)
             {
                 this.Gesture = type;
             }
         }
 
         /// <summary>
-        /// The delegate delegate that is used to handle the button pressed and screen released events.
+        /// The delegate that is used to handle the button pressed and screen released events.
         /// </summary>
         /// <param name="sender">The <see cref="DisplayCP7"/> object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
@@ -264,7 +257,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public delegate void TouchEventHandler(DisplayCP7 sender, TouchEventArgs e);
 
         /// <summary>
-        /// The delegate delegate that is used to handle the GestureDetected event.
+        /// The delegate that is used to handle the GestureDetected event.
         /// </summary>
         /// <param name="sender">The <see cref="DisplayCP7"/> object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
@@ -310,7 +303,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnScreenPressed(DisplayCP7 sender, TouchEventArgs e)
         {
             if (this.onScreenPressed == null)
-                this.onScreenPressed = new TouchEventHandler(this.OnScreenPressed);
+                this.onScreenPressed = this.OnScreenPressed;
 
             if (Program.CheckAndInvoke(this.ScreenPressed, this.onScreenPressed, sender, e))
                 this.ScreenPressed(sender, e);
