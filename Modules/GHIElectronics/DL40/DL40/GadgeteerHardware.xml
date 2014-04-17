@@ -12,14 +12,14 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="18"
                   BoardWidth="51"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/363">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DL40"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DL40"/>
-		
+
         <Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.DaisyLink" />
       </Assemblies>
@@ -38,7 +38,7 @@
           </Pins>
         </Socket>
       </Sockets>
-      
+
       <ProvidedSockets>
         <ProvidedSocket Label="*" Left="47" Top="10" Orientation="0" ConstructorParameter="DaisyLinkSocketNumber">
           <Types>
@@ -46,7 +46,7 @@
           </Types>
         </ProvidedSocket>
       </ProvidedSockets>
-      
+
       <Power>
         <PowerRequirements Voltage="3.3">
           <TypicalCurrent>0.012</TypicalCurrent>

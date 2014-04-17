@@ -1,136 +1,109 @@
 ﻿using System;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
-
 using System.Threading;
+using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-
     /// <summary>
-    /// A Distance US3 module for Microsoft .NET Gadgeteer
+    /// A DistanceUS3 module for Microsoft .NET Gadgeteer
     /// </summary>
     public class DistanceUS3 : GTM.Module
     {
-        private GTI.DigitalInput Echo;
-        private GTI.DigitalOutput Trigger;
+        private GTI.DigitalInput echo;
+        private GTI.DigitalOutput trigger;
 
-        private readonly int TicksPerMicrosecond = (int)(TimeSpan.TicksPerMillisecond / 1000);
-
-        /// <summary>
-        /// Number of errors that can be accumulated in the GetDistanceInCentimeters function before the function returns an error value;
-        /// </summary>
-        public int AcceptableErrorRate = 10;
+        private const int MIN_DISTANCE = 2;
+        private const int MAX_DISTANCE = 400;
+        private const int MIN_FLAG = -2;
+        private const int MAX_FLAG = -1;
 
         /// <summary>
-        /// Error that will be returned if the sensor fails to get an accurate reading after the AcceptableErrorRate has been reached.
+        /// The value that will be returned when the sensor failed to take an accurate reading.
         /// </summary>
-        public readonly int SENSOR_ERROR = -1;
+        public const int SENSOR_ERROR = -1;
 
-        /// <summary>Constructor</summary>
+        /// <summary>
+        /// The number of errors to encounter before returning SENSOR_ERROR.
+        /// </summary>
+        public int AcceptableErrors { get; set; }
+
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public DistanceUS3(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-
             socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-            Echo = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-            Trigger = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
+            this.echo = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+            this.trigger = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
+            this.AcceptableErrors = 10;
         }
 
         /// <summary>
-        /// Takes a number of measurements, averaging the distance, and returns the detected distance in centimeters.
+        /// Takes a number of measurements and returns the average in centimeters.
         /// </summary>
-        /// <param name="numMeasurements">The number of measurements to take and average before returning a value.</param>
-        /// <returns>Distance that the module has detected an object in front of it. Will return SENSOR_ERROR if the number of errors 
-        /// was reached, which can be caused by an object either being too close or too far from the sensor.</returns>
-        public int GetDistanceInCentimeters(int numMeasurements = 1)
+        /// <returns>The averaged distance or SENSOR_ERROR.</returns>
+        public int GetDistance()
         {
-            int measuredValue = 0;
-            int measuredAverage = 0;
-            int errorCount = 0;
+            return this.GetDistance(1);
+        }
 
-            for (int i = 0; i < numMeasurements; i++)
+        /// <summary>
+        /// Takes a number of measurements and returns the average in centimeters.
+        /// </summary>
+        /// <param name="measurements">The number of measurements to take and average.</param>
+        /// <returns>The averaged distance or SENSOR_ERROR.</returns>
+        public int GetDistance(int measurements)
+        {
+            long sum = 0, errorCount = 0;
+
+            for (int i = 0; i < measurements; i++)
             {
-                measuredValue = GetDistanceHelper();
+                var value = this.GetDistanceHelper();
 
-                if (measuredValue != MaxFlag || measuredValue != MinFlag)
+                if (value >= DistanceUS3.MIN_DISTANCE && value <= DistanceUS3.MAX_DISTANCE) 
                 {
-                    measuredAverage += measuredValue;
+                    sum += value;
                 }
                 else
                 {
                     errorCount++;
                     i--;
 
-                    if (errorCount > AcceptableErrorRate)
-                    {
-                        return SENSOR_ERROR;
-                    }
+                    if (errorCount > this.AcceptableErrors)
+                        return DistanceUS3.SENSOR_ERROR;
                 }
-
             }
 
-            measuredAverage /= numMeasurements;
-            return measuredAverage;
+            return (int)(sum / measurements);
         }
 
-        private const int MIN_DISTANCE = 2;
-        private const int MAX_DISTANCE = 400;
-
-        private const int MaxFlag = -1;
-        private const int MinFlag = -2;
-
-        private int GetDistanceHelper()
+        private long GetDistanceHelper()
         {
-            long start = 0;
-            int microseconds = 0;
-            long time = 0;
-            int distance = 0;
-
-            Trigger.Write(true);
+            this.trigger.Write(true);
             Thread.Sleep(10);
-            Trigger.Write(false);
+            this.trigger.Write(false);
 
-            int error = 0;
-            while (!Echo.Read())
+            var error = 0;
+            while (!this.echo.Read())
             {
-                error++;
-                if (error > 1000)
-                    break;
+                if (error++ > 1000)
+                    return DistanceUS3.SENSOR_ERROR;
+
                 Thread.Sleep(0);
             }
 
-            start = System.DateTime.Now.Ticks;
+            var start = DateTime.Now.Ticks;
 
-            while (Echo.Read())
+            while (this.echo.Read())
                 Thread.Sleep(0);
 
-            time = (System.DateTime.Now.Ticks - start);
-            microseconds = (int)time / TicksPerMicrosecond;
+            var end = DateTime.Now.Ticks;
 
-            distance = (microseconds / 58);
-            distance += 2;
+            var microseconds = (end - start) / (TimeSpan.TicksPerMillisecond / 1000);
 
-            if (distance < MAX_DISTANCE)
-            {
-                if (distance >= MIN_DISTANCE)
-                    return distance;
-                else
-                    return MinFlag;
-            }
-            else
-            {
-                return MaxFlag;
-            }
+            return microseconds / 58 + 2;
         }
     }
 }

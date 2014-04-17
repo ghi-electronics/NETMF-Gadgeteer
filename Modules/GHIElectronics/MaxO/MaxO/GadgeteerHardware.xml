@@ -30,6 +30,7 @@
             <Type>S</Type>
           </Types>
           <Pins>
+            <Pin Shared="false">6</Pin>
             <Pin Shared="true">7</Pin>
             <Pin Shared="true">8</Pin>
             <Pin Shared="true">9</Pin>

@@ -12,14 +12,14 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="37.5"
                   BoardWidth="37.5"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.2"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/366">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RFIDReader"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RFIDReader"/>
-		
+
         <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
       </Assemblies>
@@ -30,7 +30,6 @@
             <Type>U</Type>
           </Types>
           <Pins>
-            <Pin Shared="false">3</Pin>
             <Pin Shared="false">4</Pin>
             <Pin Shared="false">5</Pin>
           </Pins>

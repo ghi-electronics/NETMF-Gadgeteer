@@ -12,14 +12,14 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="37"
                   BoardWidth="42"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.4"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/314">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.XBeeAdapter"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.XBeeAdapter"/>
-		
+
         <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
       </Assemblies>
