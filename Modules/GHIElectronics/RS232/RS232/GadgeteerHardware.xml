@@ -12,14 +12,14 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="39"
                   BoardWidth="47"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/479">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RS232"/>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RS232"/>
-		
+
         <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
       </Assemblies>
