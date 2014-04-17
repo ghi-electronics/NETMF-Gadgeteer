@@ -1,10 +1,11 @@
-﻿using GTI = Gadgeteer.SocketInterfaces;
+﻿using System;
+using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
-	/// A Reflector R3 module for Microsoft .NET Gadgeteer
+	/// A ReflectorR3 module for Microsoft .NET Gadgeteer
 	/// </summary>
 	public class ReflectorR3 : GTM.Module
 	{
@@ -13,7 +14,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private GTI.AnalogInput right;
 		private GTI.DigitalOutput centerSwitch;
 
-		/// <summary></summary>
+		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public ReflectorR3(int socketNumber)
 		{
@@ -56,7 +57,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				case Reflectors.Left: return 1 - this.left.ReadProportion();
 				case Reflectors.Center: return 1 - this.center.ReadProportion();
 				case Reflectors.Right: return 1 - this.right.ReadProportion();
-				default: return 0;
+				default: throw new ArgumentException("reflector", "You must provide a valid reflector.");
 			}
 		}
 	}

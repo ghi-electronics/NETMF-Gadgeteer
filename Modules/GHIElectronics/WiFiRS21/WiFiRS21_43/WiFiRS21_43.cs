@@ -65,7 +65,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
-                return this.networkInterface.CableConnected;
+                return this.networkInterface.LinkConnected;
             }
         }
     }

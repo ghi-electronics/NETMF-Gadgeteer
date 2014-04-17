@@ -8,44 +8,51 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class GasSense : GTM.Module
     {
-        // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-        // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2CBus), you must do a few more steps
-        // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-        // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-        // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
+        private GTI.AnalogInput input;
+        private GTI.DigitalOutput enable;
 
-        GTI.AnalogInput ain;
-        GTI.DigitalOutput heatingElementEnable;
-
-        /// <summary>Constructor</summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public GasSense(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-
             socket.EnsureTypeIsSupported('A', this);
 
-            ain = GTI.AnalogInputFactory.Create(socket, Socket.Pin.Three, this);
-
-            heatingElementEnable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
+            this.input = GTI.AnalogInputFactory.Create(socket, Socket.Pin.Three, this);
+            this.enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
         }
 
         /// <summary>
-        /// Returns a value describing the reading of the air.
+        /// The voltage returned from the sensor.
         /// </summary>
-        /// <returns>Value between 0.0 and 3.3</returns>
+        /// <returns>The voltage value between 0.0 and 3.3</returns>
         public double ReadVoltage()
         {
-            return (ain.ReadVoltage());
+            return this.input.ReadVoltage();
+        }
+
+        /// <summary>
+        /// The proportion returned from the sensor.
+        /// </summary>
+        /// <returns>The value between 0.0 and 1.0</returns>
+        public double ReadProportion()
+        {
+            return this.input.ReadProportion();
         }
 
         /// <summary>
         /// Turns the heating element on or off. This may take up to 10 seconds befre a proper reading is taken.
         /// </summary>
-        /// <param name="bOn">True to turn the element on, false to turn it off.</param>
-        public void SetHeatingElement(bool bOn)
+        public bool HeatingElementEnabled
         {
-            heatingElementEnable.Write(bOn);
+            get
+            {
+                return this.enable.Read();
+            }
+            set
+            {
+                this.enable.Write(value);
+            }
         }
     }
 }

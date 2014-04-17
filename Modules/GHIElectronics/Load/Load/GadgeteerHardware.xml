@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="37"
                   BoardWidth="72"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.2"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/361">
 
@@ -23,14 +23,14 @@
 
       <Sockets>
         <Socket Left="35.5" Top="33" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
-        <Types>
-          <Type>Y</Type>
-        </Types>
-        <Pins>
-          <Pin Shared="false">3</Pin>
-          <Pin Shared="false">4</Pin>
-        </Pins>
-      </Socket>
+          <Types>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+          </Pins>
+        </Socket>
       </Sockets>
 
       <Power>
