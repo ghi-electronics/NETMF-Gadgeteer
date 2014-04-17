@@ -5,7 +5,7 @@
     <ModuleDefinition Name="UCBattery4xAA"
                   UniqueId="d62d26a0-c456-475f-a5f9-227b4ff6ae37"
                   Manufacturer="GHI Electronics"
-                  Description="An UCBattery4xAA module"
+                  Description="A UCBattery4xAA module"
                   InstanceName="ucBattery4xAA"
                   Type="Gadgeteer.Modules.GHIElectronics.UCBattery4xAA"
                   ModuleSuppliesPower="false"
