@@ -1,24 +1,19 @@
-﻿using System;
-using Microsoft.SPOT;
-
-using GT = Gadgeteer;
+﻿using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
-	/// A SPlus module for Microsoft .NET Gadgeteer
+	/// An SPlus module for Microsoft .NET Gadgeteer
 	/// </summary>
 	public class SPlus : GTM.Module
 	{
 		private GT.Socket sSocket;
 		private GT.Socket ySocket;
-		 
 		private GT.Socket sx1;
 		private GT.Socket sx2;
 
-		/// <summary>Creates a new SPlus instance.</summary>
+		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		/// <param name="socketNumberTwo">The second socket that this module is plugged in to.</param>
 		public SPlus(int socketNumber, int socketNumberTwo)
@@ -29,8 +24,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.sSocket.EnsureTypeIsSupported('S', this);
 			this.ySocket.EnsureTypeIsSupported('Y', this);
 
-			this.sx1 = Socket.SocketInterfaces.CreateUnnumberedSocket("SPlus1");
-			this.sx2 = Socket.SocketInterfaces.CreateUnnumberedSocket("SPlus2");
+			this.sx1 = Socket.SocketInterfaces.CreateUnnumberedSocket(socketNumber.ToString() + "-" + socketNumberTwo.ToString() + " SPlus1");
+			this.sx2 = Socket.SocketInterfaces.CreateUnnumberedSocket(socketNumber.ToString() + "-" + socketNumberTwo.ToString() + " SPlus2");
 
 			this.sx1.SupportedTypes = this.sx2.SupportedTypes = new char[2] { 'S', 'X' };
 
@@ -50,12 +45,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
 		/// <summary>
-		/// Returns the socket number for socket 1 on the hub.
+		/// Returns the socket number for socket 1 on the module.
 		/// </summary>
 		public int SHubSocket1 { get { return this.sx1.SocketNumber; } }
 
 		/// <summary>
-		/// Returns the socket number for socket 2 on the hub.
+        /// Returns the socket number for socket 2 on the module.
 		/// </summary>
 		public int SHubSocket2 { get { return this.sx2.SocketNumber; } }
 	}

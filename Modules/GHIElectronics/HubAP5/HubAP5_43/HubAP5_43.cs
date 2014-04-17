@@ -1,11 +1,7 @@
 ﻿using System;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Hardware;
 using System.Collections;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
@@ -61,7 +57,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public int HubSocket8 { get { return this.sockets[7].SocketNumber; } }
 
-		/// <summary>Constructs a new HubAP5 module.</summary>
+		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public HubAP5(int socketNumber)
 		{

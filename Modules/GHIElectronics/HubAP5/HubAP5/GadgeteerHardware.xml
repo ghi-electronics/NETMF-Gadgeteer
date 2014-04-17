@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="52"
                   BoardWidth="72"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/365">
 
@@ -50,6 +50,7 @@
             <SharedPinMap NetId="S19" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H2" Left="6" Top="30" Orientation="180" ConstructorParameter="HubSocket2">
           <Types>
             <Type>A</Type>
@@ -65,6 +66,7 @@
             <SharedPinMap NetId="S29" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H3" Left="15" Top="45" Orientation="270" ConstructorParameter="HubSocket3">
           <Types>
             <Type>Y</Type>
@@ -79,6 +81,7 @@
             <SharedPinMap NetId="S39" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H4" Left="29" Top="45" Orientation="270" ConstructorParameter="HubSocket4">
           <Types>
             <Type>P</Type>
@@ -94,6 +97,7 @@
             <SharedPinMap NetId="S49" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H5" Left="43" Top="45" Orientation="270" ConstructorParameter="HubSocket5">
           <Types>
             <Type>P</Type>
@@ -109,6 +113,7 @@
             <SharedPinMap NetId="S59" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H6" Left="57" Top="45" Orientation="270" ConstructorParameter="HubSocket6">
           <Types>
             <Type>P</Type>
@@ -124,6 +129,7 @@
             <SharedPinMap NetId="S69" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H7" Left="66" Top="30" Orientation="0" ConstructorParameter="HubSocket7">
           <Types>
             <Type>P</Type>
@@ -139,6 +145,7 @@
             <SharedPinMap NetId="S79" SocketPin="9" />
           </SharedPinMaps>
         </ProvidedSocket>
+        
         <ProvidedSocket Label="H8" Left="66" Top="16" Orientation="0" ConstructorParameter="HubSocket8">
           <Types>
             <Type>P</Type>

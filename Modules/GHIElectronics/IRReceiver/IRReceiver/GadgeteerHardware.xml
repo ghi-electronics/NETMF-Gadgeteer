@@ -29,7 +29,6 @@
           </Types>
           <Pins>
             <Pin Shared="false">3</Pin>
-            <Pin Shared="false">4</Pin>
           </Pins>
         </Socket>
       </Sockets>
