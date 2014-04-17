@@ -18,7 +18,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public RS232(int socketNumber)
         {
             this.socket = Socket.GetSocket(socketNumber, true, this, null);
-            this.socket.EnsureTypeIsSupported(new char[] {'U', 'K'}, this);
+            this.socket.EnsureTypeIsSupported(new char[] { 'U', 'K' }, this);
             this.serialPort = null;
         }
 
@@ -40,6 +40,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="flowControl">The flow control to use.</param>
         public void Configure(int baudRate, GTI.SerialParity parity, GTI.SerialStopBits stopBits, int dataBits, GTI.HardwareFlowControl flowControl)
         {
+            if (this.serialPort != null) throw new InvalidOperationException("Configure can only be called once.");
+
             this.serialPort = GTI.SerialFactory.Create(socket, baudRate, parity, stopBits, dataBits, flowControl, this);
             this.serialPort.Open();
         }

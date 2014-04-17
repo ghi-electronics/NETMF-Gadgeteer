@@ -5,14 +5,14 @@
     <ModuleDefinition Name="USBSerial"
                   UniqueId="7b529b63-fb23-4998-9840-232fb1276518"
                   Manufacturer="GHI Electronics"
-                  Description="An USBSerial module"
+                  Description="A USBSerial module"
                   InstanceName="usbSerial"
                   Type="Gadgeteer.Modules.GHIElectronics.USBSerial"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
                   BoardHeight="26.38"
                   BoardWidth="30"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.4"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/311">
 
@@ -30,11 +30,8 @@
             <Type>U</Type>
           </Types>
           <Pins>
-            <Pin Shared="false">3</Pin>
             <Pin Shared="false">4</Pin>
             <Pin Shared="false">5</Pin>
-            <Pin Shared="false">6</Pin>
-            <Pin Shared="false">7</Pin>
           </Pins>
         </Socket>
       </Sockets>

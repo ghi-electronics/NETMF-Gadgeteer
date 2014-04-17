@@ -5,14 +5,14 @@
     <ModuleDefinition Name="USBSerialSP"
                   UniqueId="efb787c4-aae6-477d-ab8b-ef59dcf2b420"
                   Manufacturer="GHI Electronics"
-                  Description="An USBSerialSP module"
+                  Description="A USBSerialSP module"
                   InstanceName="usbSerialSP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBSerialSP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
                   BoardHeight="28"
                   BoardWidth="32"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/441">
 
@@ -30,7 +30,6 @@
             <Type>U</Type>
           </Types>
           <Pins>
-            <Pin Shared="false">3</Pin>
             <Pin Shared="false">4</Pin>
             <Pin Shared="false">5</Pin>
           </Pins>
