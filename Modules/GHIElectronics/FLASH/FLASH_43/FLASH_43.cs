@@ -1,8 +1,7 @@
-﻿using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
-using System;
+﻿using System;
 using System.Threading;
+using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {

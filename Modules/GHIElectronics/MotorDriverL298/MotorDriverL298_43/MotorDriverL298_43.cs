@@ -1,273 +1,121 @@
 ﻿using System;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
-
 using System.Threading;
-using Microsoft.SPOT;
+using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-	/// <summary>
-	/// A motor controller used to control two different motors.
+    /// <summary>
+    /// A MotorDriverL298 module for Microsoft .NET Gadgeteer
 	/// </summary>
     public class MotorDriverL298 : GTM.Module
     {
-        GTI.PwmOutput m_Pwm1;
-        GTI.PwmOutput m_Pwm2;
+        private const int STEP_FACTOR = 1000;
 
-        GTI.DigitalOutput m_Direction1;
-        GTI.DigitalOutput m_Direction2;
+        private GTI.PwmOutput[] pwms;
+        private GTI.DigitalOutput[] directions;
+        private double[] lastSpeeds;
 
-		/// <summary>
-		/// Used to set the PWM frequency for the motors because some motors require a 
-		/// certain frequency in order to operate properly. It defaults to 25KHz (25000).
-		/// </summary>
-        public int Frequency { get; set; }
-
-        int m_lastSpeed1 = 0;
-        int m_lastSpeed2 = 0;
-
-        /// <summary></summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public MotorDriverL298(int socketNumber)
         {
-			this.Frequency = 25000;
 
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+            socket.EnsureTypeIsSupported('P', this);
 
-            socket.EnsureTypeIsSupported(new char[] { 'P' }, this);
+            this.pwms = new GTI.PwmOutput[2]
+            {
+                GTI.PwmOutputFactory.Create(socket, Socket.Pin.Eight, false, this),
+                GTI.PwmOutputFactory.Create(socket, Socket.Pin.Seven, false, this)
+            };
 
-            m_Pwm1 = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
-            m_Pwm2 = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Eight, false, this);
+            this.directions = new GTI.DigitalOutput[2]
+            {
+                GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this),
+                GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this)
+            };
 
-            m_Direction1 = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
-            m_Direction2 = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
+            this.lastSpeeds = new double[2] {0, 0};
 
-            m_Pwm1.Set(Frequency, 0);
-            m_Pwm2.Set(Frequency, 0);
+            this.Frequency = 25000;
+
+            this.StopAll();
         }
 
         /// <summary>
-        /// Represents the state of the <see cref="MotorDriverL298"/> object.
-        /// </summary>
-        public enum MotorControllerL298State
-        {
-            /// <summary>
-            /// The state of MotorDriverL298 is low.
-            /// </summary>
-            Low = 0,
-            /// <summary>
-            /// The state of MotorDriverL298 is high.
-            /// </summary>
-            High = 1
-        }
-
-        /// <summary>
-        /// Represents the desired motor to use.
+        /// The possible motors.
         /// </summary>
         public enum Motor
         {
             /// <summary>
-            /// The left motor, marked M1, is the one in use.
+            /// The motor marked M1.
             /// </summary>
             Motor1 = 0,
 
             /// <summary>
-            /// The right motor, marked M2, is the one in use.
+            /// The motor marked M2.
             /// </summary>
             Motor2 = 1,
         }
 
         /// <summary>
-        /// Used to set a motor's speed.
-        /// <param name="_motorSide">The motor <see cref="Motor"/> you are setting the speed for.</param>
-        /// <param name="_newSpeed"> The new speed that you want to set the current motor to.</param>
+        /// Used to set the PWM frequency for the motors because some motors require a 
+        /// certain frequency in order to operate properly. It defaults to 25KHz (25000).
         /// </summary>
-        public void MoveMotor(Motor _motorSide, int _newSpeed)
+        public int Frequency { get; set; }
+
+        /// <summary>
+        /// Stops all motors.
+        /// </summary>
+        public void StopAll()
         {
-            // Make sure the speed is within an acceptable range.
-            if (_newSpeed > 100 || _newSpeed < -100)
-                new ArgumentException("New motor speed outside the acceptable range (-100-100)", "_newSpeed");
-
-            //////////////////////////////////////////////////////////////////////////////////
-            // Motor1
-            //////////////////////////////////////////////////////////////////////////////////
-            if (_motorSide == Motor.Motor2)
-            {
-                // Determine the direction we are going to go.
-                if (_newSpeed == 0)
-                {
-                    //if (m_lastSpeed1 == 0)
-                    m_Direction1.Write(false);
-                    m_Pwm1.Set(Frequency, 0.01);
-                }
-                else if (_newSpeed < 0)
-                {
-                    // Set direction and power.
-                    m_Direction1.Write(true);
-
-                    /////////////////////////////////////////////////////////////////////////////
-                    // Quick fix for current PWM issue
-                    double fix = (double)((100 - System.Math.Abs(_newSpeed)) / 100.0);
-                    if (fix >= 1.0)
-                        fix = 0.99;
-                    if (fix <= 0.0)
-                        fix = 0.01;
-                    /////////////////////////////////////////////////////////////////////////////
-
-                    m_Pwm1.Set(Frequency, fix);
-                }
-                else
-                {
-                    // Set direction and power.
-                    m_Direction1.Write(false);
-
-                    /////////////////////////////////////////////////////////////////////////////
-                    // Quick fix for current PWM issue
-                    double fix = (double)(_newSpeed / 100.0);
-                    if (fix >= 1.0)
-                        fix = 0.99;
-                    if (fix <= 0.0)
-                        fix = 0.01;
-                    /////////////////////////////////////////////////////////////////////////////
-
-                    m_Pwm1.Set(Frequency, fix);
-                }
-
-                // Save our speed
-                m_lastSpeed1 = _newSpeed;
-            }
-            //////////////////////////////////////////////////////////////////////////////////
-            // Motor2
-            //////////////////////////////////////////////////////////////////////////////////
-            else
-			{
-                // Determine the direction we are going to go.
-                if (_newSpeed == 0)
-                {
-                    //if( m_lastSpeed2 == 0)
-                    m_Direction2.Write(false);
-                    m_Pwm2.Set(Frequency, 0.01);
-                }
-                else if (_newSpeed < 0)
-                {
-                    // Set direction and power.
-                    m_Direction2.Write(true);
-
-                    /////////////////////////////////////////////////////////////////////////////
-                    // Quick fix for current PWM issue
-                    double fix = (double)((100 - System.Math.Abs(_newSpeed)) / 100.0);
-                    if (fix >= 1.0)
-                        fix = 0.99;
-                    if (fix <= 0.0)
-                        fix = 0.01;
-                    /////////////////////////////////////////////////////////////////////////////
-
-                    m_Pwm2.Set(Frequency, fix);
-                }
-                else
-                {
-                    // Set direction and power.
-                    m_Direction2.Write(false);
-
-                    /////////////////////////////////////////////////////////////////////////////
-                    // Quick fix for current PWM issue
-                    double fix = (double)(_newSpeed / 100.0);
-                    if (fix >= 1.0)
-                        fix = 0.99;
-                    if (fix <= 0.0)
-                        fix = 0.01;
-                    /////////////////////////////////////////////////////////////////////////////
-
-                    m_Pwm2.Set(Frequency, fix);
-                }
-
-                // Save our speed
-                m_lastSpeed2 = _newSpeed;
-
-            }
-            //////////////////////////////////////////////////////////////////////////////////
+            this.SetSpeed(Motor.Motor1, 0);
+            this.SetSpeed(Motor.Motor2, 0);
         }
 
         /// <summary>
-        /// Used to set a motor's speed with a ramping acceleration. <see cref="MoveMotor"/>
-        /// <param name="_motorSide">The motor <see cref="Motor"/> you are setting the speed for.</param>
-        /// <param name="_newSpeed"> The new speed that you want to set the current motor to.</param>
-        /// <param name="_rampingDelayMilli"> The time in which you want the motor to reach the new speed (in milliseconds).</param>
+        /// Sets the given motor's speed.
         /// </summary>
-        public void MoveMotorRamp(Motor _motorSide, int _newSpeed, int _rampingDelayMilli)
+        /// <param name="motor">The motor to set the speed for.</param>
+        /// <param name="speed">The desired speed of the motor.</param>
+        public void SetSpeed(Motor motor, double speed)
         {
-            int temp_speed;
-            int startSpeed;
-            int lastSpeed;
+            if (speed > 1 || speed < -1) new ArgumentOutOfRangeException("speed", "speed must be between -1 and 1.");
+            if (motor != Motor.Motor1 && motor != Motor.Motor2) throw new ArgumentException("motor", "You must specify a valid motor.");
 
-            int timeStep;
-            int deltaTime = 0;
+            this.directions[(int)motor].Write(speed < 0);
+            this.pwms[(int)motor].Set(this.Frequency, speed < 0 ? 1 - speed : speed);
+            this.lastSpeeds[(int)motor] = speed;
+        }
 
-            // Determine which motor we are going to change.
-            if (_motorSide == Motor.Motor2)
-            {
-                temp_speed = m_lastSpeed1;
-                startSpeed = m_lastSpeed1;
-                lastSpeed = m_lastSpeed1;
-            }
-            else
-            {
-                temp_speed = m_lastSpeed2;
-                startSpeed = m_lastSpeed2;
-                lastSpeed = m_lastSpeed2;
-            }
+        /// <summary>
+        /// Sets the given motor's speed.
+        /// </summary>
+        /// <param name="motor">The motor to set the speed for.</param>
+        /// <param name="speed">The desired speed of the motor.</param>
+        /// <param name="time">How many milliseconds the motor should take to reach the specified speed.</param>
+        public void SetSpeed(Motor motor, double speed, int time)
+        {
+            if (speed > 1 || speed < -1) new ArgumentOutOfRangeException("speed", "speed must be between -1  and 1.");
+            if (motor != Motor.Motor1 && motor != Motor.Motor2) throw new ArgumentException("motor", "You must specify a valid motor.");
 
-            // Determine how long we need to wait between move calls.
-            // Make sure we dont divied by 0
-            if (_newSpeed == lastSpeed)
+            double currentSpeed = this.lastSpeeds[(int)motor];
+
+            if (currentSpeed == speed)
                 return;
 
-            timeStep = _rampingDelayMilli / (_newSpeed - lastSpeed);
+            double sleep = time / ((speed - currentSpeed) * MotorDriverL298.STEP_FACTOR);
+            double step = 1 / MotorDriverL298.STEP_FACTOR;
 
-            ////////////////////////////////////////////////////////////////
-            // Ramp
-            ////////////////////////////////////////////////////////////////
-            while (_newSpeed != temp_speed)
+            while (Math.Abs(speed - currentSpeed) >= 0.01)
             {
-                // If we have been updating for the passed in length of time, exit the loop.
-                if (deltaTime >= _rampingDelayMilli)
-                    break;
+                currentSpeed += step;
 
-                // If we are slowing the motor down.
-                if (temp_speed > _newSpeed)
-                {
-                    temp_speed += ((startSpeed - _newSpeed) / timeStep);
-                }
-                // If we are speeding the motor up.
-                if (temp_speed < _newSpeed)
-                {
-                    temp_speed -= ((startSpeed - _newSpeed) / timeStep);
-                }
+                this.SetSpeed(motor, currentSpeed);
 
-                // Set our motor speed to our new values.
-                MoveMotor(_motorSide, temp_speed);
-
-                // Increase our timer.
-                deltaTime += System.Math.Abs(timeStep);
-
-                // Wait until we can move again.
-                Thread.Sleep(System.Math.Abs(timeStep));
+                Thread.Sleep((int)sleep);
             }
-            ////////////////////////////////////////////////////////////////
-        }
-
-        /// <summary>
-        /// Used to set a motor's speed with a ramping acceleration asynchronously. <see cref="MoveMotor"/>
-        /// <param name="_motorSide">The motor <see cref="Motor"/> you are setting the speed for.</param>
-        /// <param name="_newSpeed"> The new speed that you want to set the current motor to.</param>
-        /// <param name="_rampingDelayMilli"> The time in which you want the motor to reach the new speed (in milliseconds).</param>
-        /// </summary>
-        public void MoveMotorRampNonBlocking(Motor _motorSide, int _newSpeed, int _rampingDelayMilli)
-		{
-			new Thread(() => this.MoveMotorRamp(_motorSide, _newSpeed, _rampingDelayMilli)).Start();
         }
     }
 }
