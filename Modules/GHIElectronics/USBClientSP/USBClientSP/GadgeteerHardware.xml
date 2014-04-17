@@ -5,14 +5,14 @@
     <ModuleDefinition Name="USBClientSP"
                   UniqueId="71b7dedb-29b0-4175-b295-bd153b56cd32"
                   Manufacturer="GHI Electronics"
-                  Description="An USBClientSP module"
+                  Description="A USBClientSP module"
                   InstanceName="usbClientSP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBClientSP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
                   BoardHeight="27"
                   BoardWidth="27"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.3"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/437">
 

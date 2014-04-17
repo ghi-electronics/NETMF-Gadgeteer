@@ -5,14 +5,14 @@
     <ModuleDefinition Name="USBClientDP"
                   UniqueId="4f21fe56-9794-4f0f-a8b8-d74ce4dc93d0"
                   Manufacturer="GHI Electronics"
-                  Description="An USBClientDP module"
+                  Description="A USBClientDP module"
                   InstanceName="usbClientDP"
                   Type="Gadgeteer.Modules.GHIElectronics.USBClientDP"
                   ModuleSuppliesPower="false"
                   Image="Resources\Image.jpg"
                   BoardHeight="37"
                   BoardWidth="42"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.3"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/330">
 
