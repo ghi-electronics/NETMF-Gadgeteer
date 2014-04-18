@@ -48,6 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CharacterDisplay_42\CharacterDisplay_42.csproj">
+      <Project>{68BBF307-8795-420F-9653-316966EE246A}</Project>
+      <Name>CharacterDisplay_42</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CharacterDisplay_43\CharacterDisplay_43.csproj">
       <Project>{511BDCA6-7C0C-4947-8E06-CCC4861AA904}</Project>
       <Name>CharacterDisplay_43</Name>

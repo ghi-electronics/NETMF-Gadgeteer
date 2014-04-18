@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{38b8c5e4-f538-413b-bb26-a222c53e09a2}") = "HD44780", "HD44780\HD44780.csproj", "{96e35114-01d8-42e1-ac6c-2aed53f7d435}"
 EndProject
-Project("{38b8c5e4-f538-413b-bb26-a222c53e09a2}") = "HD44780_42", "HD44780_42\HD44780_42.csproj", "{68BBF307-8795-420F-9653-316966EE246A}"
-EndProject
 Project("{38b8c5e4-f538-413b-bb26-a222c53e09a2}") = "HD44780_43", "HD44780_43\HD44780_43.csproj", "{a1d7e938-5977-46ac-bbca-2c83ae0ae782}"
 EndProject
 Project("{38b8c5e4-f538-413b-bb26-a222c53e09a2}") = "HD44780_Tester", "HD44780_Tester\HD44780_Tester.csproj", "{d82efd23-defb-452f-8563-44d21ce23ccc}"
@@ -15,10 +13,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{68BBF307-8795-420F-9653-316966EE246A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{68BBF307-8795-420F-9653-316966EE246A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{68BBF307-8795-420F-9653-316966EE246A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{68BBF307-8795-420F-9653-316966EE246A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{96e35114-01d8-42e1-ac6c-2aed53f7d435}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{96e35114-01d8-42e1-ac6c-2aed53f7d435}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96e35114-01d8-42e1-ac6c-2aed53f7d435}.Release|Any CPU.ActiveCfg = Release|Any CPU
