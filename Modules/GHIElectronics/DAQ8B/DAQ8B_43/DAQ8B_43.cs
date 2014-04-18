@@ -4,26 +4,26 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics
 {
 	/// <summary>
-	/// A DAQ 8B module for Microsoft .NET Gadgeteer
+	/// A DAQ8B module for Microsoft .NET Gadgeteer
 	/// </summary>
 	public class DAQ8B : GTM.Module
 	{
-		private GTI.DigitalInput MISO;
-		private GTI.DigitalOutput MOSI;
-		private GTI.DigitalOutput CLOCK;
-		private GTI.DigitalOutput CS;
+		private GTI.DigitalInput miso;
+		private GTI.DigitalOutput mosi;
+		private GTI.DigitalOutput clock;
+		private GTI.DigitalOutput cs;
 
-		/// <summary>Constructs a new instance of a DAQ 8B module.</summary>
+		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public DAQ8B(int socketNumber)
 		{
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('S', this);
 
-			this.CS = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
-			this.MISO = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-			this.MOSI = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
-			this.CLOCK = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
+			this.cs = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
+			this.miso = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+			this.mosi = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
+			this.clock = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
 		}
 
 		/// <summary>
@@ -66,37 +66,37 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
 		/// <summary>
-		/// Queries the board for a voltage reading on the given channel.
+		/// Gets the voltage on the given channel.
 		/// </summary>
-		/// <param name="channel">The channel to query.</param>
+		/// <param name="channel">The channel to read.</param>
 		/// <returns>The voltage on the given channel between 0 and 4.096V.</returns>
 		public double GetReading(Channel channel)
 		{
-			this.SPIWriteRead((ushort)(0xF124 | (int)channel));
-			return 4.096 * (double)this.SPIWriteRead(0x0000) / 65535.0;
+			this.writeRead((ushort)(0xF124 | (int)channel));
+			return 4.096 * (double)this.writeRead(0x0000) / 65535.0;
 		}
 
-		private ushort SPIWriteRead(ushort write)
+		private ushort writeRead(ushort write)
 		{
 			ushort read = 0;
 
-			this.CS.Write(false);
+			this.cs.Write(false);
 
 			for (ushort j = 0, mask = 0x8000; j < 16; j++, mask >>= 1)
 			{
-				this.CLOCK.Write(false);
+				this.clock.Write(false);
 
-				this.MOSI.Write((write & mask) != 0);
+				this.mosi.Write((write & mask) != 0);
 
-				this.CLOCK.Write(true);
+				this.clock.Write(true);
 
-				if (this.MISO.Read())
+				if (this.miso.Read())
 					read |= mask;
 			}
 
-			this.MOSI.Write(true);
-			this.CLOCK.Write(false);
-			this.CS.Write(true);
+			this.mosi.Write(true);
+			this.clock.Write(false);
+			this.cs.Write(true);
 
 			return read;
 		}

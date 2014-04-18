@@ -22,8 +22,9 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="16" Top="43" Orientation="90" ConstructorOrder="1" TypesLabel="Y">
+        <Socket Left="16" Top="43" Orientation="90" ConstructorOrder="1" TypesLabel="SY">
           <Types>
+            <Type>S</Type>
             <Type>Y</Type>
           </Types>
           <Pins>

@@ -288,9 +288,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 			LS7366_MDR1_1BYTE = 0x03, // 1 byte counter mode
 			LS7366_MDR1_ENCNT = 0x00, // enable counting
 			LS7366_MDR1_DICNT = 0x04, // disable counting
-			LS7366_MDR1_FLIDX = 0x20, // FLAG on IDX (index)
-			LS7366_MDR1_FLCMP = 0x40, // FLAG on CMP (compare)
-			LS7366_MDR1_FLCY = 0x80, // FLAG on CY (carry)
+            LS7366_MDR1_FLIDX = 0x10,
+            LS7366_MDR1_FLCMP = 0x20,
+            LS7366_MDR1_FLBW = 0x40,
+            LS7366_MDR1_FLCY = 0x80,
 		}
     }
 }

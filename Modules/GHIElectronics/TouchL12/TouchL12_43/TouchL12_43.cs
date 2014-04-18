@@ -1,5 +1,5 @@
-﻿using System.Threading;
-using Microsoft.SPOT.Hardware;
+﻿using Microsoft.SPOT;
+using System.Threading;
 using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 
@@ -45,62 +45,99 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// Moving towards the right end of the device
 			/// </summary>
 			Right
-		}
+        }
+
+        /// <summary>
+        /// Event arguments for the SliderPositionChanged event.
+        /// </summary>
+        public class SliderPositionChangedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// The position of the touch on the slider between 0 and 11.
+            /// </summary>
+            public double Position { get; private set; }
+
+            /// <summary>
+            /// The direction of movement on the slider.
+            /// </summary>
+            public Direction Direction { get; private set; }
+
+            internal SliderPositionChangedEventArgs(Direction direction, double position)
+            {
+                this.Direction = direction;
+                this.Position = position;
+            }
+        }
+
+        /// <summary>
+        /// Event arguments for the SliderTouched event.
+        /// </summary>
+        public class SliderTouchedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// Whether or not the slider was touched.
+            /// </summary>
+            public bool State { get; private set; }
+
+            internal SliderTouchedEventArgs(bool state)
+            {
+                this.State = state;
+            }
+        }
 
 		/// <summary>
 		/// Delegate representing the slider touch event.
 		/// </summary>
 		/// <param name="sender">The sensor that the event occured on.</param>
-		/// <param name="state">Whether or not the slider was pressed or released.</param>
-		public delegate void SliderTouchHandler(TouchL12 sender, bool state);
+		/// <param name="e">The event arguments.</param>
+        public delegate void SliderTouchedHandler(TouchL12 sender, SliderTouchedEventArgs e);
 
 		/// <summary>
 		/// Delegate representing the slider position changed event.
 		/// </summary>
-		/// <param name="sender">The sensor that the event occured on.</param>
-		/// <param name="position">The position of the touch on the Slider.</param>
-		/// <param name="direction">The direction of the touch on the Slider.</param>
-		public delegate void SliderPositionChangedHandler(TouchL12 sender, double position, Direction direction);
+        /// <param name="sender">The sensor that the event occured on.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void SliderPositionChangedHandler(TouchL12 sender, SliderPositionChangedEventArgs e);
 
 		/// <summary>
 		/// Fires when the slider is pressed.
 		/// </summary>
-		public event SliderTouchHandler OnSliderPressed;
+		public event SliderTouchedHandler SliderPressed;
 
 		/// <summary>
 		/// Fires when the slider is released.
 		/// </summary>
-		public event SliderTouchHandler OnSliderReleased;
+		public event SliderTouchedHandler SliderReleased;
 
 		/// <summary>
 		/// Fires when the position of the touch on the slider changes.
 		/// </summary>
-		public event SliderPositionChangedHandler OnSliderPositionChanged;
+		public event SliderPositionChangedHandler SliderPositionChanged;
 
-		private SliderTouchHandler OnSlider;
-		private SliderPositionChangedHandler OnSliderPosition;
+		private SliderTouchedHandler onSliderTouched;
+		private SliderPositionChangedHandler onSliderPositionChanged;
 
-		private void OnSliderEvent(TouchL12 sender, bool state)
+        private void OnSliderTouched(TouchL12 sender, SliderTouchedEventArgs e)
 		{
-			if (this.OnSlider == null)
-				this.OnSlider = new SliderTouchHandler(this.OnSliderEvent);
+			if (this.onSliderTouched == null)
+				this.onSliderTouched = this.OnSliderTouched;
 
-			if (Program.CheckAndInvoke(state ? this.OnSliderPressed : this.OnSliderReleased, this.OnSlider, sender, state))
+			if (Program.CheckAndInvoke(e.State ? this.SliderPressed : this.SliderReleased, this.onSliderTouched, sender, e))
 			{
-				if (state)
-					this.OnSliderPressed(sender, state);
+				if (e.State)
+					this.SliderPressed(sender, e);
 				else
-					this.OnSliderReleased(sender, state);
+					this.SliderReleased(sender, e);
 			}
 		}
 
-		private void OnSliderPositionEvent(TouchL12 sender, double position, Direction direction)
+        private void OnSliderPositionChanged(TouchL12 sender, SliderPositionChangedEventArgs e)
 		{
-			if (this.OnSliderPosition == null)
-				this.OnSliderPosition = new SliderPositionChangedHandler(this.OnSliderPositionEvent);
+			if (this.onSliderPositionChanged == null)
+				this.onSliderPositionChanged = this.OnSliderPositionChanged;
 
-			if (Program.CheckAndInvoke(this.OnSliderPositionChanged, this.OnSliderPosition, sender, position, direction))
-				this.OnSliderPositionChanged(sender, position, direction);
+			if (Program.CheckAndInvoke(this.SliderPositionChanged, this.onSliderPositionChanged, sender, e))
+				this.SliderPositionChanged(sender, e);
 		}
 
 		/// <summary>
@@ -114,7 +151,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.addressBuffer = new byte[1];
 
 			this.socket = GT.Socket.GetSocket(socketNumber, false, this, "I");
-
 			this.reset = GTI.DigitalOutputFactory.Create(this.socket, GT.Socket.Pin.Six, true, this);
 
 			this.Reset();
@@ -122,7 +158,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.device = GTI.I2CBusFactory.Create(this.socket, TouchL12.I2C_ADDRESS, TouchL12.I2C_CLOCK_RATE, this);
 
 			this.interrupt = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.FallingEdge, this);
-			this.interrupt.Interrupt += (OnInterrupt);
+			this.interrupt.Interrupt += this.OnInterrupt;
 
 			this.previousSliderDirection = (Direction)(-1);
 			this.previousSliderPosition = 0;
@@ -178,19 +214,19 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			if ((flags & 0x8) != 0)
 			{
-				double SliderPosition = this.GetSliderPosition();
-				bool SliderTouched = this.IsSliderPressed();
-				Direction SliderDirection = this.GetSliderDirection();
+				double position = this.GetSliderPosition();
+				bool touched = this.IsSliderPressed();
+				Direction direction = this.GetSliderDirection();
 
-				if (SliderTouched != this.previousSliderTouched)
-					this.OnSliderEvent(this, SliderTouched);
+				if (touched != this.previousSliderTouched)
+					this.OnSliderTouched(this, new SliderTouchedEventArgs(touched));
 
-				if (SliderPosition != this.previousSliderPosition || SliderDirection != this.previousSliderDirection)
-					this.OnSliderPositionEvent(this, SliderPosition, SliderDirection);
+				if (position != this.previousSliderPosition || direction != this.previousSliderDirection)
+					this.OnSliderPositionChanged(this, new SliderPositionChangedEventArgs(direction, position));
 
-				this.previousSliderTouched = SliderTouched;
-				this.previousSliderPosition = SliderPosition;
-				this.previousSliderDirection = SliderDirection;
+				this.previousSliderTouched = touched;
+				this.previousSliderPosition = position;
+				this.previousSliderDirection = direction;
 			}
 		}
 

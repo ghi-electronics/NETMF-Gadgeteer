@@ -1,12 +1,13 @@
-﻿using System.Threading;
+﻿using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
+using System.Threading;
 using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-	/// <summary>
-	/// A multi-function touch sensor for .Net Gadgeteer.
+    /// <summary>
+    /// A TouchC8 module for Microsoft .NET Gadgeteer
 	/// </summary>
 	public class TouchC8 : GT.Modules.Module
 	{
@@ -41,7 +42,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Represents the buttons on the sensor.
 		/// </summary>
-		public enum Buttons
+		public enum Button
 		{
 			/// <summary>
 			/// The up button.
@@ -72,125 +73,199 @@ namespace Gadgeteer.Modules.GHIElectronics
 			Counterclockwise
 		}
 
+        /// <summary>
+        /// Event arguments for the WheelPositionChanged event.
+        /// </summary>
+        public class WheelPositionChangedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// The position of the touch on the wheel between 0 and 360 degrees.
+            /// </summary>
+            public double Position { get; private set; }
+
+            /// <summary>
+            /// The direction of movement on the wheel.
+            /// </summary>
+            public Direction Direction { get; private set; }
+
+            internal WheelPositionChangedEventArgs(Direction direction, double position)
+            {
+                this.Direction = direction;
+                this.Position = position;
+            }
+        }
+
+        /// <summary>
+        /// Event arguments for the ButtonTouched event.
+        /// </summary>
+        public class ButtonTouchedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// The new state of the button.
+            /// </summary>
+            public bool State { get; private set; }
+
+            /// <summary>
+            /// The button pressed or released.
+            /// </summary>
+            public Button Button { get; private set; }
+
+            internal ButtonTouchedEventArgs(Button button, bool state)
+            {
+                this.Button = button;
+                this.State = state;
+            }
+        }
+
+        /// <summary>
+        /// Event arguments for the PromixityDetected event.
+        /// </summary>
+        public class PromixityDetectedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// Whether or not the proximity was detected.
+            /// </summary>
+            public bool State { get; private set; }
+
+            internal PromixityDetectedEventArgs(bool state)
+            {
+                this.State = state;
+            }
+        }
+
+        /// <summary>
+        /// Event arguments for the WheelTouched event.
+        /// </summary>
+        public class WheelTouchedEventArgs : EventArgs
+        {
+            /// <summary>
+            /// Whether or not the wheel was touched.
+            /// </summary>
+            public bool State { get; private set; }
+
+            internal WheelTouchedEventArgs(bool state)
+            {
+                this.State = state;
+            }
+        }
+
 		/// <summary>
 		/// Delegate representing the proximity detected event.
 		/// </summary>
 		/// <param name="sender">The sensor that the detection occured on.</param>
-		/// <param name="state">Whether or not an object is near the sensor.</param>
-		public delegate void PromixityDetectedHandler(TouchC8 sender, bool state);
+		/// <param name="e">The event arguments.</param>
+        public delegate void PromixityDetectedHandler(TouchC8 sender, PromixityDetectedEventArgs e);
 
 		/// <summary>
 		/// Delegate representing the button touch event.
 		/// </summary>
-		/// <param name="sender">The sensor that the event occured on.</param>
-		/// <param name="button">The button that the event occured on.</param>
-		/// <param name="state">Whether or not the button was pressed or released.</param>
-		public delegate void ButtonTouchHandler(TouchC8 sender, Buttons button, bool state);
+        /// <param name="sender">The sensor that the event occured on.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void ButtonTouchedHandler(TouchC8 sender, ButtonTouchedEventArgs e);
 
 		/// <summary>
 		/// Delegate representing the wheel touch event.
 		/// </summary>
-		/// <param name="sender">The sensor that the event occured on.</param>
-		/// <param name="state">Whether or not the wheel was pressed or released.</param>
-		public delegate void WheelTouchHandler(TouchC8 sender, bool state);
+        /// <param name="sender">The sensor that the event occured on.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void WheelTouchedHandler(TouchC8 sender, WheelTouchedEventArgs e);
 
 		/// <summary>
 		/// Delegate representing the wheel position changed event.
 		/// </summary>
-		/// <param name="sender">The sensor that the event occured on.</param>
-		/// <param name="position">The position of the touch on the wheel.</param>
-		/// <param name="direction">The direction of the touch on the wheel.</param>
-		public delegate void WheelPositionChangedHandler(TouchC8 sender, double position, Direction direction);
+        /// <param name="sender">The sensor that the event occured on.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void WheelPositionChangedHandler(TouchC8 sender, WheelPositionChangedEventArgs e);
 
 		/// <summary>
 		/// Fires when the proximity sensor detects an object.
 		/// </summary>
-		public event PromixityDetectedHandler OnProximityEnter;
+		public event PromixityDetectedHandler ProximityEnter;
 
 		/// <summary>
 		/// Fires when the proximity sensor no longer detects an object after detecting one.
 		/// </summary>
-		public event PromixityDetectedHandler OnProximityExit;
+		public event PromixityDetectedHandler ProximityExit;
 
 		/// <summary>
 		/// Fires when a button is pressed.
 		/// </summary>
-		public event ButtonTouchHandler OnButtonPressed;
+		public event ButtonTouchedHandler ButtonPressed;
 
 		/// <summary>
 		/// Fires when a button is released.
 		/// </summary>
-		public event ButtonTouchHandler OnButtonReleased;
+		public event ButtonTouchedHandler ButtonReleased;
 
 		/// <summary>
 		/// Fires when the wheel is pressed.
 		/// </summary>
-		public event WheelTouchHandler OnWheelPressed;
+		public event WheelTouchedHandler WheelPressed;
 
 		/// <summary>
 		/// Fires when the wheel is released.
 		/// </summary>
-		public event WheelTouchHandler OnWheelReleased;
+		public event WheelTouchedHandler WheelReleased;
 
 		/// <summary>
 		/// Fires when the position of the touch on the wheel changes.
 		/// </summary>
-		public event WheelPositionChangedHandler OnWheelPositionChanged;
+		public event WheelPositionChangedHandler WheelPositionChanged;
 
-		private PromixityDetectedHandler OnProximity;
-		private ButtonTouchHandler OnButton;
-		private WheelTouchHandler OnWheel;
-		private WheelPositionChangedHandler OnWheelPosition;
+		private PromixityDetectedHandler onProximityDetected;
+		private ButtonTouchedHandler onButtonTouched;
+		private WheelTouchedHandler onWheelTouched;
+		private WheelPositionChangedHandler onWheelPositionChanged;
 
-		private void OnProximityEvent(TouchC8 sender, bool state)
+        private void OnProximityDetected(TouchC8 sender, PromixityDetectedEventArgs e)
 		{
-			if (this.OnProximity == null)
-				this.OnProximity = new PromixityDetectedHandler(this.OnProximityEvent);
+			if (this.onProximityDetected == null)
+				this.onProximityDetected = this.OnProximityDetected;
 
-			if (Program.CheckAndInvoke(state ? this.OnProximityEnter : this.OnProximityExit, this.OnProximity, sender, state))
+			if (Program.CheckAndInvoke(e.State ? this.ProximityEnter : this.ProximityExit, this.onProximityDetected, sender, e))
 			{
-				if (state)
-					this.OnProximityEnter(sender, state);
+                if (e.State)
+					this.ProximityEnter(sender, e);
 				else
-					this.OnProximityExit(sender, state);
+					this.ProximityExit(sender, e);
 			}
 		}
 
-		private void OnButtonEvent(TouchC8 sender, Buttons button, bool state)
+        private void OnButtonTouched(TouchC8 sender, ButtonTouchedEventArgs e)
 		{
-			if (this.OnButton == null)
-				this.OnButton = new ButtonTouchHandler(this.OnButtonEvent);
+			if (this.onButtonTouched == null)
+				this.onButtonTouched = this.OnButtonTouched;
 
-			if (Program.CheckAndInvoke(state ? this.OnButtonPressed : this.OnButtonReleased, this.OnButton, sender, button, state))
+            if (Program.CheckAndInvoke(e.State ? this.ButtonPressed : this.ButtonReleased, this.onButtonTouched, sender, e))
 			{
-				if (state)
-					this.OnButtonPressed(sender, button, state);
+                if (e.State)
+					this.ButtonPressed(sender, e);
 				else
-					this.OnButtonReleased(sender, button, state);
+					this.ButtonReleased(sender, e);
 			}
 		}
 
-		private void OnWheelEvent(TouchC8 sender, bool state)
+        private void OnWheelTouched(TouchC8 sender, WheelTouchedEventArgs e)
 		{
-			if (this.OnWheel == null)
-				this.OnWheel = new WheelTouchHandler(this.OnWheelEvent);
+			if (this.onWheelTouched == null)
+				this.onWheelTouched = this.OnWheelTouched;
 
-			if (Program.CheckAndInvoke(state ? this.OnWheelPressed : this.OnWheelReleased, this.OnWheel, sender, state))
+            if (Program.CheckAndInvoke(e.State ? this.WheelPressed : this.WheelReleased, this.onWheelTouched, sender, e))
 			{
-				if (state)
-					this.OnWheelPressed(sender, state);
+                if (e.State)
+					this.WheelPressed(sender, e);
 				else
-					this.OnWheelReleased(sender, state);
+					this.WheelReleased(sender, e);
 			}
 		}
 
-		private void OnWheelPositionEvent(TouchC8 sender, double position, Direction direction)
+        private void OnWheelPositionChanged(TouchC8 sender, WheelPositionChangedEventArgs e)
 		{
-			if (this.OnWheelPosition == null)
-				this.OnWheelPosition = new WheelPositionChangedHandler(this.OnWheelPositionEvent);
+			if (this.onWheelPositionChanged == null)
+                this.onWheelPositionChanged = this.OnWheelPositionChanged;
 
-			if (Program.CheckAndInvoke(this.OnWheelPositionChanged, this.OnWheelPosition, sender, position, direction))
-				this.OnWheelPositionChanged(sender, position, direction);
+            if (Program.CheckAndInvoke(this.WheelPositionChanged, this.onWheelPositionChanged, sender, e))
+				this.WheelPositionChanged(sender, e);
 		}
 
 		/// <summary>
@@ -204,16 +279,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.addressBuffer = new byte[1];
 
 			this.socket = GT.Socket.GetSocket(socketNumber, false, this, "I");
-
 			this.reset = GTI.DigitalOutputFactory.Create(this.socket, GT.Socket.Pin.Six, true, this);
-
 
 			this.Reset();
 
 			this.device = GTI.I2CBusFactory.Create(this.socket, TouchC8.I2C_ADDRESS, TouchC8.I2C_CLOCK_RATE, this);
 
 			this.interrupt = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.FallingEdge, this);
-			this.interrupt.Interrupt += (OnInterrupt);
+			this.interrupt.Interrupt += this.OnInterrupt;
 
 			this.previousWheelDirection = (Direction)(-1);
 			this.previousWheelPosition = 0;
@@ -232,7 +305,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="button">The button to check.</param>
 		/// <returns>Whether or not the given button is being touched.</returns>
-		public bool IsButtonPressed(Buttons button)
+		public bool IsButtonPressed(Button button)
 		{
 			return (this.ReadRegister(TouchC8.CAP_STAT_LSB) & (byte)button) != 0;
 		}
@@ -296,10 +369,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 				Direction wheelDirection = this.GetWheelDirection();
 
 				if (wheelTouched != this.previousWheelTouched)
-					this.OnWheelEvent(this, wheelTouched);
+					this.OnWheelTouched(this, new WheelTouchedEventArgs(wheelTouched));
 
 				if (wheelPosition != this.previousWheelPosition || wheelDirection != this.previousWheelDirection)
-					this.OnWheelPositionEvent(this, wheelPosition, wheelDirection);
+                    this.WheelPositionChanged(this, new WheelPositionChangedEventArgs(wheelDirection, wheelPosition));
 
 				this.previousWheelTouched = wheelTouched;
 				this.previousWheelPosition = wheelPosition;
@@ -315,16 +388,16 @@ namespace Gadgeteer.Modules.GHIElectronics
 				bool button3 = (cap & 0x8) != 0;
 
 				if (button0 != this.previousButton0Touched)
-					this.OnProximityEvent(this, button0);
+					this.OnProximityDetected(this, new PromixityDetectedEventArgs(button0));
 
 				if (button1 != this.previousButton1Touched)
-					this.OnButtonEvent(this, Buttons.Up, button1);
+					this.OnButtonTouched(this, new ButtonTouchedEventArgs(Button.Up, button1));
 
 				if (button2 != this.previousButton2Touched)
-					this.OnButtonEvent(this, Buttons.Middle, button2);
+					this.OnButtonTouched(this, new ButtonTouchedEventArgs(Button.Middle, button2));
 
 				if (button3 != this.previousButton3Touched)
-					this.OnButtonEvent(this, Buttons.Down, button3);
+                    this.OnButtonTouched(this, new ButtonTouchedEventArgs(Button.Down, button3));
 
 				this.previousButton0Touched = button0;
 				this.previousButton1Touched = button1;

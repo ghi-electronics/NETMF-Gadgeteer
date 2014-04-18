@@ -43,14 +43,16 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <None Include="GadgeteerHardware.xml" />
+    <None Include="GadgeteerHardware.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="common.wxi" />
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RFIDReader_42\RFIDReader_42.csproj">
-        <Project>{E4BF6B0D-8331-473F-AD6B-990DFDBD9C6E}</Project>
-        <Name>RFIDReader_42</Name>
+      <Project>{E4BF6B0D-8331-473F-AD6B-990DFDBD9C6E}</Project>
+      <Name>RFIDReader_42</Name>
     </ProjectReference>
     <ProjectReference Include="..\RFIDReader_43\RFIDReader_43.csproj">
       <Project>{F976E0BC-5691-4519-98C0-27066FC74ADE}</Project>
