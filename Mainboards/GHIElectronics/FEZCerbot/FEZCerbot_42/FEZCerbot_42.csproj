@@ -44,13 +44,14 @@
   <ItemGroup>
     <Compile Include="FEZCerbot_42.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal42.cs" />
+    <Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal42.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Gadgeteer.SPI, Version=2.42.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHI.OSHW.Hardware" />
     <Reference Include="GHI.Hardware.FEZCerb" />
     <Reference Include="Microsoft.SPOT.Graphics" />

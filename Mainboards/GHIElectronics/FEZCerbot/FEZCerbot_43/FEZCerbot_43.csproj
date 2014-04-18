@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{174b4fcd-bba3-46d7-8c89-e1013cc33494}</ProjectGuid>
+    <ProjectGuid>{174B4FCD-BBA3-46D7-8C89-E1013CC33494}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>GHIElectronics.Gadgeteer</RootNamespace>
@@ -44,13 +44,14 @@
   <ItemGroup>
     <Compile Include="FEZCerbot_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal43.cs" />
+    <Compile Include="..\..\..\..\Modules\GHIElectronics\Shared\AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Gadgeteer.SPI, Version=2.43.1.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.Pins" />
     <Reference Include="Microsoft.SPOT.Graphics" />
