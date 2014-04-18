@@ -57,6 +57,42 @@
         </Socket>
       </Sockets>
 
+      <ProvidedSockets>
+        <ProvidedSocket Label="E1" Left="14.76" Top="22" Orientation="270" ConstructorParameter="ExtenderSocketB">
+          <Types>
+            <Type>A</Type>
+            <Type>B</Type>
+            <Type>C</Type>
+            <Type>D</Type>
+            <Type>E</Type>
+            <Type>F</Type>
+            <Type>G</Type>
+            <Type>H</Type>
+            <Type>I</Type>
+            <Type>J</Type>
+            <Type>K</Type>
+            <Type>L</Type>
+            <Type>M</Type>
+            <Type>N</Type>
+            <Type>O</Type>
+            <Type>P</Type>
+            <Type>Q</Type>
+            <Type>R</Type>
+            <Type>S</Type>
+            <Type>T</Type>
+            <Type>U</Type>
+            <Type>V</Type>
+            <Type>W</Type>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>Z</Type>
+            <Type>*</Type>
+          </Types>
+          <SharedPinMaps>
+          </SharedPinMaps>
+        </ProvidedSocket>
+      </ProvidedSockets>
+
       <Power>
         <PowerRequirements Voltage="3.3">
           <TypicalCurrent>Infinity</TypicalCurrent>

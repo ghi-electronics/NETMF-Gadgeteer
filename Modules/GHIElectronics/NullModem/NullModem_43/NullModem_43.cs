@@ -27,8 +27,26 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.socketB.CpuPins[5] = this.socketA.CpuPins[4];
             this.socketB.CpuPins[6] = this.socketA.CpuPins[7];
             this.socketB.CpuPins[7] = this.socketA.CpuPins[6];
-
-            this.socketB.SerialPortName = this.socketA.SerialPortName;
+            this.socketB.CpuPins[8] = this.socketA.CpuPins[8];
+            this.socketB.CpuPins[9] = this.socketA.CpuPins[9];
+            this.socketB.SPIModule = this.socketA.SPIModule;
+            this.socketB.AnalogOutput5 = this.socketA.AnalogOutput5;
+            this.socketB.AnalogInput3 = this.socketA.AnalogInput3;
+            this.socketB.AnalogInput4 = this.socketA.AnalogInput4;
+            this.socketB.AnalogInput5 = this.socketA.AnalogInput5;
+            this.socketB.PWM7 = this.socketA.PWM7;
+            this.socketB.PWM8 = this.socketA.PWM8;
+            this.socketB.PWM9 = this.socketA.PWM9;
+            this.socketB.AnalogInputIndirector = this.socketA.AnalogInputIndirector;
+            this.socketB.AnalogOutputIndirector = this.socketA.AnalogOutputIndirector;
+            this.socketB.DigitalInputIndirector = this.socketA.DigitalInputIndirector;
+            this.socketB.DigitalIOIndirector = this.socketA.DigitalIOIndirector;
+            this.socketB.DigitalOutputIndirector = this.socketA.DigitalOutputIndirector;
+            this.socketB.I2CBusIndirector = this.socketA.I2CBusIndirector;
+            this.socketB.InterruptIndirector = this.socketA.InterruptIndirector;
+            this.socketB.PwmOutputIndirector = this.socketA.PwmOutputIndirector;
+            this.socketB.SpiIndirector = this.socketA.SpiIndirector;
+            this.socketB.SerialIndirector = this.socketA.SerialIndirector;
 
             Socket.SocketInterfaces.RegisterSocket(this.socketB);
         }
