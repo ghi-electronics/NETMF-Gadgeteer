@@ -132,7 +132,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
             catch
             {
-                ErrorPrint("Painting error");
+                this.ErrorPrint("Painting error");
             }
         }
 

@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="72.15"
                   BoardWidth="57.15"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.3"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/444">
 
@@ -34,6 +34,47 @@
             <Pin Shared="false">7</Pin>
             <Pin Shared="false">8</Pin>
             <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+
+        <Socket Left="27.5" Top="68" Orientation="90" ConstructorOrder="2" TypesLabel="G">
+          <Types>
+            <Type>G</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+
+        <Socket Left="43" Top="68" Orientation="90" ConstructorOrder="3" TypesLabel="B">
+          <Types>
+            <Type>B</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+
+        <Socket Left="4" Top="55" Orientation="0" ConstructorOrder="4" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
           </Pins>
         </Socket>
       </Sockets>
