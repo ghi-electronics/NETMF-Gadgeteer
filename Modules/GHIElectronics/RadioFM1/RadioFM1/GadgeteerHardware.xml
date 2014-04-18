@@ -12,7 +12,7 @@
                   Image="Resources\Image.jpg"
                   BoardHeight="36"
                   BoardWidth="27"
-                  HardwareVersion="1.0"
+                  HardwareVersion="1.1"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/434">
 
@@ -27,12 +27,9 @@
             <Type>Y</Type>
           </Types>
           <Pins>
-			  <Pin Shared="false">8</Pin>
-			  <Pin Shared="false">9</Pin>
-			  <Pin Shared="false">5</Pin>
-			  <Pin Shared="false">6</Pin>
-			  <Pin Shared="false">6</Pin>
-			  <Pin Shared="false">3</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+            <Pin Shared="false">5</Pin>
           </Pins>
         </Socket>
       </Sockets>

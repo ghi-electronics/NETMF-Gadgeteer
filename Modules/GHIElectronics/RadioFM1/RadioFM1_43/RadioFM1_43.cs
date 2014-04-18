@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Threading;
-
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
     /// <summary>
-    /// An FM Radio module for Microsoft .NET Gadgeteer
+    /// An RadioFM1 module for Microsoft .NET Gadgeteer
     /// </summary>
     public class RadioFM1 : GTM.Module
     {
         private int currentVolume;
-        private bool radioTextWorkerRunning = true;
+        private bool radioTextWorkerRunning;
         private Thread radioTextWorkerThread;
-        private string currentRadioText = "N/A";
+        private string currentRadioText;
         private GTI.SoftwareI2CBus i2cBus;
         private GTI.DigitalOutput resetPin;
-		private int spacingDivisor = 2;
-		private int baseChannel = 875;
-
-        private ushort[] registers = new ushort[16];
+		private int spacingDivisor;
+		private int baseChannel;
+        private ushort[] registers;
 
         private const byte I2C_ADDRESS = 0x10;
 
@@ -63,25 +61,40 @@ namespace Gadgeteer.Modules.GHIElectronics
         private const byte BIT_RDSS = 11;
         private const byte BIT_STEREO = 8;
 
+        private const int RADIO_TEXT_GROUP_CODE = 2;
+        private const int TOGGLE_FLAG_POSITION = 5;
+        private const int CHARS_PER_SEGMENT = 2;
+        private const int MAX_MESSAGE_LENGTH = 64;
+        private const int MAX_SEGMENTS = 16;
+        private const int MAX_CHARS_PER_GROUP = 4;
+        private const int VERSION_A_TEXT_SEGMENT_PER_GROUP = 2;
+        private const int VERSION_B_TEXT_SEGMENT_PER_GROUP = 1;
+
         /// <summary>
-        /// The Channel returned by <see cref="Seek"/> when no Channel is found.
+        /// The channel returned by <see cref="Seek"/> when no Channel is found.
         /// </summary>
         public const double INVALID_CHANNEL = -1.0;
 
         /// <summary>
-        /// The minimum Volume the device can output.
+        /// The minimum volume the device can output.
         /// </summary>
         public const int MIN_VOLUME = 0;
 
         /// <summary>
-        /// The maximum Volume the device can output.
+        /// The maximum volume the device can output.
         /// </summary>
-        public const int MAX_VOLUME = 15;
+        public const int MAX_VOLUME = 100;
 
-        /// <summary>An FM radio module for Microsoft .NET Gadgeteer</summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public RadioFM1(int socketNumber)
         {
+            this.radioTextWorkerRunning = true;
+            this.currentRadioText = "N/A";
+            this.spacingDivisor = 2;
+            this.baseChannel = 875;
+            this.registers = new ushort[16];
+
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported(new char[] { 'Y' }, this);
 
@@ -137,6 +150,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void IncreaseVolume()
         {
+            if (this.Volume == RadioFM1.MAX_VOLUME) return;
+
             ++this.Volume;
         }
 
@@ -145,6 +160,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void DecreaseVolume()
         {
+            if (this.Volume == RadioFM1.MIN_VOLUME) return;
+
             --this.Volume;
         }
 
@@ -159,10 +176,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
             set
             {
-                if (value > RadioFM1.MAX_VOLUME || value < RadioFM1.MIN_VOLUME) return; // throw new ArgumentOutOfRangeException("value", "The Volume provided was outside the allowed range.");
+                if (value > RadioFM1.MAX_VOLUME || value < RadioFM1.MIN_VOLUME) throw new ArgumentOutOfRangeException("value", "The volume provided was outside the allowed range.");
 
                 this.currentVolume = value;
-                this.SetDeviceVolume((ushort)value);
+
+                this.SetDeviceVolume((ushort)Math.Ceiling(value / 100.0));
             }
         }
 
@@ -246,7 +264,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			this.ReadRegisters();
 
-
 			if (spacing == Spacing.USAAustrailia)
 			{
 				this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFCF;
@@ -259,7 +276,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 			else
 			{
-				throw new ArgumentException("Spacing");
+                throw new ArgumentException("You must provide a valid spacing.", "spacing");
 			}
 
 			if (band == Band.USAEurope)
@@ -285,7 +302,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 			else
 			{
-				throw new ArgumentException("Band");
+				throw new ArgumentException("You must provide a valid band.", "band");
 			}
 
 			this.UpdateRegisters();
@@ -314,36 +331,21 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public event RadioTextChangedHandler RadioTextChanged;
 
-        private RadioTextChangedHandler radioTextChangedHandler;
+        private RadioTextChangedHandler onRadioTextChanged;
 
         private void OnRadioTextChanged(RadioFM1 sender, string newRadioText)
         {
-            if (this.radioTextChangedHandler == null)
-            {
-                this.radioTextChangedHandler = new RadioTextChangedHandler(this.OnRadioTextChanged);
-            }
+            if (this.onRadioTextChanged == null)
+                this.onRadioTextChanged = this.OnRadioTextChanged;
 
-            if (Program.CheckAndInvoke(this.RadioTextChanged, this.radioTextChangedHandler, sender, newRadioText))
-            {
+            if (Program.CheckAndInvoke(this.RadioTextChanged, this.onRadioTextChanged, sender, newRadioText))
                 this.RadioTextChanged(sender, newRadioText);
-            }
         }
 
         private void RadioTextWorker()
         {
-            const int RADIO_TEXT_GROUP_CODE = 2;
-            const int TOGGLE_FLAG_POSITION = 5;
-            const int CHARS_PER_SEGMENT = 2;
-
-            const int MAX_MESSAGE_LENGTH = 64;
-            const int MAX_SEGMENTS = 16;
-            const int MAX_CHARS_PER_GROUP = 4;
-
-            const int VERSION_A_TEXT_SEGMENT_PER_GROUP = 2;
-            const int VERSION_B_TEXT_SEGMENT_PER_GROUP = 1;
-
-            char[] currentRadioText = new char[MAX_MESSAGE_LENGTH];
-            bool[] isSegmentPresent = new bool[MAX_SEGMENTS];
+            char[] currentRadioText = new char[RadioFM1.MAX_MESSAGE_LENGTH];
+            bool[] isSegmentPresent = new bool[RadioFM1.MAX_SEGMENTS];
             int endOfMessage = -1;
             int endSegmentAddress = -1;
             string lastMessage = "";
@@ -357,7 +359,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 ushort b = this.registers[RadioFM1.REGISTER_RDSB];
                 ushort c = this.registers[RadioFM1.REGISTER_RDSC];
                 ushort d = this.registers[RadioFM1.REGISTER_RDSD];
-                bool ready = (this.registers[RadioFM1.REGISTER_STATUSRSSI] & (1 << BIT_RDSR)) != 0;
+                bool ready = (this.registers[RadioFM1.REGISTER_STATUSRSSI] & (1 << RadioFM1.BIT_RDSR)) != 0;
 
                 if (ready)
                 {
@@ -367,12 +369,12 @@ namespace Gadgeteer.Modules.GHIElectronics
                     int trafficIDCode = (b >> 10) & 0x1;
                     int programTypeCode = (b >> 5) & 0x1F;
 
-                    if (groupTypeCode == RADIO_TEXT_GROUP_CODE)
+                    if (groupTypeCode == RadioFM1.RADIO_TEXT_GROUP_CODE)
                     {
-                        int textToggleFlag = b & (1 << (TOGGLE_FLAG_POSITION - 1));
+                        int textToggleFlag = b & (1 << (RadioFM1.TOGGLE_FLAG_POSITION - 1));
                         if (textToggleFlag != lastTextToggleFlag)
                         {
-                            currentRadioText = new char[MAX_MESSAGE_LENGTH];
+                            currentRadioText = new char[RadioFM1.MAX_MESSAGE_LENGTH];
                             lastTextToggleFlag = textToggleFlag;
                             waitForNextMessage = false;
                         }
@@ -387,7 +389,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                         if (versionCode == 0)
                         {
-                            textAddress = segmentAddress * CHARS_PER_SEGMENT * VERSION_A_TEXT_SEGMENT_PER_GROUP;
+                            textAddress = segmentAddress * RadioFM1.CHARS_PER_SEGMENT * RadioFM1.VERSION_A_TEXT_SEGMENT_PER_GROUP;
                             currentRadioText[textAddress] = (char)(c >> 8);
                             currentRadioText[textAddress + 1] = (char)(c & 0xFF);
                             currentRadioText[textAddress + 2] = (char)(d >> 8);
@@ -395,7 +397,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         }
                         else
                         {
-                            textAddress = segmentAddress * CHARS_PER_SEGMENT * VERSION_B_TEXT_SEGMENT_PER_GROUP;
+                            textAddress = segmentAddress * RadioFM1.CHARS_PER_SEGMENT * RadioFM1.VERSION_B_TEXT_SEGMENT_PER_GROUP;
                             currentRadioText[textAddress] = (char)(d >> 8);
                             currentRadioText[textAddress + 1] = (char)(d & 0xFF);
                         }
@@ -403,7 +405,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                         if (endOfMessage == -1)
                         {
-                            for (int i = 0; i < MAX_CHARS_PER_GROUP; ++i)
+                            for (int i = 0; i < RadioFM1.MAX_CHARS_PER_GROUP; ++i)
                             {
                                 if (currentRadioText[textAddress + i] == 0xD)
                                 {
@@ -455,20 +457,20 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.resetPin.Write(true);
 
             this.ReadRegisters();
-            this.registers[0x07] = 0x8100; //Enable the oscillator
+            this.registers[0x07] = 0x8100;
             this.UpdateRegisters();
 
-            Thread.Sleep(500); //Wait for clock to settle - from AN230 page 9
+            Thread.Sleep(500);
 
             this.ReadRegisters();
-            this.registers[RadioFM1.REGISTER_POWERCFG] = 0x4001; //Enable the IC
-            this.registers[RadioFM1.REGISTER_SYSCONFIG1] |= (1 << RadioFM1.BIT_RDS); //Enable RDS
-            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFCF; //Force 200kHz Channel spacing for USA
-            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFF0; //Clear Volume bits
-            this.registers[RadioFM1.REGISTER_SYSCONFIG2] |= 0x000F; //Set Volume to lowest
+            this.registers[RadioFM1.REGISTER_POWERCFG] = 0x4001;
+            this.registers[RadioFM1.REGISTER_SYSCONFIG1] |= (1 << RadioFM1.BIT_RDS);
+            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFCF;
+            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFF0;
+            this.registers[RadioFM1.REGISTER_SYSCONFIG2] |= 0x000F;
             this.UpdateRegisters();
 
-            Thread.Sleep(110); //Max powerup time, from datasheet page 13
+            Thread.Sleep(110);
         }
 
         private void ReadRegisters()
@@ -497,11 +499,11 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.i2cBus.Write(data);
         }
 		
-        private void SetDeviceVolume(ushort Volume)
+        private void SetDeviceVolume(ushort volume)
         {
             this.ReadRegisters();
-            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFF0; //Clear Volume bits
-            this.registers[RadioFM1.REGISTER_SYSCONFIG2] |= Volume; //Set Volume to lowest
+            this.registers[RadioFM1.REGISTER_SYSCONFIG2] &= 0xFFF0;
+            this.registers[RadioFM1.REGISTER_SYSCONFIG2] |= volume;
             this.UpdateRegisters();
         }
 
@@ -520,29 +522,27 @@ namespace Gadgeteer.Modules.GHIElectronics
 			newChannel /= this.spacingDivisor;
 
             this.ReadRegisters();
-            this.registers[RadioFM1.REGISTER_CHANNEL] &= 0xFE00; //Clear out the Channel bits
-            this.registers[RadioFM1.REGISTER_CHANNEL] |= (ushort)newChannel; //Mask in the new Channel
-            this.registers[RadioFM1.REGISTER_CHANNEL] |= (1 << BIT_TUNE); //Set the TUNE bit to start
+            this.registers[RadioFM1.REGISTER_CHANNEL] &= 0xFE00;
+            this.registers[RadioFM1.REGISTER_CHANNEL] |= (ushort)newChannel;
+            this.registers[RadioFM1.REGISTER_CHANNEL] |= (1 << RadioFM1.BIT_TUNE);
             this.UpdateRegisters();
 
-            //Poll to see if STC is set
             while (true)
             {
                 this.ReadRegisters();
                 if ((this.registers[RadioFM1.REGISTER_STATUSRSSI] & (1 << BIT_STC)) != 0)
-                    break; //Tuning complete!
+                    break;
             }
 
             this.ReadRegisters();
-            this.registers[RadioFM1.REGISTER_CHANNEL] &= 0x7FFF; //Clear the tune after a tune has completed
+            this.registers[RadioFM1.REGISTER_CHANNEL] &= 0x7FFF;
             this.UpdateRegisters();
 
-            //Wait for the si4703 to clear the STC as well
             while (true)
             {
                 this.ReadRegisters();
                 if ((this.registers[RadioFM1.REGISTER_STATUSRSSI] & (1 << BIT_STC)) == 0)
-                    break; //Tuning complete!
+                    break;
             }
         }
 
@@ -550,20 +550,16 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             this.ReadRegisters();
 
-            //Set Seek mode wrap bit
             this.registers[RadioFM1.REGISTER_POWERCFG] &= 0xFBFF;
 
-
             if (direction == SeekDirection.Backward)
-                this.registers[RadioFM1.REGISTER_POWERCFG] &= 0xFDFF; //Seek down is the default upon reset
+                this.registers[RadioFM1.REGISTER_POWERCFG] &= 0xFDFF;
             else
-                this.registers[RadioFM1.REGISTER_POWERCFG] |= 1 << RadioFM1.BIT_SEEKUP; //Set the bit to Seek up
+                this.registers[RadioFM1.REGISTER_POWERCFG] |= 1 << RadioFM1.BIT_SEEKUP;
 
-
-            this.registers[RadioFM1.REGISTER_POWERCFG] |= (1 << RadioFM1.BIT_SEEK); //Start Seek
+            this.registers[RadioFM1.REGISTER_POWERCFG] |= (1 << RadioFM1.BIT_SEEK);
             this.UpdateRegisters();
 
-            //Poll to see if STC is set
             while (true)
             {
                 this.ReadRegisters();
@@ -573,10 +569,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.ReadRegisters();
             int valueSFBL = this.registers[RadioFM1.REGISTER_STATUSRSSI] & (1 << RadioFM1.BIT_SFBL);
-            this.registers[RadioFM1.REGISTER_POWERCFG] &= 0xFEFF; //Clear the Seek bit after Seek has completed
+            this.registers[RadioFM1.REGISTER_POWERCFG] &= 0xFEFF;
             this.UpdateRegisters();
 
-            //Wait for the si4703 to clear the STC as well
             while (true)
             {
                 this.ReadRegisters();
@@ -584,7 +579,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     break;
             }
 
-            if (valueSFBL > 0) //The bit was set indicating we hit a band limit or failed to find a station
+            if (valueSFBL > 0)
                 return false;
 
             return true;
