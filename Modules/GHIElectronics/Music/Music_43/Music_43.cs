@@ -167,7 +167,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 buf[0] = start[i];
 
                 this.spiData.Write(buf);
-                while (this.dreq.Read() == false)
+                while (!this.dreq.Read())
                     Thread.Sleep(0);
             }
 
@@ -178,7 +178,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 buf[0] = end[i];
 
                 this.spiData.Write(buf);
-                while (this.dreq.Read() == false)
+                while (!this.dreq.Read())
                     Thread.Sleep(0);
             }
         }
