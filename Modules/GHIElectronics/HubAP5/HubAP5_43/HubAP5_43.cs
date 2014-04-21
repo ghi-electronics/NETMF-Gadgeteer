@@ -116,12 +116,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60 = io60;
 				this.pin = pin;
 
-				this.io60.setIOMode(this.pin, IO60P16.IOState.Input, resistorMode);
+				this.io60.SetIOMode(this.pin, IO60P16.IOState.Input, resistorMode);
 			}
 
 			public override bool Read()
 			{
-				return this.io60.readDigital(this.pin);
+				return this.io60.ReadDigital(this.pin);
 			}
 		}
 
@@ -135,18 +135,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60 = io60;
 				this.pin = pin;
 
-				this.io60.setIOMode(this.pin, IO60P16.IOState.Output, GTI.ResistorMode.Disabled);
+				this.io60.SetIOMode(this.pin, IO60P16.IOState.Output, GTI.ResistorMode.Disabled);
 				this.Write(initialState);
 			}
 
 			public override bool Read()
 			{
-				return this.io60.readDigital(this.pin);
+				return this.io60.ReadDigital(this.pin);
 			}
 
 			public override void Write(bool state)
 			{
-				this.io60.writeDigital(this.pin, state);
+				this.io60.WriteDigital(this.pin, state);
 			}
 		}
 
@@ -163,19 +163,19 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.pin = pin;
 				this.resistorMode = resistorMode;
 				this.Mode = GTI.IOMode.Input;
-				this.io60.writeDigital(this.pin, initialState);
+				this.io60.WriteDigital(this.pin, initialState);
 			}
 
 			public override bool Read()
 			{
 				this.Mode = GTI.IOMode.Input;
-				return this.io60.readDigital(this.pin);
+				return this.io60.ReadDigital(this.pin);
 			}
 
 			public override void Write(bool state)
 			{
 				this.Mode = GTI.IOMode.Output;
-				this.io60.writeDigital(this.pin, state);
+				this.io60.WriteDigital(this.pin, state);
 			}
 
 			public override GTI.IOMode Mode
@@ -187,7 +187,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				set
 				{
 					this.mode = value;
-					this.io60.setIOMode(this.pin, this.mode == GTI.IOMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
+					this.io60.SetIOMode(this.pin, this.mode == GTI.IOMode.Input ? IO60P16.IOState.Input : IO60P16.IOState.Output, this.resistorMode);
 				}
 			}
 		}
@@ -237,7 +237,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 					this.active = value;
 
 					if (this.active)
-						this.io60.setIOMode(this.pin, IO60P16.IOState.Input, IO60P16.ResistorMode.Floating);
+						this.io60.SetIOMode(this.pin, IO60P16.IOState.Input, IO60P16.ResistorMode.Floating);
 				}
 			}
 		}
@@ -256,19 +256,19 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 
 			public override void Set(double frequency, double dutyCycle)
-			{
-				if (frequency < 0) throw new ArgumentException("frequency");
-				if (dutyCycle < 0 || dutyCycle > 1) throw new ArgumentException("dutyCycle");
+            {
+                if (frequency <= 0) throw new ArgumentOutOfRangeException("frequency", "frequency must be positive.");
+                if (dutyCycle < 0 || dutyCycle > 1) throw new ArgumentOutOfRangeException("dutyCycle", "dutyCycle must be between zero and one.");
 
-				this.IsActive = true;
+                this.IsActive = true;
 
-				this.io60.setPWM(this.pin, frequency, dutyCycle);
-			}
+                this.io60.SetPWM(this.pin, frequency, dutyCycle);
+            }
 
-			public override void Set(uint period, uint highTime, GTI.PwmScaleFactor factor)
-			{
-				if (period == 0) throw new ArgumentException("period");
-				if (highTime > period) throw new ArgumentException("highTime");
+            public override void Set(uint period, uint highTime, GTI.PwmScaleFactor factor)
+            {
+                if (period == 0) throw new ArgumentOutOfRangeException("period", "pedior must be positive.");
+                if (highTime > period) throw new ArgumentOutOfRangeException("highTime", "highTime must be no more than period.");
 
 				double frequency = 0;
 
@@ -297,12 +297,12 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 					if (this.isActive)
 					{
-						this.io60.setIOMode(this.pin, IO60P16.IOState.PWM, GTI.ResistorMode.Disabled);
-						this.io60.setPWM(this.pin, 1, 0.5);
+						this.io60.SetIOMode(this.pin, IO60P16.IOState.Pwm, GTI.ResistorMode.Disabled);
+						this.io60.SetPWM(this.pin, 1, 0.5);
 					}
 					else
 					{
-						this.io60.setIOMode(this.pin, IO60P16.IOState.Input, GTI.ResistorMode.Disabled);
+						this.io60.SetIOMode(this.pin, IO60P16.IOState.Input, GTI.ResistorMode.Disabled);
 					}
 				}
 			}
@@ -328,13 +328,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.io60 = io60;
 				this.pin = pin;
 
-				this.io60.setIOMode(this.pin, IO60P16.IOState.InputInterrupt, resistorMode);
-				this.io60.registerInterruptHandler(this.pin, interruptMode, this.RaiseInterrupt);
+				this.io60.SetIOMode(this.pin, IO60P16.IOState.InputInterrupt, resistorMode);
+				this.io60.RegisterInterruptHandler(this.pin, interruptMode, this.RaiseInterrupt);
 			}
 
 			public override bool Read()
 			{
-				return this.io60.readDigital(this.pin);
+				return this.io60.ReadDigital(this.pin);
 			}
 		}
 
@@ -365,11 +365,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			private GTI.I2CBus io60Chip;
 			private GTI.InterruptInput interrupt;
-			private ArrayList interruptHandlers = new ArrayList();
-			private byte[] write2 = new byte[2];
-			private byte[] write1 = new byte[1];
-			private byte[] read1 = new byte[1];
-			private byte[] pwms = new byte[30] { 0x60, 0, 0x61, 1, 0x62, 2, 0x63, 3, 0x64, 4, 0x65, 5, 0x66, 6, 0x67, 7, 0x70, 8, 0x71, 9, 0x72, 10, 0x73, 11, 0x74, 12, 0x75, 13, 0x76, 14 };
+			private ArrayList interruptHandlers;
+			private byte[] write2;
+            private byte[] write1;
+            private byte[] read1;
+			private byte[] pwms;
 
 			public delegate void InterruptHandler(bool state);
 
@@ -385,7 +385,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				InputInterrupt,
 				Input,
 				Output,
-				PWM
+				Pwm
 			}
 
 			public enum ResistorMode
@@ -395,17 +395,17 @@ namespace Gadgeteer.Modules.GHIElectronics
 				Floating = IO60P16.PIN_HIGH_IMPEDENCE,
 			}
 
-			private byte getPort(byte pin)
+			private byte GetPort(byte pin)
 			{
 				return (byte)(pin >> 4);
 			}
 
-			private byte getMask(byte pin)
+			private byte GetMask(byte pin)
 			{
 				return (byte)(1 << (pin & 0x0F));
 			}
 
-			private void writeRegister(byte register, byte value)
+			private void WriteRegister(byte register, byte value)
 			{
 				lock (this.io60Chip)
 				{
@@ -415,7 +415,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				}
 			}
 
-			private byte readRegister(byte register)
+			private byte ReadRegister(byte register)
 			{
 				byte result;
 
@@ -429,7 +429,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 				return result;
 			}
 
-            private byte[] readRegisters(byte register, uint count)
+            private byte[] ReadRegisters(byte register, uint count)
             {
                 byte[] result = new byte[count];
 
@@ -446,7 +446,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			{
 				ArrayList interruptedPins = new ArrayList();
 
-                byte[] intPorts = this.readRegisters(IO60P16.INTERRUPT_PORT_0_REGISTER, 8);
+                byte[] intPorts = this.ReadRegisters(IO60P16.INTERRUPT_PORT_0_REGISTER, 8);
 				for (byte i = 0; i < 8; i++)
 					for (int j = 1, k = 0; j <= 128; j <<= 1, k++)
                         if ((intPorts[i] & j) != 0)
@@ -460,7 +460,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 						{
 							if (reg.pin == pin)
 							{
-								bool val = this.readDigital((byte)pin);
+								bool val = this.ReadDigital((byte)pin);
 								if ((reg.mode == GTI.InterruptMode.RisingEdge && val) || (reg.mode == GTI.InterruptMode.FallingEdge && !val) || reg.mode == GTI.InterruptMode.RisingAndFallingEdge)
 									reg.handler(val);
 							}
@@ -471,13 +471,19 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			public IO60P16(Socket socket)
 			{
+                this.interruptHandlers = new ArrayList();
+			    this.write2 = new byte[2];
+			    this.write1 = new byte[1];
+			    this.read1 = new byte[1];
+			    this.pwms = new byte[30] { 0x60, 0, 0x61, 1, 0x62, 2, 0x63, 3, 0x64, 4, 0x65, 5, 0x66, 6, 0x67, 7, 0x70, 8, 0x71, 9, 0x72, 10, 0x73, 11, 0x74, 12, 0x75, 13, 0x76, 14 };
+
 				this.io60Chip = GTI.I2CBusFactory.Create(socket, 0x20, 100, null);
 
 				this.interrupt = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, null);
 				this.interrupt.Interrupt += this.OnInterrupt;
 			}
 
-			public void registerInterruptHandler(byte pin, GTI.InterruptMode mode, InterruptHandler handler)
+			public void RegisterInterruptHandler(byte pin, GTI.InterruptMode mode, InterruptHandler handler)
 			{
 				InterruptRegistraton reg = new InterruptRegistraton();
 				reg.handler = handler;
@@ -488,103 +494,103 @@ namespace Gadgeteer.Modules.GHIElectronics
 					this.interruptHandlers.Add(reg);
 			}
 
-			public void setIOMode(byte pin, IOState state, GTI.ResistorMode resistorMode)
+			public void SetIOMode(byte pin, IOState state, GTI.ResistorMode resistorMode)
 			{
 				switch (resistorMode)
 				{
-					case GTI.ResistorMode.Disabled: this.setIOMode(pin, state, ResistorMode.Floating); break;
-					case GTI.ResistorMode.PullDown: this.setIOMode(pin, state, ResistorMode.PullDown); break;
-					case GTI.ResistorMode.PullUp: this.setIOMode(pin, state, ResistorMode.PullUp); break;
+					case GTI.ResistorMode.Disabled: this.SetIOMode(pin, state, ResistorMode.Floating); break;
+					case GTI.ResistorMode.PullDown: this.SetIOMode(pin, state, ResistorMode.PullDown); break;
+					case GTI.ResistorMode.PullUp: this.SetIOMode(pin, state, ResistorMode.PullUp); break;
 				}
 			}
 
-			public void setIOMode(byte pin, IOState state, ResistorMode resistorMode)
+			public void SetIOMode(byte pin, IOState state, ResistorMode resistorMode)
 			{
-				this.writeRegister(IO60P16.PORT_SELECT_REGISTER, this.getPort(pin));
+				this.WriteRegister(IO60P16.PORT_SELECT_REGISTER, this.GetPort(pin));
 
-				byte mask = this.getMask(pin);
-				byte val = this.readRegister(IO60P16.ENABLE_PWM_REGISTER);
+				byte mask = this.GetMask(pin);
+				byte val = this.ReadRegister(IO60P16.ENABLE_PWM_REGISTER);
 
-				if (state == IOState.PWM)
+				if (state == IOState.Pwm)
 				{
-					this.writeRegister(IO60P16.ENABLE_PWM_REGISTER, (byte)(val | mask));
+					this.WriteRegister(IO60P16.ENABLE_PWM_REGISTER, (byte)(val | mask));
 
-					this.writeDigital(pin, true);
+					this.WriteDigital(pin, true);
 
 					byte pwm = 255;
 					for (var i = 0; i < 30; i += 2)
 						if (this.pwms[i] == pin)
 							pwm = this.pwms[i + 1];
 
-					this.writeRegister(IO60P16.PWM_SELECT_REGISTER, pwm);
-                    this.writeRegister(IO60P16.PWM_CONFIG, IO60P16.CLOCK_SOURCE); //93.75KHz clock
+					this.WriteRegister(IO60P16.PWM_SELECT_REGISTER, pwm);
+                    this.WriteRegister(IO60P16.PWM_CONFIG, IO60P16.CLOCK_SOURCE); //93.75KHz clock
 
-                    val = this.readRegister(IO60P16.PIN_STRONG_DRIVE);
-                    this.writeRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
+                    val = this.ReadRegister(IO60P16.PIN_STRONG_DRIVE);
+                    this.WriteRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
 				}
 				else
 				{
-					this.writeRegister(IO60P16.ENABLE_PWM_REGISTER, (byte)(val & ~mask));
-                    val = this.readRegister(IO60P16.PIN_DIRECTION_REGISTER);
+					this.WriteRegister(IO60P16.ENABLE_PWM_REGISTER, (byte)(val & ~mask));
+                    val = this.ReadRegister(IO60P16.PIN_DIRECTION_REGISTER);
 
 					if (state == IOState.Output)
 					{
-						this.writeRegister(IO60P16.PIN_DIRECTION_REGISTER, (byte)(val & ~mask));
+						this.WriteRegister(IO60P16.PIN_DIRECTION_REGISTER, (byte)(val & ~mask));
 
-						val = this.readRegister(IO60P16.PIN_STRONG_DRIVE);
-						this.writeRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
+						val = this.ReadRegister(IO60P16.PIN_STRONG_DRIVE);
+						this.WriteRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
 					}
 					else
 					{
-						this.writeRegister(IO60P16.PIN_DIRECTION_REGISTER, (byte)(val | mask));
+						this.WriteRegister(IO60P16.PIN_DIRECTION_REGISTER, (byte)(val | mask));
 
-                        val = this.readRegister((byte)resistorMode);
-						this.writeRegister((byte)resistorMode, (byte)(val | mask));
+                        val = this.ReadRegister((byte)resistorMode);
+						this.WriteRegister((byte)resistorMode, (byte)(val | mask));
 					}
 				}
 
-                val = this.readRegister(IO60P16.INTERRUPT_MASK_REGISTER);
+                val = this.ReadRegister(IO60P16.INTERRUPT_MASK_REGISTER);
 				if (state == IOState.InputInterrupt)
-					this.writeRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val & ~mask));
+					this.WriteRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val & ~mask));
 				else
-					this.writeRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val | mask));
+					this.WriteRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val | mask));
 			}
 
 			//We're using the 93.75KHz clock source because it gives a good resolution around the 1KHz frequency
 			//while still allowing the user to select frequencies such as 10KHz, but with reduced duty cycle
 			//resolution.
-			public void setPWM(byte pin, double frequency, double dutyCycle)
+			public void SetPWM(byte pin, double frequency, double dutyCycle)
 			{
 				byte pwm = 255;
 				for (var i = 0; i < 30; i += 2)
 					if (this.pwms[i] == pin)
 						pwm = this.pwms[i + 1];
 
-				this.writeRegister((byte)(IO60P16.PWM_SELECT_REGISTER), pwm); // (byte)((pin % 8) + (this.getPort(pin) - 6) * 8));
+				this.WriteRegister((byte)(IO60P16.PWM_SELECT_REGISTER), pwm); // (byte)((pin % 8) + (this.getPort(pin) - 6) * 8));
 
 				byte period = (byte)(93750 / frequency);
 
-				this.writeRegister(IO60P16.PERIOD_REGISTER, period);
-				this.writeRegister((byte)(IO60P16.PULSE_WIDTH_REGISTER), (byte)(period * dutyCycle));
+				this.WriteRegister(IO60P16.PERIOD_REGISTER, period);
+				this.WriteRegister((byte)(IO60P16.PULSE_WIDTH_REGISTER), (byte)(period * dutyCycle));
 			}
 
-			public bool readDigital(byte pin)
+			public bool ReadDigital(byte pin)
 			{
-				byte b = this.readRegister((byte)(IO60P16.INPUT_PORT_0_REGISTER + this.getPort(pin)));
+				byte b = this.ReadRegister((byte)(IO60P16.INPUT_PORT_0_REGISTER + this.GetPort(pin)));
 
-				return (b & this.getMask(pin)) != 0;
+				return (b & this.GetMask(pin)) != 0;
 			}
 
-			public void writeDigital(byte pin, bool value)
+			public void WriteDigital(byte pin, bool value)
 			{
-				byte b = this.readRegister((byte)(IO60P16.OUTPUT_PORT_0_REGISTER + this.getPort(pin)));
+				byte b = this.ReadRegister((byte)(IO60P16.OUTPUT_PORT_0_REGISTER + this.GetPort(pin)));
 
 				if (value)
-					b |= this.getMask(pin);
+					b |= this.GetMask(pin);
 				else
-					b = (byte)(b & ~this.getMask(pin));
+					b = (byte)(b & ~this.GetMask(pin));
 
-				this.writeRegister((byte)(IO60P16.OUTPUT_PORT_0_REGISTER + this.getPort(pin)), b);
+				this.WriteRegister((byte)(IO60P16.OUTPUT_PORT_0_REGISTER + this.GetPort(pin)), b);
 			}
 		}
 
