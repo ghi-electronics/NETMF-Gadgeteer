@@ -18,7 +18,7 @@
 
       <Assemblies>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.GPS"/>
-        
+
         <Assembly MFVersion="4.3" Name="Gadgeteer.Serial"/>
       </Assemblies>
 
@@ -38,12 +38,12 @@
 
       <Power>
         <PowerRequirements Voltage="3.3">
-          <TypicalCurrent>Infinity</TypicalCurrent>
-          <MaximumCurrent>Infinity</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
         <PowerRequirements Voltage="5.0">
-          <TypicalCurrent>Infinity</TypicalCurrent>
-          <MaximumCurrent>Infinity</MaximumCurrent>
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
         </PowerRequirements>
       </Power>
     </ModuleDefinition>
