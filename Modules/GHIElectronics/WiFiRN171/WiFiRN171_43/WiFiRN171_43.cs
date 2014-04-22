@@ -24,19 +24,26 @@ namespace Gadgeteer.Modules.GHIElectronics
             internal TimeoutException(string message) : base(message) { }
             internal TimeoutException(string message, Exception innerException) : base(message, innerException) { }
         }
+        /// <summary>
+        /// An exception thrown when an errror is received.
+        /// </summary>
+        [Serializable]
+        public class ErrorReceivedException : global::System.Exception
+        {
+            internal ErrorReceivedException() : base() { }
+            internal ErrorReceivedException(string message) : base(message) { }
+            internal ErrorReceivedException(string message, Exception innerException) : base(message, innerException) { }
+        }
 
         private string commandModeResponse;
         private string serialBuffer;
         private int timeout;
         private bool useDhcp;
-        private bool commandModeResponseComplete;
-        private bool commandModeReponseOk;
-        private bool flowControlEnabled;
+        private bool inCommandMode;
+        private AutoResetEvent updateComplete;
+        private AutoResetEvent commandResponseComplete;
         private GTI.DigitalOutput reset;
         private GTI.DigitalOutput rts;
-        private StreamMode streamMode;
-        private DataReturnLevel dataLevel;
-        private RunMode runMode;
 
         /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -49,16 +56,15 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.DebugPort = null;
             this.Ready = false;
 
-            this.flowControlEnabled = socket.SupportsType('K');
+            var useFlowControlEnabled = socket.SupportsType('K');
+
             this.commandModeResponse = "";
             this.serialBuffer = "";
             this.timeout = 10000;
             this.useDhcp = false;
-            this.commandModeResponseComplete = true;
-            this.commandModeReponseOk = true;
-            this.streamMode = StreamMode.NoStream;
-            this.dataLevel = DataReturnLevel.ReturnIncomming;
-            this.runMode = RunMode.Normal;
+            this.inCommandMode = false;
+            this.updateComplete = new AutoResetEvent(false);
+            this.commandResponseComplete = new AutoResetEvent(false);
 
             this.onHttpRequestReceived = this.OnHttpRequestReceived;
             this.onDataReceived = this.OnDataReceived;
@@ -66,14 +72,37 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.onConnectionEstablished = this.OnConnectionEstablished;
             this.onConnectionClosed = this.OnConnectionClosed;
 
-            if (!this.flowControlEnabled)
+            if (!useFlowControlEnabled)
                 socket.EnsureTypeIsSupported('U', this);
             
             this.reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
             this.rts = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
-            this.SerialPort = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, this.flowControlEnabled ? GTI.HardwareFlowControl.Required : GTI.HardwareFlowControl.NotRequired, this);
+            this.SerialPort = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, useFlowControlEnabled ? GTI.HardwareFlowControl.Required : GTI.HardwareFlowControl.NotRequired, this);
             this.SerialPort.DataReceived += this.OnSerialDataReceived;
             this.SerialPort.Open();
+
+            this.Reset();
+
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (!this.Ready)
+            {
+                if (end <= DateTime.Now && this.timeout > 0)
+                    throw new TimeoutException();
+
+                Thread.Sleep(1);
+            }
+
+            this.EnterCommandMode();
+
+            this.ExecuteCommand("set sys printlvl 0");
+            this.ExecuteCommand("set comm remote 0");
+
+            if (useFlowControlEnabled)
+                this.ExecuteCommand("set uart flow 1");
+
+            this.ExecuteCommand("set uart tx 1");
+
+            this.ExitCommandMode();
         }
 
         /// <summary>
@@ -137,105 +166,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public GTI.Serial DebugPort { get; set; }
 
-        #region "Enumerations"
-
-        /// <summary>
-        /// Represents the level of data to return.
-        /// </summary>
-        public enum DataReturnLevel
-        {
-            /// <summary>
-            /// Returns all data.
-            /// Command data and External Communications
-            /// </summary>
-            ReturnAll,
-
-            /// <summary>
-            /// Returns only External, non-command data
-            /// </summary>
-            ReturnIncomming
-        };
-
-        /// <summary>
-        /// Represents the stream mode.
-        /// </summary>
-        public enum StreamMode
-        {
-            /// <summary>
-            /// Idle
-            /// </summary>
-            NoStream,
-
-            /// <summary>
-            /// Command Data stream
-            /// </summary>
-            CommandStream,
-
-            /// <summary>
-            /// Stream for get reponses
-            /// </summary>
-            GetStream,
-
-            /// <summary>
-            /// Non-command data (external communications)
-            /// </summary>
-            DataStream
-        };
-
-        /// <summary>
-        /// Represents the socket protocal.
-        /// </summary>
-        public enum SocketProtocol
-        {
-            /// <summary>
-            /// UPD Mode: Connection-less protocol with no handshaking
-            /// </summary>
-            UDP = 1,
-
-            /// <summary>
-            /// TCP Server Mode: TCP Connection with handshaking (Client and Server)
-            /// </summary>
-            TCP_Server = 2,
-
-            /// <summary>
-            /// Secure Connection Mode: Only send to the stored host-ip
-            /// </summary>
-            Secure_Connection = 4,
-
-            /// <summary>
-            /// TCP Client Mode: TCP Connection with handshaking (Client Only)
-            /// </summary>
-            TCP_Client = 8
-        }
-
-        /// <summary>
-        /// Represents the encyrption mode to use.
-        /// </summary>
-        public enum WirelessEncryptionMode
-        {
-            /// <summary>Open Authentication (No Passphrase required)</summary>
-            Open = 0,
-            /// <summary>128-bit Wired Equivalent Privacy (WEP)</summary>
-            WEP_128 = 1,
-            /// <summary>Wi-Fi Protected Access (WPA)</summary>
-            WPA1 = 2,
-            /// <summary>Mixed WPA1 &amp; WPA2-PSK</summary>
-            MixedWPA1_WPA2 = 3,
-            /// <summary>Wi-Fi Protected Access (WPA) II (uses preshared key)</summary>
-            WPA2_PSK = 4
-        }
-
-        private enum RunMode
-        {
-            Normal = 0,
-            UpdateWait = 1, //Reserved for future use
-            Update_Fail = 2, //Reserved for future use
-            UpdateOkay = 3, //Reserved for future use
-            Boot = 4
-        }
-
-        #endregion
-
         /// <summary>
         /// Reboots the module.
         /// </summary>
@@ -259,87 +189,22 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Initializes the WiFly Module.
-        /// </summary>
-        /// <param name="protocol">The socket protocol to initialize.</param>
-        /// <returns>Whether it was successful or not.</returns>
-        public bool Initialize(SocketProtocol protocol)
-        {
-            this.Ready = false;
-
-            this.Reset();
-
-            var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (!this.Ready)
-            {
-                if (end <= DateTime.Now && this.timeout > 0)
-                    throw new TimeoutException();
-
-                Thread.Sleep(1);
-            }
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            if (!this.EnterCommandMode())
-                return false;
-
-            if (!this.ExecuteCommand("set sys printlvl 0"))
-                return false;
-
-            if (!this.ExecuteCommand("set comm remote 0"))
-                return false;
-
-            if (this.flowControlEnabled && !this.ExecuteCommand("set uart flow 1"))
-                return false;
-
-            if (!this.ExecuteCommand("set uart tx 1"))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
-        }
-
-        /// <summary>
         /// Updates the firmware.
         /// </summary>
         /// <returns>Whether it was successful or not.</returns>
         public bool UpdateFirmware()
         {
-            if (!this.ExitCommandMode())
-                return false;
+            this.ExitCommandMode();
+            this.EnterCommandMode();
 
-            if (!this.EnterCommandMode())
-                return false;
-
-            if (!this.ExecuteCommand("set ftp address 0"))
-                return false;
-
-            if (!this.ExecuteCommand("set dns name rn.microchip.com"))
-                return false;
-
-            if (!this.ExecuteCommand("save"))
-                return false;
-
-            this.runMode = RunMode.UpdateWait;
-
+            this.ExecuteCommand("set ftp address 0");
+            this.ExecuteCommand("set dns name rn.microchip.com");
+            this.ExecuteCommand("save");
+            
             this.ExecuteCommand("ftp update wifly7-245.img");
 
-            var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (this.runMode == RunMode.UpdateWait)
-            {
-                if (end <= DateTime.Now && this.timeout > 0)
-                    return false;
-
-                Thread.Sleep(1);
-            }
-
-            if (runMode != RunMode.UpdateOkay)
-                return false;
-
-            this.runMode = RunMode.Normal;
+            if (!this.updateComplete.WaitOne(this.timeout, true))
+                throw new TimeoutException();
 
             return true;
         }
@@ -348,42 +213,23 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Creates an access point with the given SSID.
         /// </summary>
         /// <param name="ssid">The SSID to use.</param>
-        /// <returns>Whether or not it was successful.</returns>
-        public bool CreateAccessPoint(string ssid)
+        public void CreateAccessPoint(string ssid)
         {
             if (ssid == null) throw new ArgumentNullException("ssid");
 
-            if (!this.ExitCommandMode())
-                return false;
+            this.ExitCommandMode();
 
-            if (!this.EnterCommandMode())
-                return false;
+            this.EnterCommandMode();
 
-            if (!this.ExecuteCommand("set wlan channel 2"))
-                return false;
-
-            if (!this.ExecuteCommand("set wlan join 7"))
-                return false;
-
-            if (!this.ExecuteCommand("set ip address 192.168.1.1"))
-                return false;
-
-            if (!this.ExecuteCommand("set ip gateway 192.168.1.1"))
-                return false;
-
-            if (!this.ExecuteCommand("set ip netmask 255.255.255.0"))
-                return false;
-
-            if (!this.ExecuteCommand("set ip dhcp 4"))
-                return false;
-
-            if (!this.ExecuteCommand("join " + ssid))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.ExecuteCommand("set wlan channel 2");
+            this.ExecuteCommand("set wlan join 7");
+            this.ExecuteCommand("set ip address 192.168.1.1");
+            this.ExecuteCommand("set ip gateway 192.168.1.1");
+            this.ExecuteCommand("set ip netmask 255.255.255.0");
+            this.ExecuteCommand("set ip dhcp 4");
+            this.ExecuteCommand("join " + ssid);
+            
+            this.ExitCommandMode();
         }
 
         /// <summary>
@@ -392,8 +238,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="gateway">The gateway address.</param>
         /// <param name="subnetMask">The subnet mask.</param>
         /// <param name="dnsAddress">The DNS address.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool EnableDhcp(string gateway, string subnetMask, string dnsAddress)
+        public void EnableDhcp(string gateway, string subnetMask, string dnsAddress)
         {
             if (gateway == null) throw new ArgumentNullException("gateway");
             if (subnetMask == null) throw new ArgumentNullException("subnetMask");
@@ -401,25 +246,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.useDhcp = true;
 
-            if (!this.EnterCommandMode())
-                return false;
+            this.EnterCommandMode();
 
-            if (!this.ExecuteCommand("set ip dhcp 1"))
-                return false;
+            this.ExecuteCommand("set ip dhcp 1");
+            this.ExecuteCommand("set ip gateway " + gateway);
+            this.ExecuteCommand("set ip netmask " + subnetMask);
+            this.ExecuteCommand("set dns address " + dnsAddress);
 
-            if (!this.ExecuteCommand("set ip gateway " + gateway))
-                return false;
-
-            if (!this.ExecuteCommand("set ip netmask " + subnetMask))
-                return false;
-
-            if (!this.ExecuteCommand("set dns address " + dnsAddress))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.ExitCommandMode();
         }
 
         /// <summary>
@@ -429,8 +263,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="gateway">The gateway address.</param>
         /// <param name="subnetMask">The subnet mask.</param>
         /// <param name="dnsAddress">The DNS address.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool EnableStaticIP(string ipAddress, string gateway, string subnetMask, string dnsAddress)
+        public void EnableStaticIP(string ipAddress, string gateway, string subnetMask, string dnsAddress)
         {
             if (ipAddress == null) throw new ArgumentNullException("ipAddress");
             if (gateway == null) throw new ArgumentNullException("gateway");
@@ -439,28 +272,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.useDhcp = false;
 
-            if (!this.EnterCommandMode())
-                return false;
+            this.EnterCommandMode();
 
-            if (!this.ExecuteCommand("set ip dhcp 0"))
-                return false;
+            this.ExecuteCommand("set ip dhcp 0");
+            this.ExecuteCommand("set ip address " + ipAddress);
+            this.ExecuteCommand("set ip gateway " + gateway);
+            this.ExecuteCommand("set ip netmask " + subnetMask);
+            this.ExecuteCommand("set dns address " + dnsAddress);
 
-            if (!this.ExecuteCommand("set ip address " + ipAddress))
-                return false;
-
-            if (!this.ExecuteCommand("set ip gateway " + gateway))
-                return false;
-
-            if (!this.ExecuteCommand("set ip netmask " + subnetMask))
-                return false;
-
-            if (!this.ExecuteCommand("set dns address " + dnsAddress))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.ExitCommandMode();
         }
 
         /// <summary>
@@ -468,10 +288,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="ssid">The ssid.</param>
         /// <param name="passphrase">The passphrase.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool JoinWirelessNetwork(string ssid, string passphrase)
+        public void JoinWirelessNetwork(string ssid, string passphrase)
         {
-            return this.JoinWirelessNetwork(ssid, passphrase, 0, WirelessEncryptionMode.Open);
+            this.JoinWirelessNetwork(ssid, passphrase, 0, WirelessEncryptionMode.Open);
         }
 
         /// <summary>
@@ -481,98 +300,60 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="passphrase">The passphrase.</param>
         /// <param name="channel">The channel.</param>
         /// <param name="authenticationMode">The authentication mode.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool JoinWirelessNetwork(string ssid, string passphrase, int channel, WirelessEncryptionMode authenticationMode)
+        public void JoinWirelessNetwork(string ssid, string passphrase, int channel, WirelessEncryptionMode authenticationMode)
         {
             if (ssid == null) throw new ArgumentNullException("ssid");
             if (passphrase == null) throw new ArgumentNullException("passphrase");
             if (channel < 0) throw new ArgumentOutOfRangeException("channel", "channel must be non-negative.");
 
-            if (!this.EnterCommandMode())
-                return false;
+            this.EnterCommandMode();
 
-            if (!this.ExecuteCommand("set wlan ssid " + ssid))
-                return false;
+            this.ExecuteCommand("set wlan ssid " + ssid);
+            this.ExecuteCommand("set wlan channel " + channel.ToString());
+            this.ExecuteCommand("set wlan auth " + authenticationMode.ToString());
+            this.ExecuteCommand("set wlan phrase " + passphrase);
+            this.ExecuteCommand("join");
+            
+            if (this.useDhcp)
+                this.ExecuteCommand("get ip");
 
-            if (!this.ExecuteCommand("set wlan channel " + channel.ToString()))
-                return false;
-
-            if (!this.ExecuteCommand("set wlan auth " + authenticationMode.ToString()))
-                return false;
-
-            if (!this.ExecuteCommand("set wlan phrase " + passphrase))
-                return false;
-
-            if (!this.ExecuteCommand("join"))
-                return false;
-
-            if (this.useDhcp && this.ExecuteCommand("get ip"))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.ExitCommandMode();
         }
 
         /// <summary>
         /// Sets the socket protocol.
         /// </summary>
         /// <param name="protocol">The desired protocol.</param>
-        /// <returns>Whether or not it was successful.</returns>
-        public bool SetProtocol(SocketProtocol protocol)
+        public void SetProtocol(SocketProtocol protocol)
         {
-            if (!this.EnterCommandMode())
-                return false;
-
-            if (!this.ExecuteCommand("set ip protocol " + protocol.ToString()))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.EnterCommandMode();
+            this.ExecuteCommand("set ip protocol " + protocol.ToString());
+            this.ExitCommandMode();
         }
 
         /// <summary>
         /// Set the port the WiFly module should listen for connections on.
         /// </summary>
         /// <param name="port">The port to listen on.</param>
-        /// <returns>Whether or not it was successful.</returns>
-        public bool SetListenPort(int port)
+        public void SetListenPort(int port)
         {
             if (port < 0) throw new ArgumentOutOfRangeException("port", "port must be non-negative.");
 
-            if (!this.EnterCommandMode())
-                return false;
-
-            if (!this.ExecuteCommand("set ip local " + port.ToString()))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
-            return true;
+            this.EnterCommandMode();
+            this.ExecuteCommand("set ip local " + port.ToString());
+            this.ExitCommandMode();
         }
 
         /// <summary>
         /// Sets the device to listen port on port 80 and allow HTTP request parsing.
         /// </summary>
-        /// <returns>Whether or not it was successful.</returns>
-        public bool EnableHttpServer()
+        public void EnableHttpServer()
         {
-            if (!this.EnterCommandMode())
-                return false;
-
-            if (!this.ExecuteCommand("set ip local 80"))
-                return false;
-
-            if (!this.ExitCommandMode())
-                return false;
-
+            this.EnterCommandMode();
+            this.ExecuteCommand("set ip local 80");
+            this.ExitCommandMode();
+            
             this.HttpEnabled = true;
-
-            return true;
         }
 
         /// <summary>
@@ -989,8 +770,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Executes the command.
         /// </summary>
         /// <param name="command">The command to execute.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool ExecuteCommand(string command)
+        public void ExecuteCommand(string command)
         {
             if (command == null) throw new ArgumentNullException("command");
 
@@ -1001,58 +781,44 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             Thread.Sleep(10);
 
-            var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (!this.commandModeResponseComplete)
-            {
-                if (end <= DateTime.Now && this.timeout > 0)
-                    return false;
-
-                Thread.Sleep(1);
-            }
-
-            return this.commandModeReponseOk;
+            if (!this.commandResponseComplete.WaitOne(this.timeout, true))
+                throw new TimeoutException();
         }
 
         /// <summary>
         /// Enters command mode.
         /// </summary>
-        /// <returns>Whether or not it was successful</returns>
-        public bool EnterCommandMode()
+        public void EnterCommandMode()
         {
             Thread.Sleep(100);
 
             this.WriteCommand("$$$");
 
             var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (this.streamMode != StreamMode.CommandStream)
+            while (!this.inCommandMode)
             {
                 if (end <= DateTime.Now && this.timeout > 0)
-                    return false;
+                    throw new TimeoutException();
 
                 Thread.Sleep(1);
             }
-
-            return true;
         }
 
         /// <summary>
         /// Exits command mode.
         /// </summary>
-        /// <returns>Whether or not it was successful</returns>
-        public bool ExitCommandMode()
+        public void ExitCommandMode()
         {
             this.WriteCommand("exit\r");
 
             var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (this.streamMode == StreamMode.CommandStream)
+            while (this.inCommandMode)
             {
                 if (end <= DateTime.Now && this.timeout > 0)
-                    return false;
+                    throw new TimeoutException();
 
                 Thread.Sleep(1);
             }
-
-            return true;
         }
 
         /// <summary>
@@ -1077,30 +843,21 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (command == null) throw new ArgumentNullException("command");
 
             this.commandModeResponse = "";
-            this.commandModeResponseComplete = false;
 
             this.SerialPort.Write(command);
         }
 
         private void GetCommand(string command)
         {
-            if (!this.EnterCommandMode())
-                return;
+            this.EnterCommandMode();
 
-            if (!this.ExecuteCommand("get " + command) && !this.ExecuteCommand("get " + command))
-                return;
+            this.ExecuteCommand("get " + command);
+            this.ExecuteCommand("get " + command);
 
-            var end = DateTime.Now.AddMilliseconds(this.timeout);
-            while (!this.commandModeResponseComplete)
-            {
-                if (end <= DateTime.Now && this.timeout > 0)
-                    return;
+            if (!this.commandResponseComplete.WaitOne(this.timeout, true))
+                throw new TimeoutException();
 
-                Thread.Sleep(1);
-            }
-
-            if (!this.ExitCommandMode())
-                return;
+            this.ExitCommandMode();
         }
 
         private void OnSerialDataReceived(GTI.Serial sender)
@@ -1162,55 +919,41 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (line.IndexOf("*READY*") >= 0)
                 this.Ready = true;
 
-            if (line.Length >= 3 && streamMode != StreamMode.CommandStream && line.Substring(0, 3) == "CMD")
-                this.streamMode = StreamMode.CommandStream;
+            if (line.Length >= 3 && !this.inCommandMode && line.Substring(0, 3) == "CMD")
+                this.inCommandMode = true;
 
-            //Are we in command mode waiting for response?
-            if (streamMode == StreamMode.CommandStream)
+            if (this.inCommandMode)
             {
                 this.commandModeResponse += line;
 
                 if (this.commandModeResponse.IndexOf("EXIT") >= 0)
                 {
-                    this.streamMode = StreamMode.NoStream;
-
-                    if (this.dataLevel == DataReturnLevel.ReturnAll)
-                        this.OnLineReceived(this, line);
+                    this.inCommandMode = false;
 
                     return;
                 }
 
                 if (this.commandModeResponse.IndexOf("UPDATE OK") >= 0)
                 {
-                    this.commandModeReponseOk = true;
-                    this.commandModeResponseComplete = true;
+                    this.updateComplete.Set();
+                    this.commandResponseComplete.Set();
                 }
 
                 if (this.commandModeResponse.IndexOf("Set Factory Defaults") >= 0)
-                {
-                    this.commandModeReponseOk = true;
-                    this.commandModeResponseComplete = true;
-                }
+                    this.commandResponseComplete.Set();
 
                 if (this.commandModeResponse.IndexOf("AOK") >= 0)
-                {
-                    this.commandModeReponseOk = true;
-                    this.commandModeResponseComplete = true;
-                }
+                    this.commandResponseComplete.Set();
 
                 if (this.commandModeResponse.IndexOf("ERR") >= 0)
                 {
-                    this.Log("ERROR: " + line);
+                    this.commandResponseComplete.Set();
 
-                    this.commandModeReponseOk = false;
-                    this.commandModeResponseComplete = true;
+                    throw new ErrorReceivedException(line);
                 }
 
                 if (!this.useDhcp && this.commandModeResponse.IndexOf("Associated!") >= 0)
-                {
-                    this.commandModeReponseOk = true;
-                    this.commandModeResponseComplete = true;
-                }
+                    this.commandResponseComplete.Set();
 
                 if (line.Length >= 3)
                 {
@@ -1218,8 +961,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     {
                         this.LocalIP = line.Substring(3).Split(':')[0];
 
-                        this.commandModeReponseOk = true;
-                        this.commandModeResponseComplete = true;
+                        this.commandResponseComplete.Set();
                     }
 
                     //Check to see if the appropriate firmware is loaded
@@ -1227,13 +969,9 @@ namespace Gadgeteer.Modules.GHIElectronics
                     {
                         this.LocalIP = line.Substring(5).Split(':')[0];
 
-                        this.commandModeReponseOk = true;
-                        this.commandModeResponseComplete = true;
+                        this.commandResponseComplete.Set();
                     }
                 }
-
-                if (this.dataLevel == DataReturnLevel.ReturnAll)
-                    this.OnLineReceived(this, line);
             }
             else
             {
@@ -1379,6 +1117,49 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             if (Program.CheckAndInvoke(this.ConnectionClosed, this.onConnectionClosed, sender, e))
                 this.ConnectionClosed(sender, e);
+        }
+
+        /// <summary>
+        /// Represents the socket protocal.
+        /// </summary>
+        public enum SocketProtocol
+        {
+            /// <summary>
+            /// UPD Mode: Connection-less protocol with no handshaking
+            /// </summary>
+            UDP = 1,
+
+            /// <summary>
+            /// TCP Server Mode: TCP Connection with handshaking (Client and Server)
+            /// </summary>
+            TCPServer = 2,
+
+            /// <summary>
+            /// Secure Connection Mode: Only send to the stored host-ip
+            /// </summary>
+            SecureConnection = 4,
+
+            /// <summary>
+            /// TCP Client Mode: TCP Connection with handshaking (Client Only)
+            /// </summary>
+            TCPClient = 8
+        }
+
+        /// <summary>
+        /// Represents the encyrption mode to use.
+        /// </summary>
+        public enum WirelessEncryptionMode
+        {
+            /// <summary>Open Authentication (No Passphrase required)</summary>
+            Open = 0,
+            /// <summary>128-bit Wired Equivalent Privacy (WEP)</summary>
+            WEP_128 = 1,
+            /// <summary>Wi-Fi Protected Access (WPA)</summary>
+            WPA1 = 2,
+            /// <summary>Mixed WPA1 and WPA2-PSK</summary>
+            MixedWPA1_WPA2 = 3,
+            /// <summary>Wi-Fi Protected Access (WPA) II (uses preshared key)</summary>
+            WPA2_PSK = 4
         }
     }
 }
