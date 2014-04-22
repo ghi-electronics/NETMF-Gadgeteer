@@ -1,120 +1,143 @@
-﻿using System;
-using Microsoft.SPOT;
-
+﻿using Microsoft.SPOT;
+using System;
 using System.Collections;
 using System.Text;
-
-using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using GTI = Gadgeteer.SocketInterfaces;
 using System.Threading;
+using Encoder = System.Text.Encoding;
+using GTI = Gadgeteer.SocketInterfaces;
+using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics
 {
-    // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
-    // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
-    // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
-    // 1) add a reference to the assembly (named Gadgeteer.[interfacename])
-    // 2) in GadgeteerHardware.xml, uncomment the lines under <Assemblies> so that end user apps using this module also add a reference.
-
     /// <summary>
-    /// A WiFi RN171 module for Microsoft .NET Gadgeteer
+    /// A WiFiRN171 module for Microsoft .NET Gadgeteer
     /// </summary>
     public class WiFiRN171 : GTM.Module
     {
-        /// <summary>Constructor</summary>
+        /// <summary>
+        /// An exception thrown when a timeout occurs.
+        /// </summary>
+        [Serializable]
+        public class TimeoutException : global::System.Exception
+        {
+            internal TimeoutException() : base() { }
+            internal TimeoutException(string message) : base(message) { }
+            internal TimeoutException(string message, Exception innerException) : base(message, innerException) { }
+        }
+
+        private string commandModeResponse;
+        private string serialBuffer;
+        private int timeout;
+        private bool useDhcp;
+        private bool commandModeResponseComplete;
+        private bool commandModeReponseOk;
+        private bool flowControlEnabled;
+        private GTI.DigitalOutput reset;
+        private GTI.DigitalOutput rts;
+        private StreamMode streamMode;
+        private DataReturnLevel dataLevel;
+        private RunMode runMode;
+
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public WiFiRN171(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            string t_Command_Init = "$$$";
 
-            _baud = 115200; //Changed from datasheet
-            LocalIP = "0.0.0.0";
-            _Command_Init = System.Text.Encoding.UTF8.GetBytes(t_Command_Init);
-            _Port_Name = socket.SerialPortName;
+            this.LocalIP = "0.0.0.0";
+            this.LocalListenPort = "0";
+            this.DebugPort = null;
+            this.Ready = false;
 
-            try
-            {
-                socket.EnsureTypeIsSupported(new char[] { 'K' }, this);
-                _wifly = GTI.SerialFactory.Create(socket, _baud, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.Required, this);
+            this.flowControlEnabled = socket.SupportsType('K');
+            this.commandModeResponse = "";
+            this.serialBuffer = "";
+            this.timeout = 10000;
+            this.useDhcp = false;
+            this.commandModeResponseComplete = true;
+            this.commandModeReponseOk = true;
+            this.streamMode = StreamMode.NoStream;
+            this.dataLevel = DataReturnLevel.ReturnIncomming;
+            this.runMode = RunMode.Normal;
 
-                _Flow_Control_Enable = true;
+            this.onHttpRequestReceived = this.OnHttpRequestReceived;
+            this.onDataReceived = this.OnDataReceived;
+            this.onLineReceived = this.OnLineReceived;
+            this.onConnectionEstablished = this.OnConnectionEstablished;
+            this.onConnectionClosed = this.OnConnectionClosed;
 
-                Debug.Print("Using hardware flow control");
-            }
-            catch
-            {
-                try
-                {
-                    socket.EnsureTypeIsSupported(new char[] { 'U' }, this);
-                    _wifly = GTI.SerialFactory.Create(socket, _baud, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
-                }
-                catch (Exception e)
-                {
-                    throw new Exception("Socket type is not supported", e);
-                }
-            }
-
-            _wifly.Open();
-
-            Reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
-            RTS = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
+            if (!this.flowControlEnabled)
+                socket.EnsureTypeIsSupported('U', this);
+            
+            this.reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
+            this.rts = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
+            this.SerialPort = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, this.flowControlEnabled ? GTI.HardwareFlowControl.Required : GTI.HardwareFlowControl.NotRequired, this);
+            this.SerialPort.DataReceived += this.OnSerialDataReceived;
+            this.SerialPort.Open();
         }
 
-        //Added method for user-defined baud rates as well as
-        //the ability to work with WiFly modules
         /// <summary>
-        /// Sets the baud rate for the device.
+        /// The baudrate of the device.
         /// </summary>
-        /// <param name="baud">The baudrate to use.</param>
-        public void SetBaudRate(int baud = 115200)
+        public int BaudRate
         {
-            _wifly.Close();
-            _wifly.BaudRate = baud;
-            _wifly.Open();
+            get
+            {
+                return this.SerialPort.BaudRate;
+            }
+            set
+            {
+                if (value <= 0) throw new ArgumentOutOfRangeException("value", "value must be positive.");
 
-            _baud = baud;
+                this.SerialPort.Close();
+                this.SerialPort.BaudRate = value;
+                this.SerialPort.Open();
+            }
         }
+
+        /// <summary>
+        /// The timeout of the device.
+        /// </summary>
+        public int Timeout
+        {
+            get
+            {
+                return this.timeout;
+            }
+            set
+            {
+                if (value <= 0) throw new ArgumentOutOfRangeException("value", "value must be positive.");
+
+                this.timeout = value;
+            }
+        }
+
+        /// <summary>
+        /// If the device is ready.
+        /// </summary>
+        public bool Ready { get; private set; }
+
+        /// <summary>
+        /// The local IP of the device.
+        /// </summary>
+        public string LocalIP { get; private set; }
+
+        /// <summary>
+        /// The local listening port of the device.
+        /// </summary>
+        public string LocalListenPort { get; private set; }
+
+        /// <summary>
+        /// The raw underlying serial port object.
+        /// </summary>
+        public GTI.Serial SerialPort { get; private set; }
+
+        /// <summary>
+        /// The port to print debug messages to when DebugPrintEnabled is true. If null, messages are sent to Debug.Print.
+        /// </summary>
+        public GTI.Serial DebugPort { get; set; }
 
         #region "Enumerations"
-
-        /// <summary>
-        /// Represents the debug mode.
-        /// </summary>
-        public enum DebugMode
-        {
-            /// <summary>
-            /// Use no debugging
-            /// </summary>
-            NoDebug,
-
-            /// <summary>
-            /// Report debugging to Visual Studio debug output
-            /// </summary>
-            StandardDebug,
-
-            /// <summary>
-            /// Re-direct debugging to a given serial port.
-            /// Console Debugging
-            /// </summary>
-            SerialDebug
-        };
-
-        /// <summary>
-        /// Represents the debug level.
-        /// </summary>
-        public enum DebugLevel
-        {
-            /// <summary>
-            /// Only debug errors.
-            /// </summary>
-            DebugErrors,
-            /// <summary>
-            /// Debug everything.
-            /// </summary>
-            DebugAll
-        };
 
         /// <summary>
         /// Represents the level of data to return.
@@ -205,352 +228,118 @@ namespace Gadgeteer.Modules.GHIElectronics
         private enum RunMode
         {
             Normal = 0,
-            Update_Wait = 1, //Reserved for future use
+            UpdateWait = 1, //Reserved for future use
             Update_Fail = 2, //Reserved for future use
-            Update_Okay = 3, //Reserved for future use
+            UpdateOkay = 3, //Reserved for future use
             Boot = 4
         }
 
         #endregion
 
-        #region "Private Data Types"
-
-        //Strings
-        private string _Port_Name = "";
-        private string _Command_Mode_Response = "";
-        private string _Serial_String_Buffer = "";
-
-        //Ints
-        private int _baud = 0;
-        private int _Timeout = 10000;
-
-        //Classes
-        private GTI.Serial _wifly;
-        private GTI.Serial _debug_port;
-        private static Thread listen = null;
-
-        //Byte
-        private byte[] _Command_Init = new byte[3];
-        private byte[] _Serial_Byte_Buffer = new byte[1] { 0x00 };
-
-        //Bools
-        private bool _device_ready = false;
-        private bool _DHCP = false;
-        private bool _Command_Mode_Response_Complete = true;
-        private bool _Command_Mode_Response_Okay = true;
-        private bool _Flow_Control_Enable = false;
-
-        //Pin declarations
-        private GTI.DigitalOutput Reset;
-        private GTI.DigitalOutput RTS;
-
-        //Others
-        private StreamMode _stream = StreamMode.NoStream;
         /// <summary>
-        /// The current debug mode.
-        /// </summary>
-        public DebugMode _debug = DebugMode.NoDebug;
-        private DebugLevel _debug_level = DebugLevel.DebugErrors;
-        private DataReturnLevel _data_level = DataReturnLevel.ReturnIncomming;
-        private DateTime _TimeOutDate;
-
-        private RunMode _RunMode = RunMode.Normal;
-
-        #endregion
-
-        #region "Public Data Types"
-        /// <summary>
-        /// Is the device ready.
-        /// </summary>
-        public bool IsReady = false;
-
-        //strings
-        /// <summary>
-        /// The local IP of the device.
-        /// </summary>
-        public string LocalIP { get; protected set; }
-        /// <summary>
-        /// The local listening port of the device.
-        /// </summary>
-        public string LocalListenPort { get; protected set; }
-        #endregion
-
-        #region "Public Events"
-
-        //Delegates
-        /// <summary>
-        /// A delegate representing receipt of an HTTP request.
-        /// </summary>
-        /// <param name="request">The HTTP request.</param>
-        public delegate void HttpRequestReceivedHandler(HttpStream request);
-        /// <summary>
-        /// A delegate representing data received.
-        /// </summary>
-        /// <param name="data">The data received.</param>
-        public delegate void DataReceivedHandler(string data);
-        /// <summary>
-        /// A delegate representing line received.
-        /// </summary>
-        /// <param name="line">The line received.</param>
-        public delegate void LineReceivedHandler(string line);
-        /// <summary>
-        /// A delegate representing connection opening.
-        /// </summary>
-        public delegate void ConnectionEstablishedHandler();
-        /// <summary>
-        /// A delegate representing connection closure.
-        /// </summary>
-        public delegate void ConnectionClosedHandler();
-
-        //Handlers
-
-        /// <summary>
-        /// Fired when a HTTP Request is received
-        /// </summary>
-        public event HttpRequestReceivedHandler HttpRequestReceived;
-
-        /// <summary>
-        /// Fired when any data is received
-        /// </summary>
-        public event DataReceivedHandler DataReceived;
-
-        /// <summary>
-        /// Fired when a complete line of data has been received
-        /// </summary>
-        public event LineReceivedHandler LineReceived;
-
-        /// <summary>
-        /// Fired when an connection has been establised to a
-        /// remote client.
-        /// </summary>
-        public event ConnectionEstablishedHandler ConnectionEstablished;
-
-        /// <summary>
-        /// Fired when an connection to a remote client
-        /// has closed.
-        /// </summary>
-        public event ConnectionClosedHandler ConnectionClosed;
-
-        //Triggers
-
-        /// <summary>
-        /// Fired when an HTTP request is received.
-        /// </summary>
-        /// <param name="request">The request received.</param>
-        protected virtual void OnHttpRequestReceived(HttpRequest request)
-        {
-            if (HttpRequestReceived != null)
-            {
-                HttpStream stream = new HttpStream(request, _wifly);
-                HttpRequestReceived(stream);
-            }
-        }
-
-        /// <summary>
-        /// Fired when data is received.
-        /// </summary>
-        /// <param name="data">The line received.</param>
-        protected virtual void OnDataReceived(string data)
-        {
-            if (DataReceived != null)
-                DataReceived(data);
-        }
-
-        /// <summary>
-        /// Fired when an a line is received.
-        /// </summary>
-        /// <param name="line">The HTTP request.</param>
-        protected virtual void OnLineReceived(string line)
-        {
-            if (LineReceived != null)
-                LineReceived(line);
-        }
-
-        /// <summary>
-        /// Fired when the connection is opened.
-        /// </summary>
-        protected virtual void OnConnectionEstablished()
-        {
-            if (ConnectionEstablished != null)
-                ConnectionEstablished();
-        }
-
-        /// <summary>
-        /// Fired when the connection is closed.
-        /// </summary>
-        protected virtual void OnConnectionClosed()
-        {
-            if (ConnectionClosed != null)
-                ConnectionClosed();
-        }
-
-        #endregion
-
-        #region "Construction And Initialization"
-
-        //WiFly Construction Method
-        //public WiFly(Cpu.Pin Reset_Pin, Cpu.Pin RTS_Pin, string ComPort = "COM1", int BaudRate = 9600, string CommandToken = "$", DebugMode Debug = DebugMode.NoDebug)
-        //{
-        //    LocalIP = "0.0.0.0";
-        //    Reset = new OutputPort(Reset_Pin, true);
-
-        //    string t_Command_Init = CommandToken + CommandToken + CommandToken;
-        //    _Command_Init = System.Text.Encoding.UTF8.GetBytes(t_Command_Init);
-
-        //    _Port_Name = ComPort;
-        //    _baud = BaudRate;
-
-        //    _wifly = new SerialPort(_Port_Name, _baud, Parity.None, 8, StopBits.One);
-        //    //_wifly.Handshake = Handshake.RequestToSend;
-        //    _wifly.ErrorReceived += new SerialErrorReceivedEventHandler(_wifly_ErrorReceived);
-        //    _wifly.Open();
-
-        //    RTS = new OutputPort(RTS_Pin, false);
-        //}
-
-        //void _wifly_ErrorReceived(object sender, SerialErrorReceivedEventArgs e)
-        //{
-        //    //Debug.Print(e.EventType.ToString());
-        //}
-
-        /// <summary>
-        /// Reboot the module
+        /// Reboots the module.
         /// </summary>
         public void Reboot()
         {
-            _wifly.DiscardInBuffer();
-            _wifly.DiscardOutBuffer();
+            this.SerialPort.DiscardInBuffer();
+            this.SerialPort.DiscardOutBuffer();
 
-            _device_ready = false;
+            this.Ready = false;
 
-            //Reset the module
-            Reset.Write(false);
-            Thread.Sleep(100);
-            Reset.Write(true);
-            Thread.Sleep(250);
+            this.Reset();
 
-            //Wait for the device to be ready
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (!_device_ready)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (!this.Ready)
             {
-                if (_TimeOutDate <= DateTime.Now)
-                    throw new Exception("Time out waiting for device to ready");
+                if (end <= DateTime.Now && this.timeout > 0)
+                    throw new TimeoutException();
 
                 Thread.Sleep(1);
             }
-
-            Debug.Print("Device is ready");
         }
 
         /// <summary>
-        /// Initialize the WiFly Module
+        /// Initializes the WiFly Module.
         /// </summary>
-        /// <param name="protocol">The socket protocol to initialize</param>
-        /// <returns>True on successful initialization, false upon failure</returns>
-        public bool Initialize(SocketProtocol protocol = SocketProtocol.TCP_Server)
+        /// <param name="protocol">The socket protocol to initialize.</param>
+        /// <returns>Whether it was successful or not.</returns>
+        public bool Initialize(SocketProtocol protocol)
         {
-            if (listen == null)
+            this.Ready = false;
+
+            this.Reset();
+
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (!this.Ready)
             {
-                listen = new Thread(_Serial_Listen);
-                listen.Start();
-            }
-
-            _device_ready = false;
-
-            //Reset the module
-            Reset.Write(false);
-            Thread.Sleep(100);
-            Reset.Write(true);
-            Thread.Sleep(250);
-
-            //Wait for the device to be ready
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (!_device_ready)
-            {
-                if (_TimeOutDate <= DateTime.Now)
-                    return false;
+                if (end <= DateTime.Now && this.timeout > 0)
+                    throw new TimeoutException();
 
                 Thread.Sleep(1);
             }
 
-            //Exit command mode..just in case
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set default initialization values
-            if (!_Command_Execute("set sys printlvl 0"))
+            if (!this.ExecuteCommand("set sys printlvl 0"))
                 return false;
 
-            if (!_Command_Execute("set comm remote 0"))
+            if (!this.ExecuteCommand("set comm remote 0"))
                 return false;
 
-            //Setup hardware flow control
-            if (_Flow_Control_Enable)
-            {
-                if (!_Command_Execute("set uart flow 1"))
-                    return false;
-            }
-
-            //if (!_Command_Execute("set uart baud 115200"))
-            //    return false;
-
-            //Enable TX pin
-            if (!_Command_Execute("set uart tx 1"))
+            if (this.flowControlEnabled && !this.ExecuteCommand("set uart flow 1"))
                 return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExecuteCommand("set uart tx 1"))
+                return false;
+
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// updates the firmware.
+        /// Updates the firmware.
         /// </summary>
         /// <returns>Whether it was successful or not.</returns>
         public bool UpdateFirmware()
         {
-            //Exit command mode..just in case
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Setup FTP access
-            if (!_Command_Execute("set ftp address 0"))
+            if (!this.ExecuteCommand("set ftp address 0"))
                 return false;
 
-            if (!_Command_Execute("set dns name rn.microchip.com"))
+            if (!this.ExecuteCommand("set dns name rn.microchip.com"))
                 return false;
 
-            if (!_Command_Execute("save"))
+            if (!this.ExecuteCommand("save"))
                 return false;
 
-            //Being updating firmware
-            _RunMode = RunMode.Update_Wait;
+            this.runMode = RunMode.UpdateWait;
 
-            _Command_Execute("ftp update wifly7-245.img");
+            this.ExecuteCommand("ftp update wifly7-245.img");
 
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (_RunMode == RunMode.Update_Wait)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (this.runMode == RunMode.UpdateWait)
             {
-                if (_TimeOutDate <= DateTime.Now)
+                if (end <= DateTime.Now && this.timeout > 0)
                     return false;
 
                 Thread.Sleep(1);
             }
 
-            if (_RunMode != RunMode.Update_Okay)
+            if (runMode != RunMode.UpdateOkay)
                 return false;
-            else
-                _RunMode = RunMode.Normal;
+
+            this.runMode = RunMode.Normal;
 
             return true;
         }
@@ -558,130 +347,117 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Creates an access point with the given SSID.
         /// </summary>
-        /// <param name="SSID">The SSID to use.</param>
+        /// <param name="ssid">The SSID to use.</param>
         /// <returns>Whether or not it was successful.</returns>
-        public bool CreateAccessPoint(string SSID = "")
+        public bool CreateAccessPoint(string ssid)
         {
-            //Exit command mode..just in case
-            if (!_Command_Mode_Exit())
+            if (ssid == null) throw new ArgumentNullException("ssid");
+
+            if (!this.ExitCommandMode())
                 return false;
 
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Setup default access point parameters
-            if (!_Command_Execute("set wlan channel 2"))
+            if (!this.ExecuteCommand("set wlan channel 2"))
                 return false;
 
-            if (!_Command_Execute("set wlan join 7"))
+            if (!this.ExecuteCommand("set wlan join 7"))
                 return false;
 
-            if (!_Command_Execute("set ip address 192.168.1.1"))
+            if (!this.ExecuteCommand("set ip address 192.168.1.1"))
                 return false;
 
-            if (!_Command_Execute("set ip gateway 192.168.1.1"))
+            if (!this.ExecuteCommand("set ip gateway 192.168.1.1"))
                 return false;
 
-            if (!_Command_Execute("set ip netmask 255.255.255.0"))
+            if (!this.ExecuteCommand("set ip netmask 255.255.255.0"))
                 return false;
 
-            if (!_Command_Execute("set ip dhcp 4"))
+            if (!this.ExecuteCommand("set ip dhcp 4"))
                 return false;
 
-            //if (SSID.Length > 0)
-            //{
-            if (!_Command_Execute("join " + SSID))
-                return false;
-            //}
-
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExecuteCommand("join " + ssid))
                 return false;
 
-            return true;
-        }
-
-        #endregion
-
-        #region "Network Configuration"
-
-        /// <summary>
-        /// Enable DHPC Mode
-        /// </summary>
-        /// <param name="Gateway">The Gateway address.</param>
-        /// <param name="SubnetMask">The Subnet mask.</param>
-        /// <param name="DNS">The DNS address.</param>
-        /// <returns>Whether or not it was successful</returns>
-        public bool EnableDHCP(string Gateway = "192.168.1.1", string SubnetMask = "255.255.255.0", string DNS = "192.168.1.1")
-        {
-            _DHCP = true;
-
-            //Enter command mode
-            if (!_Command_Mode_Start())
-                return false;
-
-            //Set DHCP off
-            if (!_Command_Execute("set ip dhcp 1"))
-                return false;
-
-            //Set requested gateway
-            if (!_Command_Execute("set ip gateway " + Gateway))
-                return false;
-
-            //Set requested subnetmask
-            if (!_Command_Execute("set ip netmask " + SubnetMask))
-                return false;
-
-            //Set requested DNS address
-            if (!_Command_Execute("set dns address " + DNS))
-                return false;
-
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Enable Static IP Request
+        /// Enables DHCP mode.
         /// </summary>
-        /// <param name="IP">IP Requested</param>
-        /// <param name="Gateway">Gateway</param>
-        /// <param name="SubnetMask">Subnet Mask</param>
-        /// <param name="DNS">DNS Server</param>
+        /// <param name="gateway">The gateway address.</param>
+        /// <param name="subnetMask">The subnet mask.</param>
+        /// <param name="dnsAddress">The DNS address.</param>
         /// <returns>Whether or not it was successful</returns>
-        public bool EnableStaticIP(string IP, string Gateway = "192.168.1.1", string SubnetMask = "255.255.255.0", string DNS = "192.168.1.1")
+        public bool EnableDhcp(string gateway, string subnetMask, string dnsAddress)
         {
-            _DHCP = false;
+            if (gateway == null) throw new ArgumentNullException("gateway");
+            if (subnetMask == null) throw new ArgumentNullException("subnetMask");
+            if (dnsAddress == null) throw new ArgumentNullException("dnsAddress");
 
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            this.useDhcp = true;
+
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set DHCP off
-            if (!_Command_Execute("set ip dhcp 0"))
+            if (!this.ExecuteCommand("set ip dhcp 1"))
                 return false;
 
-            //Set requested IP address
-            if (!_Command_Execute("set ip address " + IP))
+            if (!this.ExecuteCommand("set ip gateway " + gateway))
                 return false;
 
-            //Set requested gateway
-            if (!_Command_Execute("set ip gateway " + Gateway))
+            if (!this.ExecuteCommand("set ip netmask " + subnetMask))
                 return false;
 
-            //Set requested subnetmask
-            if (!_Command_Execute("set ip netmask " + SubnetMask))
+            if (!this.ExecuteCommand("set dns address " + dnsAddress))
                 return false;
 
-            //Set requested DNS address
-            if (!_Command_Execute("set dns address " + DNS))
+            if (!this.ExitCommandMode())
                 return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            return true;
+        }
+
+        /// <summary>
+        /// Enables static ip mode.
+        /// </summary>
+        /// <param name="ipAddress">The ip address</param>
+        /// <param name="gateway">The gateway address.</param>
+        /// <param name="subnetMask">The subnet mask.</param>
+        /// <param name="dnsAddress">The DNS address.</param>
+        /// <returns>Whether or not it was successful</returns>
+        public bool EnableStaticIP(string ipAddress, string gateway, string subnetMask, string dnsAddress)
+        {
+            if (ipAddress == null) throw new ArgumentNullException("ipAddress");
+            if (gateway == null) throw new ArgumentNullException("gateway");
+            if (subnetMask == null) throw new ArgumentNullException("subnetMask");
+            if (dnsAddress == null) throw new ArgumentNullException("dnsAddress");
+
+            this.useDhcp = false;
+
+            if (!this.EnterCommandMode())
+                return false;
+
+            if (!this.ExecuteCommand("set ip dhcp 0"))
+                return false;
+
+            if (!this.ExecuteCommand("set ip address " + ipAddress))
+                return false;
+
+            if (!this.ExecuteCommand("set ip gateway " + gateway))
+                return false;
+
+            if (!this.ExecuteCommand("set ip netmask " + subnetMask))
+                return false;
+
+            if (!this.ExecuteCommand("set dns address " + dnsAddress))
+                return false;
+
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
@@ -689,172 +465,151 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Attempt to join a wireless network with given parameters.
-        /// Function does not return until and IP address has been granted,
-        /// or a time-out has occured.
         /// </summary>
-        /// <param name="SSID"></param>
-        /// <param name="Passphrase"></param>
-        /// <param name="channel"></param>
-        /// <param name="Authentication"></param>
+        /// <param name="ssid">The ssid.</param>
+        /// <param name="passphrase">The passphrase.</param>
         /// <returns>Whether or not it was successful</returns>
-        public bool JoinWirelessNetwork(string SSID, string Passphrase, int channel = 0, WirelessEncryptionMode Authentication = WirelessEncryptionMode.Open)
+        public bool JoinWirelessNetwork(string ssid, string passphrase)
         {
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            return this.JoinWirelessNetwork(ssid, passphrase, 0, WirelessEncryptionMode.Open);
+        }
+
+        /// <summary>
+        /// Attempt to join a wireless network with given parameters.
+        /// </summary>
+        /// <param name="ssid">The ssid.</param>
+        /// <param name="passphrase">The passphrase.</param>
+        /// <param name="channel">The channel.</param>
+        /// <param name="authenticationMode">The authentication mode.</param>
+        /// <returns>Whether or not it was successful</returns>
+        public bool JoinWirelessNetwork(string ssid, string passphrase, int channel, WirelessEncryptionMode authenticationMode)
+        {
+            if (ssid == null) throw new ArgumentNullException("ssid");
+            if (passphrase == null) throw new ArgumentNullException("passphrase");
+            if (channel < 0) throw new ArgumentOutOfRangeException("channel", "channel must be non-negative.");
+
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set DHCP off
-            if (!_Command_Execute("set wlan ssid " + SSID))
+            if (!this.ExecuteCommand("set wlan ssid " + ssid))
                 return false;
 
-            //Set requested IP address
-            if (!_Command_Execute("set wlan channel " + channel.ToString()))
+            if (!this.ExecuteCommand("set wlan channel " + channel.ToString()))
                 return false;
 
-            //Set requested gateway
-            if (!_Command_Execute("set wlan auth " + Authentication.ToString()))
+            if (!this.ExecuteCommand("set wlan auth " + authenticationMode.ToString()))
                 return false;
 
-            //Set requested subnetmask
-            if (!_Command_Execute("set wlan phrase " + Passphrase))
+            if (!this.ExecuteCommand("set wlan phrase " + passphrase))
                 return false;
 
-            //Set requested DNS address
-            if (!_Command_Execute("join"))
+            if (!this.ExecuteCommand("join"))
                 return false;
 
-            if (_DHCP)
-            {
-                if (!_Command_Execute("get ip"))
-                    return false;
-            }
+            if (this.useDhcp && this.ExecuteCommand("get ip"))
+                return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Set Socket Protocol
+        /// Sets the socket protocol.
         /// </summary>
-        /// <param name="protocol">Desired Protocol</param>
-        /// <returns></returns>
+        /// <param name="protocol">The desired protocol.</param>
+        /// <returns>Whether or not it was successful.</returns>
         public bool SetProtocol(SocketProtocol protocol)
         {
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set the requested protocol
-            if (!_Command_Execute("set ip protocol " + protocol.ToString()))
+            if (!this.ExecuteCommand("set ip protocol " + protocol.ToString()))
                 return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Set the port the WiFly module should listen for connection on.
+        /// Set the port the WiFly module should listen for connections on.
         /// </summary>
-        /// <param name="port">Port</param>
-        /// <returns></returns>
+        /// <param name="port">The port to listen on.</param>
+        /// <returns>Whether or not it was successful.</returns>
         public bool SetListenPort(int port)
         {
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (port < 0) throw new ArgumentOutOfRangeException("port", "port must be non-negative.");
+
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set the requested protocol
-            if (!_Command_Execute("set ip local " + port.ToString()))
+            if (!this.ExecuteCommand("set ip local " + port.ToString()))
                 return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
             return true;
         }
 
         /// <summary>
-        /// Set the device listen port to 80 and allow HTTP request parsing
+        /// Sets the device to listen port on port 80 and allow HTTP request parsing.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Whether or not it was successful.</returns>
         public bool EnableHttpServer()
         {
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return false;
 
-            //Set the requested protocol
-            if (!_Command_Execute("set ip local 80"))
+            if (!this.ExecuteCommand("set ip local 80"))
                 return false;
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return false;
 
-            HttpEnabled = true;
+            this.HttpEnabled = true;
 
             return true;
         }
 
         /// <summary>
-        /// Send data to the currently connected client
+        /// Sends data to the currently connected client.
         /// </summary>
-        /// <param name="data">Data</param>
+        /// <param name="data">The data to send.</param>
         public void Send(byte[] data)
         {
-            while (_wifly.BytesToWrite > 0)
-                Thread.Sleep(10);
-
-            _wifly.Write(data, 0, data.Length);
-
-            return;
+            this.Send(data, 0, data.Length);
         }
 
-        //public void SendResponse(HttpResponse response)
-        //{
-        //    StringBuilder header = new StringBuilder();
-        //    header.Append("HTTP/1.1 " + _GetResponseText(response.ResponseStatus) + "\r\n");
-        //    header.Append("Content-Length: " + response.ContentLength.ToString() + "\r\n");
-        //    header.Append("Content-Type: " + response.ContentType + "\r\n");
+        /// <summary>
+        /// Sends data to the currently connected client.
+        /// </summary>
+        /// <param name="data">The data to send.</param>
+        /// <param name="offset">The offset into the buffer to send at.</param>
+        /// <param name="count">The number of bytes to send.</param>
+        public void Send(byte[] data, int offset, int count)
+        {
+            if (data == null) throw new ArgumentNullException("data");
+            if (offset < 0) throw new ArgumentOutOfRangeException("offset", "offset must be at least zero.");
+            if (count <= 0) throw new ArgumentOutOfRangeException("count", "count must be positive.");
+            if (offset + count > data.Length) throw new ArgumentOutOfRangeException("buffer", "buffer.Length must be at least offset + count.");
 
-        //    //Append the other MetaData
-        //    foreach (string data in response.MetaData)
-        //    {
-        //        header.Append(data + "\r\n");
-        //    }
+            while (this.SerialPort.BytesToWrite > 0)
+                Thread.Sleep(10);
 
-        //    //Append end of header
-        //    header.Append("\r\n");
-
-        //    //copy the header
-        //    string _header = header.ToString();
-
-        //    //Clear the header 
-        //    header.Clear();
-
-        //    //Send the header
-        //    Send(ref _header);
-
-        //    //return so the user can send the body
-        //    return;
-        //}
-
-        #endregion
+            this.SerialPort.Write(data, offset, count);
+        }
 
         #region "HTTP Parser"
 
         private bool HttpEnabled = false;
         private bool HttpStream = false;
         private string HttpBuffer = "";
-        private HttpRequest current_request;
-        private bool bAwaitingPostData = false;
+        private HttpRequest currentRequest;
+        private bool awaitingPostData = false;
 
         private string _GetResponseText(HttpResponse.ResponseStatus status)
         {
@@ -990,7 +745,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             return text;
         }
 
-        private void _ParseBufferForHttp(string buffer)
+        private void ParseBufferForHttp(string buffer)
         {
             if (buffer.Length <= 0)
             {
@@ -999,11 +754,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             //Remove connection open tag
             if (buffer.IndexOf("*OPEN*") >= 0)
-                buffer = StringReplace("*OPEN*", "", buffer);
+                buffer = Replace("*OPEN*", "", buffer);
 
             //Remove connection close tag
             if (buffer.IndexOf("*CLOS*") >= 0)
-                buffer = StringReplace("*CLOS*", "", buffer);
+                buffer = Replace("*CLOS*", "", buffer);
 
             if (!HttpStream && buffer.IndexOf("GET") >= 0)
                 HttpStream = true;
@@ -1017,36 +772,36 @@ namespace Gadgeteer.Modules.GHIElectronics
                 HttpBuffer += buffer;
 
                 int index = -1;
-                if (bAwaitingPostData)
+                if (awaitingPostData)
                 {
                     int len;
-                    StringToInt(current_request.HeaderData["Content-length"], out len);
+                    ParseInt(currentRequest.HeaderData["Content-length"], out len);
 
                     if (HttpBuffer.Length >= len)
                     {
-                        bAwaitingPostData = false;
+                        awaitingPostData = false;
                         HttpStream = false;
 
-                        current_request.PostData = HttpBuffer;
-                        OnHttpRequestReceived(current_request);
+                        currentRequest.PostData = HttpBuffer;
+                        OnHttpRequestReceived(this, new HttpStream(currentRequest, this.SerialPort));
                     }
                 }
 
                 else if ((index = HttpBuffer.IndexOf("\r\n\r\n")) >= 0)
                 {
                     //Set the current request
-                    current_request = _ParseHttpHeader(HttpBuffer);
+                    currentRequest = _ParseHttpHeader(HttpBuffer);
 
-                    if (current_request.RequestType == HttpRequest.HttpRequestType.GET)
+                    if (currentRequest.RequestType == HttpRequest.HttpRequestType.GET)
                     {
                         HttpBuffer = "";
                         HttpStream = false;
 
-                        OnHttpRequestReceived(current_request);
+                        OnHttpRequestReceived(this, new HttpStream(currentRequest, this.SerialPort));
                     }
-                    else if (current_request.RequestType == HttpRequest.HttpRequestType.POST)
+                    else if (currentRequest.RequestType == HttpRequest.HttpRequestType.POST)
                     {
-                        bAwaitingPostData = true;
+                        awaitingPostData = true;
                         HttpBuffer = HttpBuffer.Substring(index + 4);
                     }
 
@@ -1192,7 +947,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                     if (line_buffer.IndexOf("Content-Length:") == 0)
                     {
-                        StringToInt(line_buffer.Substring(16), out request.PostLength);
+                        ParseInt(line_buffer.Substring(16), out request.PostLength);
 
                         //Once we have the content length, we no longer need to parse
                         //the individual lines
@@ -1230,55 +985,48 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         #endregion
 
-        #region "Command Mode"
-
-        //Attempt to execute a command
         /// <summary>
         /// Executes the command.
         /// </summary>
-        /// <param name="Command">The command to execute.</param>
+        /// <param name="command">The command to execute.</param>
         /// <returns>Whether or not it was successful</returns>
-        public bool _Command_Execute(string Command)
+        public bool ExecuteCommand(string command)
         {
-            //Append the return
-            if (Command.IndexOf("\r") < 0)
-                Command += "\r";
+            if (command == null) throw new ArgumentNullException("command");
 
-            _Command_Mode_Write(Command);
+            if (command.IndexOf("\r") < 0)
+                command += "\r";
+
+            this.WriteCommand(command);
 
             Thread.Sleep(10);
 
-            //Wait until the device has responded to the last command
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (!_Command_Mode_Response_Complete)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (!this.commandModeResponseComplete)
             {
-                //Did we time-out?
-                if (_TimeOutDate <= DateTime.Now && _Timeout > 0)
+                if (end <= DateTime.Now && this.timeout > 0)
                     return false;
 
                 Thread.Sleep(1);
             }
 
-            return _Command_Mode_Response_Okay;
+            return this.commandModeReponseOk;
         }
 
-        //Initiate command mode
         /// <summary>
-        /// Starts command mode.
+        /// Enters command mode.
         /// </summary>
         /// <returns>Whether or not it was successful</returns>
-        public bool _Command_Mode_Start()
+        public bool EnterCommandMode()
         {
             Thread.Sleep(100);
 
-            _Command_Mode_Write(_Command_Init);
+            this.WriteCommand("$$$");
 
-            //Wait until we are in command mode
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (_stream != StreamMode.CommandStream)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (this.streamMode != StreamMode.CommandStream)
             {
-                //Did we time-out?
-                if (_TimeOutDate <= DateTime.Now && _Timeout > 0)
+                if (end <= DateTime.Now && this.timeout > 0)
                     return false;
 
                 Thread.Sleep(1);
@@ -1287,21 +1035,18 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
-        //Exit command mode
         /// <summary>
         /// Exits command mode.
         /// </summary>
         /// <returns>Whether or not it was successful</returns>
-        public bool _Command_Mode_Exit()
+        public bool ExitCommandMode()
         {
-            _Command_Mode_Write("exit\r");
+            this.WriteCommand("exit\r");
 
-            //Wait until we are out of command mode
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (_stream == StreamMode.CommandStream)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (this.streamMode == StreamMode.CommandStream)
             {
-                //Did we time-out?
-                if (_TimeOutDate <= DateTime.Now && _Timeout > 0)
+                if (end <= DateTime.Now && this.timeout > 0)
                     return false;
 
                 Thread.Sleep(1);
@@ -1310,428 +1055,330 @@ namespace Gadgeteer.Modules.GHIElectronics
             return true;
         }
 
-        //Command write string method
         /// <summary>
-        /// Write to the device.
+        /// Writes to the device.
         /// </summary>
-        /// <param name="Command">The command to write.</param>
+        /// <param name="command">The command to write.</param>
         /// <returns>Whether or not it was successful</returns>
-        public void _Command_Mode_Write(string Command)
+        public void WriteCommand(string command)
         {
-            //Await response
-            _Command_Mode_Response = "";
-            _Command_Mode_Response_Complete = false;
+            if (command == null) throw new ArgumentNullException("command");
 
-            //Convert string to byte array
-            byte[] _Command = System.Text.Encoding.UTF8.GetBytes(Command);
-            _wifly.Write(_Command, 0, _Command.Length);
-
-            return;
+            this.WriteCommand(Encoder.UTF8.GetBytes(command));
         }
 
-        //Command write bytes method
         /// <summary>
-        /// Write to the device.
+        /// Writes to the device.
         /// </summary>
-        /// <param name="Command">The command to write.</param>
+        /// <param name="command">The command to write.</param>
         /// <returns>Whether or not it was successful</returns>
-        public void _Command_Mode_Write(byte[] Command)
+        public void WriteCommand(byte[] command)
         {
-            //Await response
-            _Command_Mode_Response = "";
-            _Command_Mode_Response_Complete = false;
+            if (command == null) throw new ArgumentNullException("command");
 
-            _wifly.Write(Command, 0, Command.Length);
-            return;
+            this.commandModeResponse = "";
+            this.commandModeResponseComplete = false;
+
+            this.SerialPort.Write(command);
         }
 
-        //Command get method
-        private void _Command_Mode_Get(string Command)
+        private void GetCommand(string command)
         {
-            //Enter command mode
-            if (!_Command_Mode_Start())
+            if (!this.EnterCommandMode())
                 return;
 
-            //Get the requested configuration
-            if (!_Command_Execute("get " + Command))
-                if (!_Command_Execute("get " + Command))
-                    return;
+            if (!this.ExecuteCommand("get " + command) && !this.ExecuteCommand("get " + command))
+                return;
 
-            _TimeOutDate = DateTime.Now.AddMilliseconds((double)_Timeout);
-            while (!_Command_Mode_Response_Complete)
+            var end = DateTime.Now.AddMilliseconds(this.timeout);
+            while (!this.commandModeResponseComplete)
             {
-                //Did we timeout?
-                if (_TimeOutDate <= DateTime.Now && _Timeout > 0)
+                if (end <= DateTime.Now && this.timeout > 0)
                     return;
 
                 Thread.Sleep(1);
             }
 
-            //Exit command mode
-            if (!_Command_Mode_Exit())
+            if (!this.ExitCommandMode())
                 return;
         }
 
-        #endregion
-
-        #region "Serial Communications"
-
-        /// <summary>
-        /// Returns the raw underlying serial port object.
-        /// </summary>
-        public GTI.Serial SerialPort
+        private void OnSerialDataReceived(GTI.Serial sender)
         {
-            get
-            {
-                return _wifly;
-            }
-        }
+            var available = this.SerialPort.BytesToRead;
+            var data = new byte[available];
+            var size = this.SerialPort.Read(data, 0, available);
 
-        //Threaded listener for incomming data
-        private void _Serial_Listen()
-        {
-            _Serial_Byte_Buffer = new byte[1024];
-
-            while (true)
-            {
-                if (_wifly.BytesToRead > 0)
-                {
-                    int i = _wifly.Read(_Serial_Byte_Buffer, 0, 1024);
-
-                    //RTS.Write(true);
-                    _Serial_Data_Received(_Serial_Byte_Buffer, i);
-                    //RTS.Write(false);
-                }
-                Thread.Sleep(50);
-            }
-        }
-
-        //Data received
-        private void _Serial_Data_Received(byte[] data, int size)
-        {
-            //Convert bytes into an indexable string
-            string line = new string(System.Text.Encoding.UTF8.GetChars(data, 0, size));
+            string line = new string(Encoder.UTF8.GetChars(data, 0, size));
 
             if (line == null)
-            {
                 return;
-            }
 
-            _Serial_String_Buffer += line;
+            this.serialBuffer += line;
 
-            //Report all incomming data to the debug
-            if (_debug_level == DebugLevel.DebugAll)
+            this.Log(line);
+
+            if (this.serialBuffer.IndexOf("*OPEN*") >= 0)
             {
-                _Print_Debug(line);
+                this.serialBuffer = this.Replace("*OPEN*", "", this.serialBuffer);
+                this.OnConnectionEstablished(this, null);
             }
 
-            //Handle Connection open request tags
-            if (_Serial_String_Buffer.IndexOf("*OPEN*") >= 0)
+            if (this.serialBuffer.IndexOf("*CLOS*") >= 0)
             {
-                _Serial_String_Buffer = StringReplace("*OPEN*", "", _Serial_String_Buffer);
-                OnConnectionEstablished();
+                this.serialBuffer = this.Replace("*CLOS*", "", this.serialBuffer);
+                this.OnConnectionClosed(this, null);
             }
 
-            //Handle Connection close request tags
-            else if (_Serial_String_Buffer.IndexOf("*CLOS*") >= 0)
+            if (this.serialBuffer.IndexOf("\r\r") >= 0)
             {
-                _Serial_String_Buffer = StringReplace("*CLOS*", "", _Serial_String_Buffer);
-                OnConnectionClosed();
+                this.serialBuffer = this.Replace("\r\r", "\r", this.serialBuffer);
             }
 
-            if (_Serial_String_Buffer.IndexOf("\r\r") >= 0)
-            {
-                _Serial_String_Buffer = StringReplace("\r\r", "\r", _Serial_String_Buffer);
-            }
-
-            //Is the buffer now a complete line of data?
-            if (_Serial_String_Buffer.IndexOf("\r\n") >= 0)
+            if (this.serialBuffer.IndexOf("\r\n") >= 0)
             {
                 int index = -1;
-                while ((index = _Serial_String_Buffer.IndexOf("\r\n")) >= 0)
-                {
-                    string new_line = _Serial_String_Buffer.Substring(0, index);
-                    _Serial_String_Buffer = _Serial_String_Buffer.Substring(index + 2);
-                    new_line = new_line + "\r\n";
 
-                    _Serial_Line_Received(new_line);
+                while ((index = this.serialBuffer.IndexOf("\r\n")) >= 0)
+                {
+                    string newLine = this.serialBuffer.Substring(0, index) + "\r\n";
+
+                    this.serialBuffer = this.serialBuffer.Substring(index + 2);
+
+                    this.OnSerialLineReceived(newLine);
                 }
             }
 
-            //End of post-data
-            if (current_request != null && bAwaitingPostData && _Serial_String_Buffer.Length >= current_request.PostLength)
+            if (this.currentRequest != null && this.awaitingPostData && this.serialBuffer.Length >= this.currentRequest.PostLength)
             {
-                _Serial_Line_Received(_Serial_String_Buffer);
+                this.OnSerialLineReceived(this.serialBuffer);
             }
 
-            OnDataReceived(line);
+            this.OnDataReceived(this, line);
         }
 
-        //Data received complete
-        private void _Serial_Line_Received(string line)
+        private void OnSerialLineReceived(string line)
         {
-
             if (line.IndexOf("*READY*") >= 0)
-                _device_ready = true;
+                this.Ready = true;
 
-            //Are we entering command mode?
-            if (line.Length >= 3)
-            {
-                if (_stream != StreamMode.CommandStream && line.Substring(0, 3) == "CMD")
-                    _stream = StreamMode.CommandStream;
-            }
+            if (line.Length >= 3 && streamMode != StreamMode.CommandStream && line.Substring(0, 3) == "CMD")
+                this.streamMode = StreamMode.CommandStream;
 
             //Are we in command mode waiting for response?
-            if (_stream == StreamMode.CommandStream)
+            if (streamMode == StreamMode.CommandStream)
             {
-                //Append line to the response
-                _Command_Mode_Response += line;
+                this.commandModeResponse += line;
 
-                //Are we leaving command mode?
-                if (_Command_Mode_Response.IndexOf("EXIT") >= 0)
+                if (this.commandModeResponse.IndexOf("EXIT") >= 0)
                 {
-                    _stream = StreamMode.NoStream;
+                    this.streamMode = StreamMode.NoStream;
 
-                    //Report data to user-event
-                    if (_data_level == DataReturnLevel.ReturnAll)
-                        OnLineReceived(line);
+                    if (this.dataLevel == DataReturnLevel.ReturnAll)
+                        this.OnLineReceived(this, line);
 
-                    //This is all we need to do with this event
                     return;
                 }
 
-                //Are we updating the firmware?
-                if (_Command_Mode_Response.IndexOf("UPDATE OK") >= 0)
+                if (this.commandModeResponse.IndexOf("UPDATE OK") >= 0)
                 {
-                    _Command_Mode_Response_Okay = true;
-                    _Command_Mode_Response_Complete = true;
+                    this.commandModeReponseOk = true;
+                    this.commandModeResponseComplete = true;
                 }
 
-                //Are we updating the firmware?
-                if (_Command_Mode_Response.IndexOf("Set Factory Defaults") >= 0)
+                if (this.commandModeResponse.IndexOf("Set Factory Defaults") >= 0)
                 {
-                    _Command_Mode_Response_Okay = true;
-                    _Command_Mode_Response_Complete = true;
+                    this.commandModeReponseOk = true;
+                    this.commandModeResponseComplete = true;
                 }
 
-                //Did the command execute without error?
-                if (_Command_Mode_Response.IndexOf("AOK") >= 0)
+                if (this.commandModeResponse.IndexOf("AOK") >= 0)
                 {
-                    _Command_Mode_Response_Okay = true;
-                    _Command_Mode_Response_Complete = true;
+                    this.commandModeReponseOk = true;
+                    this.commandModeResponseComplete = true;
                 }
 
-                //Did the command execute with an error?
-                else if (_Command_Mode_Response.IndexOf("ERR") >= 0)
+                if (this.commandModeResponse.IndexOf("ERR") >= 0)
                 {
-                    _Print_Debug("ERROR! --- " + line);
+                    this.Log("ERROR: " + line);
 
-                    _Command_Mode_Response_Okay = false;
-                    _Command_Mode_Response_Complete = true;
+                    this.commandModeReponseOk = false;
+                    this.commandModeResponseComplete = true;
                 }
 
-                if (!_DHCP && _Command_Mode_Response.IndexOf("Associated!") >= 0)
+                if (!this.useDhcp && this.commandModeResponse.IndexOf("Associated!") >= 0)
                 {
-                    _Command_Mode_Response_Okay = true;
-                    _Command_Mode_Response_Complete = true;
+                    this.commandModeReponseOk = true;
+                    this.commandModeResponseComplete = true;
                 }
 
                 if (line.Length >= 3)
                 {
                     if (line.Substring(0, 3) == "IP=")
                     {
-                        string line_buffer = line.Substring(3);
-                        string[] split_ip = line_buffer.Split(new char[] { ':' });
-                        LocalIP = split_ip[0];
+                        this.LocalIP = line.Substring(3).Split(':')[0];
 
-                        _Command_Mode_Response_Okay = true;
-                        _Command_Mode_Response_Complete = true;
+                        this.commandModeReponseOk = true;
+                        this.commandModeResponseComplete = true;
                     }
 
                     //Check to see if the appropriate firmware is loaded
                     if (line.Substring(0, 5) == "File=")
                     {
-                        string line_buffer = line.Substring(5);
-                        string[] split_ip = line_buffer.Split(new char[] { ':' });
-                        LocalIP = split_ip[0];
+                        this.LocalIP = line.Substring(5).Split(':')[0];
 
-                        _Command_Mode_Response_Okay = true;
-                        _Command_Mode_Response_Complete = true;
+                        this.commandModeReponseOk = true;
+                        this.commandModeResponseComplete = true;
                     }
                 }
 
-                //Report data to user-event
-                if (_data_level == DataReturnLevel.ReturnAll)
-                    OnLineReceived(line);
+                if (this.dataLevel == DataReturnLevel.ReturnAll)
+                    this.OnLineReceived(this, line);
             }
-
             else
             {
-                if (HttpEnabled)
-                {
-                    _ParseBufferForHttp(line);
-                }
+                if (this.HttpEnabled)
+                    this.ParseBufferForHttp(line);
 
-                OnLineReceived(line);
+                this.OnLineReceived(this, line);
             }
         }
 
-        #endregion
-
-        #region "Debugging"
-        private void _Print_Debug(string message)
+        private void Log(string message)
         {
-            switch (_debug)
+            if (!this.DebugPrintEnabled)
+                return;
+
+            if (this.DebugPort == null)
+                Debug.Print(message);
+            else
+                this.DebugPort.Write(Encoder.UTF8.GetBytes(message));
+        }
+
+        private void Reset()
+        {
+            this.reset.Write(false);
+            Thread.Sleep(100);
+
+            this.reset.Write(true);
+            Thread.Sleep(250);
+        }
+
+        private string Replace(string oldValue, string newValue, string source)
+        {
+            return new StringBuilder(source).Replace(oldValue, newValue).ToString();
+        }
+
+        private bool ParseInt(string source, out int result)
+        {
+            try
             {
-                //Do nothing
-                case DebugMode.NoDebug:
-                    break;
+                result = int.Parse(source);
 
-                //Output Debugging info to the serial port
-                case DebugMode.SerialDebug:
-                    //Convert the message to bytes
-                    byte[] message_buffer = System.Text.Encoding.UTF8.GetBytes(message);
-                    _debug_port.Write(message_buffer, 0, message_buffer.Length);
-                    break;
-
-                //Print message to the standard debug output
-                case DebugMode.StandardDebug:
-                    Debug.Print(message);
-                    break;
+                return true;
             }
-        }
-
-        /// <summary>
-        /// Set the serial port to be used as the debugging output.
-        /// This is much faster than using Debug.Print
-        /// </summary>
-        /// <param name="DebugPort">The serial port</param>
-        public void SetDebugPort(Gadgeteer.SocketInterfaces.Serial DebugPort)
-        {
-            _debug_port = DebugPort;
-
-            //Open the serial port if it is not already
-            if (!_debug_port.IsOpen)
-                _debug_port.Open();
-
-            _debug = DebugMode.SerialDebug;
-        }
-
-        /// <summary>
-        /// Set the debugging level.
-        /// DebugLevel.DebugErrors only report error data
-        /// DebugLevel.DebugAll will report all incoming and outgoing data
-        /// </summary>
-        /// <param name="Debug_Level">The debug level</param>
-        public void SetDebugLevel(DebugLevel Debug_Level)
-        {
-            _debug_level = Debug_Level;
-        }
-        #endregion
-
-        #region "Timeout"
-        /// <summary>
-        /// Set the timeout for module communications
-        /// </summary>
-        /// <param name="Timeout">The amount of time in ms before timeout occurs</param>
-        public void SetTimeout(int Timeout = 3000)
-        {
-            _Timeout = Timeout;
-        }
-        #endregion
-
-        #region "Logical Tools"
-
-        //This is needed because String.IndexOf is returning false randomly
-        int IndexIn(string needle, string haystack)
-        {
-            int found_index = -1;
-            int needle_length = needle.Length;
-
-            for (int i = 0; i < haystack.Length; i++)
+            catch
             {
-                if ((i + needle_length) < haystack.Length)
-                {
-                    if (haystack.Substring(i, needle_length) == needle)
-                    {
-                        found_index = i;
-                        break;
-                    }
-                }
-                else
-                {
-                    break;
-                }
-            }
+                result = 0;
 
-            return found_index;
-        }
-
-        //String replace method
-        string StringReplace(string token, string text, string haystack)
-        {
-            string left = "";
-            string right = "";
-            string buffer = haystack;
-            int index = buffer.IndexOf(token);
-
-            while (index >= 0)
-            {
-                int other_index = index + token.Length;
-
-                left = buffer.Substring(0, index);
-                right = buffer.Substring(other_index);
-                buffer = left + text + right;
-
-                index = buffer.IndexOf(token);
-            }
-
-            return buffer;
-        }
-
-        //Qt style StartsWith function with PHP string function syntax
-        private bool StartsWith(string needle, string haystack)
-        {
-            //Avoid Out of range exceptions
-            if (needle.Length > haystack.Length)
                 return false;
-
-            //Grab the beginning of the string
-            string buffer = haystack.Substring(0, needle.Length);
-
-            //Does the substring match the needle?
-            return buffer == needle ? true : false;
-        }
-
-        //Exception-less string to int method
-        private bool StringToInt(string str, out int integer)
-        {
-            int total = 0;
-            bool bOkay = true;
-
-            for (int i = 0; i < str.Length; i++)
-            {
-                uint temp = str[i];
-                temp = temp - 48;
-
-                if (temp > 9 || temp < 0)
-                {
-                    bOkay = false;
-                    break;
-                }
-
-                total = total * 10;
-                total = total + (int)temp;
             }
-
-            integer = bOkay ? total : 0;
-
-            return bOkay;
         }
 
-        #endregion
+        /// <summary>
+        /// A delegate representing receipt of an HTTP request.
+        /// </summary>
+        /// <param name="sender">The object that sent this event.</param>
+        /// <param name="e">The HTTP request.</param>
+        public delegate void HttpRequestReceivedHandler(WiFiRN171 sender, HttpStream e);
 
+        /// <summary>
+        /// A delegate representing data received.
+        /// </summary>
+        /// <param name="sender">The object that sent this event.</param>
+        /// <param name="e">The data received.</param>
+        public delegate void DataReceivedHandler(WiFiRN171 sender, string e);
 
+        /// <summary>
+        /// A delegate representing line received.
+        /// </summary>
+        /// <param name="sender">The object that sent this event.</param>
+        /// <param name="e">The line received.</param>
+        public delegate void LineReceivedHandler(WiFiRN171 sender, string e);
+
+        /// <summary>
+        /// A delegate representing connection opening.
+        /// </summary>
+        /// <param name="sender">The object that sent this event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void ConnectionEstablishedHandler(WiFiRN171 sender, EventArgs e);
+
+        /// <summary>
+        /// A delegate representing connection closure.
+        /// </summary>
+        /// <param name="sender">The object that sent this event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void ConnectionClosedHandler(WiFiRN171 sender, EventArgs e);
+
+        /// <summary>
+        /// Fired when a HTTP Request is received
+        /// </summary>
+        public event HttpRequestReceivedHandler HttpRequestReceived;
+
+        /// <summary>
+        /// Fired when any data is received
+        /// </summary>
+        public event DataReceivedHandler DataReceived;
+
+        /// <summary>
+        /// Fired when a complete line of data has been received
+        /// </summary>
+        public event LineReceivedHandler LineReceived;
+
+        /// <summary>
+        /// Fired when an connection has been establised to a remote client.
+        /// </summary>
+        public event ConnectionEstablishedHandler ConnectionEstablished;
+
+        /// <summary>
+        /// Fired when an connection to a remote client has closed.
+        /// </summary>
+        public event ConnectionClosedHandler ConnectionClosed;
+
+        private HttpRequestReceivedHandler onHttpRequestReceived;
+        private DataReceivedHandler onDataReceived;
+        private LineReceivedHandler onLineReceived;
+        private ConnectionEstablishedHandler onConnectionEstablished;
+        private ConnectionClosedHandler onConnectionClosed;
+
+        private void OnHttpRequestReceived(WiFiRN171 sender, HttpStream e)
+        {
+            if (Program.CheckAndInvoke(this.HttpRequestReceived, this.onHttpRequestReceived, sender, e))
+                this.HttpRequestReceived(sender, e);
+        }
+
+        private void OnDataReceived(WiFiRN171 sender, string e)
+        {
+            if (Program.CheckAndInvoke(this.DataReceived, this.onDataReceived, sender, e))
+                this.DataReceived(sender, e);
+        }
+
+        private void OnLineReceived(WiFiRN171 sender, string e)
+        {
+            if (Program.CheckAndInvoke(this.LineReceived, this.onLineReceived, sender, e))
+                this.LineReceived(sender, e);
+        }
+
+        private void OnConnectionEstablished(WiFiRN171 sender, EventArgs e)
+        {
+            if (Program.CheckAndInvoke(this.ConnectionEstablished, this.onConnectionEstablished, sender, e))
+                this.ConnectionEstablished(sender, e);
+        }
+
+        private void OnConnectionClosed(WiFiRN171 sender, EventArgs e)
+        {
+            if (Program.CheckAndInvoke(this.ConnectionClosed, this.onConnectionClosed, sender, e))
+                this.ConnectionClosed(sender, e);
+        }
     }
 }
-
