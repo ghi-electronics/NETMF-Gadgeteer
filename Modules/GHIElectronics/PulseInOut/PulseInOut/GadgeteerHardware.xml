@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="PulseInOut"
+    <ModuleDefinition Name="Pulse InOut"
                   UniqueId="664915c0-4f8f-4e49-9457-bffa3a151cb1"
                   Manufacturer="GHI Electronics"
                   Description="A PulseInOut module"

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="SerialCameraL2"
+    <ModuleDefinition Name="Serial Camera L2"
                   UniqueId="9e363613-5342-4c51-a7b5-288627d176bc"
                   Manufacturer="GHI Electronics"
                   Description="A SerialCameraL2 module"

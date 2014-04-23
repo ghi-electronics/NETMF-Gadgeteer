@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="UCBattery4xAA"
+    <ModuleDefinition Name="UC Battery 4xAA"
                   UniqueId="d62d26a0-c456-475f-a5f9-227b4ff6ae37"
                   Manufacturer="GHI Electronics"
                   Description="A UCBattery4xAA module"

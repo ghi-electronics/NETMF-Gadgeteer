@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="XBeeAdapter"
+    <ModuleDefinition Name="XBee Adapter"
                   UniqueId="e939cc81-9f4b-48ff-a14d-96d9f9753b22"
                   Manufacturer="GHI Electronics"
                   Description="A XBeeAdapter module"

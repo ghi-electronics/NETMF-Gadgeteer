@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="MulticolorLED"
+    <ModuleDefinition Name="Multicolor LED"
                   UniqueId="65ecff76-0731-4edc-ac49-cdac5b6f9057"
                   Manufacturer="GHI Electronics"
                   Description="A MulticolorLED module"

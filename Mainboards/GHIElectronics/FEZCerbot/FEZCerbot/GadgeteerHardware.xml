@@ -3,7 +3,7 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCerbot"
+            Name="FEZ Cerbot"
             Type="GHIElectronics.Gadgeteer.FEZCerbot"
             HardwareVersion="1.3"
             Image="Resources\Image.jpg"
@@ -17,7 +17,7 @@
         <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/> -->
 
         <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
-        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+        <!-- <Assembly MFVersion="4.3" Name="Gadgeteer.SPI"/> -->
       </Assemblies>
 
       <ProvidedSockets>

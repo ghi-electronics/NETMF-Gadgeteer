@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="USBSerialSP"
+    <ModuleDefinition Name="USB-Serial SP"
                   UniqueId="efb787c4-aae6-477d-ab8b-ef59dcf2b420"
                   Manufacturer="GHI Electronics"
                   Description="A USBSerialSP module"

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="TouchL12"
+    <ModuleDefinition Name="Touch L12"
                   UniqueId="d189880a-9289-465f-9f05-d2acf977ad54"
                   Manufacturer="GHI Electronics"
                   Description="A TouchL12 module"

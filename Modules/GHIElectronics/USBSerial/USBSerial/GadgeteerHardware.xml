@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="USBSerial"
+    <ModuleDefinition Name="USB-Serial"
                   UniqueId="7b529b63-fb23-4998-9840-232fb1276518"
                   Manufacturer="GHI Electronics"
                   Description="A USBSerial module"

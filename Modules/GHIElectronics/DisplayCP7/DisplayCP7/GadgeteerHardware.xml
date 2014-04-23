@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DisplayCP7"
+    <ModuleDefinition Name="Display CP7"
                   UniqueId="92f0d77c-81d1-4bc7-b048-2fab2714f08a"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayCP7 module"

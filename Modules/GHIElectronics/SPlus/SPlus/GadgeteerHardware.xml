@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="SPlus"
+    <ModuleDefinition Name="S-Plus"
                   UniqueId="ec60bf64-ef5f-471e-bba1-98bf545d5166"
                   Manufacturer="GHI Electronics"
                   Description="A SPlus module"

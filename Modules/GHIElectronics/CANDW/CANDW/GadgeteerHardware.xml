@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="CANDW"
+    <ModuleDefinition Name="CAN DW"
                   UniqueId="adec4987-e1b3-4586-a2e2-ccd34837c5b1"
                   Manufacturer="GHI Electronics"
                   Description="A CANDW module"

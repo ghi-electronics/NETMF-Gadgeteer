@@ -3,7 +3,7 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCerbuinoBee"
+            Name="FEZ Cerbuino Bee"
             Type="GHIElectronics.Gadgeteer.FEZCerbuinoBee"
             HardwareVersion="1.2"
             Image="Resources\Image.jpg"

@@ -31,7 +31,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.DigitalInput CreateDigitalInput(Socket.Pin pin, GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode)
         {
-            return GTI.DigitalInputFactory.Create(socket, pin, glitchFilterMode, resistorMode, this);
+            return GTI.DigitalInputFactory.Create(this.socket, pin, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.DigitalOutput CreateDigitalOutput(Socket.Pin pin, bool initialState)
         {
-            return GTI.DigitalOutputFactory.Create(socket, pin, initialState, this);
+            return GTI.DigitalOutputFactory.Create(this.socket, pin, initialState, this);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.DigitalIO CreateDigitalIO(Socket.Pin pin, bool initialState, GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode)
         {
-            return GTI.DigitalIOFactory.Create(socket, pin, initialState, glitchFilterMode, resistorMode, this);
+            return GTI.DigitalIOFactory.Create(this.socket, pin, initialState, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.InterruptInput CreateInterruptInput(Socket.Pin pin, GTI.GlitchFilterMode glitchFilterMode, GTI.ResistorMode resistorMode, GTI.InterruptMode interruptMode)
         {
-            return GTI.InterruptInputFactory.Create(socket, pin, glitchFilterMode, resistorMode, interruptMode, this);
+            return GTI.InterruptInputFactory.Create(this.socket, pin, glitchFilterMode, resistorMode, interruptMode, this);
         }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.AnalogInput CreateAnalogInput(Socket.Pin pin)
         {
-            return GTI.AnalogInputFactory.Create(socket, pin, this);
+            return GTI.AnalogInputFactory.Create(this.socket, pin, this);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.AnalogOutput CreateAnalogOutput(Socket.Pin pin)
         {
-            return GTI.AnalogOutputFactory.Create(socket, pin, this);
+            return GTI.AnalogOutputFactory.Create(this.socket, pin, this);
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The new interface.</returns>
         public GTI.PwmOutput CreatePwmOutput(Socket.Pin pin)
         {
-            return GTI.PwmOutputFactory.Create(socket, pin, false, this);
+            return GTI.PwmOutputFactory.Create(this.socket, pin, false, this);
         }
     }
 }

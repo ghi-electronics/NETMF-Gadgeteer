@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="USBHost"
+    <ModuleDefinition Name="USB Host"
                   UniqueId="e8323968-d331-44bd-8e7c-225de173dcfb"
                   Manufacturer="GHI Electronics"
                   Description="An USBHost module"

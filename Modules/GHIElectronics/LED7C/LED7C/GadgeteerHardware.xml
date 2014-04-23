@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="LED7C"
+    <ModuleDefinition Name="LED 7C"
                   UniqueId="3092023a-0d8e-4431-8c87-1c7d8c58f0ac"
                   Manufacturer="GHI Electronics"
                   Description="A LED7C module"

@@ -9,7 +9,7 @@
   <?define FullManufacturer = "GHI Electronics" ?>
 
   <?define NETMF42Supported ?>
-  <!--<?define NETMF43Supported ?>-->
+  <?define NETMF43Supported ?>
 
   <?define OutputFileName = "$(var.SafeManufacturer).Gadgeteer.$(var.SafeMainboardName)"?>
   <?define ProjectPath = "FEZSpider" ?>

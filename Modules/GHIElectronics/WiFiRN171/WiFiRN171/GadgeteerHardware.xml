@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="WiFiRN171"
+    <ModuleDefinition Name="WiFi RN171"
                   UniqueId="7fa77e40-694e-4fc6-81c7-281d8db39152"
                   Manufacturer="GHI Electronics"
                   Description="A WiFiRN171 module"

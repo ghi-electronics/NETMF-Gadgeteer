@@ -3,9 +3,9 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCobraIINet"
+            Name="FEZ Cobra II Net"
             Type="GHIElectronics.Gadgeteer.FEZCobraIINet"
-            HardwareVersion="Rev A"
+            HardwareVersion="1.0"
             Image="Resources\Image.jpg"
             BoardWidth="112"
             BoardHeight="126"

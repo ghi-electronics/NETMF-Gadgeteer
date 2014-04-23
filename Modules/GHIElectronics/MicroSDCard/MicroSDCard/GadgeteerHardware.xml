@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="MicroSDCard"
+    <ModuleDefinition Name="Micro SD Card"
                   UniqueId="717014f7-a853-40d8-828e-dbf2cb407edc"
                   Manufacturer="GHI Electronics"
                   Description="A MicroSDCard module"
@@ -21,7 +21,7 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="23.88" Top="38.27" Orientation="90" ConstructorOrder="1" TypesLabel="F">
+        <Socket Left="18" Top="33" Orientation="90" ConstructorOrder="1" TypesLabel="F">
           <Types>
             <Type>F</Type>
           </Types>

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="ButtonS7"
+    <ModuleDefinition Name="Button S7"
                   UniqueId="5159d6cf-bb96-4ead-8e15-f5a270e6db8a"
                   Manufacturer="GHI Electronics"
                   Description="A ButtonS7 module"

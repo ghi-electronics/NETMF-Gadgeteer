@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="OBDII"
+    <ModuleDefinition Name="OBD II"
                   UniqueId="dc732d71-9e76-4b21-b04b-0ab185097371"
                   Manufacturer="GHI Electronics"
                   Description="An OBDII module"

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="LEDStrip"
+    <ModuleDefinition Name="LED Strip"
                   UniqueId="908f0a93-727a-4ad1-92a8-b09573aec253"
                   Manufacturer="GHI Electronics"
                   Description="A LEDStrip module"

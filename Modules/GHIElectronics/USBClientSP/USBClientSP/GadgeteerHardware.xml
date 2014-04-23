@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="USBClientSP"
+    <ModuleDefinition Name="USB Client SP"
                   UniqueId="71b7dedb-29b0-4175-b295-bd153b56cd32"
                   Manufacturer="GHI Electronics"
                   Description="A USBClientSP module"

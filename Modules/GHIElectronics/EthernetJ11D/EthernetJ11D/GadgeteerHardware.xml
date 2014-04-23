@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="EthernetJ11D"
+    <ModuleDefinition Name="Ethernet J11D"
                   UniqueId="78197eb6-ea07-47da-b63b-7dafa352dede"
                   Manufacturer="GHI Electronics"
                   Description="An EthernetJ11D module"

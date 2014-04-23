@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DisplayN7"
+    <ModuleDefinition Name="Display N7"
                   UniqueId="fa682613-5a64-427f-9c96-b6a176da9d5c"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayN7 module"

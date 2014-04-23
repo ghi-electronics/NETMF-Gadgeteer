@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="BreakoutTB10"
+    <ModuleDefinition Name="Breakout TB10"
                   UniqueId="777ea013-614a-4e09-be22-dbea46b4f8b4"
                   Manufacturer="GHI Electronics"
                   Description="A BreakoutTB10 module"

@@ -3,9 +3,9 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCobraIIEco"
+            Name="FEZ Cobra II Eco"
             Type="GHIElectronics.Gadgeteer.FEZCobraIIEco"
-            HardwareVersion="Rev B"
+            HardwareVersion="1.1"
             Image="Resources\Image.jpg"
             BoardWidth="112"
             BoardHeight="122"
@@ -14,7 +14,7 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCobraIIEco"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIEco"/> -->
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIIEco"/>
       </Assemblies>
 
       <ProvidedSockets>

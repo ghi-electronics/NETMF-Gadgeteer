@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="OneWireX1"
+    <ModuleDefinition Name="OneWire X1"
                   UniqueId="8fb06201-b748-4d29-90d3-0a823d643c1b"
                   Manufacturer="GHI Electronics"
                   Description="An OneWireX1 module"

@@ -3,7 +3,7 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCerbuinoNet"
+            Name="FEZ Cerbuino Net"
             Type="GHIElectronics.Gadgeteer.FEZCerbuinoNet"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"

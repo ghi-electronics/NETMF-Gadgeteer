@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="USBClientDP"
+    <ModuleDefinition Name="USB Client DP"
                   UniqueId="4f21fe56-9794-4f0f-a8b8-d74ce4dc93d0"
                   Manufacturer="GHI Electronics"
                   Description="A USBClientDP module"

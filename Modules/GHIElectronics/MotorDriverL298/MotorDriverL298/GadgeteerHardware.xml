@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="MotorDriverL298"
+    <ModuleDefinition Name="Motor Driver L298"
                   UniqueId="2ef96cfa-44be-4e34-bf4e-aea37e321153"
                   Manufacturer="GHI Electronics"
                   Description="A MotorDriverL298 module"

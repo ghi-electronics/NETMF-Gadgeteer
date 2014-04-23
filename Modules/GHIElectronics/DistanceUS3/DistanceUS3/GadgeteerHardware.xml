@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DistanceUS3"
+    <ModuleDefinition Name="Distance US3"
                   UniqueId="96109d88-d7db-4487-886d-52a529052a04"
                   Manufacturer="GHI Electronics"
                   Description="A DistanceUS3 module"

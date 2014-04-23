@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="EthernetENC28"
+    <ModuleDefinition Name="Ethernet ENC28"
                   UniqueId="cab62291-8a54-4a55-935a-a62bc7cc2a20"
                   Manufacturer="GHI Electronics"
                   Description="An EthernetENC28 module"

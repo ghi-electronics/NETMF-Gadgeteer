@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="RadioFM1"
+    <ModuleDefinition Name="Radio FM1"
                   UniqueId="12c1bcff-31fe-4eca-aff2-f99bc9edeae9"
                   Manufacturer="GHI Electronics"
                   Description="A RadioFM1 module"

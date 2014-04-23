@@ -3,7 +3,7 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZSpider"
+            Name="FEZ Spider"
             Type="GHIElectronics.Gadgeteer.FEZSpider"
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
@@ -14,7 +14,7 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZSpider"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider"/> -->
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZSpider"/>
       </Assemblies>
 
       <ProvidedSockets>

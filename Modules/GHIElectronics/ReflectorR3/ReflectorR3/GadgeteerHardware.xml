@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="ReflectorR3"
+    <ModuleDefinition Name="Reflector R3"
                   UniqueId="494f0f2e-c020-4e07-bf53-bfca94582de1"
                   Manufacturer="GHI Electronics"
                   Description="A ReflectorR3 module"

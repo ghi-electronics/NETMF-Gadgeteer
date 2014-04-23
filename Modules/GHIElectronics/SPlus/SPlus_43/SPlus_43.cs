@@ -47,11 +47,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Returns the socket number for socket 1 on the module.
 		/// </summary>
-		public int SHubSocket1 { get { return this.sx1.SocketNumber; } }
+		public int SPlusSocket1 { get { return this.sx1.SocketNumber; } }
 
 		/// <summary>
         /// Returns the socket number for socket 2 on the module.
 		/// </summary>
-		public int SHubSocket2 { get { return this.sx2.SocketNumber; } }
+		public int SPlusSocket2 { get { return this.sx2.SocketNumber; } }
 	}
 }

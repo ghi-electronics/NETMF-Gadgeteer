@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="KeypadKP16"
+    <ModuleDefinition Name="Keypad KP16"
                   UniqueId="81ddcd6d-4a54-4f98-a042-aa726d3a75b0"
                   Manufacturer="GHI Electronics"
                   Description="A KeypadKP16 module"

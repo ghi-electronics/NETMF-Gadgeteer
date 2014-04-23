@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="PulseCount"
+    <ModuleDefinition Name="Pulse Count"
                   UniqueId="e891bf8a-6dc6-4786-8bb3-911d3645f379"
                   Manufacturer="GHI Electronics"
                   Description="A PulseCount module"

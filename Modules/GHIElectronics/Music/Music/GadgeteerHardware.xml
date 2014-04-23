@@ -25,7 +25,7 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="45" Top="19" Orientation="180" ConstructorOrder="1" TypesLabel="S">
+        <Socket Left="46" Top="20" Orientation="180" ConstructorOrder="1" TypesLabel="S">
           <Types>
             <Type>S</Type>
           </Types>

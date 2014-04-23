@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="AMPM35"
+    <ModuleDefinition Name="AMP M35"
                   UniqueId="7d0ff9f1-ca37-48c1-9eef-aea20eab7e15"
                   Manufacturer="GHI Electronics"
                   Description="An AMPM35 module"

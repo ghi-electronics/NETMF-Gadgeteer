@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="HubAP5"
+    <ModuleDefinition Name="Hub AP5"
                   UniqueId="5f41a8b9-427d-4dd5-9e67-093e22e0fca8"
                   Manufacturer="GHI Electronics"
                   Description="A HubAP5 module"

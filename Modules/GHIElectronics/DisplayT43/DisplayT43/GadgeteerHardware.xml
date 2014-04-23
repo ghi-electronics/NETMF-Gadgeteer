@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DisplayT43"
+    <ModuleDefinition Name="Display T43"
                   UniqueId="4dabebd0-6737-4c08-b493-41d3f0467c93"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayT43 module"

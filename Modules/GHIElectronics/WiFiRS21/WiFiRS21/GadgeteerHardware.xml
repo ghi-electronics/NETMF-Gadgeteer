@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="WiFiRS21"
+    <ModuleDefinition Name="WiFi RS21"
                   UniqueId="6c73904a-8e11-44e9-8cae-77b48d2b0c6b"
                   Manufacturer="GHI Electronics"
                   Description="A WiFiRS21 module"

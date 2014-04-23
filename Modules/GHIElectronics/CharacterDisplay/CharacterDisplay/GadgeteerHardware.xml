@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="CharacterDisplay"
+    <ModuleDefinition Name="Character Display"
                   UniqueId="aceb557c-f235-406b-af48-a402b8f29066"
                   Manufacturer="GHI Electronics"
                   Description="A CharacterDisplay module"

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="TouchC8"
+    <ModuleDefinition Name="Touch C8"
                   UniqueId="6c5868f1-035f-4394-a165-9921472e9e8f"
                   Manufacturer="GHI Electronics"
                   Description="A TouchC8 module"

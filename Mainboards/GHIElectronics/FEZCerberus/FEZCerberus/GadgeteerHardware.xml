@@ -3,7 +3,7 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCerberus"
+            Name="FEZ Cerberus"
             Type="GHIElectronics.Gadgeteer.FEZCerberus"
             HardwareVersion="1.2"
             Image="Resources\Image.jpg"

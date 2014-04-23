@@ -3,9 +3,9 @@
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <MainboardDefinitions>
     <MainboardDefinition
-            Name="FEZCobraIIWiFi"
+            Name="FEZ Cobra II WiFi"
             Type="GHIElectronics.Gadgeteer.FEZCobraIIWiFi"
-            HardwareVersion="Rev A"
+            HardwareVersion="1.0"
             Image="Resources\Image.jpg"
             BoardWidth="112"
             BoardHeight="122"

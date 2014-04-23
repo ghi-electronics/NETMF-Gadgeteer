@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="NullModem"
+    <ModuleDefinition Name="Null Modem"
                   UniqueId="98628b92-618e-420c-8911-a651ed910324"
                   Manufacturer="GHI Electronics"
                   Description="A NullModem module"

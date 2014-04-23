@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="RelayX1"
+    <ModuleDefinition Name="Relay X1"
                   UniqueId="b6be21b7-a86a-49dc-adb2-2f60634f03ad"
                   Manufacturer="GHI Electronics"
                   Description="A RelayX1 module"

@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="RelayISOx16"
+    <ModuleDefinition Name="Relay ISOx16"
                   UniqueId="3175a095-c782-460b-a4cc-5d26925bbf6e"
                   Manufacturer="GHI Electronics"
                   Description="A RelayISOx16 module"

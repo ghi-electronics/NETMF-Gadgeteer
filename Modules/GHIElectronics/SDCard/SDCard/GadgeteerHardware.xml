@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="SDCard"
+    <ModuleDefinition Name="SD Card"
                   UniqueId="de3c7522-7331-40d5-bea7-9143e1a66430"
                   Manufacturer="GHI Electronics"
                   Description="A SDCard module"

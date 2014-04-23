@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="AccelG248"
+    <ModuleDefinition Name="Accel G248"
                   UniqueId="5eac9ff1-9c47-4aea-b320-39ced3134bb1"
                   Manufacturer="GHI Electronics"
                   Description="An AccelG248 module"

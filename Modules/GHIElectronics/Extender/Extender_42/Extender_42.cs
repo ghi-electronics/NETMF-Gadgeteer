@@ -18,19 +18,48 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </example>
     public class Extender : GTM.Module
     {
-        private Socket ExtenderSocket;
+        private Socket socketA;
+        private Socket socketB;
 
-        /// <summary></summary>
+        /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
         public Extender(int socketNumber)
         {
-            ExtenderSocket = Socket.GetSocket(socketNumber, true, this, null);
+            this.socketA = Socket.GetSocket(socketNumber, true, this, null);
+
+            this.socketB = Socket.SocketInterfaces.CreateUnnumberedSocket(socketNumber.ToString() + "-" + " Extender");
+            this.socketB.SupportedTypes = this.socketA.SupportedTypes;
+            this.socketB.CpuPins[3] = this.socketA.CpuPins[3];
+            this.socketB.CpuPins[4] = this.socketA.CpuPins[5];
+            this.socketB.CpuPins[5] = this.socketA.CpuPins[4];
+            this.socketB.CpuPins[6] = this.socketA.CpuPins[7];
+            this.socketB.CpuPins[7] = this.socketA.CpuPins[6];
+            this.socketB.SerialPortName = this.socketA.SerialPortName;
+            this.socketB.SPIModule = this.socketA.SPIModule;
+            this.socketB.AnalogOutput = this.socketA.AnalogOutput;
+            this.socketB.AnalogInput3 = this.socketA.AnalogInput3;
+            this.socketB.AnalogInput4 = this.socketA.AnalogInput4;
+            this.socketB.AnalogInput5 = this.socketA.AnalogInput5;
+            this.socketB.PWM7 = this.socketA.PWM7;
+            this.socketB.PWM8 = this.socketA.PWM8;
+            this.socketB.PWM9 = this.socketA.PWM9;
+            this.socketB.AnalogInputIndirector = this.socketA.AnalogInputIndirector;
+            this.socketB.DigitalInputIndirector = this.socketA.DigitalInputIndirector;
+            this.socketB.DigitalIOIndirector = this.socketA.DigitalIOIndirector;
+            this.socketB.DigitalOutputIndirector = this.socketA.DigitalOutputIndirector;
+            this.socketB.I2CBusIndirector = this.socketA.I2CBusIndirector;
+            this.socketB.InterruptIndirector = this.socketA.InterruptIndirector;
+            this.socketB.PwmOutputIndirector = this.socketA.PwmOutputIndirector;
+            this.socketB.SpiIndirector = this.socketA.SpiIndirector;
+            this.socketB.SerialIndirector = this.socketA.SerialIndirector;
+
+            Socket.SocketInterfaces.RegisterSocket(this.socketB);
         }
 
         /// <summary>
-        /// The mainboard socket number which this Extender module is plugged into.
+        /// Returns the socket number for socket on the module.
         /// </summary>
-        public int ExtenderSocketNumber { get { return ExtenderSocket.SocketNumber; } }
+        public int ExtenderSocketB { get { return this.socketB.SocketNumber; } }
 
         /// <summary>
         /// Returns a digital input interface associated with the specified pin on this module.
@@ -47,7 +76,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </exception>
         public Interfaces.DigitalInput SetupDigitalInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
         {
-            return new Interfaces.DigitalInput(ExtenderSocket, pin, glitchFilterMode, resistorMode, this);
+            return new Interfaces.DigitalInput(this.socketB, pin, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -61,7 +90,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </exception>
         public Interfaces.DigitalOutput SetupDigitalOutput(Socket.Pin pin, bool initialState)
         {
-            return new Interfaces.DigitalOutput(ExtenderSocket, pin, initialState, this);
+            return new Interfaces.DigitalOutput(this.socketB, pin, initialState, this);
         }
 
         /// <summary>
@@ -83,7 +112,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </exception>
         public Interfaces.DigitalIO SetupDigitalIO(Socket.Pin pin, bool initialState, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode)
         {
-            return new Interfaces.DigitalIO(ExtenderSocket, pin, initialState, glitchFilterMode, resistorMode, this);
+            return new Interfaces.DigitalIO(this.socketB, pin, initialState, glitchFilterMode, resistorMode, this);
         }
 
         /// <summary>
@@ -102,7 +131,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </exception>
         public Interfaces.InterruptInput SetupInterruptInput(Socket.Pin pin, Interfaces.GlitchFilterMode glitchFilterMode, Interfaces.ResistorMode resistorMode, Interfaces.InterruptMode interruptMode)
         {
-            return new Interfaces.InterruptInput(ExtenderSocket, pin, glitchFilterMode, resistorMode, interruptMode, this);
+            return new Interfaces.InterruptInput(this.socketB, pin, glitchFilterMode, resistorMode, interruptMode, this);
         }
 
         /// <summary>
@@ -112,7 +141,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The interface.</returns>
         public Interfaces.AnalogInput SetupAnalogInput(Socket.Pin pin)
         {
-            return new Interfaces.AnalogInput(ExtenderSocket, pin, this);
+            return new Interfaces.AnalogInput(this.socketB, pin, this);
         }
 
         // TODO:  Determine whether AnalogOutput should be added to Gadgeteer.Interfaces
@@ -125,7 +154,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The interface.</returns>
         public Interfaces.AnalogOutput SetupAnalogOutput(Socket.Pin pin)
         {
-            return new Interfaces.AnalogOutput(ExtenderSocket, pin, this);
+            return new Interfaces.AnalogOutput(this.socketB, pin, this);
         }
 
         /// <summary>
@@ -135,7 +164,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The PWM interface.</returns>
         public Interfaces.PWMOutput SetupPWMOutput(Socket.Pin pin)
         {
-            return new Interfaces.PWMOutput(ExtenderSocket, pin, false, this);
+            return new Interfaces.PWMOutput(this.socketB, pin, false, this);
         }
     }
 }
