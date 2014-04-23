@@ -20,6 +20,13 @@ namespace Gadgeteer.Modules.GHIElectronics
         private byte[] resultBuffer;
         private bool releaseSent;
 
+        private TouchEventHandler onScreenPressed;
+        private EventHandler onScreenReleased;
+        private EventHandler onHomePressed;
+        private EventHandler onMenuPressed;
+        private EventHandler onBackPressed;
+        private GestureDetectedEventHandler onGestureDetected;
+
         /// <summary>Constructs a new instance.</summary>
         /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
         /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
@@ -86,9 +93,16 @@ namespace Gadgeteer.Modules.GHIElectronics
             bSocket.ReservePin(Socket.Pin.Seven, this);
             bSocket.ReservePin(Socket.Pin.Eight, this);
             bSocket.ReservePin(Socket.Pin.Nine, this);
-
-            if (i2cSocketNumber == Socket.Unused)
+            
+             if (i2cSocketNumber == Socket.Unused)
                 return;
+            
+            this.onScreenPressed = this.OnScreenPressed;
+            this.onScreenReleased = this.OnScreenReleased;
+            this.onHomePressed = this.OnHomePressed;
+            this.onMenuPressed = this.OnMenuPressed;
+            this.onBackPressed = this.OnBackPressed;
+            this.onGestureDetected = this.OnGestureDetected;
 
             Socket i2cSocket = Socket.GetSocket(i2cSocketNumber, true, this, null);
 
@@ -293,63 +307,38 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public event GestureDetectedEventHandler GestureDetected;
 
-        private TouchEventHandler onScreenPressed;
-        private EventHandler onScreenReleased;
-        private EventHandler onHomePressed;
-        private EventHandler onMenuPressed;
-        private EventHandler onBackPressed;
-        private GestureDetectedEventHandler onGestureDetected;
-
         private void OnScreenPressed(DisplayCP7 sender, TouchEventArgs e)
         {
-            if (this.onScreenPressed == null)
-                this.onScreenPressed = this.OnScreenPressed;
-
             if (Program.CheckAndInvoke(this.ScreenPressed, this.onScreenPressed, sender, e))
                 this.ScreenPressed(sender, e);
         }
 
         private void OnScreenReleased(DisplayCP7 sender, EventArgs e)
         {
-            if (this.onScreenReleased == null)
-                this.onScreenReleased = this.OnScreenReleased;
-
             if (Program.CheckAndInvoke(this.ScreenReleased, this.onScreenReleased, sender, e))
                 this.ScreenReleased(sender, e);
         }
 
         private void OnHomePressed(DisplayCP7 sender, EventArgs e)
         {
-            if (this.onHomePressed == null)
-                this.onHomePressed = this.OnHomePressed;
-
             if (Program.CheckAndInvoke(this.HomePressed, this.onHomePressed, sender, e))
                 this.HomePressed(sender, e);
         }
 
         private void OnMenuPressed(DisplayCP7 sender, EventArgs e)
         {
-            if (this.onMenuPressed == null)
-                this.onMenuPressed = this.OnMenuPressed;
-
             if (Program.CheckAndInvoke(this.MenuPressed, this.onMenuPressed, sender, e))
                 this.MenuPressed(sender, e);
         }
 
         private void OnBackPressed(DisplayCP7 sender, EventArgs e)
         {
-            if (this.onBackPressed == null)
-                this.onBackPressed = this.OnBackPressed;
-
             if (Program.CheckAndInvoke(this.BackPressed, this.onBackPressed, sender, e))
                 this.BackPressed(sender, e);
         }
 
         private void OnGestureDetected(DisplayCP7 sender, GestureDetectedEventArgs e)
         {
-            if (this.onGestureDetected == null)
-                this.onGestureDetected = this.OnGestureDetected;
-
             if (Program.CheckAndInvoke(this.GestureDetected, this.onGestureDetected, sender, e))
                 this.GestureDetected(sender, e);
         }
@@ -361,7 +350,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 if (!this.releaseSent)
                 {
-                    this.onScreenReleased(this, new EventArgs());
+                    this.OnScreenReleased(this, new EventArgs());
 
                     this.releaseSent = true;
                 }
@@ -374,7 +363,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             var gesture = (GestureType)(this.ReadRegister(0x01) & 0xFF);
             if (gesture != GestureType.None)
             {
-                this.onGestureDetected(this, new GestureDetectedEventArgs(gesture));
+                this.OnGestureDetected(this, new GestureDetectedEventArgs(gesture));
 
                 return;
             }
@@ -391,27 +380,27 @@ namespace Gadgeteer.Modules.GHIElectronics
                 {
                     if (y >= 0 && y <= 50)
                     {
-                        this.onHomePressed(this, new EventArgs());
+                        this.OnHomePressed(this, new EventArgs());
                     }
-                    if (y >= 100 && y <= 150)
+                    else if (y >= 100 && y <= 150)
                     {
-                        this.onMenuPressed(this, new EventArgs());
+                        this.OnMenuPressed(this, new EventArgs());
                     }
                     else if (y >= 200 && y <= 250)
                     {
-                        this.onBackPressed(this, new EventArgs());
+                        this.OnBackPressed(this, new EventArgs());
                     }
-                    else
-                    {
-                        actualTouchCount++;
-                        positions[i] = new Position(x, y);
-                    }
+                }
+                else
+                {
+                    actualTouchCount++;
+                    positions[i] = new Position(x, y);
                 }
             }
 
             TouchEventArgs e = new TouchEventArgs(actualTouchCount);
             Array.Copy(positions, e.TouchPoints, actualTouchCount);
-            this.onScreenPressed(this, e);
+            this.OnScreenPressed(this, e);
         }
 
         private byte ReadRegister(byte address)
