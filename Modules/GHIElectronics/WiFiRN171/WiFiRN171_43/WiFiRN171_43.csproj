@@ -42,11 +42,6 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <Compile Include="WiFly\HttpHeaderList.cs" />
-    <Compile Include="WiFly\HttpRequest.cs" />
-    <Compile Include="WiFly\HttpResponse.cs" />
-    <Compile Include="WiFly\HttpStream.cs" />
-    <Compile Include="WiFly\QueryDataList.cs" />
     <Compile Include="WiFiRN171_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="..\..\Shared\AssemblyInfoGlobal43.cs" />

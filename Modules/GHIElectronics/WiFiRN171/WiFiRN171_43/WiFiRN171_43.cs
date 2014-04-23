@@ -24,6 +24,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             internal TimeoutException(string message) : base(message) { }
             internal TimeoutException(string message, Exception innerException) : base(message, innerException) { }
         }
+
         /// <summary>
         /// An exception thrown when an errror is received.
         /// </summary>
@@ -44,6 +45,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         private AutoResetEvent commandResponseComplete;
         private GTI.DigitalOutput reset;
         private GTI.DigitalOutput rts;
+        private bool awaitingPostData;
+        private bool httpEnabled;
+        private string httpBuffer;
+        private HttpRequest currentRequest;
 
         /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -51,12 +56,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
+            var useFlowControl = socket.SupportsType('K');
+
             this.LocalIP = "0.0.0.0";
             this.LocalListenPort = "0";
             this.DebugPort = null;
             this.Ready = false;
-
-            var useFlowControlEnabled = socket.SupportsType('K');
 
             this.commandModeResponse = "";
             this.serialBuffer = "";
@@ -65,6 +70,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.inCommandMode = false;
             this.updateComplete = new AutoResetEvent(false);
             this.commandResponseComplete = new AutoResetEvent(false);
+            this.awaitingPostData = false;
+            this.httpEnabled = false;
+            this.httpBuffer = "";
+            this.currentRequest = null;
 
             this.onHttpRequestReceived = this.OnHttpRequestReceived;
             this.onDataReceived = this.OnDataReceived;
@@ -72,12 +81,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.onConnectionEstablished = this.OnConnectionEstablished;
             this.onConnectionClosed = this.OnConnectionClosed;
 
-            if (!useFlowControlEnabled)
+            if (!useFlowControl)
                 socket.EnsureTypeIsSupported('U', this);
             
             this.reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
             this.rts = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
-            this.SerialPort = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, useFlowControlEnabled ? GTI.HardwareFlowControl.Required : GTI.HardwareFlowControl.NotRequired, this);
+            this.SerialPort = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, useFlowControl ? GTI.HardwareFlowControl.Required : GTI.HardwareFlowControl.NotRequired, this);
             this.SerialPort.DataReceived += this.OnSerialDataReceived;
             this.SerialPort.Open();
 
@@ -97,7 +106,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.ExecuteCommand("set sys printlvl 0");
             this.ExecuteCommand("set comm remote 0");
 
-            if (useFlowControlEnabled)
+            if (useFlowControl)
                 this.ExecuteCommand("set uart flow 1");
 
             this.ExecuteCommand("set uart tx 1");
@@ -353,7 +362,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.ExecuteCommand("set ip local 80");
             this.ExitCommandMode();
             
-            this.HttpEnabled = true;
+            this.httpEnabled = true;
         }
 
         /// <summary>
@@ -383,388 +392,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.SerialPort.Write(data, offset, count);
         }
-
-        #region "HTTP Parser"
-
-        private bool HttpEnabled = false;
-        private bool HttpStream = false;
-        private string HttpBuffer = "";
-        private HttpRequest currentRequest;
-        private bool awaitingPostData = false;
-
-        private string _GetResponseText(HttpResponse.ResponseStatus status)
-        {
-            string text = "";
-
-            switch (status)
-            {
-                case HttpResponse.ResponseStatus.Accepted:
-                    text = "202 Accepted";
-                    break;
-
-                case HttpResponse.ResponseStatus.BadGateway:
-                    text = "502 Bad Gateway";
-                    break;
-
-                case HttpResponse.ResponseStatus.BadRequest:
-                    text = "400 Bad Gateway";
-                    break;
-
-                case HttpResponse.ResponseStatus.Conflict:
-                    text = "409 Conflict";
-                    break;
-
-                case HttpResponse.ResponseStatus.Continue:
-                    text = "100 Continue";
-                    break;
-
-                case HttpResponse.ResponseStatus.Created:
-                    text = "201 Created";
-                    break;
-
-                case HttpResponse.ResponseStatus.ExpectationFailed:
-                    text = "417 Expectation Fail";
-                    break;
-
-                case HttpResponse.ResponseStatus.Forbidden:
-                    text = "403 Forbidden";
-                    break;
-
-                case HttpResponse.ResponseStatus.GatewayTimeout:
-                    text = "504 Gateway Timeout";
-                    break;
-
-                case HttpResponse.ResponseStatus.Gone:
-                    text = "410 Gone";
-                    break;
-
-                case HttpResponse.ResponseStatus.HTTPVersionNotSupported:
-                    text = "505 HTTP Version Not Supported";
-                    break;
-
-                case HttpResponse.ResponseStatus.InternalServerError:
-                    text = "500 Internal Server Error";
-                    break;
-
-                case HttpResponse.ResponseStatus.LengthRequired:
-                    text = "411 Length Required";
-                    break;
-
-                case HttpResponse.ResponseStatus.MethodNotAllowed:
-                    text = "405 Method Not Allowed";
-                    break;
-
-                case HttpResponse.ResponseStatus.NoContent:
-                    text = "204 No Content";
-                    break;
-
-                case HttpResponse.ResponseStatus.NonAuthoritativeInformation:
-                    text = "203 Non-Authoritative Information";
-                    break;
-
-                case HttpResponse.ResponseStatus.NotAcceptable:
-                    text = "406 Not Acceptable";
-                    break;
-
-                case HttpResponse.ResponseStatus.NotFound:
-                    text = "404 Not Found";
-                    break;
-
-                case HttpResponse.ResponseStatus.NotImplemented:
-                    text = "501 Not Implemented";
-                    break;
-
-                case HttpResponse.ResponseStatus.OK:
-                    text = "200 OK";
-                    break;
-
-                case HttpResponse.ResponseStatus.PreconditionFailed:
-                    text = "412 Precondition Failed";
-                    break;
-
-                case HttpResponse.ResponseStatus.ProxyAuthenticationRequired:
-                    text = "407 Proxy Authentication Required";
-                    break;
-
-                case HttpResponse.ResponseStatus.RequestedRangeNotSatisfiable:
-                    text = "416 Requested Range Not Satisfiable";
-                    break;
-
-                case HttpResponse.ResponseStatus.RequestEntityTooLarge:
-                    text = "413 Request Entity Too Large";
-                    break;
-
-                case HttpResponse.ResponseStatus.RequestTimeout:
-                    text = "408 Request Timeout";
-                    break;
-
-                case HttpResponse.ResponseStatus.RequestUriTooLong:
-                    text = "413 Request Entity Too Large";
-                    break;
-
-                case HttpResponse.ResponseStatus.ResetContent:
-                    text = "205 Reset Content";
-                    break;
-
-                case HttpResponse.ResponseStatus.ServiceUnavailable:
-                    text = "503 Service Unavailable";
-                    break;
-
-                case HttpResponse.ResponseStatus.SwitchingProtocols:
-                    text = "101 Switching Protocols";
-                    break;
-
-                case HttpResponse.ResponseStatus.Unauthorized:
-                    text = "401 Unauthorized";
-                    break;
-
-                case HttpResponse.ResponseStatus.UnsupportedMediaType:
-                    text = "415 Unsupported Media Type";
-                    break;
-            }
-
-            return text;
-        }
-
-        private void ParseBufferForHttp(string buffer)
-        {
-            if (buffer.Length <= 0)
-            {
-                return;
-            }
-
-            //Remove connection open tag
-            if (buffer.IndexOf("*OPEN*") >= 0)
-                buffer = Replace("*OPEN*", "", buffer);
-
-            //Remove connection close tag
-            if (buffer.IndexOf("*CLOS*") >= 0)
-                buffer = Replace("*CLOS*", "", buffer);
-
-            if (!HttpStream && buffer.IndexOf("GET") >= 0)
-                HttpStream = true;
-
-            if (!HttpStream && buffer.IndexOf("POST") >= 0)
-                HttpStream = true;
-
-            if (HttpStream)
-            {
-                //Otherwise append to buffer
-                HttpBuffer += buffer;
-
-                int index = -1;
-                if (awaitingPostData)
-                {
-                    int len;
-                    ParseInt(currentRequest.HeaderData["Content-length"], out len);
-
-                    if (HttpBuffer.Length >= len)
-                    {
-                        awaitingPostData = false;
-                        HttpStream = false;
-
-                        currentRequest.PostData = HttpBuffer;
-                        OnHttpRequestReceived(this, new HttpStream(currentRequest, this.SerialPort));
-                    }
-                }
-
-                else if ((index = HttpBuffer.IndexOf("\r\n\r\n")) >= 0)
-                {
-                    //Set the current request
-                    currentRequest = _ParseHttpHeader(HttpBuffer);
-
-                    if (currentRequest.RequestType == HttpRequest.HttpRequestType.GET)
-                    {
-                        HttpBuffer = "";
-                        HttpStream = false;
-
-                        OnHttpRequestReceived(this, new HttpStream(currentRequest, this.SerialPort));
-                    }
-                    else if (currentRequest.RequestType == HttpRequest.HttpRequestType.POST)
-                    {
-                        awaitingPostData = true;
-                        HttpBuffer = HttpBuffer.Substring(index + 4);
-                    }
-
-                    //We can return without further parsing
-                    return;
-                }
-            }
-        }
-
-        private ArrayList _ParsePostData(string buffer)
-        {
-            ArrayList list = new ArrayList();
-            //Separate POST elements
-            //int index = -1;
-            string[] data = buffer.Split(new char[1] { '&' });
-            foreach (string param in data)
-            {
-                if (param.Length > 0)
-                {
-                    int separate_index = param.IndexOf("=");
-
-                    list.Add(
-                        new DictionaryEntry(
-                            _UrlDecode(param.Substring(0, separate_index)),
-                            _UrlDecode(param.Substring(separate_index + 1))
-                        )
-                    );
-                }
-            }
-            //while ((index = buffer.IndexOf("&")) >= 0)
-            //{
-            //    int separate_index = buffer.IndexOf("=");
-
-            //    //Add the key/value pair
-            //    list.Add(
-            //        new DictionaryEntry(
-            //            _UrlDecode(buffer.Substring(0, separate_index)),
-            //            _UrlDecode(buffer.Substring(separate_index + 1, index))
-            //        )
-            //    );
-
-            //    //shift the buffer forward
-            //    buffer = buffer.Substring(index + 1);
-            //}
-
-            return list;
-        }
-
-        private string _UrlDecode(string buffer)
-        {
-            //There was no encoded data
-            if (buffer.IndexOf("%") < 0)
-                return buffer;
-
-            StringBuilder build_buffer = new StringBuilder();
-
-            string working_buffer = "";
-
-            int index = -1;
-            while ((index = buffer.IndexOf("%")) >= 0)
-            {
-                //Add data before encoded char
-                build_buffer.Append(buffer.Substring(0, index));
-
-                //Grab the encoded char
-                working_buffer = buffer.Substring(index + 1, 2);
-
-                //Shift the buffer forward
-                buffer = buffer.Substring(index + 3);
-
-                byte high;
-                byte low;
-
-                if (working_buffer[0] >= 'A')
-                    high = (byte)(working_buffer[0] - 48 - 7);
-                else
-                    high = (byte)(working_buffer[0] - 48);
-
-                if (working_buffer[1] >= 'A')
-                    low = (byte)(working_buffer[1] - 48 - 7);
-                else
-                    low = (byte)(working_buffer[1] - 48);
-
-                byte num = 0;
-                num = (byte)(high << 4);
-                num = (byte)(num | (low));
-
-                //Add the new byte to the string
-                build_buffer.Append(num);
-
-            }
-
-            return build_buffer.ToString();
-        }
-        private HttpRequest _ParseHttpHeader(string buffer)
-        {
-            HttpRequest request = new HttpRequest();
-
-            //Get the request type
-            if (buffer.IndexOf("GET") >= 0)
-                request.RequestType = HttpRequest.HttpRequestType.GET;
-            else if (buffer.IndexOf("POST") >= 0)
-                request.RequestType = HttpRequest.HttpRequestType.POST;
-
-            //Get the requested document
-            int start_index = buffer.IndexOf("/");
-            int end_index = start_index >= 0 ? buffer.IndexOf(" ", start_index) : -1;
-
-            if (start_index >= 0 && end_index > start_index)
-            {
-                int i = buffer.IndexOf("?");
-
-                if (i > 0)
-                {
-                    string query = buffer.Substring(i + 1, end_index - (i + 1));
-                    request.URL = buffer.Substring(start_index, i - start_index);
-
-                    var paras = query.Split('=', '&');
-
-                    for (int j = 0; j < paras.Length; j += 2)
-                        request.QueryData[_UrlDecode(paras[j])] = _UrlDecode(paras[j + 1]);
-                }
-                else
-                {
-                    request.URL = buffer.Substring(start_index, end_index - start_index);
-                }
-
-                //Shift the buffer forward
-                buffer = buffer.Substring(buffer.IndexOf("\r\n") + 2);
-            }
-
-            //Inflate the individual elements
-            int index = -1;
-            string line_buffer = "";
-            bool keep_check = true;
-
-            while ((index = buffer.IndexOf("\r\n")) >= 0)
-            {
-                //For POST headers, we need to determine the length of the post data
-                if (request.RequestType == HttpRequest.HttpRequestType.POST && keep_check)
-                {
-                    line_buffer = buffer.Substring(0, index);
-
-                    if (line_buffer.IndexOf("Content-Length:") == 0)
-                    {
-                        ParseInt(line_buffer.Substring(16), out request.PostLength);
-
-                        //Once we have the content length, we no longer need to parse
-                        //the individual lines
-                        keep_check = false;
-                    }
-
-                    if (line_buffer.IndexOf(": ") > 0)
-                    {
-                        request.HeaderData[line_buffer.Substring(0, line_buffer.IndexOf(": "))]
-                            =
-                            line_buffer.Substring((line_buffer.IndexOf(": ") + 2));
-                    }
-                }
-                else
-                {
-                    line_buffer = buffer.Substring(0, index);
-
-                    //Add the element
-                    if (line_buffer.IndexOf(": ") > 0)
-                    {
-                        request.HeaderData[line_buffer.Substring(0, line_buffer.IndexOf(": "))]
-                            =
-                            line_buffer.Substring((line_buffer.IndexOf(": ") + 2));
-                    }
-
-                    line_buffer = "";
-                }
-
-                //Shift the buffer forward
-                buffer = buffer.Substring(index + 2);
-            }
-
-            return request;
-        }
-
-        #endregion
 
         /// <summary>
         /// Executes the command.
@@ -975,10 +602,121 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
             else
             {
-                if (this.HttpEnabled)
-                    this.ParseBufferForHttp(line);
+                if (this.httpEnabled)
+                    this.ParseHttp(line);
 
                 this.OnLineReceived(this, line);
+            }
+        }
+
+        private void ParseHttp(string buffer)
+        {
+            if (buffer.Length <= 0)
+                return;
+
+            if (buffer.IndexOf("GET") < 0 || buffer.IndexOf("POST") < 0)
+                return;
+
+            buffer = this.Replace("*OPEN*", "", buffer);
+            buffer = this.Replace("*CLOS*", "", buffer);
+
+            this.httpBuffer += buffer;
+
+            if (this.awaitingPostData)
+            {
+                int length = this.ParseInt(this.currentRequest.HeaderData["Content-length"]);
+
+                if (this.httpBuffer.Length >= length)
+                {
+                    this.awaitingPostData = false;
+                    this.currentRequest.PostData = httpBuffer;
+
+                    this.OnHttpRequestReceived(this, new HttpSession(this.currentRequest, this.SerialPort));
+                }
+
+                return;
+            }
+
+            int index = this.httpBuffer.IndexOf("\r\n\r\n");
+            if (index >= 0)
+            {
+                this.ParseHttpHeader();
+
+                if (this.currentRequest.Type == HttpRequest.RequestType.Get)
+                {
+                    this.httpBuffer = "";
+
+                    this.OnHttpRequestReceived(this, new HttpSession(this.currentRequest, this.SerialPort));
+                }
+                else if (currentRequest.Type == HttpRequest.RequestType.Post)
+                {
+                    this.awaitingPostData = true;
+                    this.httpBuffer = this.httpBuffer.Substring(index + 4);
+                }
+            }
+        }
+
+        private void ParseHttpHeader()
+        {
+            if (this.httpBuffer.IndexOf("GET") >= 0)
+                this.currentRequest.Type = HttpRequest.RequestType.Get;
+            else if (this.httpBuffer.IndexOf("POST") >= 0)
+                this.currentRequest.Type = HttpRequest.RequestType.Post;
+
+            int startIndex = httpBuffer.IndexOf("/");
+            int endIndex = startIndex >= 0 ? this.httpBuffer.IndexOf(" ", startIndex) : -1;
+
+            if (startIndex >= 0 && endIndex > startIndex)
+            {
+                int i = this.httpBuffer.IndexOf("?");
+
+                if (i > 0)
+                {
+                    this.currentRequest.Url = this.httpBuffer.Substring(startIndex, i - startIndex);
+
+                    var queryParameters = this.httpBuffer.Substring(i + 1, endIndex - i - 1).Split('=', '&');
+                    for (int j = 0; j < queryParameters.Length; j += 2)
+                        this.currentRequest.QueryData[this.UrlDecode(queryParameters[j])] = this.UrlDecode(queryParameters[j + 1]);
+                }
+                else
+                {
+                    this.currentRequest.Url = this.httpBuffer.Substring(startIndex, endIndex - startIndex);
+                }
+
+                this.httpBuffer = this.httpBuffer.Substring(this.httpBuffer.IndexOf("\r\n") + 2);
+            }
+
+            int index = -1;
+            string lineBuffer = "";
+            bool needsLength = true;
+
+            while ((index = this.httpBuffer.IndexOf("\r\n")) >= 0)
+            {
+                if (this.currentRequest.Type == HttpRequest.RequestType.Post && needsLength)
+                {
+                    lineBuffer = this.httpBuffer.Substring(0, index);
+
+                    if (lineBuffer.IndexOf("Content-Length:") == 0)
+                    {
+                        this.currentRequest.PostLength = this.ParseInt(lineBuffer.Substring(16));
+
+                        needsLength = false;
+                    }
+
+                    if (lineBuffer.IndexOf(": ") > 0)
+                        this.currentRequest.HeaderData[lineBuffer.Substring(0, lineBuffer.IndexOf(": "))] = lineBuffer.Substring((lineBuffer.IndexOf(": ") + 2));
+                }
+                else
+                {
+                    lineBuffer = this.httpBuffer.Substring(0, index);
+
+                    if (lineBuffer.IndexOf(": ") > 0)
+                        this.currentRequest.HeaderData[lineBuffer.Substring(0, lineBuffer.IndexOf(": "))] = lineBuffer.Substring((lineBuffer.IndexOf(": ") + 2));
+
+                    lineBuffer = "";
+                }
+
+                this.httpBuffer = this.httpBuffer.Substring(index + 2);
             }
         }
 
@@ -1007,28 +745,56 @@ namespace Gadgeteer.Modules.GHIElectronics
             return new StringBuilder(source).Replace(oldValue, newValue).ToString();
         }
 
-        private bool ParseInt(string source, out int result)
+        private int ParseInt(string source)
         {
             try
             {
-                result = int.Parse(source);
-
-                return true;
+                return int.Parse(source);
             }
             catch
             {
-                result = 0;
-
-                return false;
+                return 0;
             }
+        }
+
+        private string UrlDecode(string buffer)
+        {
+            if (buffer.IndexOf("%") < 0)
+                return buffer;
+
+            StringBuilder builder = new StringBuilder();
+            int index = -1;
+
+            while ((index = buffer.IndexOf("%")) >= 0)
+            {
+                builder.Append(buffer.Substring(0, index));
+
+                int value = 0;
+
+                if (buffer[index + 1] >= 'A')
+                    value = (buffer[index + 1] - 48 - 7) << 4;
+                else
+                    value = (buffer[index + 1] - 48) << 4;
+
+                if (buffer[index + 2] >= 'A')
+                    value |= (byte)(buffer[index + 2] - 48 - 7);
+                else
+                    value |= (byte)(buffer[index + 2] - 48);
+
+                builder.Append((char)value);
+
+                buffer = buffer.Substring(index + 3);
+            }
+
+            return builder.ToString();
         }
 
         /// <summary>
         /// A delegate representing receipt of an HTTP request.
         /// </summary>
         /// <param name="sender">The object that sent this event.</param>
-        /// <param name="e">The HTTP request.</param>
-        public delegate void HttpRequestReceivedHandler(WiFiRN171 sender, HttpStream e);
+        /// <param name="e">The HTTP session.</param>
+        public delegate void HttpRequestReceivedHandler(WiFiRN171 sender, HttpSession e);
 
         /// <summary>
         /// A delegate representing data received.
@@ -1089,7 +855,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private ConnectionEstablishedHandler onConnectionEstablished;
         private ConnectionClosedHandler onConnectionClosed;
 
-        private void OnHttpRequestReceived(WiFiRN171 sender, HttpStream e)
+        private void OnHttpRequestReceived(WiFiRN171 sender, HttpSession e)
         {
             if (Program.CheckAndInvoke(this.HttpRequestReceived, this.onHttpRequestReceived, sender, e))
                 this.HttpRequestReceived(sender, e);
@@ -1160,6 +926,460 @@ namespace Gadgeteer.Modules.GHIElectronics
             MixedWPA1_WPA2 = 3,
             /// <summary>Wi-Fi Protected Access (WPA) II (uses preshared key)</summary>
             WPA2_PSK = 4
+        }
+
+        /// <summary>
+        /// A Hashtable that works with strings.
+        /// </summary>
+        public class StringHashtable : Hashtable
+        {
+            /// <summary>
+            /// Constructs a new instance.
+            /// </summary>
+            public StringHashtable() : base()
+            {
+
+            }
+
+            /// <summary>
+            /// Indexer for the value with the given key.
+            /// </summary>
+            /// <param name="i">The key.</param>
+            /// <returns>The value.</returns>
+            /// 
+            public string this[string i]
+            {
+                get
+                {
+                    return (string)base[i];
+                }
+                set
+                {
+                    base[i] = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Represents an HTTP request.
+        /// </summary>
+        public class HttpRequest
+        {
+            /// <summary>
+            /// Represents an HTTP request type.
+            /// </summary>
+            public enum RequestType
+            {
+                /// <summary>
+                /// A GET request.
+                /// </summary>
+                Get,
+
+                /// <summary>
+                /// A POST request.
+                /// </summary>
+                Post
+            }
+
+            /// <summary>
+            /// The request type.
+            /// </summary>
+            public RequestType Type { get; set; }
+
+            /// <summary>
+            /// The header data.
+            /// </summary>
+            public StringHashtable HeaderData { get; private set; }
+
+            /// <summary>
+            /// The query data.
+            /// </summary>
+            public StringHashtable QueryData { get; private set; }
+
+            /// <summary>
+            /// The URL.
+            /// </summary>
+            public string Url { get; set; }
+
+            /// <summary>
+            /// The posted data.
+            /// </summary>
+            public string PostData { get; set; }
+
+            /// <summary>
+            /// The length of the posted data.
+            /// </summary>
+            public int PostLength { get; set; }
+
+            /// <summary>
+            /// Whether or not there was posted data.
+            /// </summary>
+            public bool HasPostData
+            {
+                get
+                {
+                    return (this.PostData.Length > 0);
+                }
+            }
+
+            /// <summary>
+            /// Constructs a new instance.
+            /// </summary>
+            public HttpRequest()
+            {
+                this.HeaderData = new StringHashtable();
+                this.QueryData = new StringHashtable();
+                this.Url = string.Empty;
+                this.PostData = string.Empty;
+                this.PostLength = 0;
+            }
+        }
+
+        /// <summary>
+        /// An HTTP response.
+        /// </summary>
+        public class HttpResponse
+        {
+            private ResponseStatus status;
+            private GTI.Serial stream;
+
+            /// <summary>
+            /// The possible response statuses.
+            /// </summary>
+            public enum ResponseStatus
+            {
+                /// <summary>
+                /// The Continue status
+                /// </summary>
+                Continue = 100,
+
+                /// <summary>
+                /// The SwitchingProtocols status
+                /// </summary>
+                SwitchingProtocols = 101,
+
+                /// <summary>
+                /// The OK status
+                /// </summary>
+                Ok = 200,
+
+                /// <summary>
+                /// The Created status
+                /// </summary>
+                Created = 201,
+
+                /// <summary>
+                /// The Accepted status
+                /// </summary>
+                Accepted = 202,
+
+                /// <summary>
+                /// The NonAuthoritativeInformation status
+                /// </summary>
+                NonAuthoritativeInformation = 203,
+
+                /// <summary>
+                /// The NoContent status
+                /// </summary>
+                NoContent = 204,
+
+                /// <summary>
+                /// The ResetContent status
+                /// </summary>
+                ResetContent = 205,
+
+                /// <summary>
+                /// The BadRequest status
+                /// </summary>
+                BadRequest = 400,
+
+                /// <summary>
+                /// The Unauthorized status
+                /// </summary>
+                Unauthorized = 401,
+
+                /// <summary>
+                /// The Forbidden status
+                /// </summary>
+                Forbidden = 403,
+
+                /// <summary>
+                /// The NotFound status
+                /// </summary>
+                NotFound = 404,
+
+                /// <summary>
+                /// The MethodNotAllowed status
+                /// </summary>
+                MethodNotAllowed = 405,
+
+                /// <summary>
+                /// The NotAcceptable status
+                /// </summary>
+                NotAcceptable = 406,
+
+                /// <summary>
+                /// The ProxyAuthenticationRequired status
+                /// </summary>
+                ProxyAuthenticationRequired = 407,
+
+                /// <summary>
+                /// The RequestTimeout status
+                /// </summary>
+                RequestTimeout = 408,
+
+                /// <summary>
+                /// The Conflict status
+                /// </summary>
+                Conflict = 409,
+
+                /// <summary>
+                /// The Gone status
+                /// </summary>
+                Gone = 410,
+
+                /// <summary>
+                /// The LengthRequired status
+                /// </summary>
+                LengthRequired = 411,
+
+                /// <summary>
+                /// The PreconditionFailed status
+                /// </summary>
+                PreconditionFailed = 412,
+
+                /// <summary>
+                /// The RequestEntityTooLarge status
+                /// </summary>
+                RequestEntityTooLarge = 413,
+
+                /// <summary>
+                /// The RequestUriTooLong status
+                /// </summary>
+                RequestUriTooLong = 414,
+
+                /// <summary>
+                /// The UnsupportedMediaType status
+                /// </summary>
+                UnsupportedMediaType = 415,
+
+                /// <summary>
+                /// The RequestedRangeNotSatisfiable status
+                /// </summary>
+                RequestedRangeNotSatisfiable = 416,
+
+                /// <summary>
+                /// The ExpectationFailed status
+                /// </summary>
+                ExpectationFailed = 417,
+
+                /// <summary>
+                /// The InternalServerError status
+                /// </summary>
+                InternalServerError = 500,
+
+                /// <summary>
+                /// The NotImplemented status
+                /// </summary>
+                NotImplemented = 501,
+
+                /// <summary>
+                /// The BadGateway status
+                /// </summary>
+                BadGateway = 502,
+
+                /// <summary>
+                /// The ServiceUnavailable status
+                /// </summary>
+                ServiceUnavailable = 503,
+
+                /// <summary>
+                /// The GatewayTimeout status
+                /// </summary>
+                GatewayTimeout = 504,
+
+                /// <summary>
+                /// The HttpVersionNotSupported status
+                /// </summary>
+                HttpVersionNotSupported = 505
+            }
+
+            /// <summary>
+            /// The header data of the response.
+            /// </summary>
+            public StringHashtable HeaderData { get; private set; }
+
+            /// <summary>
+            /// The status code of the reponse.
+            /// </summary>
+            public ResponseStatus StatusCode
+            {
+                get
+                {
+                    return this.status;
+                }
+                set
+                {
+                    status = value;
+                    this.HeaderData["Status"] = "HTTP/1.1 " + this.GetResponseText(value);
+                }
+            }
+
+            /// <summary>
+            /// Constructs a new instance.
+            /// </summary>
+            /// <param name="stream">The stream to use.</param>
+            public HttpResponse(GTI.Serial stream)
+            {
+                if (stream == null) throw new ArgumentNullException("stream");
+
+                this.stream = stream;
+
+                this.HeaderData = new StringHashtable();
+            }
+
+            /// <summary>
+            /// Sends a response.
+            /// </summary>
+            /// <param name="document">The body of the response.</param>
+            public void Send(byte[] document)
+            {
+                this.Send(document, true);
+            }
+
+            /// <summary>
+            /// Sends a response.
+            /// </summary>
+            /// <param name="document">The body of the response.</param>
+            /// <param name="sendHeader">Whether or not to send the header as part of the response.</param>
+            public void Send(byte[] document, bool sendHeader)
+            {
+                if (document == null) throw new ArgumentNullException("document");
+
+                this.Send(document, 0, document.Length, sendHeader);
+            }
+
+            /// <summary>
+            /// Sends a response.
+            /// </summary>
+            /// <param name="document">The body of the response.</param>
+            /// <param name="offset">The offset into the document.</param>
+            /// <param name="count">The amount to transfer starting at offset from the document.</param>
+            /// <param name="sendHeader">Whether or not to send the header as part of the response.</param>
+            public void Send(byte[] document, int offset, int count, bool sendHeader)
+            {
+                if (document == null) throw new ArgumentNullException("document");
+                if (offset < 0) throw new ArgumentOutOfRangeException("offset", "offset must be non-negative.");
+                if (count < 0) throw new ArgumentOutOfRangeException("count", "count must be non-negative.");
+                if (document.Length < offset + count) throw new ArgumentOutOfRangeException("document", "document.Length must be at least offset + count.");
+
+                if (sendHeader)
+                    this.stream.Write(Encoder.UTF8.GetBytes(this.HeaderToString()));
+
+                this.stream.Write(document, offset, count);
+            }
+
+            private string HeaderToString()
+            {
+                string header = string.Empty;
+
+                if (this.HeaderData.Contains("Request"))
+                    header += this.HeaderData["Request"] + "\r\n";
+
+                if (this.HeaderData.Contains("Status"))
+                    header += this.HeaderData["Status"] + "\r\n";
+
+                foreach (DictionaryEntry entry in this.HeaderData)
+                    if ((string)entry.Key != "Request" && (string)entry.Key != "Status")
+                        header += (string)entry.Key + ": " + (string)entry.Value + "\r\n";
+
+                return header + "\r\n";
+            }
+
+            private string GetResponseText(ResponseStatus status)
+            {
+                switch (status)
+                {
+                    case ResponseStatus.Accepted: return "202 Accepted";
+                    case ResponseStatus.BadGateway: return "502 Bad Gateway";
+                    case ResponseStatus.BadRequest: return "400 Bad Gateway";
+                    case ResponseStatus.Conflict: return "409 Conflict";
+                    case ResponseStatus.Continue: return "100 Continue";
+                    case ResponseStatus.Created: return "201 Created";
+                    case ResponseStatus.ExpectationFailed: return "417 Expectation Fail";
+                    case ResponseStatus.Forbidden: return "403 Forbidden";
+                    case ResponseStatus.GatewayTimeout: return "504 Gateway Timeout";
+                    case ResponseStatus.Gone: return "410 Gone";
+                    case ResponseStatus.HttpVersionNotSupported: return "505 HTTP Version Not Supported";
+                    case ResponseStatus.InternalServerError: return "500 Internal Server Error";
+                    case ResponseStatus.LengthRequired: return "411 Length Required";
+                    case ResponseStatus.MethodNotAllowed: return "405 Method Not Allowed";
+                    case ResponseStatus.NoContent: return "204 No Content";
+                    case ResponseStatus.NonAuthoritativeInformation: return "203 Non-Authoritative Information";
+                    case ResponseStatus.NotAcceptable: return "406 Not Acceptable";
+                    case ResponseStatus.NotFound: return "404 Not Found";
+                    case ResponseStatus.NotImplemented: return "501 Not Implemented";
+                    case ResponseStatus.Ok: return "200 OK";
+                    case ResponseStatus.PreconditionFailed: return "412 Precondition Failed";
+                    case ResponseStatus.ProxyAuthenticationRequired: return "407 Proxy Authentication Required";
+                    case ResponseStatus.RequestedRangeNotSatisfiable: return "416 Requested Range Not Satisfiable";
+                    case ResponseStatus.RequestEntityTooLarge: return "413 Request Entity Too Large";
+                    case ResponseStatus.RequestTimeout: return "408 Request Timeout";
+                    case ResponseStatus.RequestUriTooLong: return "413 Request Entity Too Large";
+                    case ResponseStatus.ResetContent: return "205 Reset Content";
+                    case ResponseStatus.ServiceUnavailable: return "503 Service Unavailable";
+                    case ResponseStatus.SwitchingProtocols: return "101 Switching Protocols";
+                    case ResponseStatus.Unauthorized: return "401 Unauthorized";
+                    case ResponseStatus.UnsupportedMediaType: return "415 Unsupported Media Type";
+                    default: return string.Empty;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Represents an HTTP session.
+        /// </summary>
+        public class HttpSession
+        {
+            private HttpRequest request;
+            private HttpResponse response;
+
+            /// <summary>
+            /// Constructs a new instance.
+            /// </summary>
+            /// <param name="request">The http request the session will represent.</param>
+            /// <param name="stream">The stream of serial data.</param>
+            public HttpSession(HttpRequest request, GTI.Serial stream)
+            {
+                if (request == null) throw new ArgumentNullException("request");
+                if (stream == null) throw new ArgumentNullException("stream");
+
+                this.request = request;
+                this.response = new HttpResponse(stream);
+            }
+
+
+            /// <summary>
+            /// The response.
+            /// </summary>
+            public HttpResponse Response
+            {
+                get
+                {
+                    return this.response;
+                }
+            }
+
+            /// <summary>
+            /// The request.
+            /// </summary>
+            public HttpRequest Request
+            {
+                get
+                {
+                    return this.request;
+                }
+            }
         }
     }
 }
