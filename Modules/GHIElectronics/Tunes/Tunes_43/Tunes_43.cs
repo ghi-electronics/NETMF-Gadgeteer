@@ -92,7 +92,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <returns></returns>
 			public MusicNote GetNextNote()
 			{
-				if (this.list.Count == 0) throw new InvalidOperationException("No notes added.");
+				if (this.list.Count == 0)
+                    return null;
 
 				return (MusicNote)this.list.Dequeue();
 			}

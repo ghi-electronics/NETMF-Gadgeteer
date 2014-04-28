@@ -14,6 +14,8 @@
 
       <Assemblies>
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCobraIINet"/>
+
+        <Assembly MFVersion="4.3" Name="GHI.Networking"/>
       </Assemblies>
 
       <ProvidedSockets>
