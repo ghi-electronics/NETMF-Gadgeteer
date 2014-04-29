@@ -52,7 +52,7 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="GHI.Hardware" />
-    <Reference Include="GHI.Networking, Version=4.3.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GHI.Networking" />
     <Reference Include="GHI.Pins" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
