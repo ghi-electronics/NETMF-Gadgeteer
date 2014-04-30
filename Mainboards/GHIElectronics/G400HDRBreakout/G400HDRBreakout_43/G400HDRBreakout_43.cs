@@ -17,6 +17,8 @@ namespace GHIElectronics.Gadgeteer
     /// </summary>
     public class G400HDRBreakout : GT.Mainboard
     {
+        private InterruptPort ldr0;
+        private InterruptPort ldr1;
         private OutputPort debugLed;
         private Removable[] storageDevices;
         private Device usbMassStorageDevice;
@@ -26,6 +28,8 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public G400HDRBreakout()
         {
+            this.ldr0 = null;
+            this.ldr1 = null;
             this.debugLed = null;
             this.storageDevices = new Removable[3];
             this.usbMassStorageDevice = null;
@@ -369,6 +373,34 @@ namespace GHIElectronics.Gadgeteer
         public override void PostInit()
         {
 
+        }
+
+        /// <summary>
+        /// The InterruptPort object for LDR0.
+        /// </summary>
+        public InterruptPort LDR0
+        {
+            get
+            {
+                if (this.ldr0 == null)
+                    this.ldr0 = new InterruptPort(G400.PA24, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+
+                return this.ldr0;
+            }
+        }
+
+        /// <summary>
+        /// The InterruptPort object for LDR1.
+        /// </summary>
+        public InterruptPort LDR1
+        {
+            get
+            {
+                if (this.ldr1 == null)
+                    this.ldr1 = new InterruptPort(G400.PA4, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+
+                return this.ldr1;
+            }
         }
 
         private void BitmapConverter(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp)

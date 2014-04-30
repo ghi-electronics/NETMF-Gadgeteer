@@ -18,6 +18,8 @@ namespace GHIElectronics.Gadgeteer
     /// </summary>
     public class FEZCobraIIWiFi : GT.Mainboard
     {
+        private InterruptPort ldr0;
+        private InterruptPort ldr1;
         private OutputPort debugLed;
         private Removable[] storageDevices;
         private Device usbMassStorageDevice;
@@ -28,6 +30,8 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public FEZCobraIIWiFi()
         {
+            this.ldr0 = null;
+            this.ldr1 = null;
             this.debugLed = null;
             this.storageDevices = new Removable[2];
             this.usbMassStorageDevice = null;
@@ -373,6 +377,34 @@ namespace GHIElectronics.Gadgeteer
                     this.wifi = new WiFiRS9110(SPI.SPI_module.SPI2, G120.P1_10, G120.P2_11, G120.P1_9, 4000);
  
                 return this.wifi;
+            }
+        }
+
+        /// <summary>
+        /// The InterruptPort object for LDR0.
+        /// </summary>
+        public InterruptPort LDR0
+        {
+            get
+            {
+                if (this.ldr0 == null)
+                    this.ldr0 = new InterruptPort(G120.P2_10, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+
+                return this.ldr0;
+            }
+        }
+
+        /// <summary>
+        /// The InterruptPort object for LDR1.
+        /// </summary>
+        public InterruptPort LDR1
+        {
+            get
+            {
+                if (this.ldr1 == null)
+                    this.ldr1 = new InterruptPort(G120.P0_22, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+
+                return this.ldr1;
             }
         }
 
