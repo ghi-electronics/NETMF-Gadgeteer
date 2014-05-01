@@ -17,28 +17,28 @@
       </Assemblies>
 
       <ProvidedSockets>
-        <ProvidedSocket Label="1" Left="4" Top="64" Orientation="180" ConstructorParameter="1">
+        <ProvidedSocket Label="1" Left="95" Top="6" Orientation="180" ConstructorParameter="1">
           <Types>
             <Type>R</Type>
             <Type>Y</Type>
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="2" Left="4" Top="49" Orientation="180" ConstructorParameter="2">
+        <ProvidedSocket Label="2" Left="95" Top="21" Orientation="180" ConstructorParameter="2">
           <Types>
             <Type>G</Type>
             <Type>Y</Type>
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="3" Left="4" Top="35" Orientation="180" ConstructorParameter="3">
+        <ProvidedSocket Label="3" Left="95" Top="35" Orientation="180" ConstructorParameter="3">
           <Types>
             <Type>B</Type>
             <Type>Y</Type>
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="4" Left="4" Top="21" Orientation="180" ConstructorParameter="4">
+        <ProvidedSocket Label="4" Left="95" Top="49" Orientation="180" ConstructorParameter="4">
           <Types>
             <Type>D</Type>
             <Type>I</Type>
@@ -49,13 +49,13 @@
           </SharedPinMaps>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="5" Left="4" Top="6" Orientation="180" ConstructorParameter="5">
+        <ProvidedSocket Label="5" Left="95" Top="64" Orientation="180" ConstructorParameter="5">
           <Types>
             <Type>Z</Type>
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="6" Left="95" Top="64" Orientation="0" ConstructorParameter="6">
+        <ProvidedSocket Label="6" Left="4" Top="6" Orientation="0" ConstructorParameter="6">
           <Types>
             <Type>S</Type>
             <Type>U</Type>
@@ -68,7 +68,7 @@
           </SharedPinMaps>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="7" Left="95" Top="49" Orientation="0" ConstructorParameter="7">
+        <ProvidedSocket Label="7" Left="4" Top="20" Orientation="0" ConstructorParameter="7">
           <Types>
             <Type>I</Type>
             <Type>U</Type>
@@ -80,7 +80,7 @@
           </SharedPinMaps>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="8" Left="95" Top="34" Orientation="0" ConstructorParameter="8">
+        <ProvidedSocket Label="8" Left="4" Top="34" Orientation="0" ConstructorParameter="8">
           <Types>
             <Type>A</Type>
             <Type>I</Type>
@@ -92,7 +92,7 @@
           </SharedPinMaps>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="9" Left="95" Top="20" Orientation="0" ConstructorParameter="9">
+        <ProvidedSocket Label="9" Left="4" Top="49" Orientation="0" ConstructorParameter="9">
           <Types>
             <Type>P</Type>
             <Type>U</Type>
@@ -100,7 +100,7 @@
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="10" Left="95" Top="6" Orientation="0" ConstructorParameter="10">
+        <ProvidedSocket Label="10" Left="4" Top="64" Orientation="0" ConstructorParameter="10">
           <Types>
             <Type>F</Type>
           </Types>
