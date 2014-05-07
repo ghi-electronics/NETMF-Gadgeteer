@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="Temp&Humidity"
+    <ModuleDefinition Name="Temp&amp;Humidity"
                   UniqueId="82fa8ac6-3975-4c9b-8b6a-470d6c7e8fe2"
                   Manufacturer="GHI Electronics"
                   Description="A TempHumidity module"
