@@ -78,14 +78,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Sets the given motor's speed.
         /// </summary>
         /// <param name="motor">The motor to set the speed for.</param>
-        /// <param name="speed">The desired speed of the motor.</param>
+        /// <param name="speed">The desired speed of the motor between -1 and 1.</param>
         public void SetSpeed(Motor motor, double speed)
         {
             if (speed > 1 || speed < -1) new ArgumentOutOfRangeException("speed", "speed must be between -1 and 1.");
             if (motor != Motor.Motor1 && motor != Motor.Motor2) throw new ArgumentException("motor", "You must specify a valid motor.");
 
             this.directions[(int)motor].Write(speed < 0);
-            this.pwms[(int)motor].Set(this.Frequency, speed < 0 ? 1 - speed : speed);
+            this.pwms[(int)motor].Set(this.Frequency, speed < 0 ? 1 + speed : speed);
             this.lastSpeeds[(int)motor] = speed;
         }
 
@@ -93,7 +93,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Sets the given motor's speed.
         /// </summary>
         /// <param name="motor">The motor to set the speed for.</param>
-        /// <param name="speed">The desired speed of the motor.</param>
+        /// <param name="speed">The desired speed of the motor between -1 and 1.</param>
         /// <param name="time">How many milliseconds the motor should take to reach the specified speed.</param>
         public void SetSpeed(Motor motor, double speed, int time)
         {

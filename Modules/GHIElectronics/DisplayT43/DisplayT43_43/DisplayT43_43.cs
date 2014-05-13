@@ -8,7 +8,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A DisplayT43 module for Microsoft .NET Gadgeteer.
     /// </summary>
-    public class DisplayTE35 : GTM.Module.DisplayModule
+    public class DisplayT43 : GTM.Module.DisplayModule
     {
         private delegate void NullParamsDelegate();
         private GTI.DigitalOutput backlightPin;
@@ -17,7 +17,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
         /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
         /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
-        public DisplayTE35(int rSocketNumber, int gSocketNumber, int bSocketNumber) : this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused)
+        public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber) : this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused)
         {
 
         }
@@ -27,7 +27,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
         /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
         /// <param name="tSocketNumber">The mainboard socket that has the display's T socket connected to it.</param>
-        public DisplayTE35(int rSocketNumber, int gSocketNumber, int bSocketNumber, int tSocketNumber) : base(WpfMode.PassThrough)
+        public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber, int tSocketNumber) : base(WpfMode.PassThrough)
         {
             var config = new DisplayModule.TimingRequirements()
             {

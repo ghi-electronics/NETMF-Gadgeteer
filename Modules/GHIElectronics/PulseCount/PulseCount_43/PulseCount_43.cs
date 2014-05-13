@@ -22,6 +22,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.DigitalOutput mosi;
         private GTI.DigitalOutput clock;
         private GTI.DigitalOutput cs;
+        private GTI.DigitalOutput enable;
         private GTI.Spi spi;
         private SPIWriteRead spiWriteRead;
         private CountMode mode;
@@ -52,6 +53,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                 this.spiWriteRead = this.SoftwareWriteRead;
             }
+
+            this.enable = GTI.DigitalOutputFactory.Create(this.socket, Socket.Pin.Five, true, this);
 
             this.Initialize();
         }
@@ -174,7 +177,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void HardwareWriteRead(byte[] writeBuffer, byte[] readBuffer)
         {
-            if (readBuffer != null)
+            if (readBuffer == null)
                 this.spi.Write(writeBuffer);
             else
                 this.spi.WriteRead(writeBuffer, readBuffer);

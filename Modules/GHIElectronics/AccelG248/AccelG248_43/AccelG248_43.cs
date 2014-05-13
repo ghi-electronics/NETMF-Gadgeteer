@@ -138,6 +138,15 @@ namespace Gadgeteer.Modules.GHIElectronics
             /// The z acceleration.
             /// </summary>
             public int Z { get; set; }
+
+            /// <summary>
+            /// Returns the string representation of this object.
+            /// </summary>
+            /// <returns>The string representation.</returns>
+            public override string ToString()
+            {
+                return "(" + this.X.ToString() + ", " + this.Y.ToString() + ", " + this.Z.ToString() + ")";
+            }
         }
     }
 }
