@@ -42,7 +42,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Four, this);
             socket.ReservePin(Socket.Pin.Five, this);
 
-            Controller.DeviceConnected += OnDeviceConnected;
+            Controller.DeviceConnected += this.OnDeviceConnected;
 
             this.CurrentPictureResolution = PictureResolution.Resolution320x240;
         }
@@ -57,7 +57,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 this.workerThread = new Thread(this.DoWork);
                 this.workerThread.Start();
 
-                this.CameraConnected(this, null);
+                this.OnCameraConnected(this, null);
 
                 e.Device.Disconnected += this.OnDeviceDisconnected;
             }

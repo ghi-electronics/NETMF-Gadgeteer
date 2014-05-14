@@ -52,7 +52,6 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="GHI.Hardware" />
-    <Reference Include="GHI.Usb" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
@@ -60,5 +59,11 @@
     <Reference Include="mscorlib" />
     <Reference Include="System" />
     <Reference Include="System.IO" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\..\MicroFrameworkPK_v4_3\DeviceCode\GHI.Libraries\GHI.Usb\GHI.Usb.csproj">
+      <Project>{AEA61961-773A-4AFF-B365-72F25EFC0BA6}</Project>
+      <Name>GHI.Usb</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

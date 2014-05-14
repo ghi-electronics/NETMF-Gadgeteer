@@ -20,6 +20,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private GTI.DigitalOutput backlight;
 
+        private int currentRow;
+
         private static byte[] ROW_OFFSETS = new byte[4] { 0x00, 0x40, 0x14, 0x54 };
         private const byte DISP_ON = 0x0C;
         private const byte CLR_DISP = 1;
@@ -68,6 +70,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.backlight = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Eight, true, null);
 
+            this.currentRow = 0;
+
             this.SendCommand(0x33);
             this.SendCommand(0x32);
             this.SendCommand(HD44780.DISP_ON);
@@ -78,6 +82,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Prints the passed in string to the screen at the current cursor position.
+        /// A newline character (\n) will move the cursor to the start of the next row.
         /// </summary>
         /// <param name="value">The string to print.</param>
         public void Print(string value)
@@ -88,12 +93,20 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Prints a character to the screen at the current cursor position.
+        /// A newline character (\n) will move the cursor to the start of the next row.
         /// </summary>
         /// <param name="value">The character to display.</param>
         public void Print(char value)
         {
-            this.WriteNibble((byte)(value >> 4));
-            this.WriteNibble((byte)value);
+            if (value != '\n')
+            {
+                this.WriteNibble((byte)(value >> 4));
+                this.WriteNibble((byte)value);
+            }
+            else
+            {
+                this.SetCursorPosition((this.currentRow + 1) % 2, 0);
+            }
         }
 
         /// <summary>
@@ -121,8 +134,13 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <param name="row">The new row.</param>
         /// <param name="column">The new column.</param>
-        public void SetCursorPosition(byte row, byte column)
+        public void SetCursorPosition(int row, int column)
         {
+            if (column > 15 || column < 0) throw new System.ArgumentOutOfRangeException("column", "column must be between 0 and 15.");
+            if (row > 1 || row < 0) throw new System.ArgumentOutOfRangeException("row", "row must be between 0 and 1.");
+
+            this.currentRow = row;
+
             this.SendCommand((byte)(HD44780.SET_CURSOR | HD44780.ROW_OFFSETS[row] | column));
         }
 

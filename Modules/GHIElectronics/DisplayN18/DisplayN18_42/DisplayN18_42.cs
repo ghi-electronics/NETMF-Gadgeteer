@@ -154,6 +154,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 			}
 		}
 
+        /// <summary>
+        /// Swaps the red and blue channels if your display has them reversed.
+        /// </summary>
+        public void SwapRedBlueChannels()
+        {
+            this.WriteCommand(0x36); //MX, MY, RGB mode 
+            this.WriteData(0xC0);
+        }
+
 		private void Reset()
 		{
 			this.resetPin.Write(false);
