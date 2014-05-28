@@ -1,17 +1,21 @@
 ﻿DisplayN18 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 5/28/2014 by John
+SDK Version: 2014 R2 Beta 3
+Firmware Version: 4.3.2.0
 
 Instructions
 ------------
-1. None
+1. Connect a DisplayN18 to sockets 1, 3, and 11.
+2. Power the mainboard.
 
 Passing
 -------
-
+Each display shows red, green, blue, white, black, yellow,
+purple, and then orange in that order for roughly one second
+each and then repeats.
 
 Notes
 -----
-- None
+- All displays will show the same color at the same time.
+- You must restart the mainboard between tests.
