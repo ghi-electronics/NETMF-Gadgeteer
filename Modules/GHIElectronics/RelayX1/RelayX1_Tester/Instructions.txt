@@ -1,0 +1,22 @@
+RelayX1 Tester
+---------------
+Last Updated: 5/27/2014 by John
+SDK Version: 2014 R2 Beta 2
+Firmware Version: 4.3.2.0
+
+Instructions
+------------
+1. Connect a RelayX1 to sockets 1, 2, 3, 4, 9, 10, 11, 12, and 13.
+2. Power the mainboard.
+
+Passing
+-------
+The relays will turn on for 1 second and then turn off for one 
+second and then repeat.
+
+Notes
+-----
+- All relays will have the same state, either all on, or all off.
+- The relay is on when the onboard LED turns green on the module.
+- The screen will display the current state of the relays.
+- You may plug and unplug modules without restarting the mainboard.
