@@ -12,7 +12,7 @@ using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-namespace Tester
+namespace FEZHydra_Tester
 {
     public partial class Program
     {

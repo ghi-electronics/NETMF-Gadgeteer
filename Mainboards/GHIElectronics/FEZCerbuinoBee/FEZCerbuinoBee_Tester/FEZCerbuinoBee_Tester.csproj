@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{64a02f56-bcc3-4f94-ad49-9df87eecbc99}</ProjectGuid>
+    <ProjectGuid>{64A02F56-BCC3-4F94-AD49-9DF87EECBC99}</ProjectGuid>
     <!--This is an executable-->
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,8 +64,15 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
+    <None Include="small.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FEZCerbuinoBee_43\FEZCerbuinoBee_43.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

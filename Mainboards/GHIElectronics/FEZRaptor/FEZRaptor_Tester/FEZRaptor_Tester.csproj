@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5384330a-1585-4b87-a09f-4c17bb0674f7}</ProjectGuid>
+    <ProjectGuid>{5384330A-1585-4B87-A09F-4C17BB0674F7}</ProjectGuid>
     <!--This is an executable-->
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -64,8 +64,15 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
+    <None Include="small.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FEZRaptor_43\FEZRaptor_43.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

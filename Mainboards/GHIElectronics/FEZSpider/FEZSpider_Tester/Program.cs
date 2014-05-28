@@ -12,7 +12,7 @@ using Gadgeteer.Networking;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-namespace Tester
+namespace FEZSpider_Tester
 {
     public partial class Program
     {

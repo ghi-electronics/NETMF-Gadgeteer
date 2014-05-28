@@ -1,9 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <gadgeteerDSLDiagram dslVersion="1.0.0.0" Id="117734b1-42a0-4fee-99b2-981a0bef250b" absoluteBounds="0, 0, 11, 8.5" name="Program">
   <gadgeteerModelMoniker Id="a6ec24a6-bf3c-4865-81af-572c8d0c0da4" />
-  <nestedChildShapes>
-    <commentBoxShape Id="8e2552c2-d11f-4f2a-ae44-8f85034b1240" absoluteBounds="0.5, 2.375, 1.75, 1.375">
-      <commentMoniker Id="ef53fc86-fd08-43e6-94e0-ecd96a28b722" />
-    </commentBoxShape>
-  </nestedChildShapes>
 </gadgeteerDSLDiagram>
