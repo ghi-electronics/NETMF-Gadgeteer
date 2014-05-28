@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Template_Tester
+namespace RelayX1_Tester
 {
     
     internal partial class Resources
@@ -20,7 +20,7 @@ namespace Template_Tester
             {
                 if ((Resources.manager == null))
                 {
-                    Resources.manager = new System.Resources.ResourceManager("Template_Tester.Resources", typeof(Resources).Assembly);
+                    Resources.manager = new System.Resources.ResourceManager("RelayX1_Tester.Resources", typeof(Resources).Assembly);
                 }
                 return Resources.manager;
             }
