@@ -1,7 +1,7 @@
 RelayX1 Tester
 ---------------
-Last Updated: 5/27/2014 by John
-SDK Version: 2014 R2 Beta 2
+Last Updated: 5/28/2014 by John
+SDK Version: 2014 R2 Beta 3
 Firmware Version: 4.3.2.0
 
 Instructions
@@ -11,12 +11,12 @@ Instructions
 
 Passing
 -------
-The relays will turn on for 1 second and then turn off for one 
-second and then repeat.
+The relays will turn on for 1 second when the screen says "Relays on" 
+and then turn off for one second when the screen says "Relays off" 
+and then repeat.
 
 Notes
 -----
 - All relays will have the same state, either all on, or all off.
 - The relay is on when the onboard LED turns green on the module.
-- The screen will display the current state of the relays.
 - You may plug and unplug modules without restarting the mainboard.
