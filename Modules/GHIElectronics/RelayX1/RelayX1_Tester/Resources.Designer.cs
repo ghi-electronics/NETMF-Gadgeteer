@@ -20,7 +20,7 @@ namespace RelayX1_Tester
             {
                 if ((Resources.manager == null))
                 {
-					Resources.manager = new System.Resources.ResourceManager("RelayX1_Tester.Resources", typeof(Resources).Assembly);
+                    Resources.manager = new System.Resources.ResourceManager("RelayX1_Tester.Resources", typeof(Resources).Assembly);
                 }
                 return Resources.manager;
             }
