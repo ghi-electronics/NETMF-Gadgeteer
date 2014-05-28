@@ -19,6 +19,8 @@ namespace HD44780_Tester
     {
         void ProgramStarted()
         {
+            this.displayT43.SimpleGraphics.DisplayText("HD44780 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            Thread.Sleep(2000);
 
         }
     }

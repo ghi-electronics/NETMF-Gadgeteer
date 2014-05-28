@@ -19,6 +19,8 @@ namespace MotorDriverL298_Tester
     {
         void ProgramStarted()
         {
+            this.displayT43.SimpleGraphics.DisplayText("MotorDriverL298 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            Thread.Sleep(2000);
 
         }
     }

@@ -19,6 +19,8 @@ namespace CurrentACS712_Tester
     {
         void ProgramStarted()
         {
+            this.displayT43.SimpleGraphics.DisplayText("CurrentACS712 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            Thread.Sleep(2000);
 
         }
     }

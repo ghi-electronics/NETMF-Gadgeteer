@@ -19,6 +19,8 @@ namespace DisplayTE35_Tester
     {
         void ProgramStarted()
         {
+            this.displayT43.SimpleGraphics.DisplayText("DisplayTE35 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            Thread.Sleep(2000);
 
         }
     }
