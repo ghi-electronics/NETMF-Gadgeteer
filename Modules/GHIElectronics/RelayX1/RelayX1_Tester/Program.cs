@@ -11,7 +11,7 @@ namespace RelayX1_Tester
 
         void ProgramStarted()
         {
-            this.displayT43.SimpleGraphics.DisplayText("RelayX1 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("RelayX1 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
             this.next = false;
@@ -19,7 +19,7 @@ namespace RelayX1_Tester
             this.timer.Tick += (a) =>
                 {
                     this.displayT43.SimpleGraphics.Clear();
-                    this.displayT43.SimpleGraphics.DisplayText("Relays " + (this.next ? "on" : "off"), Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+                    this.displayT43.SimpleGraphics.DisplayText("Relays are now " + (this.next ? "on" : "off"), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
 
                     this.relayX11.Enabled = this.next;
                     this.relayX12.Enabled = this.next;

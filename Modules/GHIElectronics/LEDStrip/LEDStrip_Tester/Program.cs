@@ -11,7 +11,7 @@ namespace LEDStrip_Tester
 
         void ProgramStarted()
         {
-            this.displayT43.SimpleGraphics.DisplayText("LEDStrip Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("LEDStrip Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
             this.next = false;
@@ -19,7 +19,7 @@ namespace LEDStrip_Tester
             this.timer.Tick += (a) =>
             {
                 this.displayT43.SimpleGraphics.Clear();
-                this.displayT43.SimpleGraphics.DisplayText("LEDs " + (this.next ? "on" : "off"), Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+                this.displayT43.SimpleGraphics.DisplayText("LEDs are now " + (this.next ? "on" : "off"), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
 
                 if (next)
                 {

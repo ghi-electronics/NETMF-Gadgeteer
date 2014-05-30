@@ -75,7 +75,7 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
-    <None Include="small.tinyfnt" />
+    <None Include="NinaB.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XBeeAdapter_43\XBeeAdapter_43.csproj" />

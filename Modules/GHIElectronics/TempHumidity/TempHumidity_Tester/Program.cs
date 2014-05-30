@@ -19,7 +19,7 @@ namespace TempHumidity_Tester
     {
         void ProgramStarted()
         {
-            this.displayT43.SimpleGraphics.DisplayText("TempHumidity Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("TempHumidity Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
         }

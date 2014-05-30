@@ -11,7 +11,7 @@ namespace DisplayN18_Tester
 
         void ProgramStarted()
         {
-            this.displayT43.SimpleGraphics.DisplayText("DisplayN18 Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("DisplayN18 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
             this.next = 0;
@@ -38,7 +38,7 @@ namespace DisplayN18_Tester
 
         private void Show(GT.Color c, string s)
         {
-            this.displayT43.SimpleGraphics.DisplayText("Screens " + s.ToLower(), Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("Screens are now " + s.ToLower(), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             this.displayN181.SimpleGraphics.DisplayRectangle(c, 1, c, 0, 0, 128, 160);
             this.displayN182.SimpleGraphics.DisplayRectangle(c, 1, c, 0, 0, 128, 160);
             this.displayN183.SimpleGraphics.DisplayRectangle(c, 1, c, 0, 0, 128, 160);

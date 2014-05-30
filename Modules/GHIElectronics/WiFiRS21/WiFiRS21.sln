@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21", "WiFiRS21\WiFiRS21.csproj", "{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRS21", "WiFiRS21\WiFiRS21.csproj", "{9BBBE9E8-CD56-47F9-9ABF-BA29578EACE4}"
 EndProject
-Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21_42", "WiFiRS21_42\WiFiRS21_42.csproj", "{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRS21_42", "WiFiRS21_42\WiFiRS21_42.csproj", "{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}"
 EndProject
-Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21_43", "WiFiRS21_43\WiFiRS21_43.csproj", "{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRS21_43", "WiFiRS21_43\WiFiRS21_43.csproj", "{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}"
 EndProject
-Project("{7b429287-5c08-47a6-9cf2-536867a88c40}") = "WiFiRS21_Tester", "WiFiRS21_Tester\WiFiRS21_Tester.csproj", "{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRS21_Tester", "WiFiRS21_Tester\WiFiRS21_Tester.csproj", "{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9BBBE9E8-CD56-47F9-9ABF-BA29578EACE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBBE9E8-CD56-47F9-9ABF-BA29578EACE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBBE9E8-CD56-47F9-9ABF-BA29578EACE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBBE9E8-CD56-47F9-9ABF-BA29578EACE4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D89E99BA-2002-4B4A-AB2B-F0531DC73CAD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9bbbe9e8-cd56-47f9-9abf-ba29578eace4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1ff958d3-c5d3-4dbf-82b3-a03d9c3c2939}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7b5c4d32-c3d4-44df-84c5-f46206f5ad00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FF958D3-C5D3-4DBF-82B3-A03D9C3C2939}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5C4D32-C3D4-44DF-84C5-F46206F5AD00}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

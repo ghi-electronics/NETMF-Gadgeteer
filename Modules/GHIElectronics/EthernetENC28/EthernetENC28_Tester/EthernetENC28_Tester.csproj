@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer" />
+    <Reference Include="GHI.Networking, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
@@ -65,6 +66,7 @@
     <Reference Include="Microsoft.SPOT.Net" />
     <Reference Include="Microsoft.SPOT.TinyCore" />
     <Reference Include="mscorlib" />
+    <Reference Include="System.Http" />
     <Reference Include="System.IO" />
   </ItemGroup>
   <ItemGroup>
@@ -75,7 +77,7 @@
     <None Include="Program.gadgeteer.diagram">
       <DependentUpon>Program.gadgeteer</DependentUpon>
     </None>
-    <None Include="small.tinyfnt" />
+    <None Include="NinaB.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EthernetENC28_43\EthernetENC28_43.csproj" />

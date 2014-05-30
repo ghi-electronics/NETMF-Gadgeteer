@@ -32,7 +32,7 @@ namespace ButtonS7_Tester
         [System.SerializableAttribute()]
         internal enum FontResources : short
         {
-            small = 13070,
+            NinaB = 18060,
         }
     }
 }

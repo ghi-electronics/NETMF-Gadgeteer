@@ -1,8 +1,7 @@
 ﻿LEDStrip Tester
 ---------------
-Last Updated: 5/28/2014 by John
-SDK Version: 2014 R2 Beta 3
-Firmware Version: 4.3.2.0
+Last Updated: 5/30/2014 by John
+Firmware Version: 4.3.1.0
 
 Instructions
 ------------
@@ -20,3 +19,4 @@ Notes
 -----
 - All leds will have the same state, either all on, or all off.
 - You may plug and unplug modules without restarting the mainboard.
+- You may plug in only one module at a time if it is easier to test.

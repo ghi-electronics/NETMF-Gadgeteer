@@ -19,7 +19,7 @@ namespace DAQ8B_Tester
     {
         void ProgramStarted()
         {
-            this.displayT43.SimpleGraphics.DisplayText("DAQ8B Tester", Resources.GetFont(Resources.FontResources.small), GT.Color.White, 0, 0);
+            this.displayT43.SimpleGraphics.DisplayText("DAQ8B Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
         }
