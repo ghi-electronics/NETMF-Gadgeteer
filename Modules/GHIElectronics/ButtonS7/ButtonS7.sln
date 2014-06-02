@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{a6e85c86-a6b5-444c-8bb2-4ad075992ac9}") = "ButtonS7", "ButtonS7\ButtonS7.csproj", "{718edc49-4e03-47cc-9d36-28b67188d5d4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7", "ButtonS7\ButtonS7.csproj", "{718EDC49-4E03-47CC-9D36-28B67188D5D4}"
 EndProject
-Project("{a6e85c86-a6b5-444c-8bb2-4ad075992ac9}") = "ButtonS7_42", "ButtonS7_42\ButtonS7_42.csproj", "{EBB7C975-D722-4092-A51F-70F410C649CA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7_42", "ButtonS7_42\ButtonS7_42.csproj", "{EBB7C975-D722-4092-A51F-70F410C649CA}"
 EndProject
-Project("{a6e85c86-a6b5-444c-8bb2-4ad075992ac9}") = "ButtonS7_43", "ButtonS7_43\ButtonS7_43.csproj", "{0b191107-5dd3-441b-93ce-ff0d9d1ed1a0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7_43", "ButtonS7_43\ButtonS7_43.csproj", "{0B191107-5DD3-441B-93CE-FF0D9D1ED1A0}"
 EndProject
-Project("{a6e85c86-a6b5-444c-8bb2-4ad075992ac9}") = "ButtonS7_Tester", "ButtonS7_Tester\ButtonS7_Tester.csproj", "{499ec75e-ea54-4273-9a02-7636a96c53f0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ButtonS7_Tester", "ButtonS7_Tester\ButtonS7_Tester.csproj", "{499EC75E-EA54-4273-9A02-7636A96C53F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{718EDC49-4E03-47CC-9D36-28B67188D5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{718EDC49-4E03-47CC-9D36-28B67188D5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{718EDC49-4E03-47CC-9D36-28B67188D5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{718EDC49-4E03-47CC-9D36-28B67188D5D4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EBB7C975-D722-4092-A51F-70F410C649CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EBB7C975-D722-4092-A51F-70F410C649CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB7C975-D722-4092-A51F-70F410C649CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBB7C975-D722-4092-A51F-70F410C649CA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{718edc49-4e03-47cc-9d36-28b67188d5d4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{718edc49-4e03-47cc-9d36-28b67188d5d4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{718edc49-4e03-47cc-9d36-28b67188d5d4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{718edc49-4e03-47cc-9d36-28b67188d5d4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0b191107-5dd3-441b-93ce-ff0d9d1ed1a0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0b191107-5dd3-441b-93ce-ff0d9d1ed1a0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0b191107-5dd3-441b-93ce-ff0d9d1ed1a0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0b191107-5dd3-441b-93ce-ff0d9d1ed1a0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{499ec75e-ea54-4273-9a02-7636a96c53f0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{499ec75e-ea54-4273-9a02-7636a96c53f0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{499ec75e-ea54-4273-9a02-7636a96c53f0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{499ec75e-ea54-4273-9a02-7636a96c53f0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B191107-5DD3-441B-93CE-FF0D9D1ED1A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B191107-5DD3-441B-93CE-FF0D9D1ED1A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B191107-5DD3-441B-93CE-FF0D9D1ED1A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B191107-5DD3-441B-93CE-FF0D9D1ED1A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{499EC75E-EA54-4273-9A02-7636A96C53F0}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

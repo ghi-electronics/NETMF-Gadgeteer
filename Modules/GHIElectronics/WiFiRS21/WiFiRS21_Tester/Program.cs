@@ -31,11 +31,14 @@ namespace WiFiRS21_Tester
                 while (Mainboard.LDR0.Read())
                     Thread.Sleep(250);
 
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText("Beginning test.", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+
                 using (var netif = new WiFiRS9110(socket.SPIModule, socket.CpuPins[6], socket.CpuPins[3], socket.CpuPins[4]))
                 {
                     netif.Open();
-                    netif.EnableDhcp();
-                    netif.EnableDynamicDns();
+                    netif.EnableStaticIP("192.168.0.225", "255.255.255.0", "192.168.0.1");
+                    netif.EnableStaticDns(new string[] { "192.168.0.1" });
 
                     Debug.Print("Joining");
                     netif.Join("GHI Production", "48755981");
@@ -80,15 +83,11 @@ namespace WiFiRS21_Tester
                             }
                         }
 
-                        var s = end.AddMilliseconds(-20 * count) - start;
-                        var ms = s.Minutes * 60000 + s.Seconds * 1000 + s.Milliseconds;
-                        this.displayT43.SimpleGraphics.DisplayText(i.ToString() + " " + ((total / 1024.0) / (ms / 1000.0)).ToString("N2") + "    " + total.ToString() + "    " + ms.ToString(), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 15);
-
                         Thread.Sleep(100);
                     }
                 }
 
-                this.displayT43.SimpleGraphics.DisplayText("Module passes.", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.Green, 0, 30);
+                this.displayT43.SimpleGraphics.DisplayText("Module passes.", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.Green, 0, 15);
             }
         }
     }

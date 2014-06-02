@@ -1,17 +1,19 @@
 ﻿ButtonS7 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 6/2/2014 by John
+Firmware Version: 4.3.1.0
 
 Instructions
 ------------
-1. None
+1. Connect a ButtonS7 to sockets 1.
+2. Power the mainboard.
 
 Passing
 -------
-
+The screen will display which button is pressed and the
+two red LEDs next to the buttons will illuminate when the
+button is pressed.
 
 Notes
 -----
-- None
+- You may plug and unplug modules without restarting the mainboard.
