@@ -108,7 +108,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void TakeMeasurement()
         {
-            i2c.Write(new byte[] { (byte)Register.MR, (byte)Mode.SingleMode });
+            this.i2c.Write((byte)Register.MR, (byte)Mode.SingleMode);
         }
 
         void OnInterrupt(GTI.InterruptInput sender, bool value)
@@ -141,7 +141,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="gain">The gain value.</param>
         public void SetGain(Gain gain)
         {
-            this.i2c.Write(new byte[2] { (byte)Register.CRB, (byte)gain });
+            this.i2c.Write((byte)Register.CRB, (byte)gain);
         }
 
         /// <summary>

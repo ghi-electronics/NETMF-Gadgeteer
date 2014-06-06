@@ -215,10 +215,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="data">The music to play.</param>
         public void Play(byte[] data)
         {
+            if (data == null) throw new ArgumentNullException("data");
+
             lock (this.playSyncRoot)
             {
-                if (this.playing) throw new InvalidOperationException("Music is already playing, stop it first.");
-                if (data == null) throw new ArgumentNullException("data");
+                if (this.playing) throw new InvalidOperationException("You are arleady playing.");
+                if (this.recording) throw new InvalidOperationException("You cannot play while something is being recorded.");
 
                 this.playing = true;
                 this.playBackThread = new Thread(() => this.DoPlayback(data));
@@ -255,7 +257,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             lock (this.recordSyncRoot)
             {
-                if (this.playing) return;
+                if (this.playing) throw new InvalidOperationException("You cannot record while something is being played.");
+                if (this.recording) throw new InvalidOperationException("You are arleady recording.");
 
                 this.recording = true;
                 this.recordingThread = new Thread(() => this.DoRecord(stream, patch));
@@ -270,7 +273,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             lock (this.recordSyncRoot)
             {
-                if (!this.recording) throw new InvalidOperationException("Nothing is being recorded.");
+                if (!this.recording) return;
 
                 this.recording = false;
                 this.recordingThread.Join();
@@ -395,7 +398,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.CommandWrite(Music.SCI_AIADDR, 0x0034);
 
             while (!this.dreq.Read())
-                Thread.Sleep(0);
+                Thread.Sleep(5);
 
             bool stop = false;
             bool stopInProgress = false;
@@ -473,7 +476,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         this.spiCommand.Write(this.commandBuffer);
 
                         while (!this.dreq.Read())
-                            Thread.Sleep(0);
+                            Thread.Sleep(2);
                     }
                 }
                 else
@@ -487,7 +490,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         this.spiCommand.Write(this.commandBuffer);
 
                         while (!this.dreq.Read())
-                            Thread.Sleep(0);
+                            Thread.Sleep(2);
                     }
 
                 }
