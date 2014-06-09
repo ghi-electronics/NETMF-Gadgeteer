@@ -83,15 +83,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         private byte[] ReadBytes()
         {
             int available = this.port.BytesToRead;
-            byte[] buffer = null;
 
-            if (available > 0)
-            {
-                buffer = new byte[available];
+            if (available <= 0)
+                return null;
 
-                this.ReadBytes(buffer, 0, buffer.Length);
-            }
-
+            byte[] buffer = new byte[available];
+            this.ReadBytes(buffer, 0, buffer.Length);
             return buffer;
         }
 
@@ -111,7 +108,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     this.port.DiscardInBuffer();
 
                     if (attempts++ > 10)
-                        throw new InvalidOperationException("Failed to ready all of the bytes from the port.");
+                        throw new InvalidOperationException("Failed to read all of the bytes from the port.");
 
                     continue;
                 }
@@ -150,8 +147,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.port.Write(0x56, 0x00, 0x36, 0x01, 0x03);
 
-            byte[] reply = new byte[5];
-            this.ReadBytes(reply, 0, 5);
+            this.ReadBytes(new byte[5], 0, 5);
         }
 
         private int GetFrameBufferLength()
@@ -175,7 +171,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             this.DiscardBuffers();
 
-            this.port.Write(0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, (byte)(dataSize >> 24), (byte)(dataSize >> 16), (byte)(dataSize >> 8), (byte)(dataSize), 0x10, 0x00);
+            this.port.Write(0x56, 0x00, 0x32, 0x0C, 0x00, 0x0A, 0x00, 0x00, 0x00, 0x00, (byte)(this.dataSize >> 24), (byte)(this.dataSize >> 16), (byte)(this.dataSize >> 8), (byte)(this.dataSize), 0x10, 0x00);
 
             Thread.Sleep(10);
 
