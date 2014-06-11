@@ -11,8 +11,8 @@ Instructions
 Passing
 -------
 Every led on each LEDStrip will turn on for 1 second when the 
-screen says "Relays on" and then turn off for one second when 
-the screen says "Relays off" and then repeat.
+screen says "LEDs on" and then turn off for one second when 
+the screen says "LEDs off" and then repeat.
 
 
 Notes
