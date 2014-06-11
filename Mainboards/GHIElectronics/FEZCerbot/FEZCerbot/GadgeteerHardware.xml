@@ -14,10 +14,10 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
-        <!-- <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/> -->
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbot"/>
 
         <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
-        <!-- <Assembly MFVersion="4.3" Name="Gadgeteer.SPI"/> -->
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI"/>
       </Assemblies>
 
       <ProvidedSockets>
