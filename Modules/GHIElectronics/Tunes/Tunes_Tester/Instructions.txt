@@ -1,17 +1,20 @@
 ﻿Tunes Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 6/12/2014 by John
+Firmware Version: 4.3.1.0
 
 Instructions
 ------------
-1. None
+1. Connect a Tunes module to socket 18.
+2. Power the mainboard.
 
 Passing
 -------
+The module will emit a tone at 800Hz. It is a moderately high 
+frequency noise.
 
 
 Notes
 -----
-- None
+- The frequency will never change.
+- You may plug and unplug modules without restarting the mainboard.

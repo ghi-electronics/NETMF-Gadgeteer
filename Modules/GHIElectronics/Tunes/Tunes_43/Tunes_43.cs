@@ -234,18 +234,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="frequency">The frequency to play.</param>
 		public void Play(int frequency)
 		{
-            this.Play(frequency, int.MaxValue);
-		}
+            this.Pause();
 
-        /// <summary>
-        /// Plays the given frequency for the given duration.
-        /// </summary>
-        /// <param name="frequency">The frequency to play.</param>
-        /// <param name="duration">How long to play for.</param>
-        public void Play(int frequency, int duration)
-        {
-            this.Play(new MusicNote(new Tone(frequency), duration));
-        }
+            this.pwm.Set((int)frequency, 0.5);
+		}
 
         /// <summary>
         /// Plays the given tone indefinitely.
@@ -257,12 +249,26 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
+        /// Plays the given frequency for the given duration.
+        /// </summary>
+        /// <param name="frequency">The frequency to play.</param>
+        /// <param name="duration">How long to play for.</param>
+        public void Play(int frequency, int duration)
+        {
+            this.Play(new MusicNote(new Tone(frequency), duration));
+
+            this.Resume();
+        }
+
+        /// <summary>
         /// Plays the given note.
         /// </summary>
         /// <param name="note">The note to play.</param>
         public void Play(MusicNote note)
         {
             this.Play(new Melody(note));
+
+            this.Resume();
         }
 
         /// <summary>
@@ -272,6 +278,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void Play(params MusicNote[] notes)
         {
             this.Play(new Melody(notes));
+
+            this.Resume();
         }
 
 		/// <summary>
@@ -282,6 +290,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
             lock (this.syncRoot)
                 this.playlist = melody;
+
+            this.Resume();
 		}
 
         /// <summary>
