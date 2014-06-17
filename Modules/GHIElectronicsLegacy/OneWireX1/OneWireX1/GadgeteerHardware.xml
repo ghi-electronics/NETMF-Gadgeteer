@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="OneWire X1"
+                  UniqueId="8fb06201-b748-4d29-90d3-0a823d643c1b"
+                  Manufacturer="GHI Electronics"
+                  Description="An OneWireX1 module"
+                  InstanceName="oneWireX1"
+                  Type="Gadgeteer.Modules.GHIElectronics.OneWireX1"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="16"
+                  BoardWidth="27"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/366">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.OneWireX1"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.OneWireX1"/>
+		
+        <Assembly MFVersion="4.2" Name="Microsoft.SPOT.Hardware.OneWire"/>
+        <Assembly MFVersion="4.3" Name="Microsoft.SPOT.Hardware.OneWire"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="14" Top="13" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>Infinity</TypicalCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.000</TypicalCurrent>
+          <MaximumCurrent>0.000</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

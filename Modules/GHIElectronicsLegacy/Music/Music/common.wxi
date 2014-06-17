@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Music" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Music" ?>
+
+  <?define guid_msi_upgrade_code =  "2e5b1732-d1e4-449e-99f0-2a1d2c25b62e" ?>
+  <?define guid_msm_package_id = "dd80c6a4-174b-4ba0-8657-7f0e1e79768a" ?>
+
+  <?define guid_msm_comp_resources_id = "4d9fba48-be86-4056-bd59-66d624dd47fa" ?>
+  <?define guid_msm_comp_registry_id = "6f3752f2-1cee-44c3-8103-871d6ba0b281" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "d1650b2e-2533-4fc4-8073-e8325e8d2952"?>
+
+  <?define guid_msm_comp_files_id_42 = "6cb6a892-518f-41e8-beb5-724308439888" ?>
+  <?define guid_msm_comp_files_be_id_42 = "88f0d7e0-5c5b-462a-8963-fc5f888dca5e" ?>
+  <?define guid_msm_comp_files_le_id_42 = "1c234c4d-6416-4bd3-b87a-c20e1c7b4275" ?>
+
+  <?define guid_msm_comp_files_id_43 = "212d6f0e-98ca-44db-88e4-98a0a5f824dc" ?>
+  <?define guid_msm_comp_files_be_id_43 = "064bda84-a109-4612-afd7-c505f4e21371" ?>
+  <?define guid_msm_comp_files_le_id_43 = "b47f23e6-800a-425e-b57e-8d0f1412d5bd" ?>
+</Include>
+

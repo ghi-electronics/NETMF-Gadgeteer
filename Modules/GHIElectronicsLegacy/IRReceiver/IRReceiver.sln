@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{1ca41511-84c6-4e5f-9630-4e496342630f}") = "IRReceiver", "IRReceiver\IRReceiver.csproj", "{9117d14f-5086-40d9-8198-fcfd4de9d4e5}"
+EndProject
+Project("{1ca41511-84c6-4e5f-9630-4e496342630f}") = "IRReceiver_42", "IRReceiver_42\IRReceiver_42.csproj", "{F66552DC-510B-4875-87B8-5B5CFDABD1EB}"
+EndProject
+Project("{1ca41511-84c6-4e5f-9630-4e496342630f}") = "IRReceiver_43", "IRReceiver_43\IRReceiver_43.csproj", "{af52165f-c513-4e94-9e35-3aebc9fbebe4}"
+EndProject
+Project("{1ca41511-84c6-4e5f-9630-4e496342630f}") = "IRReceiver_Tester", "IRReceiver_Tester\IRReceiver_Tester.csproj", "{8134f18a-0841-4e9e-837f-fcc5eadbe315}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F66552DC-510B-4875-87B8-5B5CFDABD1EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F66552DC-510B-4875-87B8-5B5CFDABD1EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F66552DC-510B-4875-87B8-5B5CFDABD1EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F66552DC-510B-4875-87B8-5B5CFDABD1EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9117d14f-5086-40d9-8198-fcfd4de9d4e5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9117d14f-5086-40d9-8198-fcfd4de9d4e5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9117d14f-5086-40d9-8198-fcfd4de9d4e5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9117d14f-5086-40d9-8198-fcfd4de9d4e5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{af52165f-c513-4e94-9e35-3aebc9fbebe4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{af52165f-c513-4e94-9e35-3aebc9fbebe4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{af52165f-c513-4e94-9e35-3aebc9fbebe4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{af52165f-c513-4e94-9e35-3aebc9fbebe4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8134f18a-0841-4e9e-837f-fcc5eadbe315}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8134f18a-0841-4e9e-837f-fcc5eadbe315}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8134f18a-0841-4e9e-837f-fcc5eadbe315}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8134f18a-0841-4e9e-837f-fcc5eadbe315}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{d655b38f-b287-4618-8192-560713370d92}") = "RadioFM1", "RadioFM1\RadioFM1.csproj", "{9cb5162a-dfee-4ee6-b19a-513e07074972}"
+EndProject
+Project("{d655b38f-b287-4618-8192-560713370d92}") = "RadioFM1_42", "RadioFM1_42\RadioFM1_42.csproj", "{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}"
+EndProject
+Project("{d655b38f-b287-4618-8192-560713370d92}") = "RadioFM1_43", "RadioFM1_43\RadioFM1_43.csproj", "{e1f6e1f7-9234-4c7a-8e04-c3c52e24ffc3}"
+EndProject
+Project("{d655b38f-b287-4618-8192-560713370d92}") = "RadioFM1_Tester", "RadioFM1_Tester\RadioFM1_Tester.csproj", "{1abc2450-5f29-4f7b-8958-f2abbc01f1ef}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B056560-BC03-47B8-982A-A7EEC6B4F8F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9cb5162a-dfee-4ee6-b19a-513e07074972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9cb5162a-dfee-4ee6-b19a-513e07074972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9cb5162a-dfee-4ee6-b19a-513e07074972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9cb5162a-dfee-4ee6-b19a-513e07074972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{e1f6e1f7-9234-4c7a-8e04-c3c52e24ffc3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e1f6e1f7-9234-4c7a-8e04-c3c52e24ffc3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e1f6e1f7-9234-4c7a-8e04-c3c52e24ffc3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{e1f6e1f7-9234-4c7a-8e04-c3c52e24ffc3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1abc2450-5f29-4f7b-8958-f2abbc01f1ef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1abc2450-5f29-4f7b-8958-f2abbc01f1ef}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1abc2450-5f29-4f7b-8958-f2abbc01f1ef}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1abc2450-5f29-4f7b-8958-f2abbc01f1ef}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

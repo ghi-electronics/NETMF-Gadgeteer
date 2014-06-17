@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "ColorSense" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "ColorSense" ?>
+
+  <?define guid_msi_upgrade_code =  "acf33592-4286-4758-abf7-6ddf79f0b0a1" ?>
+  <?define guid_msm_package_id = "fd08dac3-cea0-4dfb-9e91-5c1dd3eac2f5" ?>
+
+  <?define guid_msm_comp_resources_id = "0c75af06-a760-42c2-8153-e6e1b82c5ea6" ?>
+  <?define guid_msm_comp_registry_id = "caadae71-f791-4d8d-9c14-3ae379b4f347" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "9e9af904-1cda-4b63-ba98-246e03c766a3"?>
+
+  <?define guid_msm_comp_files_id_42 = "1cb2f440-94bb-4328-bc74-6517012f7507" ?>
+  <?define guid_msm_comp_files_be_id_42 = "7cabf922-9c99-4817-95aa-221a9d6a9a25" ?>
+  <?define guid_msm_comp_files_le_id_42 = "277bd1ba-d722-4a13-8bd9-941db743ddbc" ?>
+
+  <?define guid_msm_comp_files_id_43 = "0878c496-efb1-454b-b89e-eba013ed9066" ?>
+  <?define guid_msm_comp_files_be_id_43 = "31af0ba8-1bb4-4ddb-9b80-d0f9ad3692f3" ?>
+  <?define guid_msm_comp_files_le_id_43 = "7ee4a3ce-ca3b-4aef-985d-2a3df370dd11" ?>
+</Include>
+

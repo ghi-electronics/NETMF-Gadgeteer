@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "Potentiometer" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "Potentiometer" ?>
+
+  <?define guid_msi_upgrade_code =  "5598f424-8509-47d6-bdeb-b5d0da73fe05" ?>
+  <?define guid_msm_package_id = "13283ef9-d9a7-4ac9-b3f8-bddd2b3e108a" ?>
+
+  <?define guid_msm_comp_resources_id = "3c190543-c63d-4b2c-960a-07b98bf40764" ?>
+  <?define guid_msm_comp_registry_id = "9f137d32-8fe5-4144-b8cc-215721a97ed4" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "5dbc6889-acee-4a24-b7bc-432dff50e467"?>
+
+  <?define guid_msm_comp_files_id_42 = "af3f5a8a-56a0-4a67-a6f4-3eb41ac9ae0e" ?>
+  <?define guid_msm_comp_files_be_id_42 = "1f71851a-fbf9-4c74-8369-45046b0065fd" ?>
+  <?define guid_msm_comp_files_le_id_42 = "95df48c2-2400-465b-a8fc-93717a97f584" ?>
+
+  <?define guid_msm_comp_files_id_43 = "f676b2cf-8cb3-4ae9-8083-93e0c501963b" ?>
+  <?define guid_msm_comp_files_be_id_43 = "5ec6ef47-0b91-482d-aaf9-521e4e6658b5" ?>
+  <?define guid_msm_comp_files_le_id_43 = "1645a4af-910b-4784-a517-38a5e4218e8b" ?>
+</Include>
+

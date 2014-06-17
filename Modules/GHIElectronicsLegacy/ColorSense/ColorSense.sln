@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{199187fe-d359-4b45-b900-628d0c21e45a}") = "ColorSense", "ColorSense\ColorSense.csproj", "{7b48c675-a34c-4486-997c-618f33db6347}"
+EndProject
+Project("{199187fe-d359-4b45-b900-628d0c21e45a}") = "ColorSense_42", "ColorSense_42\ColorSense_42.csproj", "{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}"
+EndProject
+Project("{199187fe-d359-4b45-b900-628d0c21e45a}") = "ColorSense_43", "ColorSense_43\ColorSense_43.csproj", "{724baa0f-445e-4bda-a6a0-e06f5620cb23}"
+EndProject
+Project("{199187fe-d359-4b45-b900-628d0c21e45a}") = "ColorSense_Tester", "ColorSense_Tester\ColorSense_Tester.csproj", "{b8c1de62-cead-497e-91b5-5a7a7530d73a}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB359AAA-BFC6-400A-81B5-E4D0D51E9BFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7b48c675-a34c-4486-997c-618f33db6347}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7b48c675-a34c-4486-997c-618f33db6347}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7b48c675-a34c-4486-997c-618f33db6347}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7b48c675-a34c-4486-997c-618f33db6347}.Release|Any CPU.Build.0 = Release|Any CPU
+		{724baa0f-445e-4bda-a6a0-e06f5620cb23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{724baa0f-445e-4bda-a6a0-e06f5620cb23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{724baa0f-445e-4bda-a6a0-e06f5620cb23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{724baa0f-445e-4bda-a6a0-e06f5620cb23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{b8c1de62-cead-497e-91b5-5a7a7530d73a}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b8c1de62-cead-497e-91b5-5a7a7530d73a}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b8c1de62-cead-497e-91b5-5a7a7530d73a}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{b8c1de62-cead-497e-91b5-5a7a7530d73a}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "ButtonS7" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "ButtonS7" ?>
+
+  <?define guid_msi_upgrade_code =  "15712e20-3ad8-4670-8e7a-f4ae4e40c1ed" ?>
+  <?define guid_msm_package_id = "210d27d8-33e6-4302-9433-cad18209eb37" ?>
+
+  <?define guid_msm_comp_resources_id = "163a4d41-1e83-47cf-8051-783a2cb12c96" ?>
+  <?define guid_msm_comp_registry_id = "c589bcd4-a7d9-4812-abad-6ef530b64814" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "e03bf628-bae7-41b5-bcdb-0e9bf7a9627f"?>
+
+  <?define guid_msm_comp_files_id_42 = "87fd10fa-25c0-447c-9324-d1a4e36e12db" ?>
+  <?define guid_msm_comp_files_be_id_42 = "267d502c-dfe8-4dbc-b67a-0d8ac5767cda" ?>
+  <?define guid_msm_comp_files_le_id_42 = "08f8d709-6ff5-42f6-b792-b2300b2eb934" ?>
+
+  <?define guid_msm_comp_files_id_43 = "b4203366-20a0-432a-8e97-d75377269991" ?>
+  <?define guid_msm_comp_files_be_id_43 = "c54e2a21-61bb-4cf0-939b-c0dd3f7cbc2d" ?>
+  <?define guid_msm_comp_files_le_id_43 = "a81b2a61-55c5-4719-885d-1fc53ed21260" ?>
+</Include>
+

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="IO60P16"
+                  UniqueId="df940797-1081-4830-8cd6-d977052314c5"
+                  Manufacturer="GHI Electronics"
+                  Description="An IO60P16 module"
+                  InstanceName="io60P16"
+                  Type="Gadgeteer.Modules.GHIElectronics.IO60P16"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="48"
+                  BoardWidth="63"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/364">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.IO60P16"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.IO60P16"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="10.5" Top="13.5" Orientation="0" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>Infinity</TypicalCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>Infinity</TypicalCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

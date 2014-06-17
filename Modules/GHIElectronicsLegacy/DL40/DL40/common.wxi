@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "DL40" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "DL40" ?>
+
+  <?define guid_msi_upgrade_code =  "8493aef4-de8b-4570-a4b6-d3e9bde4573b" ?>
+  <?define guid_msm_package_id = "afe4a93f-bb6b-41b6-9f84-1c0231f950e1" ?>
+
+  <?define guid_msm_comp_resources_id = "cce917f1-d89c-40ae-89a0-c5bb58c754f6" ?>
+  <?define guid_msm_comp_registry_id = "409f6613-ae9b-489d-b7dd-a30aef440e3c" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "986a8338-baf8-48f5-8a84-f60e5d79edaa"?>
+
+  <?define guid_msm_comp_files_id_42 = "57a065ac-a971-4f51-ae02-5f7480ac7f8e" ?>
+  <?define guid_msm_comp_files_be_id_42 = "664b7b6d-bfe2-4f21-bd2a-968840443bdd" ?>
+  <?define guid_msm_comp_files_le_id_42 = "10479e63-2a0a-47c3-8760-e919ac30f3db" ?>
+
+  <?define guid_msm_comp_files_id_43 = "166635b0-18b9-471d-91ce-72771bf4f16c" ?>
+  <?define guid_msm_comp_files_be_id_43 = "19fa229d-d005-4ffe-824c-ebc521617dfb" ?>
+  <?define guid_msm_comp_files_le_id_43 = "0e926deb-36c0-494e-9fe6-89d7cad5ce90" ?>
+</Include>
+

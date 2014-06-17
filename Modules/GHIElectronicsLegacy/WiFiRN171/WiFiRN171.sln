@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRN171", "WiFiRN171\WiFiRN171.csproj", "{3390C19A-3979-47CC-BE1B-FAC2862D60C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRN171_42", "WiFiRN171_42\WiFiRN171_42.csproj", "{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRN171_43", "WiFiRN171_43\WiFiRN171_43.csproj", "{9CCDA855-D061-4CC2-9F3E-A69F6EDBA2D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WiFiRN171_Tester", "WiFiRN171_Tester\WiFiRN171_Tester.csproj", "{17C92D6C-CC62-403C-88F0-0C8365E46E7E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3390C19A-3979-47CC-BE1B-FAC2862D60C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3390C19A-3979-47CC-BE1B-FAC2862D60C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3390C19A-3979-47CC-BE1B-FAC2862D60C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3390C19A-3979-47CC-BE1B-FAC2862D60C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E6BF5C0-1CFC-4851-AA14-2969DA4AC7F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CCDA855-D061-4CC2-9F3E-A69F6EDBA2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CCDA855-D061-4CC2-9F3E-A69F6EDBA2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CCDA855-D061-4CC2-9F3E-A69F6EDBA2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CCDA855-D061-4CC2-9F3E-A69F6EDBA2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17C92D6C-CC62-403C-88F0-0C8365E46E7E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

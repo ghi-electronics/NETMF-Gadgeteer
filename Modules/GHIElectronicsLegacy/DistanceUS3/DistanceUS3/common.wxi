@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "DistanceUS3" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "DistanceUS3" ?>
+
+  <?define guid_msi_upgrade_code =  "40059904-dd4b-4e61-83da-4b174ab1d449" ?>
+  <?define guid_msm_package_id = "f1c51b06-42e9-46ec-970d-3516240f6d3a" ?>
+
+  <?define guid_msm_comp_resources_id = "1da804b0-195b-46f5-8611-19cc90c6192e" ?>
+  <?define guid_msm_comp_registry_id = "45a6c738-e14e-4576-9789-950ee712177f" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "bee547ec-ca45-46d4-9c60-c4a86ed163bf"?>
+
+  <?define guid_msm_comp_files_id_42 = "487098e5-eaa3-4c45-a478-61383570ebc9" ?>
+  <?define guid_msm_comp_files_be_id_42 = "9042f2d3-7b15-4ecf-807f-ad560b4c3b59" ?>
+  <?define guid_msm_comp_files_le_id_42 = "7deb9fbd-b239-4a8e-9c16-b9fa3be6fe4f" ?>
+
+  <?define guid_msm_comp_files_id_43 = "40fc863b-1371-43c2-a59d-88df3ad323ed" ?>
+  <?define guid_msm_comp_files_be_id_43 = "ae3c9a76-62f3-49df-9b6a-b5ee8ab1822b" ?>
+  <?define guid_msm_comp_files_le_id_43 = "cf02d1f7-77dd-47e6-b050-5d91a66823ca" ?>
+</Include>
+
