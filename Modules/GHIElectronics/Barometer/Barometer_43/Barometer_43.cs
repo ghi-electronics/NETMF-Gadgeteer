@@ -7,7 +7,7 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics
 {
     /// <summary>
-    /// An Barometer module for Microsoft .NET Gadgeteer
+    /// A Barometer module for Microsoft .NET Gadgeteer
     /// </summary>
     public class Barometer : GTM.Module
     {
