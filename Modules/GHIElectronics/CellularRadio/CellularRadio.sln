@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{eaee00c0-5a12-4ef0-8354-f4e188c4cbf9}") = "CellularRadio", "CellularRadio\CellularRadio.csproj", "{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}"
+EndProject
+Project("{eaee00c0-5a12-4ef0-8354-f4e188c4cbf9}") = "CellularRadio_43", "CellularRadio_43\CellularRadio_43.csproj", "{45ccf7a3-437c-4666-87b4-a321f487d6e5}"
+EndProject
+Project("{eaee00c0-5a12-4ef0-8354-f4e188c4cbf9}") = "CellularRadio_Tester", "CellularRadio_Tester\CellularRadio_Tester.csproj", "{d8989b3a-add9-47f4-8f09-9e2302a5889d}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45ccf7a3-437c-4666-87b4-a321f487d6e5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45ccf7a3-437c-4666-87b4-a321f487d6e5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45ccf7a3-437c-4666-87b4-a321f487d6e5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45ccf7a3-437c-4666-87b4-a321f487d6e5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{d8989b3a-add9-47f4-8f09-9e2302a5889d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d8989b3a-add9-47f4-8f09-9e2302a5889d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d8989b3a-add9-47f4-8f09-9e2302a5889d}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d8989b3a-add9-47f4-8f09-9e2302a5889d}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

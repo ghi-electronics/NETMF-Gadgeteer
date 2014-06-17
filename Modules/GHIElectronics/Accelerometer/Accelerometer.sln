@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{7accb044-55bd-432c-af0e-7eae290d0445}") = "Accelerometer", "Accelerometer\Accelerometer.csproj", "{b9641526-4fd7-4338-b4ca-992572cd2e29}"
+EndProject
+Project("{7accb044-55bd-432c-af0e-7eae290d0445}") = "Accelerometer_43", "Accelerometer_43\Accelerometer_43.csproj", "{e13e1ee6-cfae-40e2-b6d9-90dc7a24cb15}"
+EndProject
+Project("{7accb044-55bd-432c-af0e-7eae290d0445}") = "Accelerometer_Tester", "Accelerometer_Tester\Accelerometer_Tester.csproj", "{e377b7fa-f507-4beb-a4d2-21ae5a000aed}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{b9641526-4fd7-4338-b4ca-992572cd2e29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b9641526-4fd7-4338-b4ca-992572cd2e29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b9641526-4fd7-4338-b4ca-992572cd2e29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{b9641526-4fd7-4338-b4ca-992572cd2e29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{e13e1ee6-cfae-40e2-b6d9-90dc7a24cb15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e13e1ee6-cfae-40e2-b6d9-90dc7a24cb15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e13e1ee6-cfae-40e2-b6d9-90dc7a24cb15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{e13e1ee6-cfae-40e2-b6d9-90dc7a24cb15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{e377b7fa-f507-4beb-a4d2-21ae5a000aed}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e377b7fa-f507-4beb-a4d2-21ae5a000aed}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e377b7fa-f507-4beb-a4d2-21ae5a000aed}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{e377b7fa-f507-4beb-a4d2-21ae5a000aed}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

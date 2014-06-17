@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{5521a4d2-1259-4eed-acb5-40eff67305ca}") = "PulseOximeter", "PulseOximeter\PulseOximeter.csproj", "{d674a64e-4af1-4787-b8cd-abc553b68f7b}"
+EndProject
+Project("{5521a4d2-1259-4eed-acb5-40eff67305ca}") = "PulseOximeter_43", "PulseOximeter_43\PulseOximeter_43.csproj", "{afdec835-ffac-4d8f-9ed2-3aaa0e23f2e0}"
+EndProject
+Project("{5521a4d2-1259-4eed-acb5-40eff67305ca}") = "PulseOximeter_Tester", "PulseOximeter_Tester\PulseOximeter_Tester.csproj", "{735821b8-6960-4bd2-af97-744136cc61cf}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{d674a64e-4af1-4787-b8cd-abc553b68f7b}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d674a64e-4af1-4787-b8cd-abc553b68f7b}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d674a64e-4af1-4787-b8cd-abc553b68f7b}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d674a64e-4af1-4787-b8cd-abc553b68f7b}.Release|Any CPU.Build.0 = Release|Any CPU
+		{afdec835-ffac-4d8f-9ed2-3aaa0e23f2e0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{afdec835-ffac-4d8f-9ed2-3aaa0e23f2e0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{afdec835-ffac-4d8f-9ed2-3aaa0e23f2e0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{afdec835-ffac-4d8f-9ed2-3aaa0e23f2e0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{735821b8-6960-4bd2-af97-744136cc61cf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{735821b8-6960-4bd2-af97-744136cc61cf}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{735821b8-6960-4bd2-af97-744136cc61cf}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{735821b8-6960-4bd2-af97-744136cc61cf}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
