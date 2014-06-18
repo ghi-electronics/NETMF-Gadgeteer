@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="ParallelCNC"
+                  UniqueId="b91e8c3d-4fb5-4e96-b5b1-96c8454dd726"
+                  Manufacturer="GHI Electronics"
+                  Description="A ParallelCNC module"
+                  InstanceName="ParallelCNC"
+                  Type="Gadgeteer.Modules.GHIElectronics.ParallelCNC"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="45"
+                  BoardWidth="57"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/374">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.ParallelCNC"/>
+		
+        <Assembly MFVersion="4.2" Name="Gadgeteer.DaisyLink" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="4" Top="29" Orientation="0" ConstructorOrder="1" TypesLabel="XY*">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+            <Type>*</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.00</TypicalCurrent>
+          <MaximumCurrent>0.00</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.022</TypicalCurrent>
+          <MaximumCurrent>0.030</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "ParallelCNC" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "ParallelCNC" ?>
+
+  <?define guid_msi_upgrade_code =  "40860a7d-16e7-4a35-b83d-e907a3493773" ?>
+  <?define guid_msm_package_id = "f91797eb-25c9-4448-b1eb-b518bea62870" ?>
+
+  <?define guid_msm_comp_resources_id = "96bf961a-271c-408d-911e-1dcd7c6e75c4" ?>
+  <?define guid_msm_comp_registry_id = "9323b50c-d3ab-46c0-a4a9-7b99195cf36a" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "5827446a-c56d-4b2a-b46e-25c5aa88c119"?>
+
+  <?define guid_msm_comp_files_id_42 = "18c1ae42-9e92-4d66-9e23-3fa00922d272" ?>
+  <?define guid_msm_comp_files_be_id_42 = "6bbf0698-35b7-4ca2-bc3d-b30f6e7fa008" ?>
+  <?define guid_msm_comp_files_le_id_42 = "e729b397-627e-46e5-aeb1-149af61c1cce" ?>
+</Include>
+

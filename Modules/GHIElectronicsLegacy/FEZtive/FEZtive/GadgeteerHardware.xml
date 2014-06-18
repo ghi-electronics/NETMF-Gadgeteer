@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="FEZtive"
+                  UniqueId="bae47830-de8b-45a1-9432-86af24398445"
+                  Manufacturer="GHI Electronics"
+                  Description="A FEZtive module"
+                  InstanceName="FEZtive"
+                  Type="Gadgeteer.Modules.GHIElectronics.FEZtive"
+                  ModuleSuppliesPower="false"
+                  Image="Resources\Image.jpg"
+                  BoardHeight="25"
+                  BoardWidth="135"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/409">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZtive"/>
+		
+        <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="111" Top="20" Orientation="90" ConstructorOrder="1" TypesLabel="S">
+          <Types>
+            <Type>S</Type>
+          </Types>
+          <Pins>
+			  <Pin Shared="false">6</Pin>
+			  <Pin Shared="true">7</Pin>
+			  <Pin Shared="true">8</Pin>
+			  <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

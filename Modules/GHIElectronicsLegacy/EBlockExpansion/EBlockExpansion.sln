@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{0717915f-9b38-4332-a79c-9eb9cd7ef521}") = "EBlockExpansion", "EBlockExpansion\EBlockExpansion.csproj", "{1d037acd-8034-42d4-8c37-42ddd83f2112}"
+EndProject
+Project("{0717915f-9b38-4332-a79c-9eb9cd7ef521}") = "EBlockExpansion_42", "EBlockExpansion_42\EBlockExpansion_42.csproj", "{d9c6c272-b4d6-4cd2-9efc-1f15a9e40f10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1d037acd-8034-42d4-8c37-42ddd83f2112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1d037acd-8034-42d4-8c37-42ddd83f2112}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1d037acd-8034-42d4-8c37-42ddd83f2112}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1d037acd-8034-42d4-8c37-42ddd83f2112}.Release|Any CPU.Build.0 = Release|Any CPU
+		{d9c6c272-b4d6-4cd2-9efc-1f15a9e40f10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{d9c6c272-b4d6-4cd2-9efc-1f15a9e40f10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{d9c6c272-b4d6-4cd2-9efc-1f15a9e40f10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{d9c6c272-b4d6-4cd2-9efc-1f15a9e40f10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

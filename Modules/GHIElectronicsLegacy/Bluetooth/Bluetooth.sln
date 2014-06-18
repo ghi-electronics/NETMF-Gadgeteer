@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{780b8d35-c960-4186-90a0-298a3d512170}") = "Bluetooth", "Bluetooth\Bluetooth.csproj", "{5f912dff-8974-4a52-8733-aa665a0d6cdb}"
+EndProject
+Project("{780b8d35-c960-4186-90a0-298a3d512170}") = "Bluetooth_42", "Bluetooth_42\Bluetooth_42.csproj", "{c5bf3e1f-d609-4d9e-b151-b31dffa084f1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5f912dff-8974-4a52-8733-aa665a0d6cdb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5f912dff-8974-4a52-8733-aa665a0d6cdb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5f912dff-8974-4a52-8733-aa665a0d6cdb}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5f912dff-8974-4a52-8733-aa665a0d6cdb}.Release|Any CPU.Build.0 = Release|Any CPU
+		{c5bf3e1f-d609-4d9e-b151-b31dffa084f1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c5bf3e1f-d609-4d9e-b151-b31dffa084f1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c5bf3e1f-d609-4d9e-b151-b31dffa084f1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{c5bf3e1f-d609-4d9e-b151-b31dffa084f1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
