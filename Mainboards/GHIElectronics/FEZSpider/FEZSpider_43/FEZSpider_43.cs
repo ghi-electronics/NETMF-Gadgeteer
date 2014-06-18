@@ -275,7 +275,7 @@ namespace GHIElectronics.Gadgeteer
             switch (volumeName)
             {
                 case "SD":
-                    this.storageDevices[0] = new SD(SD.SDInterface.MCI);
+                    this.storageDevices[0] = new SD();
                     this.storageDevices[0].Mount();
 
                     break;
@@ -289,7 +289,7 @@ namespace GHIElectronics.Gadgeteer
                     break;
 
                 default:
-                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
             }
 
             return true;
@@ -323,7 +323,7 @@ namespace GHIElectronics.Gadgeteer
                     break;
 
                 default:
-                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
             }
 
             return true;

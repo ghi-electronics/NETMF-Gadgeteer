@@ -205,7 +205,7 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>The volume names.</returns>
         public override string[] GetStorageDeviceVolumeNames()
         {
-            return new string[] { "SD", "SD SPI", "USB MassStorage" };
+            return new string[] { "SD", "USB MassStorage" };
         }
 
         /// <summary>
@@ -218,27 +218,21 @@ namespace GHIElectronics.Gadgeteer
             switch (volumeName)
             {
                 case "SD":
-                    this.storageDevices[0] = new SD(SD.SDInterface.MCI);
+                    this.storageDevices[0] = new SD();
                     this.storageDevices[0].Mount();
-
-                    break;
-
-                case "SD SPI":
-                    this.storageDevices[1] = new SD(SD.SDInterface.SPI);
-                    this.storageDevices[1].Mount();
 
                     break;
 
                 case "USB MassStorage":
                     if (this.usbMassStorageDevice == null) throw new InvalidOperationException("No USB MassStorage device is plugged into the device.");
 
-                    this.storageDevices[2] = new UsbMassStorage(this.usbMassStorageDevice);
-                    this.storageDevices[2].Mount();
+                    this.storageDevices[1] = new UsbMassStorage(this.usbMassStorageDevice);
+                    this.storageDevices[1].Mount();
 
                     break;
 
                 default:
-                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
             }
 
             return true;
@@ -262,7 +256,7 @@ namespace GHIElectronics.Gadgeteer
 
                     break;
 
-                case "SD SPI":
+                case "USB MassStorage":
                     if (this.storageDevices[1] == null) return false;
 
                     this.storageDevices[1].Unmount();
@@ -271,17 +265,8 @@ namespace GHIElectronics.Gadgeteer
 
                     break;
 
-                case "USB MassStorage":
-                    if (this.storageDevices[2] == null) return false;
-
-                    this.storageDevices[2].Unmount();
-                    this.storageDevices[2].Dispose();
-                    this.storageDevices[2] = null;
-
-                    break;
-
                 default:
-                    throw new ArgumentException("volumeName", "volumeName must be present in the array returned by GetStorageDeviceVolumeNames.");
+                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
             }
 
             return true;
