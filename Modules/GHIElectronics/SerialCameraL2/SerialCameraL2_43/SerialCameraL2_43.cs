@@ -32,8 +32,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.EnsureTypeIsSupported('U', this);
 
             this.port = GTI.SerialFactory.Create(socket, 115200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
-            this.port.ReadTimeout = 5000;
-            this.port.WriteTimeout = 5000;
+            this.port.ReadTimeout = 500;
+            this.port.WriteTimeout = 500;
             this.port.Open();
             this.ResetCamera();
 
@@ -107,7 +107,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 {
                     this.port.DiscardInBuffer();
 
-                    if (attempts++ > 10)
+                    if (attempts++ > 1)
                         throw new InvalidOperationException("Failed to read all of the bytes from the port.");
 
                     continue;
