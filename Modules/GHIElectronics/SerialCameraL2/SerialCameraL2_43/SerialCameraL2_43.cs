@@ -303,32 +303,33 @@ namespace Gadgeteer.Modules.GHIElectronics
                     Thread.Sleep(10);
                     continue;
                 }
+				
                 try
                 {
-                this.StopFrameBufferControl();
-                this.dataSize = this.GetFrameBufferLength();
+					this.StopFrameBufferControl();
+					this.dataSize = this.GetFrameBufferLength();
 
-                if (this.dataSize > 0)
-                {
-                    this.newImageReady = false;
+					if (this.dataSize > 0)
+					{
+						this.newImageReady = false;
 
-                    this.imageData = null;
-                    this.imageData = new byte[dataSize];
+						this.imageData = null;
+						this.imageData = new byte[dataSize];
 
-                    this.newImageReady = this.ReadFrameBuffer();
-                    if (!this.newImageReady)
-                    {
-                        this.ResetCamera();
-                    }
-                    else
-                    {
-                        this.ResumeToNextFrame();
-                    }
+						this.newImageReady = this.ReadFrameBuffer();
+						if (!this.newImageReady)
+						{
+							this.ResetCamera();
+						}
+						else
+						{
+							this.ResumeToNextFrame();
+						}
                     }
                 }
                 catch (Exception e)
                 {
-                    Debug.Print("Bad Frame");
+                    Debug.Print("Error in SerialCameraL2.");
                 }
             }
         }

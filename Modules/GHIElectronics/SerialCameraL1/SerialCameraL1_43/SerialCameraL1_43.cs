@@ -303,6 +303,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     Thread.Sleep(10);
                     continue;
                 }
+				
                 try
                 {
                     this.StopFrameBufferControl();
@@ -328,7 +329,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 }
                 catch (Exception e)
                 {
-                    Debug.Print("Bad Frame");
+                    Debug.Print("Error in SerialCameraL1.");
                 }
             }
         }
