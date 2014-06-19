@@ -113,7 +113,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                     continue;
                 }
 
-                Thread.Sleep(1); // Do not remove this sleep or slow speed in some case
+                Thread.Sleep(1);
             } while (count > 0);
         }
 
