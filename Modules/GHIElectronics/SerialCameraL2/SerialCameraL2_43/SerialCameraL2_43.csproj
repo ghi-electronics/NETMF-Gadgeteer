@@ -47,10 +47,7 @@
     <Compile Include="..\..\Shared\AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Gadgeteer">
-      <SpecificVersion>false</SpecificVersion>
-      <Private>false</Private>
-    </Reference>
+    <Reference Include="Gadgeteer" />
     <Reference Include="Gadgeteer.Serial" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
