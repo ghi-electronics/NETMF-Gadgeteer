@@ -303,7 +303,8 @@ namespace Gadgeteer.Modules.GHIElectronics
                     Thread.Sleep(10);
                     continue;
                 }
-
+                try
+                {
                 this.StopFrameBufferControl();
                 this.dataSize = this.GetFrameBufferLength();
 
@@ -323,6 +324,11 @@ namespace Gadgeteer.Modules.GHIElectronics
                     {
                         this.ResumeToNextFrame();
                     }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Print("Bad Frame");
                 }
             }
         }

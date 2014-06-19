@@ -303,26 +303,32 @@ namespace Gadgeteer.Modules.GHIElectronics
                     Thread.Sleep(10);
                     continue;
                 }
-
-                this.StopFrameBufferControl();
-                this.dataSize = this.GetFrameBufferLength();
-
-                if (this.dataSize > 0)
+                try
                 {
-                    this.newImageReady = false;
+                    this.StopFrameBufferControl();
+                    this.dataSize = this.GetFrameBufferLength();
 
-                    this.imageData = null;
-                    this.imageData = new byte[dataSize];
+                    if (this.dataSize > 0)
+                    {
+                        this.newImageReady = false;
 
-                    this.newImageReady = this.ReadFrameBuffer();
-                    if (!this.newImageReady)
-                    {
-                        this.ResetCamera();
+                        this.imageData = null;
+                        this.imageData = new byte[dataSize];
+
+                        this.newImageReady = this.ReadFrameBuffer();
+                        if (!this.newImageReady)
+                        {
+                            this.ResetCamera();
+                        }
+                        else
+                        {
+                            this.ResumeToNextFrame();
+                        }
                     }
-                    else
-                    {
-                        this.ResumeToNextFrame();
-                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.Print("Bad Frame");
                 }
             }
         }
