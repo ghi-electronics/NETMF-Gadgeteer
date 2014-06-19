@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{589ef5e5-9c5b-4f19-b5d2-2426049ea69d}</ProjectGuid>
+    <ProjectGuid>{589EF5E5-9C5B-4F19-B5D2-2426049EA69D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CellularRadio_43\CellularRadio_43.csproj" />
+    <ProjectReference Include="..\CellularRadio_43\CellularRadio_43.csproj">
+      <Project>{45CCF7A3-437C-4666-87B4-A321F487D6E5}</Project>
+      <Name>CellularRadio_43</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

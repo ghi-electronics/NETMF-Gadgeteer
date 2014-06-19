@@ -103,5 +103,20 @@
         </socketUses>
       </module>
     </gadgeteerModelHasGadgeteerHardware>
+    <gadgeteerModelHasGadgeteerHardware Id="101e4a2b-4887-4d8a-aae6-d5689fa6cb55">
+      <module Id="74e378df-a528-4123-8b18-1a92917b9e10" cachedDefinition="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ModuleDefinition xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; Name=&quot;Keypad KP16&quot; Manufacturer=&quot;GHI Electronics&quot; Description=&quot;A KeypadKP16 module&quot; Type=&quot;Gadgeteer.Modules.GHIElectronics.KeypadKP16&quot; HardwareVersion=&quot;1.0&quot; Image=&quot;C:\Program Files (x86)\GHI Electronics\GHI .NET Gadgeteer SDK\Modules\KeypadKP16\Resources\Image.jpg&quot; BoardWidth=&quot;69&quot; BoardHeight=&quot;75&quot; MinimumGadgeteerCoreVersion=&quot;2.43.800&quot; HelpUrl=&quot;http://www.ghielectronics.com/catalog/product/345&quot; UniqueId=&quot;81ddcd6d-4a54-4f98-a042-aa726d3a75b0&quot; InstanceName=&quot;keypadKP16&quot; ModuleSuppliesPower=&quot;false&quot;&gt;&#xD;&#xA;  &lt;Power&gt;&#xD;&#xA;    &lt;PowerRequirements Voltage=&quot;3.3&quot;&gt;&#xD;&#xA;      &lt;TypicalCurrent&gt;1E-06&lt;/TypicalCurrent&gt;&#xD;&#xA;      &lt;MaximumCurrent&gt;2E-06&lt;/MaximumCurrent&gt;&#xD;&#xA;    &lt;/PowerRequirements&gt;&#xD;&#xA;    &lt;PowerRequirements Voltage=&quot;5&quot;&gt;&#xD;&#xA;      &lt;TypicalCurrent&gt;0&lt;/TypicalCurrent&gt;&#xD;&#xA;      &lt;MaximumCurrent&gt;0&lt;/MaximumCurrent&gt;&#xD;&#xA;    &lt;/PowerRequirements&gt;&#xD;&#xA;  &lt;/Power&gt;&#xD;&#xA;  &lt;ProvidedSockets /&gt;&#xD;&#xA;  &lt;Assemblies&gt;&#xD;&#xA;    &lt;Assembly MFVersion=&quot;4.2&quot; Name=&quot;GTM.GHIElectronics.KeypadKP16&quot; /&gt;&#xD;&#xA;    &lt;Assembly MFVersion=&quot;4.3&quot; Name=&quot;GTM.GHIElectronics.KeypadKP16&quot; /&gt;&#xD;&#xA;  &lt;/Assemblies&gt;&#xD;&#xA;  &lt;LibrariesProvided /&gt;&#xD;&#xA;  &lt;Sockets&gt;&#xD;&#xA;    &lt;Socket Orientation=&quot;90&quot; Left=&quot;33&quot; Top=&quot;27&quot; TypesLabel=&quot;Y&quot; ConstructorOrder=&quot;1&quot; Optional=&quot;false&quot;&gt;&#xD;&#xA;      &lt;Types&gt;&#xD;&#xA;        &lt;Type&gt;Y&lt;/Type&gt;&#xD;&#xA;      &lt;/Types&gt;&#xD;&#xA;      &lt;Pins&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;3&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;4&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;5&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;6&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;7&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;8&lt;/Pin&gt;&#xD;&#xA;      &lt;/Pins&gt;&#xD;&#xA;    &lt;/Socket&gt;&#xD;&#xA;  &lt;/Sockets&gt;&#xD;&#xA;  &lt;ExtraLibrariesRequired /&gt;&#xD;&#xA;&lt;/ModuleDefinition&gt;" name="keypadKP16" moduleType="Gadgeteer.Modules.GHIElectronics.KeypadKP16" moduleDefinitionId="81ddcd6d-4a54-4f98-a042-aa726d3a75b0">
+        <socketUses>
+          <moduleHasSocketUses Id="a44bdfba-09a7-4615-a11a-6fa490499b1e">
+            <socketUse Id="83ec0dfd-a429-4241-b2b7-5971feb9190b" label="Y">
+              <socket>
+                <socketUseReferencesSocket Id="19fb0ec5-4aa9-4ffa-9a33-ca73f352bc9f">
+                  <socketMoniker Id="45c3d08c-7dda-4141-a091-1e567a6c9ef8" />
+                </socketUseReferencesSocket>
+              </socket>
+            </socketUse>
+          </moduleHasSocketUses>
+        </socketUses>
+      </module>
+    </gadgeteerModelHasGadgeteerHardware>
   </gadgeteerHardware>
 </gadgeteerModel>

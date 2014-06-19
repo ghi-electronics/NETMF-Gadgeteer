@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{b9641526-4fd7-4338-b4ca-992572cd2e29}</ProjectGuid>
+    <ProjectGuid>{B9641526-4FD7-4338-B4CA-992572CD2E29}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Accelerometer_43\Accelerometer_43.csproj" />
+    <ProjectReference Include="..\Accelerometer_43\Accelerometer_43.csproj">
+      <Project>{E13E1EE6-CFAE-40E2-B6D9-90DC7A24CB15}</Project>
+      <Name>Accelerometer_43</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

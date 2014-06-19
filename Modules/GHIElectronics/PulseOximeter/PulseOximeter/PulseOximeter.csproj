@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{d674a64e-4af1-4787-b8cd-abc553b68f7b}</ProjectGuid>
+    <ProjectGuid>{D674A64E-4AF1-4787-B8CD-ABC553B68F7B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PulseOximeter_43\PulseOximeter_43.csproj" />
+    <ProjectReference Include="..\PulseOximeter_43\PulseOximeter_43.csproj">
+      <Project>{AFDEC835-FFAC-4D8F-9ED2-3AAA0E23F2E0}</Project>
+      <Name>PulseOximeter_43</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
