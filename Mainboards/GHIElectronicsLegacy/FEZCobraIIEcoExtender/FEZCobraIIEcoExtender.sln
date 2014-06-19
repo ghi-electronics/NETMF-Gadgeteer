@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEco", "FEZCobraIIEco\FEZCobraIIEco.csproj", "{76e2719e-3a27-425f-bc52-325bc0ac251c}"
+Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEcoExtender", "FEZCobraIIEcoExtender\FEZCobraIIEcoExtender.csproj", "{76e2719e-3a27-425f-bc52-325bc0ac251c}"
 EndProject
-Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEco_42", "FEZCobraIIEco_42\FEZCobraIIEco_42.csproj", "{88E55EF7-DEF2-4E4F-9B37-C3AE13DAE9A3}"
+Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEcoExtender_42", "FEZCobraIIEcoExtender_42\FEZCobraIIEcoExtender_42.csproj", "{88E55EF7-DEF2-4E4F-9B37-C3AE13DAE9A3}"
 EndProject
-Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEco_43", "FEZCobraIIEco_43\FEZCobraIIEco_43.csproj", "{c167beb4-796b-4390-80cf-f53aa4016344}"
+Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEcoExtender_43", "FEZCobraIIEcoExtender_43\FEZCobraIIEcoExtender_43.csproj", "{c167beb4-796b-4390-80cf-f53aa4016344}"
 EndProject
-Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEco_Tester", "FEZCobraIIEco_Tester\FEZCobraIIEco_Tester.csproj", "{d1aa7177-cf14-4f3f-bca1-b58102f38916}"
+Project("{2b40b37b-e2c9-48a1-a65a-53a5e4233011}") = "FEZCobraIIEcoExtender_Tester", "FEZCobraIIEcoExtender_Tester\FEZCobraIIEcoExtender_Tester.csproj", "{d1aa7177-cf14-4f3f-bca1-b58102f38916}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

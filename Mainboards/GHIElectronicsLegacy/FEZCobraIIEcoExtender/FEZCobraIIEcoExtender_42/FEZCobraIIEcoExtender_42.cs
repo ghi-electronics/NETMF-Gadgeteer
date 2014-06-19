@@ -15,12 +15,12 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZCobra II for Microsoft .NET Gadgeteer
 	/// </summary>
-	public class FEZCobraIIEco : GT.Mainboard
+	public class FEZCobraIIEcoExtender : GT.Mainboard
 	{
 		/// <summary>
 		/// Instantiates a new GHI Electronics FEZCobra II mainboard
 		/// </summary>
-		public FEZCobraIIEco()
+		public FEZCobraIIEcoExtender()
 		{
 			// uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
 			// otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.

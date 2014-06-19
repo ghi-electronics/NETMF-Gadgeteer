@@ -1,7 +1,6 @@
-﻿FEZCerbot Tester
+﻿FEZCobraIIEco Tester
 ---------------
-Last Updated: 
-SDK Version: 
+Last Updated:  
 Firmware Version: 
 
 Instructions
