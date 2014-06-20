@@ -56,9 +56,7 @@
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Native" />
@@ -78,12 +76,15 @@
     <None Include="NinaB.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DistanceUS3_43\DistanceUS3_43.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DistanceUS3_43\DistanceUS3_43.csproj">
+      <Project>{70316713-0644-42E5-8AC2-47D331128438}</Project>
+      <Name>DistanceUS3_43</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

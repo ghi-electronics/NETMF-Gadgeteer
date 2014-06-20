@@ -39,7 +39,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             if (socket.SupportsType('S'))
             {
-                this.spi = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 1000), GTI.SpiSharing.Shared, socket, GT.Socket.Pin.Six, this);
+                this.spi = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 5, 20, false, true, 1), GTI.SpiSharing.Shared, socket, GT.Socket.Pin.Six, this);
                 this.spiWriteRead = this.HardwareWriteRead;
             }
             else
@@ -146,7 +146,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void HardwareWriteRead(byte[] writeBuffer, byte[] readBuffer)
         {
-            if (readBuffer != null)
+            if (readBuffer == null)
                 this.spi.Write(writeBuffer);
             else
                 this.spi.WriteRead(writeBuffer, readBuffer);

@@ -1,17 +1,25 @@
 ﻿RotaryH1 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 6/20/2014 by John
+Firmware Version: 4.3.1.0
 
 Instructions
 ------------
-1. None
+1. Connect a module to sockets 1, 9, and 18.
+2. Power the mainboard.
+3. Turn the knob on each module to the left and the right.
+4. As you turn, observe the two numbers after each socket
+   label on the screen.
 
 Passing
 -------
-
+When the knob is facing you and you turn it counter-clockwise, the 
+first number will increase and the second number will be zero. When
+you turn it clockwise, the first number will decrease and the second
+number will be one.
 
 Notes
 -----
-- None
+- You must restart the mainboard between tests.
+- You may plug in only one module at a time, but make sure to ignore 
+  the values for the unplugged sockets.

@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
-
-using Gadgeteer.Networking;
+﻿using System.Threading;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
 using Gadgeteer.Modules.GHIElectronics;
 
 namespace DistanceUS3_Tester
 {
     public partial class Program
     {
+        private GT.Timer timer;
+
         void ProgramStarted()
         {
             this.displayT43.SimpleGraphics.DisplayText("DistanceUS3 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
+            this.timer = new GT.Timer(200);
+            this.timer.Tick += (a) =>
+            {
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText("Distance: " + this.distanceUS31.GetDistance().ToString() + "cm", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+            };
+            this.timer.Start();
         }
     }
 }
