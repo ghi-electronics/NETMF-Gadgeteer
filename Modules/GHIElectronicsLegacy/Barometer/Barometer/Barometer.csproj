@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9CB1725-036E-42CA-BDD5-7D02CBD9C09F}</ProjectGuid>
+    <ProjectGuid>{D3C377E1-1ED2-4275-B1A5-E40EBF47CA5B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,9 +48,9 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FEZtive_42\FEZtive_42.csproj">
-      <Project>{7E8872F4-5DA8-45D8-AA73-B3BA3963242A}</Project>
-      <Name>FEZtive_42</Name>
+    <ProjectReference Include="..\Barometer_43\Barometer_43.csproj">
+      <Project>{010F2C46-9EB2-46D1-992B-F55E26DADF19}</Project>
+      <Name>Barometer_43</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
@@ -66,7 +66,7 @@
     <Message Text="Compiling msm" />
     <Candle ToolPath="$(WixToolPath)" DefineConstants="BinPath=$(OutDir);SourcePath=$(ProjectDir)" SourceFiles="..\..\Shared\msm.wxs" OutputFile="$(WixIntermediateFolderPath)\msm.wixobj" />
     <Message Text="Linking msm" />
-    <Light ToolPath="$(WixToolPath)" LocalizationFiles="..\..\Shared\en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\FEZtive.msm" />
+    <Light ToolPath="$(WixToolPath)" LocalizationFiles="..\..\Shared\en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\Barometer.msm" />
   </Target>
   <!--Cleanup for installer -->
   <Target Name="AfterClean">

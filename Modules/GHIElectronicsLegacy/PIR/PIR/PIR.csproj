@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{56157585-ddac-4373-b825-6c65da119194}</ProjectGuid>
+    <ProjectGuid>{56157585-DDAC-4373-B825-6C65DA119194}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PIR_42\PIR_42.csproj" />
+    <ProjectReference Include="..\PIR_42\PIR_42.csproj">
+      <Project>{B6E9AC9E-6CCE-4693-8326-0FB3D3E66D8B}</Project>
+      <Name>PIR_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

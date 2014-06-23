@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "KeypadKP16" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF42Supported ?>
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "KeypadKP16" ?>
+
+  <?define guid_msi_upgrade_code =  "4e816648-32ab-43cc-9b4b-6a49e11b8217" ?>
+  <?define guid_msm_package_id = "4eff1b8d-0268-4884-9711-5ae9a1ba2df4" ?>
+
+  <?define guid_msm_comp_resources_id = "ebcc0c07-a18c-4d53-980c-6e227af1f427" ?>
+  <?define guid_msm_comp_registry_id = "f7aa1fee-33ff-4ace-941f-cd679ecc99fe" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "157f2560-b011-4d3a-8ed3-f36b7fa18d0a"?>
+
+  <?define guid_msm_comp_files_id_42 = "1e55c38d-db44-4978-b58e-18a22f100426" ?>
+  <?define guid_msm_comp_files_be_id_42 = "35e87ed7-b359-4ff5-8e34-50b6297ef1aa" ?>
+  <?define guid_msm_comp_files_le_id_42 = "ac9bde00-2cbf-44f0-9c3f-d3e4fdd3941f" ?>
+
+  <?define guid_msm_comp_files_id_43 = "ee5b0b4b-6fe8-4c57-85b0-da64865793e9" ?>
+  <?define guid_msm_comp_files_be_id_43 = "4eebcd5e-0746-468e-a81b-ae92012cfbf2" ?>
+  <?define guid_msm_comp_files_le_id_43 = "f5eef204-5e6b-4cf2-9034-8ba4b0dc317e" ?>
+</Include>
+

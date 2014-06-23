@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{A9CB1725-036E-42CA-BDD5-7D02CBD9C09F}</ProjectGuid>
+    <ProjectGuid>{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,9 +48,13 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FEZtive_42\FEZtive_42.csproj">
-      <Project>{7E8872F4-5DA8-45D8-AA73-B3BA3963242A}</Project>
-      <Name>FEZtive_42</Name>
+    <ProjectReference Include="..\KeypadKP16_42\KeypadKP16_42.csproj">
+        <Project>{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}</Project>
+        <Name>KeypadKP16_42</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KeypadKP16_43\KeypadKP16_43.csproj">
+      <Project>{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}</Project>
+      <Name>KeypadKP16_43</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
@@ -66,7 +70,7 @@
     <Message Text="Compiling msm" />
     <Candle ToolPath="$(WixToolPath)" DefineConstants="BinPath=$(OutDir);SourcePath=$(ProjectDir)" SourceFiles="..\..\Shared\msm.wxs" OutputFile="$(WixIntermediateFolderPath)\msm.wixobj" />
     <Message Text="Linking msm" />
-    <Light ToolPath="$(WixToolPath)" LocalizationFiles="..\..\Shared\en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\FEZtive.msm" />
+    <Light ToolPath="$(WixToolPath)" LocalizationFiles="..\..\Shared\en-us.wxl" ObjectFiles="$(WixIntermediateFolderPath)\msm.wixobj" OutputFile="$(WixOutputFolderPath)\KeypadKP16.msm" />
   </Target>
   <!--Cleanup for installer -->
   <Target Name="AfterClean">

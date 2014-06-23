@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4c6a0e77-2359-4852-a350-30656cee58b6}</ProjectGuid>
+    <ProjectGuid>{4C6A0E77-2359-4852-A350-30656CEE58B6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ParallelCNC_42\ParallelCNC_42.csproj" />
+    <ProjectReference Include="..\ParallelCNC_42\ParallelCNC_42.csproj">
+      <Project>{3945E34F-8711-443E-90A9-2D25CDC9D59F}</Project>
+      <Name>ParallelCNC_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

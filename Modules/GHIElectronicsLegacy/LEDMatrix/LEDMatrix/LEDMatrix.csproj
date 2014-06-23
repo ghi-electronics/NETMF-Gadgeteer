@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{866ead46-3609-42f3-ba63-e4b6b539b0a8}</ProjectGuid>
+    <ProjectGuid>{866EAD46-3609-42F3-BA63-E4B6B539B0A8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LEDMatrix_42\LEDMatrix_42.csproj" />
+    <ProjectReference Include="..\LEDMatrix_42\LEDMatrix_42.csproj">
+      <Project>{C4BB8F70-4521-4AD3-B792-90F0A7C916A5}</Project>
+      <Name>LEDMatrix_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

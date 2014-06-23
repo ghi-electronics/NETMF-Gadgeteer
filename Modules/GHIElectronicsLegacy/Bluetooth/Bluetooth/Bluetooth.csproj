@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5f912dff-8974-4a52-8733-aa665a0d6cdb}</ProjectGuid>
+    <ProjectGuid>{5F912DFF-8974-4A52-8733-AA665A0D6CDB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bluetooth_42\Bluetooth_42.csproj" />
+    <ProjectReference Include="..\Bluetooth_42\Bluetooth_42.csproj">
+      <Project>{C5BF3E1F-D609-4D9E-B151-B31DFFA084F1}</Project>
+      <Name>Bluetooth_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

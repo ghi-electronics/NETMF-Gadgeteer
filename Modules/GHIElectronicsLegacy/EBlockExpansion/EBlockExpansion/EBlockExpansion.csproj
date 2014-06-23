@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1d037acd-8034-42d4-8c37-42ddd83f2112}</ProjectGuid>
+    <ProjectGuid>{1D037ACD-8034-42D4-8C37-42DDD83F2112}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EBlockExpansion_42\EBlockExpansion_42.csproj" />
+    <ProjectReference Include="..\EBlockExpansion_42\EBlockExpansion_42.csproj">
+      <Project>{D9C6C272-B4D6-4CD2-9EFC-1F15A9E40F10}</Project>
+      <Name>EBlockExpansion_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

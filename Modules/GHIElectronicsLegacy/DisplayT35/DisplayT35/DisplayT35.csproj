@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{237af29f-97b7-4577-9b33-2fbd64541694}</ProjectGuid>
+    <ProjectGuid>{237AF29F-97B7-4577-9B33-2FBD64541694}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -48,7 +48,10 @@
     <None Include="Image.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DisplayT35_42\DisplayT35_42.csproj" />
+    <ProjectReference Include="..\DisplayT35_42\DisplayT35_42.csproj">
+      <Project>{9D61F761-DD30-4233-B680-13EE141EDF3B}</Project>
+      <Name>DisplayT35_42</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>

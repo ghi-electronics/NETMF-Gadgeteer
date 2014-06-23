@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeypadKP16", "KeypadKP16\KeypadKP16.csproj", "{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeypadKP16_42", "KeypadKP16_42\KeypadKP16_42.csproj", "{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeypadKP16_43", "KeypadKP16_43\KeypadKP16_43.csproj", "{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeypadKP16_Tester", "KeypadKP16_Tester\KeypadKP16_Tester.csproj", "{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75F8C956-6435-4CB8-91C2-AC31CDAF46CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29FF6B34-54DA-4AD3-8AB4-B45BDC6B8520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C9E5FB7-0CFD-461F-BB8F-BCDE02CCFC74}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AF0E29B-1577-4487-B4ED-6A3E1E25B6DA}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
