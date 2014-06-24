@@ -56,9 +56,6 @@
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Native" />
@@ -78,6 +75,10 @@
     <None Include="NinaB.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\DisplayT43\DisplayT43_43\DisplayT43_43.csproj">
+      <Project>{4A04560C-0FD2-4D91-A3D3-4ACBD95D2A4B}</Project>
+      <Name>DisplayT43_43</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LightSense_43\LightSense_43.csproj" />
   </ItemGroup>
   <ItemGroup>

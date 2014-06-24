@@ -1,17 +1,22 @@
 ﻿LightSense Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 6/23/2014 by John
+Firmware Version: 4.3.1.0
 
 Instructions
 ------------
-1. None
+1. Connect a LightSense module to sockets 2, 13, and 18.
+2. Power the mainboard.
+3. Cover and uncover the front of the module.
 
 Passing
 -------
-
+When the module is uncovered, the number displayed on the screen
+will be closer to 100. When the module is covered, the number will
+be closer to 0.
 
 Notes
 -----
-- None
+- The more light in the room the closer to 100 the number will be.
+- You may plug and unplug modules without restarting the mainboard.
+- You may plug in only one module if it is easier to test.
