@@ -1,17 +1,23 @@
 ﻿USBHost Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 6/25/2014 by John
+Firmware Version: 4.3.2.0
 
 Instructions
 ------------
-1. None
+1. Connect a USBHost module to socket 6.
+2. Power the mainboard.
+3. When the screen says plug in a mouse, plug a mouse
+   into the USBHost module.
+4. Move the mouse around.
+5. Unplug the mouse.
 
 Passing
 -------
-
+As you move the mouse, the coordiantes on the screen 
+will change.
 
 Notes
 -----
-- None
+- You may plug and unplug modules without restarting the mainboard.
+- Do not have a mouse plugged in before powering the mainboard.

@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost", "USBHost\USBHost.csproj", "{b7543f6b-6849-4676-baf3-5b8ca81efeef}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USBHost", "USBHost\USBHost.csproj", "{B7543F6B-6849-4676-BAF3-5B8CA81EFEEF}"
 EndProject
-Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost_42", "USBHost_42\USBHost_42.csproj", "{85484495-8305-49DF-9683-A56C29EA32D4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USBHost_42", "USBHost_42\USBHost_42.csproj", "{85484495-8305-49DF-9683-A56C29EA32D4}"
 EndProject
-Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost_43", "USBHost_43\USBHost_43.csproj", "{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USBHost_43", "USBHost_43\USBHost_43.csproj", "{A3F3A1B1-63DD-496E-85C2-AAD608F6E9A7}"
 EndProject
-Project("{b29bda36-0e40-4a9e-a749-73a4f93eb669}") = "USBHost_Tester", "USBHost_Tester\USBHost_Tester.csproj", "{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "USBHost_Tester", "USBHost_Tester\USBHost_Tester.csproj", "{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B7543F6B-6849-4676-BAF3-5B8CA81EFEEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7543F6B-6849-4676-BAF3-5B8CA81EFEEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7543F6B-6849-4676-BAF3-5B8CA81EFEEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7543F6B-6849-4676-BAF3-5B8CA81EFEEF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{85484495-8305-49DF-9683-A56C29EA32D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{85484495-8305-49DF-9683-A56C29EA32D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85484495-8305-49DF-9683-A56C29EA32D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85484495-8305-49DF-9683-A56C29EA32D4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{b7543f6b-6849-4676-baf3-5b8ca81efeef}.Release|Any CPU.Build.0 = Release|Any CPU
-		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{a3f3a1b1-63dd-496e-85c2-aad608f6e9a7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{d00f0d58-2caf-4ea5-91c2-dc3dd1e88946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3F3A1B1-63DD-496E-85C2-AAD608F6E9A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3F3A1B1-63DD-496E-85C2-AAD608F6E9A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3F3A1B1-63DD-496E-85C2-AAD608F6E9A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3F3A1B1-63DD-496E-85C2-AAD608F6E9A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D00F0D58-2CAF-4EA5-91C2-DC3DD1E88946}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

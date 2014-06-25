@@ -56,7 +56,12 @@
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GTM.GHIElectronics.DistanceUS3, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.Native" />

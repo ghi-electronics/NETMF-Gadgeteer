@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using GT = Gadgeteer;
+using Gadgeteer.Modules.GHIElectronics;
 
 namespace RotaryH1_Tester
 {
