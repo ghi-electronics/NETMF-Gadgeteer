@@ -393,6 +393,15 @@ namespace GHIElectronics.Gadgeteer
         /// <param name="timing">The required timings from an LCD controller.</param>
         protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GTM.Module.DisplayModule.TimingRequirements timing)
         {
+            switch (orientationDeg)
+            {
+                case 0: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Normal; break;
+                case 90: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Clockwise90; break;
+                case 180: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Half; break;
+                case 270: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.CounterClockwise90; break;
+                default: throw new ArgumentOutOfRangeException("orientationDeg", "orientationDeg must be 0, 90, 180, or 270.");
+            }
+
             Configuration.Display.Height = (uint)height;
             Configuration.Display.HorizontalBackPorch = timing.HorizontalBackPorch;
             Configuration.Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
@@ -414,15 +423,6 @@ namespace GHIElectronics.Gadgeteer
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
 
                 Microsoft.SPOT.Hardware.PowerState.RebootDevice(false);
-            }
-
-            switch (orientationDeg)
-            {
-                case 0: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Normal; break;
-                case 90: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Clockwise90; break;
-                case 180: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Half; break;
-                case 270: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.CounterClockwise90; break;
-                default: throw new ArgumentOutOfRangeException("orientationDeg", "orientationDeg must be 0, 90, 180, or 270.");
             }
         }
 
