@@ -61,7 +61,7 @@
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="5" Left="44" Top="41" Orientation="270" ConstructorParameter="5">
+        <ProvidedSocket Label="5" Left="43" Top="41" Orientation="270" ConstructorParameter="5">
           <Types>
             <Type>P</Type>
             <Type>C</Type>
@@ -94,7 +94,7 @@
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="8" Left="5" Top="24" Orientation="180" ConstructorParameter="8">
+        <ProvidedSocket Label="8" Left="6" Top="23" Orientation="180" ConstructorParameter="8">
           <Types>
             <Type>D</Type>
             <Type>Z</Type>
