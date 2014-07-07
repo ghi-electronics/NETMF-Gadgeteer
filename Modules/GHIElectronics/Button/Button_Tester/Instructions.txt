@@ -1,17 +1,19 @@
 ﻿Button Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 7/7/2014 by John
+SDK Version: 4.3.2.0
 
 Instructions
 ------------
-1. None
+1. Connect a Button to sockets 1, 2, 3, 4, 9, 10, 11, 12, 13, and 18.
+2. Power the mainboard.
 
 Passing
 -------
-
+When you press a button, its on-board LED will light up and the screen
+will say that it is pressed.
 
 Notes
 -----
-- None
+- You may plug and unplug modules without restarting the mainboard.
+- You may plug in only one module at a time if it is easier to test.

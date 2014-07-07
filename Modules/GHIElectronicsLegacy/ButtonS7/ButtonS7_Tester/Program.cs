@@ -19,13 +19,13 @@ namespace ButtonS7_Tester
                     {
                         this.Clear();
 
-                        if (buttonS7.IsPressed(ButtonS7.Button.Back)) this.Write("Back Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Forward)) this.Write("Forward Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Left)) this.Write("Left Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Right)) this.Write("Right Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Up)) this.Write("Up Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Down)) this.Write("Down Pressed.");
-                        if (buttonS7.IsPressed(ButtonS7.Button.Enter)) this.Write("Enter Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Back)) this.Write("Back Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Forward)) this.Write("Forward Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Left)) this.Write("Left Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Right)) this.Write("Right Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Up)) this.Write("Up Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Down)) this.Write("Down Pressed.");
+                        if (this.buttonS7.IsPressed(ButtonS7.Button.Enter)) this.Write("Enter Pressed.");
 
                         Thread.Sleep(15);
                     }
