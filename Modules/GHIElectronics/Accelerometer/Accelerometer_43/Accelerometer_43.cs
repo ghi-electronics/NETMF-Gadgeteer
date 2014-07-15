@@ -33,8 +33,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.read1 = new byte[1];
             this.write1 = new byte[1];
             this.autoResetThresholdDetection = false;
-            this.OperatingMode = Mode.Measurement;
-            this.MeasurementRange = Range.TwoG;
 
             this.interrupt = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, this);
             this.interrupt.Interrupt += this.OnInterrupt;
@@ -44,6 +42,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.timer = new GT.Timer(200);
             this.timer.Tick += (a) => this.TakeMeasurement();
+
+            this.OperatingMode = Mode.Measurement;
+            this.MeasurementRange = Range.TwoG;
         }
 
         private enum Mode

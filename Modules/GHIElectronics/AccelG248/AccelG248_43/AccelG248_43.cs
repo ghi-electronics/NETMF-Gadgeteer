@@ -42,7 +42,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             var data = this.ReadRegister(0x01, 2);
 
-            int value = data[0] << 2 | data[1] >> 6 & 0x3F;
+            int value = ((data[0] << 2) | (data[1] >> 6)) & 0x3F;
 
             if (value > 511)
                 value = value - 1024;

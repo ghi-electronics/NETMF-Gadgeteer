@@ -168,7 +168,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Erases the specified blocks.
+        /// Erases the specified sectors.
         /// </summary>
         /// <param name="sector">The sector to begin erasing at.</param>
         /// <param name="count">The number of sectors to erase.</param>

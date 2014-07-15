@@ -11,9 +11,11 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class TempHumidity : GTM.Module
     {
-        private GT.Timer timer;
+        private Thread timer;
         private GTI.DigitalIO data;
         private GTI.DigitalOutput sck;
+        private bool running;
+        private int interval;
 
         /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -24,9 +26,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.sck = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
             this.data = GTI.DigitalIOFactory.Create(socket, Socket.Pin.Three, true, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-
-            this.timer = new GT.Timer(200);
-            this.timer.Tick += (a) => this.TakeMeasurement();
+            this.running = false;
         }
 
         /// <summary>
@@ -34,9 +34,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void RequestSingleMeasurement()
         {
-            if (this.timer.IsRunning) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
+            if (this.timer != null && this.timer.IsAlive) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
 
-            this.timer.Behavior = Timer.BehaviorType.RunOnce;
+            this.running = false;
+            this.timer = new Thread(this.TakeMeasurement);
             this.timer.Start();
         }
 
@@ -45,7 +46,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void StartTakingMeasurements()
         {
-            this.timer.Behavior = Timer.BehaviorType.RunContinuously;
+            this.running = true;
+            this.timer = new Thread(this.TakeMeasurement);
             this.timer.Start();
         }
 
@@ -54,50 +56,50 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void StopTakingMeasurements()
         {
-            this.timer.Stop();
+            this.running = false;
+            this.timer.Join();
         }
 
         /// <summary>
-        /// The interval at which measurements are taken.
+        /// The interval in milliseconds at which measurements are taken.
         /// </summary>
-        public TimeSpan MeasurementInterval
+        public int MeasurementInterval
         {
             get
             {
-                return this.timer.Interval;
+                return this.interval;
             }
             set
             {
-                var wasRunning = this.timer.IsRunning;
+                if (value <= 0) throw new ArgumentOutOfRangeException("value", "value must be positive.");
 
-                this.timer.Stop();
-                this.timer.Interval = value;
-
-                if (wasRunning)
-                    this.timer.Start();
+                this.interval = value;
             }
         }
 
         private void TakeMeasurement()
         {
-            this.ResetCommuncation();
+            do
+            {
+                this.ResetCommuncation();
 
-            this.TransmissionStart();
-            
-            double temperature = -39.65 + 0.01 * this.MeasureTemperature();
+                this.TransmissionStart();
 
-            this.TransmissionStart();
+                double temperature = -39.65 + 0.01 * this.MeasureTemperature();
 
-            int rawHumidity = this.MeasureHumidity();
-            double humidity = -2.0468 + 0.0367 * rawHumidity - 1.5955E-6 * rawHumidity * rawHumidity;
-            humidity = (temperature - 25) * (0.01 + 0.00008 * rawHumidity) + humidity;
+                this.TransmissionStart();
 
-            temperature = Math.Round(100.0 * temperature) / 100.0;
-            humidity = Math.Round(100.0 * humidity) / 100.0;
+                int rawHumidity = this.MeasureHumidity();
+                double humidity = -2.0468 + 0.0367 * rawHumidity - 1.5955E-6 * rawHumidity * rawHumidity;
+                humidity = (temperature - 25) * (0.01 + 0.00008 * rawHumidity) + humidity;
 
-            this.OnMeasurementComplete(this, new MeasurementCompleteEventArgs(temperature, humidity));
+                temperature = Math.Round(100.0 * temperature) / 100.0;
+                humidity = Math.Round(100.0 * humidity) / 100.0;
 
-            Thread.Sleep(3600);
+                this.OnMeasurementComplete(this, new MeasurementCompleteEventArgs(temperature, humidity));
+
+                Thread.Sleep(this.interval);
+            } while (this.running);
         }
 
         private void TransmissionStart()
@@ -152,7 +154,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.sck.Write(false);
 
             while (this.data.Read())
-                Thread.Sleep(10);
+                Thread.Sleep(1);
 
             int reading = 0;
 
@@ -221,7 +223,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.sck.Write(false);
 
             while (this.data.Read())
-                Thread.Sleep(10);
+                Thread.Sleep(1);
 
             int reading = 0;
             for (int i = 0; i < 8; i++)

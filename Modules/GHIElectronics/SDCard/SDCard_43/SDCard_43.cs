@@ -30,7 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
-            IsCardMounted = false;
+            this.IsCardMounted = false;
 
             this.cardDetect = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
             this.cardDetect.Interrupt += this.OnCardDetect;

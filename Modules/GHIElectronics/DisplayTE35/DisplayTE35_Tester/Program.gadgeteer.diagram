@@ -61,49 +61,49 @@
         </socketShape>
       </nestedChildShapes>
     </mainboardShape>
-    <moduleShape Id="eb52eff8-34bb-4a0c-97d4-cad2e9d2c3b3" absoluteBounds="0.5, 2.64, 4.1338582677165361, 3.4251968503937009">
-      <moduleMoniker Id="dbd77880-4d89-4946-8ea4-3f29eb698e58" />
+    <moduleShape Id="d1535679-28d9-4c99-94d3-57e9e93617f8" absoluteBounds="1.36, 2.82, 3.0708661417322838, 3.2677165354330708">
+      <moduleMoniker Id="079a68eb-4b6a-46f8-b001-e0d9d1f86ab2" />
       <relativeChildShapes />
       <nestedChildShapes>
-        <socketUseShape Id="196e2810-dde3-479d-8ff7-827daa815920" absoluteBounds="4.32, 4.6400000000000006, 0.25, 0.25">
-          <socketUseMoniker Id="3b94957f-5b55-4f27-a617-0cedcdda43a4" />
+        <socketUseShape Id="1aff382c-502f-4720-b967-f49cb1591329" absoluteBounds="4.1000000000000005, 4.66, 0.25, 0.25">
+          <socketUseMoniker Id="621eb05d-8244-4cf8-917c-8fc4ee17f8f0" />
         </socketUseShape>
-        <socketUseShape Id="5342a779-1b93-4e65-9143-d7d43c82f15e" absoluteBounds="4.32, 4.08, 0.25, 0.25">
-          <socketUseMoniker Id="40ec463f-134c-4e03-a8df-66034cd4384a" />
+        <socketUseShape Id="84e7083a-9104-4ed5-92cf-7bfd52ad0d97" absoluteBounds="4.1000000000000005, 4.1, 0.25, 0.25">
+          <socketUseMoniker Id="b3394152-58d0-4dc4-9eec-f8d42bc33798" />
         </socketUseShape>
-        <socketUseShape Id="113d4d69-419e-4904-8cca-f3844363e7d6" absoluteBounds="4.32, 3.54, 0.25, 0.25">
-          <socketUseMoniker Id="e99e5745-2d44-4423-8b5a-ee22df12c544" />
+        <socketUseShape Id="eb77526a-4026-4983-82ac-a0b888f6f469" absoluteBounds="4.1000000000000005, 3.54, 0.25, 0.25">
+          <socketUseMoniker Id="6b05aee2-cc03-42c7-8560-d5185683078f" />
         </socketUseShape>
-        <socketUseShape Id="63dd9d93-9462-4f4c-8807-9c63dc792b67" absoluteBounds="4.32, 5.2, 0.25, 0.25">
-          <socketUseMoniker Id="0ea838a4-cdd0-4935-aa35-59bdb9bd3ded" />
+        <socketUseShape Id="6171389c-205d-49f5-ab66-e804a84e503d" absoluteBounds="4.1000000000000005, 5.24, 0.25, 0.25">
+          <socketUseMoniker Id="9aea4b22-b925-4742-9660-b048f245637f" />
         </socketUseShape>
       </nestedChildShapes>
     </moduleShape>
-    <socketConnector Id="8ccb4b63-df70-44c9-88ee-4490eae81452" edgePoints="[(4.53358267849573 : 4.765); (5.23641732150427 : 4.765)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <socketUseReferencesSocketMoniker Id="872a8aec-60f6-46b6-a5bb-53fd7b19c8a7" />
+    <socketConnector Id="0260dbfb-fb79-4be2-a5ee-8f3981f4acd0" edgePoints="[(4.31358267849573 : 4.785); (4.725 : 4.785); (4.725 : 4.765); (5.23641732150427 : 4.765)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <socketUseReferencesSocketMoniker Id="4d76812a-3281-4f13-ac8d-851c33b103ff" />
       <nodes>
-        <socketUseShapeMoniker Id="196e2810-dde3-479d-8ff7-827daa815920" />
+        <socketUseShapeMoniker Id="1aff382c-502f-4720-b967-f49cb1591329" />
         <socketShapeMoniker Id="5499c1ee-8f4d-43df-9441-5f42a1758cb8" />
       </nodes>
     </socketConnector>
-    <socketConnector Id="44e94ee8-6516-4a94-9723-fc684843b168" edgePoints="[(4.53358267849573 : 4.205); (5.23641732150427 : 4.205)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <socketUseReferencesSocketMoniker Id="42f58cf2-b816-4a2f-8fcc-b6a9b1680bb1" />
+    <socketConnector Id="f444053e-8ccf-441f-96b1-a9085dba0a85" edgePoints="[(4.31358267849573 : 4.225); (4.725 : 4.225); (4.725 : 4.205); (5.23641732150427 : 4.205)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <socketUseReferencesSocketMoniker Id="75ece5a6-e1c5-4e01-afab-e6a4faaa978f" />
       <nodes>
-        <socketUseShapeMoniker Id="5342a779-1b93-4e65-9143-d7d43c82f15e" />
+        <socketUseShapeMoniker Id="84e7083a-9104-4ed5-92cf-7bfd52ad0d97" />
         <socketShapeMoniker Id="4d32da18-3817-44e9-ad56-f585c86e34d8" />
       </nodes>
     </socketConnector>
-    <socketConnector Id="15192656-c124-422f-899a-41401b069f39" edgePoints="[(4.53358267849573 : 3.665); (5.23641732150427 : 3.665)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <socketUseReferencesSocketMoniker Id="f0bd7689-bd2b-4fae-9574-2c710d1b87bc" />
+    <socketConnector Id="845e0e51-5f47-430e-8f88-991b7d49708f" edgePoints="[(4.31358267849573 : 3.665); (5.23641732150427 : 3.665)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <socketUseReferencesSocketMoniker Id="ef1f320d-28ef-4f0e-a4bb-74c24a17a1a9" />
       <nodes>
-        <socketUseShapeMoniker Id="113d4d69-419e-4904-8cca-f3844363e7d6" />
+        <socketUseShapeMoniker Id="eb77526a-4026-4983-82ac-a0b888f6f469" />
         <socketShapeMoniker Id="357bd2cb-6c8c-4b1a-98cd-1404e8af53a0" />
       </nodes>
     </socketConnector>
-    <socketConnector Id="dea1fe77-e909-4f1c-a6bb-17ca0db6ba5b" edgePoints="[(4.53358267849573 : 5.325); (4.945 : 5.325); (4.945 : 5.305); (5.23641732150427 : 5.305)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <socketUseReferencesSocketMoniker Id="214a3fa7-f967-49e3-bef3-3ab93eba7fec" />
+    <socketConnector Id="665ab100-e63b-441d-bc57-8860ad47cdd0" edgePoints="[(4.31358267849573 : 5.365); (4.725 : 5.365); (4.725 : 5.305); (5.23641732150427 : 5.305)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <socketUseReferencesSocketMoniker Id="5ff733e8-b422-491b-96b8-8c822b37980c" />
       <nodes>
-        <socketUseShapeMoniker Id="63dd9d93-9462-4f4c-8807-9c63dc792b67" />
+        <socketUseShapeMoniker Id="6171389c-205d-49f5-ab66-e804a84e503d" />
         <socketShapeMoniker Id="f96a4f3e-9093-4a99-aa95-1047b833d754" />
       </nodes>
     </socketConnector>

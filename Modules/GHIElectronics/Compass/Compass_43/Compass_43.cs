@@ -131,7 +131,6 @@ namespace Gadgeteer.Modules.GHIElectronics
                 return;
             }
 
-
             this.OnMeasurementComplete(this, new MeasurementCompleteEventArgs(Math.Atan2((double)rawY, (double)rawX) * (180 / 3.14159265) + 180, rawX, rawY, rawZ));
         }
 
