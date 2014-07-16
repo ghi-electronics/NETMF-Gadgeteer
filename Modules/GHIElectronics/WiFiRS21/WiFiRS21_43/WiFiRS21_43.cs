@@ -59,7 +59,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Whether or not the cable is inserted into the module. Make sure to also check the NetworkUp property to verify network state.
+        /// Whether or not the the module is connected to a wireless network. Make sure to also check the NetworkUp property to verify network state.
         /// </summary>
         public override bool IsNetworkConnected
         {

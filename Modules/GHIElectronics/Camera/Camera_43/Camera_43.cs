@@ -67,9 +67,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             this.status = CameraStatus.Disconnected;
             this.running = false;
+            this.workerThread.Join();
             this.takePictureFlag = false;
-            this.camera.StopStreaming();
+
+            if (this.status == CameraStatus.StreamBitmap)
+                this.camera.StopStreaming();
+
             this.camera = null;
+
             this.OnCameraDisconnected(this, null);
         }
 
