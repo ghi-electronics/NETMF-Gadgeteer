@@ -37,15 +37,17 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Gets the current X acceleration value.
         /// </summary>
-        /// <returns>The X acceleration.</returns>
-        public int GetX()
+        /// <returns>The X acceleration between -1 and 1.</returns>
+        public double GetX()
         {
             var data = this.ReadRegister(0x01, 2);
 
-            int value = ((data[0] << 2) | (data[1] >> 6)) & 0x3F;
+            double value = (data[0] << 2) | (data[1] >> 6);
 
-            if (value > 511)
-                value = value - 1024;
+            if (value > 511.0)
+                value = value - 1024.0;
+
+            value /= 512.0;
 
             return value;
         }
@@ -53,15 +55,17 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Gets the current Y acceleration value.
         /// </summary>
-        /// <returns>The Y acceleration.</returns>
-        public int GetY()
+        /// <returns>The Y acceleration between -1 and 1.</returns>
+        public double GetY()
         {
             var data = this.ReadRegister(0x03, 2);
 
-            int value = data[0] << 2 | data[1] >> 6 & 0x3F;
+            double value = (data[0] << 2) | (data[1] >> 6);
 
-            if (value > 511)
-                value = value - 1024;
+            if (value > 511.0)
+                value = value - 1024.0;
+
+            value /= 512.0;
 
             return value;
         }
@@ -69,15 +73,17 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Gets the current Z acceleration value.
         /// </summary>
-        /// <returns>The Z acceleration.</returns>
-        public int GetZ()
+        /// <returns>The Z acceleration between -1 and 1.</returns>
+        public double GetZ()
         {
             var data = this.ReadRegister(0x05, 2);
 
-            int value = data[0] << 2 | data[1] >> 6 & 0x3F;
+            double value = (data[0] << 2) | (data[1] >> 6);
 
-            if (value > 511)
-                value = value - 1024;
+            if (value > 511.0)
+                value = value - 1024.0;
+
+            value /= 512.0;
 
             return value;
         }
@@ -88,7 +94,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>The acceleration.</returns>
         public Acceleration GetAcceleration()
         {
-            int x, y, z;
+            double x, y, z;
 
             this.GetXYZ(out x, out y, out z);
 
@@ -98,25 +104,29 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Gets the current acceleration values.
         /// </summary>
-        /// <param name="x">The x acceleration.</param>
-        /// <param name="y">The y acceleration.</param>
-        /// <param name="z">The z acceleration.</param>
-        public void GetXYZ(out int x, out int y, out int z)
+        /// <param name="x">The x acceleration between -1 and 1.</param>
+        /// <param name="y">The y acceleration between -1 and 1.</param>
+        /// <param name="z">The z acceleration between -1 and 1.</param>
+        public void GetXYZ(out double x, out double y, out double z)
         {
             var data = this.ReadRegister(0x01, 6);
 
-            x = data[0] << 2 | data[1] >> 6 & 0x3F;
-            y = data[2] << 2 | data[3] >> 6 & 0x3F;
-            z = data[4] << 2 | data[5] >> 6 & 0x3F;
+            x = (data[0] << 2) | (data[1] >> 6);
+            y = (data[2] << 2) | (data[3] >> 6);
+            z = (data[4] << 2) | (data[5] >> 6);
 
-            if (x > 511)
-                x -= 1024;
+            if (x > 511.0)
+                x -= 1024.0;
 
-            if (y > 511)
-                y -= 1024;
+            if (y > 511.0)
+                y -= 1024.0;
 
-            if (z > 511)
-                z -= 1024;
+            if (z > 511.0)
+                z -= 1024.0;
+
+            x /= 512.0;
+            y /= 512.0;
+            z /= 512.0;
         }
 
         /// <summary>
@@ -125,19 +135,19 @@ namespace Gadgeteer.Modules.GHIElectronics
         public struct Acceleration
         {
             /// <summary>
-            /// The x acceleration.
+            /// The x acceleration between -1 and 1.
             /// </summary>
-            public int X { get; set; }
+            public double X { get; set; }
 
             /// <summary>
-            /// The y acceleration.
+            /// The y acceleration between -1 and 1.
             /// </summary>
-            public int Y { get; set; }
+            public double Y { get; set; }
 
             /// <summary>
-            /// The z acceleration.
+            /// The z acceleration between -1 and 1.
             /// </summary>
-            public int Z { get; set; }
+            public double Z { get; set; }
 
             /// <summary>
             /// Returns the string representation of this object.
@@ -145,7 +155,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             /// <returns>The string representation.</returns>
             public override string ToString()
             {
-                return "(" + this.X.ToString() + ", " + this.Y.ToString() + ", " + this.Z.ToString() + ")";
+                return "(" + this.X.ToString("F2") + ", " + this.Y.ToString("F2") + ", " + this.Z.ToString("F2") + ")";
             }
         }
     }

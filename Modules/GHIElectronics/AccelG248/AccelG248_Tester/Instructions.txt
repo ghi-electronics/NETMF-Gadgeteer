@@ -1,17 +1,25 @@
 ﻿AccelG248 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 7/17/2014 by John
+SDK Version: 4.3.2.0
 
 Instructions
 ------------
-1. None
+1. Connect a AccelG248 module to socket 2.
+2. Power the mainboard.
+3. Move the module around.
 
 Passing
 -------
-
+When the module is held flat to a level surface, the third number
+will read around 0.5 while the rest are near 0. If you turn it 
+socket side down and level, the third number will then read around -0.5.
 
 Notes
 -----
-- None
+- You may plug and unplug modules without restarting the mainboard.
+- The graphs track the acceleration.
+- Red is x, the first number. Green is y, the second number. Blue is
+  z, the third number.
+- You can use gravity to measure acceleration. As you move the module
+  around you can observe the change in all three axes.
