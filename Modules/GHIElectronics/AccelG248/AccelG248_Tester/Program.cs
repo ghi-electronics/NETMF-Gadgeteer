@@ -7,10 +7,12 @@ namespace AccelG248_Tester
     {
         private static int GRAPH_HEIGHT = 80;
         private static int GRAPH_SPACING = 8;
+        private static int TEXT_HEIGHT = 15;
 
         private int xCoord;
         private GT.Timer timer;
         private GT.Color[] colors;
+        private double[] last;
 
         void ProgramStarted()
         {
@@ -18,6 +20,7 @@ namespace AccelG248_Tester
             Thread.Sleep(2000);
 
             this.xCoord = int.MaxValue;
+            this.last = new double[] { 0, 0, 0 };
             this.colors = new GT.Color[] { GT.Color.Red, GT.Color.Green, GT.Color.Blue };
 
             this.timer = new GT.Timer(25);
@@ -25,8 +28,8 @@ namespace AccelG248_Tester
             {
                 var acc = this.accelG248.GetAcceleration();
 
-                this.displayT43.SimpleGraphics.DisplayRectangle(GT.Color.Black, 1, GT.Color.Black, 0, 260, 480, 12);
-                this.displayT43.SimpleGraphics.DisplayText(acc.ToString(), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 260);
+                this.displayT43.SimpleGraphics.DisplayRectangle(GT.Color.Black, 1, GT.Color.Black, 0, this.displayT43.Height - Program.TEXT_HEIGHT, this.displayT43.Width, Program.TEXT_HEIGHT);
+                this.displayT43.SimpleGraphics.DisplayText(acc.ToString(), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, this.displayT43.Height - Program.TEXT_HEIGHT);
 
                 this.CheckReset();
                 this.Draw(0, acc.X);
@@ -59,14 +62,16 @@ namespace AccelG248_Tester
             value = 1 - value;
             value *= Program.GRAPH_HEIGHT;
 
-            this.displayT43.SimpleGraphics.DisplayEllipse(this.colors[axis], 1, this.colors[axis], this.xCoord, axis * (Program.GRAPH_HEIGHT + Program.GRAPH_SPACING) + (int)value, 1, 1);
+            this.displayT43.SimpleGraphics.DisplayLine(this.colors[axis], 1, this.xCoord, axis * (Program.GRAPH_HEIGHT + Program.GRAPH_SPACING) + (int)this.last[axis], this.xCoord + 1, axis * (Program.GRAPH_HEIGHT + Program.GRAPH_SPACING) + (int)value);
+
+            this.last[axis] = value;
         }
 
         private void CheckReset()
         {
             if (this.xCoord > this.displayT43.Width)
             {
-                this.xCoord = 0;
+                this.xCoord = 1;
                 this.displayT43.SimpleGraphics.Clear();
                 this.DrawAxes();
             }
