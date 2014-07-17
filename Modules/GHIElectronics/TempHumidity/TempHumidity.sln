@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity", "TempHumidity\TempHumidity.csproj", "{939af39a-efea-4d9e-8c33-7710fcfd2ebe}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempHumidity", "TempHumidity\TempHumidity.csproj", "{939AF39A-EFEA-4D9E-8C33-7710FCFD2EBE}"
 EndProject
-Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity_43", "TempHumidity_43\TempHumidity_43.csproj", "{0d10b1d2-1f3e-49e8-83ea-029bd680c706}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempHumidity_43", "TempHumidity_43\TempHumidity_43.csproj", "{0D10B1D2-1F3E-49E8-83EA-029BD680C706}"
 EndProject
-Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity_Tester", "TempHumidity_Tester\TempHumidity_Tester.csproj", "{0264814b-5d34-4314-acb4-ffd0386f6bfc}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TempHumidity_Tester", "TempHumidity_Tester\TempHumidity_Tester.csproj", "{0264814B-5D34-4314-ACB4-FFD0386F6BFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,18 +13,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Release|Any CPU.Build.0 = Release|Any CPU
+		{939AF39A-EFEA-4D9E-8C33-7710FCFD2EBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939AF39A-EFEA-4D9E-8C33-7710FCFD2EBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939AF39A-EFEA-4D9E-8C33-7710FCFD2EBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939AF39A-EFEA-4D9E-8C33-7710FCFD2EBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D10B1D2-1F3E-49E8-83EA-029BD680C706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D10B1D2-1F3E-49E8-83EA-029BD680C706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D10B1D2-1F3E-49E8-83EA-029BD680C706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D10B1D2-1F3E-49E8-83EA-029BD680C706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0264814B-5D34-4314-ACB4-FFD0386F6BFC}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
