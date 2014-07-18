@@ -1,5 +1,5 @@
 ﻿using Microsoft.SPOT;
-using System.Threading;
+using System.Text;
 using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
@@ -12,9 +12,12 @@ namespace Gadgeteer.Modules.GHIElectronics
     public class RFIDReader : GTM.Module
     {
         private GT.SocketInterfaces.Serial port;
-        private Thread worker;
+        private GT.Timer timer;
+        private byte[] buffer;
+        private int read;
+        private int checksum;
 
-        private const int ID_LENGTH = 12;
+        private const int MESSAGE_LENGTH = 13;
 
         /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
@@ -23,98 +26,65 @@ namespace Gadgeteer.Modules.GHIElectronics
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('U', this);
 
+            this.buffer = new byte[RFIDReader.MESSAGE_LENGTH];
+            this.read = 0;
+            this.checksum = 0;
+
             this.port = GTI.SerialFactory.Create(socket, 9600, GTI.SerialParity.None, GTI.SerialStopBits.Two, 8, GTI.HardwareFlowControl.NotRequired, this);
+            this.port.ReadTimeout = 10;
             this.port.Open();
 
-            this.worker = new Thread(DoWork);
-            this.worker.Start();
+            this.timer = new GT.Timer(100);
+            this.timer.Tick += this.DoWork;
+            this.timer.Start();
         }
 
-        private byte ASCIIToNumber(char upper, char lower)
+        private int ASCIIToNumber(byte upper, byte lower)
         {
-            byte high = (byte)(upper - 48 - (upper >= 'A' ? 7 : 0));
-            byte low = (byte)(lower - 48 - (lower >= 'A' ? 7 : 0));
+            var high = upper - 48 - (upper >= 'A' ? 7 : 0);
+            var low = lower - 48 - (lower >= 'A' ? 7 : 0);
 
-            return (byte)((high << 4) | low);
+            return (high << 4) | low;
         }
 
-        private void DoWork()
+        private void DoWork(object o)
         {
-            var id = string.Empty;
+            this.read += this.port.Read(this.buffer, this.read, RFIDReader.MESSAGE_LENGTH - this.read);
 
-            while (true)
+            if (this.read != RFIDReader.MESSAGE_LENGTH)
+                return;
+
+            for (int i = 1; i < 10; i += 2)
+                this.checksum ^= this.ASCIIToNumber(this.buffer[i], this.buffer[i + 1]);
+
+            if (this.buffer[0] == 0x02 && this.buffer[12] == 0x03 && this.checksum == this.buffer[11])
             {
-                Thread.Sleep(10);
-
-                int available = this.port.BytesToRead;
-
-                if (available <= 0)
-                    continue;
-
-                var buffer = new byte[available];
-
-                this.port.Read(buffer, 0, available);
-
-                for (int i = 0; i < buffer.Length; i++)
-                {
-                    id += (char)buffer[i];
-
-                    if (id.Length < RFIDReader.ID_LENGTH)
-                        continue;
-
-                    if (id[0] != 2)
-                    {
-                        id = string.Empty;
-
-                        this.HandleChecksumError();
-
-                        break;
-                    }
-
-                    int cs = 0;
-                    for (int x = 1; x < 10; x += 2)
-                        cs ^= this.ASCIIToNumber((char)id[x], (char)id[x + 1]);
-
-                    if (cs != id[11])
-                    {
-                        id = string.Empty;
-
-                        this.HandleChecksumError();
-
-                        break;
-                    }
-
-                    this.OnIdReceivedEvent(this, id.Substring(1, 10));
-
-                    Thread.Sleep(100);
-
-                    id = string.Empty;
-                }
+                this.OnIdReceived(this, new string(Encoding.UTF8.GetChars(this.buffer, 1, 10)));
             }
-        }
+            else
+            {
+                this.port.DiscardInBuffer();
 
-        private void HandleChecksumError()
-        {
-            this.port.DiscardInBuffer();
+                this.OnMalformedIdReceived(this, null);
+            }
 
-            this.OnBadChecksumReceived(this, null);
-
-            Thread.Sleep(100);
+            this.read = 0;
+            this.checksum = 0;
         }
 
         /// <summary>
         /// The delegate that is used to handle the id received event.
         /// </summary>
-        /// <param name="sender">The <see cref="RFIDReader"/> object that raised the event.</param>
-        /// <param name="e">The event argument.</param>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
         public delegate void IdReceivedEventHandler(RFIDReader sender, string e);
 
         /// <summary>
         /// The delegate that is used to handle the bad checksum event.
         /// </summary>
-        /// <param name="sender">The <see cref="RFIDReader"/> object that raised the event.</param>
-        /// <param name="e">The event argument.</param>
-        public delegate void BadChecksumReceivedEventHandler(RFIDReader sender, EventArgs e);
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void MalformedIdReceivedEventHandler(RFIDReader sender, EventArgs e);
         
         /// <summary>
         /// Raised when the module receives an id.
@@ -124,27 +94,27 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raised when the module receives an id with an incorrect checksum.
         /// </summary>
-        public event BadChecksumReceivedEventHandler BadChecksumReceived;
+        public event MalformedIdReceivedEventHandler MalformedIdReceived;
 
         private IdReceivedEventHandler onIdReceived;
-        private BadChecksumReceivedEventHandler onBadChecksumReceived;
+        private MalformedIdReceivedEventHandler onMalformedIdReceived;
 
-        private void OnIdReceivedEvent(RFIDReader sender, string e)
+        private void OnIdReceived(RFIDReader sender, string e)
         {
             if (this.onIdReceived == null)
-                this.onIdReceived = this.OnIdReceivedEvent;
+                this.onIdReceived = this.OnIdReceived;
 
             if (Program.CheckAndInvoke(this.IdReceived, this.onIdReceived, sender, e))
                 this.IdReceived(sender, e);
         }
 
-        private void OnBadChecksumReceived(RFIDReader sender, EventArgs e)
+        private void OnMalformedIdReceived(RFIDReader sender, EventArgs e)
         {
-            if (this.onBadChecksumReceived == null)
-                this.onBadChecksumReceived = this.OnBadChecksumReceived;
+            if (this.onMalformedIdReceived == null)
+                this.onMalformedIdReceived = this.OnMalformedIdReceived;
 
-            if (Program.CheckAndInvoke(this.BadChecksumReceived, this.onBadChecksumReceived, sender, e))
-                this.BadChecksumReceived(sender, e);
+            if (Program.CheckAndInvoke(this.MalformedIdReceived, this.onMalformedIdReceived, sender, e))
+                this.MalformedIdReceived(sender, e);
         }
     }
 }
