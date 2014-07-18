@@ -10,7 +10,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 	/// </summary>
     public class MotorDriverL298 : GTM.Module
     {
-        private const int STEP_FACTOR = 1000;
+        private const int STEP_FACTOR = 250;
 
         private GTI.PwmOutput[] pwms;
         private GTI.DigitalOutput[] directions;
@@ -84,6 +84,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (speed > 1 || speed < -1) new ArgumentOutOfRangeException("speed", "speed must be between -1 and 1.");
             if (motor != Motor.Motor1 && motor != Motor.Motor2) throw new ArgumentException("motor", "You must specify a valid motor.");
 
+            if (speed == 1.0)
+                speed = 0.99;
+
+            if (speed == -1.0)
+                speed = -0.99;
+
             this.directions[(int)motor].Write(speed < 0);
             this.pwms[(int)motor].Set(this.Frequency, speed < 0 ? 1 + speed : speed);
             this.lastSpeeds[(int)motor] = speed;
@@ -105,8 +111,14 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (currentSpeed == speed)
                 return;
 
-            double sleep = time / ((speed - currentSpeed) * MotorDriverL298.STEP_FACTOR);
-            double step = 1 / MotorDriverL298.STEP_FACTOR;
+            int sleep = (int)(time / (Math.Abs(speed - currentSpeed) * MotorDriverL298.STEP_FACTOR));
+            double step = 1.0 / MotorDriverL298.STEP_FACTOR;
+
+            if (sleep < 1)
+                throw new ArgumentOutOfRangeException("time", "You cannot move to a speed this close to the existing speed in so little time.");
+
+            if (speed < currentSpeed)
+                step *= -1;
 
             while (Math.Abs(speed - currentSpeed) >= 0.01)
             {
@@ -114,7 +126,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                 this.SetSpeed(motor, currentSpeed);
 
-                Thread.Sleep((int)sleep);
+                Thread.Sleep(sleep);
             }
         }
     }

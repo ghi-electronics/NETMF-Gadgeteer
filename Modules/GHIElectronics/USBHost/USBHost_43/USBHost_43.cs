@@ -150,7 +150,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 if (e.Volume.FileSystem != null)
                 {
-                    this.OnUsbDriveConnected(this, new StorageDevice(e.Volume));
+                    this.OnMassStorageConnected(this, new StorageDevice(e.Volume));
                 }
                 else
                 {
@@ -163,22 +163,22 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             if (e.Volume.Name.Length >= 3 && e.Volume.Name.Substring(0, 3) == "USB")
             {
-                this.OnUsbDriveDisconnected(this);
+                this.OnMassStorageDisconnected(this);
             }
         }
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="UsbDriveConnected"/> event.
+        /// Represents the delegate that is used for the <see cref="MassStorageConnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
         /// <param name="storageDevice">The <see cref="T:Microsoft.Gadgeteer.StorageDevice"/> object associated with the connected USB drive.</param>
-        public delegate void UsbDriveConnectedEventHandler(USBHost sender, StorageDevice storageDevice);
+        public delegate void MassStorageConnectedEventHandler(USBHost sender, StorageDevice storageDevice);
         
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="UsbDriveDisconnected"/> event.
+        /// Represents the delegate that is used for the <see cref="MassStorageDisconnected"/> event.
         /// </summary>
         /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        public delegate void UsbDriveDisconnectedEventHandler(USBHost sender);
+        public delegate void MassStorageDisconnectedEventHandler(USBHost sender);
 
         /// <summary>
         /// Represents the delegate that is used for the <see cref="MouseConnected"/> event.
@@ -211,12 +211,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Raised when a USB drive is connected.
         /// </summary>
-        public event UsbDriveConnectedEventHandler UsbDriveConnected;
+        public event MassStorageConnectedEventHandler MassStorageConnected;
 
         /// <summary>
         /// Raised when a USB drive is disconnected.
         /// </summary>
-        public event UsbDriveDisconnectedEventHandler UsbDriveDisconnected;
+        public event MassStorageDisconnectedEventHandler MassStorageDisconnected;
 
         /// <summary>
         /// Raised when a USB mouse is connected.
@@ -238,29 +238,29 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public event KeyboardDisconnectedEventHandler KeyboardDisconnected;
 
-        private UsbDriveConnectedEventHandler onUsbDriveConnected;
-        private UsbDriveDisconnectedEventHandler onUsbDriveDisconnected;
+        private MassStorageConnectedEventHandler onMassStorageConnected;
+        private MassStorageDisconnectedEventHandler onMassStorageDisconnected;
         private MouseConnectedEventHandler onMouseConnected;
         private MouseDisconnectedEventHandler onMouseDisconnected;
         private KeyboardConnectedEventHandler onKeyboardConnected;
         private KeyboardDisconnectedEventHandler onKeyboardDisconnected;
 
-        private void OnUsbDriveConnected(USBHost sender, StorageDevice storageDevice)
+        private void OnMassStorageConnected(USBHost sender, StorageDevice storageDevice)
         {
-            if (this.onUsbDriveConnected == null) 
-                this.onUsbDriveConnected = this.OnUsbDriveConnected;
+            if (this.onMassStorageConnected == null) 
+                this.onMassStorageConnected = this.OnMassStorageConnected;
 
-            if (Program.CheckAndInvoke(this.UsbDriveConnected, this.onUsbDriveConnected, sender, storageDevice))
-                this.UsbDriveConnected(sender, storageDevice);
+            if (Program.CheckAndInvoke(this.MassStorageConnected, this.onMassStorageConnected, sender, storageDevice))
+                this.MassStorageConnected(sender, storageDevice);
         }
 
-        private void OnUsbDriveDisconnected(USBHost sender)
+        private void OnMassStorageDisconnected(USBHost sender)
         {
-            if (this.onUsbDriveDisconnected == null)
-                this.onUsbDriveDisconnected = this.OnUsbDriveDisconnected;
+            if (this.onMassStorageDisconnected == null)
+                this.onMassStorageDisconnected = this.OnMassStorageDisconnected;
 
-            if (Program.CheckAndInvoke(this.UsbDriveDisconnected, this.onUsbDriveDisconnected, sender))
-                this.UsbDriveDisconnected(sender);
+            if (Program.CheckAndInvoke(this.MassStorageDisconnected, this.onMassStorageDisconnected, sender))
+                this.MassStorageDisconnected(sender);
         }
 
         private void OnMouseConnected(USBHost sender, Mouse mouse)
