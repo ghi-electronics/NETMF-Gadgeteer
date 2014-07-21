@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
-
-using Gadgeteer.Networking;
+﻿using System.Threading;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using Gadgeteer.Modules.GHIElectronics;
 
 namespace RS232_Tester
 {
@@ -20,8 +8,20 @@ namespace RS232_Tester
         void ProgramStarted()
         {
             this.displayT43.SimpleGraphics.DisplayText("RS232 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
-            Thread.Sleep(2000);
+            Thread.Sleep(500);
 
+            this.rs2321.Configure();
+            this.rs2322.Configure();
+
+            this.rs2322.Port.LineReceived += (a, b) => this.rs2322.Port.WriteLine(b);
+
+            this.rs2321.Port.LineReceived += (a, b) =>
+            {
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText(b == "Hello, World!" ? "Passed" : "Failed", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+            };
+
+            this.rs2321.Port.WriteLine("Hello, World!");
         }
     }
 }

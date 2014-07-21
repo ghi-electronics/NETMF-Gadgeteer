@@ -23,11 +23,11 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Initializes the serial port with the parameters 38400 baud, 8N1, with no flow control.
+        /// Initializes the serial port with the parameters 9800 baud, 8N1, with no flow control.
         /// </summary>
         public void Configure()
         {
-            this.Configure(38400, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired);
+            this.Configure(9800, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired);
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="flowControl">The flow control to use.</param>
         public void Configure(int baudRate, GTI.SerialParity parity, GTI.SerialStopBits stopBits, int dataBits, GTI.HardwareFlowControl flowControl)
         {
-            if (this.serialPort != null) throw new InvalidOperationException("Configure can only be called once.");
+            if (this.serialPort != null && this.serialPort.IsOpen) throw new InvalidOperationException("Configure can only be when the port is closed.");
 
             this.serialPort = GTI.SerialFactory.Create(socket, baudRate, parity, stopBits, dataBits, flowControl, this);
             this.serialPort.Open();

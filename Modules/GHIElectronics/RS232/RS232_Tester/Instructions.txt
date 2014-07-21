@@ -1,17 +1,23 @@
 ﻿RS232 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 7/21/2014 by John
+SDK Version: 4.3.2.0
 
 Instructions
 ------------
-1. None
+1. Connect an RS232 module to socket 1 and 4.
+2. Connect the provided cable to both modules.
+3. Power the mainboard.
 
 Passing
 -------
-
+After a brief delay on starting the board, "Passed" will be 
+displayed on the screen. If passed is not displayed or "Failed"
+is displayed, test the module once more and if the same behavior
+occurs again, the module is bad.
 
 Notes
 -----
-- None
+- You must restart the mainboard between tests.
+- If it is easier, you can use the same known good module on 
+  socket 1 and only swap out the module on socket 4 between tests.
