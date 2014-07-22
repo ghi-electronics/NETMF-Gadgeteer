@@ -20,8 +20,8 @@ namespace GHIElectronics.Gadgeteer
         private InterruptPort ldr0;
         private InterruptPort ldr1;
         private OutputPort debugLed;
-        private Removable[] storageDevices;
-        private Device usbMassStorageDevice;
+        private IRemovable[] storageDevices;
+        private MassStorage massStorageDevice;
 
         /// <summary>
         /// Constructs a new instance.
@@ -31,16 +31,13 @@ namespace GHIElectronics.Gadgeteer
             this.ldr0 = null;
             this.ldr1 = null;
             this.debugLed = null;
-            this.storageDevices = new Removable[2];
-            this.usbMassStorageDevice = null;
+            this.storageDevices = new IRemovable[2];
+            this.massStorageDevice = null;
 
-            Controller.DeviceConnected += (a, b) =>
+            Controller.MassStorageConnected += (a, b) =>
             {
-                if (b.Device.Type == GHI.Usb.Device.DeviceType.MassStorage)
-                {
-                    this.usbMassStorageDevice = b.Device;
-                    this.usbMassStorageDevice.Disconnected += (c, d) => this.UnmountStorageDevice("USB MassStorage");
-                }
+                this.massStorageDevice = b;
+                this.massStorageDevice.Disconnected += (c, d) => this.UnmountStorageDevice("USB");
             };
 
             this.NativeBitmapConverter = this.BitmapConverter;
@@ -148,7 +145,7 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>The volume names.</returns>
         public override string[] GetStorageDeviceVolumeNames()
         {
-            return new string[] { "SD", "USB MassStorage" };
+            return new string[] { "SD", "USB" };
         }
 
         /// <summary>
@@ -161,15 +158,15 @@ namespace GHIElectronics.Gadgeteer
             switch (volumeName)
             {
                 case "SD":
-                    this.storageDevices[0] = new SD();
+                    this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
 
                     break;
 
-                case "USB MassStorage":
-                    if (this.usbMassStorageDevice == null) throw new InvalidOperationException("No USB MassStorage device is plugged into the device.");
+                case "USB":
+                    if (this.massStorageDevice == null) throw new InvalidOperationException("No USB device is plugged into the device.");
 
-                    this.storageDevices[1] = new UsbMassStorage(this.usbMassStorageDevice);
+                    this.storageDevices[1] = this.massStorageDevice;
                     this.storageDevices[1].Mount();
 
                     break;
@@ -199,7 +196,7 @@ namespace GHIElectronics.Gadgeteer
 
                     break;
 
-                case "USB MassStorage":
+                case "USB":
                     if (this.storageDevices[1] == null) throw new InvalidOperationException("This volume is not mounted.");
 
                     this.storageDevices[1].Unmount();
@@ -229,29 +226,29 @@ namespace GHIElectronics.Gadgeteer
         {
             switch (orientationDeg)
             {
-                case 0: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Normal; break;
-                case 90: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Clockwise90; break;
-                case 180: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Half; break;
-                case 270: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.CounterClockwise90; break;
+                case 0: Display.CurrentRotation = Display.Rotation.Normal; break;
+                case 90: Display.CurrentRotation = Display.Rotation.Clockwise90; break;
+                case 180: Display.CurrentRotation = Display.Rotation.Half; break;
+                case 270: Display.CurrentRotation = Display.Rotation.CounterClockwise90; break;
                 default: throw new ArgumentOutOfRangeException("orientationDeg", "orientationDeg must be 0, 90, 180, or 270.");
             }
 
-            Configuration.Display.Height = (uint)height;
-            Configuration.Display.HorizontalBackPorch = timing.HorizontalBackPorch;
-            Configuration.Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
-            Configuration.Display.HorizontalSyncPolarity = timing.HorizontalSyncPulseIsActiveHigh;
-            Configuration.Display.HorizontalSyncPulseWidth = timing.HorizontalSyncPulseWidth;
-            Configuration.Display.OutputEnableIsFixed = timing.UsesCommonSyncPin; //not the proper property, but we needed it;
-            Configuration.Display.OutputEnablePolarity = timing.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
-            Configuration.Display.PixelClockRateKHz = timing.MaximumClockSpeed;
-            Configuration.Display.PixelPolarity = timing.PixelDataIsValidOnClockRisingEdge;
-            Configuration.Display.VerticalBackPorch = timing.VerticalBackPorch;
-            Configuration.Display.VerticalFrontPorch = timing.VerticalFrontPorch;
-            Configuration.Display.VerticalSyncPolarity = timing.VerticalSyncPulseIsActiveHigh;
-            Configuration.Display.VerticalSyncPulseWidth = timing.VerticalSyncPulseWidth;
-            Configuration.Display.Width = (uint)width;
+            Display.Height = (uint)height;
+            Display.HorizontalBackPorch = timing.HorizontalBackPorch;
+            Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
+            Display.HorizontalSyncPolarity = timing.HorizontalSyncPulseIsActiveHigh;
+            Display.HorizontalSyncPulseWidth = timing.HorizontalSyncPulseWidth;
+            Display.OutputEnableIsFixed = timing.UsesCommonSyncPin; //not the proper property, but we needed it;
+            Display.OutputEnablePolarity = timing.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            Display.PixelClockRateKHz = timing.MaximumClockSpeed;
+            Display.PixelPolarity = timing.PixelDataIsValidOnClockRisingEdge;
+            Display.VerticalBackPorch = timing.VerticalBackPorch;
+            Display.VerticalFrontPorch = timing.VerticalFrontPorch;
+            Display.VerticalSyncPolarity = timing.VerticalSyncPulseIsActiveHigh;
+            Display.VerticalSyncPulseWidth = timing.VerticalSyncPulseWidth;
+            Display.Width = (uint)width;
 
-            if (Configuration.Display.Save())
+            if (Display.Save())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -265,7 +262,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            if (Configuration.Display.Disable())
+            if (Display.Disable())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");

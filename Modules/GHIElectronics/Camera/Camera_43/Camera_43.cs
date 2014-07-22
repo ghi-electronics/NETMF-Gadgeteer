@@ -42,25 +42,22 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Four, this);
             socket.ReservePin(Socket.Pin.Five, this);
 
-            Controller.DeviceConnected += this.OnDeviceConnected;
+            Controller.WebcamConnected += this.OnDeviceConnected;
 
             this.CurrentPictureResolution = PictureResolution.Resolution320x240;
         }
 
-        private void OnDeviceConnected(object sender, Controller.DeviceConnectedEventArgs e)
+        private void OnDeviceConnected(object sender, Webcam camera)
         {
-            if (e.Device.Type == GHI.Usb.Device.DeviceType.Webcam)
-            {
-                this.camera = new Webcam(e.Device);
-                this.status = CameraStatus.Ready;
-                this.running = true;
-                this.workerThread = new Thread(this.DoWork);
-                this.workerThread.Start();
+            this.camera = camera;
+            this.camera.Disconnected += this.OnDeviceDisconnected;
 
-                this.OnCameraConnected(this, null);
+            this.status = CameraStatus.Ready;
+            this.running = true;
+            this.workerThread = new Thread(this.DoWork);
+            this.workerThread.Start();
 
-                e.Device.Disconnected += this.OnDeviceDisconnected;
-            }
+            this.OnCameraConnected(this, null);
         }
 
         private void OnDeviceDisconnected(object sender, EventArgs e)

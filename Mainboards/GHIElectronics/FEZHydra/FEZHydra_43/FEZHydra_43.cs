@@ -16,7 +16,7 @@ namespace GHIElectronics.Gadgeteer
     public class FEZHydra : GT.Mainboard
     {
         private OutputPort debugLed;
-        private Removable[] storageDevices;
+        private IRemovable[] storageDevices;
 
         /// <summary>
         /// Constructs a new instance.
@@ -24,7 +24,7 @@ namespace GHIElectronics.Gadgeteer
         public FEZHydra()
         {
             this.debugLed = null;
-            this.storageDevices = new Removable[1];
+            this.storageDevices = new IRemovable[1];
 
             this.NativeBitmapConverter = this.BitmapConverter;
 
@@ -256,7 +256,7 @@ namespace GHIElectronics.Gadgeteer
             switch (volumeName)
             {
                 case "SD":
-                    this.storageDevices[0] = new SD();
+                    this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
 
                     break;
@@ -307,26 +307,26 @@ namespace GHIElectronics.Gadgeteer
         {
             switch (orientationDeg)
             {
-                case 0: Configuration.Display.CurrentRotation = Configuration.Display.Rotation.Normal; break;
+                case 0: Display.CurrentRotation = Display.Rotation.Normal; break;
                 default: throw new ArgumentOutOfRangeException("orientationDeg", "orientationDeg must be 0, 90, 180, or 270.");
             }
 
-            Configuration.Display.Height = (uint)height;
-            Configuration.Display.HorizontalBackPorch = timing.HorizontalBackPorch;
-            Configuration.Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
-            Configuration.Display.HorizontalSyncPolarity = timing.HorizontalSyncPulseIsActiveHigh;
-            Configuration.Display.HorizontalSyncPulseWidth = timing.HorizontalSyncPulseWidth;
-            Configuration.Display.OutputEnableIsFixed = timing.UsesCommonSyncPin; //not the proper property, but we needed it;
-            Configuration.Display.OutputEnablePolarity = timing.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
-            Configuration.Display.PixelClockRateKHz = timing.MaximumClockSpeed;
-            Configuration.Display.PixelPolarity = timing.PixelDataIsValidOnClockRisingEdge;
-            Configuration.Display.VerticalBackPorch = timing.VerticalBackPorch;
-            Configuration.Display.VerticalFrontPorch = timing.VerticalFrontPorch;
-            Configuration.Display.VerticalSyncPolarity = timing.VerticalSyncPulseIsActiveHigh;
-            Configuration.Display.VerticalSyncPulseWidth = timing.VerticalSyncPulseWidth;
-            Configuration.Display.Width = (uint)width;
+            Display.Height = (uint)height;
+            Display.HorizontalBackPorch = timing.HorizontalBackPorch;
+            Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
+            Display.HorizontalSyncPolarity = timing.HorizontalSyncPulseIsActiveHigh;
+            Display.HorizontalSyncPulseWidth = timing.HorizontalSyncPulseWidth;
+            Display.OutputEnableIsFixed = timing.UsesCommonSyncPin; //not the proper property, but we needed it;
+            Display.OutputEnablePolarity = timing.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
+            Display.PixelClockRateKHz = timing.MaximumClockSpeed;
+            Display.PixelPolarity = timing.PixelDataIsValidOnClockRisingEdge;
+            Display.VerticalBackPorch = timing.VerticalBackPorch;
+            Display.VerticalFrontPorch = timing.VerticalFrontPorch;
+            Display.VerticalSyncPolarity = timing.VerticalSyncPulseIsActiveHigh;
+            Display.VerticalSyncPulseWidth = timing.VerticalSyncPulseWidth;
+            Display.Width = (uint)width;
 
-            if (Configuration.Display.Save())
+            if (Display.Save())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");
@@ -340,7 +340,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override void EnsureRgbSocketPinsAvailable()
         {
-            if (Configuration.Display.Disable())
+            if (Display.Disable())
             {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");
                 Debug.Print("To continue debugging, you will need to restart debugging manually (Ctrl-Shift-F5)");

@@ -327,7 +327,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                         }
                     }
                 }
-                catch (Exception e)
+                catch
                 {
                     Debug.Print("Error in SerialCameraL1.");
                 }
