@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity", "TempHumidity\TempHumidity.csproj", "{939af39a-efea-4d9e-8c33-7710fcfd2ebe}"
+EndProject
+Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity_43", "TempHumidity_43\TempHumidity_43.csproj", "{0d10b1d2-1f3e-49e8-83ea-029bd680c706}"
+EndProject
+Project("{1dc5337b-5ec4-4df7-b58a-05fbbca8285d}") = "TempHumidity_Tester", "TempHumidity_Tester\TempHumidity_Tester.csproj", "{0264814b-5d34-4314-acb4-ffd0386f6bfc}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{939af39a-efea-4d9e-8c33-7710fcfd2ebe}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0d10b1d2-1f3e-49e8-83ea-029bd680c706}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0264814b-5d34-4314-acb4-ffd0386f6bfc}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
