@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+  <?include $(var.SourcePath)..\..\Shared\version.wxi ?>
+  
+  <?define ModuleSoftwareVersion = "$(var.KitVersion)" ?>
+  <?define SafeModuleName = "TempHumidSI70" ?>
+  <?define SafeManufacturer = "GHIElectronics" ?>
+  <?define FullManufacturer = "GHI Electronics" ?>
+  
+  <?define NETMF43Supported ?>
+
+  <?define OutputFileName = "GTM.$(var.SafeManufacturer).$(var.SafeModuleName)"?>
+  <?define ProjectPath = "TempHumidSI70" ?>
+
+  <?define guid_msi_upgrade_code =  "473e8879-7b92-423e-930f-06a342183a05" ?>
+  <?define guid_msm_package_id = "b04868e0-41fc-4ad1-ab30-252b2deb5c44" ?>
+
+  <?define guid_msm_comp_resources_id = "c897929a-4c1c-431d-9dd9-fb348c1689d3" ?>
+  <?define guid_msm_comp_registry_id = "5127bac2-c5ee-4d95-b940-e0f3a8631524" ?>
+  <?define guid_msm_comp_gadgeteerhardware_id = "4ee8f0e7-0b71-4306-8fef-366eac1b78b7"?>
+
+  <?define guid_msm_comp_files_id_43 = "b9639a84-8d3d-4bf4-a6d2-07660ce08734" ?>
+  <?define guid_msm_comp_files_be_id_43 = "d19c4587-dd99-4ed6-ada3-8efea0e8da00" ?>
+  <?define guid_msm_comp_files_le_id_43 = "964e47b5-6dfe-4a0a-b977-e6ef5f23ad84" ?>
+</Include>
+
