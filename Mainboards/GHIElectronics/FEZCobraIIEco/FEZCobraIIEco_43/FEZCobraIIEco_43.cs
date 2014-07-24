@@ -4,8 +4,8 @@ using GHI.Processor;
 using GHI.Usb;
 using GHI.Usb.Host;
 using Microsoft.SPOT;
-using Microsoft.SPOT.IO;
 using Microsoft.SPOT.Hardware;
+using Microsoft.SPOT.IO;
 using System;
 using G120 = GHI.Pins.G120;
 using GT = Gadgeteer;
@@ -441,14 +441,14 @@ namespace GHIElectronics.Gadgeteer
         }
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="SDCardMounted"/> event.
+        /// Represents the delegate that is used for the SDCardMmounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="device">A storage device that can be used to access the SD non-volatile memory card.</param>
         public delegate void SDCardMountedEventHandler(FEZCobraIIEco sender, GT.StorageDevice device);
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="SDCardMounted"/> event.
+        /// Represents the delegate that is used for the SDCardUnmounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
