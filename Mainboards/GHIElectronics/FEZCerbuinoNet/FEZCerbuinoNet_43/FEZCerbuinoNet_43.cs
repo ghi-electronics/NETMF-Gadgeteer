@@ -3,6 +3,8 @@ using GHI.IO.Storage;
 using GHI.Networking;
 using GHI.Pins;
 using GHI.Processor;
+using GHI.Usb;
+using GHI.Usb.Host;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System;
@@ -20,6 +22,7 @@ namespace GHIElectronics.Gadgeteer
         private OutputPort debugLed;
         private IRemovable[] storageDevices;
         private EthernetENC28J60 ethernet;
+        private MassStorage massStorageDevice;
 
         /// <summary>
         /// Constructs a new instance.
@@ -28,8 +31,15 @@ namespace GHIElectronics.Gadgeteer
         {
             this.configSet = false;
             this.debugLed = null;
-            this.storageDevices = new IRemovable[1];
             this.ethernet = null;
+            this.storageDevices = new IRemovable[2];
+            this.massStorageDevice = null;
+
+            Controller.MassStorageConnected += (a, b) =>
+            {
+                this.massStorageDevice = b;
+                this.massStorageDevice.Disconnected += (c, d) => this.UnmountStorageDevice("USB");
+            };
 
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
@@ -118,7 +128,7 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>The volume names.</returns>
         public override string[] GetStorageDeviceVolumeNames()
         {
-            return new string[] { "SD" };
+            return new string[] { "SD", "USB" };
         }
 
         /// <summary>
@@ -134,6 +144,11 @@ namespace GHIElectronics.Gadgeteer
                 {
                     this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] == null && this.massStorageDevice != null)
+                {
+                    this.storageDevices[1] = this.massStorageDevice;
+                    this.storageDevices[1].Mount();
                 }
                 else
                 {
@@ -161,6 +176,11 @@ namespace GHIElectronics.Gadgeteer
                 {
                     this.storageDevices[0].Dispose();
                     this.storageDevices[0] = null;
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] != null)
+                {
+                    this.storageDevices[1].Dispose();
+                    this.storageDevices[1] = null;
                 }
                 else
                 {
