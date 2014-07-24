@@ -16,8 +16,6 @@ namespace Gadgeteer.Modules.GHIElectronics
     {
         private static bool firstHostModule;
 
-        private Hashtable storageDevices;
-
         static USBHost()
         {
             USBHost.firstHostModule = true;
@@ -38,14 +36,13 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Four, this);
             socket.ReservePin(Socket.Pin.Five, this);
 
-            this.storageDevices = new Hashtable();
-
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
             Controller.MouseConnected += (a, b) => this.OnMouseConnected(this, b);
             Controller.KeyboardConnected += (a, b) => this.OnKeyboardConnected(this, b);
             Controller.MassStorageConnected += (a, b) => b.Mount();
+            Controller.Start();
         }
 
         private void OnInsert(object sender, MediaEventArgs e)

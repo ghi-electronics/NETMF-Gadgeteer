@@ -6,7 +6,7 @@
     <!--VS2010 product version-->
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{015b664a-c2fe-4c1a-862f-2d8e8f52b4d2}</ProjectGuid>
+    <ProjectGuid>{015B664A-C2FE-4C1A-862F-2D8E8F52B4D2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ignore</RootNamespace>
@@ -43,7 +43,9 @@
   </PropertyGroup>
   <Import Project="$(NetMfTargetsBaseDir)$(TargetFrameworkVersion)\CSharp.Targets" />
   <ItemGroup>
-    <None Include="GadgeteerHardware.xml" />
+    <None Include="GadgeteerHardware.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="common.wxi" />
     <None Include="Image.jpg" />
   </ItemGroup>

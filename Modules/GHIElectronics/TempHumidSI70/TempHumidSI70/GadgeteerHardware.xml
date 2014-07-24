@@ -21,13 +21,14 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="8.4" Top="21.3" Orientation="90" ConstructorOrder="1" TypesLabel="I">
+        <Socket Left="8.4" Top="21.3" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
           <Types>
-            <Type>I</Type>
+            <Type>X</Type>
+            <Type>Y</Type>
           </Types>
           <Pins>
-            <Pin Shared="true">8</Pin>
-            <Pin Shared="true">9</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
           </Pins>
         </Socket>
       </Sockets>
