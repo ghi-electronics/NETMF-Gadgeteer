@@ -38,8 +38,11 @@ namespace GHIElectronics.Gadgeteer
                 this.massStorageDevice.Disconnected += (c, d) => this.UnmountStorageDevice("USB");
             };
 
+            Controller.Start();
+
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
+
 
             GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
             GT.Socket socket;

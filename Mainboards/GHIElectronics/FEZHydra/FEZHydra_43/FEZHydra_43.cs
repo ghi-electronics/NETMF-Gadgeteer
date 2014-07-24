@@ -28,6 +28,7 @@ namespace GHIElectronics.Gadgeteer
 
             this.NativeBitmapConverter = this.BitmapConverter;
 
+
             GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
             GT.Socket socket;
 
