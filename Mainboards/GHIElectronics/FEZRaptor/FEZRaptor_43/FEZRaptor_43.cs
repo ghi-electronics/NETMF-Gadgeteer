@@ -321,24 +321,26 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the mount was successful.</returns>
         public override bool MountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
+                if (volumeName == "SD" && this.storageDevices[0] == null)
+                {
                     this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
-
-                    break;
-
-                case "USB":
-                    if (this.massStorageDevice == null) throw new InvalidOperationException("No USB device is plugged into the device.");
-
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] == null && this.massStorageDevice != null)
+                {
                     this.storageDevices[1] = this.massStorageDevice;
                     this.storageDevices[1].Mount();
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
@@ -351,28 +353,26 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
-                    if (this.storageDevices[0] == null) return false;
-
-                    this.storageDevices[0].Unmount();
+                if (volumeName == "SD" && this.storageDevices[0] != null)
+                {
                     this.storageDevices[0].Dispose();
                     this.storageDevices[0] = null;
-
-                    break;
-
-                case "USB":
-                    if (this.storageDevices[1] == null) return false;
-
-                    this.storageDevices[1].Unmount();
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] != null)
+                {
                     this.storageDevices[1].Dispose();
                     this.storageDevices[1] = null;
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;

@@ -128,16 +128,21 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the mount was successful.</returns>
         public override bool MountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
+                if (volumeName == "SD" && this.storageDevices[0] == null)
+                {
                     this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
@@ -150,19 +155,21 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
-                    if (this.storageDevices[0] == null) throw new InvalidOperationException("This volume is not mounted.");
-
-                    this.storageDevices[0].Unmount();
+                if (volumeName == "SD" && this.storageDevices[0] != null)
+                {
                     this.storageDevices[0].Dispose();
                     this.storageDevices[0] = null;
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;

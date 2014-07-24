@@ -162,24 +162,26 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the mount was successful.</returns>
         public override bool MountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
+                if (volumeName == "SD" && this.storageDevices[0] == null)
+                {
                     this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
-
-                    break;
-
-                case "USB":
-                    if (this.massStorageDevice == null) throw new InvalidOperationException("No USB device is plugged into the device.");
-
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] == null && this.massStorageDevice != null)
+                {
                     this.storageDevices[1] = this.massStorageDevice;
                     this.storageDevices[1].Mount();
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
@@ -192,28 +194,26 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            try
             {
-                case "SD":
-                    if (this.storageDevices[0] == null) throw new InvalidOperationException("This volume is not mounted.");
-
-                    this.storageDevices[0].Unmount();
+                if (volumeName == "SD" && this.storageDevices[0] != null)
+                {
                     this.storageDevices[0].Dispose();
                     this.storageDevices[0] = null;
-
-                    break;
-
-                case "USB":
-                    if (this.storageDevices[1] == null) throw new InvalidOperationException("This volume is not mounted.");
-
-                    this.storageDevices[1].Unmount();
+                }
+                else if (volumeName == "USB" && this.storageDevices[1] != null)
+                {
                     this.storageDevices[1].Dispose();
                     this.storageDevices[1] = null;
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+                return false;
             }
 
             return true;
@@ -390,33 +390,6 @@ namespace GHIElectronics.Gadgeteer
             get { return this.storageDevice; }
         }
 
-        /// <summary>
-        /// Attempts to mount the SD card.
-        /// </summary>
-        /// <returns>Whether or not the card was successfully mounted.</returns>
-        public bool MountSDCard()
-        {
-            if (this.IsSDCardMounted)
-                throw new InvalidOperationException("The card is already mounted.");
-
-            this.IsSDCardMounted = this.MountStorageDevice("SD");
-            return this.IsSDCardMounted;
-        }
-
-        /// <summary>
-        /// Attempts to unmount the SD card.
-        /// </summary>
-        /// <returns>Whether or not the card was successfully unmounted.</returns>
-        public bool UnmountSDCard()
-        {
-            if (!this.IsSDCardMounted)
-                throw new InvalidOperationException("The card is already unmounted.");
-
-            this.IsSDCardMounted = !this.UnmountStorageDevice("SD");
-            this.storageDevice = null;
-            return !this.IsSDCardMounted;
-        }
-
         private void CheckSDCardDetectCreation()
         {
             if (this.sdCardDetect == null)
@@ -430,11 +403,13 @@ namespace GHIElectronics.Gadgeteer
         {
             if (this.IsSDCardInserted)
             {
-                this.MountSDCard();
+                this.IsSDCardMounted = this.MountStorageDevice("SD");
             }
             else
             {
-                this.UnmountSDCard();
+                this.UnmountStorageDevice("SD");
+                this.IsSDCardMounted = false;
+                this.storageDevice = null;
             }
         }
 
@@ -449,7 +424,9 @@ namespace GHIElectronics.Gadgeteer
                 }
                 else
                 {
-                    this.UnmountSDCard();
+                    this.UnmountStorageDevice("SD");
+                    this.IsSDCardMounted = false;
+                    this.storageDevice = null;
                 }
             }
         }
