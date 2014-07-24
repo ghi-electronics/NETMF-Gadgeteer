@@ -1,5 +1,6 @@
 ﻿using Microsoft.SPOT;
 using Microsoft.SPOT.IO;
+using System;
 using System.Threading;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
@@ -37,7 +38,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.cardDetect.Interrupt += this.OnCardDetect;
 
             if (this.IsCardInserted)
-                this.MountSDCard();
+                this.Mount();
         }
 
         /// <summary>
@@ -62,25 +63,30 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Attempts to mount the file system of the SD card.
+        /// Attempts to mount the card.
         /// </summary>
-        public void MountSDCard()
+        /// <returns>Whether or not the card was successfully mounted.</returns>
+        public bool Mount()
         {
-            if (!this.IsCardMounted)
-                this.IsCardMounted = Mainboard.MountStorageDevice("SD");
+            if (this.IsCardMounted)
+                throw new InvalidOperationException("The card is already mounted.");
+
+            this.IsCardMounted = Mainboard.MountStorageDevice("SD");
+            return this.IsCardMounted;
         }
 
         /// <summary>
-        /// Attempts to unmount the file system of the SD card.
+        /// Attempts to unmount the card.
         /// </summary>
-        public void UnmountSDCard()
+        /// <returns>Whether or not the card was successfully unmounted.</returns>
+        public bool Unmount()
         {
-            if (this.IsCardMounted)
-            {
-                this.IsCardMounted = false;
-                Mainboard.UnmountStorageDevice("SD");
-                this.device = null;
-            }
+            if (!this.IsCardMounted)
+                throw new InvalidOperationException("The card is already unmounted.");
+
+            this.IsCardMounted = !Mainboard.UnmountStorageDevice("SD");
+            this.device = null;
+            return !this.IsCardMounted;
         }
 
         private void OnCardDetect(GTI.InterruptInput sender, bool value)
@@ -89,11 +95,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             if (this.IsCardInserted)
             {
-                this.MountSDCard();
+                this.Mount();
             }
             else
             {
-                this.UnmountSDCard();
+                this.Unmount();
             }
         }
 
@@ -108,10 +114,9 @@ namespace Gadgeteer.Modules.GHIElectronics
                 }
                 else
                 {
-                    this.UnmountSDCard();
+                    this.Unmount();
                 }
             }
-
         }
 
         private void OnEject(object sender, MediaEventArgs e)

@@ -391,25 +391,30 @@ namespace GHIElectronics.Gadgeteer
         }
 
         /// <summary>
-        /// Attempts to mount the file system of the SD card.
+        /// Attempts to mount the SD card.
         /// </summary>
-        public void MountSDCard()
+        /// <returns>Whether or not the card was successfully mounted.</returns>
+        public bool MountSDCard()
         {
-            if (!this.IsSDCardMounted)
-                this.IsSDCardMounted = this.MountStorageDevice("SD");
+            if (this.IsSDCardMounted)
+                throw new InvalidOperationException("The card is already mounted.");
+
+            this.IsSDCardMounted = this.MountStorageDevice("SD");
+            return this.IsSDCardMounted;
         }
 
         /// <summary>
-        /// Attempts to unmount the file system of the SD card.
+        /// Attempts to unmount the SD card.
         /// </summary>
-        public void UnmountSDCard()
+        /// <returns>Whether or not the card was successfully unmounted.</returns>
+        public bool UnmountSDCard()
         {
-            if (this.IsSDCardMounted)
-            {
-                this.IsSDCardMounted = false;
-                this.UnmountStorageDevice("SD");
-                this.storageDevice = null;
-            }
+            if (!this.IsSDCardMounted)
+                throw new InvalidOperationException("The card is already unmounted.");
+
+            this.IsSDCardMounted = !this.UnmountStorageDevice("SD");
+            this.storageDevice = null;
+            return !this.IsSDCardMounted;
         }
 
         private void CheckSDCardDetectCreation()
@@ -447,7 +452,6 @@ namespace GHIElectronics.Gadgeteer
                     this.UnmountSDCard();
                 }
             }
-
         }
 
         private void OnEject(object sender, MediaEventArgs e)
