@@ -1,4 +1,5 @@
-﻿using Microsoft.SPOT.IO;
+﻿using Microsoft.SPOT;
+using Microsoft.SPOT.IO;
 using System.Threading;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
@@ -53,7 +54,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public bool IsCardMounted { get; private set; }
 
         /// <summary>
-        /// The StorageDevice for the currently mounted SD card..
+        /// The StorageDevice for the currently mounted SD card.
         /// </summary>
         public StorageDevice StorageDevice
         {
@@ -66,18 +67,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void MountSDCard()
         {
             if (!this.IsCardMounted)
-            {
-                try
-                {
-                    Mainboard.MountStorageDevice("SD");
-                    this.IsCardMounted = true;
-                    Thread.Sleep(500);
-                }
-                catch
-                {
-                    ErrorPrint("Error mounting SD card - no card detected.");
-                }
-            }
+                this.IsCardMounted = Mainboard.MountStorageDevice("SD");
         }
 
         /// <summary>
@@ -87,24 +77,15 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             if (this.IsCardMounted)
             {
-                try
-                {
-                    this.IsCardMounted = false;
-                    Mainboard.UnmountStorageDevice("SD");
-                    Thread.Sleep(500);
-                }
-                catch
-                {
-                    this.ErrorPrint("Unable to unmount SD card - no card detected.");
-                }
-
+                this.IsCardMounted = false;
+                Mainboard.UnmountStorageDevice("SD");
                 this.device = null;
             }
         }
 
         private void OnCardDetect(GTI.InterruptInput sender, bool value)
         {
-            Thread.Sleep(500);
+            Thread.Sleep(100);
 
             if (this.IsCardInserted)
             {
@@ -127,7 +108,6 @@ namespace Gadgeteer.Modules.GHIElectronics
                 }
                 else
                 {
-                    this.ErrorPrint("Unable to mount SD card. Is card formatted as FAT32?");
                     this.UnmountSDCard();
                 }
             }
@@ -137,21 +117,22 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void OnEject(object sender, MediaEventArgs e)
         {
             if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
-                this.OnUnmounted(this);
+                this.OnUnmounted(this, null);
         }
 
         /// <summary>
         /// Represents the delegate that is used for the <see cref="Mounted"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="SDCard"/> object that raised the event.</param>
-        /// <param name="SDCard">A storage device that can be used to access the SD non-volatile memory card.</param>
-        public delegate void MountedEventHandler(SDCard sender, StorageDevice SDCard);
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="device">A storage device that can be used to access the SD non-volatile memory card.</param>
+        public delegate void MountedEventHandler(SDCard sender, StorageDevice device);
 
         /// <summary>
         /// Represents the delegate that is used for the <see cref="Mounted"/> event.
         /// </summary>
-        /// <param name="sender">The <see cref="SDCard"/> object that raised the event.</param>
-        public delegate void UnmountedEventHandler(SDCard sender);
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void UnmountedEventHandler(SDCard sender, EventArgs e);
 
         /// <summary>
         /// Raised when the file system of the SD card is mounted.
@@ -175,13 +156,13 @@ namespace Gadgeteer.Modules.GHIElectronics
                 this.Mounted(sender, device);
         }
 
-        private void OnUnmounted(SDCard sender)
+        private void OnUnmounted(SDCard sender, EventArgs e)
         {
             if (this.onUnmounted == null)
                 this.onUnmounted = this.OnUnmounted;
 
-            if (Program.CheckAndInvoke(this.Unmounted, this.onUnmounted, sender))
-                this.Unmounted(sender);
+            if (Program.CheckAndInvoke(this.Unmounted, this.onUnmounted, sender, e))
+                this.Unmounted(sender, e);
         }
     }
 }
