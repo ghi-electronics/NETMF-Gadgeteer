@@ -23,9 +23,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         public TempHumidSI70(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported('I', this);
+            socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-            this.i2c = new GTI.SoftwareI2CBus(socket, Socket.Pin.Eight, Socket.Pin.Nine, TempHumidSI70.I2C_ADDRESS, 400, this);
+            this.i2c = new GTI.SoftwareI2CBus(socket, Socket.Pin.Five, Socket.Pin.Four, TempHumidSI70.I2C_ADDRESS, 400, this);
 
             this.writeBuffer1 = new byte[1] { TempHumidSI70.MEASURE_HUMIDITY_HOLD };
             this.writeBuffer2 = new byte[1] { TempHumidSI70.READ_TEMP_FROM_PREVIOUS };

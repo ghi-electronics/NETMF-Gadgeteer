@@ -1,11 +1,11 @@
-﻿TempHumidity Tester
+﻿TempHumidSI70 Tester
 -------------------
 Last Updated: 7/17/2014 by John
 SDK Version: 4.3.2.0
 
 Instructions
 ------------
-1. Connect a Temp&Humidity module to socket 2.
+1. Connect a TempHumidSI70 module to socket 2.
 2. Power the mainboard.
 3. Surround the module with your hand.
 
