@@ -4,6 +4,7 @@ using GHI.Processor;
 using GHI.Usb;
 using GHI.Usb.Host;
 using Microsoft.SPOT;
+using Microsoft.SPOT.IO;
 using Microsoft.SPOT.Hardware;
 using System;
 using G120 = GHI.Pins.G120;
@@ -22,6 +23,10 @@ namespace GHIElectronics.Gadgeteer
         private OutputPort debugLed;
         private IRemovable[] storageDevices;
         private MassStorage massStorageDevice;
+        private InterruptPort sdCardDetect;
+        private GT.StorageDevice storageDevice;
+        private SDCardMountedEventHandler mounted;
+        private SDCardUnmountedEventHandler unmounted;
 
         /// <summary>
         /// Constructs a new instance.
@@ -33,6 +38,8 @@ namespace GHIElectronics.Gadgeteer
             this.debugLed = null;
             this.storageDevices = new IRemovable[2];
             this.massStorageDevice = null;
+            this.storageDevice = null;
+            this.sdCardDetect = null;
 
             Controller.MassStorageConnected += (a, b) =>
             {
@@ -57,8 +64,8 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[9] = G120.P2_2;
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
-            
-            
+
+
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
             socket.SupportedTypes = new char[] { 'G' };
             socket.CpuPins[3] = G120.P1_20;
@@ -69,8 +76,8 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[8] = G120.P1_25;
             socket.CpuPins[9] = G120.P1_19;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
-            
-            
+
+
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
             socket.SupportedTypes = new char[] { 'R', 'Y' };
             socket.CpuPins[3] = G120.P2_12;
@@ -82,8 +89,8 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[9] = G120.P2_5;
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
-            
-            
+
+
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
             socket.SupportedTypes = new char[] { 'A', 'I', 'T', 'X' };
             socket.CpuPins[3] = G120.P0_25;
@@ -98,8 +105,8 @@ namespace GHIElectronics.Gadgeteer
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
             GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
-            
-            
+
+
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
             socket.SupportedTypes = new char[] { 'U', 'X' };
             socket.CpuPins[3] = G120.P0_13;
@@ -108,8 +115,8 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[6] = G120.P1_4;
             socket.SerialPortName = "COM1";
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
-            
-            
+
+
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
             socket.SupportedTypes = new char[] { 'S', 'X' };
             socket.CpuPins[3] = G120.P2_21;
@@ -355,6 +362,167 @@ namespace GHIElectronics.Gadgeteer
             {
                 this.softwareBus.WriteRead((byte)this.Address, writeBuffer, writeOffset, writeLength, readBuffer, readOffset, readLength, out numWritten, out numRead);
             }
+        }
+
+        /// <summary>
+        /// Whether or not an SD card is inserted.
+        /// </summary>
+        public bool IsSDCardInserted
+        {
+            get
+            {
+                this.CheckSDCardDetectCreation();
+
+                return !this.sdCardDetect.Read();
+            }
+        }
+
+        /// <summary>
+        /// Whether or not the SD card is mounted.
+        /// </summary>
+        public bool IsSDCardMounted { get; private set; }
+
+        /// <summary>
+        /// The StorageDevice for the currently mounted SD card.
+        /// </summary>
+        public GT.StorageDevice StorageDevice
+        {
+            get { return this.storageDevice; }
+        }
+
+        /// <summary>
+        /// Attempts to mount the file system of the SD card.
+        /// </summary>
+        public void MountSDCard()
+        {
+            if (!this.IsSDCardMounted)
+                this.IsSDCardMounted = this.MountStorageDevice("SD");
+        }
+
+        /// <summary>
+        /// Attempts to unmount the file system of the SD card.
+        /// </summary>
+        public void UnmountSDCard()
+        {
+            if (this.IsSDCardMounted)
+            {
+                this.IsSDCardMounted = false;
+                this.UnmountStorageDevice("SD");
+                this.storageDevice = null;
+            }
+        }
+
+        private void CheckSDCardDetectCreation()
+        {
+            if (this.sdCardDetect == null)
+            {
+                this.sdCardDetect = new InterruptPort(G120.P1_8, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+                this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
+            }
+        }
+
+        private void OnSDCardDetect(uint data1, uint data2, DateTime when)
+        {
+            if (this.IsSDCardInserted)
+            {
+                this.MountSDCard();
+            }
+            else
+            {
+                this.UnmountSDCard();
+            }
+        }
+
+        private void OnInsert(object sender, MediaEventArgs e)
+        {
+            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
+            {
+                if (e.Volume.FileSystem != null)
+                {
+                    this.storageDevice = new GT.StorageDevice(e.Volume);
+                    this.OnMounted(this, this.storageDevice);
+                }
+                else
+                {
+                    this.UnmountSDCard();
+                }
+            }
+
+        }
+
+        private void OnEject(object sender, MediaEventArgs e)
+        {
+            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
+                this.OnUnmounted(this, null);
+        }
+
+        /// <summary>
+        /// Represents the delegate that is used for the <see cref="SDCardMounted"/> event.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="device">A storage device that can be used to access the SD non-volatile memory card.</param>
+        public delegate void SDCardMountedEventHandler(FEZCobraIIEco sender, GT.StorageDevice device);
+
+        /// <summary>
+        /// Represents the delegate that is used for the <see cref="SDCardMounted"/> event.
+        /// </summary>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="e">The event arguments.</param>
+        public delegate void SDCardUnmountedEventHandler(FEZCobraIIEco sender, EventArgs e);
+
+        /// <summary>
+        /// Raised when the file system of the SD card is mounted.
+        /// </summary>
+        public event SDCardMountedEventHandler SDCardMounted
+        {
+            add
+            {
+                this.CheckSDCardDetectCreation();
+
+                this.mounted += value;
+            }
+            remove
+            {
+                this.mounted -= value;
+            }
+        }
+
+        /// <summary>
+        /// Raised when the file system of the SD card is unmounted.
+        /// </summary>
+        public event SDCardUnmountedEventHandler SDCardUnmounted
+        {
+            add
+            {
+                this.CheckSDCardDetectCreation();
+
+                this.unmounted += value;
+            }
+            remove
+            {
+                this.unmounted -= value;
+            }
+        }
+
+        private SDCardMountedEventHandler onMounted;
+        private SDCardUnmountedEventHandler onUnmounted;
+
+        private void OnMounted(FEZCobraIIEco sender, GT.StorageDevice device)
+        {
+            if (this.onMounted == null)
+                this.onMounted = this.OnMounted;
+
+            if (GT.Program.CheckAndInvoke(this.mounted, this.onMounted, sender, device))
+                this.mounted(sender, device);
+        }
+
+        private void OnUnmounted(FEZCobraIIEco sender, EventArgs e)
+        {
+            if (this.onUnmounted == null)
+                this.onUnmounted = this.OnUnmounted;
+
+            if (GT.Program.CheckAndInvoke(this.unmounted, this.onUnmounted, sender, e))
+                this.unmounted(sender, e);
         }
     }
 }
