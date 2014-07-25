@@ -24,9 +24,7 @@ namespace GHIElectronics.Gadgeteer
         private IRemovable[] storageDevices;
         private EthernetENC28J60 ethernet;
         private InterruptPort sdCardDetect;
-        private GT.StorageDevice storageDevice;
-        private SDCardMountedEventHandler mounted;
-        private SDCardUnmountedEventHandler unmounted;
+        private GT.StorageDevice sdCardStorageDevice;
 
         /// <summary>
         /// Constructs a new instance.
@@ -37,10 +35,20 @@ namespace GHIElectronics.Gadgeteer
             this.debugLed = null;
             this.ethernet = null;
             this.storageDevices = new IRemovable[2];
-            this.storageDevice = null;
-            this.sdCardDetect = null;
+            this.sdCardStorageDevice = null;
 
             Controller.Start();
+
+            RemovableMedia.Insert += this.OnInsert;
+            RemovableMedia.Eject += this.OnEject;
+
+            this.IsSDCardMounted = false;
+
+            this.sdCardDetect = new InterruptPort(Generic.GetPin('C', 2), true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+            this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
+
+            if (this.IsSDCardInserted)
+                this.MountStorageDevice("SD");
 
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
@@ -315,8 +323,6 @@ namespace GHIElectronics.Gadgeteer
         {
             get
             {
-                this.CheckSDCardDetectCreation();
-
                 return !this.sdCardDetect.Read();
             }
         }
@@ -329,67 +335,59 @@ namespace GHIElectronics.Gadgeteer
         /// <summary>
         /// The StorageDevice for the currently mounted SD card.
         /// </summary>
-        public GT.StorageDevice StorageDevice
+        public GT.StorageDevice SDCardStorageDevice
         {
-            get { return this.storageDevice; }
-        }
-
-        private void CheckSDCardDetectCreation()
-        {
-            if (this.sdCardDetect == null)
-            {
-                this.sdCardDetect = new InterruptPort(G120.P1_8, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
-                this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
-            }
+            get { return this.sdCardStorageDevice; }
         }
 
         private void OnSDCardDetect(uint data1, uint data2, DateTime when)
         {
-            if (this.IsSDCardInserted)
-            {
-                this.IsSDCardMounted = this.MountStorageDevice("SD");
-            }
-            else
-            {
+            if (this.IsSDCardInserted && !this.IsSDCardMounted)
+                this.MountStorageDevice("SD");
+
+            if (!this.IsSDCardInserted && this.IsSDCardMounted)
                 this.UnmountStorageDevice("SD");
-                this.IsSDCardMounted = false;
-                this.storageDevice = null;
-            }
         }
 
         private void OnInsert(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
+            if (string.Compare(e.Volume.Name, "SD") == 0)
             {
                 if (e.Volume.FileSystem != null)
                 {
-                    this.storageDevice = new GT.StorageDevice(e.Volume);
-                    this.OnMounted(this, this.storageDevice);
+                    this.sdCardStorageDevice = new GT.StorageDevice(e.Volume);
+                    this.IsSDCardMounted = true;
+                    this.OnSDCardMounted(this, this.sdCardStorageDevice);
                 }
                 else
                 {
-                    this.UnmountStorageDevice("SD");
+                    this.sdCardStorageDevice = null;
                     this.IsSDCardMounted = false;
-                    this.storageDevice = null;
+                    this.UnmountStorageDevice("SD");
+                    Debug.Print("The SD card does not have a valid filesystem.");
                 }
             }
         }
 
         private void OnEject(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
-                this.OnUnmounted(this, null);
+            if (string.Compare(e.Volume.Name, "SD") == 0)
+            {
+                this.sdCardStorageDevice = null;
+                this.IsSDCardMounted = false;
+                this.OnSDCardUnmounted(this, null);
+            }
         }
 
         /// <summary>
-        /// Represents the delegate that is used for the SDCardMounted event.
+        /// Represents the delegate that is used for the Mounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
-        /// <param name="device">A storage device that can be used to access the SD non-volatile memory card.</param>
+        /// <param name="device">A storage device that can be used to access the SD card.</param>
         public delegate void SDCardMountedEventHandler(FEZCerbuinoNet sender, GT.StorageDevice device);
 
         /// <summary>
-        /// Represents the delegate that is used for the SDCardUnmounted event.
+        /// Represents the delegate that is used for the Unmounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
@@ -398,56 +396,32 @@ namespace GHIElectronics.Gadgeteer
         /// <summary>
         /// Raised when the file system of the SD card is mounted.
         /// </summary>
-        public event SDCardMountedEventHandler SDCardMounted
-        {
-            add
-            {
-                this.CheckSDCardDetectCreation();
-
-                this.mounted += value;
-            }
-            remove
-            {
-                this.mounted -= value;
-            }
-        }
+        public event SDCardMountedEventHandler SDCardMounted;
 
         /// <summary>
         /// Raised when the file system of the SD card is unmounted.
         /// </summary>
-        public event SDCardUnmountedEventHandler SDCardUnmounted
-        {
-            add
-            {
-                this.CheckSDCardDetectCreation();
+        public event SDCardUnmountedEventHandler SDCardUnmounted;
 
-                this.unmounted += value;
-            }
-            remove
-            {
-                this.unmounted -= value;
-            }
+        private SDCardMountedEventHandler onSDCardMounted;
+        private SDCardUnmountedEventHandler onSDCardUnmounted;
+
+        private void OnSDCardMounted(FEZCerbuinoNet sender, GT.StorageDevice device)
+        {
+            if (this.onSDCardMounted == null)
+                this.onSDCardMounted = this.OnSDCardMounted;
+
+            if (GT.Program.CheckAndInvoke(this.SDCardMounted, this.onSDCardMounted, sender, device))
+                this.SDCardMounted(sender, device);
         }
 
-        private SDCardMountedEventHandler onMounted;
-        private SDCardUnmountedEventHandler onUnmounted;
-
-        private void OnMounted(FEZCerbuinoNet sender, GT.StorageDevice device)
+        private void OnSDCardUnmounted(FEZCerbuinoNet sender, EventArgs e)
         {
-            if (this.onMounted == null)
-                this.onMounted = this.OnMounted;
+            if (this.onSDCardUnmounted == null)
+                this.onSDCardUnmounted = this.OnSDCardUnmounted;
 
-            if (GT.Program.CheckAndInvoke(this.mounted, this.onMounted, sender, device))
-                this.mounted(sender, device);
-        }
-
-        private void OnUnmounted(FEZCerbuinoNet sender, EventArgs e)
-        {
-            if (this.onUnmounted == null)
-                this.onUnmounted = this.OnUnmounted;
-
-            if (GT.Program.CheckAndInvoke(this.unmounted, this.onUnmounted, sender, e))
-                this.unmounted(sender, e);
+            if (GT.Program.CheckAndInvoke(this.SDCardUnmounted, this.onSDCardUnmounted, sender, e))
+                this.SDCardUnmounted(sender, e);
         }
     }
 }

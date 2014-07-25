@@ -109,8 +109,8 @@ namespace Gadgeteer.Modules.GHIElectronics
                 {
                     this.device = null;
                     this.IsCardMounted = false;
-                    this.ErrorPrint("The SD card does not have a valid filesystem.");
                     Mainboard.UnmountStorageDevice("SD");
+                    this.ErrorPrint("The SD card does not have a valid filesystem.");
                 }
             }
         }
