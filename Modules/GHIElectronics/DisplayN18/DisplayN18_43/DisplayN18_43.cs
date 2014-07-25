@@ -127,8 +127,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary>
         /// Renders display data on the display device. 
-		/// </summary>
-        /// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
+        /// </summary>
+        /// <param name="bitmap">The bitmap object to render on the display.</param>
         /// <param name="x">The start x coordinate of the dirty area.</param>
         /// <param name="y">The start y coordinate of the dirty area.</param>
         /// <param name="width">The width of the dirty area.</param>

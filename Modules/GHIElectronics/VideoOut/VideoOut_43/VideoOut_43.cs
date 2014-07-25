@@ -72,37 +72,37 @@ namespace Gadgeteer.Modules.GHIElectronics
         public enum Resolution
         {
             /// <summary>
-            /// Represents the values for an Rca display in the NTSC standard with a resolution of 320x240.
+            /// Represents the values for an RCA display in the NTSC standard with a resolution of 320x240.
             /// </summary>
             Rca320x240 = 0,
 
             /// <summary>
-            /// Represents the values for an Rca display in the NTSC standard with a resolution of 640x480.
+            /// Represents the values for an RCA display in the NTSC standard with a resolution of 640x480.
             /// </summary>
             Rca640x480 = 1,
 
             /// <summary>
-            /// Represents the values for an Rca display in the NTSC standard with a resolution of 800x600.
+            /// Represents the values for an RCA display in the NTSC standard with a resolution of 800x600.
             /// </summary>
             Rca800x600 = 2,
 
             /// <summary>
-            /// Represents the values for an Vga display with a resolution of 320x240.
+            /// Represents the values for a VGA display with a resolution of 320x240.
             /// </summary>
             Vga320x240 = 10,
 
             /// <summary>
-            /// Represents the values for an Vga display with a resolution of 640x480.
+            /// Represents the values for a VGA display with a resolution of 640x480.
             /// </summary>
             Vga640x480 = 11,
 
             /// <summary>
-            /// Represents the values for an Vga display with a resolution of 800x600.
+            /// Represents the values for a VGA display with a resolution of 800x600.
             /// </summary>
             Vga800x600 = 12,
 
             /// <summary>
-            /// Represents the values for an Rca display in the Pal standard with a resolution of 320x240.
+            /// Represents the values for an RCA display in the PAL standard with a resolution of 320x240.
             /// </summary>
             RcaPal320x240 = 20
         }
@@ -183,7 +183,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             byte ud = this.ReadRegister(0x00);
             if (ud != 0x55 && ud != 0x54) 
-                throw new InvalidOperationException("Invalid data returned.");
+                this.ErrorPrint("Setting the display configuration failed.");
         }
 
         private void WriteRegister(byte address, byte data)
@@ -222,9 +222,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x71);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -269,9 +267,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x71);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -318,9 +314,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x69);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -377,9 +371,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x71);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -441,9 +433,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x71);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -507,9 +497,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x69);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
@@ -551,9 +539,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.WriteRegister(0x04, 0x38);
             this.WriteRegister(0x06, 0x71);
 
-            /*
-            NOTE: The following five repeated sentences are used here to wait memory initial complete. See Appendix A of programming guide document CH7025(26)B Programming Guide Rev 2.03 for detailed information about memory initialization.
-            */
+            //The following repitions are used here to wait for memory initialization to complete. See Appendix A of CH7025(26)B Programming Guide Rev 2.03 for more information.
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
             this.WriteRegister(0x03, 0x00);
