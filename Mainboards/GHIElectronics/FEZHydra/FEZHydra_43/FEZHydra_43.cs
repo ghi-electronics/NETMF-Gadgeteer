@@ -16,7 +16,7 @@ namespace GHIElectronics.Gadgeteer
     public class FEZHydra : GT.Mainboard
     {
         private OutputPort debugLed;
-        private IRemovable[] storageDevices;
+        private SDCard sdCard;
 
         /// <summary>
         /// Constructs a new instance.
@@ -24,7 +24,7 @@ namespace GHIElectronics.Gadgeteer
         public FEZHydra()
         {
             this.debugLed = null;
-            this.storageDevices = new IRemovable[1];
+            this.sdCard = null;
 
             this.NativeBitmapConverter = this.BitmapConverter;
 
@@ -254,19 +254,15 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the mount was successful.</returns>
         public override bool MountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            if (volumeName == "SD")
             {
-                case "SD":
-                    this.storageDevices[0] = new SDCard();
-                    this.storageDevices[0].Mount();
+                this.sdCard = new SDCard();
+                this.sdCard.Mount();
 
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -276,22 +272,15 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            switch (volumeName)
+            if (volumeName == "SD")
             {
-                case "SD":
-                    if (this.storageDevices[0] == null) throw new InvalidOperationException("This volume is not mounted.");
+                this.sdCard.Dispose();
+                this.sdCard = null;
 
-                    this.storageDevices[0].Unmount();
-                    this.storageDevices[0].Dispose();
-                    this.storageDevices[0] = null;
-
-                    break;
-
-                default:
-                    throw new ArgumentException("volumeName must be present in the array returned by GetStorageDeviceVolumeNames.", "volumeName");
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>

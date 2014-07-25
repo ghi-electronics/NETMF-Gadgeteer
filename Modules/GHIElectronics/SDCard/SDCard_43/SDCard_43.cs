@@ -68,11 +68,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>Whether or not the card was successfully mounted.</returns>
         public bool Mount()
         {
-            if (this.IsCardMounted)
-                throw new InvalidOperationException("The card is already mounted.");
+            if (this.IsCardMounted) throw new InvalidOperationException("The card is already mounted.");
 
-            this.IsCardMounted = Mainboard.MountStorageDevice("SD");
-            return this.IsCardMounted;
+            return Mainboard.MountStorageDevice("SD");
         }
 
         /// <summary>
@@ -81,59 +79,61 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>Whether or not the card was successfully unmounted.</returns>
         public bool Unmount()
         {
-            if (!this.IsCardMounted)
-                throw new InvalidOperationException("The card is already unmounted.");
+            if (!this.IsCardMounted) throw new InvalidOperationException("The card is already unmounted.");
 
-            this.IsCardMounted = !Mainboard.UnmountStorageDevice("SD");
-            this.device = null;
-            return !this.IsCardMounted;
+            return !Mainboard.UnmountStorageDevice("SD");
         }
 
         private void OnCardDetect(GTI.InterruptInput sender, bool value)
         {
             Thread.Sleep(100);
 
-            if (this.IsCardInserted)
-            {
+            if (this.IsCardInserted && !this.IsCardMounted)
                 this.Mount();
-            }
-            else
-            {
+
+            if (!this.IsCardInserted && this.IsCardMounted)
                 this.Unmount();
-            }
         }
 
         private void OnInsert(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
+            if (string.Compare(e.Volume.Name, "SD") == 0)
             {
                 if (e.Volume.FileSystem != null)
                 {
                     this.device = new StorageDevice(e.Volume);
+                    this.IsCardMounted = true;
                     this.OnMounted(this, this.device);
                 }
                 else
                 {
-                    this.Unmount();
+                    this.device = null;
+                    this.IsCardMounted = false;
+                    this.ErrorPrint("The SD card does not have a valid filesystem.");
+                    Mainboard.UnmountStorageDevice("SD");
                 }
             }
         }
 
         private void OnEject(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 2 && e.Volume.Name.Substring(0, 2) == "SD")
+            if (string.Compare(e.Volume.Name, "SD") == 0)
+            {
+                this.device = null;
+                this.IsCardMounted = false;
                 this.OnUnmounted(this, null);
+            }
         }
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="Mounted"/> event.
+        /// Represents the delegate that is used for the Mounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
-        /// <param name="device">A storage device that can be used to access the SD non-volatile memory card.</param>
+        /// <param name="device">A storage device that can be used to access the SD card.</param>
         public delegate void MountedEventHandler(SDCard sender, StorageDevice device);
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="Mounted"/> event.
+        /// Represents the delegate that is used for the Unmounted event.
         /// </summary>
         /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>

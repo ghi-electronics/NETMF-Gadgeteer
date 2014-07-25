@@ -16,6 +16,10 @@ namespace Gadgeteer.Modules.GHIElectronics
     {
         private static bool firstHostModule;
 
+        private StorageDevice massStorageDevice;
+        private Keyboard connectedKeyboard;
+        private Mouse connectedMouse;
+
         static USBHost()
         {
             USBHost.firstHostModule = true;
@@ -39,70 +43,153 @@ namespace Gadgeteer.Modules.GHIElectronics
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
-            Controller.MouseConnected += (a, b) => this.OnMouseConnected(this, b);
-            Controller.KeyboardConnected += (a, b) => this.OnKeyboardConnected(this, b);
-            Controller.MassStorageConnected += (a, b) => b.Mount();
-            Controller.Start();
+            Controller.MouseConnected += (a, b) => 
+            {
+                this.connectedMouse = b;
+                this.OnMouseConnected(this, b);
+
+                b.Disconnected += (c, d) => this.connectedMouse = null;
+            };
+
+            Controller.KeyboardConnected += (a, b) =>
+            {
+                this.connectedKeyboard = b;
+                this.OnKeyboardConnected(this, b);
+
+                b.Disconnected += (c, d) => this.connectedKeyboard = null;
+            };
+
+            Controller.MassStorageConnected += (a, b) =>
+            {
+                if (!this.IsMassStorageMounted)
+                    this.MountMassStorage();
+
+                b.Disconnected += (c, d) =>
+                {
+                    if (this.IsMassStorageMounted)
+                        this.UnmountMassStorage();
+                };
+            };
+        }
+
+        /// <summary>
+        /// The current connected keyboard.
+        /// </summary>
+        public Keyboard ConnectedKeyboard
+        {
+            get { return this.connectedKeyboard; }
+        }
+
+        /// <summary>
+        /// The current connected mouse.
+        /// </summary>
+        public Mouse ConnectedMouse
+        {
+            get { return this.connectedMouse; }
+        }
+
+        /// <summary>
+        /// The StorageDevice for the currently mounted mass storage device.
+        /// </summary>
+        public StorageDevice MassStorageDevice
+        {
+            get { return this.massStorageDevice; }
+        }
+
+        /// <summary>
+        /// Whether or not the mass storage device is mounted.
+        /// </summary>
+        public bool IsMassStorageMounted { get; private set; }
+
+        /// <summary>
+        /// Attempts to mount the mass storage device.
+        /// </summary>
+        /// <returns>Whether or not the mass storage device was successfully mounted.</returns>
+        public bool MountMassStorage()
+        {
+            if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
+
+            return Mainboard.MountStorageDevice("USB");
+        }
+
+        /// <summary>
+        /// Attempts to unmount the mass storage device.
+        /// </summary>
+        /// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
+        public bool UnmountMassStorage()
+        {
+            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already unmounted.");
+
+            return Mainboard.UnmountStorageDevice("USB");
         }
 
         private void OnInsert(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 3 && e.Volume.Name.Substring(0, 3) == "USB")
+            if (string.Compare(e.Volume.Name, "USB") == 0)
             {
                 if (e.Volume.FileSystem != null)
                 {
-                    this.OnMassStorageConnected(this, new StorageDevice(e.Volume));
+                    this.massStorageDevice = new StorageDevice(e.Volume);
+                    this.IsMassStorageMounted = true;
+                    this.OnMassStorageMounted(this, this.massStorageDevice);
                 }
                 else
                 {
-                    this.ErrorPrint("Unable to mount the USB drive. Is it formatted as FAT32?");
+                    this.massStorageDevice = null;
+                    this.IsMassStorageMounted = false;
+                    this.ErrorPrint("The mass storage device does not have a valid filesystem.");
+                    Mainboard.UnmountStorageDevice("USB");
                 }
             }
         }
 
         private void OnEject(object sender, MediaEventArgs e)
         {
-            if (e.Volume.Name.Length >= 3 && e.Volume.Name.Substring(0, 3) == "USB")
-                this.OnMassStorageDisconnected(this, null);
+            if (string.Compare(e.Volume.Name, "USB") == 0)
+            {
+                this.massStorageDevice = null;
+                this.IsMassStorageMounted = false;
+                this.OnMassStorageUnmounted(this, null);
+            }
         }
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="MassStorageConnected"/> event.
+        /// Represents the delegate that is used for the MassStorageMounted event.
         /// </summary>
-        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="storageDevice">The <see cref="T:Microsoft.Gadgeteer.StorageDevice"/> object associated with the connected USB drive.</param>
-        public delegate void MassStorageConnectedEventHandler(USBHost sender, StorageDevice storageDevice);
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="device">A storage device that can be used to access the SD card.</param>
+        public delegate void MassStorageMountedEventHandler(USBHost sender, StorageDevice device);
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="MassStorageDisconnected"/> event.
+        /// Represents the delegate that is used for the MassStorageUnmounted event.
         /// </summary>
-        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
+        /// <param name="sender">The object that raised the event.</param>
         /// <param name="e">The event arguments.</param>
-        public delegate void MassStorageDisconnectedEventHandler(USBHost sender, EventArgs e);
+        public delegate void MassStorageUnmountedEventHandler(USBHost sender, EventArgs e);
 
         /// <summary>
-        /// Represents the delegate that is used for the <see cref="MouseConnected"/> event.
+        /// Represents the delegate that is used for the MouseConnected event.
         /// </summary>
-        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="mouse">The <see cref="Mouse"/> object associated with the event.</param>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="mouse">The object associated with the event.</param>
         public delegate void MouseConnectedEventHandler(USBHost sender, Mouse mouse);
 
         /// <summary>
-        /// Represents the delegate that is used to handle the <see cref="KeyboardConnected"/> event.
+        /// Represents the delegate that is used to handle the KeyboardConnected event.
         /// </summary>
-        /// <param name="sender">The <see cref="USBHost"/> object that raised the event.</param>
-        /// <param name="keyboard">The <see cref="Keyboard"/> object associated with the event.</param>
+        /// <param name="sender">The object that raised the event.</param>
+        /// <param name="keyboard">The object associated with the event.</param>
         public delegate void KeyboardConnectedEventHandler(USBHost sender, Keyboard keyboard);
 
         /// <summary>
-        /// Raised when a USB drive is connected.
+        /// Raised when the file system of the mass storage device is mounted.
         /// </summary>
-        public event MassStorageConnectedEventHandler MassStorageConnected;
+        public event MassStorageMountedEventHandler MassStorageMounted;
 
         /// <summary>
-        /// Raised when a USB drive is disconnected.
+        /// Raised when the file system of the mass storage device is unmounted.
         /// </summary>
-        public event MassStorageDisconnectedEventHandler MassStorageDisconnected;
+        public event MassStorageUnmountedEventHandler MassStorageUnmounted;
 
         /// <summary>
         /// Raised when a USB mouse is connected.
@@ -114,27 +201,27 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public event KeyboardConnectedEventHandler KeyboardConnected;
 
-        private MassStorageConnectedEventHandler onMassStorageConnected;
-        private MassStorageDisconnectedEventHandler onMassStorageDisconnected;
+        private MassStorageMountedEventHandler onMassStorageMounted;
+        private MassStorageUnmountedEventHandler onMassStorageUnmounted;
         private MouseConnectedEventHandler onMouseConnected;
         private KeyboardConnectedEventHandler onKeyboardConnected;
 
-        private void OnMassStorageConnected(USBHost sender, StorageDevice storageDevice)
+        private void OnMassStorageMounted(USBHost sender, StorageDevice device)
         {
-            if (this.onMassStorageConnected == null)
-                this.onMassStorageConnected = this.OnMassStorageConnected;
+            if (this.onMassStorageMounted == null)
+                this.onMassStorageMounted = this.OnMassStorageMounted;
 
-            if (Program.CheckAndInvoke(this.MassStorageConnected, this.onMassStorageConnected, sender, storageDevice))
-                this.MassStorageConnected(sender, storageDevice);
+            if (Program.CheckAndInvoke(this.MassStorageMounted, this.onMassStorageMounted, sender, device))
+                this.MassStorageMounted(sender, device);
         }
 
-        private void OnMassStorageDisconnected(USBHost sender, EventArgs e)
+        private void OnMassStorageUnmounted(USBHost sender, EventArgs e)
         {
-            if (this.onMassStorageDisconnected == null)
-                this.onMassStorageDisconnected = this.OnMassStorageDisconnected;
+            if (this.onMassStorageUnmounted == null)
+                this.onMassStorageUnmounted = this.OnMassStorageUnmounted;
 
-            if (Program.CheckAndInvoke(this.MassStorageDisconnected, this.onMassStorageDisconnected, sender, e))
-                this.MassStorageDisconnected(sender, e);
+            if (Program.CheckAndInvoke(this.MassStorageUnmounted, this.onMassStorageUnmounted, sender, e))
+                this.MassStorageUnmounted(sender, e);
         }
 
         private void OnMouseConnected(USBHost sender, Mouse mouse)

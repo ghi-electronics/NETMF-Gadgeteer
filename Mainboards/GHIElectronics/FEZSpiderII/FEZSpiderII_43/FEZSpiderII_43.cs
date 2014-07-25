@@ -19,7 +19,6 @@ namespace GHIElectronics.Gadgeteer
     {
         private OutputPort debugLed;
         private IRemovable[] storageDevices;
-        private MassStorage massStorageDevice;
 
         /// <summary>
         /// Constructs a new instance.
@@ -28,13 +27,6 @@ namespace GHIElectronics.Gadgeteer
         {
             this.debugLed = null;
             this.storageDevices = new IRemovable[2];
-            this.massStorageDevice = null;
-
-            Controller.MassStorageConnected += (a, b) =>
-            {
-                this.massStorageDevice = b;
-                this.massStorageDevice.Disconnected += (c, d) => this.UnmountStorageDevice("USB");
-            };
 
             Controller.Start();
 
@@ -267,20 +259,26 @@ namespace GHIElectronics.Gadgeteer
                 {
                     this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
+
+                    return true;
                 }
-                else if (volumeName == "USB" && this.storageDevices[1] == null && this.massStorageDevice != null)
+                else if (volumeName == "USB" && this.storageDevices[1] == null)
                 {
-                    this.storageDevices[1] = this.massStorageDevice;
-                    this.storageDevices[1].Mount();
-                }
-                else
-                {
-                    return false;
+                    foreach (BaseDevice dev in Controller.GetConnectedDevices())
+                    {
+                        if (dev.GetType() == typeof(MassStorage))
+                        {
+                            this.storageDevices[1] = (MassStorage)dev;
+                            this.storageDevices[1].Mount();
+
+                            return true;
+                        }
+                    }
                 }
             }
             catch
             {
-                return false;
+
             }
 
             return true;
@@ -293,24 +291,17 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>Whether or not the unmount was successful.</returns>
         public override bool UnmountStorageDevice(string volumeName)
         {
-            try
+            if (volumeName == "SD" && this.storageDevices[0] != null)
             {
-                if (volumeName == "SD" && this.storageDevices[0] != null)
-                {
-                    this.storageDevices[0].Dispose();
-                    this.storageDevices[0] = null;
-                }
-                else if (volumeName == "USB" && this.storageDevices[1] != null)
-                {
-                    this.storageDevices[1].Dispose();
-                    this.storageDevices[1] = null;
-                }
-                else
-                {
-                    return false;
-                }
+                this.storageDevices[0].Dispose();
+                this.storageDevices[0] = null;
             }
-            catch
+            else if (volumeName == "USB" && this.storageDevices[1] != null)
+            {
+                this.storageDevices[1].Dispose();
+                this.storageDevices[1] = null;
+            }
+            else
             {
                 return false;
             }
