@@ -168,7 +168,7 @@ namespace GHIElectronics.Gadgeteer
 
             }
 
-            return true;
+            return false;
         }
 
         /// <summary>

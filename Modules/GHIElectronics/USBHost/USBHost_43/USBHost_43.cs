@@ -40,6 +40,9 @@ namespace Gadgeteer.Modules.GHIElectronics
             socket.ReservePin(Socket.Pin.Four, this);
             socket.ReservePin(Socket.Pin.Five, this);
 
+            this.IsMassStorageConnected = false;
+            this.IsMassStorageMounted = false;
+
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
@@ -61,11 +64,15 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             Controller.MassStorageConnected += (a, b) =>
             {
+                this.IsMassStorageConnected = true;
+
                 if (!this.IsMassStorageMounted)
                     this.MountMassStorage();
 
                 b.Disconnected += (c, d) =>
                 {
+                    this.IsMassStorageConnected = false;
+
                     if (this.IsMassStorageMounted)
                         this.UnmountMassStorage();
                 };
@@ -97,6 +104,21 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
+        /// Whether or not the keyboard is connected.
+        /// </summary>
+        public bool IsKeyboardConnected { get { return this.connectedKeyboard != null; } }
+
+        /// <summary>
+        /// Whether or not the mouse is connected.
+        /// </summary>
+        public bool IsMouseConnected { get { return this.connectedMouse != null; } }
+
+        /// <summary>
+        /// Whether or not the mass storage device is connected.
+        /// </summary>
+        public bool IsMassStorageConnected { get; private set; }
+
+        /// <summary>
         /// Whether or not the mass storage device is mounted.
         /// </summary>
         public bool IsMassStorageMounted { get; private set; }
@@ -108,6 +130,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public bool MountMassStorage()
         {
             if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
+            if (!this.IsMassStorageConnected) throw new InvalidOperationException("There is no mass storage device connected.");
 
             return Mainboard.MountStorageDevice("USB");
         }
@@ -118,7 +141,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
         public bool UnmountMassStorage()
         {
-            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already unmounted.");
+            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is not mounted.");
 
             return Mainboard.UnmountStorageDevice("USB");
         }
