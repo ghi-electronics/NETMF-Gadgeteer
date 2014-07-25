@@ -46,7 +46,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
-            Controller.MouseConnected += (a, b) => 
+            Controller.MouseConnected += (a, b) =>
             {
                 this.connectedMouse = b;
                 this.OnMouseConnected(this, b);
@@ -160,8 +160,8 @@ namespace Gadgeteer.Modules.GHIElectronics
                 {
                     this.massStorageDevice = null;
                     this.IsMassStorageMounted = false;
-                    this.ErrorPrint("The mass storage device does not have a valid filesystem.");
                     Mainboard.UnmountStorageDevice("USB");
+                    this.ErrorPrint("The mass storage device does not have a valid filesystem.");
                 }
             }
         }
@@ -215,12 +215,12 @@ namespace Gadgeteer.Modules.GHIElectronics
         public event MassStorageUnmountedEventHandler MassStorageUnmounted;
 
         /// <summary>
-        /// Raised when a USB mouse is connected.
+        /// Raised when a mouse is connected.
         /// </summary>
         public event MouseConnectedEventHandler MouseConnected;
 
         /// <summary>
-        /// Raised when a USB keyboard is connected.
+        /// Raised when a keyboard is connected.
         /// </summary>
         public event KeyboardConnectedEventHandler KeyboardConnected;
 
