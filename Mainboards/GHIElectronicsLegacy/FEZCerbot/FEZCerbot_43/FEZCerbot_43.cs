@@ -42,7 +42,7 @@ namespace GHIElectronics.Gadgeteer
 
         private bool configSet;
         private OutputPort debugLed;
-        private Removable[] storageDevices;
+        private IRemovable[] storageDevices;
 
         /// <summary>
         /// Constructs a new instance.
@@ -51,7 +51,7 @@ namespace GHIElectronics.Gadgeteer
         {
             this.configSet = false;
             this.debugLed = null;
-            this.storageDevices = new Removable[1];
+            this.storageDevices = new IRemovable[1];
 
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
@@ -223,7 +223,7 @@ namespace GHIElectronics.Gadgeteer
             switch (volumeName)
             {
                 case "SD":
-                    this.storageDevices[0] = new SD();
+                    this.storageDevices[0] = new SDCard();
                     this.storageDevices[0].Mount();
 
                     break;
@@ -325,10 +325,10 @@ namespace GHIElectronics.Gadgeteer
 
 			if (!this.configSet)
             {
-                Configuration.Display.Populate(Configuration.Display.GHIDisplay.DisplayN18);
-                Configuration.Display.SpiConfiguration = config;
-                Configuration.Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
-                Configuration.Display.Save();
+                Display.Populate(Display.GHIDisplay.DisplayN18);
+                Display.SpiConfiguration = config;
+                Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
+                Display.Save();
 
 				this.configSet = true;
 			}

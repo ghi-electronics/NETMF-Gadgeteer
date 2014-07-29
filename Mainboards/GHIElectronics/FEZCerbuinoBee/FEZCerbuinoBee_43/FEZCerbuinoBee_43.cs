@@ -76,7 +76,7 @@ namespace GHIElectronics.Gadgeteer
             this.IsMassStorageConnected = false;
             this.IsMassStorageMounted = false;
 
-            this.sdCardDetect = new InterruptPort(G120.P1_8, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+            this.sdCardDetect = new InterruptPort(Generic.GetPin('C', 2), true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
             this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
 
             if (this.IsSDCardInserted)
