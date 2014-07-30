@@ -22,7 +22,7 @@ namespace GHIElectronics.Gadgeteer
         private InterruptPort ldr1;
         private OutputPort debugLed;
         private IRemovable[] storageDevices;
-        private InterruptPort sdCardDetect;
+        private InputPort sdCardDetect;
         private GT.StorageDevice sdCardStorageDevice;
         private GT.StorageDevice massStorageDevice;
         private Keyboard connectedKeyboard;
@@ -62,15 +62,14 @@ namespace GHIElectronics.Gadgeteer
             {
                 this.IsMassStorageConnected = true;
 
-                if (!this.IsMassStorageMounted)
-                    this.MountMassStorage();
+                this.MountStorageDevice("USB");
 
                 b.Disconnected += (c, d) =>
                 {
                     this.IsMassStorageConnected = false;
 
                     if (this.IsMassStorageMounted)
-                        this.UnmountMassStorage();
+                        this.UnmountStorageDevice("USB");
                 };
             };
 
@@ -78,8 +77,7 @@ namespace GHIElectronics.Gadgeteer
             this.IsMassStorageConnected = false;
             this.IsMassStorageMounted = false;
 
-            this.sdCardDetect = new InterruptPort(G120.P1_8, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
-            this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
+            this.sdCardDetect = new InputPort(G120.P1_8, false, Port.ResistorMode.PullUp);
 
             if (this.IsSDCardInserted)
                 this.MountStorageDevice("SD");
@@ -458,7 +456,7 @@ namespace GHIElectronics.Gadgeteer
 
         #region SDCard
         /// <summary>
-        /// Whether or not an SD card is inserted.
+        /// Whether or not an SD card is inserted. Since the SD card detect pin is not interrupt capable, you must manually poll this property then call MountStorageDevice.
         /// </summary>
         public bool IsSDCardInserted
         {
@@ -479,15 +477,6 @@ namespace GHIElectronics.Gadgeteer
         public GT.StorageDevice SDCardStorageDevice
         {
             get { return this.sdCardStorageDevice; }
-        }
-
-        private void OnSDCardDetect(uint data1, uint data2, DateTime when)
-        {
-            if (this.IsSDCardInserted && !this.IsSDCardMounted)
-                this.MountStorageDevice("SD");
-
-            if (!this.IsSDCardInserted && this.IsSDCardMounted)
-                this.UnmountStorageDevice("SD");
         }
 
         /// <summary>
@@ -580,29 +569,6 @@ namespace GHIElectronics.Gadgeteer
         /// Whether or not the mass storage device is mounted.
         /// </summary>
         public bool IsMassStorageMounted { get; private set; }
-
-        /// <summary>
-        /// Attempts to mount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully mounted.</returns>
-        public bool MountMassStorage()
-        {
-            if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
-            if (!this.IsMassStorageConnected) throw new InvalidOperationException("There is no mass storage device connected.");
-
-            return this.MountStorageDevice("USB");
-        }
-
-        /// <summary>
-        /// Attempts to unmount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
-        public bool UnmountMassStorage()
-        {
-            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is not mounted.");
-
-            return this.UnmountStorageDevice("USB");
-        }
 
         /// <summary>
         /// Represents the delegate that is used for the MassStorageMounted event.

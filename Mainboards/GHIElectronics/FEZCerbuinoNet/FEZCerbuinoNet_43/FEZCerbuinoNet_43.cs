@@ -63,15 +63,14 @@ namespace GHIElectronics.Gadgeteer
             //{
             //    this.IsMassStorageConnected = true;
             //
-            //    if (!this.IsMassStorageMounted)
-            //        this.MountMassStorage();
+            //    this.MountStorageDevice("USB");
             //
             //    b.Disconnected += (c, d) =>
             //    {
             //        this.IsMassStorageConnected = false;
             //
             //        if (this.IsMassStorageMounted)
-            //            this.UnmountMassStorage();
+            //            this.UnmountStorageDevice("USB");
             //    };
             //};
 
@@ -530,29 +529,6 @@ namespace GHIElectronics.Gadgeteer
         /// Whether or not the mass storage device is mounted.
         /// </summary>
         public bool IsMassStorageMounted { get; private set; }
-
-        /// <summary>
-        /// Attempts to mount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully mounted.</returns>
-        public bool MountMassStorage()
-        {
-            if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
-            if (!this.IsMassStorageConnected) throw new InvalidOperationException("There is no mass storage device connected.");
-
-            return this.MountStorageDevice("USB");
-        }
-
-        /// <summary>
-        /// Attempts to unmount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
-        public bool UnmountMassStorage()
-        {
-            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is not mounted.");
-
-            return this.UnmountStorageDevice("USB");
-        }
 
         /// <summary>
         /// Represents the delegate that is used for the MassStorageMounted event.
