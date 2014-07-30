@@ -54,7 +54,6 @@
     <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.Networking" />
     <Reference Include="GHI.Pins" />
-    <Reference Include="GHI.Usb" />
     <Reference Include="Microsoft.SPOT.Graphics" />
     <Reference Include="Microsoft.SPOT.Hardware" />
     <Reference Include="Microsoft.SPOT.IO" />
