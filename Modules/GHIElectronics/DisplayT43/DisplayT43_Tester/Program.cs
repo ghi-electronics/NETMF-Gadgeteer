@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
+﻿using Microsoft.SPOT;
 using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
-
-using Gadgeteer.Networking;
+using System.Threading;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using Gadgeteer.Modules.GHIElectronics;
 
 namespace DisplayT43_Tester
 {
@@ -21,7 +11,15 @@ namespace DisplayT43_Tester
         {
             this.displayT43.SimpleGraphics.DisplayText("DisplayT43 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
-
+			
+            Application.Current.MainWindow = new Window();
+            Application.Current.MainWindow.TouchDown += (a, b) =>
+            {
+                b.Touches[0].X = (int)(b.Touches[0].X / 0.75);
+                this.displayT43.SimpleGraphics.DisplayEllipse(GT.Color.Red, 1, GT.Color.Red, b.Touches[0].X - 3, b.Touches[0].Y + 3, 3, 3);
+                this.displayT43.SimpleGraphics.DisplayEllipse(GT.Color.Green, 1, GT.Color.Green, b.Touches[0].X + 3, b.Touches[0].Y + 3, 3, 3);
+                this.displayT43.SimpleGraphics.DisplayEllipse(GT.Color.Blue, 1, GT.Color.Blue, b.Touches[0].X, b.Touches[0].Y - 3, 3, 3);
+            };
         }
     }
 }
