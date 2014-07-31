@@ -1,7 +1,6 @@
 ﻿Moisture Tester
 ---------------
 Last Updated: 
-SDK Version: 
 Firmware Version: 
 
 Instructions

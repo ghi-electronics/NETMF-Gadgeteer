@@ -1,7 +1,7 @@
 ﻿AccelG248 Tester
 ---------------
 Last Updated: 7/17/2014 by John
-SDK Version: 4.3.2.0
+Firmware Version: 4.3.2.0
 
 Instructions
 ------------

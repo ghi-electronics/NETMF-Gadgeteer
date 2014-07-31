@@ -1,7 +1,7 @@
 ﻿RS232 Tester
 ---------------
 Last Updated: 7/21/2014 by John
-SDK Version: 4.3.2.0
+Firmware Version: 4.3.2.0
 
 Instructions
 ------------

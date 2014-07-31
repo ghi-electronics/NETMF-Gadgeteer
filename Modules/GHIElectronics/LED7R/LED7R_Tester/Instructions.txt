@@ -1,7 +1,6 @@
 ﻿LED7R Tester
 ---------------
 Last Updated: 
-SDK Version: 
 Firmware Version: 
 
 Instructions

@@ -1,7 +1,6 @@
 ﻿UCBattery4xAA Tester
 ---------------
 Last Updated: 
-SDK Version: 
 Firmware Version: 
 
 Instructions
