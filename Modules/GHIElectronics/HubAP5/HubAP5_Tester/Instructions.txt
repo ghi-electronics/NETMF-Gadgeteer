@@ -1,17 +1,21 @@
 ﻿HubAP5 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 7/31/2014 by John
+SDK Version: 4.3.3.0
 
 Instructions
 ------------
-1. None
+1. Connect a HubAP5 module to socket 2 on the mainboard.
+2. Connect a Button module to socket 1 on the hub.
+3. Power the mainboard.
 
 Passing
 -------
-
+When you press the button, "Button pressed" is displayed 
+on the screen and the led on the button is lit. When you
+release the button, "Button released" is display on the
+screen and the led on the button is not lit.
 
 Notes
 -----
-- None
+- You must restart the mainboard between tests.

@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
-
-using Gadgeteer.Networking;
+﻿using System.Threading;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using Gadgeteer.Modules.GHIElectronics;
 
 namespace HubAP5_Tester
 {
@@ -22,6 +10,19 @@ namespace HubAP5_Tester
             this.displayT43.SimpleGraphics.DisplayText("HubAP5 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
+            this.button.ButtonPressed += (a, b) =>
+            {
+                this.button.TurnLedOn();
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText("Button pressed.", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+            };
+
+            this.button.ButtonReleased += (a, b) =>
+            {
+                this.button.TurnLedOff();
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText("Button released.", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+            };
         }
     }
 }
