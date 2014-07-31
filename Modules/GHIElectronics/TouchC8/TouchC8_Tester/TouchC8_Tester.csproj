@@ -78,12 +78,15 @@
     <None Include="NinaB.tinyfnt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TouchC8_43\TouchC8_43.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TouchC8_43\TouchC8_43.csproj">
+      <Project>{A45BAA3B-24E3-403F-A6E8-86619E869670}</Project>
+      <Name>TouchC8_43</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

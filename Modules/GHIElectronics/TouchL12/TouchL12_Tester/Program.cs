@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
-
-using Gadgeteer.Networking;
+﻿using System.Threading;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using Gadgeteer.Modules.GHIElectronics;
 
 namespace TouchL12_Tester
 {
@@ -22,6 +10,11 @@ namespace TouchL12_Tester
             this.displayT43.SimpleGraphics.DisplayText("TouchL12 Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
             Thread.Sleep(2000);
 
+            this.touchL12.SliderPositionChanged += (a, b) =>
+            {
+                this.displayT43.SimpleGraphics.Clear();
+                this.displayT43.SimpleGraphics.DisplayText("Position: " + b.Position.ToString("F2"), Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
+            };
         }
     }
 }

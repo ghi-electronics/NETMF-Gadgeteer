@@ -1,17 +1,24 @@
 ﻿TouchC8 Tester
 ---------------
-Last Updated: 
-SDK Version: 
-Firmware Version: 
+Last Updated: 7/31/2014 by John
+SDK Version: 4.3.3.0
 
 Instructions
 ------------
-1. None
+1. Plug a TouchC8 module into socket 2.
+2. Power the mainboard.
+3. Touch the 3 buttons on the module.
+4. Move your finger clockwise around the circle.
 
 Passing
 -------
-
+When you press the button on the top, "Button 1 pressed" is displayed.
+When you press the button in the middle, "Button 2 pressed" is displayed.
+When you press the button on the bottom, "Button 3 pressed" is displayed.
+As you move your finger clockwise around the circle, the number after
+"Wheel Position" increased from 0 to 360 and then resets to 0 when you return
+to the top.
 
 Notes
 -----
-- None
+- You must restart the mainboard between tests.

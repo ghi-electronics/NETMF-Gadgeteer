@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
-Project("{c83bd038-f9d0-4e6e-a58c-f7d667972a69}") = "TouchC8", "TouchC8\TouchC8.csproj", "{541717b1-4b24-40f9-94d4-3b1959303eb8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchC8", "TouchC8\TouchC8.csproj", "{541717B1-4B24-40F9-94D4-3B1959303EB8}"
 EndProject
-Project("{c83bd038-f9d0-4e6e-a58c-f7d667972a69}") = "TouchC8_42", "TouchC8_42\TouchC8_42.csproj", "{8D060E2D-F835-475E-A041-447FCE7D65DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchC8_42", "TouchC8_42\TouchC8_42.csproj", "{8D060E2D-F835-475E-A041-447FCE7D65DE}"
 EndProject
-Project("{c83bd038-f9d0-4e6e-a58c-f7d667972a69}") = "TouchC8_43", "TouchC8_43\TouchC8_43.csproj", "{a45baa3b-24e3-403f-a6e8-86619e869670}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchC8_43", "TouchC8_43\TouchC8_43.csproj", "{A45BAA3B-24E3-403F-A6E8-86619E869670}"
 EndProject
-Project("{c83bd038-f9d0-4e6e-a58c-f7d667972a69}") = "TouchC8_Tester", "TouchC8_Tester\TouchC8_Tester.csproj", "{eb70cf42-ae5a-4e49-b095-6a98924c7bbf}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TouchC8_Tester", "TouchC8_Tester\TouchC8_Tester.csproj", "{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,22 +15,24 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{541717B1-4B24-40F9-94D4-3B1959303EB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541717B1-4B24-40F9-94D4-3B1959303EB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541717B1-4B24-40F9-94D4-3B1959303EB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541717B1-4B24-40F9-94D4-3B1959303EB8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8D060E2D-F835-475E-A041-447FCE7D65DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8D060E2D-F835-475E-A041-447FCE7D65DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D060E2D-F835-475E-A041-447FCE7D65DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D060E2D-F835-475E-A041-447FCE7D65DE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{541717b1-4b24-40f9-94d4-3b1959303eb8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{541717b1-4b24-40f9-94d4-3b1959303eb8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{541717b1-4b24-40f9-94d4-3b1959303eb8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{541717b1-4b24-40f9-94d4-3b1959303eb8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{a45baa3b-24e3-403f-a6e8-86619e869670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{a45baa3b-24e3-403f-a6e8-86619e869670}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{a45baa3b-24e3-403f-a6e8-86619e869670}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{a45baa3b-24e3-403f-a6e8-86619e869670}.Release|Any CPU.Build.0 = Release|Any CPU
-		{eb70cf42-ae5a-4e49-b095-6a98924c7bbf}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{eb70cf42-ae5a-4e49-b095-6a98924c7bbf}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{eb70cf42-ae5a-4e49-b095-6a98924c7bbf}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{eb70cf42-ae5a-4e49-b095-6a98924c7bbf}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A45BAA3B-24E3-403F-A6E8-86619E869670}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A45BAA3B-24E3-403F-A6E8-86619E869670}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A45BAA3B-24E3-403F-A6E8-86619E869670}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A45BAA3B-24E3-403F-A6E8-86619E869670}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB70CF42-AE5A-4E49-B095-6A98924C7BBF}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
