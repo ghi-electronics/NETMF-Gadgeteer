@@ -103,5 +103,20 @@
         </socketUses>
       </module>
     </gadgeteerModelHasGadgeteerHardware>
+    <gadgeteerModelHasGadgeteerHardware Id="6b86fb40-8378-4a1e-a266-d8be6e692b01">
+      <module Id="cb448c07-e43d-493c-b65a-7b19cf0ef8f6" cachedDefinition="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&#xD;&#xA;&lt;ModuleDefinition xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; Name=&quot;TempHumid SI70&quot; Manufacturer=&quot;GHI Electronics&quot; Description=&quot;A TempHumidSI70 module&quot; Type=&quot;Gadgeteer.Modules.GHIElectronics.TempHumidSI70&quot; HardwareVersion=&quot;1.0&quot; Image=&quot;C:\Program Files (x86)\GHI Electronics\GHI .NET Gadgeteer SDK\Modules\TempHumidSI70\Resources\Image.jpg&quot; BoardWidth=&quot;17.1&quot; BoardHeight=&quot;27.3&quot; MinimumGadgeteerCoreVersion=&quot;2.43.800&quot; HelpUrl=&quot;http://www.ghielectronics.com/catalog/product/525&quot; UniqueId=&quot;94feab82-5eb0-4930-a9e1-1fa56608f19c&quot; InstanceName=&quot;tempHumidSI70&quot; ModuleSuppliesPower=&quot;false&quot;&gt;&#xD;&#xA;  &lt;Power&gt;&#xD;&#xA;    &lt;PowerRequirements Voltage=&quot;3.3&quot;&gt;&#xD;&#xA;      &lt;TypicalCurrent&gt;5.5E-05&lt;/TypicalCurrent&gt;&#xD;&#xA;      &lt;MaximumCurrent&gt;5.8E-05&lt;/MaximumCurrent&gt;&#xD;&#xA;    &lt;/PowerRequirements&gt;&#xD;&#xA;    &lt;PowerRequirements Voltage=&quot;5&quot;&gt;&#xD;&#xA;      &lt;TypicalCurrent&gt;0&lt;/TypicalCurrent&gt;&#xD;&#xA;      &lt;MaximumCurrent&gt;0&lt;/MaximumCurrent&gt;&#xD;&#xA;    &lt;/PowerRequirements&gt;&#xD;&#xA;  &lt;/Power&gt;&#xD;&#xA;  &lt;ProvidedSockets /&gt;&#xD;&#xA;  &lt;Assemblies&gt;&#xD;&#xA;    &lt;Assembly MFVersion=&quot;4.3&quot; Name=&quot;GTM.GHIElectronics.TempHumidSI70&quot; /&gt;&#xD;&#xA;  &lt;/Assemblies&gt;&#xD;&#xA;  &lt;LibrariesProvided /&gt;&#xD;&#xA;  &lt;Sockets&gt;&#xD;&#xA;    &lt;Socket Orientation=&quot;90&quot; Left=&quot;8.4&quot; Top=&quot;21.3&quot; TypesLabel=&quot;XY&quot; ConstructorOrder=&quot;1&quot; Optional=&quot;false&quot;&gt;&#xD;&#xA;      &lt;Types&gt;&#xD;&#xA;        &lt;Type&gt;X&lt;/Type&gt;&#xD;&#xA;        &lt;Type&gt;Y&lt;/Type&gt;&#xD;&#xA;      &lt;/Types&gt;&#xD;&#xA;      &lt;Pins&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;4&lt;/Pin&gt;&#xD;&#xA;        &lt;Pin Shared=&quot;false&quot;&gt;5&lt;/Pin&gt;&#xD;&#xA;      &lt;/Pins&gt;&#xD;&#xA;    &lt;/Socket&gt;&#xD;&#xA;  &lt;/Sockets&gt;&#xD;&#xA;  &lt;ExtraLibrariesRequired /&gt;&#xD;&#xA;&lt;/ModuleDefinition&gt;" name="tempHumidSI70" moduleType="Gadgeteer.Modules.GHIElectronics.TempHumidSI70" moduleDefinitionId="94feab82-5eb0-4930-a9e1-1fa56608f19c">
+        <socketUses>
+          <moduleHasSocketUses Id="083c3c5a-a028-467f-87c7-03c8f46baa67">
+            <socketUse Id="1729df01-2452-45a0-83f1-b599d537ddcf" label="XY">
+              <socket>
+                <socketUseReferencesSocket Id="0d58ab29-67c7-4ebb-afcf-c930288d1e3b">
+                  <socketMoniker Id="45c3d08c-7dda-4141-a091-1e567a6c9ef8" />
+                </socketUseReferencesSocket>
+              </socket>
+            </socketUse>
+          </moduleHasSocketUses>
+        </socketUses>
+      </module>
+    </gadgeteerModelHasGadgeteerHardware>
   </gadgeteerHardware>
 </gadgeteerModel>
