@@ -21,7 +21,7 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="8.4" Top="21.3" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+        <Socket Left="8.4" Top="22" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
           <Types>
             <Type>X</Type>
             <Type>Y</Type>
