@@ -1,16 +1,37 @@
 ﻿FEZCerbuinoNet Tester
 ---------------
-Last Updated: 
-Firmware Version: 
+Last Updated: 8/7/2014 by John
+Firmware Version: 4.3.3.0
 
 Instructions
 ------------
-1. None
+1. Power the mainboard.
+2. Load the loader using the STDFU tester.
+3. Load the firmware using MFDeploy.
+4. Insert a micro sd card and ethernet cable.
+5. Verify the LED near the black power jack turned on.
+6. Plug an LED strip into each of the three sockets.
+7. Verify each LED on each strip turns on and off.
+8. Place an LED between ground and the ports labeled D0 through D13 
+   and A0 through A5 along the sides of the board.
 
 Passing
 -------
-
+Shortly after inserting the micro sd card and the ethernet cable,
+the led near the black power jack should turn red. All LEDs on 
+sockets 1, 2, and 3 and the ports along the sides should blink on 
+and off. 
 
 Notes
 -----
-- None
+- If the LED fails to turn on after inserting the sd card and ethernet
+  cable, remove them, remove and then re-add power to the mainboard, 
+  and try again.
+- To test the individual ports along the sides of the boards, you can 
+  connect a BreadBoardX1 to one of the three sockets and place a wire
+  between LED1 on the BreadBoardX1 and the port to be tested on the
+  mainboard.
+- The loader and firmware files can be found in the correct version 
+  of the firmware folder (the same used for testing modules) under 
+  FEZ Cerberus.
+- Only test the LEDs after after you have tested the SD card and ethernet.
