@@ -86,7 +86,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         private void OnCardDetect(GTI.InterruptInput sender, bool value)
         {
-            Thread.Sleep(100);
+            Thread.Sleep(500);
 
             if (this.IsCardInserted && !this.IsCardMounted)
                 this.Mount();
