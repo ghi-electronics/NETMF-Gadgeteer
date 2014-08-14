@@ -119,7 +119,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         public void StartStreaming()
         {
-            this.StartStreaming(new Bitmap(this.CurrentPictureResolution.Height, this.CurrentPictureResolution.Width));
+            this.StartStreaming(new Bitmap(this.CurrentPictureResolution.Width, this.CurrentPictureResolution.Height));
         }
 
         /// <summary>
