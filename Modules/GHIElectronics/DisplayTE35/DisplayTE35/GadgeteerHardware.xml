@@ -14,7 +14,7 @@
                   BoardWidth="78"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
-                  HelpUrl="http://www.ghielectronics.com/catalog/product/449">
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/387">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DisplayTE35"/>
