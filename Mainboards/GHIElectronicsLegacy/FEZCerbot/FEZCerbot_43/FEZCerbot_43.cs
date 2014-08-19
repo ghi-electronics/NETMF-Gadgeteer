@@ -183,6 +183,7 @@ namespace GHIElectronics.Gadgeteer
             socket.AnalogInput3 = (Cpu.AnalogChannel)8;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_6;
             socket.AnalogInput5 = (Cpu.AnalogChannel)(-1);
+            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             this.Initialize();
