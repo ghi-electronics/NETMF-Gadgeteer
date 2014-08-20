@@ -69,8 +69,9 @@
             <Type>X</Type>
           </Types>
           <SharedPinMaps>
-            <SharedPinMap NetId="SPI1_MOSI" SocketPin="8"/>
-            <SharedPinMap NetId="SPI1_MISO" SocketPin="9"/>
+            <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+            <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+            <SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
           </SharedPinMaps>
         </ProvidedSocket>
 
@@ -82,8 +83,9 @@
             <Type>X</Type>
           </Types>
           <SharedPinMaps>
-            <SharedPinMap NetId="SPI1_MOSI" SocketPin="8"/>
-            <SharedPinMap NetId="SPI1_MISO" SocketPin="9"/>
+            <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+            <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+            <SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
           </SharedPinMaps>
         </ProvidedSocket>
 
