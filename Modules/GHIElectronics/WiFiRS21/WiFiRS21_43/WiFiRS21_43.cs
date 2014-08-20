@@ -28,11 +28,6 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.spi = GTI.SpiFactory.Create(socket, null, GTI.SpiSharing.Exclusive, socket, Socket.Pin.Six, this);
             this.networkInterface = new WiFiRS9110(socket.SPIModule, socket.CpuPins[6], socket.CpuPins[3], socket.CpuPins[4], 4000);
 
-            if (BaseInterface.ActiveInterface == null)
-                this.networkInterface.Open();
-
-            Thread.Sleep(500);
-
             this.NetworkSettings = this.networkInterface.NetworkInterface;
         }
 
@@ -48,7 +43,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Opens the underlying network interface and assigns the NETMF networking stack to it if it is not already so.
+        /// Opens the underlying network interface and assigns the NETMF networking stack.
         /// </summary>
         public void UseThisNetworkInterface()
         {

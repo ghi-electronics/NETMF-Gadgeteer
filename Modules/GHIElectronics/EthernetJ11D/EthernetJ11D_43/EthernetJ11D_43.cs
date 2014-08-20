@@ -29,11 +29,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.networkInterface = new EthernetBuiltIn();
 
-            if (BaseInterface.ActiveInterface == null)
-                this.networkInterface.Open();
-
-            Thread.Sleep(500);
-
             this.NetworkSettings = this.networkInterface.NetworkInterface;
         }
 
@@ -49,7 +44,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
         /// <summary>
-        /// Opens the underlying network interface and assigns the NETMF networking stack to it if it is not already so.
+        /// Opens the underlying network interface and assigns the NETMF networking stack.
         /// </summary>
         public void UseThisNetworkInterface()
         {
