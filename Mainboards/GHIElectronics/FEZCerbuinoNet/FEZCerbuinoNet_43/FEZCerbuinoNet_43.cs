@@ -619,5 +619,89 @@ namespace GHIElectronics.Gadgeteer
                 this.KeyboardConnected(sender, keyboard);
         }
         #endregion*/
+
+	    /// <summary>
+	    /// Pin definitions for the headers on the board.
+        /// </summary>
+        public class Pins
+        {
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D0 = (Cpu.Pin)(16 + 11);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D1 = (Cpu.Pin)(16 + 10);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D2 = (Cpu.Pin)(16 + 12);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D3 = (Cpu.Pin)(32 + 14);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D4 = (Cpu.Pin)(32 + 15);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D5 = (Cpu.Pin)(0 + 8);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D6 = (Cpu.Pin)(0 + 10);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D7 = (Cpu.Pin)(32 + 4);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D8 = (Cpu.Pin)(16 + 13);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D9 = (Cpu.Pin)(0 + 9);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D10 = (Cpu.Pin)(0 + 15);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D11 = (Cpu.Pin)(16 + 5);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D12 = (Cpu.Pin)(16 + 4);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin D13 = (Cpu.Pin)(16 + 3);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A0 = (Cpu.Pin)(16 + 1);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A1 = (Cpu.Pin)(0 + 5);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A2 = (Cpu.Pin)(16 + 0);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A3 = (Cpu.Pin)(32 + 3);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A4 = (Cpu.Pin)(32 + 1);
+
+            /// <summary>GPIO pin.</summary>
+            public const Cpu.Pin A5 = (Cpu.Pin)(0 + 4);
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A0_AnalogChannel = (Cpu.AnalogChannel)9;
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A1_AnalogChannel = (Cpu.AnalogChannel)5;
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A2_AnalogChannel = (Cpu.AnalogChannel)8;
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A3_AnalogChannel = (Cpu.AnalogChannel)13;
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A4_AnalogChannel = (Cpu.AnalogChannel)11;
+
+            /// <summary>Analog channel.</summary>
+            public const Cpu.AnalogChannel A5_AnalogChannel = (Cpu.AnalogChannel)4;
+        }
     }
 }
