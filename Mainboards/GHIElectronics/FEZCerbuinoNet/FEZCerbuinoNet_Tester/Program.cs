@@ -11,7 +11,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 
-namespace MFConsoleApplication1
+namespace FEZCerbuinoNet_Tester
 {
     public class Program
     {
