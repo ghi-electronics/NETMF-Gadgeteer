@@ -7,9 +7,9 @@ Product strings for en-us culture
                  Culture="en-us">
 
   <!-- No need to change these settings -->
-  <String Id="MainboardDirectoryName">Mainboards</String>
-  <String Id="GadgeteerDirectoryName">GHI .NET Discontinued Gadgeteer Products SDK</String>
-  <String Id="ForGadgeteer">mainboard for Microsoft .NET Gadgeteer</String>
+  <String Id="ModulesDirectoryName">Modules</String>
+  <String Id="GadgeteerDirectoryName">GHI .NET Discontinued Gadgeteer Modules SDK</String>
+  <String Id="ForGadgeteer">module for Microsoft .NET Gadgeteer</String>
   <String Id="NewerVersionFoundPrefix">A newer version of</String>
   <String Id="NewerVersionFoundSuffix">is already installed. Setup will now exit.</String>
   <String Id="SameVersionInstalledPrefix">Version number was not updated correctly. Please manually uninstall</String>
