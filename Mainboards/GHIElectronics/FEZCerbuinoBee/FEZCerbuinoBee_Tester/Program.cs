@@ -67,6 +67,7 @@ namespace FEZCerbuinoBee_Tester
             outputs.Add(new OutputPort(Generic.GetPin('A', 15), false));
             outputs.Add(new OutputPort(Generic.GetPin('B', 1), false));
             outputs.Add(new OutputPort(Generic.GetPin('A', 5), false));
+            outputs.Add(new OutputPort(Generic.GetPin('B', 0), false));
             outputs.Add(new OutputPort(Generic.GetPin('C', 3), false));
 
             timer = new Thread(() =>
