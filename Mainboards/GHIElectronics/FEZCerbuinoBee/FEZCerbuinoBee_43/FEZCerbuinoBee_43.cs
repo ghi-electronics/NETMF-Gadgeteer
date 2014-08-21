@@ -306,6 +306,7 @@ namespace GHIElectronics.Gadgeteer
                 Display.Populate(Display.GHIDisplay.DisplayN18);
                 Display.SpiConfiguration = config;
                 Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
+                Display.ControlPin = Cpu.Pin.GPIO_NONE;
                 Display.Save();
 
                 this.configSet = true;
