@@ -16,6 +16,7 @@
         <Assembly MFVersion="4.2" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet"/>
         <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZCerbuinoNet"/>
 
+        <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <!--<Assembly MFVersion="4.3" Name="GHI.Usb"/>-->
       </Assemblies>
