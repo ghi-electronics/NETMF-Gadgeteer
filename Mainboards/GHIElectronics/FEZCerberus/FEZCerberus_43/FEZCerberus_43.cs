@@ -2,8 +2,8 @@
 using GHI.IO.Storage;
 using GHI.Pins;
 using GHI.Processor;
-//using GHI.Usb;
-//using GHI.Usb.Host;
+using GHI.Usb;
+using GHI.Usb.Host;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System;
@@ -30,7 +30,7 @@ namespace GHIElectronics.Gadgeteer
             this.debugLed = null;
             this.storageDevices = new IRemovable[2];
 
-            //Controller.Start();
+            Controller.Start();
 
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
@@ -210,19 +210,19 @@ namespace GHIElectronics.Gadgeteer
 
                     return true;
                 }
-                //else if (volumeName == "USB" && this.storageDevices[1] == null)
-                //{
-                //    foreach (BaseDevice dev in Controller.GetConnectedDevices())
-                //    {
-                //        if (dev.GetType() == typeof(MassStorage))
-                //        {
-                //            this.storageDevices[1] = (MassStorage)dev;
-                //            this.storageDevices[1].Mount();
-                //
-                //            return true;
-                //        }
-                //    }
-                //}
+                else if (volumeName == "USB" && this.storageDevices[1] == null)
+                {
+                    foreach (BaseDevice dev in Controller.GetConnectedDevices())
+                    {
+                        if (dev.GetType() == typeof(MassStorage))
+                        {
+                            this.storageDevices[1] = (MassStorage)dev;
+                            this.storageDevices[1].Mount();
+                
+                            return true;
+                        }
+                    }
+                }
             }
             catch
             {
@@ -244,11 +244,11 @@ namespace GHIElectronics.Gadgeteer
                 this.storageDevices[0].Dispose();
                 this.storageDevices[0] = null;
             }
-            //else if (volumeName == "USB" && this.storageDevices[1] != null)
-            //{
-            //    this.storageDevices[1].Dispose();
-            //    this.storageDevices[1] = null;
-            //}
+            else if (volumeName == "USB" && this.storageDevices[1] != null)
+            {
+                this.storageDevices[1].Dispose();
+                this.storageDevices[1] = null;
+            }
             else
             {
                 return false;

@@ -18,7 +18,7 @@
 
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
-        <!--<Assembly MFVersion="4.3" Name="GHI.Usb"/>-->
+        <Assembly MFVersion="4.3" Name="GHI.Usb"/>
       </Assemblies>
 
       <ProvidedSockets>
@@ -64,7 +64,7 @@
         <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
         <Assembly MFVersion="4.3" Name="GHI.Networking"/>
         <Assembly MFVersion="4.3" Name="GHI.Pins"/>
-        <!--<Assembly MFVersion="4.3" Name="GHI.Usb"/>-->
+        <Assembly MFVersion="4.3" Name="GHI.Usb"/>
       </LibrariesProvided>
 
       <Power>

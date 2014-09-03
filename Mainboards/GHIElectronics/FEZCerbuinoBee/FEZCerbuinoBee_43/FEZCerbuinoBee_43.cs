@@ -2,8 +2,8 @@
 using GHI.IO.Storage;
 using GHI.Pins;
 using GHI.Processor;
-//using GHI.Usb;
-//using GHI.Usb.Host;
+using GHI.Usb;
+using GHI.Usb.Host;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using Microsoft.SPOT.IO;
@@ -23,9 +23,9 @@ namespace GHIElectronics.Gadgeteer
         private IRemovable[] storageDevices;
         private InterruptPort sdCardDetect;
         private GT.StorageDevice sdCardStorageDevice;
-        //private GT.StorageDevice massStorageDevice;
-        //private Keyboard connectedKeyboard;
-        //private Mouse connectedMouse;
+        private GT.StorageDevice massStorageDevice;
+        private Keyboard connectedKeyboard;
+        private Mouse connectedMouse;
 
         /// <summary>
         /// Constructs a new instance.
@@ -40,40 +40,40 @@ namespace GHIElectronics.Gadgeteer
             RemovableMedia.Insert += this.OnInsert;
             RemovableMedia.Eject += this.OnEject;
 
-            //Controller.MouseConnected += (a, b) =>
-            //{
-            //    this.connectedMouse = b;
-            //    this.OnMouseConnected(this, b);
-            //
-            //    b.Disconnected += (c, d) => this.connectedMouse = null;
-            //};
-            //
-            //Controller.KeyboardConnected += (a, b) =>
-            //{
-            //    this.connectedKeyboard = b;
-            //    this.OnKeyboardConnected(this, b);
-            //
-            //    b.Disconnected += (c, d) => this.connectedKeyboard = null;
-            //};
-            //
-            //Controller.MassStorageConnected += (a, b) =>
-            //{
-            //    this.IsMassStorageConnected = true;
-            //
-            //    this.MountStorageDevice("USB");
-            //
-            //    b.Disconnected += (c, d) =>
-            //    {
-            //        this.IsMassStorageConnected = false;
-            //
-            //        if (this.IsMassStorageMounted)
-            //            this.UnmountStorageDevice("USB");
-            //    };
-            //};
+            Controller.MouseConnected += (a, b) =>
+            {
+                this.connectedMouse = b;
+                this.OnMouseConnected(this, b);
+            
+                b.Disconnected += (c, d) => this.connectedMouse = null;
+            };
+            
+            Controller.KeyboardConnected += (a, b) =>
+            {
+                this.connectedKeyboard = b;
+                this.OnKeyboardConnected(this, b);
+            
+                b.Disconnected += (c, d) => this.connectedKeyboard = null;
+            };
+            
+            Controller.MassStorageConnected += (a, b) =>
+            {
+                this.IsMassStorageConnected = true;
+            
+                this.MountStorageDevice("USB");
+            
+                b.Disconnected += (c, d) =>
+                {
+                    this.IsMassStorageConnected = false;
+            
+                    if (this.IsMassStorageMounted)
+                        this.UnmountStorageDevice("USB");
+                };
+            };
 
             this.IsSDCardMounted = false;
-            //this.IsMassStorageConnected = false;
-            //this.IsMassStorageMounted = false;
+            this.IsMassStorageConnected = false;
+            this.IsMassStorageMounted = false;
 
             this.sdCardDetect = new InterruptPort(Generic.GetPin('C', 2), true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
             this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
@@ -81,7 +81,7 @@ namespace GHIElectronics.Gadgeteer
             if (this.IsSDCardInserted)
                 this.MountStorageDevice("SD");
 
-            //Controller.Start();
+            Controller.Start();
 
             this.NativeBitmapConverter = this.NativeBitmapConvert;
             this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
@@ -191,19 +191,19 @@ namespace GHIElectronics.Gadgeteer
 
                     return true;
                 }
-                //else if (volumeName == "USB" && this.storageDevices[1] == null)
-                //{
-                //    foreach (BaseDevice dev in Controller.GetConnectedDevices())
-                //    {
-                //        if (dev.GetType() == typeof(MassStorage))
-                //        {
-                //            this.storageDevices[1] = (MassStorage)dev;
-                //            this.storageDevices[1].Mount();
-                //
-                //            return true;
-                //        }
-                //    }
-                //}
+                else if (volumeName == "USB" && this.storageDevices[1] == null)
+                {
+                    foreach (BaseDevice dev in Controller.GetConnectedDevices())
+                    {
+                        if (dev.GetType() == typeof(MassStorage))
+                        {
+                            this.storageDevices[1] = (MassStorage)dev;
+                            this.storageDevices[1].Mount();
+                
+                            return true;
+                        }
+                    }
+                }
             }
             catch
             {
@@ -225,11 +225,11 @@ namespace GHIElectronics.Gadgeteer
                 this.storageDevices[0].Dispose();
                 this.storageDevices[0] = null;
             }
-            //else if (volumeName == "USB" && this.storageDevices[1] != null)
-            //{
-            //    this.storageDevices[1].Dispose();
-            //    this.storageDevices[1] = null;
-            //}
+            else if (volumeName == "USB" && this.storageDevices[1] != null)
+            {
+                this.storageDevices[1].Dispose();
+                this.storageDevices[1] = null;
+            }
             else
             {
                 return false;
@@ -339,7 +339,7 @@ namespace GHIElectronics.Gadgeteer
 
         private void OnInsert(object sender, MediaEventArgs e)
         {
-            /*if (string.Compare(e.Volume.Name, "USB") == 0)
+            if (string.Compare(e.Volume.Name, "USB") == 0)
             {
                 if (e.Volume.FileSystem != null)
                 {
@@ -355,7 +355,7 @@ namespace GHIElectronics.Gadgeteer
                     Debug.Print("The mass storage device does not have a valid filesystem.");
                 }
             }
-            else*/ if (string.Compare(e.Volume.Name, "SD") == 0)
+            else if (string.Compare(e.Volume.Name, "SD") == 0)
             {
                 if (e.Volume.FileSystem != null)
                 {
@@ -375,13 +375,13 @@ namespace GHIElectronics.Gadgeteer
 
         private void OnEject(object sender, MediaEventArgs e)
         {
-            /*if (string.Compare(e.Volume.Name, "USB") == 0)
+            if (string.Compare(e.Volume.Name, "USB") == 0)
             {
                 this.massStorageDevice = null;
                 this.IsMassStorageMounted = false;
                 this.OnMassStorageUnmounted(this, null);
             }
-            else*/ if (string.Compare(e.Volume.Name, "SD") == 0)
+            else if (string.Compare(e.Volume.Name, "SD") == 0)
             {
                 this.sdCardStorageDevice = null;
                 this.IsSDCardMounted = false;
@@ -469,7 +469,7 @@ namespace GHIElectronics.Gadgeteer
         }
         #endregion
 
-        /*#region USBHost
+        #region USBHost
         /// <summary>
         /// The current connected keyboard.
         /// </summary>
@@ -602,7 +602,7 @@ namespace GHIElectronics.Gadgeteer
             if (GT.Program.CheckAndInvoke(this.KeyboardConnected, this.onKeyboardConnected, sender, keyboard))
                 this.KeyboardConnected(sender, keyboard);
         }
-        #endregion*/
+        #endregion
 
         /// <summary>
         /// Pin definitions for the headers on the board.
