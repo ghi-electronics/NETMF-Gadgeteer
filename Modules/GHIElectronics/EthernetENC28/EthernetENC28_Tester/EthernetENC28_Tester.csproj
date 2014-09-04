@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer" />
-    <Reference Include="GHI.Networking, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="GHI.Networking, Version=4.3.3.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
