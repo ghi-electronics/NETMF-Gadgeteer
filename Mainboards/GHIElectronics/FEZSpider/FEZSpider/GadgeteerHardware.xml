@@ -8,7 +8,7 @@
             HardwareVersion="1.0"
             Image="Resources\Image.jpg"
             BoardWidth="57.15"
-            BoardHeight="61.07"
+            BoardHeight="52.28"
             MinimumGadgeteerCoreVersion="2.43.800"
             HelpUrl="http://www.ghielectronics.com/catalog/product/269">
 
@@ -18,7 +18,7 @@
       </Assemblies>
 
       <ProvidedSockets>
-        <ProvidedSocket Label="1" Left="14.07" Top="6.13" Orientation="90" ConstructorParameter="1">
+        <ProvidedSocket Label="1" Left="14.07" Top="6" Orientation="90" ConstructorParameter="1">
           <Types>
             <Type>D</Type>
             <Type>I</Type>
@@ -29,13 +29,13 @@
           </SharedPinMaps>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="2" Left="28.4" Top="6.04" Orientation="90" ConstructorParameter="2">
+        <ProvidedSocket Label="2" Left="28.4" Top="6" Orientation="90" ConstructorParameter="2">
           <Types>
             <Type>Z</Type>
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="3" Left="42.91" Top="6.13" Orientation="90" ConstructorParameter="3">
+        <ProvidedSocket Label="3" Left="42.91" Top="6" Orientation="90" ConstructorParameter="3">
           <Types>
             <Type>H</Type>
             <Type>I</Type>
@@ -46,7 +46,7 @@
           </SharedPinMaps>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="4" Left="5.72" Top="19.34" Orientation="180" ConstructorParameter="4">
+        <ProvidedSocket Label="4" Left="5.72" Top="19" Orientation="180" ConstructorParameter="4">
           <Types>
             <Type>I</Type>
             <Type>K</Type>
@@ -59,14 +59,14 @@
           </SharedPinMaps>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="5" Left="18.64" Top="19.17" Orientation="180" ConstructorParameter="5">
+        <ProvidedSocket Label="5" Left="18.64" Top="19" Orientation="180" ConstructorParameter="5">
           <Types>
             <Type>F</Type>
             <Type>Y</Type>
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="6" Left="38.51" Top="19.34" Orientation="0" ConstructorParameter="6">
+        <ProvidedSocket Label="6" Left="38.51" Top="19" Orientation="0" ConstructorParameter="6">
           <Types>
             <Type>C</Type>
             <Type>S</Type>
@@ -74,13 +74,13 @@
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="7" Left="51.35" Top="19.25" Orientation="0" ConstructorParameter="7">
+        <ProvidedSocket Label="7" Left="51.35" Top="19" Orientation="0" ConstructorParameter="7">
           <Types>
             <Type>E</Type>
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="8" Left="5.8" Top="33.25" Orientation="180" ConstructorParameter="8">
+        <ProvidedSocket Label="8" Left="5.8" Top="33" Orientation="180" ConstructorParameter="8">
           <Types>
             <Type>P</Type>
             <Type>U</Type>
@@ -88,7 +88,7 @@
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="9" Left="18.55" Top="33.34" Orientation="180" ConstructorParameter="9">
+        <ProvidedSocket Label="9" Left="18.55" Top="33" Orientation="180" ConstructorParameter="9">
           <Types>
             <Type>A</Type>
             <Type>O</Type>
@@ -98,7 +98,7 @@
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="10" Left="38.25" Top="33.34" Orientation="0" ConstructorParameter="10">
+        <ProvidedSocket Label="10" Left="38.25" Top="33" Orientation="0" ConstructorParameter="10">
           <Types>
             <Type>A</Type>
             <Type>I</Type>
@@ -111,7 +111,7 @@
           </SharedPinMaps>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="11" Left="51" Top="33.25" Orientation="0" ConstructorParameter="11">
+        <ProvidedSocket Label="11" Left="51" Top="33" Orientation="0" ConstructorParameter="11">
           <Types>
             <Type>P</Type>
             <Type>U</Type>
@@ -119,20 +119,20 @@
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="12" Left="13.89" Top="46.47" Orientation="270" ConstructorParameter="12">
+        <ProvidedSocket Label="12" Left="13.89" Top="47" Orientation="270" ConstructorParameter="12">
           <Types>
             <Type>B</Type>
             <Type>Y</Type>
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="13" Left="28.14" Top="46.47" Orientation="270" ConstructorParameter="13">
+        <ProvidedSocket Label="13" Left="28.14" Top="47" Orientation="270" ConstructorParameter="13">
           <Types>
             <Type>G</Type>
           </Types>
         </ProvidedSocket>
         
-        <ProvidedSocket Label="14" Left="42.55" Top="46.73" Orientation="270" ConstructorParameter="14">
+        <ProvidedSocket Label="14" Left="42.55" Top="47" Orientation="270" ConstructorParameter="14">
           <Types>
             <Type>R</Type>
             <Type>Y</Type>

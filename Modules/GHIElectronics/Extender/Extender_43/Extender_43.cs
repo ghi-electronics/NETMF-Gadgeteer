@@ -19,11 +19,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.socketB = Socket.SocketInterfaces.CreateUnnumberedSocket(socketNumber.ToString() + "-" + " Extender");
             this.socketB.SupportedTypes = this.socketA.SupportedTypes;
-            this.socketB.CpuPins[3] = this.socketA.CpuPins[3];
-            this.socketB.CpuPins[4] = this.socketA.CpuPins[5];
-            this.socketB.CpuPins[5] = this.socketA.CpuPins[4];
-            this.socketB.CpuPins[6] = this.socketA.CpuPins[7];
-            this.socketB.CpuPins[7] = this.socketA.CpuPins[6];
+
+            for (int i = 3; i < 10; i++)
+                this.socketB.CpuPins[i] = this.socketA.CpuPins[i];
+
             this.socketB.SerialPortName = this.socketA.SerialPortName;
             this.socketB.SPIModule = this.socketA.SPIModule;
             this.socketB.AnalogOutput5 = this.socketA.AnalogOutput5;
