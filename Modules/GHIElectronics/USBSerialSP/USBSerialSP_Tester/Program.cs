@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Threading;
-using Microsoft.SPOT;
-using Microsoft.SPOT.Presentation;
-using Microsoft.SPOT.Presentation.Controls;
-using Microsoft.SPOT.Presentation.Media;
-using Microsoft.SPOT.Presentation.Shapes;
-using Microsoft.SPOT.Touch;
+﻿using System.Threading;
 
-using Gadgeteer.Networking;
 using GT = Gadgeteer;
-using GTM = Gadgeteer.Modules;
-using Gadgeteer.Modules.GHIElectronics;
 
 namespace USBSerialSP_Tester
 {
@@ -20,8 +9,15 @@ namespace USBSerialSP_Tester
         void ProgramStarted()
         {
             this.displayT43.SimpleGraphics.DisplayText("USBSerialSP Tester", Resources.GetFont(Resources.FontResources.NinaB), GT.Color.White, 0, 0);
-            Thread.Sleep(2000);
 
+            var buffer = new byte[512];
+
+            this.usbSerialSP.Configure();
+            this.usbSerialSP.Port.DataReceived += a =>
+            {
+                var read = a.Read(buffer, 0, buffer.Length);
+                a.Write(buffer, 0, read);
+            };
         }
     }
 }

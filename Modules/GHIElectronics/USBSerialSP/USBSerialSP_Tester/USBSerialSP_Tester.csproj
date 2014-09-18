@@ -53,10 +53,16 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer" />
+    <Reference Include="Gadgeteer.Serial, Version=2.43.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="GHIElectronics.Gadgeteer.FEZRaptor, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="GTM.GHIElectronics.DisplayT43, Version=4.3.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="GTM.GHIElectronics.USBSerialSP, Version=4.3.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Microsoft.SPOT.Graphics" />
