@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="LED 7C"
+                  UniqueId="3092023a-0d8e-4431-8c87-1c7d8c58f0ac"
+                  Manufacturer="GHI Electronics"
+                  Description="A LED7C module"
+                  InstanceName="led7C"
+                  Type="Gadgeteer.Modules.GHIElectronics.LED7C"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="18"
+                  BoardWidth="17"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/370">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.LED7C"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.LED7C"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="8.7" Top="13.5" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.035</TypicalCurrent>
+          <MaximumCurrent>0.060</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

@@ -49,7 +49,7 @@
     <Compile Include="Elm327\Util.cs" />
     <Compile Include="OBDII_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="..\..\Shared\AssemblyInfoGlobal43.cs" />
+    <Compile Include="..\..\AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">

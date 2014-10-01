@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="CurrentACS712_42.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\Shared\AssemblyInfoGlobal42.cs" />
+	<Compile Include="..\..\AssemblyInfoGlobal42.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">

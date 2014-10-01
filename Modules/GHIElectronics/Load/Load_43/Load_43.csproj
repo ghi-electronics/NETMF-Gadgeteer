@@ -44,7 +44,7 @@
   <ItemGroup>
     <Compile Include="Load_43.cs" />
     <Compile Include="AssemblyInfo.cs" />
-	<Compile Include="..\..\Shared\AssemblyInfoGlobal43.cs" />
+	<Compile Include="..\..\AssemblyInfoGlobal43.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">

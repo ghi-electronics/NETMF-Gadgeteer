@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Touch C8"
+                  UniqueId="6c5868f1-035f-4394-a165-9921472e9e8f"
+                  Manufacturer="GHI Electronics"
+                  Description="A TouchC8 module"
+                  InstanceName="touchC8"
+                  Type="Gadgeteer.Modules.GHIElectronics.TouchC8"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="91"
+                  BoardWidth="61"
+                  HardwareVersion="1.3"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/484">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.TouchC8"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.TouchC8"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="31" Top="87" Orientation="90" ConstructorOrder="1" TypesLabel="I">
+          <Types>
+            <Type>I</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="true">8</Pin>
+            <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.00018</TypicalCurrent>
+          <MaximumCurrent>0.0247</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.000</TypicalCurrent>
+          <MaximumCurrent>0.000</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Distance US3"
+                  UniqueId="96109d88-d7db-4487-886d-52a529052a04"
+                  Manufacturer="GHI Electronics"
+                  Description="A DistanceUS3 module"
+                  InstanceName="distanceUS3"
+                  Type="Gadgeteer.Modules.GHIElectronics.DistanceUS3"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="17.25"
+                  BoardWidth="32"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/393">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.DistanceUS3"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DistanceUS3"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="17.75" Top="12.25" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.015</TypicalCurrent>
+          <MaximumCurrent>0.015</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

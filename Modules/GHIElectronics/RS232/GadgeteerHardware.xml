@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="RS232"
+                  UniqueId="64d78cd8-6fce-48a8-b112-ba6dc71b2a73"
+                  Manufacturer="GHI Electronics"
+                  Description="A RS232 module"
+                  InstanceName="rs232"
+                  Type="Gadgeteer.Modules.GHIElectronics.RS232"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="39"
+                  BoardWidth="47"
+                  HardwareVersion="1.1"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/479">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RS232"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.RS232"/>
+
+        <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="23" Top="35" Orientation="90" ConstructorOrder="1" TypesLabel="KU">
+          <Types>
+            <Type>K</Type>
+            <Type>U</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.007</TypicalCurrent>
+          <MaximumCurrent>0.007</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

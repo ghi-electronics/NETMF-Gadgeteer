@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Stepper L6470"
+                  UniqueId="c7cc0dc6-de7f-4ed2-b639-a9da8a42c264"
+                  Manufacturer="GHI Electronics"
+                  Description="A StepperL6470 module"
+                  InstanceName="stepperL6470"
+                  Type="Gadgeteer.Modules.GHIElectronics.StepperL6470"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="47"
+                  BoardWidth="47"
+                  HardwareVersion="1.3"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/284">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.StepperL6470"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.StepperL6470"/>
+
+        <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="2" Top="24" Orientation="0" ConstructorOrder="1" TypesLabel="S">
+          <Types>
+            <Type>S</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="true">7</Pin>
+            <Pin Shared="true">8</Pin>
+            <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

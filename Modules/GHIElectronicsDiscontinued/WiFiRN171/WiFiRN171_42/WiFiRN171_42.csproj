@@ -49,7 +49,7 @@
     <Compile Include="WiFly\QueryDataList.cs" />
     <Compile Include="WiFiRN171_42.cs" />
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="..\..\Shared\AssemblyInfoGlobal42.cs" />
+    <Compile Include="..\..\AssemblyInfoGlobal42.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Gadgeteer">

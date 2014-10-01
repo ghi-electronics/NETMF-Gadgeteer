@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Serial Camera L1"
+                  UniqueId="ac366d09-04f4-4b27-ae40-332b7868e1b2"
+                  Manufacturer="GHI Electronics"
+                  Description="A SerialCameraL1 module"
+                  InstanceName="serialCameraL1"
+                  Type="Gadgeteer.Modules.GHIElectronics.SerialCameraL1"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="27"
+                  BoardWidth="47"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/383">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.SerialCameraL1"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.SerialCameraL1"/>
+
+        <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="42.57" Top="13.32" Orientation="180" ConstructorOrder="1" TypesLabel="U">
+          <Types>
+            <Type>U</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.055</TypicalCurrent>
+          <MaximumCurrent>0.065</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

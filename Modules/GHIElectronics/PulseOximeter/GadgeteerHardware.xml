@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="PulseOximeter"
+                  UniqueId="79a7542f-84c3-411f-ad77-57553c4e544b"
+                  Manufacturer="GHI Electronics"
+                  Description="A PulseOximeter module"
+                  InstanceName="PulseOximeter"
+                  Type="Gadgeteer.Modules.GHIElectronics.PulseOximeter"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="42"
+                  BoardWidth="37"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/345">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.PulseOximeter"/>
+        
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="18.5" Top="38" Orientation="90" ConstructorOrder="1" TypesLabel="U">
+          <Types>
+            <Type>U</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket> 
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.00</TypicalCurrent>
+          <MaximumCurrent>0.00</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.00</TypicalCurrent>
+          <MaximumCurrent>0.00</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

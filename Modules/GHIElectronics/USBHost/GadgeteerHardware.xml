@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="USB Host"
+                  UniqueId="e8323968-d331-44bd-8e7c-225de173dcfb"
+                  Manufacturer="GHI Electronics"
+                  Description="An USBHost module"
+                  InstanceName="usbHost"
+                  Type="Gadgeteer.Modules.GHIElectronics.USBHost"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="22"
+                  BoardWidth="32"
+                  HardwareVersion="1.1"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/287">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBHost"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.USBHost"/>
+
+        <Assembly MFVersion="4.2" Name="GHI.Premium.IO" ErrorMessage="GHI.Premium.IO could not be found."/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
+
+        <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
+      </Assemblies>
+
+      <ExtraLibrariesRequired>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.IO" ErrorMessage="GHI.Premium.IO could not be found."/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.System" ErrorMessage="GHI.Premium.System could not be found."/>
+        <Assembly MFVersion="4.2" Name="GHI.Premium.USBHost" ErrorMessage="GHI.Premium.USBHost could not be found."/>
+
+        <Assembly MFVersion="4.3" Name="GHI.Hardware" ErrorMessage="GHI.Hardware could not be found."/>
+        <Assembly MFVersion="4.3" Name="GHI.Usb" ErrorMessage="GHI.Usb could not be found."/>
+      </ExtraLibrariesRequired>
+
+      <Sockets>
+        <Socket Left="14.41" Top="18.75" Orientation="90" ConstructorOrder="1" TypesLabel="H">
+          <Types>
+            <Type>H</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.050</TypicalCurrent>
+          <MaximumCurrent>Infinity</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

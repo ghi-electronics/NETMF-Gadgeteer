@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="FLASH"
+                  UniqueId="bc663245-5f0c-4459-a0b0-21fb680fa894"
+                  Manufacturer="GHI Electronics"
+                  Description="A FLASH module"
+                  InstanceName="flash"
+                  Type="Gadgeteer.Modules.GHIElectronics.FLASH"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="22"
+                  BoardWidth="27"
+                  HardwareVersion="1.1"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/359">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FLASH"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.FLASH"/>
+
+        <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="13" Top="4" Orientation="270" ConstructorOrder="1" TypesLabel="S">
+          <Types>
+            <Type>S</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="true">7</Pin>
+            <Pin Shared="true">8</Pin>
+            <Pin Shared="true">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>
