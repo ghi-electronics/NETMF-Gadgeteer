@@ -5,7 +5,7 @@
     <MainboardDefinition
             Name="FEZ Cerberus"
             Type="GHIElectronics.Gadgeteer.FEZCerberus"
-            HardwareVersion="1.2"
+            HardwareVersion="1.3"
             Image="Image.jpg"
             BoardWidth="57"
             BoardHeight="47"

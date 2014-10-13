@@ -182,7 +182,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         public override string MainboardVersion
         {
-            get { return "1.2"; }
+            get { return "1.3"; }
         }
 
         /// <summary>
