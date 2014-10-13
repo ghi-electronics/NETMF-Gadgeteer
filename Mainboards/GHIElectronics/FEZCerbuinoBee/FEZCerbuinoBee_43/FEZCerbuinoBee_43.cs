@@ -8,6 +8,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using Microsoft.SPOT.IO;
 using System;
+using System.Threading;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
@@ -416,6 +417,8 @@ namespace GHIElectronics.Gadgeteer
 
         private void OnSDCardDetect(uint data1, uint data2, DateTime when)
         {
+            Thread.Sleep(500);
+
             if (this.IsSDCardInserted && !this.IsSDCardMounted)
                 this.MountStorageDevice("SD");
 

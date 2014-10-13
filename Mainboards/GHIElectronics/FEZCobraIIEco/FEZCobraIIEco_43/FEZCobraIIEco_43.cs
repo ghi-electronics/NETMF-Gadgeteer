@@ -7,6 +7,7 @@ using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using Microsoft.SPOT.IO;
 using System;
+using System.Threading;
 using G120 = GHI.Pins.G120;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
