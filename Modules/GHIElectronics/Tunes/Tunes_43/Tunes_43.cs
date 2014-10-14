@@ -12,9 +12,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 	public class Tunes : GTM.Module
 	{
         private GTI.PwmOutput pwm;
-		private Melody playlist;
+		private Queue playlist;
 		private Thread worker;
-        private bool running;
         private object syncRoot;
 
 		/// <summary>
@@ -22,7 +21,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public class Melody
 		{
-			private Queue list;
+			internal Queue list;
 
 			/// <summary>
 			/// Constructs a new instance.
@@ -85,37 +84,6 @@ namespace Gadgeteer.Modules.GHIElectronics
                 foreach (MusicNote i in notes)
                     this.Add(i);
             }
-
-			/// <summary>
-			/// Gets the next note to play from the melody.
-			/// </summary>
-			/// <returns></returns>
-			public MusicNote GetNextNote()
-			{
-				if (this.list.Count == 0)
-                    return null;
-
-				return (MusicNote)this.list.Dequeue();
-			}
-
-			/// <summary>
-			/// The number of notes left to play in the melody.
-			/// </summary>
-			public int NotesRemaining
-			{
-				get
-				{
-					return this.list.Count;
-				}
-			}
-
-			/// <summary>
-			/// Removes all notes from the melody.
-			/// </summary>
-			public void Clear()
-			{
-				this.list.Clear();
-			}
 		}
 
 		/// <summary>
@@ -194,6 +162,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// The tone of the note.
 			/// </summary>
             public Tone Tone { get; set; }
+
 			/// <summary>
 			/// The duration of the note.
 			/// </summary>
@@ -221,11 +190,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			socket.EnsureTypeIsSupported('P', this);
 
 			this.pwm = GTI.PwmOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
-            this.running = true;
-			this.playlist = new Melody();
+            this.playlist = new Queue();
             this.syncRoot = new object();
-            this.worker = new Thread(this.DoWork);
-            this.worker.Start();
 		}
 
 		/// <summary>
@@ -234,9 +200,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="frequency">The frequency to play.</param>
 		public void Play(int frequency)
 		{
-            this.Pause();
-
-            this.pwm.Set((int)frequency, 0.5);
+            this.Play(new Tone(frequency));
 		}
 
         /// <summary>
@@ -245,7 +209,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="tone">The tone to play.</param>
         public void Play(Tone tone)
         {
-            this.Play((int)tone.Frequency);
+            this.Play(new MusicNote(tone, Timeout.Infinite));
         }
 
         /// <summary>
@@ -256,8 +220,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void Play(int frequency, int duration)
         {
             this.Play(new MusicNote(new Tone(frequency), duration));
-
-            this.Resume();
         }
 
         /// <summary>
@@ -267,8 +229,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void Play(MusicNote note)
         {
             this.Play(new Melody(note));
-
-            this.Resume();
         }
 
         /// <summary>
@@ -278,8 +238,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void Play(params MusicNote[] notes)
         {
             this.Play(new Melody(notes));
-
-            this.Resume();
         }
 
 		/// <summary>
@@ -288,10 +246,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <param name="melody">The melody to play.</param>
 		public void Play(Melody melody)
 		{
-            lock (this.syncRoot)
-                this.playlist = melody;
+            this.Stop();
 
-            this.Resume();
+            foreach (var i in melody.list)
+                this.playlist.Enqueue(i);
+
+            this.worker = new Thread(this.DoWork);
+            this.worker.Start();
 		}
 
         /// <summary>
@@ -301,42 +262,24 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void AddNote(MusicNote note)
         {
             lock (this.syncRoot)
-                this.playlist.Add(note);
+                this.playlist.Enqueue(note);
         }
-
-		/// <summary>
-		/// Resumes playing after stop was called.
-		/// </summary>
-		public void Resume()
-		{
-            if (!this.running)
-            {
-                this.running = true;
-                this.worker.Resume();
-            }
-		}
 
 		/// <summary>
 		/// Stops playback.
 		/// </summary>
-		public void Pause()
+		public void Stop()
 		{
-            if (this.running)
+            lock (this.syncRoot)
             {
-                this.worker.Suspend();
-                this.running = false;
-                this.pwm.IsActive = false;
+                if (this.worker != null && this.worker.IsAlive)
+                    this.worker.Abort();
+
+                this.playlist.Clear();
+
+                this.pwm.Set(100, 0);
             }
 		}
-
-        /// <summary>
-        /// Removes all notes from the playlist.
-        /// </summary>
-        public void ClearPlaylist()
-        {
-            lock (this.syncRoot)
-                this.playlist.Clear();
-        }
 
         /// <summary>
         /// Whether or not there is something being played.
@@ -346,7 +289,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             get
             {
                 lock (this.playlist)
-                    return this.playlist.NotesRemaining != 0;
+                    return this.playlist.Count != 0;
             }
         }
 
@@ -354,25 +297,22 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             MusicNote note = null;
 
-            while (this.running)
+            while (true)
             {
-                while (true)
+                lock (this.syncRoot)
                 {
-                    lock (this.syncRoot)
-                        note = this.playlist.GetNextNote();
-
-                    if (note == null)
+                    if (this.playlist.Count == 0)
                         break;
 
-                    this.pwm.Set((int)note.Tone.Frequency, 0.5);
-
-                    Thread.Sleep(note.Durartion);
+                    note = (MusicNote)this.playlist.Dequeue();
                 }
 
-                this.pwm.IsActive = false;
+                this.pwm.Set((int)note.Tone.Frequency, 0.5);
 
-                Thread.Sleep(100);
+                Thread.Sleep(note.Durartion);
             }
+
+            this.pwm.Set(100, 0);
         }
 	}
 }
