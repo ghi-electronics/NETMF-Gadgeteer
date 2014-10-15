@@ -19,8 +19,12 @@
       <Assemblies>
         <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.CellularRadio"/>
 
-        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial"/>
+        <Assembly MFVersion="4.3" Name="GHI.Networking" ErrorMessage="GHI.Networking could not be found."/>
       </Assemblies>
+
+      <ExtraLibrariesRequired>
+        <Assembly MFVersion="4.3" Name="GHI.Networking" ErrorMessage="GHI.Networking could not be found."/>
+      </ExtraLibrariesRequired>
 
       <Sockets>
         <Socket TypesLabel="K" ConstructorOrder="1" Orientation="90" Top="42" Left="47">

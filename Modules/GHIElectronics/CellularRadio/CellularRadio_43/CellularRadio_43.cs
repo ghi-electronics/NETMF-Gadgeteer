@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GHI.Networking;
+using System;
 using System.Collections;
+using System.IO.Ports;
+using System.Text;
 using System.Threading;
-using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
@@ -10,9 +12,10 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A CellularRadio module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class CellularRadio : GTM.Module
+    public class CellularRadio : GTM.Module.NetworkModule
     {
-        private GTI.Serial serial;
+        private PPPSerialModem networkInterface;
+        private SerialPort serial;
         private GTI.DigitalOutput power;
         private Queue newMessages;
         private Queue requestedMessages;
@@ -351,26 +354,29 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.moduleBusy = false;
 
             var socket = Socket.GetSocket(socketNumber, true, this, null);
+            socket.EnsureTypeIsSupported('K', this);
+
             this.power = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
-            this.serial = GTI.SerialFactory.Create(socket, 19200, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.Required, this);
+            this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
+            this.serial.Handshake = Handshake.RequestToSend;
 
-            this.serial.Open();
-            this.serial.Write("AT");
+			this.serial.Open();
 
-            Thread.Sleep(1000);
+			this.WriteLine("AT\n");
 
-            var response = "";
-            while (serial.BytesToRead > 0)
-                response += (char)serial.ReadByte();
+			Thread.Sleep(1000);
 
-            if (response.Length != 0)
-            {
-                this.power.Write(true);
-                Thread.Sleep(1200);
+            if (this.serial.BytesToRead != 0)
+			{
+				this.power.Write(true);
+				Thread.Sleep(1200);
 
-                this.power.Write(false);
-                Thread.Sleep(500);
-            }
+				this.power.Write(false);
+				Thread.Sleep(500);
+
+                this.serial.DiscardInBuffer();
+                this.serial.DiscardOutBuffer();
+			}
 
             this.worker = new Thread(this.DoWork);
             this.worker.Start();
@@ -392,6 +398,66 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.onCallConnected = this.OnCallConnected;
             this.onGprsAttached = this.OnGprsAttached;
             this.onModuleInitialized = this.OnModuleInitialized;
+        }
+
+        /// <summary>
+        /// The underlying network interface.
+        /// </summary>
+        public PPPSerialModem NetworkInterface
+        {
+            get
+            {
+                return this.networkInterface;
+            }
+        }
+
+        /// <summary>
+        /// Opens the underlying network interface and assigns the NETMF networking stack.
+        /// </summary>
+        /// <param name="apn">The APN to use.</param>
+        public void UseThisNetworkInterface(string apn)
+        {
+            this.UseThisNetworkInterface(apn, "", "", PPPSerialModem.AuthenticationType.None);
+        }
+
+        /// <summary>
+        /// Opens the underlying network interface and assigns the NETMF networking stack.
+        /// </summary>
+        /// <param name="apn">The APN to use.</param>
+        /// <param name="username">The username to connect with.</param>
+        /// <param name="password">The password to connect with.</param>
+        /// <param name="authenticationType">The authentication type.</param>
+        public void UseThisNetworkInterface(string apn, string username, string password, PPPSerialModem.AuthenticationType authenticationType)
+        {
+            if (this.networkInterface != null && this.networkInterface.Opened)
+                return;
+
+            this.serial.DiscardInBuffer();
+            this.serial.DiscardOutBuffer();
+
+            this.SendATCommand("AT+CGDCONT=2,\"IP\",\"" + apn + "\"");
+            this.SendATCommand("ATDT*99***2#");
+
+            Thread.Sleep(2500);
+
+            this.worker.Abort();
+
+            this.networkInterface = new PPPSerialModem(this.serial);
+            this.networkInterface.Open();
+            this.networkInterface.Connect(authenticationType, username, password);
+
+            this.NetworkSettings = this.networkInterface.NetworkInterface;
+        }
+
+        /// <summary>
+        /// Whether or not the network is connected. Make sure to also check the NetworkUp property to verify network state.
+        /// </summary>
+        public override bool IsNetworkConnected
+        {
+            get
+            {
+                return this.networkInterface.LinkConnected;
+            }
         }
 
         /// <summary>
@@ -459,7 +525,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             if (!this.serial.IsOpen)
                 return ReturnedState.Error;
 
-            this.serial.Write(atCommand);
+            this.WriteLine(atCommand);
 
             Thread.Sleep(100);
 
@@ -485,13 +551,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.moduleBusy = true;
 
-            this.serial.Write("AT+CMGS=\"+" + number + "\"\r\n");
+            this.WriteLine("AT+CMGS=\"+" + number + "\"\r\n");
             Thread.Sleep(100);
 
-            this.serial.Write(message);
+            this.WriteLine(message);
             Thread.Sleep(100);
 
-            this.serial.Write((char)26 + "\r");
+            this.WriteLine((char)26 + "\r");
 
             return ReturnedState.OK;
         }
@@ -812,41 +878,34 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 this.powerOn = true;
 
-                if (!this.serial.IsOpen)
-                {
-                    this.serial.Open();
-                    Thread.Sleep(100);
-
-                    this.worker.Resume();
-                    Thread.Sleep(100);
-                }
-
                 this.power.Write(true);
                 Thread.Sleep(1200);
+
                 this.power.Write(false);
-                Thread.Sleep(3000);
+                Thread.Sleep(1200);
 
                 this.SendATCommand("AT");
-
+                
                 //Set SMS mode to text
-                this.SendATCommand("AT+CMGF=1");
-                this.SendATCommand("AT+CSDH=0");
-
+				this.SendATCommand("AT+CMGF=1");
+				this.SendATCommand("AT+CSDH=0");
+                
                 // Set the phonebook to be stored in the SIM card
                 this.SendATCommand("AT+CPBS=\"SM\"");
-
+                
                 // Set the sms to be stored in the SIM card
                 this.SendATCommand("AT+CPMS=\"SM\"");
-                this.SendATCommand("AT+CNMI=2,1,0,1,0");
-
-                //// Sets how connected lines are presented
+                
+                // Sets how connected lines are presented
                 this.SendATCommand("AT+COLP=1");
-
+                
                 // Enable GPRS network registration status
                 this.SendATCommand("AT+CGREG=1");
-
+                
                 // Enable GSM network registration status
                 this.SendATCommand("AT+CREG=1");
+
+                this.OnModuleInitialized(this);
             }
         }
 
@@ -867,7 +926,8 @@ namespace Gadgeteer.Modules.GHIElectronics
                     {
                         var read = this.serial.Read(buffer, 0, buffer.Length);
 
-                        response += new string(System.Text.Encoding.UTF8.GetChars(buffer, 0, read));
+                        for (var i = 0; i < read; i++)
+                            response += (char)buffer[i];
                     }
 
                     if (response == string.Empty)
@@ -1273,11 +1333,6 @@ namespace Gadgeteer.Modules.GHIElectronics
                     }
                     #endregion
 
-                    #region Check Module Initialization (Call Ready)
-                    if (response.IndexOf("Call Ready") >= 0)
-                        this.OnModuleInitialized(this);
-                    #endregion
-
                     #region Check GPRS Attached (CISFR)
                     if (response.IndexOf("CIFSR") > 0 && response.IndexOf("ERROR") < 0)
                         this.OnGprsAttached(this, this.Between(response, "AT+CIFSR\n\n\n", "\n"));
@@ -1300,6 +1355,13 @@ namespace Gadgeteer.Modules.GHIElectronics
             var last = source.IndexOf(right, first + 1);
 
             return source.Substring(first, last - first).Trim();
+        }
+
+        private void WriteLine(string line)
+        {
+            var buffer = Encoding.UTF8.GetBytes(line);
+
+            this.serial.Write(buffer, 0, buffer.Length);
         }
 
         private PinStateRequestedHandler onPinStateRequested;
