@@ -43,6 +43,12 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.socketB.SpiIndirector = this.socketA.SpiIndirector;
             this.socketB.SerialIndirector = this.socketA.SerialIndirector;
 
+            if (this.socketA.SupportsType('A'))
+                Socket.SocketInterfaces.SetAnalogInputFactors(this.socketB, 3.3, 0, -1);
+            
+            if (this.socketA.SupportsType('O'))
+                Socket.SocketInterfaces.SetAnalogOutputFactors(this.socketB, 3.3, 0, -1);
+
             Socket.SocketInterfaces.RegisterSocket(this.socketB);
         }
 
