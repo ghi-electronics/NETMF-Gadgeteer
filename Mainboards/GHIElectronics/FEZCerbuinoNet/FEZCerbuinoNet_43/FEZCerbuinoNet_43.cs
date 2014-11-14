@@ -686,25 +686,25 @@ namespace GHIElectronics.Gadgeteer
             public const Cpu.Pin A4 = (Cpu.Pin)(32 + 1);
 
             /// <summary>GPIO pin.</summary>
-            public const Cpu.Pin A5 = (Cpu.Pin)(0 + 4);
+			public const Cpu.Pin A5 = (Cpu.Pin)(0 + 4);
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A0_AnalogChannel = (Cpu.AnalogChannel)9;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A0_AnalogChannel = (Cpu.AnalogChannel)10;
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A1_AnalogChannel = (Cpu.AnalogChannel)5;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A1_AnalogChannel = (Cpu.AnalogChannel)8;
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A2_AnalogChannel = (Cpu.AnalogChannel)8;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A2_AnalogChannel = (Cpu.AnalogChannel)9;
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A3_AnalogChannel = (Cpu.AnalogChannel)13;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A3_AnalogChannel = (Cpu.AnalogChannel)7;
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A4_AnalogChannel = (Cpu.AnalogChannel)11;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A4_AnalogChannel = (Cpu.AnalogChannel)4;
 
-            /// <summary>Analog channel.</summary>
-            public const Cpu.AnalogChannel A5_AnalogChannel = (Cpu.AnalogChannel)4;
+			/// <summary>Analog channel.</summary>
+			public const Cpu.AnalogChannel A5_AnalogChannel = (Cpu.AnalogChannel)5;
         }
     }
 }
