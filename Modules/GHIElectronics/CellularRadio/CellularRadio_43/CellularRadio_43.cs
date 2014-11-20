@@ -22,7 +22,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         private Thread worker;
         private bool powerOn;
         private bool moduleBusy;
-
+		private string responseBuffer;
+		private AutoResetEvent pppEvent;
+		
         /// <summary>
         /// Represents an SMS.
         /// </summary>
@@ -356,6 +358,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             var socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('K', this);
 
+			this.pppEvent = new AutoResetEvent(false);
             this.power = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
             this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
             this.serial.Handshake = Handshake.RequestToSend;
@@ -368,11 +371,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             if (this.serial.BytesToRead != 0)
 			{
-				this.power.Write(true);
-				Thread.Sleep(1200);
-
 				this.power.Write(false);
-				Thread.Sleep(500);
+				Thread.Sleep(1000);
+				this.power.Write(true);
+				Thread.Sleep(1700);
 
                 this.serial.DiscardInBuffer();
                 this.serial.DiscardOutBuffer();
@@ -438,9 +440,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.SendATCommand("AT+CGDCONT=1,\"IP\",\"" + apn + "\"");
             this.SendATCommand("ATDT*99***1#");
 
-            Thread.Sleep(2500);
-
-            this.worker.Abort();
+            this.pppEvent.WaitOne();
 
             this.networkInterface = new PPPSerialModem(this.serial);
             this.networkInterface.Open();
@@ -484,11 +484,10 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             if (this.powerOn)
             {
-                this.power.Write(true);
-                Thread.Sleep(1200);
-
                 this.power.Write(false);
-                Thread.Sleep(500);
+				Thread.Sleep(1000);
+				this.power.Write(true);
+				Thread.Sleep(1700);
 
                 this.powerOn = false;
             }
@@ -878,13 +877,15 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 this.powerOn = true;
 
-                this.power.Write(true);
-                Thread.Sleep(1200);
+				this.power.Write(false);
+				Thread.Sleep(1000);
+				this.power.Write(true);
+				Thread.Sleep(2200);
 
-                this.power.Write(false);
-                Thread.Sleep(1200);
+				this.SendATCommand("AT");
 
-                this.SendATCommand("AT");
+				//Disable echo
+				this.SendATCommand("ATE0");
                 
                 //Set SMS mode to text
 				this.SendATCommand("AT+CMGF=1");
@@ -912,440 +913,448 @@ namespace Gadgeteer.Modules.GHIElectronics
         private void DoWork()
         {
             var buffer = new byte[256];
-            var response = string.Empty;
+			var response = string.Empty;
 
             while (true)
             {
-                Thread.Sleep(100);
-
                 if (serial.IsOpen)
                 {
-                    response = string.Empty;
-
-                    while (this.serial.BytesToRead != 0)
-                    {
-                        var read = this.serial.Read(buffer, 0, buffer.Length);
-
-                        for (var i = 0; i < read; i++)
-                            response += (char)buffer[i];
-                    }
-
-                    if (response == string.Empty)
-                        continue;
-
-                    #region Check Pin State (CPIN)
-                    if (response.IndexOf("+CPIN:") > 0)
-                    {
-                        var reply = this.Between(response, "+CPIN", "\n");
-
-                        if (reply.IndexOf("READY") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.Ready);
-                        }
-                        else if (reply.IndexOf("SIM PIN2") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.Pin2);
-                        }
-                        else if (reply.IndexOf("SIM PUK2") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.Puk2);
-                        }
-                        else if (reply.IndexOf("PH_SIM PIN") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.PhPin);
-                        }
-                        else if (reply.IndexOf("PH_SIM PUK") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.PhPuk);
-                        }
-                        else if (reply.IndexOf("SIM PIN") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.Pin);
-                        }
-                        else if (reply.IndexOf("SIM PUK") > -1)
-                        {
-                            this.OnPinStateRequested(this, PinState.Puk);
-                        }
-                        else
-                        {
-                            this.OnPinStateRequested(this, PinState.NotPresent);
-                        }
-                    }
-                    #endregion
-
-                    #region Check GSM Network Registration (CREG)
-                    if (response.IndexOf("+CREG:") > 0)
-                    {
-                        try
-                        {
-                            switch (int.Parse(this.Between(response, "+CREG:", "\n")))
-                            {
-                                case 0: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
-                                case 1: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
-                                case 2: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
-                                case 3: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.RegistrationDenied); break;
-                                case 4: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Unknown); break;
-                                case 5: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Roaming); break;
-                            }
-                        }
-                        catch (Exception)
-                        {
-                            this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Error);
-                        }
-                    }
-                    #endregion
-
-                    #region Check GPRS Network Registration (CGREG)
-                    if (response.IndexOf("+CGREG:") > 0)
-                    {
-                        try
-                        {
-                            switch (int.Parse(this.Between(response, "+CGREG:", "\n")))
-                            {
-                                case 0: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
-                                case 1: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
-                                case 2: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
-                                case 3: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.RegistrationDenied); break;
-                                case 4: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Unknown); break;
-                                case 5: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Roaming); break;
-                            }
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-                    }
-                    #endregion
-
-                    #region Check Sms Received (CMTI)
-                    if (response.IndexOf("+CMTI:") > 0)
-                    {
-                        var parts = this.Between(response, "+CMTI:", "\n").Split(',');
-
-                        try
-                        {
-                            var position = int.Parse(parts[1]);
-
-                            this.newMessages.Enqueue(position);
-                            this.RequestSms(position, false);
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-                    }
-
-                    #endregion
-
-                    #region Check Incoming Call (CLIP)
-                    if (response.IndexOf("+CLIP:") > 0)
-                    {
-                        var parts = this.Between(response, "+CLIP:", "\n").Split(',');
-
-                        if (parts.Length > 1)
-                            this.OnIncomingCall(this, parts[0].Trim('\"'));
-                    }
-                    #endregion
-
-                    #region Check Sms Requested (CMGR)
-                    if (response.IndexOf("+CMGR:") > 0)
-                    {
-                        var first = response.IndexOf("+CMGR:") + 6;
-                        var mid = response.IndexOf("\n", first);
-                        var last = response.IndexOf("OK", mid);
-                        var parts = response.Substring(first, mid - first).Trim().Split(',');
-
-                        var sms = new Sms();
-
-                        sms.Message = response.Substring(mid, last - mid).Trim();
-
-                        if (parts.Length == 5)
-                        {
-                            sms.PhoneNumber = parts[1].Trim('\"');
-
-                            if (parts[0].IndexOf("REC UNREAD") > 0)
-                            {
-                                sms.Status = SmsState.ReceivedUnread;
-                            }
-                            else if (parts[0].IndexOf("REC READ") > 0)
-                            {
-                                sms.Status = SmsState.ReceivedRead;
-                            }
-                            else if (parts[0].IndexOf("STO UNSENT") > 0)
-                            {
-                                sms.Status = SmsState.StoredUnsent;
-                            }
-                            else if (parts[0].IndexOf("STO SENT") > 0)
-                            {
-                                sms.Status = SmsState.StoredSent;
-                            }
-                            else
-                            {
-                                sms.Status = SmsState.All;
-                            }
-
-                            try
-                            {
-                                if (parts[3].Length >= 7 && parts[4].Length >= 7)
-                                {
-                                    sms.Timestamp = new DateTime(int.Parse(parts[3].Substring(1, 2)) + 2000, int.Parse(parts[3].Substring(4, 2)), int.Parse(parts[3].Substring(7, 2)), int.Parse(parts[4].Substring(0, 2)), int.Parse(parts[4].Substring(3, 2)), int.Parse(parts[4].Substring(6, 2)));
-                                }
-                                else
-                                {
-                                    sms.Timestamp = new DateTime();
-                                }
-
-                                sms.Index = (int)this.requestedMessages.Dequeue();
-
-                                if (this.newMessages.Contains(sms.Index))
-                                    this.newMessages.Dequeue();
-
-                                this.OnSmsRequested(this, sms);
-                            }
-                            catch (Exception)
-                            {
-
-                            }
-                        }
-                    }
-
-                    #endregion
-
-                    #region Check Phone Activity (CPAS)
-                    if (response.IndexOf("+CPAS:") > 0)
-                    {
-                        try
-                        {
-                            switch (int.Parse(this.Between(response, "+CPAS", "\n")))
-                            {
-                                case 0: this.OnPhoneActivityRequested(this, PhoneActivity.Ready); break;
-                                case 2: this.OnPhoneActivityRequested(this, PhoneActivity.Unknown); break;
-                                case 3: this.OnPhoneActivityRequested(this, PhoneActivity.Ringing); break;
-                                case 4: this.OnPhoneActivityRequested(this, PhoneActivity.CallInProgress); break;
-                            }
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-
-                    }
-                    #endregion
-
-                    #region Check Request Contact (CPBR)
-                    if (response.IndexOf("+CPBR:") > 0)
-                    {
-                        var parts = this.Between(response, "+CPBR", "\n").Split(',');
-
-                        try
-                        {
-                            this.OnContactRequested(this, new Contact(parts[1].Trim('\"'), parts[3].Trim('\"')));
-                        }
-                        catch (Exception)
-                        {
-                            this.OnSmsReceived(this, null);
-                        }
-                    }
-                    #endregion
-
-                    #region Check Request Clock (CCLK)
-                    if (response.IndexOf("+CCLK:") > 0)
-                    {
-                        var str = this.Between(response, "+CCLK:", "OK");
-
-                        try
-                        {
-                            this.OnClockRequested(this, new DateTime(int.Parse(str.Substring(1, 2)) + 2000, int.Parse(str.Substring(4, 2)), int.Parse(str.Substring(7, 2)), int.Parse(str.Substring(10, 2)), int.Parse(str.Substring(13, 2)), int.Parse(str.Substring(16, 2))));
-                        }
-                        catch (Exception)
-                        {
-
-                        }
-                    }
-                    #endregion
-
-                    #region Check Request IMEI (GSN)
-                    if (response.IndexOf("GSN") > 0)
-                        this.OnImeiRequested(this, this.Between(response, "GSN", "OK"));
-                    #endregion
-
-                    #region Check Request Signal Strength (CSQ)
-                    if (response.IndexOf("+CSQ:") > 0)
-                    {
-                        var parts = this.Between(response, "+CSQ:", "OK").Split(',');
-
-                        if (parts.Length == 2)
-                        {
-                            try
-                            {
-                                int signal = int.Parse(parts[0]);
-
-                                switch (signal)
-                                {
-                                    case 0: this.OnSignalStrengthRequested(this, SignalStrength.VeryWeak); break;
-                                    case 1: this.OnSignalStrengthRequested(this, SignalStrength.Weak); break;
-                                    case 31: this.OnSignalStrengthRequested(this, SignalStrength.VeryStrong); break;
-                                    case 99: this.OnSignalStrengthRequested(this, SignalStrength.Unknown); break;
-                                    default:
-                                        if (signal >= 2 && signal <= 30) 
-                                            this.OnSignalStrengthRequested(this, SignalStrength.Strong);
-
-                                        break;
-                                }
-                            }
-                            catch (Exception)
-                            {
-
-                            }
-                        }
-                    }
-                    #endregion
-
-                    #region Check Request Operator (COPS)
-                    if (response.IndexOf("+COPS:") > 0)
-                    {
-                        var parts = this.Between(response, "+COPS:", "OK").Split(',');
-                        if (parts.Length == 3)
-                            this.OnOperatorRequested(this, parts.Length == 3 ? parts[2] : null);
-                    }
-                    #endregion
-
-                    #region Check PowerOn Error (NORMAL POWER DOWN)
-                    if (response.IndexOf("NORMAL POWER DOWN") > 0 && this.powerOn)
-                        this.Reset();
-                    #endregion
-
-                    #region Check Request SMS List (CMGL)
-                    if (response.IndexOf("+CMGL:") > 0)
-                    {
-                        var smsList = new ArrayList();
-
-                        do
-                        {
-                            var first = response.IndexOf("+CMGL:") + 6;
-                            var mid = response.IndexOf("\n", first);
-                            var last = response.IndexOf("\n", mid + 1);
-                            var parts = response.Substring(first, mid - first).Trim().Split(',');
-
-                            response = response.Substring(last);
-
-                            if (parts.Length == 6)
-                            {
-                                var sms = new Sms();
-
-                                sms.Message = response.Substring(mid, last - mid).Trim();
-                                sms.PhoneNumber = parts[2].Trim('\"');
-
-                                try
-                                {
-                                    sms.Index = int.Parse(parts[0]);
-                                }
-                                catch (Exception)
-                                {
-
-                                };
-
-                                if (parts[1].IndexOf("REC UNREAD") > 0)
-                                {
-                                    sms.Status = SmsState.ReceivedUnread;
-                                }
-                                else if (parts[1].IndexOf("REC READ") > 0)
-                                {
-                                    sms.Status = SmsState.ReceivedRead;
-                                }
-                                else if (parts[1].IndexOf("STO UNSENT") > 0)
-                                {
-                                    sms.Status = SmsState.StoredUnsent;
-                                }
-                                else if (parts[1].IndexOf("STO SENT") > 0)
-                                {
-                                    sms.Status = SmsState.StoredSent;
-                                }
-                                else
-                                {
-                                    sms.Status = SmsState.All;
-                                }
-
-                                try
-                                {
-                                    if (parts[4].Length >= 7 && parts[5].Length >= 7)
-                                    {
-                                        sms.Timestamp = new DateTime(int.Parse(parts[4].Substring(1, 2)) + 2000, int.Parse(parts[4].Substring(4, 2)), int.Parse(parts[4].Substring(7, 2)), int.Parse(parts[5].Substring(0, 2)), int.Parse(parts[5].Substring(3, 2)), int.Parse(parts[5].Substring(6, 2)));
-                                    }
-                                    else
-                                    {
-                                        sms.Timestamp = new DateTime();
-                                    }
-                                }
-                                catch (Exception)
-                                {
-
-                                }
-
-                                smsList.Add(sms);
-                            }
-                        }
-                        while (response.IndexOf("+CMGL") > 0);
-
-                        this.OnSmsListRequested(this, smsList);
-                    }
-                    #endregion
-
-                    #region Check No Carrier (NO CARRIER)
-                    if (response.IndexOf("NO CARRIER") > 0)
-                    {
-                        this.OnCallEnded(this, CallEndReason.NoCarrier);
-
-                        if (this.moduleBusy)
-                            this.moduleBusy = false;
-                    }
-                    #endregion
-
-                    #region Check No Dial Tone (NO DIALTONE)
-                    if (response.IndexOf("NO DIALTONE") > 0)
-                    {
-                        this.OnCallEnded(this, CallEndReason.NoDialTone);
-
-                        if (this.moduleBusy)
-                            this.moduleBusy = false;
-                    }
-                    #endregion
-
-                    #region Check Busy (BUSY)
-                    if (response.IndexOf("BUSY") > 0)
-                    {
-                        this.OnCallEnded(this, CallEndReason.Busy);
-
-                        if (this.moduleBusy)
-                            this.moduleBusy = false;
-                    }
-                    #endregion
-
-                    #region Check Call Connected (COLP)
-                    if (response.IndexOf("+COLP:") > 0)
-                    {
-                        if (this.moduleBusy)
-                            this.moduleBusy = false;
-
-                        var parts = this.Between(response, "+COLP", "\n").Split(',');
-                        if (parts.Length == 5)
-                            this.OnCallConnected(this, parts[0].Trim('\"'));
-                    }
-                    #endregion
-
-                    #region Check GPRS Attached (CISFR)
-                    if (response.IndexOf("CIFSR") > 0 && response.IndexOf("ERROR") < 0)
-                        this.OnGprsAttached(this, this.Between(response, "AT+CIFSR\n\n\n", "\n"));
-                    #endregion
-
-                    #region Check SendSms Result
-                    if (response.IndexOf("+CMGS:") >= 0 && this.moduleBusy)
-                        this.moduleBusy = false;
-
-                    if (response.IndexOf("ERROR") >= 0 && this.moduleBusy)
-                        this.moduleBusy = false;
-                    #endregion
-                }
+					while (this.ExtractLine(ref response))
+					{
+						#region Check Pin State (CPIN)
+						if (response.IndexOf("+CPIN:") > 0)
+						{
+							var reply = this.Between(response, "+CPIN:", "\r\n");
+
+							if (reply.IndexOf("READY") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.Ready);
+							}
+							else if (reply.IndexOf("SIM PIN2") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.Pin2);
+							}
+							else if (reply.IndexOf("SIM PUK2") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.Puk2);
+							}
+							else if (reply.IndexOf("PH_SIM PIN") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.PhPin);
+							}
+							else if (reply.IndexOf("PH_SIM PUK") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.PhPuk);
+							}
+							else if (reply.IndexOf("SIM PIN") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.Pin);
+							}
+							else if (reply.IndexOf("SIM PUK") > -1)
+							{
+								this.OnPinStateRequested(this, PinState.Puk);
+							}
+							else
+							{
+								this.OnPinStateRequested(this, PinState.NotPresent);
+							}
+						}
+						#endregion
+
+						#region Check GSM Network Registration (CREG)
+						if (response.IndexOf("+CREG:") > 0)
+						{
+							try
+							{
+								switch (int.Parse(this.Between(response, "+CREG:", "\r\n")))
+								{
+									case 0: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
+									case 1: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
+									case 2: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
+									case 3: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.RegistrationDenied); break;
+									case 4: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Unknown); break;
+									case 5: this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Roaming); break;
+								}
+							}
+							catch (Exception)
+							{
+								this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Error);
+							}
+						}
+						#endregion
+
+						#region Check GPRS Network Registration (CGREG)
+						if (response.IndexOf("+CGREG:") > 0)
+						{
+							try
+							{
+								switch (int.Parse(this.Between(response, "+CGREG:", "\r\n")))
+								{
+									case 0: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
+									case 1: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
+									case 2: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
+									case 3: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.RegistrationDenied); break;
+									case 4: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Unknown); break;
+									case 5: this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Roaming); break;
+								}
+							}
+							catch (Exception)
+							{
+
+							}
+						}
+						#endregion
+
+						#region Check Sms Received (CMTI)
+						if (response.IndexOf("+CMTI:") > 0)
+						{
+							var parts = this.Between(response, "+CMTI:", "\r\n").Split(',');
+
+							try
+							{
+								var position = int.Parse(parts[1]);
+
+								this.newMessages.Enqueue(position);
+								this.RequestSms(position, false);
+							}
+							catch (Exception)
+							{
+
+							}
+						}
+
+						#endregion
+
+						#region Check Incoming Call (CLIP)
+						if (response.IndexOf("+CLIP:") > 0)
+						{
+							var parts = this.Between(response, "+CLIP:", "\r\n").Split(',');
+
+							if (parts.Length > 1)
+								this.OnIncomingCall(this, parts[0].Trim('\"'));
+						}
+						#endregion
+
+						#region Check Sms Requested (CMGR)
+						if (response.IndexOf("+CMGR:") > 0)
+						{
+							var first = response.IndexOf("+CMGR:") + 6;
+							var mid = response.IndexOf("\r\n", first);
+							var parts = response.Substring(first, mid - first).Trim().Split(',');
+							var sms = new Sms();
+
+							this.ExtractLine(ref sms.Message, "OK");
+
+							if (parts.Length == 5)
+							{
+								sms.PhoneNumber = parts[1].Trim('\"');
+
+								if (parts[0].IndexOf("REC UNREAD") > 0)
+								{
+									sms.Status = SmsState.ReceivedUnread;
+								}
+								else if (parts[0].IndexOf("REC READ") > 0)
+								{
+									sms.Status = SmsState.ReceivedRead;
+								}
+								else if (parts[0].IndexOf("STO UNSENT") > 0)
+								{
+									sms.Status = SmsState.StoredUnsent;
+								}
+								else if (parts[0].IndexOf("STO SENT") > 0)
+								{
+									sms.Status = SmsState.StoredSent;
+								}
+								else
+								{
+									sms.Status = SmsState.All;
+								}
+
+								try
+								{
+									if (parts[3].Length >= 7 && parts[4].Length >= 7)
+									{
+										sms.Timestamp = new DateTime(int.Parse(parts[3].Substring(1, 2)) + 2000, int.Parse(parts[3].Substring(4, 2)), int.Parse(parts[3].Substring(7, 2)), int.Parse(parts[4].Substring(0, 2)), int.Parse(parts[4].Substring(3, 2)), int.Parse(parts[4].Substring(6, 2)));
+									}
+									else
+									{
+										sms.Timestamp = new DateTime();
+									}
+
+									sms.Index = (int)this.requestedMessages.Dequeue();
+
+									if (this.newMessages.Contains(sms.Index))
+										this.newMessages.Dequeue();
+
+									this.OnSmsRequested(this, sms);
+								}
+								catch (Exception)
+								{
+
+								}
+							}
+						}
+
+						#endregion
+
+						#region Check Phone Activity (CPAS)
+						if (response.IndexOf("+CPAS:") > 0)
+						{
+							try
+							{
+								switch (int.Parse(this.Between(response, "+CPAS:", "\r\n")))
+								{
+									case 0: this.OnPhoneActivityRequested(this, PhoneActivity.Ready); break;
+									case 2: this.OnPhoneActivityRequested(this, PhoneActivity.Unknown); break;
+									case 3: this.OnPhoneActivityRequested(this, PhoneActivity.Ringing); break;
+									case 4: this.OnPhoneActivityRequested(this, PhoneActivity.CallInProgress); break;
+								}
+							}
+							catch (Exception)
+							{
+
+							}
+
+						}
+						#endregion
+
+						#region Check Request Contact (CPBR)
+						if (response.IndexOf("+CPBR:") > 0)
+						{
+							var parts = this.Between(response, "+CPBR:", "\r\n").Split(',');
+
+							try
+							{
+								this.OnContactRequested(this, new Contact(parts[1].Trim('\"'), parts[3].Trim('\"')));
+							}
+							catch (Exception)
+							{
+								this.OnSmsReceived(this, null);
+							}
+						}
+						#endregion
+
+						#region Check Request Clock (CCLK)
+						if (response.IndexOf("+CCLK:") > 0)
+						{
+							var str = this.Between(response, "+CCLK:", "OK");
+
+							try
+							{
+								this.OnClockRequested(this, new DateTime(int.Parse(str.Substring(1, 2)) + 2000, int.Parse(str.Substring(4, 2)), int.Parse(str.Substring(7, 2)), int.Parse(str.Substring(10, 2)), int.Parse(str.Substring(13, 2)), int.Parse(str.Substring(16, 2))));
+							}
+							catch (Exception)
+							{
+
+							}
+						}
+						#endregion
+
+						#region Check Request IMEI (GSN)
+						if (response.IndexOf("+GSN:") > 0)
+							this.OnImeiRequested(this, this.Between(response, "+GSN:", "OK"));
+						#endregion
+
+						#region Check Request Signal Strength (CSQ)
+						if (response.IndexOf("+CSQ:") > 0)
+						{
+							var parts = this.Between(response, "+CSQ:", "OK").Split(',');
+
+							if (parts.Length == 2)
+							{
+								try
+								{
+									int signal = int.Parse(parts[0]);
+
+									switch (signal)
+									{
+										case 0: this.OnSignalStrengthRequested(this, SignalStrength.VeryWeak); break;
+										case 1: this.OnSignalStrengthRequested(this, SignalStrength.Weak); break;
+										case 31: this.OnSignalStrengthRequested(this, SignalStrength.VeryStrong); break;
+										case 99: this.OnSignalStrengthRequested(this, SignalStrength.Unknown); break;
+										default:
+											if (signal >= 2 && signal <= 30) 
+												this.OnSignalStrengthRequested(this, SignalStrength.Strong);
+
+											break;
+									}
+								}
+								catch (Exception)
+								{
+
+								}
+							}
+						}
+						#endregion
+
+						#region Check Request Operator (COPS)
+						if (response.IndexOf("+COPS:") > 0)
+						{
+							var parts = this.Between(response, "+COPS:", "OK").Split(',');
+							if (parts.Length == 3)
+								this.OnOperatorRequested(this, parts.Length == 3 ? parts[2] : null);
+						}
+						#endregion
+
+						#region Check PowerOn Error (NORMAL POWER DOWN)
+						if (response.IndexOf("NORMAL POWER DOWN") > 0 && this.powerOn)
+							this.Reset();
+						#endregion
+
+						#region Check Request SMS List (CMGL)
+						if (response.IndexOf("+CMGL:") > 0)
+						{
+							var smsList = new ArrayList();
+
+							do
+							{
+								var first = response.IndexOf("+CMGL:") + 6;
+								var mid = response.IndexOf("\r\n", first);
+								var parts = response.Substring(first, mid - first).Trim().Split(',');
+								var message = "";
+
+								this.ExtractLine(ref message);
+
+								if (parts.Length == 6)
+								{
+									var sms = new Sms();
+
+									sms.Message = message.Trim();
+									sms.PhoneNumber = parts[2].Trim('\"');
+
+									try
+									{
+										sms.Index = int.Parse(parts[0]);
+									}
+									catch (Exception)
+									{
+
+									};
+
+									if (parts[1].IndexOf("REC UNREAD") > 0)
+									{
+										sms.Status = SmsState.ReceivedUnread;
+									}
+									else if (parts[1].IndexOf("REC READ") > 0)
+									{
+										sms.Status = SmsState.ReceivedRead;
+									}
+									else if (parts[1].IndexOf("STO UNSENT") > 0)
+									{
+										sms.Status = SmsState.StoredUnsent;
+									}
+									else if (parts[1].IndexOf("STO SENT") > 0)
+									{
+										sms.Status = SmsState.StoredSent;
+									}
+									else
+									{
+										sms.Status = SmsState.All;
+									}
+
+									try
+									{
+										if (parts[4].Length >= 7 && parts[5].Length >= 7)
+										{
+											sms.Timestamp = new DateTime(int.Parse(parts[4].Substring(1, 2)) + 2000, int.Parse(parts[4].Substring(4, 2)), int.Parse(parts[4].Substring(7, 2)), int.Parse(parts[5].Substring(0, 2)), int.Parse(parts[5].Substring(3, 2)), int.Parse(parts[5].Substring(6, 2)));
+										}
+										else
+										{
+											sms.Timestamp = new DateTime();
+										}
+									}
+									catch (Exception)
+									{
+
+									}
+
+									smsList.Add(sms);
+								}
+							}
+							while (this.responseBuffer.Substring(0, 6) == "+CMGL:");
+
+							this.OnSmsListRequested(this, smsList);
+						}
+						#endregion
+
+						#region Check No Carrier (NO CARRIER)
+						if (response.IndexOf("NO CARRIER") > 0)
+						{
+							this.OnCallEnded(this, CallEndReason.NoCarrier);
+
+							if (this.moduleBusy)
+								this.moduleBusy = false;
+						}
+						#endregion
+
+						#region Check No Dial Tone (NO DIALTONE)
+						if (response.IndexOf("NO DIALTONE") > 0)
+						{
+							this.OnCallEnded(this, CallEndReason.NoDialTone);
+
+							if (this.moduleBusy)
+								this.moduleBusy = false;
+						}
+						#endregion
+
+						#region Check Busy (BUSY)
+						if (response.IndexOf("BUSY") > 0)
+						{
+							this.OnCallEnded(this, CallEndReason.Busy);
+
+							if (this.moduleBusy)
+								this.moduleBusy = false;
+						}
+						#endregion
+
+						#region Check Connect (CONNECT)
+						if (response.IndexOf("CONNECT") > 0)
+						{
+							if (this.moduleBusy)
+								this.moduleBusy = false;
+
+							this.pppEvent.Set();
+
+							return;
+						}
+						#endregion
+
+						#region Check Call Connected (COLP)
+						if (response.IndexOf("+COLP:") > 0)
+						{
+							if (this.moduleBusy)
+								this.moduleBusy = false;
+
+							var parts = this.Between(response, "+COLP:", "\r\n").Split(',');
+							if (parts.Length == 5)
+								this.OnCallConnected(this, parts[0].Trim('\"'));
+						}
+						#endregion
+
+						#region Check GPRS Attached (CISFR)
+						if (response.IndexOf("CIFSR") > 0 && response.IndexOf("ERROR") < 0)
+							this.OnGprsAttached(this, this.Between(response, "AT+CIFSR\n\n\n", "\n"));
+						#endregion
+
+						#region Check SendSms Result
+						if (response.IndexOf("+CMGS:") >= 0 && this.moduleBusy)
+							this.moduleBusy = false;
+
+						if (response.IndexOf("ERROR") >= 0 && this.moduleBusy)
+							this.moduleBusy = false;
+						#endregion
+					}
+
+					while (this.serial.BytesToRead != 0)
+					{
+						var read = this.serial.Read(buffer, 0, buffer.Length);
+
+						for (var i = 0; i < read; i++)
+							this.responseBuffer += (char)buffer[i];
+					}
+				}
+
+				Thread.Sleep(250);
             }
         }
 
@@ -1363,6 +1372,20 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.serial.Write(buffer, 0, buffer.Length);
         }
+
+		private bool ExtractLine(ref string line, string delimiter = "\r\n")
+		{
+			var index = this.responseBuffer.IndexOf(delimiter);
+
+			if (index == -1)
+				return false;
+
+			line = this.responseBuffer.Substring(0, index);
+
+			this.responseBuffer = this.responseBuffer.Substring(index + delimiter.Length);
+
+			return true;
+		}
 
         private PinStateRequestedHandler onPinStateRequested;
         private GsmNetworkRegistrationChangedHandler onGsmNetworkRegistrationChanged;
