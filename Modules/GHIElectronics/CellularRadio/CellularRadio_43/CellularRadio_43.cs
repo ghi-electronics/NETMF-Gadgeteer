@@ -435,8 +435,8 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.serial.DiscardInBuffer();
             this.serial.DiscardOutBuffer();
 
-            this.SendATCommand("AT+CGDCONT=2,\"IP\",\"" + apn + "\"");
-            this.SendATCommand("ATDT*99***2#");
+            this.SendATCommand("AT+CGDCONT=1,\"IP\",\"" + apn + "\"");
+            this.SendATCommand("ATDT*99***1#");
 
             Thread.Sleep(2500);
 
