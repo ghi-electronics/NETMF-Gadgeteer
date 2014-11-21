@@ -104,7 +104,7 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[7] = Generic.GetPin('B', 5);
             socket.CpuPins[8] = Generic.GetPin('B', 4);
             socket.CpuPins[9] = Generic.GetPin('B', 3);
-            socket.SerialPortName = "COM6";
+            socket.SerialPortName = "COM1";
             socket.PWM7 = Cpu.PWMChannel.PWM_6;
             socket.PWM8 = Cpu.PWMChannel.PWM_7;
             socket.PWM9 = (Cpu.PWMChannel)8;
