@@ -335,12 +335,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.power = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
 			this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
 			this.serial.Handshake = Handshake.RequestToSend;
-
 			this.serial.Open();
-			this.serial.DiscardInBuffer();
-			this.serial.DiscardOutBuffer();
-
-			this.WriteLine("AT\n");
+			this.serial.Write(Encoding.UTF8.GetBytes("AT"), 0, 2);
 
 			Thread.Sleep(1000);
 
@@ -350,6 +346,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 				Thread.Sleep(1000);
 				this.power.Write(true);
 				Thread.Sleep(1700);
+
+				this.serial.DiscardInBuffer();
+				this.serial.DiscardOutBuffer();
 			}
 
 			this.onPinStateRequested = this.OnPinStateRequested;
