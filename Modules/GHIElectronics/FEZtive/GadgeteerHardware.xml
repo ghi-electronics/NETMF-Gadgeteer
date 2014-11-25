@@ -18,8 +18,10 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.FEZtive"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.FEZtive"/>
 		
         <Assembly MFVersion="4.2" Name="Gadgeteer.SPI" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.SPI" />
       </Assemblies>
 
       <Sockets>

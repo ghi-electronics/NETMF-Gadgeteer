@@ -18,6 +18,7 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.PIR"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.PIR"/>
       </Assemblies>
 
       <Sockets>

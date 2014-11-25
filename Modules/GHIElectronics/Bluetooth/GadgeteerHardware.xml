@@ -18,8 +18,10 @@
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.Bluetooth"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Bluetooth"/>
 		
         <Assembly MFVersion="4.2" Name="Gadgeteer.Serial" />
+        <Assembly MFVersion="4.3" Name="Gadgeteer.Serial" />
       </Assemblies>
 
       <Sockets>
