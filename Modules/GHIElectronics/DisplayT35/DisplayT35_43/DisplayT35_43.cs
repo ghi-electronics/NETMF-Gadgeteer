@@ -1,4 +1,5 @@
 ﻿using Microsoft.SPOT;
+using System;
 using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
@@ -8,6 +9,7 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// <summary>
     /// A DisplayTE35 module for Microsoft .NET Gadgeteer.
     /// </summary>
+	[Obsolete]
     public class DisplayT35 : GTM.Module.DisplayModule
     {
         private delegate void NullParamsDelegate();
