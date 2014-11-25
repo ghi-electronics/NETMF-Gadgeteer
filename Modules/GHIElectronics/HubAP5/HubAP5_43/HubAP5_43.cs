@@ -612,7 +612,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			public double ReadVoltage(byte channel)
 			{
 				if (channel >= ADS7830.MAX_CHANNEL)
-					throw new Exception("Invalid channel.");
+					throw new ArgumentOutOfRangeException("channel", "Invalid channel.");
 
 				byte[] command = new byte[1] { (byte)(ADS7830.CMD_SD_SE | ADS7830.CMD_PD_ON) };
 				byte[] read = new byte[1];

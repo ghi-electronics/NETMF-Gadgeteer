@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="HD44780"
+                  UniqueId="c9f51571-8c8f-4511-8383-8840882ac668"
+                  Manufacturer="GHI Electronics"
+                  Description="A HD44780 module"
+                  InstanceName="hd44780"
+                  Type="Gadgeteer.Modules.GHIElectronics.HD44780"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="37"
+                  BoardWidth="87"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/422">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.HD44780"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="84" Top="19" Orientation="180" ConstructorOrder="1" TypesLabel="Y">
+          <Types>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+            <Pin Shared="false">6</Pin>
+            <Pin Shared="false">7</Pin>
+            <Pin Shared="false">8</Pin>
+            <Pin Shared="false">9</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.030</TypicalCurrent>
+          <MaximumCurrent>0.030</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="ColorSense"
+                  UniqueId="9f8ce325-cc4e-4d62-a34f-356656f72721"
+                  Manufacturer="GHI Electronics"
+                  Description="A ColorSense module"
+                  InstanceName="colorSense"
+                  Type="Gadgeteer.Modules.GHIElectronics.ColorSense"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="19"
+                  BoardWidth="22"
+                  HardwareVersion="1.2"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/323">
+
+      <Assemblies>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.ColorSense"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.ColorSense"/>
+      </Assemblies>
+
+      <Sockets>
+        <Socket Left="11.2" Top="12.2" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+          <Types>
+            <Type>X</Type>
+            <Type>Y</Type>
+          </Types>
+          <Pins>
+            <Pin Shared="false">3</Pin>
+            <Pin Shared="false">4</Pin>
+            <Pin Shared="false">5</Pin>
+          </Pins>
+        </Socket>
+      </Sockets>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.001</TypicalCurrent>
+          <MaximumCurrent>0.042</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.0</TypicalCurrent>
+          <MaximumCurrent>0.0</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>
