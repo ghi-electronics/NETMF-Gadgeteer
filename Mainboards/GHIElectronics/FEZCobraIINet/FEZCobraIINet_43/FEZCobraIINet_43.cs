@@ -18,6 +18,7 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// The mainboard class for the FEZ Cobra II Net.
 	/// </summary>
+	[Obsolete]
 	public class FEZCobraIINet : GT.Mainboard
 	{
 		private InterruptPort ldr0;
