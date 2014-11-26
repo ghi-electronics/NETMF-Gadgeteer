@@ -59,8 +59,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <summary>
 			/// Creates a new instance.
 			/// </summary>
-			public Sms()
-				: this("", "", SmsState.StoredUnsent, DateTime.MinValue)
+			public Sms() : this("", "", SmsState.StoredUnsent, DateTime.MinValue)
 			{
 
 			}
