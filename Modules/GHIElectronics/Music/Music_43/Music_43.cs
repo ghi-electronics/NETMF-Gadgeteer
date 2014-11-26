@@ -312,7 +312,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
             this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW | Music.SM_RESET);
 
-            while (this.dreq.Read())
+            while (!this.dreq.Read())
                 Thread.Sleep(1);
 
             Thread.Sleep(1);
@@ -364,7 +364,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             {
                 Array.Copy(buffer, i, block, 0, 32);
 
-                while (this.dreq.Read())
+                while (!this.dreq.Read())
                     Thread.Sleep(1);
 
                 lock (this.spiSyncRoot)
