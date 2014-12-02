@@ -141,7 +141,7 @@ namespace GHIElectronics.Gadgeteer
             socket.PWM7 = (Cpu.PWMChannel)14;
             socket.PWM8 = Cpu.PWMChannel.PWM_1;
             socket.PWM9 = (Cpu.PWMChannel)15;
-            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_1;
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;

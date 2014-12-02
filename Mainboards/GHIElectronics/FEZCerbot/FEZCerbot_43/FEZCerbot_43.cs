@@ -107,7 +107,7 @@ namespace GHIElectronics.Gadgeteer
             socket.CpuPins[6] = Generic.GetPin('A', 1);
             socket.CpuPins[8] = Generic.GetPin('B', 7);
             socket.CpuPins[9] = Generic.GetPin('B', 6);
-            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_1;
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;

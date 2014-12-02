@@ -82,7 +82,7 @@ namespace GHIElectronics.Gadgeteer
             socket.PWM7 = Cpu.PWMChannel.PWM_0;
             socket.PWM8 = Cpu.PWMChannel.PWM_1;
             socket.PWM9 = Cpu.PWMChannel.PWM_2;
-            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_1;
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;
@@ -104,7 +104,7 @@ namespace GHIElectronics.Gadgeteer
             socket.PWM7 = Cpu.PWMChannel.PWM_3;
             socket.PWM8 = Cpu.PWMChannel.PWM_4;
             socket.PWM9 = Cpu.PWMChannel.PWM_5;
-            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_1;
+            socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_2;
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_7;
             socket.AnalogInput5 = (Cpu.AnalogChannel)8;
