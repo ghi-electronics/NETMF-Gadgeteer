@@ -1,4 +1,6 @@
-﻿using GTM = Gadgeteer.Modules;
+﻿using System;
+using System.Threading;
+using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.SocketInterfaces;
 
 namespace Gadgeteer.Modules.GHIElectronics
@@ -23,17 +25,30 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <summary>
         /// Reads the alternating current value.
         /// </summary>
-        /// <returns>The AC reading.</returns>
-        public double ReadACCurrent()
-        {
-            double sum = 0.0;
+		/// <returns>The AC reading.</returns>
+		public double ReadDCCurrent()
+		{
+			return this.ReadACCurrent(25);
+		}
 
-            for (int i = 0; i < 400; i++)
-                sum += this.input.ReadProportion();
+		/// <summary>
+		/// Reads the alternating current value using an average of multiple samples.
+		/// </summary>
+		/// <param name="samples">The number of times to sample the sensor.</param>
+		/// <returns>The AC reading.</returns>
+		public double ReadACCurrent(int samples)
+		{
+			if (samples < 1) throw new ArgumentOutOfRangeException("samples", "samples must be at least one.");
 
-            sum /= 400;
+            var sum = 0.0;
 
-            return 21.2 * sum - 13.555;
+			for (int i = 0; i < samples; i++)
+				sum += Math.Abs(this.input.ReadVoltage() - 2.083);
+
+			sum /= samples;
+			sum /= 0.116;
+
+            return sum;
         }
 
         /// <summary>
@@ -41,23 +56,34 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// </summary>
         /// <returns>The DC reading.</returns>
         public double ReadDCCurrent()
-        {
-            double read = 0.0;
-            double calculation = 0.0;
-
-            for (int i = 0; i < 400; i++)
-            {
-                read = this.input.ReadProportion();
-                read = 21.3 * read - 13.555;
-                read *= read < 0 ? -1 : 1;
-
-                if (calculation < read)
-                    calculation = read;
-            }
-
-            calculation /= 1.41421356;
-
-            return calculation;
+		{
+			return this.ReadDCCurrent(25);
         }
+
+		/// <summary>
+		/// Reads the direct current value using an average of multiple samples.
+		/// </summary>
+		/// <param name="samples">The number of times to sample the sensor.</param>
+		/// <returns>The DC reading.</returns>
+		public double ReadDCCurrent(int samples)
+		{
+			if (samples < 1) throw new ArgumentOutOfRangeException("samples", "samples must be at least one.");
+
+			var sum = 0.0;
+
+			for (var i = 0; i < samples; i++)
+			{
+				sum += this.input.ReadVoltage();
+
+				Thread.Sleep(2);
+			}
+
+			sum /= samples;
+
+			sum -= 2.083;
+			sum /= 0.116;
+
+			return sum;
+		}
     }
 }
