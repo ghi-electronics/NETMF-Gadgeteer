@@ -26,7 +26,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Reads the alternating current value.
         /// </summary>
 		/// <returns>The AC reading.</returns>
-		public double ReadDCCurrent()
+		public double ReadACCurrent()
 		{
 			return this.ReadACCurrent(25);
 		}
