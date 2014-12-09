@@ -11,8 +11,6 @@ namespace Gadgeteer.Modules.GHIElectronics
     /// </summary>
     public class RotaryH1 : GTM.Module
     {
-        private delegate void SPIWriteRead(byte[] writeBuffer, byte[] readBuffer);
-
         private byte[] write1;
 		private byte[] write2;
 		private byte[] read2;
@@ -23,37 +21,23 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.DigitalOutput mosi;
         private GTI.DigitalOutput clock;
         private GTI.DigitalOutput cs;
-        private GTI.Spi spi;
-        private SPIWriteRead spiWriteRead;
 
 		/// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public RotaryH1(int socketNumber)
         {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported('Y', this);
 
             this.write1 = new byte[1];
             this.write2 = new byte[2];
             this.read2 = new byte[2];
             this.read4 = new byte[4];
 
-            if (socket.SupportsType('S'))
-            {
-                this.spi = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 5, 20, false, true, 1), GTI.SpiSharing.Shared, socket, GT.Socket.Pin.Six, this);
-                this.spiWriteRead = this.HardwareWriteRead;
-            }
-            else
-            {
-                socket.EnsureTypeIsSupported('Y', this);
-
-                this.cs = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
-                this.miso = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
-                this.mosi = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
-                this.clock = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
-
-                this.spiWriteRead = this.SoftwareWriteRead;
-            }
-
+            this.cs = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, true, this);
+            this.miso = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Eight, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+            this.mosi = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Seven, false, this);
+            this.clock = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Nine, false, this);
             this.enable = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Five, true, this);
             
 			this.Initialize();
@@ -107,7 +91,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
 			this.write1[0] = (byte)register;
 
-            this.spiWriteRead(this.write1, this.read2);
+			this.WriteRead(this.write1, this.read2);
 
 			return this.read2[1];
         }
@@ -116,7 +100,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             this.write1[0] = (byte)register;
 
-            this.spiWriteRead(this.write1, this.read4);
+			this.WriteRead(this.write1, this.read4);
 
             return (short)((this.read4[1] << 8) | this.read4[2]);
         }
@@ -125,7 +109,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             this.write1[0] = (byte)register;
 
-            this.spiWriteRead(this.write1, null);
+			this.WriteRead(this.write1, null);
 		}
 
         private void Write(Commands register, MDR0Modes command)
@@ -133,7 +117,7 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.write2[0] = (byte)register;
 			this.write2[1] = (byte)command;
 
-            this.spiWriteRead(this.write2, null);
+			this.WriteRead(this.write2, null);
 		}
 
         private void Write(Commands register, MDR1Modes command)
@@ -141,18 +125,10 @@ namespace Gadgeteer.Modules.GHIElectronics
             this.write2[0] = (byte)register;
             this.write2[1] = (byte)command;
 
-            this.spiWriteRead(this.write2, null);
+			this.WriteRead(this.write2, null);
         }
 
-        private void HardwareWriteRead(byte[] writeBuffer, byte[] readBuffer)
-        {
-            if (readBuffer == null)
-                this.spi.Write(writeBuffer);
-            else
-                this.spi.WriteRead(writeBuffer, readBuffer);
-        }
-
-        private void SoftwareWriteRead(byte[] writeBuffer, byte[] readBuffer)
+        private void WriteRead(byte[] writeBuffer, byte[] readBuffer)
         {
             int writeLength = writeBuffer.Length;
             int readLength = 0;
