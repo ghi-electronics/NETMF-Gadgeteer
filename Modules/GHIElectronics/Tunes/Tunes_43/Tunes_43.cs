@@ -312,7 +312,7 @@ namespace Gadgeteer.Modules.GHIElectronics
                 Thread.Sleep(note.Durartion);
             }
 
-            this.pwm.Set(100, 0);
+            this.pwm.Set(100.0, 0.0001);
         }
 	}
 }
