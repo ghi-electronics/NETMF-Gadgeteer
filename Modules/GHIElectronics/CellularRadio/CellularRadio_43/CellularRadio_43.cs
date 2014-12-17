@@ -4,6 +4,7 @@ using System.Collections;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
+using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
@@ -59,7 +60,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <summary>
 			/// Creates a new instance.
 			/// </summary>
-			public Sms() : this("", "", SmsState.StoredUnsent, DateTime.MinValue)
+			public Sms()
+				: this("", "", SmsState.StoredUnsent, DateTime.MinValue)
 			{
 
 			}
@@ -323,7 +325,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.powerOn = false;
 
-			var socket = Socket.GetSocket(socketNumber, true, this, null);
+			var socket = GT.Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('K', this);
 
 			this.buffer = new byte[1024];
@@ -331,7 +333,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.worker = null;
 			this.running = false;
 			this.pppEvent = new AutoResetEvent(false);
-			this.power = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, true, this);
+			this.power = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, true, this);
 			this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
 			this.serial.Handshake = Handshake.RequestToSend;
 			this.serial.Open();
@@ -355,14 +357,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.onGprsNetworkRegistrationChanged = this.OnGprsNetworkRegistrationChanged;
 			this.onSmsReceived = this.OnSmsReceived;
 			this.onIncomingCall = this.OnIncomingCall;
-			this.onSmsRequested = this.OnSmsRequested;
 			this.onPhoneActivityRequested = this.OnPhoneActivityRequested;
 			this.onContactRequested = this.OnContactRequested;
 			this.onClockRequested = this.OnClockRequested;
 			this.onImeiRequested = this.OnImeiRequested;
 			this.onSignalStrengthRequested = this.OnSignalStrengthRequested;
 			this.onOperatorRequested = this.OnOperatorRequested;
-			this.onSmsListRequested = this.OnSmsListRequested;
+			this.onSmsListReceived = this.OnSmsListReceived;
 			this.onCallEnded = this.OnCallEnded;
 			this.onCallConnected = this.OnCallConnected;
 			this.onGprsAttached = this.OnGprsAttached;
@@ -541,7 +542,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		}
 
 		/// <summary>
-		/// Requests to the message at the specified position. Message is returned in the SmsRequested event.
+		/// Requests to the message at the specified position. Message is returned in the SmsReceived event.
 		/// </summary>
 		/// <param name="position">The position in memory where the message is stored.</param>
 		/// <param name="markAsRead">Whether unread messages will be marked as read.</param>
@@ -1006,10 +1007,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 										smsList.Add(sms);
 									}
-								}
-								while (this.responseBuffer.Substring(0, 8) == "\r\n+CMGL:");
 
-								this.OnSmsListRequested(this, smsList);
+									Thread.Sleep(10);
+
+									this.ReadIn();
+								}
+								while (this.responseBuffer.Length >= 8 && this.responseBuffer.Substring(0, 8) == "\r\n+CMGL:");
+
+								this.OnSmsListReceived(this, (Sms[])smsList.ToArray(typeof(Sms)));
 
 								break;
 							#endregion
@@ -1041,7 +1046,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 									if (this.newMessages.Contains(sms.Index))
 										this.newMessages.Dequeue();
 
-									this.OnSmsRequested(this, sms);
+									this.OnSmsReceived(this, sms);
 								}
 
 								break;
@@ -1085,6 +1090,9 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 		private void ReadIn()
 		{
+			if (this.serial.BytesToRead == 0)
+				return;
+
 			var read = this.serial.Read(this.buffer, 0, this.buffer.Length);
 
 			for (var i = 0; i < read; i++)
@@ -1107,7 +1115,8 @@ namespace Gadgeteer.Modules.GHIElectronics
 				if (this.serial.BytesToRead == 0)
 					return false;
 
-				do {
+				do
+				{
 					this.ReadIn();
 
 					Thread.Sleep(10);
@@ -1138,14 +1147,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 		private GprsNetworkRegistrationChangedHandler onGprsNetworkRegistrationChanged;
 		private SmsReceivedHandler onSmsReceived;
 		private IncomingCallHandler onIncomingCall;
-		private SmsRequestedHandler onSmsRequested;
 		private PhoneActivityRequestedHandler onPhoneActivityRequested;
 		private ContactOpenRequested onContactRequested;
 		private ClockRequestedHandler onClockRequested;
 		private ImeiRequestedHandler onImeiRequested;
 		private SignalStrengthRequestedHandler onSignalStrengthRequested;
 		private OperatorRequestedHandler onOperatorRequested;
-		private SmsListRequestedHandler onSmsListRequested;
+		private SmsListRequestedHandler onSmsListReceived;
 		private CallEndedHandler onCallEnded;
 		private CallConnectedHandler onCallConnected;
 		private GprsAttachedHandler onGprsAttached;
@@ -1239,7 +1247,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		/// <param name="sender">The object that raised the event.</param>
 		/// <param name="smsList">Strength of the signal</param>
-		public delegate void SmsListRequestedHandler(CellularRadio sender, ArrayList smsList);
+		public delegate void SmsListRequestedHandler(CellularRadio sender, Sms[] smsList);
 
 		/// <summary>
 		/// Represents the delegate used for the CallEnded event.
@@ -1288,11 +1296,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 		public event IncomingCallHandler IncomingCall;
 
 		/// <summary>
-		/// Raised when an SMS is requested.
-		/// </summary>
-		public event SmsRequestedHandler SmsRequested;
-
-		/// <summary>
 		/// Raised when the module receives a phone activity message.
 		/// </summary>
 		public event PhoneActivityRequestedHandler PhoneActivityRequested;
@@ -1325,7 +1328,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <summary>
 		/// Raised when the sms list is requested.
 		/// </summary>
-		public event SmsListRequestedHandler SmsListRequested;
+		public event SmsListRequestedHandler SmsListReceived;
 
 		/// <summary>
 		/// Raised when the call ends.
@@ -1372,12 +1375,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.IncomingCall(sender, caller);
 		}
 
-		private void OnSmsRequested(CellularRadio sender, Sms message)
-		{
-			if (Program.CheckAndInvoke(this.SmsRequested, this.onSmsRequested, sender, message))
-				this.SmsRequested(sender, message);
-		}
-
 		private void OnPhoneActivityRequested(CellularRadio sender, PhoneActivity activity)
 		{
 			if (Program.CheckAndInvoke(this.PhoneActivityRequested, this.onPhoneActivityRequested, sender, activity))
@@ -1414,10 +1411,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.OperatorRequested(sender, operatorName);
 		}
 
-		private void OnSmsListRequested(CellularRadio sender, ArrayList smsList)
+		private void OnSmsListReceived(CellularRadio sender, Sms[] smsList)
 		{
-			if (Program.CheckAndInvoke(this.SmsListRequested, this.onSmsListRequested, sender, smsList))
-				this.SmsListRequested(sender, smsList);
+			if (Program.CheckAndInvoke(this.SmsListReceived, this.onSmsListReceived, sender, smsList))
+				this.SmsListReceived(sender, smsList);
 		}
 
 		private void OnCallEnded(CellularRadio sender, CallEndReason reason)
