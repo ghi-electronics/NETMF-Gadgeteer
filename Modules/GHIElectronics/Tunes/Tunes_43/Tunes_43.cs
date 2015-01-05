@@ -166,7 +166,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <summary>
 			/// The duration of the note.
 			/// </summary>
-            public int Durartion { get; set; }
+            public int Duration { get; set; }
 
 			/// <summary>
 			/// Constructs a new instance.
@@ -175,10 +175,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 			/// <param name="duration">The duration that the note should be played in milliseconds.</param>
 			public MusicNote(Tone tone, int duration)
 			{
-                if (duration < 1) throw new ArgumentOutOfRangeException("duration", "duration must be positive.");
+                if (duration < 1 && duration != Timeout.Infinite) throw new ArgumentOutOfRangeException("duration", "duration must be positive.");
 
 				this.Tone = tone;
-				this.Durartion = duration;
+				this.Duration = duration;
 			}
 		}
 
@@ -270,15 +270,18 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// </summary>
 		public void Stop()
 		{
-            lock (this.syncRoot)
-            {
-                if (this.worker != null && this.worker.IsAlive)
-                    this.worker.Abort();
+			if (!this.IsPlaying)
+				return;
 
-                this.playlist.Clear();
+			lock (this.syncRoot)
+				this.playlist.Clear();
 
-                this.pwm.Set(100, 0);
-            }
+			this.worker.Join(250);
+
+            if (this.worker != null && this.worker.IsAlive)
+                this.worker.Abort();
+
+            this.pwm.Set(100, 0);
 		}
 
         /// <summary>
@@ -309,7 +312,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
                 this.pwm.Set((int)note.Tone.Frequency, 0.5);
 
-                Thread.Sleep(note.Durartion);
+                Thread.Sleep(note.Duration);
             }
 
             this.pwm.Set(100.0, 0.0001);

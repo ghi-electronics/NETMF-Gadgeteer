@@ -20,7 +20,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
         public MotorDriverL298(int socketNumber)
         {
-
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
             socket.EnsureTypeIsSupported('P', this);
 
