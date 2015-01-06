@@ -156,7 +156,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// <param name="writebuffer">Byte to write.</param>
         public void WriteRegister(byte address, byte writebuffer)
         {
-            WriteParams((byte)(DaisyLinkOffset + address), (byte)writebuffer);
+			Write((byte)(DaisyLinkOffset + address), (byte)writebuffer);
         }
 
         /// <summary>

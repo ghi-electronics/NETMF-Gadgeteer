@@ -30,7 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			if (bitmap.Length != 8) throw new ArgumentException("bitmap.Length must be 8.", "bitmap");
 
 			for (int i = 0; i < 8; i++)
-				this.WriteParams((byte)(LEDMatrix.DaisyLinkOffset + i), (byte)bitmap[i]);
+				this.Write((byte)(LEDMatrix.DaisyLinkOffset + i), (byte)bitmap[i]);
         }
     }
 }
