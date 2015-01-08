@@ -10,8 +10,8 @@
                   Type="Gadgeteer.Modules.GHIElectronics.HD44780"
                   ModuleSuppliesPower="false"
                   Image="Image.jpg"
-                  BoardHeight="37"
-                  BoardWidth="87"
+                  BoardHeight="18.5"
+                  BoardWidth="42"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
                   HelpUrl="http://www.ghielectronics.com/catalog/product/422">
@@ -21,7 +21,7 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="84" Top="19" Orientation="180" ConstructorOrder="1" TypesLabel="Y">
+        <Socket Left="21.3" Top="15" Orientation="180" ConstructorOrder="1" TypesLabel="Y">
           <Types>
             <Type>Y</Type>
           </Types>
