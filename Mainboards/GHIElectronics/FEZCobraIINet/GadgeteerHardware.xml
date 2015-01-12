@@ -6,7 +6,7 @@
             Name="FEZ Cobra II Net"
             Type="GHIElectronics.Gadgeteer.FEZCobraIINet"
             HardwareVersion="1.0"
-            Image="Resources\Image.jpg"
+            Image="Image.jpg"
             BoardWidth="112"
             BoardHeight="126"
             MinimumGadgeteerCoreVersion="2.43.800"

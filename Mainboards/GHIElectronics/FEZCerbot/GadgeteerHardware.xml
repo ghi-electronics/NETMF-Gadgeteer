@@ -6,7 +6,7 @@
             Name="FEZ Cerbot"
             Type="GHIElectronics.Gadgeteer.FEZCerbot"
             HardwareVersion="1.3"
-            Image="Resources\Image.jpg"
+            Image="Image.jpg"
             BoardWidth="150"
             BoardHeight="90"
             MinimumGadgeteerCoreVersion="2.43.800"

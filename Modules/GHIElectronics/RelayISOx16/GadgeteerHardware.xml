@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
@@ -14,7 +14,7 @@
                   BoardWidth="74"
                   HardwareVersion="1.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
-                  HelpUrl="http://www.ghielectronics.com/catalog/product/464">
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/391">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RelayISOx16"/>

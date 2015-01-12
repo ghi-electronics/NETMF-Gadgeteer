@@ -6,7 +6,7 @@
             Name="FEZ Cobra II Eco Extender"
             Type="GHIElectronics.Gadgeteer.FEZCobraIIEcoExtender"
             HardwareVersion="1.1"
-            Image="Resources\Image.jpg"
+            Image="Image.jpg"
             BoardWidth="112"
             BoardHeight="122"
             MinimumGadgeteerCoreVersion="2.43.800"
