@@ -15,13 +15,14 @@ namespace Gadgeteer.Modules.GHIElectronics
         private GTI.InterruptInput input;
 		private double offsetX;
 		private double offsetY;
+		private int samples;
 
         /// <summary>Constructs a new instance.</summary>
         /// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
         public Joystick(int socketNumber)
         {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
+            socket.EnsureTypeIsSupported('A', this);
 
             this.inputX = GTI.AnalogInputFactory.Create(socket, Socket.Pin.Four, this);
             this.inputY = GTI.AnalogInputFactory.Create(socket, Socket.Pin.Five, this);
@@ -30,6 +31,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.offsetX = 0;
 			this.offsetY = 0;
+			this.samples = 5;
         }
 
         /// <summary>
@@ -43,17 +45,35 @@ namespace Gadgeteer.Modules.GHIElectronics
             }
         }
 
+		/// <summary>
+		/// The number of times to sample the input before returning a value.
+		/// </summary>
+		public int ReadSamples
+		{
+			get
+			{
+				return this.samples;
+			}
+			set
+			{
+				if (value <= 0) throw new ArgumentOutOfRangeException("value", "value must be positive.");
+
+				this.samples = value;
+			}
+		}
+
         /// <summary>
         /// Represents the state of the <see cref="Joystick"/> object.
         /// </summary>
         public enum ButtonState
         {
             /// <summary>
-            /// The state of Joystick is Pressed.
+            /// The state of Joystick is pressed.
             /// </summary>
             Pressed = 0,
+
             /// <summary>
-            /// The state of Joystick is Released.
+            /// The state of Joystick is released.
             /// </summary>
             Released = 1
         }
@@ -138,10 +158,10 @@ namespace Gadgeteer.Modules.GHIElectronics
 		{
 			double total = 0;
 
-			for (int i = 0; i < 10; i++)
+			for (int i = 0; i < this.samples; i++)
 				total += input.ReadProportion();
 
-			return total / 10;
+			return total / this.samples;
 		}
     }
 }
