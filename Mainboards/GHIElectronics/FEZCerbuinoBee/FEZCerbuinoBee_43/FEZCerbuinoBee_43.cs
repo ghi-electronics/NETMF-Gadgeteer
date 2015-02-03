@@ -173,7 +173,7 @@ namespace GHIElectronics.Gadgeteer
         /// <returns>The volume names.</returns>
         public override string[] GetStorageDeviceVolumeNames()
         {
-            return new string[] { "SD"/*, "USB"*/ };
+            return new string[] { "SD", "USB" };
         }
 
         /// <summary>
