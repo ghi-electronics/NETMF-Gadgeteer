@@ -2,12 +2,12 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="Button"
-                  UniqueId="8367136d-c1d7-41ae-89c7-30ed035b758b"
+    <ModuleDefinition Name="USB Client EDP"
+                  UniqueId="E0602508-5C54-4D3B-883E-F55D3CCA49B1"
                   Manufacturer="GHI Electronics"
-                  Description="A Button module"
-                  InstanceName="button"
-                  Type="Gadgeteer.Modules.GHIElectronics.Button"
+                  Description="A USBClientEDP module"
+                  InstanceName="usbClientEDP"
+                  Type="Gadgeteer.Modules.GHIElectronics.USBClientEDP"
                   ModuleSuppliesPower="false"
                   Image="Image.jpg"
                   BoardHeight="32"
@@ -17,8 +17,8 @@
                   HelpUrl="http://www.ghielectronics.com/catalog/product/525">
 
       <Assemblies>
-        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.Button"/>
-        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.Button"/>
+        <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.USBClientEDP"/>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.USBClientEDP"/>
       </Assemblies>
 
       <Sockets>
