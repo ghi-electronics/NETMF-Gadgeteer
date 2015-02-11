@@ -115,7 +115,9 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void Clear()
         {
             this.SendCommand(CharacterDisplay.CLR_DISP);
-            
+
+			this.currentRow = 0;
+
             Thread.Sleep(2);
         }
 
@@ -125,6 +127,8 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void CursorHome()
         {
             this.SendCommand(CharacterDisplay.CUR_HOME);
+
+			this.currentRow = 0;
             
             Thread.Sleep(2);
         }
