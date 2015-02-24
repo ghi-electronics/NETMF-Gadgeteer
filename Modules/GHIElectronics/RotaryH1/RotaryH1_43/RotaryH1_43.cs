@@ -61,6 +61,14 @@ namespace Gadgeteer.Modules.GHIElectronics
 			return ((this.GetStatus() & 0x02) >> 1) > 0 ? Direction.CounterClockwise : Direction.Clockwise;
 		}
 
+		/// <summary>
+		/// Resets the count on the module to 0.
+		/// </summary>
+		public void ResetCount()
+		{
+			this.Write(Commands.LS7366_CLEAR | Commands.LS7366_CNTR);
+		}
+
         private void Initialize()
         {
             this.Write(Commands.LS7366_CLEAR | Commands.LS7366_MDR0);
