@@ -49,16 +49,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 		/// <returns>An integer representing the count.</returns>
 		public int GetCount()
 		{
-            int count = this.Read2(Commands.LS7366_READ | Commands.LS7366_CNTR);
-
-			if ((this.GetStatus() & 0x01) > 0)
-			{
-				count = ~count;
-				count &= 0x7FFF;
-				count *= -1;
-			}
-
-			return count;
+			return this.Read2(Commands.LS7366_READ | Commands.LS7366_CNTR);
 		}
 
 		/// <summary>
