@@ -361,7 +361,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 			private const byte PERIOD_REGISTER = 0x2A;
 			private const byte PULSE_WIDTH_REGISTER = 0x2B;
 
-			private const byte CLOCK_SOURCE = 0x3;
+			private const byte CLOCK_SOURCE_32KHZ = 0x00;
+			private const byte CLOCK_SOURCE_24MHZ = 0x01;
+			private const byte CLOCK_SOURCE_1MHZ = 0x02;
+			private const byte CLOCK_SOURCE_94KHZ = 0x03;
+			private const byte CLOCK_SOURCE_367HZ = 0x04;
 
 			private GTI.I2CBus io60Chip;
 			private GTI.InterruptInput interrupt;
@@ -517,14 +521,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 					this.WriteDigital(pin, true);
 
-					byte pwm = 255;
-					for (var i = 0; i < 30; i += 2)
-						if (this.pwms[i] == pin)
-							pwm = this.pwms[i + 1];
-
-					this.WriteRegister(IO60P16.PWM_SELECT_REGISTER, pwm);
-                    this.WriteRegister(IO60P16.PWM_CONFIG, IO60P16.CLOCK_SOURCE); //93.75KHz clock
-
                     val = this.ReadRegister(IO60P16.PIN_STRONG_DRIVE);
                     this.WriteRegister(IO60P16.PIN_STRONG_DRIVE, (byte)(val | mask));
 				}
@@ -556,9 +552,6 @@ namespace Gadgeteer.Modules.GHIElectronics
 					this.WriteRegister(IO60P16.INTERRUPT_MASK_REGISTER, (byte)(val | mask));
 			}
 
-			//We're using the 93.75KHz clock source because it gives a good resolution around the 1KHz frequency
-			//while still allowing the user to select frequencies such as 10KHz, but with reduced duty cycle
-			//resolution.
 			public void SetPWM(byte pin, double frequency, double dutyCycle)
 			{
 				byte pwm = 255;
@@ -566,12 +559,47 @@ namespace Gadgeteer.Modules.GHIElectronics
 					if (this.pwms[i] == pin)
 						pwm = this.pwms[i + 1];
 
-				this.WriteRegister((byte)(IO60P16.PWM_SELECT_REGISTER), pwm); // (byte)((pin % 8) + (this.getPort(pin) - 6) * 8));
+				var period = 0.0;
+				byte clockSource = 0;
 
-				byte period = (byte)(93750 / frequency);
+				if (frequency <= 1.45)
+				{
+					throw new ArgumentOutOfRangeException("frequency", "The frequency is too low.");
+				}
+				else if (frequency <= 125.5)
+				{
+					period = 367.6 / frequency;
+					clockSource = IO60P16.CLOCK_SOURCE_367HZ;
+				}
+				else if (frequency <= 367.7)
+				{
+					period = 32000.0 / frequency;
+					clockSource = IO60P16.CLOCK_SOURCE_32KHZ;
+				}
+				else if (frequency <= 5882.4)
+				{
+					period = 93750.0 / frequency;
+					clockSource = IO60P16.CLOCK_SOURCE_94KHZ;
+				}
+				else if (frequency <= 94117.7)
+				{
+					period = 1500000.0 / frequency;
+					clockSource = IO60P16.CLOCK_SOURCE_1MHZ;
+				}
+				else if (frequency <= 12000000.0)
+				{
+					period = 24000000.0 / frequency;
+					clockSource = IO60P16.CLOCK_SOURCE_24MHZ;
+				}
+				else
+				{
+					throw new ArgumentOutOfRangeException("frequency", "The frequency is too high.");
+				}
 
-				this.WriteRegister(IO60P16.PERIOD_REGISTER, period);
-				this.WriteRegister((byte)(IO60P16.PULSE_WIDTH_REGISTER), (byte)(period * dutyCycle));
+				this.WriteRegister(IO60P16.PWM_SELECT_REGISTER, pwm);
+				this.WriteRegister(IO60P16.PWM_CONFIG, clockSource);
+				this.WriteRegister(IO60P16.PERIOD_REGISTER, (byte)period);
+				this.WriteRegister((byte)(IO60P16.PULSE_WIDTH_REGISTER), (byte)((byte)period * dutyCycle));
 			}
 
 			public bool ReadDigital(byte pin)
