@@ -56,7 +56,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         {
             get
             {
-                return data.Length;
+                return this.data.Length;
             }
         }
 
@@ -128,7 +128,7 @@ namespace Gadgeteer.Modules.GHIElectronics
         public void SetPin(int board, int pin, bool value)
         {
             if (this.data == null) throw new InvalidOperationException("You must set Boards first.");
-            if (board * 4 > data.Length) throw new ArgumentException("board", "The board is out of range.");
+            if (board * 4 > this.data.Length) throw new ArgumentException("board", "The board is out of range.");
 
             int index = (board - 1) * 4 + pin / 8;
 

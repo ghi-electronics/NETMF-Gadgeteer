@@ -14,7 +14,8 @@ namespace GHIElectronics.Gadgeteer
 {
     /// <summary>
     /// The mainboard class for the G400HDR Breakout.
-    /// </summary>
+	/// </summary>
+	[Obsolete]
     public class G400HDRBreakout : GT.Mainboard
     {
         private InterruptPort ldr0;
@@ -104,7 +105,7 @@ namespace GHIElectronics.Gadgeteer
             
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
-            socket.SupportedTypes = new char[] { 'S', 'U', 'Y' };
+            socket.SupportedTypes = new char[] { 'C', 'S', 'U', 'Y' };
             socket.CpuPins[3] = G400.PC31;
             socket.CpuPins[4] = G400.PA5; 
             socket.CpuPins[5] = G400.PA6; 
@@ -119,7 +120,7 @@ namespace GHIElectronics.Gadgeteer
             
             
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
-            socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
+            socket.SupportedTypes = new char[] { 'C', 'I', 'U', 'X' };
             socket.CpuPins[3] = G400.PA26;
             socket.CpuPins[4] = G400.PA10;
             socket.CpuPins[5] = G400.PA9; 

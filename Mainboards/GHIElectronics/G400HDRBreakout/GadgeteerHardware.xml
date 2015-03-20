@@ -57,6 +57,7 @@
 
         <ProvidedSocket Label="6" Left="4" Top="6" Orientation="0" ConstructorParameter="6">
           <Types>
+            <Type>C</Type>
             <Type>S</Type>
             <Type>U</Type>
             <Type>Y</Type>
@@ -70,6 +71,7 @@
 
         <ProvidedSocket Label="7" Left="4" Top="20" Orientation="0" ConstructorParameter="7">
           <Types>
+            <Type>C</Type>
             <Type>I</Type>
             <Type>U</Type>
             <Type>X</Type>
