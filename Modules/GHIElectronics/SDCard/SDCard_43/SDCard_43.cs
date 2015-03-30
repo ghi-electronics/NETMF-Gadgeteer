@@ -5,169 +5,134 @@ using System.Threading;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// An SDCard module for Microsoft .NET Gadgeteer
-    /// </summary>
-    public class SDCard : GTM.Module
-    {
-        private GTI.InterruptInput cardDetect;
-        private StorageDevice device;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>An SDCard module for Microsoft .NET Gadgeteer</summary>
+	public class SDCard : GTM.Module {
+		private GTI.InterruptInput cardDetect;
+		private StorageDevice device;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
-        public SDCard(int socketNumber)
-        {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported('F', this);
+		private MountedEventHandler onMounted;
 
-            socket.ReservePin(Socket.Pin.Four, this);
-            socket.ReservePin(Socket.Pin.Five, this);
-            socket.ReservePin(Socket.Pin.Six, this);
-            socket.ReservePin(Socket.Pin.Seven, this);
-            socket.ReservePin(Socket.Pin.Eight, this);
-            socket.ReservePin(Socket.Pin.Nine, this);
+		private UnmountedEventHandler onUnmounted;
 
-            RemovableMedia.Insert += this.OnInsert;
-            RemovableMedia.Eject += this.OnEject;
+		/// <summary>Represents the delegate that is used for the Mounted event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="device">A storage device that can be used to access the SD card.</param>
+		public delegate void MountedEventHandler(SDCard sender, StorageDevice device);
 
-            this.IsCardMounted = false;
+		/// <summary>Represents the delegate that is used for the Unmounted event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void UnmountedEventHandler(SDCard sender, EventArgs e);
 
-            this.cardDetect = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
-            this.cardDetect.Interrupt += this.OnCardDetect;
+		/// <summary>Raised when the file system of the SD card is mounted.</summary>
+		public event MountedEventHandler Mounted;
 
-            if (this.IsCardInserted)
-                this.Mount();
-        }
+		/// <summary>Raised when the file system of the SD card is unmounted.</summary>
+		public event UnmountedEventHandler Unmounted;
 
-        /// <summary>
-        /// Whether or not an SD card is inserted.
-        /// </summary>
-        public bool IsCardInserted
-        {
-            get { return !this.cardDetect.Read(); }
-        }
+		/// <summary>Whether or not an SD card is inserted.</summary>
+		public bool IsCardInserted {
+			get { return !this.cardDetect.Read(); }
+		}
 
-        /// <summary>
-        /// Whether or not the SD card is mounted.
-        /// </summary>
-        public bool IsCardMounted { get; private set; }
+		/// <summary>Whether or not the SD card is mounted.</summary>
+		public bool IsCardMounted { get; private set; }
 
-        /// <summary>
-        /// The StorageDevice for the currently mounted SD card.
-        /// </summary>
-        public StorageDevice StorageDevice
-        {
-            get { return this.device; }
-        }
+		/// <summary>The StorageDevice for the currently mounted SD card.</summary>
+		public StorageDevice StorageDevice {
+			get { return this.device; }
+		}
 
-        /// <summary>
-        /// Attempts to mount the card.
-        /// </summary>
-        /// <returns>Whether or not the card was successfully mounted.</returns>
-        public bool Mount()
-        {
-            if (this.IsCardMounted) throw new InvalidOperationException("The card is already mounted.");
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
+		public SDCard(int socketNumber) {
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported('F', this);
 
-            return Mainboard.MountStorageDevice("SD");
-        }
+			socket.ReservePin(Socket.Pin.Four, this);
+			socket.ReservePin(Socket.Pin.Five, this);
+			socket.ReservePin(Socket.Pin.Six, this);
+			socket.ReservePin(Socket.Pin.Seven, this);
+			socket.ReservePin(Socket.Pin.Eight, this);
+			socket.ReservePin(Socket.Pin.Nine, this);
 
-        /// <summary>
-        /// Attempts to unmount the card.
-        /// </summary>
-        /// <returns>Whether or not the card was successfully unmounted.</returns>
-        public bool Unmount()
-        {
-            if (!this.IsCardMounted) throw new InvalidOperationException("The card is already unmounted.");
+			RemovableMedia.Insert += this.OnInsert;
+			RemovableMedia.Eject += this.OnEject;
 
-            return !Mainboard.UnmountStorageDevice("SD");
-        }
+			this.IsCardMounted = false;
 
-        private void OnCardDetect(GTI.InterruptInput sender, bool value)
-        {
-            Thread.Sleep(500);
+			this.cardDetect = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.On, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+			this.cardDetect.Interrupt += this.OnCardDetect;
 
-            if (this.IsCardInserted && !this.IsCardMounted)
-                this.Mount();
+			if (this.IsCardInserted)
+				this.Mount();
+		}
 
-            if (!this.IsCardInserted && this.IsCardMounted)
-                this.Unmount();
-        }
+		/// <summary>Attempts to mount the card.</summary>
+		/// <returns>Whether or not the card was successfully mounted.</returns>
+		public bool Mount() {
+			if (this.IsCardMounted) throw new InvalidOperationException("The card is already mounted.");
 
-        private void OnInsert(object sender, MediaEventArgs e)
-        {
-            if (string.Compare(e.Volume.Name, "SD") == 0)
-            {
-                if (e.Volume.FileSystem != null)
-                {
-                    this.device = new StorageDevice(e.Volume);
-                    this.IsCardMounted = true;
-                    this.OnMounted(this, this.device);
-                }
-                else
-                {
-                    this.device = null;
-                    this.IsCardMounted = false;
-                    Mainboard.UnmountStorageDevice("SD");
-                    this.ErrorPrint("The SD card does not have a valid filesystem.");
-                }
-            }
-        }
+			return Mainboard.MountStorageDevice("SD");
+		}
 
-        private void OnEject(object sender, MediaEventArgs e)
-        {
-            if (string.Compare(e.Volume.Name, "SD") == 0)
-            {
-                this.device = null;
-                this.IsCardMounted = false;
-                this.OnUnmounted(this, null);
-            }
-        }
+		/// <summary>Attempts to unmount the card.</summary>
+		/// <returns>Whether or not the card was successfully unmounted.</returns>
+		public bool Unmount() {
+			if (!this.IsCardMounted) throw new InvalidOperationException("The card is already unmounted.");
 
-        /// <summary>
-        /// Represents the delegate that is used for the Mounted event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="device">A storage device that can be used to access the SD card.</param>
-        public delegate void MountedEventHandler(SDCard sender, StorageDevice device);
+			return !Mainboard.UnmountStorageDevice("SD");
+		}
 
-        /// <summary>
-        /// Represents the delegate that is used for the Unmounted event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void UnmountedEventHandler(SDCard sender, EventArgs e);
+		private void OnCardDetect(GTI.InterruptInput sender, bool value) {
+			Thread.Sleep(500);
 
-        /// <summary>
-        /// Raised when the file system of the SD card is mounted.
-        /// </summary>
-        public event MountedEventHandler Mounted;
+			if (this.IsCardInserted && !this.IsCardMounted)
+				this.Mount();
 
-        /// <summary>
-        /// Raised when the file system of the SD card is unmounted.
-        /// </summary>
-        public event UnmountedEventHandler Unmounted;
+			if (!this.IsCardInserted && this.IsCardMounted)
+				this.Unmount();
+		}
 
-        private MountedEventHandler onMounted;
-        private UnmountedEventHandler onUnmounted;
+		private void OnInsert(object sender, MediaEventArgs e) {
+			if (string.Compare(e.Volume.Name, "SD") == 0) {
+				if (e.Volume.FileSystem != null) {
+					this.device = new StorageDevice(e.Volume);
+					this.IsCardMounted = true;
+					this.OnMounted(this, this.device);
+				}
+				else {
+					this.device = null;
+					this.IsCardMounted = false;
+					Mainboard.UnmountStorageDevice("SD");
+					this.ErrorPrint("The SD card does not have a valid filesystem.");
+				}
+			}
+		}
 
-        private void OnMounted(SDCard sender, StorageDevice device)
-        {
-            if (this.onMounted == null)
-                this.onMounted = this.OnMounted;
+		private void OnEject(object sender, MediaEventArgs e) {
+			if (string.Compare(e.Volume.Name, "SD") == 0) {
+				this.device = null;
+				this.IsCardMounted = false;
+				this.OnUnmounted(this, null);
+			}
+		}
 
-            if (Program.CheckAndInvoke(this.Mounted, this.onMounted, sender, device))
-                this.Mounted(sender, device);
-        }
+		private void OnMounted(SDCard sender, StorageDevice device) {
+			if (this.onMounted == null)
+				this.onMounted = this.OnMounted;
 
-        private void OnUnmounted(SDCard sender, EventArgs e)
-        {
-            if (this.onUnmounted == null)
-                this.onUnmounted = this.OnUnmounted;
+			if (Program.CheckAndInvoke(this.Mounted, this.onMounted, sender, device))
+				this.Mounted(sender, device);
+		}
 
-            if (Program.CheckAndInvoke(this.Unmounted, this.onUnmounted, sender, e))
-                this.Unmounted(sender, e);
-        }
-    }
+		private void OnUnmounted(SDCard sender, EventArgs e) {
+			if (this.onUnmounted == null)
+				this.onUnmounted = this.OnUnmounted;
+
+			if (Program.CheckAndInvoke(this.Unmounted, this.onUnmounted, sender, e))
+				this.Unmounted(sender, e);
+		}
+	}
 }

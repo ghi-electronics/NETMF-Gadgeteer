@@ -7,262 +7,206 @@ using System;
 using System.Collections;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A USBHost module for Microsoft .NET Gadgeteer
-    /// </summary>
-    public class USBHost : GTM.Module
-    {
-        private static bool firstHostModule;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A USBHost module for Microsoft .NET Gadgeteer</summary>
+	public class USBHost : GTM.Module {
+		private static bool firstHostModule;
 
-        private StorageDevice massStorageDevice;
-        private Keyboard connectedKeyboard;
-        private Mouse connectedMouse;
+		private StorageDevice massStorageDevice;
+		private Keyboard connectedKeyboard;
+		private Mouse connectedMouse;
 
-        static USBHost()
-        {
-            USBHost.firstHostModule = true;
-        }
+		private MassStorageMountedEventHandler onMassStorageMounted;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
-        public USBHost(int socketNumber)
-        {
-            if (!USBHost.firstHostModule) throw new InvalidOperationException("Only one USB host module may be connected in the designer at a time. If you have multiple host modules, just connect one of the modules in the designer. It will receive the events for both modules.");
+		private MassStorageUnmountedEventHandler onMassStorageUnmounted;
 
-            USBHost.firstHostModule = false;
+		private MouseConnectedEventHandler onMouseConnected;
 
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported('H', this);
+		private KeyboardConnectedEventHandler onKeyboardConnected;
 
-            socket.ReservePin(Socket.Pin.Three, this);
-            socket.ReservePin(Socket.Pin.Four, this);
-            socket.ReservePin(Socket.Pin.Five, this);
+		/// <summary>Represents the delegate that is used for the MassStorageMounted event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="device">A storage device that can be used to access the SD card.</param>
+		public delegate void MassStorageMountedEventHandler(USBHost sender, StorageDevice device);
 
-            this.IsMassStorageConnected = false;
-            this.IsMassStorageMounted = false;
+		/// <summary>Represents the delegate that is used for the MassStorageUnmounted event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void MassStorageUnmountedEventHandler(USBHost sender, EventArgs e);
 
-            RemovableMedia.Insert += this.OnInsert;
-            RemovableMedia.Eject += this.OnEject;
+		/// <summary>Represents the delegate that is used for the MouseConnected event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="mouse">The object associated with the event.</param>
+		public delegate void MouseConnectedEventHandler(USBHost sender, Mouse mouse);
 
-            Controller.MouseConnected += (a, b) =>
-            {
-                this.connectedMouse = b;
-                this.OnMouseConnected(this, b);
+		/// <summary>Represents the delegate that is used to handle the KeyboardConnected event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="keyboard">The object associated with the event.</param>
+		public delegate void KeyboardConnectedEventHandler(USBHost sender, Keyboard keyboard);
 
-                b.Disconnected += (c, d) => this.connectedMouse = null;
-            };
+		/// <summary>Raised when the file system of the mass storage device is mounted.</summary>
+		public event MassStorageMountedEventHandler MassStorageMounted;
 
-            Controller.KeyboardConnected += (a, b) =>
-            {
-                this.connectedKeyboard = b;
-                this.OnKeyboardConnected(this, b);
+		/// <summary>Raised when the file system of the mass storage device is unmounted.</summary>
+		public event MassStorageUnmountedEventHandler MassStorageUnmounted;
 
-                b.Disconnected += (c, d) => this.connectedKeyboard = null;
-            };
+		/// <summary>Raised when a mouse is connected.</summary>
+		public event MouseConnectedEventHandler MouseConnected;
 
-            Controller.MassStorageConnected += (a, b) =>
-            {
-                this.IsMassStorageConnected = true;
+		/// <summary>Raised when a keyboard is connected.</summary>
+		public event KeyboardConnectedEventHandler KeyboardConnected;
 
-                if (!this.IsMassStorageMounted)
-                    this.MountMassStorage();
+		/// <summary>The current connected keyboard.</summary>
+		public Keyboard ConnectedKeyboard {
+			get { return this.connectedKeyboard; }
+		}
 
-                b.Disconnected += (c, d) =>
-                {
-                    this.IsMassStorageConnected = false;
+		/// <summary>The current connected mouse.</summary>
+		public Mouse ConnectedMouse {
+			get { return this.connectedMouse; }
+		}
 
-                    if (this.IsMassStorageMounted)
-                        this.UnmountMassStorage();
-                };
-            };
-        }
+		/// <summary>The StorageDevice for the currently mounted mass storage device.</summary>
+		public StorageDevice MassStorageDevice {
+			get { return this.massStorageDevice; }
+		}
 
-        /// <summary>
-        /// The current connected keyboard.
-        /// </summary>
-        public Keyboard ConnectedKeyboard
-        {
-            get { return this.connectedKeyboard; }
-        }
+		/// <summary>Whether or not the keyboard is connected.</summary>
+		public bool IsKeyboardConnected { get { return this.connectedKeyboard != null; } }
 
-        /// <summary>
-        /// The current connected mouse.
-        /// </summary>
-        public Mouse ConnectedMouse
-        {
-            get { return this.connectedMouse; }
-        }
+		/// <summary>Whether or not the mouse is connected.</summary>
+		public bool IsMouseConnected { get { return this.connectedMouse != null; } }
 
-        /// <summary>
-        /// The StorageDevice for the currently mounted mass storage device.
-        /// </summary>
-        public StorageDevice MassStorageDevice
-        {
-            get { return this.massStorageDevice; }
-        }
+		/// <summary>Whether or not the mass storage device is connected.</summary>
+		public bool IsMassStorageConnected { get; private set; }
 
-        /// <summary>
-        /// Whether or not the keyboard is connected.
-        /// </summary>
-        public bool IsKeyboardConnected { get { return this.connectedKeyboard != null; } }
+		/// <summary>Whether or not the mass storage device is mounted.</summary>
+		public bool IsMassStorageMounted { get; private set; }
 
-        /// <summary>
-        /// Whether or not the mouse is connected.
-        /// </summary>
-        public bool IsMouseConnected { get { return this.connectedMouse != null; } }
+		static USBHost() {
+			USBHost.firstHostModule = true;
+		}
 
-        /// <summary>
-        /// Whether or not the mass storage device is connected.
-        /// </summary>
-        public bool IsMassStorageConnected { get; private set; }
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The mainboard socket that has the module plugged into it.</param>
+		public USBHost(int socketNumber) {
+			if (!USBHost.firstHostModule) throw new InvalidOperationException("Only one USB host module may be connected in the designer at a time. If you have multiple host modules, just connect one of the modules in the designer. It will receive the events for both modules.");
 
-        /// <summary>
-        /// Whether or not the mass storage device is mounted.
-        /// </summary>
-        public bool IsMassStorageMounted { get; private set; }
+			USBHost.firstHostModule = false;
 
-        /// <summary>
-        /// Attempts to mount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully mounted.</returns>
-        public bool MountMassStorage()
-        {
-            if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
-            if (!this.IsMassStorageConnected) throw new InvalidOperationException("There is no mass storage device connected.");
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported('H', this);
 
-            return Mainboard.MountStorageDevice("USB");
-        }
+			socket.ReservePin(Socket.Pin.Three, this);
+			socket.ReservePin(Socket.Pin.Four, this);
+			socket.ReservePin(Socket.Pin.Five, this);
 
-        /// <summary>
-        /// Attempts to unmount the mass storage device.
-        /// </summary>
-        /// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
-        public bool UnmountMassStorage()
-        {
-            if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is not mounted.");
+			this.IsMassStorageConnected = false;
+			this.IsMassStorageMounted = false;
 
-            return Mainboard.UnmountStorageDevice("USB");
-        }
+			RemovableMedia.Insert += this.OnInsert;
+			RemovableMedia.Eject += this.OnEject;
 
-        private void OnInsert(object sender, MediaEventArgs e)
-        {
-            if (string.Compare(e.Volume.Name, "USB") == 0)
-            {
-                if (e.Volume.FileSystem != null)
-                {
-                    this.massStorageDevice = new StorageDevice(e.Volume);
-                    this.IsMassStorageMounted = true;
-                    this.OnMassStorageMounted(this, this.massStorageDevice);
-                }
-                else
-                {
-                    this.massStorageDevice = null;
-                    this.IsMassStorageMounted = false;
-                    Mainboard.UnmountStorageDevice("USB");
-                    this.ErrorPrint("The mass storage device does not have a valid filesystem.");
-                }
-            }
-        }
+			Controller.MouseConnected += (a, b) => {
+				this.connectedMouse = b;
+				this.OnMouseConnected(this, b);
 
-        private void OnEject(object sender, MediaEventArgs e)
-        {
-            if (string.Compare(e.Volume.Name, "USB") == 0)
-            {
-                this.massStorageDevice = null;
-                this.IsMassStorageMounted = false;
-                this.OnMassStorageUnmounted(this, null);
-            }
-        }
+				b.Disconnected += (c, d) => this.connectedMouse = null;
+			};
 
-        /// <summary>
-        /// Represents the delegate that is used for the MassStorageMounted event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="device">A storage device that can be used to access the SD card.</param>
-        public delegate void MassStorageMountedEventHandler(USBHost sender, StorageDevice device);
+			Controller.KeyboardConnected += (a, b) => {
+				this.connectedKeyboard = b;
+				this.OnKeyboardConnected(this, b);
 
-        /// <summary>
-        /// Represents the delegate that is used for the MassStorageUnmounted event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void MassStorageUnmountedEventHandler(USBHost sender, EventArgs e);
+				b.Disconnected += (c, d) => this.connectedKeyboard = null;
+			};
 
-        /// <summary>
-        /// Represents the delegate that is used for the MouseConnected event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="mouse">The object associated with the event.</param>
-        public delegate void MouseConnectedEventHandler(USBHost sender, Mouse mouse);
+			Controller.MassStorageConnected += (a, b) => {
+				this.IsMassStorageConnected = true;
 
-        /// <summary>
-        /// Represents the delegate that is used to handle the KeyboardConnected event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="keyboard">The object associated with the event.</param>
-        public delegate void KeyboardConnectedEventHandler(USBHost sender, Keyboard keyboard);
+				if (!this.IsMassStorageMounted)
+					this.MountMassStorage();
 
-        /// <summary>
-        /// Raised when the file system of the mass storage device is mounted.
-        /// </summary>
-        public event MassStorageMountedEventHandler MassStorageMounted;
+				b.Disconnected += (c, d) => {
+					this.IsMassStorageConnected = false;
 
-        /// <summary>
-        /// Raised when the file system of the mass storage device is unmounted.
-        /// </summary>
-        public event MassStorageUnmountedEventHandler MassStorageUnmounted;
+					if (this.IsMassStorageMounted)
+						this.UnmountMassStorage();
+				};
+			};
+		}
 
-        /// <summary>
-        /// Raised when a mouse is connected.
-        /// </summary>
-        public event MouseConnectedEventHandler MouseConnected;
+		/// <summary>Attempts to mount the mass storage device.</summary>
+		/// <returns>Whether or not the mass storage device was successfully mounted.</returns>
+		public bool MountMassStorage() {
+			if (this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is already mounted.");
+			if (!this.IsMassStorageConnected) throw new InvalidOperationException("There is no mass storage device connected.");
 
-        /// <summary>
-        /// Raised when a keyboard is connected.
-        /// </summary>
-        public event KeyboardConnectedEventHandler KeyboardConnected;
+			return Mainboard.MountStorageDevice("USB");
+		}
 
-        private MassStorageMountedEventHandler onMassStorageMounted;
-        private MassStorageUnmountedEventHandler onMassStorageUnmounted;
-        private MouseConnectedEventHandler onMouseConnected;
-        private KeyboardConnectedEventHandler onKeyboardConnected;
+		/// <summary>Attempts to unmount the mass storage device.</summary>
+		/// <returns>Whether or not the mass storage device was successfully unmounted.</returns>
+		public bool UnmountMassStorage() {
+			if (!this.IsMassStorageMounted) throw new InvalidOperationException("The mass storage is not mounted.");
 
-        private void OnMassStorageMounted(USBHost sender, StorageDevice device)
-        {
-            if (this.onMassStorageMounted == null)
-                this.onMassStorageMounted = this.OnMassStorageMounted;
+			return Mainboard.UnmountStorageDevice("USB");
+		}
 
-            if (Program.CheckAndInvoke(this.MassStorageMounted, this.onMassStorageMounted, sender, device))
-                this.MassStorageMounted(sender, device);
-        }
+		private void OnInsert(object sender, MediaEventArgs e) {
+			if (string.Compare(e.Volume.Name, "USB") == 0) {
+				if (e.Volume.FileSystem != null) {
+					this.massStorageDevice = new StorageDevice(e.Volume);
+					this.IsMassStorageMounted = true;
+					this.OnMassStorageMounted(this, this.massStorageDevice);
+				}
+				else {
+					this.massStorageDevice = null;
+					this.IsMassStorageMounted = false;
+					Mainboard.UnmountStorageDevice("USB");
+					this.ErrorPrint("The mass storage device does not have a valid filesystem.");
+				}
+			}
+		}
 
-        private void OnMassStorageUnmounted(USBHost sender, EventArgs e)
-        {
-            if (this.onMassStorageUnmounted == null)
-                this.onMassStorageUnmounted = this.OnMassStorageUnmounted;
+		private void OnEject(object sender, MediaEventArgs e) {
+			if (string.Compare(e.Volume.Name, "USB") == 0) {
+				this.massStorageDevice = null;
+				this.IsMassStorageMounted = false;
+				this.OnMassStorageUnmounted(this, null);
+			}
+		}
 
-            if (Program.CheckAndInvoke(this.MassStorageUnmounted, this.onMassStorageUnmounted, sender, e))
-                this.MassStorageUnmounted(sender, e);
-        }
+		private void OnMassStorageMounted(USBHost sender, StorageDevice device) {
+			if (this.onMassStorageMounted == null)
+				this.onMassStorageMounted = this.OnMassStorageMounted;
 
-        private void OnMouseConnected(USBHost sender, Mouse mouse)
-        {
-            if (this.onMouseConnected == null)
-                this.onMouseConnected = this.OnMouseConnected;
+			if (Program.CheckAndInvoke(this.MassStorageMounted, this.onMassStorageMounted, sender, device))
+				this.MassStorageMounted(sender, device);
+		}
 
-            if (Program.CheckAndInvoke(this.MouseConnected, this.onMouseConnected, sender, mouse))
-                this.MouseConnected(sender, mouse);
-        }
+		private void OnMassStorageUnmounted(USBHost sender, EventArgs e) {
+			if (this.onMassStorageUnmounted == null)
+				this.onMassStorageUnmounted = this.OnMassStorageUnmounted;
 
-        private void OnKeyboardConnected(USBHost sender, Keyboard keyboard)
-        {
-            if (this.onKeyboardConnected == null)
-                this.onKeyboardConnected = this.OnKeyboardConnected;
+			if (Program.CheckAndInvoke(this.MassStorageUnmounted, this.onMassStorageUnmounted, sender, e))
+				this.MassStorageUnmounted(sender, e);
+		}
 
-            if (Program.CheckAndInvoke(this.KeyboardConnected, this.onKeyboardConnected, sender, keyboard))
-                this.KeyboardConnected(sender, keyboard);
-        }
-    }
+		private void OnMouseConnected(USBHost sender, Mouse mouse) {
+			if (this.onMouseConnected == null)
+				this.onMouseConnected = this.OnMouseConnected;
+
+			if (Program.CheckAndInvoke(this.MouseConnected, this.onMouseConnected, sender, mouse))
+				this.MouseConnected(sender, mouse);
+		}
+
+		private void OnKeyboardConnected(USBHost sender, Keyboard keyboard) {
+			if (this.onKeyboardConnected == null)
+				this.onKeyboardConnected = this.OnKeyboardConnected;
+
+			if (Program.CheckAndInvoke(this.KeyboardConnected, this.onKeyboardConnected, sender, keyboard))
+				this.KeyboardConnected(sender, keyboard);
+		}
+	}
 }

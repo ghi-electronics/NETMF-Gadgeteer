@@ -3,131 +3,117 @@ using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A DisplayT43 module for Microsoft .NET Gadgeteer.
-    /// </summary>
-    public class DisplayT43 : GTM.Module.DisplayModule
-    {
-        private delegate void NullParamsDelegate();
-        private GTI.DigitalOutput backlightPin;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A DisplayT43 module for Microsoft .NET Gadgeteer.</summary>
+	public class DisplayT43 : GTM.Module.DisplayModule {
+		private GTI.DigitalOutput backlightPin;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
-        /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
-        /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
-        public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber) : this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused)
-        {
+		private delegate void NullParamsDelegate();
 
-        }
+		/// <summary>Whether or not the backlight is enabled.</summary>
+		public bool BacklightEnabled {
+			get {
+				return this.backlightPin.Read();
+			}
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
-        /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
-        /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
-        /// <param name="tSocketNumber">The mainboard socket that has the display's T socket connected to it.</param>
-        public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber, int tSocketNumber) : base(WpfMode.PassThrough)
-        {
-            var config = new DisplayModule.TimingRequirements()
-            {
-                UsesCommonSyncPin = false, //not the proper property, but we needed it for OutputEnableIsFixed
-                CommonSyncPinIsActiveHigh = true, //not the proper property, but we needed it for OutputEnablePolarity
-                HorizontalSyncPulseIsActiveHigh = false,
-                VerticalSyncPulseIsActiveHigh = false,
-                PixelDataIsValidOnClockRisingEdge = false,
-                HorizontalSyncPulseWidth = 41,
-                HorizontalBackPorch = 2,
-                HorizontalFrontPorch = 2,
-                VerticalSyncPulseWidth = 10,
-                VerticalBackPorch = 2,
-                VerticalFrontPorch = 2,
-                MaximumClockSpeed = 20000
-            };
+			set {
+				this.backlightPin.Write(value);
+			}
+		}
 
-            base.OnDisplayConnected("Display T43", 480, 272, DisplayOrientation.Normal, config);
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
+		/// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
+		/// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
+		public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber)
+			: this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused) {
+		}
 
-            var rSocket = Socket.GetSocket(rSocketNumber, true, this, null);
-            var gSocket = Socket.GetSocket(gSocketNumber, true, this, null);
-            var bSocket = Socket.GetSocket(bSocketNumber, true, this, null);
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
+		/// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
+		/// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
+		/// <param name="tSocketNumber">The mainboard socket that has the display's T socket connected to it.</param>
+		public DisplayT43(int rSocketNumber, int gSocketNumber, int bSocketNumber, int tSocketNumber)
+			: base(WpfMode.PassThrough) {
+			var config = new DisplayModule.TimingRequirements() {
+				UsesCommonSyncPin = false, //not the proper property, but we needed it for OutputEnableIsFixed
+				CommonSyncPinIsActiveHigh = true, //not the proper property, but we needed it for OutputEnablePolarity
+				HorizontalSyncPulseIsActiveHigh = false,
+				VerticalSyncPulseIsActiveHigh = false,
+				PixelDataIsValidOnClockRisingEdge = false,
+				HorizontalSyncPulseWidth = 41,
+				HorizontalBackPorch = 2,
+				HorizontalFrontPorch = 2,
+				VerticalSyncPulseWidth = 10,
+				VerticalBackPorch = 2,
+				VerticalFrontPorch = 2,
+				MaximumClockSpeed = 20000
+			};
 
-            rSocket.EnsureTypeIsSupported('R', this);
-            gSocket.EnsureTypeIsSupported('G', this);
-            bSocket.EnsureTypeIsSupported('B', this);
+			base.OnDisplayConnected("Display T43", 480, 272, DisplayOrientation.Normal, config);
 
-            this.backlightPin = GTI.DigitalOutputFactory.Create(gSocket, Socket.Pin.Nine, true, this);
+			var rSocket = Socket.GetSocket(rSocketNumber, true, this, null);
+			var gSocket = Socket.GetSocket(gSocketNumber, true, this, null);
+			var bSocket = Socket.GetSocket(bSocketNumber, true, this, null);
 
-            rSocket.ReservePin(Socket.Pin.Three, this);
-            rSocket.ReservePin(Socket.Pin.Four, this);
-            rSocket.ReservePin(Socket.Pin.Five, this);
-            rSocket.ReservePin(Socket.Pin.Six, this);
-            rSocket.ReservePin(Socket.Pin.Seven, this);
-            rSocket.ReservePin(Socket.Pin.Eight, this);
-            rSocket.ReservePin(Socket.Pin.Nine, this);
+			rSocket.EnsureTypeIsSupported('R', this);
+			gSocket.EnsureTypeIsSupported('G', this);
+			bSocket.EnsureTypeIsSupported('B', this);
 
-            gSocket.ReservePin(Socket.Pin.Three, this);
-            gSocket.ReservePin(Socket.Pin.Four, this);
-            gSocket.ReservePin(Socket.Pin.Five, this);
-            gSocket.ReservePin(Socket.Pin.Six, this);
-            gSocket.ReservePin(Socket.Pin.Seven, this);
-            gSocket.ReservePin(Socket.Pin.Eight, this);
+			this.backlightPin = GTI.DigitalOutputFactory.Create(gSocket, Socket.Pin.Nine, true, this);
 
-            bSocket.ReservePin(Socket.Pin.Three, this);
-            bSocket.ReservePin(Socket.Pin.Four, this);
-            bSocket.ReservePin(Socket.Pin.Five, this);
-            bSocket.ReservePin(Socket.Pin.Six, this);
-            bSocket.ReservePin(Socket.Pin.Seven, this);
-            bSocket.ReservePin(Socket.Pin.Eight, this);
-            bSocket.ReservePin(Socket.Pin.Nine, this);
+			rSocket.ReservePin(Socket.Pin.Three, this);
+			rSocket.ReservePin(Socket.Pin.Four, this);
+			rSocket.ReservePin(Socket.Pin.Five, this);
+			rSocket.ReservePin(Socket.Pin.Six, this);
+			rSocket.ReservePin(Socket.Pin.Seven, this);
+			rSocket.ReservePin(Socket.Pin.Eight, this);
+			rSocket.ReservePin(Socket.Pin.Nine, this);
 
-            if (tSocketNumber == Socket.Unused)
-                return;
+			gSocket.ReservePin(Socket.Pin.Three, this);
+			gSocket.ReservePin(Socket.Pin.Four, this);
+			gSocket.ReservePin(Socket.Pin.Five, this);
+			gSocket.ReservePin(Socket.Pin.Six, this);
+			gSocket.ReservePin(Socket.Pin.Seven, this);
+			gSocket.ReservePin(Socket.Pin.Eight, this);
 
-            var tSocket = Socket.GetSocket(tSocketNumber, true, this, null);
+			bSocket.ReservePin(Socket.Pin.Three, this);
+			bSocket.ReservePin(Socket.Pin.Four, this);
+			bSocket.ReservePin(Socket.Pin.Five, this);
+			bSocket.ReservePin(Socket.Pin.Six, this);
+			bSocket.ReservePin(Socket.Pin.Seven, this);
+			bSocket.ReservePin(Socket.Pin.Eight, this);
+			bSocket.ReservePin(Socket.Pin.Nine, this);
 
-            tSocket.EnsureTypeIsSupported('T', this);
+			if (tSocketNumber == Socket.Unused)
+				return;
 
-            tSocket.ReservePin(Socket.Pin.Four, this);
-            tSocket.ReservePin(Socket.Pin.Five, this);
-            tSocket.ReservePin(Socket.Pin.Six, this);
-            tSocket.ReservePin(Socket.Pin.Seven, this);
+			var tSocket = Socket.GetSocket(tSocketNumber, true, this, null);
 
-            GT.Program.BeginInvoke(new NullParamsDelegate(() => Microsoft.SPOT.Touch.Touch.Initialize(Application.Current)), null);
-        }
+			tSocket.EnsureTypeIsSupported('T', this);
 
-        /// <summary>
-        /// Whether or not the backlight is enabled.
-        /// </summary>
-        public bool BacklightEnabled
-        {
-            get
-            {
-                return this.backlightPin.Read();
-            }
-            set
-            {
-                this.backlightPin.Write(value);
-            }
-        }
+			tSocket.ReservePin(Socket.Pin.Four, this);
+			tSocket.ReservePin(Socket.Pin.Five, this);
+			tSocket.ReservePin(Socket.Pin.Six, this);
+			tSocket.ReservePin(Socket.Pin.Seven, this);
 
-        /// <summary>
-        /// Renders display data on the display device. 
-        /// </summary>
-        /// <param name="bitmap">The bitmap object to render on the display.</param>
-        /// <param name="x">The start x coordinate of the dirty area.</param>
-        /// <param name="y">The start y coordinate of the dirty area.</param>
-        /// <param name="width">The width of the dirty area.</param>
-        /// <param name="height">The height of the dirty area.</param>
-        protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
-        {
-            try
-            {
-                bitmap.Flush(x, y, width, height);
-            }
-            catch
-            {
-                this.ErrorPrint("Painting error");
-            }
-        }
-    }
+			GT.Program.BeginInvoke(new NullParamsDelegate(() => Microsoft.SPOT.Touch.Touch.Initialize(Application.Current)), null);
+		}
+
+		/// <summary>Renders display data on the display device.</summary>
+		/// <param name="bitmap">The bitmap object to render on the display.</param>
+		/// <param name="x">The start x coordinate of the dirty area.</param>
+		/// <param name="y">The start y coordinate of the dirty area.</param>
+		/// <param name="width">The width of the dirty area.</param>
+		/// <param name="height">The height of the dirty area.</param>
+		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height) {
+			try {
+				bitmap.Flush(x, y, width, height);
+			}
+			catch {
+				this.ErrorPrint("Painting error");
+			}
+		}
+	}
 }

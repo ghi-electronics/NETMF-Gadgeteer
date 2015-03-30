@@ -5,24 +5,45 @@ using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-	/// <summary>
-	/// A VideoOut module for Microsoft .NET Gadgeteer
-	/// </summary>
-	public class VideoOut : GTM.Module.DisplayModule
-	{
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A VideoOut module for Microsoft .NET Gadgeteer</summary>
+	public class VideoOut : GTM.Module.DisplayModule {
 		private GT.SocketInterfaces.SoftwareI2CBus i2c;
 		private int currentWidth;
 		private int currentHeight;
+
+		/// <summary>The input resolution of the module.</summary>
+		public enum Resolution {
+
+			/// <summary>Represents the values for an RCA display in the NTSC standard with a resolution of 320x240.</summary>
+			Rca320x240 = 0,
+
+			/// <summary>Represents the values for an RCA display in the NTSC standard with a resolution of 640x480.</summary>
+			Rca640x480 = 1,
+
+			/// <summary>Represents the values for an RCA display in the NTSC standard with a resolution of 800x600.</summary>
+			Rca800x600 = 2,
+
+			/// <summary>Represents the values for a VGA display with a resolution of 320x240.</summary>
+			Vga320x240 = 10,
+
+			/// <summary>Represents the values for a VGA display with a resolution of 640x480.</summary>
+			Vga640x480 = 11,
+
+			/// <summary>Represents the values for a VGA display with a resolution of 800x600.</summary>
+			Vga800x600 = 12,
+
+			/// <summary>Represents the values for an RCA display in the PAL standard with a resolution of 320x240.</summary>
+			RcaPal320x240 = 20
+		}
 
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
 		/// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
 		/// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
 		/// <param name="i2cSocketNumber">The mainboard socket that has the display's I socket connected to it.</param>
-		public VideoOut(int rSocketNumber, int gSocketNumber, int bSocketNumber, int i2cSocketNumber) : base(WpfMode.PassThrough)
-		{
+		public VideoOut(int rSocketNumber, int gSocketNumber, int bSocketNumber, int i2cSocketNumber)
+			: base(WpfMode.PassThrough) {
 			this.currentHeight = 320;
 			this.currentHeight = 240;
 
@@ -64,56 +85,11 @@ namespace Gadgeteer.Modules.GHIElectronics
 			bSocket.ReservePin(Socket.Pin.Nine, this);
 		}
 
-		/// <summary>
-		/// The input resolution of the module.
-		/// </summary>
-		public enum Resolution
-		{
-			/// <summary>
-			/// Represents the values for an RCA display in the NTSC standard with a resolution of 320x240.
-			/// </summary>
-			Rca320x240 = 0,
-
-			/// <summary>
-			/// Represents the values for an RCA display in the NTSC standard with a resolution of 640x480.
-			/// </summary>
-			Rca640x480 = 1,
-
-			/// <summary>
-			/// Represents the values for an RCA display in the NTSC standard with a resolution of 800x600.
-			/// </summary>
-			Rca800x600 = 2,
-
-			/// <summary>
-			/// Represents the values for a VGA display with a resolution of 320x240.
-			/// </summary>
-			Vga320x240 = 10,
-
-			/// <summary>
-			/// Represents the values for a VGA display with a resolution of 640x480.
-			/// </summary>
-			Vga640x480 = 11,
-
-			/// <summary>
-			/// Represents the values for a VGA display with a resolution of 800x600.
-			/// </summary>
-			Vga800x600 = 12,
-
-			/// <summary>
-			/// Represents the values for an RCA display in the PAL standard with a resolution of 320x240.
-			/// </summary>
-			RcaPal320x240 = 20
-		}
-
-		/// <summary>
-		/// Sets the output type and resolution and the mainboard's configuration.
-		/// </summary>
+		/// <summary>Sets the output type and resolution and the mainboard's configuration.</summary>
 		/// <param name="resolution">The desired output type and resolution.</param>
 		/// <remarks>This method must be called to change the resolution. Setting the processor's display configuration is not enough.</remarks>
-		public void SetDisplayConfiguration(Resolution resolution)
-		{
-			switch (resolution)
-			{
+		public void SetDisplayConfiguration(Resolution resolution) {
+			switch (resolution) {
 				case Resolution.Rca320x240:
 					this.currentWidth = 320;
 					this.currentHeight = 240;
@@ -157,8 +133,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 					break;
 			}
 
-			var config = new DisplayModule.TimingRequirements()
-			{
+			var config = new DisplayModule.TimingRequirements() {
 				PixelDataIsActiveHigh = true, //not the proper property, but we needed it for PriorityEnable
 				UsesCommonSyncPin = false, //not the proper property, but we needed it for OutputEnableIsFixed
 				CommonSyncPinIsActiveHigh = false, //not the proper property, but we needed it for OutputEnablePolarity
@@ -183,8 +158,22 @@ namespace Gadgeteer.Modules.GHIElectronics
 				this.ErrorPrint("Setting the display configuration failed.");
 		}
 
-		private void Write320x240RcaRegisters()
-		{
+		/// <summary>Renders display data on the display device.</summary>
+		/// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap" /> object to render on the display.</param>
+		/// <param name="x">The start x coordinate of the dirty area.</param>
+		/// <param name="y">The start y coordinate of the dirty area.</param>
+		/// <param name="width">The width of the dirty area.</param>
+		/// <param name="height">The height of the dirty area.</param>
+		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height) {
+			try {
+				bitmap.Flush(x, y, width, height);
+			}
+			catch {
+				this.ErrorPrint("Painting error");
+			}
+		}
+
+		private void Write320x240RcaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -225,8 +214,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x30);
 		}
 
-		private void Write640x480RcaRegisters()
-		{
+		private void Write640x480RcaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -270,8 +258,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x30);
 		}
 
-		private void Write800x600RcaRegisters()
-		{
+		private void Write800x600RcaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -317,8 +304,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x30);
 		}
 
-		private void Write320x240VgaRegisters()
-		{
+		private void Write320x240VgaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -374,8 +360,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x00);
 		}
 
-		private void Write640x480VgaRegisters()
-		{
+		private void Write640x480VgaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -436,8 +421,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x00);
 		}
 
-		private void Write800x600VgaRegisters()
-		{
+		private void Write800x600VgaRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -500,8 +484,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x00);
 		}
 
-		private void Write320x240RcaPalRegisters()
-		{
+		private void Write320x240RcaPalRegisters() {
 			this.WriteRegister(0x02, 0x01);
 			this.WriteRegister(0x02, 0x03);
 			this.WriteRegister(0x03, 0x00);
@@ -542,8 +525,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.WriteRegister(0x04, 0x30);
 		}
 
-		private void WriteRegister(byte address, byte data)
-		{
+		private void WriteRegister(byte address, byte data) {
 			var writeBuffer = new byte[] { address, data };
 
 			this.i2c.Write(writeBuffer);
@@ -551,34 +533,13 @@ namespace Gadgeteer.Modules.GHIElectronics
 			Thread.Sleep(1);
 		}
 
-		private byte ReadRegister(byte address)
-		{
+		private byte ReadRegister(byte address) {
 			var writeBuffer = new byte[] { address };
 			var readBuffer = new byte[] { 0x00 };
 
 			this.i2c.WriteRead(writeBuffer, readBuffer);
 
 			return readBuffer[0];
-		}
-
-		/// <summary>
-		/// Renders display data on the display device. 
-		/// </summary>
-		/// <param name="bitmap">The <see cref="T:Microsoft.SPOT.Bitmap"/> object to render on the display.</param>
-		/// <param name="x">The start x coordinate of the dirty area.</param>
-		/// <param name="y">The start y coordinate of the dirty area.</param>
-		/// <param name="width">The width of the dirty area.</param>
-		/// <param name="height">The height of the dirty area.</param>
-		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
-		{
-			try
-			{
-				bitmap.Flush(x, y, width, height);
-			}
-			catch
-			{
-				this.ErrorPrint("Painting error");
-			}
 		}
 	}
 }

@@ -6,511 +6,430 @@ using System.Threading;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A Music module for Microsoft .NET Gadgeteer
-    /// </summary>
-    [Obsolete]
-    public class Music : GTM.Module
-    {
-        private const byte CMD_WRITE = 0x02;
-        private const byte CMD_READ = 0x03;
-        private const ushort SM_RESET = 0x04;
-        private const ushort SM_CANCEL = 0x10;
-        private const ushort SM_TESTS = 0x20;
-        private const ushort SM_SDINEW = 0x800;
-        private const ushort SM_ADPCM = 0x1000;
-        private const ushort SM_LINE1 = 0x4000;
-        private const int SCI_MODE = 0x00;
-        private const int SCI_STATUS = 0x01;
-        private const int SCI_BASS = 0x02;
-        private const int SCI_CLOCKF = 0x03;
-        private const int SCI_WRAM = 0x06;
-        private const int SCI_WRAMADDR = 0x07;
-        private const int SCI_HDAT0 = 0x08;
-        private const int SCI_HDAT1 = 0x09;
-        private const int SCI_AIADDR = 0x0A;
-        private const int SCI_VOL = 0x0B;
-        private const int SCI_AICTRL0 = 0x0C;
-        private const int SCI_AICTRL1 = 0x0D;
-        private const int SCI_AICTRL2 = 0x0E;
-        private const int SCI_AICTRL3 = 0x0F;
-        private const int PCM_MODE_JOINTSTEREO = 0x00;
-        private const int PCM_MODE_DUALCHANNEL = 0x01;
-        private const int PCM_MODE_LEFTCHANNEL = 0x02;
-        private const int PCM_MODE_RIGHTCHANNEL = 0x03;
-        private const int PCM_ENC_ADPCM = 0x00;
-        private const int PCM_ENC_PCM = 0x04;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A Music module for Microsoft .NET Gadgeteer</summary>
+	[Obsolete]
+	public class Music : GTM.Module {
+		private const byte CMD_WRITE = 0x02;
+		private const byte CMD_READ = 0x03;
+		private const ushort SM_RESET = 0x04;
+		private const ushort SM_CANCEL = 0x10;
+		private const ushort SM_TESTS = 0x20;
+		private const ushort SM_SDINEW = 0x800;
+		private const ushort SM_ADPCM = 0x1000;
+		private const ushort SM_LINE1 = 0x4000;
+		private const int SCI_MODE = 0x00;
+		private const int SCI_STATUS = 0x01;
+		private const int SCI_BASS = 0x02;
+		private const int SCI_CLOCKF = 0x03;
+		private const int SCI_WRAM = 0x06;
+		private const int SCI_WRAMADDR = 0x07;
+		private const int SCI_HDAT0 = 0x08;
+		private const int SCI_HDAT1 = 0x09;
+		private const int SCI_AIADDR = 0x0A;
+		private const int SCI_VOL = 0x0B;
+		private const int SCI_AICTRL0 = 0x0C;
+		private const int SCI_AICTRL1 = 0x0D;
+		private const int SCI_AICTRL2 = 0x0E;
+		private const int SCI_AICTRL3 = 0x0F;
+		private const int PCM_MODE_JOINTSTEREO = 0x00;
+		private const int PCM_MODE_DUALCHANNEL = 0x01;
+		private const int PCM_MODE_LEFTCHANNEL = 0x02;
+		private const int PCM_MODE_RIGHTCHANNEL = 0x03;
+		private const int PCM_ENC_ADPCM = 0x00;
+		private const int PCM_ENC_PCM = 0x04;
 
-        private Thread recordingThread;
-        private Thread playBackThread;
-        private object playSyncRoot;
-        private object recordSyncRoot;
-        private object spiSyncRoot;
-        private GTI.DigitalInput dreq;
-        private GTI.Spi spiCommand;
-        private GTI.Spi spiData;
-        private byte[] commandBuffer;
-        private byte[] readBuffer;
-        private byte[] sampleBuffer;
-        private byte[] recordingBuffer;
-        private byte[] recordingBuffer4Bytes;
-        private bool playing;
-        private bool recording;
-        private byte leftVolume;
-        private byte rightVolume;
+		private Thread recordingThread;
+		private Thread playBackThread;
+		private object playSyncRoot;
+		private object recordSyncRoot;
+		private object spiSyncRoot;
+		private GTI.DigitalInput dreq;
+		private GTI.Spi spiCommand;
+		private GTI.Spi spiData;
+		private byte[] commandBuffer;
+		private byte[] readBuffer;
+		private byte[] sampleBuffer;
+		private byte[] recordingBuffer;
+		private byte[] recordingBuffer4Bytes;
+		private bool playing;
+		private bool recording;
+		private byte leftVolume;
+		private byte rightVolume;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Music(int socketNumber)
-        {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported('S', this);
+		private MusicFinishedPlayingEventHandler onMusicFinished;
 
-            this.playSyncRoot = new object();
-            this.recordSyncRoot = new object();
-            this.spiSyncRoot = new object();
+		/// <summary>Represents the delegate that is used to handle the <see cref="MusicFinished" /> event.</summary>
+		/// <param name="sender">The sending module.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void MusicFinishedPlayingEventHandler(Music sender, EventArgs e);
 
-            this.commandBuffer = new byte[4];
-            this.readBuffer = new byte[4];
+		/// <summary>Raised when a sound file has finished playing.</summary>
+		public event MusicFinishedPlayingEventHandler MusicFinished;
 
-            this.playing = false;
-            this.recording = false;
+		/// <summary>The left channel volume.</summary>
+		public int LeftChannelVolume {
+			get {
+				return leftVolume;
+			}
 
-            this.leftVolume = 0;
-            this.rightVolume = 0;
+			set {
+				if (value < 0 || value > 255) throw new ArgumentOutOfRangeException("value", "value must be between 0 and 255.");
 
-            this.sampleBuffer = new byte[] { Music.CMD_READ, Music.SCI_HDAT0 };
-            this.recordingBuffer = new byte[1024 * 8];
-            this.recordingBuffer4Bytes = new byte[4];
+				this.SetVolume(value, this.rightVolume);
+			}
+		}
 
-            this.dreq = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
-            this.spiData = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Five, this);
-            this.spiCommand = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
+		/// <summary>The right channel volume.</summary>
+		public int RightChannelVolume {
+			get {
+				return rightVolume;
+			}
 
-            this.Reset();
+			set {
+				if (value < 0 || value > 255) throw new ArgumentOutOfRangeException("value", "value must be between 0 and 255.");
 
-            this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW);
-            this.CommandWrite(Music.SCI_CLOCKF, 0xA000);
-            this.CommandWrite(Music.SCI_VOL, 0x0101);
+				this.SetVolume(this.leftVolume, value);
+			}
+		}
 
-            if (this.CommandRead(Music.SCI_VOL) != 0x0101)
-                throw new InvalidOperationException("Failed to initialize the MP3 decoder.");
+		/// <summary>Whether or not the module is playing or recording audio.</summary>
+		public bool IsBusy {
+			get {
+				return this.playing || this.recording;
+			}
+		}
 
-            this.SetVolume(200, 200);
-        }
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
+		public Music(int socketNumber) {
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported('S', this);
 
-        /// <summary>
-        /// The left channel volume.
-        /// </summary>
-        public int LeftChannelVolume
-        {
-            get 
-            { 
-                return leftVolume; 
-            }
-            set 
-            {
-                if (value < 0 || value > 255) throw new ArgumentOutOfRangeException("value", "value must be between 0 and 255.");
+			this.playSyncRoot = new object();
+			this.recordSyncRoot = new object();
+			this.spiSyncRoot = new object();
 
-                this.SetVolume(value, this.rightVolume);
-            }
-        }
+			this.commandBuffer = new byte[4];
+			this.readBuffer = new byte[4];
 
-        /// <summary>
-        /// The right channel volume.
-        /// </summary>
-        public int RightChannelVolume
-        {
-            get 
-            { 
-                return rightVolume; 
-            }
-            set 
-            {
-                if (value < 0 || value > 255) throw new ArgumentOutOfRangeException("value", "value must be between 0 and 255.");
+			this.playing = false;
+			this.recording = false;
 
-                this.SetVolume(this.leftVolume, value);
-            }
-        }
+			this.leftVolume = 0;
+			this.rightVolume = 0;
 
-        /// <summary>
-        /// Sets the volume for both channels.
-        /// </summary>
-        /// <param name="left">The volume between 0, silence, and 255, loudest.</param>
-        /// <param name="right">The volume between 0, silence, and 255, loudest.</param>
-        public void SetVolume(int left, int right)
-        {
-            if (left < 0 || left > 255) throw new ArgumentOutOfRangeException("left", "left must be between 0 and 255.");
-            if (right < 0 || right > 255) throw new ArgumentOutOfRangeException("right", "right must be between 0 and 255.");
+			this.sampleBuffer = new byte[] { Music.CMD_READ, Music.SCI_HDAT0 };
+			this.recordingBuffer = new byte[1024 * 8];
+			this.recordingBuffer4Bytes = new byte[4];
 
-            this.leftVolume = (byte)left;
-            this.rightVolume = (byte)right;
+			this.dreq = GTI.DigitalInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, this);
+			this.spiData = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Five, this);
+			this.spiCommand = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
 
-            this.CommandWrite(Music.SCI_VOL, (ushort)((255 - this.leftVolume) << 8 | (255 - this.rightVolume)));
-        }
+			this.Reset();
 
-        /// <summary>
-        /// Runs a sine test
-        /// </summary>
-        public void RunSineTest()
-        {
-            byte[] buf = { 0x00 };
+			this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW);
+			this.CommandWrite(Music.SCI_CLOCKF, 0xA000);
+			this.CommandWrite(Music.SCI_VOL, 0x0101);
 
-            this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW | Music.SM_TESTS | Music.SM_RESET);
+			if (this.CommandRead(Music.SCI_VOL) != 0x0101)
+				throw new InvalidOperationException("Failed to initialize the MP3 decoder.");
 
-            byte[] start = { 0x53, 0xEF, 0x6E, 0x7E, 0x00, 0x00, 0x00, 0x00 };
-            byte[] end = { 0x45, 0x78, 0x69, 0x74, 0x00, 0x00, 0x00, 0x00 };
+			this.SetVolume(200, 200);
+		}
 
-            for (int i = 0; i < start.Length; i++)
-            {
-                buf[0] = start[i];
+		/// <summary>Sets the volume for both channels.</summary>
+		/// <param name="left">The volume between 0, silence, and 255, loudest.</param>
+		/// <param name="right">The volume between 0, silence, and 255, loudest.</param>
+		public void SetVolume(int left, int right) {
+			if (left < 0 || left > 255) throw new ArgumentOutOfRangeException("left", "left must be between 0 and 255.");
+			if (right < 0 || right > 255) throw new ArgumentOutOfRangeException("right", "right must be between 0 and 255.");
 
-                this.spiData.Write(buf);
-                while (!this.dreq.Read())
-                    Thread.Sleep(0);
-            }
+			this.leftVolume = (byte)left;
+			this.rightVolume = (byte)right;
 
-            Thread.Sleep(2000);
+			this.CommandWrite(Music.SCI_VOL, (ushort)((255 - this.leftVolume) << 8 | (255 - this.rightVolume)));
+		}
 
-            for (int i = 0; i < end.Length; i++)
-            {
-                buf[0] = end[i];
+		/// <summary>Runs a sine test</summary>
+		public void RunSineTest() {
+			byte[] buf = { 0x00 };
 
-                this.spiData.Write(buf);
-                while (!this.dreq.Read())
-                    Thread.Sleep(0);
-            }
-        }
+			this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW | Music.SM_TESTS | Music.SM_RESET);
 
-        /// <summary>
-        /// Whether or not the module is playing or recording audio.
-        /// </summary>
-        public bool IsBusy
-        {
-            get
-            {
-                return this.playing || this.recording;
-            }
-        }
+			byte[] start = { 0x53, 0xEF, 0x6E, 0x7E, 0x00, 0x00, 0x00, 0x00 };
+			byte[] end = { 0x45, 0x78, 0x69, 0x74, 0x00, 0x00, 0x00, 0x00 };
 
-        /// <summary>
-        /// Play the music in the given file.
-        /// </summary>
-        /// <param name="filePath">The path to the file to open and play.</param>
-        public void Play(string filePath)
-        {
-            var file = new FileStream(filePath, FileMode.Open);
-            var length = (int)file.Length;
-            var buffer = new byte[length];
+			for (int i = 0; i < start.Length; i++) {
+				buf[0] = start[i];
 
-            file.Read(buffer, 0, length);
+				this.spiData.Write(buf);
+				while (!this.dreq.Read())
+					Thread.Sleep(0);
+			}
 
-            this.Play(buffer);
-        }
+			Thread.Sleep(2000);
 
-        /// <summary>
-        /// Play the music in the given buffer.
-        /// </summary>
-        /// <param name="data">The music to play.</param>
-        public void Play(byte[] data)
-        {
-            if (data == null) throw new ArgumentNullException("data");
+			for (int i = 0; i < end.Length; i++) {
+				buf[0] = end[i];
 
-            lock (this.playSyncRoot)
-            {
-                if (this.playing) throw new InvalidOperationException("You are arleady playing.");
-                if (this.recording) throw new InvalidOperationException("You cannot play while something is being recorded.");
+				this.spiData.Write(buf);
+				while (!this.dreq.Read())
+					Thread.Sleep(0);
+			}
+		}
 
-                this.playing = true;
-                this.playBackThread = new Thread(() => this.DoPlayback(data));
-                this.playBackThread.Start();
-            }
-        }
+		/// <summary>Play the music in the given file.</summary>
+		/// <param name="filePath">The path to the file to open and play.</param>
+		public void Play(string filePath) {
+			var file = new FileStream(filePath, FileMode.Open);
+			var length = (int)file.Length;
+			var buffer = new byte[length];
 
-        /// <summary>
-        /// Stops playback.
-        /// </summary>
-        public void StopPlaying()
-        {
-            lock (this.playSyncRoot)
-            {
-                if (!this.playing) return;
+			file.Read(buffer, 0, length);
 
-                this.playing = false;
-                this.playBackThread.Join();
-                this.playBackThread = null;
-            }
+			this.Play(buffer);
+		}
 
-            this.OnMusicFinished(this, null);
-        }
-        
-		/// <summary>
-		/// Begins recording to the given stream.
-		/// </summary>
+		/// <summary>Play the music in the given buffer.</summary>
+		/// <param name="data">The music to play.</param>
+		public void Play(byte[] data) {
+			if (data == null) throw new ArgumentNullException("data");
+
+			lock (this.playSyncRoot) {
+				if (this.playing) throw new InvalidOperationException("You are arleady playing.");
+				if (this.recording) throw new InvalidOperationException("You cannot play while something is being recorded.");
+
+				this.playing = true;
+				this.playBackThread = new Thread(() => this.DoPlayback(data));
+				this.playBackThread.Start();
+			}
+		}
+
+		/// <summary>Stops playback.</summary>
+		public void StopPlaying() {
+			lock (this.playSyncRoot) {
+				if (!this.playing) return;
+
+				this.playing = false;
+				this.playBackThread.Join();
+				this.playBackThread = null;
+			}
+
+			this.OnMusicFinished(this, null);
+		}
+
+		/// <summary>Begins recording to the given stream.</summary>
 		/// <param name="stream">The stream to write the recorded data to.</param>
 		/// <param name="patch">The ogg patch to use.</param>
-        public void Record(Stream stream, ushort[] patch)
-        {
-            if (stream == null) throw new ArgumentNullException("stream");
-            if (patch == null) throw new ArgumentNullException("patch");
+		public void Record(Stream stream, ushort[] patch) {
+			if (stream == null) throw new ArgumentNullException("stream");
+			if (patch == null) throw new ArgumentNullException("patch");
 
-            lock (this.recordSyncRoot)
-            {
-                if (this.playing) throw new InvalidOperationException("You cannot record while something is being played.");
-                if (this.recording) throw new InvalidOperationException("You are arleady recording.");
+			lock (this.recordSyncRoot) {
+				if (this.playing) throw new InvalidOperationException("You cannot record while something is being played.");
+				if (this.recording) throw new InvalidOperationException("You are arleady recording.");
 
-                this.recording = true;
-                this.recordingThread = new Thread(() => this.DoRecord(stream, patch));
-                this.recordingThread.Start();
-            }
-        }
+				this.recording = true;
+				this.recordingThread = new Thread(() => this.DoRecord(stream, patch));
+				this.recordingThread.Start();
+			}
+		}
 
-        /// <summary>
-        /// Stops recording.
-        /// </summary>
-        public void StopRecording()
-        {
-            lock (this.recordSyncRoot)
-            {
-                if (!this.recording) return;
+		/// <summary>Stops recording.</summary>
+		public void StopRecording() {
+			lock (this.recordSyncRoot) {
+				if (!this.recording) return;
 
-                this.recording = false;
-                this.recordingThread.Join();
-                this.recordingThread = null;
-            }
-        }
+				this.recording = false;
+				this.recordingThread.Join();
+				this.recordingThread = null;
+			}
+		}
 
-        /// <summary>
-        /// Represents the delegate that is used to handle the <see cref="MusicFinished"/> event.
-        /// </summary>
-        /// <param name="sender">The sending module.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void MusicFinishedPlayingEventHandler(Music sender, EventArgs e);
+		private void OnMusicFinished(Music sender, EventArgs e) {
+			if (this.onMusicFinished == null)
+				this.onMusicFinished = this.OnMusicFinished;
 
-        /// <summary>
-        /// Raised when a sound file has finished playing.
-        /// </summary>
-        public event MusicFinishedPlayingEventHandler MusicFinished;
+			if (Program.CheckAndInvoke(this.MusicFinished, this.onMusicFinished, sender, e))
+				this.MusicFinished(sender, e);
+		}
 
-        private MusicFinishedPlayingEventHandler onMusicFinished;
+		private void Reset() {
+			while (!this.dreq.Read())
+				Thread.Sleep(1);
 
-        private void OnMusicFinished(Music sender, EventArgs e)
-        {
-            if (this.onMusicFinished == null)
-                this.onMusicFinished = this.OnMusicFinished;
+			this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW | Music.SM_RESET);
 
-            if (Program.CheckAndInvoke(this.MusicFinished, this.onMusicFinished, sender, e))
-                this.MusicFinished(sender, e);
-        }
-        
-        private void Reset()
-        {
-            while (!this.dreq.Read())
-                Thread.Sleep(1);
+			while (!this.dreq.Read())
+				Thread.Sleep(1);
 
-            this.CommandWrite(Music.SCI_MODE, Music.SM_SDINEW | Music.SM_RESET);
+			Thread.Sleep(1);
 
-            while (!this.dreq.Read())
-                Thread.Sleep(1);
+			this.CommandWrite(Music.SCI_CLOCKF, 0xa000);
+		}
 
-            Thread.Sleep(1);
+		private ushort CommandRead(byte register) {
+			lock (this.spiSyncRoot) {
+				while (!this.dreq.Read())
+					Thread.Sleep(1);
 
-            this.CommandWrite(Music.SCI_CLOCKF, 0xa000);
-        }
+				this.commandBuffer[0] = Music.CMD_READ;
+				this.commandBuffer[1] = register;
+				this.commandBuffer[2] = 0;
+				this.commandBuffer[3] = 0;
 
-        private ushort CommandRead(byte register)
-        {
-            lock (this.spiSyncRoot)
-            {
-                while (!this.dreq.Read())
-                    Thread.Sleep(1);
+				this.spiCommand.WriteRead(this.commandBuffer, this.readBuffer);
 
-                this.commandBuffer[0] = Music.CMD_READ;
-                this.commandBuffer[1] = register;
-                this.commandBuffer[2] = 0;
-                this.commandBuffer[3] = 0;
+				return (ushort)((this.readBuffer[2] << 8) | readBuffer[3]);
+			}
+		}
 
-                this.spiCommand.WriteRead(this.commandBuffer, this.readBuffer);
+		private void CommandWrite(byte register, ushort data) {
+			lock (this.spiSyncRoot) {
+				while (!this.dreq.Read())
+					Thread.Sleep(1);
 
-                return (ushort)((this.readBuffer[2] << 8) | readBuffer[3]);
-            }
-        }
+				this.commandBuffer[0] = Music.CMD_WRITE;
+				this.commandBuffer[1] = register;
+				this.commandBuffer[2] = (byte)(data >> 8);
+				this.commandBuffer[3] = (byte)data;
 
-        private void CommandWrite(byte register, ushort data)
-        {
-            lock (this.spiSyncRoot)
-            {
-                while (!this.dreq.Read())
-                    Thread.Sleep(1);
+				this.spiCommand.Write(this.commandBuffer);
+			}
+		}
 
-                this.commandBuffer[0] = Music.CMD_WRITE;
-                this.commandBuffer[1] = register;
-                this.commandBuffer[2] = (byte)(data >> 8);
-                this.commandBuffer[3] = (byte)data;
+		private void DoPlayback(byte[] buffer) {
+			byte[] block = new byte[32];
+			int size = buffer.Length - buffer.Length % 32;
 
-                this.spiCommand.Write(this.commandBuffer);
-            }
+			for (int i = 0; i < size && this.playing; i += 32) {
+				Array.Copy(buffer, i, block, 0, 32);
 
-        }
+				while (!this.dreq.Read())
+					Thread.Sleep(1);
 
-        private void DoPlayback(byte[] buffer)
-        {
-            byte[] block = new byte[32];
-            int size = buffer.Length - buffer.Length % 32;
+				lock (this.spiSyncRoot)
+					this.spiData.Write(block);
+			}
 
-            for (int i = 0; i < size && this.playing; i += 32)
-            {
-                Array.Copy(buffer, i, block, 0, 32);
+			this.OnMusicFinished(this, null);
 
-                while (!this.dreq.Read())
-                    Thread.Sleep(1);
+			this.Reset();
 
-                lock (this.spiSyncRoot)
-                    this.spiData.Write(block);
-            }
+			this.playing = false;
+		}
 
-            this.OnMusicFinished(this, null);
+		private void DoRecord(Stream stream, ushort[] patch) {
+			this.Reset();
+			this.SetVolume(255, 255);
 
-            this.Reset();
+			this.CommandWrite(Music.SCI_CLOCKF, 0xc000);
+			this.CommandWrite(Music.SCI_BASS, 0x0000);
+			this.CommandWrite(Music.SCI_AIADDR, 0x0000);
+			this.CommandWrite(Music.SCI_WRAMADDR, 0xC01A);
+			this.CommandWrite(Music.SCI_WRAM, 0x0002);
 
-            this.playing = false;
-        }
+			this.WritePatch(patch);
 
-        private void DoRecord(Stream stream, ushort[] patch)
-        {
-            this.Reset();
-            this.SetVolume(255, 255);
+			this.CommandWrite(Music.SCI_MODE, (ushort)(this.CommandRead(Music.SCI_MODE) | Music.SM_ADPCM | Music.SM_LINE1));
+			this.CommandWrite(Music.SCI_AICTRL1, 0);
+			this.CommandWrite(Music.SCI_AICTRL2, 4096);
+			this.CommandWrite(Music.SCI_AICTRL0, 0x0000);
+			this.CommandWrite(Music.SCI_AICTRL3, 0);
+			this.CommandWrite(Music.SCI_AIADDR, 0x0034);
 
-            this.CommandWrite(Music.SCI_CLOCKF, 0xc000);
-            this.CommandWrite(Music.SCI_BASS, 0x0000);
-            this.CommandWrite(Music.SCI_AIADDR, 0x0000);
-            this.CommandWrite(Music.SCI_WRAMADDR, 0xC01A);
-            this.CommandWrite(Music.SCI_WRAM, 0x0002);
+			while (!this.dreq.Read())
+				Thread.Sleep(5);
 
-            this.WritePatch(patch);
+			bool stop = false;
+			bool stopInProgress = false;
+			int samples = 0;
 
-            this.CommandWrite(Music.SCI_MODE, (ushort)(this.CommandRead(Music.SCI_MODE) | Music.SM_ADPCM | Music.SM_LINE1));
-            this.CommandWrite(Music.SCI_AICTRL1, 0);
-            this.CommandWrite(Music.SCI_AICTRL2, 4096);
-            this.CommandWrite(Music.SCI_AICTRL0, 0x0000);
-            this.CommandWrite(Music.SCI_AICTRL3, 0);
-            this.CommandWrite(Music.SCI_AIADDR, 0x0034);
+			while (!stop) {
+				if (!this.recording && !stopInProgress) {
+					this.CommandWrite(Music.SCI_AICTRL3, 0x0001);
 
-            while (!this.dreq.Read())
-                Thread.Sleep(5);
+					stopInProgress = true;
+				}
 
-            bool stop = false;
-            bool stopInProgress = false;
-            int samples = 0;
+				if (stopInProgress)
+					stop = (this.CommandRead(Music.SCI_AICTRL3) & 0x0002) != 0;
 
-            while (!stop)
-            {
-                if (!this.recording && !stopInProgress)
-                {
-                    this.CommandWrite(Music.SCI_AICTRL3, 0x0001);
+				samples = this.CommandRead(Music.SCI_HDAT1);
 
-                    stopInProgress = true;
-                }
+				if (samples > 0) {
+					this.ReadData(samples);
 
-                if (stopInProgress)
-                    stop = (this.CommandRead(Music.SCI_AICTRL3) & 0x0002) != 0;
+					stream.Write(this.recordingBuffer, 0, samples << 1);
+				}
+			}
 
-                samples = this.CommandRead(Music.SCI_HDAT1);
-                
-                if (samples > 0)
-                {
-                    this.ReadData(samples);
-                    
-                    stream.Write(this.recordingBuffer, 0, samples << 1);
-                }
-            }
+			samples = this.CommandRead(Music.SCI_HDAT1);
 
-            samples = this.CommandRead(Music.SCI_HDAT1);
-            
-            while (samples > 0)
-            {
-                this.ReadData(samples);
+			while (samples > 0) {
+				this.ReadData(samples);
 
-                stream.Write(this.recordingBuffer, 0, samples << 1);
+				stream.Write(this.recordingBuffer, 0, samples << 1);
 
-                samples = this.CommandRead(Music.SCI_HDAT1);
-            }
+				samples = this.CommandRead(Music.SCI_HDAT1);
+			}
 
-            this.Reset();
+			this.Reset();
 
-            this.recording = false;
-        }
+			this.recording = false;
+		}
 
-        private void ReadData(int count)
-        {
-            for (int i = 0; i < count; i++)
-            {
-                this.spiCommand.WriteRead(this.sampleBuffer, this.recordingBuffer4Bytes);
-                Array.Copy(this.recordingBuffer4Bytes, 2, recordingBuffer, i * 2, 2);
-            }
-        }
+		private void ReadData(int count) {
+			for (int i = 0; i < count; i++) {
+				this.spiCommand.WriteRead(this.sampleBuffer, this.recordingBuffer4Bytes);
+				Array.Copy(this.recordingBuffer4Bytes, 2, recordingBuffer, i * 2, 2);
+			}
+		}
 
-        private void WritePatch(ushort[] patch)
-        {
-            int count = 0;
-            int i = 0;
-            ushort value = 0;
+		private void WritePatch(ushort[] patch) {
+			int count = 0;
+			int i = 0;
+			ushort value = 0;
 
-            this.commandBuffer[0] = 0x02;
+			this.commandBuffer[0] = 0x02;
 
-            while (i < patch.Length)
-            {
-                this.commandBuffer[1] = (byte)patch[i++];
-                count = patch[i++];
+			while (i < patch.Length) {
+				this.commandBuffer[1] = (byte)patch[i++];
+				count = patch[i++];
 
-                if ((count & 0x8000) != 0)
-                {
-                    count &= 0x7FFF;
-                    value = patch[i++];
-                    this.commandBuffer[2] = (byte)(value >> 8);
-                    this.commandBuffer[3] = (byte)value;
+				if ((count & 0x8000) != 0) {
+					count &= 0x7FFF;
+					value = patch[i++];
+					this.commandBuffer[2] = (byte)(value >> 8);
+					this.commandBuffer[3] = (byte)value;
 
-                    while (count-- > 0)
-                    {
-                        this.spiCommand.Write(this.commandBuffer);
+					while (count-- > 0) {
+						this.spiCommand.Write(this.commandBuffer);
 
-                        while (!this.dreq.Read())
-                            Thread.Sleep(2);
-                    }
-                }
-                else
-                {
-                    while (count-- > 0)
-                    {
-                        value = patch[i++];
-                        this.commandBuffer[2] = (byte)(value >> 8);
-                        this.commandBuffer[3] = (byte)value;
+						while (!this.dreq.Read())
+							Thread.Sleep(2);
+					}
+				}
+				else {
+					while (count-- > 0) {
+						value = patch[i++];
+						this.commandBuffer[2] = (byte)(value >> 8);
+						this.commandBuffer[3] = (byte)value;
 
-                        this.spiCommand.Write(this.commandBuffer);
+						this.spiCommand.Write(this.commandBuffer);
 
-                        while (!this.dreq.Read())
-                            Thread.Sleep(2);
-                    }
+						while (!this.dreq.Read())
+							Thread.Sleep(2);
+					}
+				}
+			}
+		}
 
-                }
-            }
-        }
+		#region Patch
 
-        #region Patch
-        /// <summary>
-        /// The default Ogg patch.
-        /// </summary>
-        public static ushort[] OggPatch
-        {
-            get
-            {
-                return Music.oggPatch;
-            }
-        }
-
-        private static ushort[] oggPatch = 
+		private static ushort[] oggPatch =
         {
           0x0007, 0x0001, 0xc01a, 0x0006, 0x0001, 0x0002, 0x0007, 0x0001, /*    0 */
           0x1800, 0x0006, 0x8008, 0x0000, 0x0006, 0x0008, 0x0018, 0x0020, /*    8 */
@@ -2212,6 +2131,14 @@ namespace Gadgeteer.Modules.GHIElectronics
           0x0000, 0x0000, 0x2000, 0x0000, 0x0020, 0x0001, 0x2000, 0x0000, /* 3508 */
           0xbc82, 0x45c4,
         };
-        #endregion
-    }
+
+		/// <summary>The default Ogg patch.</summary>
+		public static ushort[] OggPatch {
+			get {
+				return Music.oggPatch;
+			}
+		}
+
+		#endregion Patch
+	}
 }

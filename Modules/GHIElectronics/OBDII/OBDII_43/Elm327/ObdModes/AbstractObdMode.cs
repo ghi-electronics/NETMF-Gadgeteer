@@ -1,206 +1,150 @@
 using System.Collections;
 
-namespace Elm327.Core.ObdModes
-{
-    /// <summary>
-    /// Base class for one of the OBD modes of operation (see
-    /// http://en.wikipedia.org/wiki/OBD-II_PIDs for information).
-    /// </summary>
-    public abstract class AbstractObdMode
-    {
-        #region Constructors
+namespace Elm327.Core.ObdModes {
+	/// <summary>
+	/// Base class for one of the OBD modes of operation (see
+	/// http: //en.wikipedia.org/wiki/OBD-II_PIDs for information).
+	/// </summary>
+	public abstract class AbstractObdMode {
 
-        /// <summary>
-        /// Creates an instance of a derived class of <see cref="AbstractObdMode"/>.
-        /// </summary>
-        /// <param name="elm">A reference to the ELM327 core driver.</param>
-        /// <param name="obdModeIdentifier">The OBD mode identifier as a 
-        /// hexadecimal string (i.e., "01", "02", etc.).</param>
-        internal AbstractObdMode(ElmDriver elm, string obdModeIdentifier)
-        {
-            // Note: In the full .NET framework, it would probably be better
-            // to tag the derived class with a custom attribute that contained
-            // the OBD mode identifier, but that functionality is not currently
-            // available in MF
+		#region Constructors
 
-            this.Elm = elm;
-            this.ModeIdentifier = obdModeIdentifier;
-        }
+		/// <summary>Creates an instance of a derived class of <see cref="AbstractObdMode" />.</summary>
+		/// <param name="elm">A reference to the ELM327 core driver.</param>
+		/// <param name="obdModeIdentifier">The OBD mode identifier as a hexadecimal string (i.e., "01", "02", etc.).</param>
+		internal AbstractObdMode(ElmDriver elm, string obdModeIdentifier) {
+			// Note: In the full .NET framework, it would probably be better to tag the derived class with a custom attribute that contained the OBD mode identifier, but that functionality is not
+			// currently available in MF
 
-        #endregion
+			this.Elm = elm;
+			this.ModeIdentifier = obdModeIdentifier;
+		}
 
-        #region Private Instance Properties
+		#endregion Constructors
 
-        /// <summary>
-        /// The ELM327 driver instance, which allows us to communicate with the
-        /// chip.
-        /// </summary>
-        private ElmDriver Elm
-        {
-            get;
-            set;
-        }
+		#region Private Instance Properties
 
-        /// <summary>
-        /// Gets the the OBD mode identifier as a hexadecimal string 
-        /// (i.e., "01", "02", etc.).
-        /// </summary>
-        private string ModeIdentifier
-        {
-            get;
-            set;
-        }
+		/// <summary>The ELM327 driver instance, which allows us to communicate with the chip.</summary>
+		private ElmDriver Elm {
+			get;
+			set;
+		}
 
-        #endregion
+		/// <summary>Gets the the OBD mode identifier as a hexadecimal string (i.e., "01", "02", etc.).</summary>
+		private string ModeIdentifier {
+			get;
+			set;
+		}
 
-        #region Protected Instance Properties
+		#endregion Private Instance Properties
 
-        /// <summary>
-        /// Gets the measuring unit currently being used.
-        /// </summary>
-        protected ElmDriver.ElmMeasuringUnitType MeasuringUnitType
-        {
-            get
-            {
-                return this.Elm.MeasuringUnitType;
-            }
-        }
+		#region Protected Instance Properties
 
-        #endregion
+		/// <summary>Gets the measuring unit currently being used.</summary>
+		protected ElmDriver.ElmMeasuringUnitType MeasuringUnitType {
+			get {
+				return this.Elm.MeasuringUnitType;
+			}
+		}
 
-        #region Private Instance Methods
+		#endregion Protected Instance Properties
 
-        /// <summary>
-        /// Parses a multiline PID response, returning only the data
-        /// elements in the message.
-        /// </summary>
-        /// <param name="message">The message received from the ELM.</param>
-        /// <returns>An array of values returned from the ELM.  This will usually
-        /// be an array of hex-encoded bytes represented as strings.</returns>
-        private string[] ParseMultilinePidResponse(string message)
-        {
-            // Split the response into lines
+		#region Private Instance Methods
 
-            string[] lines = message.Split(ElmDriver.MESSAGE_TERMINATOR_CHAR);
+		/// <summary>Parses a multiline PID response, returning only the data elements in the message.</summary>
+		/// <param name="message">The message received from the ELM.</param>
+		/// <returns>An array of values returned from the ELM. This will usually be an array of hex-encoded bytes represented as strings.</returns>
+		private string[] ParseMultilinePidResponse(string message) {
+			// Split the response into lines
 
-            if (lines.Length == 0)
-                return new string[0];
+			string[] lines = message.Split(ElmDriver.MESSAGE_TERMINATOR_CHAR);
 
-            // If there's only one element in the first line, this is a
-            // CAN response, which needs to be parsed differently than
-            // the other protocols
+			if (lines.Length == 0)
+				return new string[0];
 
-            if (lines[0].Trim().Split(' ').Length == 1)
-                return this.ParseMultilinePidResponseForCan(lines);
-            else
-            {
-                // TODO
+			// If there's only one element in the first line, this is a CAN response, which needs to be parsed differently than the other protocols
 
-                return new string[0];
-            }
-        }
+			if (lines[0].Trim().Split(' ').Length == 1)
+				return this.ParseMultilinePidResponseForCan(lines);
+			else {
+				// TODO
 
-        /// <summary>
-        /// Parses a multiline PID CAN response, returning only the data
-        /// elements in the message.
-        /// </summary>
-        /// <param name="lines">The message received from the ELM.</param>
-        /// <returns>An array of values returned from the ELM.  This will usually
-        /// be an array of hex-encoded bytes represented as strings.</returns>
-        private string[] ParseMultilinePidResponseForCan(string[] lines)
-        {
-            // TODO: Improve the efficiency of this method (check number of
-            // data elements so we don't need to use an ArrayList, for example)
+				return new string[0];
+			}
+		}
 
-            // See the ELM327 documentation for exactly how multiline CAN 
-            // messages are reported
- 
-            ArrayList dataElements = new ArrayList();
-            string[] lineElements;
-            int firstValidLineElementIndex;
+		/// <summary>Parses a multiline PID CAN response, returning only the data elements in the message.</summary>
+		/// <param name="lines">The message received from the ELM.</param>
+		/// <returns>An array of values returned from the ELM. This will usually be an array of hex-encoded bytes represented as strings.</returns>
+		private string[] ParseMultilinePidResponseForCan(string[] lines) {
+			// TODO: Improve the efficiency of this method (check number of data elements so we don't need to use an ArrayList, for example)
 
-            // The first line contains the number of data elements 
-            // in the message, but we're ignoring it for now
+			// See the ELM327 documentation for exactly how multiline CAN messages are reported
 
-            for (int i = 1; i < lines.Length; i++)
-            {
-                lineElements = lines[i].Trim().Split(' ');
+			ArrayList dataElements = new ArrayList();
+			string[] lineElements;
+			int firstValidLineElementIndex;
 
-                // Ignore the first four data elements in the first line,
-                // and ignore the first data element for each following
-                // line
+			// The first line contains the number of data elements in the message, but we're ignoring it for now
 
-                firstValidLineElementIndex = (i == 1) ? 4 : 1;
+			for (int i = 1; i < lines.Length; i++) {
+				lineElements = lines[i].Trim().Split(' ');
 
-                for (int j = firstValidLineElementIndex; j < lineElements.Length; j++)
-                {
-                    dataElements.Add(lineElements[j]);
-                }
-            }
+				// Ignore the first four data elements in the first line, and ignore the first data element for each following line
 
-            return (string[])dataElements.ToArray(typeof(string));
-        }
+				firstValidLineElementIndex = (i == 1) ? 4 : 1;
 
-        #endregion
+				for (int j = firstValidLineElementIndex; j < lineElements.Length; j++) {
+					dataElements.Add(lineElements[j]);
+				}
+			}
 
-        #region Protected Instance Methods
+			return (string[])dataElements.ToArray(typeof(string));
+		}
 
-        /// <summary>
-        /// Sends a request for a PID value from the ELM and returns the response.
-        /// </summary>
-        /// <param name="pid">The hexadecimal value of the PID to request.</param>
-        /// <returns>An array of values returned from the ELM.  This will usually
-        /// be an array of hex-encoded bytes represented as strings.</returns>
-        protected string[] GetPidResponse(string pid)
-        {
-            // The PID request is sent to the ELM like "0102", where "01" is the
-            // mode identifier in hex and the rest of the string is the PID
+		#endregion Private Instance Methods
 
-            string message = this.Elm.SendAndReceiveMessage(this.ModeIdentifier + pid);
+		#region Protected Instance Methods
 
-            if (message == null)
-                return new string[0];
+		/// <summary>Sends a request for a PID value from the ELM and returns the response.</summary>
+		/// <param name="pid">The hexadecimal value of the PID to request.</param>
+		/// <returns>An array of values returned from the ELM. This will usually be an array of hex-encoded bytes represented as strings.</returns>
+		protected string[] GetPidResponse(string pid) {
+			// The PID request is sent to the ELM like "0102", where "01" is the mode identifier in hex and the rest of the string is the PID
 
-            // Check to see if there's a line terminator in the message.  If so, it's a
-            // multiline response that needs to be handled differently.
+			string message = this.Elm.SendAndReceiveMessage(this.ModeIdentifier + pid);
 
-            if (message.IndexOf(ElmDriver.MESSAGE_TERMINATOR_CHAR) > -1)
-                return this.ParseMultilinePidResponse(message);
-            else
-            {
-                // TODO: The response must begin with a correct response header; need to
-                // check this.  As an example, sending "0102" should return a response
-                // that begins with "41 02".
+			if (message == null)
+				return new string[0];
 
-                string[] hexBytes = message.Split(' ');
+			// Check to see if there's a line terminator in the message. If so, it's a multiline response that needs to be handled differently.
 
-                if (hexBytes.Length > 2)
-                {
-                    string[] returnValues = new string[hexBytes.Length - 2];
+			if (message.IndexOf(ElmDriver.MESSAGE_TERMINATOR_CHAR) > -1)
+				return this.ParseMultilinePidResponse(message);
+			else {
+				// TODO: The response must begin with a correct response header; need to check this. As an example, sending "0102" should return a response that begins with "41 02".
 
-                    for (int i = 0; i < hexBytes.Length - 2; i++)
-                    {
-                        returnValues[i] = hexBytes[i + 2];
-                    }
+				string[] hexBytes = message.Split(' ');
 
-                    return returnValues;
-                }
-                else
-                    return new string[0];
-            }
-        }
+				if (hexBytes.Length > 2) {
+					string[] returnValues = new string[hexBytes.Length - 2];
 
-        /// <summary>
-        /// When overridden in a derived class, queries the ECU(s) for
-        /// the PIDs that are supported for the current mode.
-        /// </summary>
-        protected virtual void GetSupportedPids()
-        {
-            // TODO: Implement this in derived classes and call it on
-            // each derived class after a successful OBD connection
-            // has been made
-        }
+					for (int i = 0; i < hexBytes.Length - 2; i++) {
+						returnValues[i] = hexBytes[i + 2];
+					}
 
-        #endregion
-    }
+					return returnValues;
+				}
+				else
+					return new string[0];
+			}
+		}
+
+		/// <summary>When overridden in a derived class, queries the ECU(s) for the PIDs that are supported for the current mode.</summary>
+		protected virtual void GetSupportedPids() {
+			// TODO: Implement this in derived classes and call it on each derived class after a successful OBD connection has been made
+		}
+
+		#endregion Protected Instance Methods
+	}
 }

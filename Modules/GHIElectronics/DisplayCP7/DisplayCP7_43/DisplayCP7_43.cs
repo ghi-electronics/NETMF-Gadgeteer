@@ -5,415 +5,327 @@ using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A DisplayCP7 module for Microsoft .NET Gadgeteer.
-    /// </summary>
-    public class DisplayCP7 : GTM.Module.DisplayModule
-    {
-        private GTI.DigitalOutput backlightPin;
-        private GTI.InterruptInput touchInterrupt;
-        private GTI.I2CBus i2cBus;
-        private I2CDevice.I2CTransaction[] transactions;
-        private byte[] addressBuffer;
-        private byte[] resultBuffer;
-        private bool releaseSent;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A DisplayCP7 module for Microsoft .NET Gadgeteer.</summary>
+	public class DisplayCP7 : GTM.Module.DisplayModule {
+		private GTI.DigitalOutput backlightPin;
+		private GTI.InterruptInput touchInterrupt;
+		private GTI.I2CBus i2cBus;
+		private I2CDevice.I2CTransaction[] transactions;
+		private byte[] addressBuffer;
+		private byte[] resultBuffer;
+		private bool releaseSent;
 
-        private TouchEventHandler onScreenPressed;
-        private EventHandler onScreenReleased;
-        private EventHandler onHomePressed;
-        private EventHandler onMenuPressed;
-        private EventHandler onBackPressed;
-        private GestureDetectedEventHandler onGestureDetected;
+		private TouchEventHandler onScreenPressed;
+		private EventHandler onScreenReleased;
+		private EventHandler onHomePressed;
+		private EventHandler onMenuPressed;
+		private EventHandler onBackPressed;
+		private GestureDetectedEventHandler onGestureDetected;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
-        /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
-        /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
-        public DisplayCP7(int rSocketNumber, int gSocketNumber, int bSocketNumber) : this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused)
-        {
+		/// <summary>The delegate that is used to handle the button pressed and screen released events.</summary>
+		/// <param name="sender">The <see cref="DisplayCP7" /> object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void EventHandler(DisplayCP7 sender, EventArgs e);
 
-        }
+		/// <summary>The delegate that is used to handle the touch events.</summary>
+		/// <param name="sender">The <see cref="DisplayCP7" /> object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void TouchEventHandler(DisplayCP7 sender, TouchEventArgs e);
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
-        /// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
-        /// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
-        /// <param name="i2cSocketNumber">The mainboard socket that has the display's I socket connected to it.</param>
-        public DisplayCP7(int rSocketNumber, int gSocketNumber, int bSocketNumber, int i2cSocketNumber) : base(WpfMode.PassThrough)
-        {
-            var config = new DisplayModule.TimingRequirements()
-            {
-                UsesCommonSyncPin = true, //not the proper property, but we needed it for OutputEnableIsFixed
-                CommonSyncPinIsActiveHigh = true, //not the proper property, but we needed it for OutputEnablePolarity
-                HorizontalSyncPulseIsActiveHigh = true,
-                VerticalSyncPulseIsActiveHigh = true,
-                PixelDataIsValidOnClockRisingEdge = false,
-                HorizontalSyncPulseWidth = 1,
-                HorizontalBackPorch = 46,
-                HorizontalFrontPorch = 16,
-                VerticalSyncPulseWidth = 1,
-                VerticalBackPorch = 23,
-                VerticalFrontPorch = 7,
-                MaximumClockSpeed = 24000,
-            };
+		/// <summary>The delegate that is used to handle the GestureDetected event.</summary>
+		/// <param name="sender">The <see cref="DisplayCP7" /> object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void GestureDetectedEventHandler(DisplayCP7 sender, GestureDetectedEventArgs e);
 
-            base.OnDisplayConnected("Display CP7", 800, 480, DisplayOrientation.Normal, config);
+		/// <summary>Raised when the screen detects a press.</summary>
+		public event TouchEventHandler ScreenPressed;
 
-            var rSocket = Socket.GetSocket(rSocketNumber, true, this, null);
-            var gSocket = Socket.GetSocket(gSocketNumber, true, this, null);
-            var bSocket = Socket.GetSocket(bSocketNumber, true, this, null);
+		/// <summary>Raised when the screen detects that all touches were released.</summary>
+		public event EventHandler ScreenReleased;
 
-            rSocket.EnsureTypeIsSupported('R', this);
-            gSocket.EnsureTypeIsSupported('G', this);
-            bSocket.EnsureTypeIsSupported('B', this);
+		/// <summary>Raised when the screen detects a touch on the home button.</summary>
+		public event EventHandler HomePressed;
 
-            this.backlightPin = GTI.DigitalOutputFactory.Create(gSocket, Socket.Pin.Nine, true, this);
+		/// <summary>Raised when the screen detects a touch on the menu button.</summary>
+		public event EventHandler MenuPressed;
 
-            rSocket.ReservePin(Socket.Pin.Three, this);
-            rSocket.ReservePin(Socket.Pin.Four, this);
-            rSocket.ReservePin(Socket.Pin.Five, this);
-            rSocket.ReservePin(Socket.Pin.Six, this);
-            rSocket.ReservePin(Socket.Pin.Seven, this);
-            rSocket.ReservePin(Socket.Pin.Eight, this);
-            rSocket.ReservePin(Socket.Pin.Nine, this);
+		/// <summary>Raised when the screen detects a touch on the back button.</summary>
+		public event EventHandler BackPressed;
 
-            gSocket.ReservePin(Socket.Pin.Three, this);
-            gSocket.ReservePin(Socket.Pin.Four, this);
-            gSocket.ReservePin(Socket.Pin.Five, this);
-            gSocket.ReservePin(Socket.Pin.Six, this);
-            gSocket.ReservePin(Socket.Pin.Seven, this);
-            gSocket.ReservePin(Socket.Pin.Eight, this);
+		/// <summary>Raised when the screen detects a gesture.</summary>
+		public event GestureDetectedEventHandler GestureDetected;
 
-            bSocket.ReservePin(Socket.Pin.Three, this);
-            bSocket.ReservePin(Socket.Pin.Four, this);
-            bSocket.ReservePin(Socket.Pin.Five, this);
-            bSocket.ReservePin(Socket.Pin.Six, this);
-            bSocket.ReservePin(Socket.Pin.Seven, this);
-            bSocket.ReservePin(Socket.Pin.Eight, this);
-            bSocket.ReservePin(Socket.Pin.Nine, this);
-            
-             if (i2cSocketNumber == Socket.Unused)
-                return;
-            
-            this.onScreenPressed = this.OnScreenPressed;
-            this.onScreenReleased = this.OnScreenReleased;
-            this.onHomePressed = this.OnHomePressed;
-            this.onMenuPressed = this.OnMenuPressed;
-            this.onBackPressed = this.OnBackPressed;
-            this.onGestureDetected = this.OnGestureDetected;
+		/// <summary>Whether or not the backlight is enabled.</summary>
+		public bool BacklightEnabled {
+			get {
+				return this.backlightPin.Read();
+			}
 
-            Socket i2cSocket = Socket.GetSocket(i2cSocketNumber, true, this, null);
+			set {
+				this.backlightPin.Write(value);
+			}
+		}
 
-            this.releaseSent = false;
-            this.transactions = new I2CDevice.I2CTransaction[2];
-            this.resultBuffer = new byte[1];
-            this.addressBuffer = new byte[1];
-            this.i2cBus = GTI.I2CBusFactory.Create(i2cSocket, 0x38, 400, this);
-            this.touchInterrupt = GTI.InterruptInputFactory.Create(i2cSocket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
-            this.touchInterrupt.Interrupt += (a, b) => this.OnTouchEvent();
-        }
+		/// <summary>The possible gestures.</summary>
+		public enum GestureType {
 
-        /// <summary>
-        /// Whether or not the backlight is enabled.
-        /// </summary>
-        public bool BacklightEnabled
-        {
-            get
-            {
-                return this.backlightPin.Read();
-            }
-            set
-            {
-                this.backlightPin.Write(value);
-            }
-        }
+			/// <summary>A move up gesture</summary>
+			MoveUp = 0x10,
 
-        /// <summary>
-        /// Renders display data on the display device. 
-        /// </summary>
-        /// <param name="bitmap">The bitmap object to render on the display.</param>
-        /// <param name="x">The start x coordinate of the dirty area.</param>
-        /// <param name="y">The start y coordinate of the dirty area.</param>
-        /// <param name="width">The width of the dirty area.</param>
-        /// <param name="height">The height of the dirty area.</param>
-        protected override void Paint(Bitmap bitmap, int x, int y, int width, int height)
-        {
-            try
-            {
-                bitmap.Flush(x, y, width, height);
-            }
-            catch
-            {
-                this.ErrorPrint("Painting error");
-            }
-        }
+			/// <summary>A move left gesture</summary>
+			MoveLeft = 0x14,
 
-        /// <summary>
-        /// The possible gestures.
-        /// </summary>
-        public enum GestureType
-        {
-            /// <summary>
-            /// A move up gesture
-            /// </summary>
-            MoveUp = 0x10,
+			/// <summary>A move down gesture</summary>
+			MoveDown = 0x18,
 
-            /// <summary>
-            /// A move left gesture
-            /// </summary>
-            MoveLeft = 0x14,
+			/// <summary>A move right gesture</summary>
+			MoveRight = 0x1C,
 
-            /// <summary>
-            /// A move down gesture
-            /// </summary>
-            MoveDown = 0x18,
+			/// <summary>A zoom in gesture</summary>
+			ZoomIn = 0x48,
 
-            /// <summary>
-            /// A move right gesture
-            /// </summary>
-            MoveRight = 0x1C,
+			/// <summary>A zoom out gesture</summary>
+			ZoomOut = 0x49,
 
-            /// <summary>
-            /// A zoom in gesture
-            /// </summary>
-            ZoomIn = 0x48,
+			/// <summary>No gesture detected</summary>
+			None = 0x00
+		}
 
-            /// <summary>
-            /// A zoom out gesture
-            /// </summary>
-            ZoomOut = 0x49,
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
+		/// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
+		/// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
+		public DisplayCP7(int rSocketNumber, int gSocketNumber, int bSocketNumber)
+			: this(rSocketNumber, gSocketNumber, bSocketNumber, Socket.Unused) {
+		}
 
-            /// <summary>
-            /// No gesture detected
-            /// </summary>
-            None = 0x00
-        }
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="rSocketNumber">The mainboard socket that has the display's R socket connected to it.</param>
+		/// <param name="gSocketNumber">The mainboard socket that has the display's G socket connected to it.</param>
+		/// <param name="bSocketNumber">The mainboard socket that has the display's B socket connected to it.</param>
+		/// <param name="i2cSocketNumber">The mainboard socket that has the display's I socket connected to it.</param>
+		public DisplayCP7(int rSocketNumber, int gSocketNumber, int bSocketNumber, int i2cSocketNumber)
+			: base(WpfMode.PassThrough) {
+			var config = new DisplayModule.TimingRequirements() {
+				UsesCommonSyncPin = true, //not the proper property, but we needed it for OutputEnableIsFixed
+				CommonSyncPinIsActiveHigh = true, //not the proper property, but we needed it for OutputEnablePolarity
+				HorizontalSyncPulseIsActiveHigh = true,
+				VerticalSyncPulseIsActiveHigh = true,
+				PixelDataIsValidOnClockRisingEdge = false,
+				HorizontalSyncPulseWidth = 1,
+				HorizontalBackPorch = 46,
+				HorizontalFrontPorch = 16,
+				VerticalSyncPulseWidth = 1,
+				VerticalBackPorch = 23,
+				VerticalFrontPorch = 7,
+				MaximumClockSpeed = 24000,
+			};
 
-        /// <summary>
-        /// Represents a single position
-        /// </summary>
-        public class Position
-        {
-            /// <summary>
-            /// The x coordinate of the position.
-            /// </summary>
-            public int X { get; set; }
+			base.OnDisplayConnected("Display CP7", 800, 480, DisplayOrientation.Normal, config);
 
-            /// <summary>
-            /// The y coordinate of the position.
-            /// </summary>
-            public int Y { get; set; }
+			var rSocket = Socket.GetSocket(rSocketNumber, true, this, null);
+			var gSocket = Socket.GetSocket(gSocketNumber, true, this, null);
+			var bSocket = Socket.GetSocket(bSocketNumber, true, this, null);
 
-            /// <summary>
-            /// Constructs a new instance.
-            /// </summary>
-            /// <param name="x">The x coordinate</param>
-            /// <param name="y">The y coordinate</param>
-            public Position(int x, int y)
-            {
-                this.X = x;
-                this.Y = y;
-            }
-        }
+			rSocket.EnsureTypeIsSupported('R', this);
+			gSocket.EnsureTypeIsSupported('G', this);
+			bSocket.EnsureTypeIsSupported('B', this);
 
-        /// <summary>
-        /// Event arguments for the ScreenPressed event.
-        /// </summary>
-        public class TouchEventArgs : EventArgs
-        {
-            /// <summary>
-            /// the detected touches.
-            /// </summary>
-            public Position[] TouchPoints { get; private set; }
+			this.backlightPin = GTI.DigitalOutputFactory.Create(gSocket, Socket.Pin.Nine, true, this);
 
-            /// <summary>
-            /// The number of touches
-            /// </summary>
-            public int TouchCount { get; private set; }
+			rSocket.ReservePin(Socket.Pin.Three, this);
+			rSocket.ReservePin(Socket.Pin.Four, this);
+			rSocket.ReservePin(Socket.Pin.Five, this);
+			rSocket.ReservePin(Socket.Pin.Six, this);
+			rSocket.ReservePin(Socket.Pin.Seven, this);
+			rSocket.ReservePin(Socket.Pin.Eight, this);
+			rSocket.ReservePin(Socket.Pin.Nine, this);
 
-            internal TouchEventArgs(int touchCount)
-            {
-                this.TouchCount = touchCount;
-                this.TouchPoints = new Position[touchCount];
-            }
-        }
+			gSocket.ReservePin(Socket.Pin.Three, this);
+			gSocket.ReservePin(Socket.Pin.Four, this);
+			gSocket.ReservePin(Socket.Pin.Five, this);
+			gSocket.ReservePin(Socket.Pin.Six, this);
+			gSocket.ReservePin(Socket.Pin.Seven, this);
+			gSocket.ReservePin(Socket.Pin.Eight, this);
 
-        /// <summary>
-        /// Event arguments for the GestureDetected event.
-        /// </summary>
-        public class GestureDetectedEventArgs : EventArgs
-        {
-            /// <summary>
-            /// The detected gesture.
-            /// </summary>
-            public GestureType Gesture { get; private set; }
+			bSocket.ReservePin(Socket.Pin.Three, this);
+			bSocket.ReservePin(Socket.Pin.Four, this);
+			bSocket.ReservePin(Socket.Pin.Five, this);
+			bSocket.ReservePin(Socket.Pin.Six, this);
+			bSocket.ReservePin(Socket.Pin.Seven, this);
+			bSocket.ReservePin(Socket.Pin.Eight, this);
+			bSocket.ReservePin(Socket.Pin.Nine, this);
 
-            internal GestureDetectedEventArgs(GestureType type)
-            {
-                this.Gesture = type;
-            }
-        }
+			if (i2cSocketNumber == Socket.Unused)
+				return;
 
-        /// <summary>
-        /// The delegate that is used to handle the button pressed and screen released events.
-        /// </summary>
-        /// <param name="sender">The <see cref="DisplayCP7"/> object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void EventHandler(DisplayCP7 sender, EventArgs e);
+			this.onScreenPressed = this.OnScreenPressed;
+			this.onScreenReleased = this.OnScreenReleased;
+			this.onHomePressed = this.OnHomePressed;
+			this.onMenuPressed = this.OnMenuPressed;
+			this.onBackPressed = this.OnBackPressed;
+			this.onGestureDetected = this.OnGestureDetected;
 
-        /// <summary>
-        /// The delegate that is used to handle the touch events.
-        /// </summary>
-        /// <param name="sender">The <see cref="DisplayCP7"/> object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void TouchEventHandler(DisplayCP7 sender, TouchEventArgs e);
+			Socket i2cSocket = Socket.GetSocket(i2cSocketNumber, true, this, null);
 
-        /// <summary>
-        /// The delegate that is used to handle the GestureDetected event.
-        /// </summary>
-        /// <param name="sender">The <see cref="DisplayCP7"/> object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void GestureDetectedEventHandler(DisplayCP7 sender, GestureDetectedEventArgs e);
+			this.releaseSent = false;
+			this.transactions = new I2CDevice.I2CTransaction[2];
+			this.resultBuffer = new byte[1];
+			this.addressBuffer = new byte[1];
+			this.i2cBus = GTI.I2CBusFactory.Create(i2cSocket, 0x38, 400, this);
+			this.touchInterrupt = GTI.InterruptInputFactory.Create(i2cSocket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.PullUp, GTI.InterruptMode.RisingAndFallingEdge, this);
+			this.touchInterrupt.Interrupt += (a, b) => this.OnTouchEvent();
+		}
 
-        /// <summary>
-        /// Raised when the screen detects a press.
-        /// </summary>
-        public event TouchEventHandler ScreenPressed;
+		/// <summary>Renders display data on the display device.</summary>
+		/// <param name="bitmap">The bitmap object to render on the display.</param>
+		/// <param name="x">The start x coordinate of the dirty area.</param>
+		/// <param name="y">The start y coordinate of the dirty area.</param>
+		/// <param name="width">The width of the dirty area.</param>
+		/// <param name="height">The height of the dirty area.</param>
+		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height) {
+			try {
+				bitmap.Flush(x, y, width, height);
+			}
+			catch {
+				this.ErrorPrint("Painting error");
+			}
+		}
 
-        /// <summary>
-        /// Raised when the screen detects that all touches were released.
-        /// </summary>
-        public event EventHandler ScreenReleased;
+		private void OnScreenPressed(DisplayCP7 sender, TouchEventArgs e) {
+			if (Program.CheckAndInvoke(this.ScreenPressed, this.onScreenPressed, sender, e))
+				this.ScreenPressed(sender, e);
+		}
 
-        /// <summary>
-        /// Raised when the screen detects a touch on the home button.
-        /// </summary>
-        public event EventHandler HomePressed;
+		private void OnScreenReleased(DisplayCP7 sender, EventArgs e) {
+			if (Program.CheckAndInvoke(this.ScreenReleased, this.onScreenReleased, sender, e))
+				this.ScreenReleased(sender, e);
+		}
 
-        /// <summary>
-        /// Raised when the screen detects a touch on the menu button.
-        /// </summary>
-        public event EventHandler MenuPressed;
+		private void OnHomePressed(DisplayCP7 sender, EventArgs e) {
+			if (Program.CheckAndInvoke(this.HomePressed, this.onHomePressed, sender, e))
+				this.HomePressed(sender, e);
+		}
 
-        /// <summary>
-        /// Raised when the screen detects a touch on the back button.
-        /// </summary>
-        public event EventHandler BackPressed;
+		private void OnMenuPressed(DisplayCP7 sender, EventArgs e) {
+			if (Program.CheckAndInvoke(this.MenuPressed, this.onMenuPressed, sender, e))
+				this.MenuPressed(sender, e);
+		}
 
-        /// <summary>
-        /// Raised when the screen detects a gesture.
-        /// </summary>
-        public event GestureDetectedEventHandler GestureDetected;
+		private void OnBackPressed(DisplayCP7 sender, EventArgs e) {
+			if (Program.CheckAndInvoke(this.BackPressed, this.onBackPressed, sender, e))
+				this.BackPressed(sender, e);
+		}
 
-        private void OnScreenPressed(DisplayCP7 sender, TouchEventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.ScreenPressed, this.onScreenPressed, sender, e))
-                this.ScreenPressed(sender, e);
-        }
+		private void OnGestureDetected(DisplayCP7 sender, GestureDetectedEventArgs e) {
+			if (Program.CheckAndInvoke(this.GestureDetected, this.onGestureDetected, sender, e))
+				this.GestureDetected(sender, e);
+		}
 
-        private void OnScreenReleased(DisplayCP7 sender, EventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.ScreenReleased, this.onScreenReleased, sender, e))
-                this.ScreenReleased(sender, e);
-        }
+		private void OnTouchEvent() {
+			int numberOfTouches = this.ReadRegister(0x02) & 0x0F;
+			if (numberOfTouches == 0) {
+				if (!this.releaseSent) {
+					this.OnScreenReleased(this, new EventArgs());
 
-        private void OnHomePressed(DisplayCP7 sender, EventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.HomePressed, this.onHomePressed, sender, e))
-                this.HomePressed(sender, e);
-        }
+					this.releaseSent = true;
+				}
 
-        private void OnMenuPressed(DisplayCP7 sender, EventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.MenuPressed, this.onMenuPressed, sender, e))
-                this.MenuPressed(sender, e);
-        }
+				return;
+			}
 
-        private void OnBackPressed(DisplayCP7 sender, EventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.BackPressed, this.onBackPressed, sender, e))
-                this.BackPressed(sender, e);
-        }
+			this.releaseSent = false;
 
-        private void OnGestureDetected(DisplayCP7 sender, GestureDetectedEventArgs e)
-        {
-            if (Program.CheckAndInvoke(this.GestureDetected, this.onGestureDetected, sender, e))
-                this.GestureDetected(sender, e);
-        }
+			var gesture = (GestureType)(this.ReadRegister(0x01) & 0xFF);
+			if (gesture != GestureType.None) {
+				this.OnGestureDetected(this, new GestureDetectedEventArgs(gesture));
 
-        private void OnTouchEvent()
-        {
-            int numberOfTouches = this.ReadRegister(0x02) & 0x0F;
-            if (numberOfTouches == 0)
-            {
-                if (!this.releaseSent)
-                {
-                    this.OnScreenReleased(this, new EventArgs());
+				return;
+			}
 
-                    this.releaseSent = true;
-                }
+			var positions = new Position[numberOfTouches];
+			var actualTouchCount = 0;
 
-                return;
-            }
+			for (int i = 0; i < numberOfTouches; i++) {
+				int x = ((this.ReadRegister((byte)(3 + i * 6)) & 0x0F) << 8) + this.ReadRegister((byte)(4 + i * 6));
+				int y = ((this.ReadRegister((byte)(5 + i * 6)) & 0x0F) << 8) + this.ReadRegister((byte)(6 + i * 6));
 
-            this.releaseSent = false;
+				if (x > 800) {
+					if (y >= 0 && y <= 50) {
+						this.OnHomePressed(this, new EventArgs());
+					}
+					else if (y >= 100 && y <= 150) {
+						this.OnMenuPressed(this, new EventArgs());
+					}
+					else if (y >= 200 && y <= 250) {
+						this.OnBackPressed(this, new EventArgs());
+					}
+				}
+				else {
+					actualTouchCount++;
+					positions[i] = new Position(x, y);
+				}
+			}
 
-            var gesture = (GestureType)(this.ReadRegister(0x01) & 0xFF);
-            if (gesture != GestureType.None)
-            {
-                this.OnGestureDetected(this, new GestureDetectedEventArgs(gesture));
+			TouchEventArgs e = new TouchEventArgs(actualTouchCount);
+			Array.Copy(positions, e.TouchPoints, actualTouchCount);
+			this.OnScreenPressed(this, e);
+		}
 
-                return;
-            }
+		private byte ReadRegister(byte address) {
+			this.addressBuffer[0] = address;
 
-            var positions = new Position[numberOfTouches];
-            var actualTouchCount = 0;
+			this.transactions[0] = I2CDevice.CreateWriteTransaction(this.addressBuffer);
+			this.transactions[1] = I2CDevice.CreateReadTransaction(this.resultBuffer);
 
-            for (int i = 0; i < numberOfTouches; i++)
-            {
-                int x = ((this.ReadRegister((byte)(3 + i * 6)) & 0x0F) << 8) + this.ReadRegister((byte)(4 + i * 6));
-                int y = ((this.ReadRegister((byte)(5 + i * 6)) & 0x0F) << 8) + this.ReadRegister((byte)(6 + i * 6));
+			if (this.i2cBus.Execute(this.transactions) == 0)
+				this.DebugPrint("Failed to perform I2C transaction");
 
-                if (x > 800)
-                {
-                    if (y >= 0 && y <= 50)
-                    {
-                        this.OnHomePressed(this, new EventArgs());
-                    }
-                    else if (y >= 100 && y <= 150)
-                    {
-                        this.OnMenuPressed(this, new EventArgs());
-                    }
-                    else if (y >= 200 && y <= 250)
-                    {
-                        this.OnBackPressed(this, new EventArgs());
-                    }
-                }
-                else
-                {
-                    actualTouchCount++;
-                    positions[i] = new Position(x, y);
-                }
-            }
+			return this.resultBuffer[0];
+		}
+		/// <summary>Represents a single position</summary>
+		public class Position {
 
-            TouchEventArgs e = new TouchEventArgs(actualTouchCount);
-            Array.Copy(positions, e.TouchPoints, actualTouchCount);
-            this.OnScreenPressed(this, e);
-        }
+			/// <summary>The x coordinate of the position.</summary>
+			public int X { get; set; }
 
-        private byte ReadRegister(byte address)
-        {
-            this.addressBuffer[0] = address;
+			/// <summary>The y coordinate of the position.</summary>
+			public int Y { get; set; }
 
-            this.transactions[0] = I2CDevice.CreateWriteTransaction(this.addressBuffer);
-            this.transactions[1] = I2CDevice.CreateReadTransaction(this.resultBuffer);
+			/// <summary>Constructs a new instance.</summary>
+			/// <param name="x">The x coordinate</param>
+			/// <param name="y">The y coordinate</param>
+			public Position(int x, int y) {
+				this.X = x;
+				this.Y = y;
+			}
+		}
 
-            if (this.i2cBus.Execute(this.transactions) == 0)
-                this.DebugPrint("Failed to perform I2C transaction");
+		/// <summary>Event arguments for the ScreenPressed event.</summary>
+		public class TouchEventArgs : EventArgs {
 
-            return this.resultBuffer[0];
-        }
-    }
+			/// <summary>the detected touches.</summary>
+			public Position[] TouchPoints { get; private set; }
+
+			/// <summary>The number of touches</summary>
+			public int TouchCount { get; private set; }
+
+			internal TouchEventArgs(int touchCount) {
+				this.TouchCount = touchCount;
+				this.TouchPoints = new Position[touchCount];
+			}
+		}
+
+		/// <summary>Event arguments for the GestureDetected event.</summary>
+		public class GestureDetectedEventArgs : EventArgs {
+
+			/// <summary>The detected gesture.</summary>
+			public GestureType Gesture { get; private set; }
+
+			internal GestureDetectedEventArgs(GestureType type) {
+				this.Gesture = type;
+			}
+		}
+	}
 }

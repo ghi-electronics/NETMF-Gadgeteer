@@ -6,36 +6,26 @@ using GT = Gadgeteer;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-	/// <summary>
-	/// A DistanceUS3 module for Microsoft .NET Gadgeteer
-	/// </summary>
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A DistanceUS3 module for Microsoft .NET Gadgeteer</summary>
 	[Obsolete]
-	public class DistanceUS3 : GTM.Module
-	{
-		private GTI.DigitalInput echo;
-		private GTI.DigitalOutput trigger;
-
+	public class DistanceUS3 : GTM.Module {
 		private const int MIN_DISTANCE = 2;
 		private const int MAX_DISTANCE = 400;
 		private const int MIN_FLAG = -2;
 		private const int MAX_FLAG = -1;
+		private GTI.DigitalInput echo;
+		private GTI.DigitalOutput trigger;
 
-		/// <summary>
-		/// The value that will be returned when the sensor failed to take an accurate reading.
-		/// </summary>
+		/// <summary>The value that will be returned when the sensor failed to take an accurate reading.</summary>
 		public static int SensorError { get { return -1; } }
 
-		/// <summary>
-		/// The number of errors to encounter before returning SENSOR_ERROR.
-		/// </summary>
+		/// <summary>The number of errors to encounter before returning SENSOR_ERROR.</summary>
 		public int AcceptableErrors { get; set; }
 
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
-		public DistanceUS3(int socketNumber)
-		{
+		public DistanceUS3(int socketNumber) {
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
@@ -45,35 +35,26 @@ namespace Gadgeteer.Modules.GHIElectronics
 			this.AcceptableErrors = 10;
 		}
 
-		/// <summary>
-		/// Takes a number of measurements and returns the average in centimeters.
-		/// </summary>
+		/// <summary>Takes a number of measurements and returns the average in centimeters.</summary>
 		/// <returns>The averaged distance or SensorError.</returns>
-		public double GetDistance()
-		{
+		public double GetDistance() {
 			return this.GetDistance(1);
 		}
 
-		/// <summary>
-		/// Takes a number of measurements and returns the average in centimeters.
-		/// </summary>
+		/// <summary>Takes a number of measurements and returns the average in centimeters.</summary>
 		/// <param name="measurements">The number of measurements to take and average.</param>
 		/// <returns>The averaged distance or SensorError.</returns>
-		public double GetDistance(int measurements)
-		{
+		public double GetDistance(int measurements) {
 			var sum = 0.0;
 			var errorCount = 0;
 
-			for (var i = 0; i < measurements; i++)
-			{
+			for (var i = 0; i < measurements; i++) {
 				var value = this.GetDistanceHelper();
 
-				if (value >= DistanceUS3.MIN_DISTANCE && value <= DistanceUS3.MAX_DISTANCE)
-				{
+				if (value >= DistanceUS3.MIN_DISTANCE && value <= DistanceUS3.MAX_DISTANCE) {
 					sum += value;
 				}
-				else
-				{
+				else {
 					errorCount++;
 					i--;
 
@@ -85,8 +66,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 			return sum / measurements;
 		}
 
-		private double GetDistanceHelper()
-		{
+		private double GetDistanceHelper() {
 			this.trigger.Write(false);
 			Thread.Sleep(1);
 

@@ -2,90 +2,67 @@
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A ColorSense module for Microsoft .NET Gadgeteer
-    /// </summary>
-    [Obsolete]
-    public class ColorSense : GTM.Module
-    {
-        private GTI.DigitalOutput led;
-        private GTI.SoftwareI2CBus i2c;
-        private byte[] writeBuffer;
-        private byte[] readBuffer;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A ColorSense module for Microsoft .NET Gadgeteer</summary>
+	[Obsolete]
+	public class ColorSense : GTM.Module {
+		private GTI.DigitalOutput led;
+		private GTI.SoftwareI2CBus i2c;
+		private byte[] writeBuffer;
+		private byte[] readBuffer;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public ColorSense(int socketNumber)
-        {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported(new char[] {'X', 'Y'}, this);
+		/// <summary>Sets the state of the onboard LED.</summary>
+		public bool LedEnabled {
+			get {
+				return this.led.Read();
+			}
 
-            this.writeBuffer = new byte[1];
-            this.readBuffer = new byte[2];
-            this.led = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
-            this.i2c = new GTI.SoftwareI2CBus(socket, Socket.Pin.Five, Socket.Pin.Four, 0x39, 100, this);
-            this.i2c.Write(new byte[] { 0x80, 0x03 });
-        }
+			set {
+				this.led.Write(value);
+			}
+		}
 
-        /// <summary>
-        /// Holds the color data.
-        /// </summary>
-        public struct ColorData
-        {
-            /// <summary>
-            /// Intensity of green-filtered channel
-            /// </summary>
-            public int Green { get; set; }
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
+		public ColorSense(int socketNumber) {
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+			socket.EnsureTypeIsSupported(new char[] { 'X', 'Y' }, this);
 
-            /// <summary>
-            /// Intensity of red-filtered channel
-            /// </summary>
-            public int Red { get; set; }
+			this.writeBuffer = new byte[1];
+			this.readBuffer = new byte[2];
+			this.led = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Three, false, this);
+			this.i2c = new GTI.SoftwareI2CBus(socket, Socket.Pin.Five, Socket.Pin.Four, 0x39, 100, this);
+			this.i2c.Write(new byte[] { 0x80, 0x03 });
+		}
 
-            /// <summary>
-            /// Intensity of blue-filtered channel
-            /// </summary>
-            public int Blue { get; set; }
+		/// <summary>Reads the current color from the sensor.</summary>
+		/// <returns>The measured color.</returns>
+		public ColorData ReadColor() {
+			return new ColorData { Green = this.ReadShort(0x90), Red = this.ReadShort(0x92), Blue = this.ReadShort(0x94), Clear = this.ReadShort(0x96) };
+		}
 
-            /// <summary>
-            /// Intensity of non-filtered channel
-            /// </summary>
-            public int Clear { get; set; }
-        }
+		private int ReadShort(byte address) {
+			this.writeBuffer[0] = address;
 
-        /// <summary>
-        /// Sets the state of the onboard LED.
-        /// </summary>
-        public bool LedEnabled
-        {
-            get
-            {
-                return this.led.Read();
-            }
-            set
-            {
-                this.led.Write(value);
-            }
-        }
+			this.i2c.WriteRead(this.writeBuffer, this.readBuffer);
 
-        /// <summary>
-        /// Reads the current color from the sensor.
-        /// </summary>
-        /// <returns>The measured color.</returns>
-        public ColorData ReadColor()
-        {
-            return new ColorData { Green = this.ReadShort(0x90), Red = this.ReadShort(0x92), Blue = this.ReadShort(0x94), Clear = this.ReadShort(0x96) };
-        }
+			return this.readBuffer[0] | this.readBuffer[1] << 8;
+		}
 
-        private int ReadShort(byte address)
-        {
-            this.writeBuffer[0] = address;
+		/// <summary>Holds the color data.</summary>
+		public struct ColorData {
 
-            this.i2c.WriteRead(this.writeBuffer, this.readBuffer);
+			/// <summary>Intensity of green-filtered channel</summary>
+			public int Green { get; set; }
 
-            return this.readBuffer[0] | this.readBuffer[1] << 8;
-        }
-    }
+			/// <summary>Intensity of red-filtered channel</summary>
+			public int Red { get; set; }
+
+			/// <summary>Intensity of blue-filtered channel</summary>
+			public int Blue { get; set; }
+
+			/// <summary>Intensity of non-filtered channel</summary>
+			public int Clear { get; set; }
+		}
+	}
 }

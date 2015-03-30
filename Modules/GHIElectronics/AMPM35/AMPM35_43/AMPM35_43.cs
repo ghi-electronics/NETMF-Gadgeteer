@@ -2,36 +2,27 @@
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// An AMPM35 module for Microsoft .NET Gadgeteer
-    /// </summary>
-    [Obsolete]
-    public class AMPM35 : GTM.Module
-    {
-        private GTI.AnalogOutput analogOut;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>An AMPM35 module for Microsoft .NET Gadgeteer</summary>
+	[Obsolete]
+	public class AMPM35 : GTM.Module {
+		private GTI.AnalogOutput analogOut;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public AMPM35(int socketNumber)
-        {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+		/// <summary>The output port that is amplified.</summary>
+		public GTI.AnalogOutput Output {
+			get {
+				return this.analogOut;
+			}
+		}
 
-            socket.EnsureTypeIsSupported('O', this);
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
+		public AMPM35(int socketNumber) {
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
-            this.analogOut = GTI.AnalogOutputFactory.Create(socket, Socket.Pin.Five, this);
-        }
+			socket.EnsureTypeIsSupported('O', this);
 
-        /// <summary>
-        /// The output port that is amplified.
-        /// </summary>
-        public GTI.AnalogOutput Output
-        {
-            get
-            {
-                return this.analogOut;
-            }
-        }
-    }
+			this.analogOut = GTI.AnalogOutputFactory.Create(socket, Socket.Pin.Five, this);
+		}
+	}
 }

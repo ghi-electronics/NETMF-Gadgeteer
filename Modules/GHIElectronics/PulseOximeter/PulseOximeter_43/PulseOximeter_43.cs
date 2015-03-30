@@ -3,226 +3,183 @@ using System.Threading;
 using GTI = Gadgeteer.SocketInterfaces;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-    /// <summary>
-    /// A PulseOximeter module for Microsoft .NET Gadgeteer
-    /// </summary>
-    public class PulseOximeter : GTM.Module
-    {
-        private Thread workerThread;
-        private GTI.Serial serialPort;
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>A PulseOximeter module for Microsoft .NET Gadgeteer</summary>
+	public class PulseOximeter : GTM.Module {
+		private Thread workerThread;
+		private GTI.Serial serialPort;
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public PulseOximeter(int socketNumber)
-        {
-            this.IsProbeAttached = false;
-            this.LastReading = null;
+		private HeartbeatEventHandler onHeartbeat;
 
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+		private ProbeAttachedEventHandler onProbeAttached;
 
-            this.serialPort = GTI.SerialFactory.Create(socket, 4800, GTI.SerialParity.Even, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
-            this.serialPort.Open();
+		private ProbeDetachedEventHandler onProbeDetached;
 
-            this.workerThread = new Thread(this.DoWork);
-            this.workerThread.Start();
-        }
+		/// <summary>Represents the delegate used for the Heartbeat event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void HeartbeatEventHandler(PulseOximeter sender, Reading e);
 
-        private void DoWork()
-        {
-            bool sync = false;
-            byte[] data = new byte[5];
+		/// <summary>Represents the delegate used for the ProbeAttached event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void ProbeAttachedEventHandler(PulseOximeter sender, EventArgs e);
 
-            while (true)
-            {
-                int totalRead = 0;
-                if (!sync)
-                {
-                    int b = this.serialPort.ReadByte();
-                    if (b < 0)
-                    {
-                        Thread.Sleep(100);
-                        continue;
-                    }
+		/// <summary>Represents the delegate used for the ProbeDetached event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="e">The event arguments.</param>
+		public delegate void ProbeDetachedEventHandler(PulseOximeter sender, EventArgs e);
 
-                    if (((b >> 7) & 0x1) != 1)
-                        continue;
+		/// <summary>Raised when the module detects a heartbeat.</summary>
+		public event HeartbeatEventHandler Heartbeat;
 
-                    data[0] = (byte)b;
-                    totalRead = 1;
-                    sync = true;
-                }
+		/// <summary>Raised when the module detects that the probe is placed on a finger.</summary>
+		public event ProbeAttachedEventHandler ProbeAttached;
 
-                while (totalRead < 5)
-                {
-                    int read = this.serialPort.Read(data, totalRead, 5 - totalRead);
-                    if (read < 0)
-                    {
-                        this.DebugPrint("Serial error");
-                        sync = false;
+		/// <summary>Raised when the module detects that the probe is removed from a finger.</summary>
+		public event ProbeDetachedEventHandler ProbeDetached;
 
-                        if (this.IsProbeAttached)
-                        {
-                            this.IsProbeAttached = false;
+		/// <summary>Whether the PulseOximeter's probe is attached to a finger.</summary>
+		public bool IsProbeAttached { get; private set; }
 
-                            this.OnProbeDetached(this, null);
-                        }
+		/// <summary>The most recent valid reading from the pulse oximeter</summary>
+		public Reading LastReading { get; private set; }
 
-                        continue;
-                    }
+		/// <summary>Constructs a new instance.</summary>
+		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
+		public PulseOximeter(int socketNumber) {
+			this.IsProbeAttached = false;
+			this.LastReading = null;
 
-                    totalRead += read;
-                }
+			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
-                if (((data[0] >> 7) & 0x1) != 1)
-                {
-                    this.DebugPrint("Lost sync");
-                    sync = false;
+			this.serialPort = GTI.SerialFactory.Create(socket, 4800, GTI.SerialParity.Even, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
+			this.serialPort.Open();
 
-                    if (this.IsProbeAttached)
-                    {
-                        this.IsProbeAttached = false;
+			this.workerThread = new Thread(this.DoWork);
+			this.workerThread.Start();
+		}
 
-                        this.OnProbeDetached(this, null);
-                    }
+		private void DoWork() {
+			bool sync = false;
+			byte[] data = new byte[5];
 
-                    continue;
-                }
+			while (true) {
+				int totalRead = 0;
+				if (!sync) {
+					int b = this.serialPort.ReadByte();
+					if (b < 0) {
+						Thread.Sleep(100);
+						continue;
+					}
 
-                bool probeAttached = ((data[2] >> 4) & 0x1) == 0;
+					if (((b >> 7) & 0x1) != 1)
+						continue;
 
-                if (!probeAttached && this.IsProbeAttached)
-                {
-                    this.IsProbeAttached = false;
-                    this.OnProbeDetached(this, null);
-                }
+					data[0] = (byte)b;
+					totalRead = 1;
+					sync = true;
+				}
 
-                if (!probeAttached || ((data[0] >> 6) & 0x1) != 1) 
-                    continue;
+				while (totalRead < 5) {
+					int read = this.serialPort.Read(data, totalRead, 5 - totalRead);
+					if (read < 0) {
+						this.DebugPrint("Serial error");
+						sync = false;
 
-                int signalStrength = data[0] & 0xF;
-                int pulseRate = ((data[2] << 1) & 0x80) + (data[3] & 0x7F);
-                int spO2 = data[4] & 0x7F;
+						if (this.IsProbeAttached) {
+							this.IsProbeAttached = false;
 
-                if (pulseRate == 255 || spO2 == 127) 
-                    continue;
+							this.OnProbeDetached(this, null);
+						}
 
-                this.LastReading = new Reading(pulseRate, spO2, signalStrength);
+						continue;
+					}
 
-                if (probeAttached && !this.IsProbeAttached)
-                {
-                    this.IsProbeAttached = true;
-                    this.OnProbeAttached(this, null);
-                }
+					totalRead += read;
+				}
 
-                this.OnHeartbeat(this, this.LastReading);
-            }
-        }
+				if (((data[0] >> 7) & 0x1) != 1) {
+					this.DebugPrint("Lost sync");
+					sync = false;
 
-        /// <summary>
-        /// Whether the PulseOximeter's probe is attached to a finger.
-        /// </summary>
-        public bool IsProbeAttached { get; private set; }
+					if (this.IsProbeAttached) {
+						this.IsProbeAttached = false;
 
-        /// <summary>
-        /// The most recent valid reading from the pulse oximeter
-        /// </summary>
-        public Reading LastReading { get; private set; }
+						this.OnProbeDetached(this, null);
+					}
 
-        /// <summary>
-        /// A class representing a pulse oximeter reading
-        /// </summary>
-        public class Reading
-        {
-            internal Reading(int pulseRate, int spo2, int signalStrength)
-            {
-                this.PulseRate = pulseRate;
-                this.SignalStrength = signalStrength;
-                this.SPO2 = spo2;
-            }
+					continue;
+				}
 
-            /// <summary>
-            /// The pulse rate automatically averaged over time.
-            /// </summary>
-            public int PulseRate { get; private set; }
+				bool probeAttached = ((data[2] >> 4) & 0x1) == 0;
 
-            /// <summary>
-            /// The oxygen saturation between 0 and 100.
-            /// </summary>
-            public int SPO2 { get; private set; }
+				if (!probeAttached && this.IsProbeAttached) {
+					this.IsProbeAttached = false;
+					this.OnProbeDetached(this, null);
+				}
 
-            /// <summary>
-            /// The signal strength between 0 and 15.
-            /// </summary>
-            public int SignalStrength { get; private set; }
-        }
+				if (!probeAttached || ((data[0] >> 6) & 0x1) != 1)
+					continue;
 
-        /// <summary>
-        /// Represents the delegate used for the Heartbeat event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void HeartbeatEventHandler(PulseOximeter sender, Reading e);
+				int signalStrength = data[0] & 0xF;
+				int pulseRate = ((data[2] << 1) & 0x80) + (data[3] & 0x7F);
+				int spO2 = data[4] & 0x7F;
 
-        /// <summary>
-        /// Represents the delegate used for the ProbeAttached event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void ProbeAttachedEventHandler(PulseOximeter sender, EventArgs e);
+				if (pulseRate == 255 || spO2 == 127)
+					continue;
 
-        /// <summary>
-        /// Represents the delegate used for the ProbeDetached event.
-        /// </summary>
-        /// <param name="sender">The object that raised the event.</param>
-        /// <param name="e">The event arguments.</param>
-        public delegate void ProbeDetachedEventHandler(PulseOximeter sender, EventArgs e);
+				this.LastReading = new Reading(pulseRate, spO2, signalStrength);
 
-        /// <summary>
-        /// Raised when the module detects a heartbeat.
-        /// </summary>
-        public event HeartbeatEventHandler Heartbeat;
+				if (probeAttached && !this.IsProbeAttached) {
+					this.IsProbeAttached = true;
+					this.OnProbeAttached(this, null);
+				}
 
-        /// <summary>
-        /// Raised when the module detects that the probe is placed on a finger.
-        /// </summary>
-        public event ProbeAttachedEventHandler ProbeAttached;
+				this.OnHeartbeat(this, this.LastReading);
+			}
+		}
 
-        /// <summary>
-        /// Raised when the module detects that the probe is removed from a finger.
-        /// </summary>
-        public event ProbeDetachedEventHandler ProbeDetached;
+		private void OnHeartbeat(PulseOximeter sender, Reading e) {
+			if (this.onHeartbeat == null)
+				this.onHeartbeat = this.OnHeartbeat;
 
-        private HeartbeatEventHandler onHeartbeat;
-        private ProbeAttachedEventHandler onProbeAttached;
-        private ProbeDetachedEventHandler onProbeDetached;
+			if (Program.CheckAndInvoke(this.Heartbeat, this.onHeartbeat, sender, e))
+				this.Heartbeat(sender, e);
+		}
 
-        private void OnHeartbeat(PulseOximeter sender, Reading e)
-        {
-            if (this.onHeartbeat == null)
-                this.onHeartbeat = this.OnHeartbeat;
+		private void OnProbeAttached(PulseOximeter sender, EventArgs e) {
+			if (this.onProbeAttached == null)
+				this.onProbeAttached = this.OnProbeAttached;
 
-            if (Program.CheckAndInvoke(this.Heartbeat, this.onHeartbeat, sender, e))
-                this.Heartbeat(sender, e);
-        }
+			if (Program.CheckAndInvoke(this.ProbeAttached, this.onProbeAttached, sender, e))
+				this.ProbeAttached(sender, e);
+		}
 
-        private void OnProbeAttached(PulseOximeter sender, EventArgs e)
-        {
-            if (this.onProbeAttached == null)
-                this.onProbeAttached = this.OnProbeAttached;
+		private void OnProbeDetached(PulseOximeter sender, EventArgs e) {
+			if (this.onProbeDetached == null)
+				this.onProbeDetached = this.OnProbeDetached;
 
-            if (Program.CheckAndInvoke(this.ProbeAttached, this.onProbeAttached, sender, e))
-                this.ProbeAttached(sender, e);
-        }
+			if (Program.CheckAndInvoke(this.ProbeDetached, this.onProbeDetached, sender, e))
+				this.ProbeDetached(sender, e);
+		}
+		/// <summary>A class representing a pulse oximeter reading</summary>
+		public class Reading {
 
-        private void OnProbeDetached(PulseOximeter sender, EventArgs e)
-        {
-            if (this.onProbeDetached == null)
-                this.onProbeDetached = this.OnProbeDetached;
+			/// <summary>The pulse rate automatically averaged over time.</summary>
+			public int PulseRate { get; private set; }
 
-            if (Program.CheckAndInvoke(this.ProbeDetached, this.onProbeDetached, sender, e))
-                this.ProbeDetached(sender, e);
-        }
-    }
+			/// <summary>The oxygen saturation between 0 and 100.</summary>
+			public int SPO2 { get; private set; }
+
+			/// <summary>The signal strength between 0 and 15.</summary>
+			public int SignalStrength { get; private set; }
+
+			internal Reading(int pulseRate, int spo2, int signalStrength) {
+				this.PulseRate = pulseRate;
+				this.SignalStrength = signalStrength;
+				this.SPO2 = spo2;
+			}
+		}
+	}
 }

@@ -1,23 +1,24 @@
 ﻿using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
-	/// <summary>
-	/// An SPlus module for Microsoft .NET Gadgeteer
-	/// </summary>
-	public class SPlus : GTM.Module
-	{
+namespace Gadgeteer.Modules.GHIElectronics {
+	/// <summary>An SPlus module for Microsoft .NET Gadgeteer</summary>
+	public class SPlus : GTM.Module {
 		private GT.Socket sSocket;
 		private GT.Socket ySocket;
 		private GT.Socket sx1;
 		private GT.Socket sx2;
 
+		/// <summary>Returns the socket number for socket 1 on the module.</summary>
+		public int SPlusSocket1 { get { return this.sx1.SocketNumber; } }
+
+		/// <summary>Returns the socket number for socket 2 on the module.</summary>
+		public int SPlusSocket2 { get { return this.sx2.SocketNumber; } }
+
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		/// <param name="socketNumberTwo">The second socket that this module is plugged in to.</param>
-		public SPlus(int socketNumber, int socketNumberTwo)
-		{
+		public SPlus(int socketNumber, int socketNumberTwo) {
 			this.sSocket = Socket.GetSocket(socketNumber, true, this, null);
 			this.ySocket = Socket.GetSocket(socketNumberTwo, true, this, null);
 
@@ -29,8 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
 			this.sx1.SupportedTypes = this.sx2.SupportedTypes = new char[2] { 'S', 'X' };
 
-			for (int i = 3; i <= 6; i++)
-			{
+			for (int i = 3; i <= 6; i++) {
 				this.sx1.CpuPins[i] = this.sSocket.CpuPins[i];
 				this.sx2.CpuPins[i] = this.ySocket.CpuPins[i];
 			}
@@ -43,15 +43,5 @@ namespace Gadgeteer.Modules.GHIElectronics
 			Socket.SocketInterfaces.RegisterSocket(this.sx1);
 			Socket.SocketInterfaces.RegisterSocket(this.sx2);
 		}
-
-		/// <summary>
-		/// Returns the socket number for socket 1 on the module.
-		/// </summary>
-		public int SPlusSocket1 { get { return this.sx1.SocketNumber; } }
-
-		/// <summary>
-        /// Returns the socket number for socket 2 on the module.
-		/// </summary>
-		public int SPlusSocket2 { get { return this.sx2.SocketNumber; } }
 	}
 }

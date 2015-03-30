@@ -1,62 +1,48 @@
 using System;
 
-namespace Elm327.Core.ObdModes
-{
-    /// <summary>
-    /// Contains methods and properties for retrieving generic
-    /// OBD mode 09 PIDs.
-    /// </summary>
-    public class ObdGenericMode09 : AbstractObdMode
-    {
-        #region Constructors
+namespace Elm327.Core.ObdModes {
+	/// <summary>Contains methods and properties for retrieving generic OBD mode 09 PIDs.</summary>
+	public class ObdGenericMode09 : AbstractObdMode {
 
-        /// <summary>
-        /// Creates an instance of <see cref="ObdGenericMode09"/>.
-        /// </summary>
-        /// <param name="elm">A reference to the ELM327 driver.</param>
-        internal ObdGenericMode09(ElmDriver elm)
-            : base(elm, "09")
-        {
-        }
+		#region Constructors
 
-        #endregion
+		/// <summary>Creates an instance of <see cref="ObdGenericMode09" />.</summary>
+		/// <param name="elm">A reference to the ELM327 driver.</param>
+		internal ObdGenericMode09(ElmDriver elm)
+			: base(elm, "09") {
+		}
 
-        #region Public Instance Properties
+		#endregion Constructors
 
-        /// <summary>
-        /// Gets the VIN of the vehicle.
-        /// </summary>
-        public string VehicleIdentificationNumber
-        {
-            get
-            {
-                string[] reading = this.GetPidResponse("02");
+		#region Public Instance Properties
 
-                if (reading == null || reading.Length == 0)
-                    return string.Empty;
+		/// <summary>Gets the VIN of the vehicle.</summary>
+		public string VehicleIdentificationNumber {
+			get {
+				string[] reading = this.GetPidResponse("02");
 
-                try
-                {
-                    char[] vinCharacters = new char[reading.Length];
+				if (reading == null || reading.Length == 0)
+					return string.Empty;
 
-                    for (int i = 0; i < reading.Length; i++)
-                    {
-                        vinCharacters[i] = (char)Util.ConvertHexToInt(reading[i]);
-                    }
+				try {
+					char[] vinCharacters = new char[reading.Length];
 
-                    return new string(
-                        vinCharacters,
-                        0,
-                        vinCharacters.Length);
-                }
-                catch (Exception ex)
-                {
-                    Util.Log(ex);
-                    return string.Empty;
-                }
-            }
-        }
+					for (int i = 0; i < reading.Length; i++) {
+						vinCharacters[i] = (char)Util.ConvertHexToInt(reading[i]);
+					}
 
-        #endregion
-    }
+					return new string(
+						vinCharacters,
+						0,
+						vinCharacters.Length);
+				}
+				catch (Exception ex) {
+					Util.Log(ex);
+					return string.Empty;
+				}
+			}
+		}
+
+		#endregion Public Instance Properties
+	}
 }
