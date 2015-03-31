@@ -108,7 +108,14 @@ namespace Gadgeteer.Modules.GHIElectronics {
 					note = (MusicNote)this.playlist.Dequeue();
 				}
 
-				this.pwm.Set((int)note.Tone.Frequency, 0.5);
+				if (note.Tone.Frequency != 0.0) {
+					this.pwm.IsActive = true;
+
+					this.pwm.Set((int)note.Tone.Frequency, 0.5);
+				}
+				else {
+					this.pwm.IsActive = false;
+				}
 
 				Thread.Sleep(note.Duration);
 			}
