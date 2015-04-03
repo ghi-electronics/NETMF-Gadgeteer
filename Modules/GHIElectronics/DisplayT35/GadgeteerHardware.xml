@@ -2,7 +2,7 @@
 
 <GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
   <ModuleDefinitions>
-    <ModuleDefinition Name="DisplayT35"
+    <ModuleDefinition Name="Display T35"
                   UniqueId="dd76cb2f-a7ce-407a-8890-5cb10e2cc44a"
                   Manufacturer="GHI Electronics"
                   Description="A DisplayT35 module"
