@@ -10,11 +10,11 @@
                   Type="Gadgeteer.Modules.GHIElectronics.RelayX1"
                   ModuleSuppliesPower="false"
                   Image="Image.jpg"
-                  BoardHeight="37"
-                  BoardWidth="37"
-                  HardwareVersion="1.3"
+                  BoardHeight="42"
+                  BoardWidth="32"
+                  HardwareVersion="2.0"
                   MinimumGadgeteerCoreVersion="2.43.800"
-                  HelpUrl="http://www.ghielectronics.com/catalog/product/464">
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/531">
 
       <Assemblies>
         <Assembly MFVersion="4.2" Name="GTM.GHIElectronics.RelayX1"/>
@@ -22,7 +22,7 @@
       </Assemblies>
 
       <Sockets>
-        <Socket Left="14" Top="33" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
+        <Socket Left="15.5" Top="37" Orientation="90" ConstructorOrder="1" TypesLabel="XY">
           <Types>
             <Type>X</Type>
             <Type>Y</Type>
