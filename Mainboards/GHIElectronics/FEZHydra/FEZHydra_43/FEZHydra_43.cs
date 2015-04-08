@@ -76,7 +76,7 @@ namespace GHIElectronics.Gadgeteer {
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
-			socket.SupportedTypes = new char[] { 'S', 'Y' };
+			socket.SupportedTypes = new char[] { 'S', 'X' };
 			socket.CpuPins[3] = Generic.GetPin('B', 8);
 			socket.CpuPins[4] = Generic.GetPin('B', 9);
 			socket.CpuPins[5] = Generic.GetPin('B', 12);
@@ -89,7 +89,7 @@ namespace GHIElectronics.Gadgeteer {
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
-			socket.SupportedTypes = new char[] { 'S', 'U', 'Y' };
+			socket.SupportedTypes = new char[] { 'S', 'U', 'X' };
 			socket.CpuPins[3] = Generic.GetPin('B', 2);
 			socket.CpuPins[4] = Generic.GetPin('A', 11);
 			socket.CpuPins[5] = Generic.GetPin('A', 12);
@@ -114,7 +114,7 @@ namespace GHIElectronics.Gadgeteer {
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
-			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
+			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
 			socket.CpuPins[3] = Generic.GetPin('D', 17);
 			socket.CpuPins[4] = Generic.GetPin('A', 13);
 			socket.CpuPins[5] = Generic.GetPin('A', 14);
