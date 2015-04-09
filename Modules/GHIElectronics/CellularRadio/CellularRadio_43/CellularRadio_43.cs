@@ -340,7 +340,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
 			this.serial.Handshake = Handshake.RequestToSend;
 			this.serial.Open();
-			this.serial.Write(Encoding.UTF8.GetBytes("AT"), 0, 2);
+			this.serial.Write(Encoding.UTF8.GetBytes("AT\r"), 0, 3);
 
 			this.atExpectedResponse = string.Empty;
 			this.pppExpectedResponse = string.Empty;
