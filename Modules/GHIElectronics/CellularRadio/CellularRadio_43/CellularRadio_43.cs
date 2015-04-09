@@ -20,9 +20,11 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		private bool powerOn;
 		private byte[] buffer;
 		private string responseBuffer;
-		private AutoResetEvent pppEvent;
 		private bool running;
+		private AutoResetEvent pppEvent;
 		private string pppExpectedResponse;
+		private AutoResetEvent atExpectedEvent;
+		private string atExpectedResponse;
 
 		private PinStateRequestedHandler onPinStateRequested;
 		private GsmNetworkRegistrationChangedHandler onGsmNetworkRegistrationChanged;
@@ -333,11 +335,15 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.worker = null;
 			this.running = false;
 			this.pppEvent = new AutoResetEvent(false);
+			this.atExpectedEvent = new AutoResetEvent(false);
 			this.power = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, true, this);
 			this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
 			this.serial.Handshake = Handshake.RequestToSend;
 			this.serial.Open();
 			this.serial.Write(Encoding.UTF8.GetBytes("AT"), 0, 2);
+
+			this.atExpectedResponse = string.Empty;
+			this.pppExpectedResponse = string.Empty;
 
 			Thread.Sleep(1000);
 
@@ -345,7 +351,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 				this.power.Write(false);
 				Thread.Sleep(1000);
 				this.power.Write(true);
-				Thread.Sleep(1700);
+				Thread.Sleep(2200);
 
 				this.serial.DiscardInBuffer();
 				this.serial.DiscardOutBuffer();
@@ -400,6 +406,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			if (this.networkInterface != null && this.networkInterface.Opened)
 				return;
 
+			this.pppEvent.Reset();
 			this.pppExpectedResponse = initializationResponse;
 
 			foreach (var command in initializationCommands)
@@ -488,7 +495,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.PowerOn();
 		}
 
-		/// <summary>Sends an AT command to the module. It automatically appends the carriage return.</summary>
+		/// <summary>Sends an AT command to the module without waiting for a response. It automatically appends the carriage return.</summary>
 		/// <param name="atCommand">The AT command. See SIM900_ATC_V1.00 for reference.</param>
 		public void SendATCommand(string atCommand) {
 			if (!this.powerOn) throw new InvalidOperationException("The module is off.");
@@ -500,6 +507,39 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.WriteLine(atCommand);
 
 			Thread.Sleep(100);
+		}
+
+		/// <summary>Sends an AT command to the module not returning until the expected response is received. It automatically appends the carriage return.</summary>
+		/// <param name="atCommand">The AT command. See SIM900_ATC_V1.00 for reference.</param>
+		/// <param name="expectedResponse">What the response to this command should start with.</param>
+		public void SendATCommand(string atCommand, string expectedResponse) {
+			this.SendATCommand(atCommand, expectedResponse, Timeout.Infinite);
+		}
+
+		/// <summary>Sends an AT command to the module not returning until the expected response is received or the timeout expires. It automatically appends the carriage return.</summary>
+		/// <param name="atCommand">The AT command. See SIM900_ATC_V1.00 for reference.</param>
+		/// <param name="expectedResponse">What the response to this command should start with.</param>
+		/// <param name="timeout">How long to wait for the response.</param>
+		/// <returns>True if the command was received, false if it timed out.</returns>
+		public bool SendATCommand(string atCommand, string expectedResponse, int timeout) {
+			if (!this.powerOn) throw new InvalidOperationException("The module is off.");
+			if (atCommand.IndexOf("AT") == -1) throw new ArgumentException("atCommand", "The command must begin with AT.");
+			if (timeout == 0) throw new ArgumentException("timeout", "timeout cannot be 0.");
+
+			if (atCommand.IndexOf("\r") < 0)
+				atCommand += "\r";
+
+			this.atExpectedEvent.Reset();
+			this.atExpectedResponse = expectedResponse;
+
+			this.WriteLine(atCommand);
+
+			if (!this.atExpectedEvent.WaitOne(timeout, false))
+				return false;
+
+			this.atExpectedResponse = string.Empty;
+
+			return true;
 		}
 
 		/// <summary>Send an SMS.</summary>
@@ -710,6 +750,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 					this.ReadIn();
 
 				while (this.ExtractLine(ref response)) {
+					if (this.atExpectedResponse != string.Empty && response.IndexOf(this.atExpectedResponse) == 0)
+						this.atExpectedEvent.Set();
+
 					if (response[0] == '+' && response.IndexOf(":") != -1) {
 						this.ParseCommand(ref command, ref response);
 
