@@ -38,6 +38,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		private CallEndedHandler onCallEnded;
 		private CallConnectedHandler onCallConnected;
 		private GprsAttachedHandler onGprsAttached;
+		private LineReceivedHandler onLineReceived;
+		private LineSentHandler onLineSent;
 
 		/// <summary>Represents the delegate used for the PinStateRequested event.</summary>
 		/// <param name="sender">The object that raised the event.</param>
@@ -119,6 +121,16 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="ipAddress">Number to which the module is connected</param>
 		public delegate void GprsAttachedHandler(CellularRadio sender, string ipAddress);
 
+		/// <summary>Represents the delegate used for the LineReceived event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="line">The line that was received.</param>
+		public delegate void LineReceivedHandler(CellularRadio sender, string line);
+
+		/// <summary>Represents the delegate used for the LineSent event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="line">The line that was sent.</param>
+		public delegate void LineSentHandler(CellularRadio sender, string line);
+
 		/// <summary>Raised when the pin state is requested.</summary>
 		public event PinStateRequestedHandler PinStateRequested;
 
@@ -164,6 +176,12 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Raised when the GPRS is attached.</summary>
 		public event GprsAttachedHandler GprsAttached;
 
+		/// <summary>Raised when a line is received. Useful for debugging.</summary>
+		public event LineReceivedHandler LineReceived;
+
+		/// <summary>Raised when a line is sent. Useful for debugging.</summary>
+		public event LineSentHandler LineSent;
+
 		/// <summary>The underlying network interface.</summary>
 		public PPPSerialModem NetworkInterface {
 			get {
@@ -180,7 +198,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible states of network registration.</summary>
 		public enum NetworkRegistrationState {
-
 			/// <summary>The module couldn't find a network.</summary>
 			NotSearching,
 
@@ -205,7 +222,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible states of the SIM card.</summary>
 		public enum PinState {
-
 			/// <summary>The SIM is unlocked and ready to be used.</summary>
 			Ready,
 
@@ -233,7 +249,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible states for a text message.</summary>
 		public enum SmsState {
-
 			/// <summary>Messages that were received and read</summary>
 			ReceivedUnread,
 
@@ -252,7 +267,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible states of a call.</summary>
 		public enum PhoneActivity {
-
 			/// <summary>The phone is not calling or being called.</summary>
 			Ready,
 
@@ -271,7 +285,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible values of the strength of a signal.</summary>
 		public enum SignalStrength {
-
 			/// <summary>- 115dBm or less.</summary>
 			VeryWeak,
 
@@ -293,7 +306,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Possible reasons for a call to be ended.</summary>
 		public enum CallEndReason {
-
 			/// <summary>No dial tone was found.</summary>
 			NoDialTone,
 
@@ -353,6 +365,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.onCallEnded = this.OnCallEnded;
 			this.onCallConnected = this.OnCallConnected;
 			this.onGprsAttached = this.OnGprsAttached;
+			this.onLineReceived = this.OnLineReceived;
+			this.onLineSent = this.OnLineSent;
 		}
 
 		/// <summary>Opens the underlying network interface and assigns the NETMF networking stack.</summary>
@@ -682,7 +696,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 						this.ParseCommand(ref command, ref response);
 
 						switch (command) {
-
 							#region Check Pin State (CPIN)
 							case "CPIN":
 								switch (response) {
@@ -911,7 +924,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 						}
 					}
 					else {
-
 						#region Check No Carrier (NO CARRIER)
 						if (response == "NO CARRIER")
 							this.OnCallEnded(this, CallEndReason.NoCarrier);
@@ -963,6 +975,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			var buffer = Encoding.UTF8.GetBytes(line);
 
 			this.serial.Write(buffer, 0, buffer.Length);
+
+			this.OnLineSent(this, line);
 		}
 
 		private bool ExtractLine(ref string line) {
@@ -985,6 +999,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 			if (line == "\r\n" || line == "")
 				return this.ExtractLine(ref line);
+
+			this.OnLineReceived(this, line);
 
 			return true;
 		}
@@ -1071,9 +1087,19 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			if (Program.CheckAndInvoke(this.GprsAttached, this.onGprsAttached, sender, ipAddress))
 				this.GprsAttached(sender, ipAddress);
 		}
+
+		private void OnLineReceived(CellularRadio sender, string line) {
+			if (Program.CheckAndInvoke(this.LineReceived, this.onLineReceived, sender, line))
+				this.LineReceived(sender, line);
+		}
+
+		private void OnLineSent(CellularRadio sender, string line) {
+			if (Program.CheckAndInvoke(this.LineSent, this.onLineSent, sender, line))
+				this.LineSent(sender, line);
+		}
+
 		/// <summary>Represents an SMS.</summary>
 		public class Sms {
-
 			/// <summary>The phone number.</summary>
 			public string PhoneNumber;
 
@@ -1110,7 +1136,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Represents an entry in the phonebook.</summary>
 		public class Contact {
-
 			/// <summary>The phone number of the contact.</summary>
 			public string PhoneNumber;
 
