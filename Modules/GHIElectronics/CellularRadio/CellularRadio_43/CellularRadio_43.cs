@@ -195,6 +195,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Whether or not the network is connected. Make sure to also check the NetworkUp property to verify network state.</summary>
 		public override bool IsNetworkConnected {
 			get {
+				if (this.networkInterface == null)
+					return false;
+
 				return this.networkInterface.LinkConnected;
 			}
 		}
