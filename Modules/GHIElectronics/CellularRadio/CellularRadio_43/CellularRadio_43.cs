@@ -22,6 +22,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		private string responseBuffer;
 		private AutoResetEvent pppEvent;
 		private bool running;
+		private string pppExpectedResponse;
 
 		private PinStateRequestedHandler onPinStateRequested;
 		private GsmNetworkRegistrationChangedHandler onGsmNetworkRegistrationChanged;
@@ -380,14 +381,32 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="username">The username to connect with.</param>
 		/// <param name="password">The password to connect with.</param>
 		/// <param name="authenticationType">The authentication type.</param>
+		/// <remarks>When using this overload, "CONNECT" is the assumed response when PPP is ready after the below commands are sent:
+		/// AT+CGDCONT=1,"IP","[APN]"
+		/// ATDT*99***1#
+		/// </remarks>
 		public void UseThisNetworkInterface(string apn, string username, string password, PPPSerialModem.AuthenticationType authenticationType) {
+			this.UseThisNetworkInterface(username, password, authenticationType, "CONNECT", "AT+CGDCONT=1,\"IP\",\"" + apn + "\"", "ATDT*99***1#");
+		}
+
+		/// <summary>Opens the underlying network interface and assigns the NETMF networking stack.</summary>
+		/// <param name="username">The username to connect with.</param>
+		/// <param name="password">The password to connect with.</param>
+		/// <param name="authenticationType">The authentication type.</param>
+		/// <param name="initializationResponse">The response to look for that signals the PPP interface is ready to be initialized.</param>
+		/// <param name="initializationCommands">The AT commands to send to the device to prepare it for PPP.</param>
+		/// <remarks>If there are no expected response or initialization commands supplied, the PPP interface will attempt to immediately initialize.</remarks>
+		public void UseThisNetworkInterface(string username, string password, PPPSerialModem.AuthenticationType authenticationType, string initializationResponse, params string[] initializationCommands) {
 			if (this.networkInterface != null && this.networkInterface.Opened)
 				return;
 
-			this.SendATCommand("AT+CGDCONT=1,\"IP\",\"" + apn + "\"");
-			this.SendATCommand("ATDT*99***1#");
+			this.pppExpectedResponse = initializationResponse;
+
+			foreach (var command in initializationCommands)
+				this.SendATCommand(command);
 
 			this.pppEvent.WaitOne();
+
 			this.running = false;
 			this.worker.Join();
 			this.worker = null;
@@ -471,7 +490,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Sends an AT command to the module. It automatically appends the carriage return.</summary>
 		/// <param name="atCommand">The AT command. See SIM900_ATC_V1.00 for reference.</param>
-		/// <returns>The module response to the AT command.</returns>
 		public void SendATCommand(string atCommand) {
 			if (!this.powerOn) throw new InvalidOperationException("The module is off.");
 			if (atCommand.IndexOf("AT") == -1) throw new ArgumentException("atCommand", "The command must begin with AT.");
@@ -943,7 +961,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 						#endregion Check Busy (BUSY)
 
 						#region Check Connect (CONNECT)
-						if (response == "CONNECT")
+						if (response == this.pppExpectedResponse)
 							this.pppEvent.Set();
 
 						#endregion Check Connect (CONNECT)
