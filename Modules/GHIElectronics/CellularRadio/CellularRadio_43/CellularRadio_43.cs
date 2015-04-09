@@ -392,6 +392,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// ATDT*99***1#
 		/// </remarks>
 		public void UseThisNetworkInterface(string apn, string username, string password, PPPSerialModem.AuthenticationType authenticationType) {
+			if (apn == null) throw new ArgumentNullException("apn");
+
 			this.UseThisNetworkInterface(username, password, authenticationType, "CONNECT", "AT+CGDCONT=1,\"IP\",\"" + apn + "\"", "ATDT*99***1#");
 		}
 
@@ -403,6 +405,11 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="initializationCommands">The AT commands to send to the device to prepare it for PPP.</param>
 		/// <remarks>If there are no expected response or initialization commands supplied, the PPP interface will attempt to immediately initialize.</remarks>
 		public void UseThisNetworkInterface(string username, string password, PPPSerialModem.AuthenticationType authenticationType, string initializationResponse, params string[] initializationCommands) {
+			if (username == null) throw new ArgumentNullException("username");
+			if (password == null) throw new ArgumentNullException("password");
+			if (initializationResponse == null) throw new ArgumentNullException("initializationResponse");
+			if (initializationCommands == null) throw new ArgumentNullException("initializationCommands");
+
 			if (this.networkInterface != null && this.networkInterface.Opened)
 				return;
 
@@ -425,9 +432,26 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.NetworkSettings = this.networkInterface.NetworkInterface;
 		}
 
-		/// <summary>Power on the module.</summary>
+		/// <summary>Powers on the module with default initialization commands.</summary>
 		public void PowerOn() {
+			this.PowerOn(new string[] {
+				"AT",
+				"ATE0",
+				"AT+CMGF=1",
+				"AT+CSDH=0",
+				"AT+CPBS=\"SM\"",
+				"AT+CPMS=\"SM\"",
+				"AT+COLP=1",
+				"AT+CGREG=1",
+				"AT+CREG=1",
+			});
+		}
+
+		/// <summary>Power on the module.</summary>
+		/// <param name="initializationCommands">The initialization commands to send after power up.</param>
+		public void PowerOn(params string[] initializationCommands) {
 			if (this.powerOn) throw new InvalidOperationException("The module is already powered on.");
+			if (initializationCommands == null) throw new ArgumentNullException("initializationCommands");
 
 			this.serial.DiscardInBuffer();
 			this.serial.DiscardOutBuffer();
@@ -443,29 +467,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.worker = new Thread(this.DoWork);
 			this.worker.Start();
 
-			this.SendATCommand("AT");
-
-			//Disable echo
-			this.SendATCommand("ATE0");
-
-			//Set SMS mode to text
-			this.SendATCommand("AT+CMGF=1");
-			this.SendATCommand("AT+CSDH=0");
-
-			// Set the phonebook to be stored in the SIM card
-			this.SendATCommand("AT+CPBS=\"SM\"");
-
-			// Set the sms to be stored in the SIM card
-			this.SendATCommand("AT+CPMS=\"SM\"");
-
-			// Sets how connected lines are presented
-			this.SendATCommand("AT+COLP=1");
-
-			// Enable GPRS network registration status
-			this.SendATCommand("AT+CGREG=1");
-
-			// Enable GSM network registration status
-			this.SendATCommand("AT+CREG=1");
+			foreach (var command in initializationCommands)
+				this.SendATCommand(command);
 		}
 
 		/// <summary>Powers off the module.</summary>
