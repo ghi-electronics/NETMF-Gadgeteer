@@ -49,22 +49,6 @@ namespace GHIElectronics.Gadgeteer {
 			}
 		}
 
-		private enum SpecialPurposePin {
-			USBD_A_DM = -9,
-			USBD_A_DP = -10,
-			USBD_B_DM = -11,
-			USBD_B_DP = -12,
-			USBD_C_DM = -13,
-			USBD_C_DP = -14,
-			RTC_BATT = -15,
-			RESET = -16,
-			TCK = -19,
-			TDO = -20,
-			TMS = -21,
-			TRST = -22,
-			TDI = -23,
-		}
-
 		/// <summary>Constructs a new instance.</summary>
 		public G400HDRBreakout() {
 			this.ldr0 = null;
@@ -118,8 +102,6 @@ namespace GHIElectronics.Gadgeteer {
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'D', 'I' };
 			socket.CpuPins[3] = G400.PD5;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_A_DM;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_A_DP;
 			socket.CpuPins[6] = G400.PA27;
 			socket.CpuPins[7] = G400.PA29;
 			socket.CpuPins[8] = G400.PA30;
@@ -128,13 +110,6 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'Z' };
-			socket.CpuPins[3] = (Cpu.Pin)SpecialPurposePin.RESET;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.TCK;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.RTC_BATT;
-			socket.CpuPins[6] = (Cpu.Pin)SpecialPurposePin.TDO;
-			socket.CpuPins[7] = (Cpu.Pin)SpecialPurposePin.TRST;
-			socket.CpuPins[8] = (Cpu.Pin)SpecialPurposePin.TMS;
-			socket.CpuPins[9] = (Cpu.Pin)SpecialPurposePin.TDI;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);

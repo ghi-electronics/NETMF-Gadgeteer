@@ -26,27 +26,6 @@ namespace GHIElectronics.Gadgeteer {
 			get { return "1.0"; }
 		}
 
-		private enum SpecialPurposePin {
-			ETH_RX_DM = -6,
-			ETH_RX_DP = -7,
-			ETH_TX_DM = -8,
-			ETH_TX_DP = -9,
-			USBH_DM = -10,
-			USBH_DP = -11,
-			USB_VBUS = -12,
-			USBD_DM = -13,
-			USBD_DP = -14,
-			RTC_BATT = -15,
-			RESET = -16,
-			LED_SPEED = -17,
-			LED_LINK = -18,
-			TCK = -19,
-			TDO = -20,
-			TMS = -21,
-			TRST = -22,
-			TDI = -23,
-		}
-
 		/// <summary>Constructs a new instance.</summary>
 		public FEZSpider() {
 			this.debugLed = null;
@@ -62,8 +41,6 @@ namespace GHIElectronics.Gadgeteer {
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'D', 'I' };
 			socket.CpuPins[3] = EMX.IO21;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_DM;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_DP;
 			socket.CpuPins[6] = EMX.IO19;
 			socket.CpuPins[7] = EMX.IO75;
 			socket.CpuPins[8] = EMX.IO12;
@@ -72,20 +49,11 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'Z' };
-			socket.CpuPins[3] = (Cpu.Pin)SpecialPurposePin.RESET;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.TCK;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.RTC_BATT;
-			socket.CpuPins[6] = (Cpu.Pin)SpecialPurposePin.TDO;
-			socket.CpuPins[7] = (Cpu.Pin)SpecialPurposePin.TRST;
-			socket.CpuPins[8] = (Cpu.Pin)SpecialPurposePin.TMS;
-			socket.CpuPins[9] = (Cpu.Pin)SpecialPurposePin.TDI;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'H', 'I' };
 			socket.CpuPins[3] = EMX.IO1;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBH_DM;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBH_DP;
 			socket.CpuPins[6] = EMX.IO0;
 			socket.CpuPins[8] = EMX.IO12;
 			socket.CpuPins[9] = EMX.IO11;
@@ -130,12 +98,6 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'E' };
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.LED_SPEED;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.LED_LINK;
-			socket.CpuPins[6] = (Cpu.Pin)SpecialPurposePin.ETH_TX_DM;
-			socket.CpuPins[7] = (Cpu.Pin)SpecialPurposePin.ETH_TX_DP;
-			socket.CpuPins[8] = (Cpu.Pin)SpecialPurposePin.ETH_RX_DM;
-			socket.CpuPins[9] = (Cpu.Pin)SpecialPurposePin.ETH_RX_DP;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
