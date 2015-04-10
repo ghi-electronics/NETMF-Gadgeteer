@@ -7,6 +7,7 @@ using Microsoft.SPOT.Hardware;
 using System;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using FEZHydraPins = GHI.Pins.FEZHydra;
 
 namespace GHIElectronics.Gadgeteer {
 	/// <summary>The mainboard class for the FEZ Hydra.</summary>
@@ -24,27 +25,6 @@ namespace GHIElectronics.Gadgeteer {
 			get { return "1.2"; }
 		}
 
-		private enum SpecialPurposePin {
-			ETH_RX_DM = -6,
-			ETH_RX_DP = -7,
-			ETH_TX_DM = -8,
-			ETH_TX_DP = -9,
-			USBH_DM = -10,
-			USBH_DP = -11,
-			USB_VBUS = -12,
-			USBD_DM = -13,
-			USBD_DP = -14,
-			RTC_BATT = -15,
-			RESET = -16,
-			LED_SPEED = -17,
-			LED_LINK = -18,
-			TCK = -19,
-			TDO = -20,
-			TMS = -21,
-			TRST = -22,
-			TDI = -23,
-		}
-
 		/// <summary>Constructs a new instance.</summary>
 		public FEZHydra() {
 			this.debugLed = null;
@@ -57,46 +37,37 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'Z' };
-			socket.CpuPins[3] = (Cpu.Pin)SpecialPurposePin.RESET;
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.TCK;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.RTC_BATT;
-			socket.CpuPins[6] = (Cpu.Pin)SpecialPurposePin.TDO;
-			socket.CpuPins[7] = (Cpu.Pin)SpecialPurposePin.TRST;
-			socket.CpuPins[8] = (Cpu.Pin)SpecialPurposePin.TMS;
-			socket.CpuPins[9] = (Cpu.Pin)SpecialPurposePin.TDI;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'D' };
-			socket.CpuPins[3] = Generic.GetPin('B', 19);
-			socket.CpuPins[4] = (Cpu.Pin)SpecialPurposePin.USBD_DM;
-			socket.CpuPins[5] = (Cpu.Pin)SpecialPurposePin.USBD_DP;
-			socket.CpuPins[6] = Generic.GetPin('B', 18);
-			socket.CpuPins[7] = Generic.GetPin('B', 22);
+			socket.CpuPins[3] = FEZHydraPins.Socket2.Pin3;
+			socket.CpuPins[6] = FEZHydraPins.Socket2.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket2.Pin7;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'S', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('B', 8);
-			socket.CpuPins[4] = Generic.GetPin('B', 9);
-			socket.CpuPins[5] = Generic.GetPin('B', 12);
-			socket.CpuPins[6] = Generic.GetPin('B', 13);
-			socket.CpuPins[7] = Generic.GetPin('A', 26);
-			socket.CpuPins[8] = Generic.GetPin('A', 25);
-			socket.CpuPins[9] = Generic.GetPin('A', 27);
+			socket.CpuPins[3] = FEZHydraPins.Socket3.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket3.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket3.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket3.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket3.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket3.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket3.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'S', 'U', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('B', 2);
-			socket.CpuPins[4] = Generic.GetPin('A', 11);
-			socket.CpuPins[5] = Generic.GetPin('A', 12);
-			socket.CpuPins[6] = Generic.GetPin('B', 14);
-			socket.CpuPins[7] = Generic.GetPin('A', 26);
-			socket.CpuPins[8] = Generic.GetPin('A', 25);
-			socket.CpuPins[9] = Generic.GetPin('A', 27);
+			socket.CpuPins[3] = FEZHydraPins.Socket4.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket4.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket4.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket4.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket4.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket4.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket4.Pin9;
 			socket.SerialPortName = "COM3";
 			socket.I2CBusIndirector = nativeI2C;
 			socket.SPIModule = SPI.SPI_module.SPI1;
@@ -104,36 +75,36 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('A', 9);
-			socket.CpuPins[4] = Generic.GetPin('A', 22);
-			socket.CpuPins[5] = Generic.GetPin('A', 21);
-			socket.CpuPins[6] = Generic.GetPin('A', 10);
-			socket.CpuPins[8] = Generic.GetPin('A', 23);
-			socket.CpuPins[9] = Generic.GetPin('A', 24);
+			socket.CpuPins[3] = FEZHydraPins.Socket5.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket5.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket5.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket5.Pin6;
+			socket.CpuPins[8] = FEZHydraPins.Socket5.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket5.Pin9;
 			socket.SerialPortName = "COM1";
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'I', 'U', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('D', 17);
-			socket.CpuPins[4] = Generic.GetPin('A', 13);
-			socket.CpuPins[5] = Generic.GetPin('A', 14);
-			socket.CpuPins[6] = Generic.GetPin('A', 29);
-			socket.CpuPins[7] = Generic.GetPin('A', 30);
-			socket.CpuPins[8] = Generic.GetPin('A', 23);
-			socket.CpuPins[9] = Generic.GetPin('A', 24);
+			socket.CpuPins[3] = FEZHydraPins.Socket6.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket6.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket6.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket6.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket6.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket6.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket6.Pin9;
 			socket.SerialPortName = "COM4";
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('D', 19);
-			socket.CpuPins[4] = Generic.GetPin('A', 6);
-			socket.CpuPins[5] = Generic.GetPin('A', 7);
-			socket.CpuPins[6] = Generic.GetPin('D', 20);
-			socket.CpuPins[7] = Generic.GetPin('D', 14);
-			socket.CpuPins[8] = Generic.GetPin('D', 15);
-			socket.CpuPins[9] = Generic.GetPin('D', 16);
+			socket.CpuPins[3] = FEZHydraPins.Socket7.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket7.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket7.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket7.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket7.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket7.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket7.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.SerialPortName = "COM2";
 			socket.PWM7 = Cpu.PWMChannel.PWM_0;
@@ -143,73 +114,73 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
 			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('D', 11);
-			socket.CpuPins[4] = Generic.GetPin('A', 0);
-			socket.CpuPins[5] = Generic.GetPin('A', 3);
-			socket.CpuPins[6] = Generic.GetPin('A', 1);
-			socket.CpuPins[7] = Generic.GetPin('A', 4);
-			socket.CpuPins[8] = Generic.GetPin('A', 5);
-			socket.CpuPins[9] = Generic.GetPin('A', 2);
+			socket.CpuPins[3] = FEZHydraPins.Socket8.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket8.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket8.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket8.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket8.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket8.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket8.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
 			socket.SupportedTypes = new char[] { 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('D', 9);
-			socket.CpuPins[4] = Generic.GetPin('D', 10);
-			socket.CpuPins[5] = Generic.GetPin('D', 12);
-			socket.CpuPins[6] = Generic.GetPin('D', 1);
-			socket.CpuPins[7] = Generic.GetPin('D', 3);
-			socket.CpuPins[8] = Generic.GetPin('D', 4);
-			socket.CpuPins[9] = Generic.GetPin('D', 2);
+			socket.CpuPins[3] = FEZHydraPins.Socket9.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket9.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket9.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket9.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket9.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket9.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket9.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
 			socket.SupportedTypes = new char[] { 'R', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 22);
-			socket.CpuPins[4] = Generic.GetPin('C', 23);
-			socket.CpuPins[5] = Generic.GetPin('C', 24);
-			socket.CpuPins[6] = Generic.GetPin('C', 25);
-			socket.CpuPins[7] = Generic.GetPin('C', 20);
-			socket.CpuPins[8] = Generic.GetPin('C', 4);
-			socket.CpuPins[9] = Generic.GetPin('C', 5);
+			socket.CpuPins[3] = FEZHydraPins.Socket10.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket10.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket10.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket10.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket10.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket10.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket10.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(11);
 			socket.SupportedTypes = new char[] { 'G', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 15);
-			socket.CpuPins[4] = Generic.GetPin('C', 16);
-			socket.CpuPins[5] = Generic.GetPin('C', 17);
-			socket.CpuPins[6] = Generic.GetPin('C', 18);
-			socket.CpuPins[7] = Generic.GetPin('C', 19);
-			socket.CpuPins[8] = Generic.GetPin('C', 21);
-			socket.CpuPins[9] = Generic.GetPin('C', 3);
+			socket.CpuPins[3] = FEZHydraPins.Socket11.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket11.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket11.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket11.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket11.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket11.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket11.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(12);
 			socket.SupportedTypes = new char[] { 'B', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 9);
-			socket.CpuPins[4] = Generic.GetPin('C', 10);
-			socket.CpuPins[5] = Generic.GetPin('C', 11);
-			socket.CpuPins[6] = Generic.GetPin('C', 12);
-			socket.CpuPins[7] = Generic.GetPin('C', 13);
-			socket.CpuPins[8] = Generic.GetPin('C', 7);
-			socket.CpuPins[9] = Generic.GetPin('C', 6);
+			socket.CpuPins[3] = FEZHydraPins.Socket12.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket12.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket12.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket12.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket12.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket12.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket12.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(13);
 			socket.SupportedTypes = new char[] { 'A', 'T', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('D', 6);
-			socket.CpuPins[4] = Generic.GetPin('A', 20);
-			socket.CpuPins[5] = Generic.GetPin('A', 18);
-			socket.CpuPins[6] = Generic.GetPin('B', 1);
-			socket.CpuPins[7] = Generic.GetPin('B', 28);
-			socket.CpuPins[8] = Generic.GetPin('B', 26);
-			socket.CpuPins[9] = Generic.GetPin('B', 29);
+			socket.CpuPins[3] = FEZHydraPins.Socket13.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket13.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket13.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket13.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket13.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket13.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket13.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_4;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_3;
@@ -219,13 +190,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(14);
 			socket.SupportedTypes = new char[] { 'A', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('D', 7);
-			socket.CpuPins[4] = Generic.GetPin('A', 19);
-			socket.CpuPins[5] = Generic.GetPin('A', 17);
-			socket.CpuPins[6] = Generic.GetPin('B', 0);
-			socket.CpuPins[7] = Generic.GetPin('B', 30);
-			socket.CpuPins[8] = Generic.GetPin('B', 31);
-			socket.CpuPins[9] = Generic.GetPin('B', 27);
+			socket.CpuPins[3] = FEZHydraPins.Socket14.Pin3;
+			socket.CpuPins[4] = FEZHydraPins.Socket14.Pin4;
+			socket.CpuPins[5] = FEZHydraPins.Socket14.Pin5;
+			socket.CpuPins[6] = FEZHydraPins.Socket14.Pin6;
+			socket.CpuPins[7] = FEZHydraPins.Socket14.Pin7;
+			socket.CpuPins[8] = FEZHydraPins.Socket14.Pin8;
+			socket.CpuPins[9] = FEZHydraPins.Socket14.Pin9;
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_5;
 			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_2;
 			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
@@ -281,7 +252,7 @@ namespace GHIElectronics.Gadgeteer {
 		/// <param name="on">The new state.</param>
 		public override void SetDebugLED(bool on) {
 			if (this.debugLed == null)
-				this.debugLed = new OutputPort(Generic.GetPin('D', 18), on);
+				this.debugLed = new OutputPort(FEZHydraPins.DebugLed, on);
 
 			this.debugLed.Write(on);
 		}

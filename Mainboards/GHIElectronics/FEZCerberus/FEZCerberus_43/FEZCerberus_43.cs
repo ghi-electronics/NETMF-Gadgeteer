@@ -9,6 +9,7 @@ using Microsoft.SPOT.Hardware;
 using System;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using FEZCerberusPins = GHI.Pins.FEZCerberus;
 
 namespace GHIElectronics.Gadgeteer {
 	/// <summary>The mainboard class for the FEZ Cerberus.</summary>
@@ -43,23 +44,23 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'H', 'I' };
-			socket.CpuPins[3] = Generic.GetPin('B', 13);
-			socket.CpuPins[4] = Generic.GetPin('B', 14);
-			socket.CpuPins[5] = Generic.GetPin('B', 15);
-			socket.CpuPins[6] = Generic.GetPin('B', 2);
-			socket.CpuPins[8] = Generic.GetPin('B', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 6);
+			socket.CpuPins[3] = FEZCerberusPins.Socket1.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket1.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket1.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket1.Pin6;
+			socket.CpuPins[8] = FEZCerberusPins.Socket1.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket1.Pin9;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'K', 'U', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('A', 6);
-			socket.CpuPins[4] = Generic.GetPin('A', 2);
-			socket.CpuPins[5] = Generic.GetPin('A', 3);
-			socket.CpuPins[6] = Generic.GetPin('A', 1);
-			socket.CpuPins[7] = Generic.GetPin('A', 0);
-			socket.CpuPins[8] = Generic.GetPin('B', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 6);
+			socket.CpuPins[3] = FEZCerberusPins.Socket2.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket2.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket2.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket2.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket2.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket2.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket2.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.SerialPortName = "COM2";
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_0;
@@ -70,13 +71,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'A', 'O', 'P', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 0);
-			socket.CpuPins[4] = Generic.GetPin('C', 1);
-			socket.CpuPins[5] = Generic.GetPin('A', 4);
-			socket.CpuPins[6] = Generic.GetPin('C', 5);
-			socket.CpuPins[7] = Generic.GetPin('C', 6);
-			socket.CpuPins[8] = Generic.GetPin('A', 7);
-			socket.CpuPins[9] = Generic.GetPin('C', 7);
+			socket.CpuPins[3] = FEZCerberusPins.Socket3.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket3.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket3.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket3.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket3.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket3.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket3.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.PWM7 = Cpu.PWMChannel.PWM_0;
 			socket.PWM8 = Cpu.PWMChannel.PWM_1;
@@ -91,13 +92,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
 			socket.SupportedTypes = new char[] { 'A', 'O', 'P', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 2);
-			socket.CpuPins[4] = Generic.GetPin('C', 3);
-			socket.CpuPins[5] = Generic.GetPin('A', 5);
-			socket.CpuPins[6] = Generic.GetPin('C', 13);
-			socket.CpuPins[7] = Generic.GetPin('A', 8);
-			socket.CpuPins[8] = Generic.GetPin('B', 0);
-			socket.CpuPins[9] = Generic.GetPin('B', 1);
+			socket.CpuPins[3] = FEZCerberusPins.Socket4.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket4.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket4.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket4.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket4.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket4.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket4.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.PWM7 = Cpu.PWMChannel.PWM_3;
 			socket.PWM8 = Cpu.PWMChannel.PWM_4;
@@ -112,13 +113,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
 			socket.SupportedTypes = new char[] { 'P', 'C', 'S', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('C', 14);
-			socket.CpuPins[4] = Generic.GetPin('B', 9);
-			socket.CpuPins[5] = Generic.GetPin('B', 8);
-			socket.CpuPins[6] = Generic.GetPin('C', 15);
-			socket.CpuPins[7] = Generic.GetPin('B', 5);
-			socket.CpuPins[8] = Generic.GetPin('B', 4);
-			socket.CpuPins[9] = Generic.GetPin('B', 3);
+			socket.CpuPins[3] = FEZCerberusPins.Socket5.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket5.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket5.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket5.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket5.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket5.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket5.Pin9;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			socket.PWM7 = Cpu.PWMChannel.PWM_6;
 			socket.PWM8 = Cpu.PWMChannel.PWM_7;
@@ -127,13 +128,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
 			socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'X' };
-			socket.CpuPins[3] = Generic.GetPin('A', 14);
-			socket.CpuPins[4] = Generic.GetPin('B', 10);
-			socket.CpuPins[5] = Generic.GetPin('B', 11);
-			socket.CpuPins[6] = Generic.GetPin('A', 13);
-			socket.CpuPins[7] = Generic.GetPin('B', 5);
-			socket.CpuPins[8] = Generic.GetPin('B', 4);
-			socket.CpuPins[9] = Generic.GetPin('B', 3);
+			socket.CpuPins[3] = FEZCerberusPins.Socket6.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket6.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket6.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket6.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket6.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket6.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket6.Pin9;
 			socket.SerialPortName = "COM3";
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			socket.PWM7 = Cpu.PWMChannel.PWM_6;
@@ -143,23 +144,23 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'F', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('A', 15);
-			socket.CpuPins[4] = Generic.GetPin('C', 8);
-			socket.CpuPins[5] = Generic.GetPin('C', 9);
-			socket.CpuPins[6] = Generic.GetPin('D', 2);
-			socket.CpuPins[7] = Generic.GetPin('C', 10);
-			socket.CpuPins[8] = Generic.GetPin('C', 11);
-			socket.CpuPins[9] = Generic.GetPin('C', 12);
+			socket.CpuPins[3] = FEZCerberusPins.Socket7.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket7.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket7.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket7.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket7.Pin7;
+			socket.CpuPins[8] = FEZCerberusPins.Socket7.Pin8;
+			socket.CpuPins[9] = FEZCerberusPins.Socket7.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
 			socket.SupportedTypes = new char[] { 'D', 'Z' };
-			socket.CpuPins[3] = Generic.GetPin('A', 9);
-			socket.CpuPins[4] = Generic.GetPin('A', 11);
-			socket.CpuPins[5] = Generic.GetPin('A', 12);
-			socket.CpuPins[6] = Generic.GetPin('B', 12);
-			socket.CpuPins[7] = Generic.GetPin('A', 10);
+			socket.CpuPins[3] = FEZCerberusPins.Socket8.Pin3;
+			socket.CpuPins[4] = FEZCerberusPins.Socket8.Pin4;
+			socket.CpuPins[5] = FEZCerberusPins.Socket8.Pin5;
+			socket.CpuPins[6] = FEZCerberusPins.Socket8.Pin6;
+			socket.CpuPins[7] = FEZCerberusPins.Socket8.Pin7;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 		}
 
@@ -225,7 +226,7 @@ namespace GHIElectronics.Gadgeteer {
 		/// <param name="on">The new state.</param>
 		public override void SetDebugLED(bool on) {
 			if (this.debugLed == null)
-				this.debugLed = new OutputPort(Generic.GetPin('C', 4), on);
+				this.debugLed = new OutputPort(FEZCerberusPins.DebugLed, on);
 
 			this.debugLed.Write(on);
 		}

@@ -11,6 +11,7 @@ using System;
 using System.Threading;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
+using FEZCerbuinoBeePins = GHI.Pins.FEZCerbuinoBee;
 
 namespace GHIElectronics.Gadgeteer {
 	/// <summary>The mainboard class for the FEZ Cerbuino Bee.</summary>
@@ -75,7 +76,7 @@ namespace GHIElectronics.Gadgeteer {
 			this.IsMassStorageConnected = false;
 			this.IsMassStorageMounted = false;
 
-			this.sdCardDetect = new InterruptPort(Generic.GetPin('C', 2), true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+			this.sdCardDetect = new InterruptPort(FEZCerbuinoBeePins.SdCardDetect, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
 			this.sdCardDetect.OnInterrupt += this.OnSDCardDetect;
 
 			if (this.IsSDCardInserted)
@@ -92,13 +93,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'P', 'S', 'U', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('A', 14);
-			socket.CpuPins[4] = Generic.GetPin('B', 10);
-			socket.CpuPins[5] = Generic.GetPin('B', 11);
-			socket.CpuPins[6] = Generic.GetPin('A', 13);
-			socket.CpuPins[7] = Generic.GetPin('B', 5);
-			socket.CpuPins[8] = Generic.GetPin('B', 4);
-			socket.CpuPins[9] = Generic.GetPin('B', 3);
+			socket.CpuPins[3] = FEZCerbuinoBeePins.Socket1.Pin3;
+			socket.CpuPins[4] = FEZCerbuinoBeePins.Socket1.Pin4;
+			socket.CpuPins[5] = FEZCerbuinoBeePins.Socket1.Pin5;
+			socket.CpuPins[6] = FEZCerbuinoBeePins.Socket1.Pin6;
+			socket.CpuPins[7] = FEZCerbuinoBeePins.Socket1.Pin7;
+			socket.CpuPins[8] = FEZCerbuinoBeePins.Socket1.Pin8;
+			socket.CpuPins[9] = FEZCerbuinoBeePins.Socket1.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.PWM7 = Cpu.PWMChannel.PWM_6;
 			socket.PWM8 = Cpu.PWMChannel.PWM_7;
@@ -109,13 +110,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'A', 'I', 'K', 'U', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('A', 6);
-			socket.CpuPins[4] = Generic.GetPin('A', 2);
-			socket.CpuPins[5] = Generic.GetPin('A', 3);
-			socket.CpuPins[6] = Generic.GetPin('A', 1);
-			socket.CpuPins[7] = Generic.GetPin('A', 0);
-			socket.CpuPins[8] = Generic.GetPin('B', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 6);
+			socket.CpuPins[3] = FEZCerbuinoBeePins.Socket2.Pin3;
+			socket.CpuPins[4] = FEZCerbuinoBeePins.Socket2.Pin4;
+			socket.CpuPins[5] = FEZCerbuinoBeePins.Socket2.Pin5;
+			socket.CpuPins[6] = FEZCerbuinoBeePins.Socket2.Pin6;
+			socket.CpuPins[7] = FEZCerbuinoBeePins.Socket2.Pin7;
+			socket.CpuPins[8] = FEZCerbuinoBeePins.Socket2.Pin8;
+			socket.CpuPins[9] = FEZCerbuinoBeePins.Socket2.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.SerialPortName = "COM2";
 			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_0;
@@ -126,13 +127,13 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'A', 'O', 'P', 'Y' };
-			socket.CpuPins[3] = Generic.GetPin('C', 0);
-			socket.CpuPins[4] = Generic.GetPin('C', 1);
-			socket.CpuPins[5] = Generic.GetPin('A', 4);
-			socket.CpuPins[6] = Generic.GetPin('C', 5);
-			socket.CpuPins[7] = Generic.GetPin('B', 8);
-			socket.CpuPins[8] = Generic.GetPin('A', 7);
-			socket.CpuPins[9] = Generic.GetPin('B', 9);
+			socket.CpuPins[3] = FEZCerbuinoBeePins.Socket3.Pin3;
+			socket.CpuPins[4] = FEZCerbuinoBeePins.Socket3.Pin4;
+			socket.CpuPins[5] = FEZCerbuinoBeePins.Socket3.Pin5;
+			socket.CpuPins[6] = FEZCerbuinoBeePins.Socket3.Pin6;
+			socket.CpuPins[7] = FEZCerbuinoBeePins.Socket3.Pin7;
+			socket.CpuPins[8] = FEZCerbuinoBeePins.Socket3.Pin8;
+			socket.CpuPins[9] = FEZCerbuinoBeePins.Socket3.Pin9;
 			socket.I2CBusIndirector = nativeI2C;
 			socket.PWM7 = (Cpu.PWMChannel)14;
 			socket.PWM8 = Cpu.PWMChannel.PWM_1;
@@ -210,7 +211,7 @@ namespace GHIElectronics.Gadgeteer {
 		/// <param name="on">The new state.</param>
 		public override void SetDebugLED(bool on) {
 			if (this.debugLed == null)
-				this.debugLed = new OutputPort(Generic.GetPin('B', 2), on);
+				this.debugLed = new OutputPort(FEZCerbuinoBeePins.DebugLed, on);
 
 			this.debugLed.Write(on);
 		}
@@ -303,6 +304,7 @@ namespace GHIElectronics.Gadgeteer {
 		}
 
 		/// <summary>Pin definitions for the headers on the board.</summary>
+		[Obsolete("Please use GHI.Pins.FEZCerbuinoBee.Header instead")]
 		public class Pins {
 
 			/// <summary>GPIO pin.</summary>
