@@ -39,6 +39,13 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			}
 		}
 
+		/// <summary>Whether or not the driver is currently taking measurements.</summary>
+		public bool IsTakingMeasurements {
+			get {
+				return this.timer.IsRunning;
+			}
+		}
+
 		/// <summary>Possible sensing gain values.</summary>
 		public enum Gain : byte {
 
@@ -116,7 +123,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Obtains a single measurement and raises the event when complete.</summary>
 		public void RequestSingleMeasurement() {
-			if (this.timer.IsRunning) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
+			if (this.IsTakingMeasurements) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
 
 			this.timer.Behavior = Timer.BehaviorType.RunOnce;
 			this.timer.Start();

@@ -37,6 +37,14 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			}
 		}
 
+
+		/// <summary>Whether or not the driver is currently taking measurements.</summary>
+		public bool IsTakingMeasurements {
+			get {
+				return this.running || (this.timer != null && this.timer.IsAlive);
+			}
+		}
+
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public TempHumidity(int socketNumber) {
@@ -50,7 +58,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Obtains a single measurement and raises the event when complete.</summary>
 		public void RequestSingleMeasurement() {
-			if (this.timer != null && this.timer.IsAlive) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
+			if (this.IsTakingMeasurements) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
 
 			this.running = false;
 			this.timer = new Thread(this.TakeMeasurement);
