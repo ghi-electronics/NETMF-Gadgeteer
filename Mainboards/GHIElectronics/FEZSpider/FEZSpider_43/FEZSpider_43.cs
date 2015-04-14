@@ -41,6 +41,8 @@ namespace GHIElectronics.Gadgeteer {
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'D', 'I' };
 			socket.CpuPins[3] = EMX.IO21;
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
 			socket.CpuPins[6] = EMX.IO19;
 			socket.CpuPins[7] = EMX.IO75;
 			socket.CpuPins[8] = EMX.IO12;
@@ -49,11 +51,20 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'Z' };
+			socket.CpuPins[3] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[6] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
 			socket.SupportedTypes = new char[] { 'H', 'I' };
 			socket.CpuPins[3] = EMX.IO1;
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
 			socket.CpuPins[6] = EMX.IO0;
 			socket.CpuPins[8] = EMX.IO12;
 			socket.CpuPins[9] = EMX.IO11;
@@ -98,6 +109,12 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
 			socket.SupportedTypes = new char[] { 'E' };
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[6] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);

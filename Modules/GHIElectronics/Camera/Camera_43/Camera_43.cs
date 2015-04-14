@@ -87,7 +87,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('H', this);
 
-			socket.ReservePin(Socket.Pin.Three, this);
 			socket.ReservePin(Socket.Pin.Four, this);
 			socket.ReservePin(Socket.Pin.Five, this);
 

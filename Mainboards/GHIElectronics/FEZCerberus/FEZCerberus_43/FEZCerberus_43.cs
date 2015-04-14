@@ -161,6 +161,8 @@ namespace GHIElectronics.Gadgeteer {
 			socket.CpuPins[5] = FEZCerberusPins.Socket8.Pin5;
 			socket.CpuPins[6] = FEZCerberusPins.Socket8.Pin6;
 			socket.CpuPins[7] = FEZCerberusPins.Socket8.Pin7;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 		}
 

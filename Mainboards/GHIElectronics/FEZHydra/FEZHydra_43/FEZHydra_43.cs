@@ -37,11 +37,20 @@ namespace GHIElectronics.Gadgeteer {
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
 			socket.SupportedTypes = new char[] { 'Z' };
+			socket.CpuPins[3] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[6] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
 			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
 			socket.SupportedTypes = new char[] { 'D' };
 			socket.CpuPins[3] = FEZHydraPins.Socket2.Pin3;
+			socket.CpuPins[4] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[5] = GT.Socket.UnnumberedPin;
 			socket.CpuPins[6] = FEZHydraPins.Socket2.Pin6;
 			socket.CpuPins[7] = FEZHydraPins.Socket2.Pin7;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
