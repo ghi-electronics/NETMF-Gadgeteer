@@ -417,6 +417,10 @@ namespace GHIElectronics.Gadgeteer {
 				Display.Populate(Display.GHIDisplay.DisplayN18);
 				Display.SpiConfiguration = config;
 				Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
+
+				if ((bitmap.Width == 128 || bitmap.Width == 160) && (bitmap.Height == 128 || bitmap.Height == 160))
+					Display.CurrentRotation = bitmap.Width == 128 ? Display.Rotation.Normal : Display.Rotation.Clockwise90;
+
 				Display.Save();
 
 				this.configSet = true;

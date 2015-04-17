@@ -9,6 +9,12 @@ using GTM = Gadgeteer.Modules;
 namespace Gadgeteer.Modules.GHIElectronics {
 	/// <summary>A Display N18 module for Microsoft .NET Gadgeteer</summary>
 	public class DisplayN18 : GTM.Module.DisplayModule {
+		private const byte ST7735_MADCTL = 0x36;
+		private const byte MADCTL_MY = 0x80;
+		private const byte MADCTL_MX = 0x40;
+		private const byte MADCTL_MV = 0x20;
+		private const byte MADCTL_BGR = 0x08;
+
 		private GTI.Spi spi;
 		private GTI.SpiConfiguration spiConfig;
 		private SPI.Configuration netMFSpiConfig;
@@ -19,13 +25,13 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		private byte[] byteArray;
 		private ushort[] shortArray;
+		private bool isBgr;
 
 		/// <summary>Whether or not the backlight is enabled.</summary>
 		public bool BacklightEnabled {
 			get {
 				return this.backlightPin.Read();
 			}
-
 			set {
 				this.backlightPin.Write(value);
 			}
@@ -37,6 +43,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			: base(WpfMode.Separate) {
 			this.byteArray = new byte[1];
 			this.shortArray = new ushort[2];
+			this.isBgr = true;
 
 			this.socket = Socket.GetSocket(socketNumber, true, this, null);
 			this.socket.EnsureTypeIsSupported('S', this);
@@ -53,19 +60,27 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 			this.ConfigureDisplay();
 
-			this.Clear();
-
 			base.OnDisplayConnected("Display N18", 128, 160, DisplayOrientation.Normal, null);
+
+			this.Clear();
 		}
 
 		/// <summary>Clears the display.</summary>
 		public void Clear() {
-			byte[] data = new byte[64 * 80 * 2]; //zero-init'd by default
+			var data = new byte[64 * 80 * 2];
 
-			this.DrawRaw(data, 64, 80, 0, 0);
-			this.DrawRaw(data, 64, 80, 64, 0);
-			this.DrawRaw(data, 64, 80, 0, 80);
-			this.DrawRaw(data, 64, 80, 64, 80);
+			if (this.Orientation == DisplayOrientation.Normal || this.Orientation == DisplayOrientation.UpsideDown) {
+				this.DrawRaw(data, 0, 0, 64, 80);
+				this.DrawRaw(data, 64, 0, 64, 80);
+				this.DrawRaw(data, 0, 80, 64, 80);
+				this.DrawRaw(data, 64, 80, 64, 80);
+			}
+			else {
+				this.DrawRaw(data, 0, 0, 80, 64);
+				this.DrawRaw(data, 80, 0, 80, 64);
+				this.DrawRaw(data, 0, 64, 80, 64);
+				this.DrawRaw(data, 80, 64, 80, 64);
+			}
 		}
 
 		/// <summary>Draws an image to the screen.</summary>
@@ -79,8 +94,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="x">Starting X position of the image.</param>
 		/// <param name="y">Starting Y position of the image.</param>
 		public void Draw(Bitmap bitmap, int x, int y) {
-			byte[] vram = new byte[bitmap.Width * bitmap.Height * 2];
+			var vram = new byte[bitmap.Width * bitmap.Height * 2];
+
 			GTM.Module.Mainboard.NativeBitmapConverter(bitmap, vram, Mainboard.BPP.BPP16_BGR_BE);
+
 			this.DrawRaw(vram, x, y, bitmap.Width, bitmap.Height);
 		}
 
@@ -91,14 +108,22 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="width">The width of the image.</param>
 		/// <param name="height">The height of the image.</param>
 		public void DrawRaw(byte[] rawData, int x, int y, int width, int height) {
-			if (x > this.Width || y > this.Height)
+			var orientedWidth = this.Width;
+			var orientedHeight = this.Height;
+
+			if (this.Orientation == DisplayOrientation.Clockwise90Degrees || this.Orientation == DisplayOrientation.Counterclockwise90Degrees) {
+				orientedWidth = this.Height;
+				orientedHeight = this.Width;
+			}
+
+			if (x > orientedWidth || y > orientedHeight)
 				return;
 
-			if (x + width > this.Width)
-				width = this.Width - x;
+			if (x + width > orientedWidth)
+				width = orientedWidth - x;
 
-			if (y + height > this.Height)
-				height = this.Height - y;
+			if (y + height > orientedHeight)
+				height = orientedHeight - y;
 
 			this.SetClippingArea(x, y, width - 1, height - 1);
 			this.WriteCommand(0x2C);
@@ -108,7 +133,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Swaps the red and blue channels if your display has them reversed.</summary>
 		public void SwapRedBlueChannels() {
 			this.WriteCommand(0x36); //MX, MY, RGB mode
-			this.WriteData(0xC0);
+			this.WriteData((byte)(this.isBgr ? 0xC0 : 0xC8));
+
+			this.isBgr = !this.isBgr;
 		}
 
 		/// <summary>Renders display data on the display device.</summary>
@@ -120,10 +147,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		protected override void Paint(Bitmap bitmap, int x, int y, int width, int height) {
 			try {
 				if (Mainboard.NativeBitmapCopyToSpi != null) {
-					this.SetClippingArea(0, 0, bitmap.Width - 1, bitmap.Height - 1);
+					this.SetClippingArea(x, y, width - 1, height - 1);
 					this.WriteCommand(0x2C);
 					this.rsPin.Write(true);
-					Mainboard.NativeBitmapCopyToSpi(bitmap, this.netMFSpiConfig, 0, 0, bitmap.Width, bitmap.Height, GT.Mainboard.BPP.BPP16_BGR_BE);
+					Mainboard.NativeBitmapCopyToSpi(bitmap, this.netMFSpiConfig, x, y, width, height, GT.Mainboard.BPP.BPP16_BGR_BE);
 				}
 				else {
 					this.Draw(bitmap);
@@ -136,14 +163,30 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Sets the orientation.</summary>
 		/// <param name="orientation">The orientation.</param>
-		protected override void SetOrientationOverride(Module.DisplayModule.DisplayOrientation orientation) {
-			throw new NotSupportedException();
+		protected override void SetOrientationOverride(DisplayOrientation orientation) {
+			this.WriteCommand(DisplayN18.ST7735_MADCTL);
+
+			switch (orientation) {
+				case DisplayOrientation.Normal: this.WriteData((byte)(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
+				case DisplayOrientation.Clockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MX | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
+				case DisplayOrientation.UpsideDown: this.WriteData((byte)(this.isBgr ? DisplayN18.MADCTL_BGR : 0)); break;
+				case DisplayOrientation.Counterclockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MY | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
+				default: throw new ArgumentException("orientation");
+			}
+
+			base.OnDisplayConnected("Display N18", 128, 160, orientation, null);
 		}
 
 		/// <summary>Checks if the orientation is supported.</summary>
 		/// <param name="orientation">The orientation.</param>
-		protected override bool SupportsOrientationOverride(Module.DisplayModule.DisplayOrientation orientation) {
-			throw new NotSupportedException();
+		protected override bool SupportsOrientationOverride(DisplayOrientation orientation) {
+			switch (orientation) {
+				case DisplayOrientation.Normal: return true;
+				case DisplayOrientation.Clockwise90Degrees: return true;
+				case DisplayOrientation.UpsideDown: return true;
+				case DisplayOrientation.Counterclockwise90Degrees: return true;
+				default: return false;
+			}
 		}
 
 		private void Reset() {
@@ -184,7 +227,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.WriteData(0x0E);
 
 			this.WriteCommand(0x36); //MX, MY, RGB mode
-			this.WriteData(0xC8);
+			this.WriteData(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | DisplayN18.MADCTL_BGR);
 
 			//ST7735R Gamma Sequence
 			this.WriteCommand(0xe0);
