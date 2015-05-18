@@ -58,7 +58,7 @@
           </Types>
         </ProvidedSocket>
 
-        <ProvidedSocket Label="6" Left="104.4" Top="91.5" Orientation="0" ConstructorParameter="6">
+        <ProvidedSocket Label="6" Left="105" Top="90" Orientation="0" ConstructorParameter="6">
           <Types>
             <Type>S</Type>
             <Type>X</Type>
