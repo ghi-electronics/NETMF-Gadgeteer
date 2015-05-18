@@ -194,6 +194,62 @@ namespace GHIElectronics.Gadgeteer {
 			socket.SPIModule = SPI.SPI_module.SPI2;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
+			socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
+			socket.CpuPins[3] = G120.P0_4;
+			socket.CpuPins[4] = G120.P4_28;
+			socket.CpuPins[5] = G120.P4_29;
+			socket.CpuPins[6] = G120.P1_30;
+			socket.CpuPins[7] = G120.P3_26;
+			socket.CpuPins[8] = G120.P3_25;
+			socket.CpuPins[9] = G120.P3_24;
+			socket.SerialPortName = "COM4";
+			socket.PWM7 = (Cpu.PWMChannel)8;
+			socket.PWM8 = Cpu.PWMChannel.PWM_7;
+			socket.PWM9 = Cpu.PWMChannel.PWM_6;
+			socket.I2CBusIndirector = nativeI2C;
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
+			socket.SupportedTypes = new char[] { 'I', 'K', 'U', 'X' };
+			socket.CpuPins[3] = G120.P0_10;
+			socket.CpuPins[4] = G120.P2_0;
+			socket.CpuPins[5] = G120.P0_16;
+			socket.CpuPins[6] = G120.P0_6;
+			socket.CpuPins[7] = G120.P0_17;
+			socket.CpuPins[8] = G120.P0_27;
+			socket.CpuPins[9] = G120.P0_28;
+			socket.SerialPortName = "COM2";
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
+			socket.SupportedTypes = new char[] { 'A', 'O', 'S', 'X' };
+			socket.CpuPins[3] = G120.P0_12;
+			socket.CpuPins[4] = G120.P1_31;
+			socket.CpuPins[5] = G120.P0_26;
+			socket.CpuPins[6] = G120.P1_5;
+			socket.CpuPins[7] = G120.P0_18;
+			socket.CpuPins[8] = G120.P0_17;
+			socket.CpuPins[9] = G120.P0_15;
+			socket.SPIModule = SPI.SPI_module.SPI1;
+			socket.AnalogOutput5 = Cpu.AnalogOutputChannel.ANALOG_OUTPUT_0;
+			socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
+			socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_5;
+			socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
+			GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
+			GT.Socket.SocketInterfaces.SetAnalogOutputFactors(socket, 3.3, 0, 10);
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+
+			socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
+			socket.SupportedTypes = new char[] { 'C', 'I', 'X' };
+			socket.CpuPins[3] = G120.P0_11;
+			socket.CpuPins[4] = G120.P0_1;
+			socket.CpuPins[5] = G120.P0_0;
+			socket.CpuPins[6] = G120.P0_5;
+			socket.CpuPins[8] = G120.P0_27;
+			socket.CpuPins[9] = G120.P0_28;
+			GT.Socket.SocketInterfaces.RegisterSocket(socket);
+
 			#endregion Sockets
 		}
 
