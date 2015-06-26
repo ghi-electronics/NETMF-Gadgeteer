@@ -51,7 +51,7 @@
       <SpecificVersion>false</SpecificVersion>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Gadgeteer.SPI, Version=2.43.1.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Gadgeteer.SPI" />
     <Reference Include="GHI.Hardware" />
     <Reference Include="GHI.Pins" />
     <Reference Include="Microsoft.SPOT.Graphics" />
