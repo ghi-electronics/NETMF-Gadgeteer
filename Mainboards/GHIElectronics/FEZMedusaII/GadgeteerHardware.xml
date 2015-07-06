@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <MainboardDefinitions>
+    <MainboardDefinition
+            Name="FEZMedusaII"
+            Type="GHIElectronics.Gadgeteer.FEZMedusaII"
+            HardwareVersion="1.0"
+            Image="Image.jpg"
+            BoardWidth="47"
+            BoardHeight="27"
+            MinimumGadgeteerCoreVersion="2.43.800"
+            HelpUrl="http://www.ghielectronics.com/catalog/product/542">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZMedusaII"/>
+      </Assemblies>
+
+      <ProvidedSockets>
+        <ProvidedSocket Label="1" Left="7" Top="7" Orientation="180" ConstructorParameter="1">
+          <Types>
+            <Type>D</Type>
+            <Type>I</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
+		
+        <ProvidedSocket Label="2" Left="19.5" Top="7" Orientation="180" ConstructorParameter="2">
+          <Types>
+            <Type>F</Type>
+            <Type>Y</Type>
+          </Types>
+        </ProvidedSocket>
+		
+        <ProvidedSocket Label="3" Left="32" Top="7" Orientation="180" ConstructorParameter="3">
+          <Types>
+            <Type>I</Type>
+            <Type>U</Type>
+            <Type>X</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="I2CSDA" SocketPin="8"/>
+            <SharedPinMap NetId="I2CSCL" SocketPin="9"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
+		
+        <ProvidedSocket Label="4" Left="15" Top="20" Orientation="0" ConstructorParameter="4">
+          <Types>
+            <Type>A</Type>
+            <Type>S</Type>
+            <Type>Y</Type>
+          </Types>
+          <SharedPinMaps>
+            <SharedPinMap NetId="SPI1_MOSI" SocketPin="7"/>
+            <SharedPinMap NetId="SPI1_MISO" SocketPin="8"/>
+            <SharedPinMap NetId="SPI1_SCK" SocketPin="9"/>
+          </SharedPinMaps>
+        </ProvidedSocket>
+		
+        <ProvidedSocket Label="5" Left="27.5" Top="20" Orientation="0" ConstructorParameter="5">
+          <Types>
+            <Type>A</Type>
+            <Type>P</Type>
+            <Type>Y</Type>
+          </Types>
+        </ProvidedSocket>
+		
+        <ProvidedSocket Label="6" Left="40" Top="20" Orientation="0" ConstructorParameter="6">
+          <Types>
+            <Type>A</Type>
+            <Type>K</Type>
+            <Type>P</Type>
+            <Type>U</Type>
+            <Type>Y</Type>
+          </Types>
+        </ProvidedSocket>
+		
+      </ProvidedSockets>
+
+      <LibrariesProvided>
+        <Assembly MFVersion="4.3" Name="GHIElectronics.Gadgeteer.FEZMedusaII" />
+
+        <Assembly MFVersion="4.3" Name="GHI.Hardware"/>
+        <Assembly MFVersion="4.3" Name="GHI.Networking"/>
+        <Assembly MFVersion="4.3" Name="GHI.Pins"/>
+        <Assembly MFVersion="4.3" Name="GHI.Usb"/>
+      </LibrariesProvided>
+
+      <Power>
+        <PowerRequirements Voltage="3.3">
+          <TypicalCurrent>0.030</TypicalCurrent>
+          <MaximumCurrent>0.031</MaximumCurrent>
+        </PowerRequirements>
+        <PowerRequirements Voltage="5.0">
+          <TypicalCurrent>0.00</TypicalCurrent>
+          <MaximumCurrent>0.00</MaximumCurrent>
+        </PowerRequirements>
+      </Power>
+    </MainboardDefinition>
+  </MainboardDefinitions>
+</GadgeteerDefinitions>
