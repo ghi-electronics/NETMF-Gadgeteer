@@ -27,6 +27,8 @@ namespace GHIElectronics.Gadgeteer {
 
         /// <summary>Constructs a new instance.</summary>
         public FEZSpiderII() {
+            if ((DeviceType)SystemInfo.SystemID.Model != DeviceType.G120E) throw new InvalidOperationException("You have selected the wrong mainboard in the designer. Please double check your mainboard.");
+
             this.debugLed = null;
             this.storageDevices = new IRemovable[2];
 
