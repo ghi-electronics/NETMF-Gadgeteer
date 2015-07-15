@@ -1,13 +1,13 @@
 ﻿using GTM = Gadgeteer.Modules;
 using GTI = Gadgeteer.Interfaces;
+using System;
 
-namespace Gadgeteer.Modules.GHIElectronics
-{
+namespace Gadgeteer.Modules.GHIElectronics {
     /// <summary>
     /// A Current ACS712 module for Microsoft .NET Gadgeteer
     /// </summary>
-    public class CurrentACS712 : GTM.Module
-    {
+    [Obsolete]
+    public class CurrentACS712 : GTM.Module {
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
         // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps
         // since these have been moved to separate assemblies for NETMF 4.2 (to reduce the minimum memory footprint of Gadgeteer)
@@ -19,8 +19,7 @@ namespace Gadgeteer.Modules.GHIElectronics
 
         /// <summary></summary>
         /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public CurrentACS712(int socketNumber)
-        {
+        public CurrentACS712(int socketNumber) {
             Socket socket = Socket.GetSocket(socketNumber, true, this, null);
 
             socket.EnsureTypeIsSupported('A', this);
@@ -32,13 +31,11 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Returns a reading of the measured AC current.
         /// </summary>
         /// <returns>AC current reading.</returns>
-        public double Read_AC_Current()
-        {
+        public double Read_AC_Current() {
             double read = 0.0;
             double calculation = 0.0;
 
-            for (int i = 0; i < 400; i++)
-            {
+            for (int i = 0; i < 400; i++) {
                 read += ain.ReadProportion();
             }
 
@@ -52,13 +49,11 @@ namespace Gadgeteer.Modules.GHIElectronics
         /// Returns a reading of the measured DC current.
         /// </summary>
         /// <returns>DC current reading.</returns>
-        public double Read_DC_Current()
-        {
+        public double Read_DC_Current() {
             double read = 0.0;
             double calculation = 0.0;
 
-            for (int i = 0; i < 400; i++)
-            {
+            for (int i = 0; i < 400; i++) {
                 read = ain.ReadProportion();
                 read = 21.3 * read - 13.555;
                 read = read < 0 ? read * -1 : read;
