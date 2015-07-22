@@ -58,7 +58,7 @@ namespace GHIElectronics.Gadgeteer {
             socket.CpuPins[4] = G80.Gpio.PD8;
             socket.CpuPins[5] = G80.Gpio.PD9;
             socket.CpuPins[6] = G80.Gpio.PD12;
-            socket.CpuPins[7] = G80.Gpio.PD12;
+            socket.CpuPins[7] = G80.Gpio.PD11;
             socket.CpuPins[8] = G80.Gpio.PB7;
             socket.CpuPins[9] = G80.Gpio.PB6;
             socket.SerialPortName = G80.SerialPort.Com3;
