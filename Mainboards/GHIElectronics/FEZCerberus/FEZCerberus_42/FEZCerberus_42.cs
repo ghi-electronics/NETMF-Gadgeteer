@@ -7,20 +7,18 @@ using GT = Gadgeteer;
 using GHI.OSHW.Hardware;
 using FEZCerb_Pins = GHI.Hardware.FEZCerb.Pin;
 
-namespace GHIElectronics.Gadgeteer
-{
+namespace GHIElectronics.Gadgeteer {
     /// <summary>
     /// Support class for GHI Electronics FEZCerberus for Microsoft .NET Gadgeteer
     /// </summary>
-    public class FEZCerberus : GT.Mainboard
-	{
-		private bool configSet = false;
+    [Obsolete]
+    public class FEZCerberus : GT.Mainboard {
+        private bool configSet = false;
 
         /// <summary>
         /// Instantiates a new FEZCerberus mainboard
         /// </summary>
-        public FEZCerberus()
-        {
+        public FEZCerberus() {
             // uncomment the following if you support NativeI2CWriteRead for faster DaisyLink performance
             // otherwise, the DaisyLink I2C interface will be supported in Gadgeteer.dll in managed code.
             GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate nativeI2C = new GT.Socket.SocketInterfaces.NativeI2CWriteReadDelegate(NativeI2CWriteRead);
@@ -293,19 +291,16 @@ namespace GHIElectronics.Gadgeteer
             #endregion Socket 8
         }
 
-        bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead)
-        {
+        bool NativeI2CWriteRead(GT.Socket socket, GT.Socket.Pin sda, GT.Socket.Pin scl, byte address, byte[] write, int writeOffset, int writeLen, byte[] read, int readOffset, int readLen, out int numWritten, out int numRead) {
             return GHI.OSHW.Hardware.SoftwareI2CBus.DirectI2CWriteRead(socket.CpuPins[(int)scl], socket.CpuPins[(int)sda], 100, address, write, writeOffset, writeLen, read, readOffset, readLen, out numWritten, out numRead);
         }
 
-		private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp)
-        {
-			if (bpp != BPP.BPP16_BGR_BE)
-				throw new ArgumentException("Invalid BPP");
+        private void NativeSPIBitmapPaint(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp) {
+            if (bpp != BPP.BPP16_BGR_BE)
+                throw new ArgumentException("Invalid BPP");
 
-            if (!this.configSet)
-			{
-				Util.SetSpecialDisplayConfig(config, Util.BPP_Type.BPP16_BGR_LE);
+            if (!this.configSet) {
+                Util.SetSpecialDisplayConfig(config, Util.BPP_Type.BPP16_BGR_LE);
 
                 this.configSet = true;
             }
@@ -318,8 +313,7 @@ namespace GHIElectronics.Gadgeteer
         /// <summary>
         /// Allows mainboards to support storage device mounting/umounting.  This provides modules with a list of storage device volume names supported by the mainboard. 
         /// </summary>
-        public override string[] GetStorageDeviceVolumeNames()
-        {
+        public override string[] GetStorageDeviceVolumeNames() {
             return sdVolumes;
         }
 
@@ -327,8 +321,7 @@ namespace GHIElectronics.Gadgeteer
         /// Functionality provided by mainboard to mount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
         /// This should result in a Microsoft.SPOT.IO.RemovableMedia.Insert event if successful.
         /// </summary>
-        public override bool MountStorageDevice(string volumeName)
-        {
+        public override bool MountStorageDevice(string volumeName) {
             // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Insert"/> event if successful and return true if the volumeName is supported.
 
             StorageDev.MountSD();
@@ -340,8 +333,7 @@ namespace GHIElectronics.Gadgeteer
         /// Functionality provided by mainboard to ummount storage devices, given the volume name of the storage device (see <see cref="GetStorageDeviceVolumeNames"/>).
         /// This should result in a Microsoft.SPOT.IO.RemovableMedia.Eject event if successful.
         /// </summary>
-        public override bool UnmountStorageDevice(string volumeName)
-        {
+        public override bool UnmountStorageDevice(string volumeName) {
             // implement this if you support storage devices. This should result in a <see cref="Microsoft.SPOT.IO.RemovableMedia.Eject"/> event if successful and return true if the volumeName is supported.
 
             StorageDev.UnmountSD();
@@ -353,14 +345,12 @@ namespace GHIElectronics.Gadgeteer
         /// Changes the programming interafces to the one specified
         /// </summary>
         /// <param name="programmingInterface">The programming interface to use</param>
-        public override void SetProgrammingMode(GT.Mainboard.ProgrammingInterface programmingInterface)
-        {
+        public override void SetProgrammingMode(GT.Mainboard.ProgrammingInterface programmingInterface) {
             // Change the reflashing interface to the one specified, if possible.
             // This is an advanced API that we don't expect people to call much.
         }
 
-        void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp)
-        {
+        void BitmapConverter(byte[] bitmapBytes, byte[] pixelBytes, GT.Mainboard.BPP bpp) {
             if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE)
                 throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
 
@@ -389,8 +379,7 @@ namespace GHIElectronics.Gadgeteer
         /// though the Bitmap width/height for WPF should be modified to the Width and Height parameters.  This must reboot if the LCD configuration changes require a reboot.
         /// </summary>
         /// <param name="lcdConfig">The LCD Configuration</param>
-        public override void SetLCDConfiguration(GT.Mainboard.LCDConfiguration lcdConfig)
-        {
+        public override void SetLCDConfiguration(GT.Mainboard.LCDConfiguration lcdConfig) {
         }
 
         /// <summary>
@@ -398,8 +387,7 @@ namespace GHIElectronics.Gadgeteer
         /// </summary>
         /// <param name="rotation">The LCD rotation to use</param>
         /// <returns>true if the rotation is supported</returns>
-        public override bool SetLCDRotation(GT.Modules.Module.DisplayModule.LCDRotation rotation)
-        {
+        public override bool SetLCDRotation(GT.Modules.Module.DisplayModule.LCDRotation rotation) {
             return false;
         }
 
@@ -411,92 +399,76 @@ namespace GHIElectronics.Gadgeteer
         /// Turns the debug LED on or off
         /// </summary>
         /// <param name="on">True if the debug LED should be on</param>
-        public override void SetDebugLED(bool on)
-        {
+        public override void SetDebugLED(bool on) {
             debugled.Write(on);
         }
 
         /// <summary>
         /// This performs post-initialization tasks for the mainboard.  It is called by Gadgeteer.Program.Run and does not need to be called manually.
         /// </summary>
-        public override void PostInit()
-        {
+        public override void PostInit() {
             return;
         }
 
         /// <summary>
         /// The mainboard name, which is printed at startup in the debug window
         /// </summary>
-        public override string MainboardName
-        {
+        public override string MainboardName {
             get { return "GHI Electronics FEZCerberus"; }
         }
 
         /// <summary>
         /// The mainboard version, which is printed at startup in the debug window
         /// </summary>
-        public override string MainboardVersion
-        {
+        public override string MainboardVersion {
             get { return "1.1"; }
         }
 
     }
 
-    internal class FEZCerberus_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput
-    {
+    internal class FEZCerberus_AnalogOut : GT.Socket.SocketInterfaces.AnalogOutput {
         private AnalogOutput aout = null;
 
         Cpu.AnalogOutputChannel pin;
         const double MIN_VOLTAGE = 0;
         const double MAX_VOLTAGE = 3.3;
 
-        public FEZCerberus_AnalogOut(Cpu.AnalogOutputChannel pin)
-        {
+        public FEZCerberus_AnalogOut(Cpu.AnalogOutputChannel pin) {
             this.pin = pin;
         }
 
-        public double MinOutputVoltage
-        {
-            get
-            {
+        public double MinOutputVoltage {
+            get {
                 return FEZCerberus_AnalogOut.MIN_VOLTAGE;
             }
         }
 
-        public double MaxOutputVoltage
-        {
-            get
-            {
+        public double MaxOutputVoltage {
+            get {
                 return FEZCerberus_AnalogOut.MAX_VOLTAGE;
             }
         }
 
-        public bool Active
-        {
-            get
-            {
+        public bool Active {
+            get {
                 return this.aout != null;
             }
-            set
-            {
+            set {
                 if (value == this.Active)
                     return;
 
-                if (value)
-                {
+                if (value) {
                     this.aout = new AnalogOutput(this.pin, 1 / FEZCerberus_AnalogOut.MAX_VOLTAGE, 0, 12);
                     this.SetVoltage(FEZCerberus_AnalogOut.MIN_VOLTAGE);
                 }
-                else
-                {
+                else {
                     this.aout.Dispose();
                     this.aout = null;
                 }
             }
         }
 
-        public void SetVoltage(double voltage)
-        {
+        public void SetVoltage(double voltage) {
             this.Active = true;
 
             if (voltage < FEZCerberus_AnalogOut.MIN_VOLTAGE)

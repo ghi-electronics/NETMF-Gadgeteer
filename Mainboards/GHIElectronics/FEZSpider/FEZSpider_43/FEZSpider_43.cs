@@ -12,6 +12,7 @@ using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer {
     /// <summary>The mainboard class for the FEZ Spider.</summary>
+    [Obsolete]
     public class FEZSpider : GT.Mainboard {
         private OutputPort debugLed;
         private IRemovable[] storageDevices;

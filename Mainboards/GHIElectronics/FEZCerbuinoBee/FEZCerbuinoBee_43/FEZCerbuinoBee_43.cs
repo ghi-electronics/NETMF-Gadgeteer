@@ -15,6 +15,7 @@ using FEZCerbuinoBeePins = GHI.Pins.FEZCerbuinoBee;
 
 namespace GHIElectronics.Gadgeteer {
     /// <summary>The mainboard class for the FEZ Cerbuino Bee.</summary>
+    [Obsolete]
     public class FEZCerbuinoBee : GT.Mainboard {
         private bool configSet;
         private OutputPort debugLed;
