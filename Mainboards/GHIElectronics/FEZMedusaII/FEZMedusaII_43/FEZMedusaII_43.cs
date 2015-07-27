@@ -1,9 +1,5 @@
 ﻿using GHI.IO;
 using GHI.IO.Storage;
-using GHI.Processor;
-using GHI.Usb;
-using GHI.Usb.Host;
-using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System;
 using G30 = GHI.Pins.G30;
@@ -15,7 +11,6 @@ namespace GHIElectronics.Gadgeteer {
     /// The mainboard class for the FEZMedusaII.
     /// </summary>
     public class FEZMedusaII : GT.Mainboard {
-        private bool configSet;
         private InterruptPort ldr0;
         private InterruptPort ldr1;
         private OutputPort debugLed;
@@ -25,12 +20,8 @@ namespace GHIElectronics.Gadgeteer {
         /// Constructs a new instance.
         /// </summary>
         public FEZMedusaII() {
-            this.configSet = false;
             this.debugLed = null;
-            this.storageDevices = new IRemovable[3];
-
-            this.NativeBitmapConverter = this.NativeBitmapConvert;
-            this.NativeBitmapCopyToSpi = this.NativeBitmapSpi;
+            this.storageDevices = new IRemovable[1];
 
             GT.SocketInterfaces.I2CBusIndirector nativeI2C = (s, sdaPin, sclPin, address, clockRateKHz, module) => new InteropI2CBus(s, sdaPin, sclPin, address, clockRateKHz, module);
             GT.Socket socket;
@@ -238,35 +229,6 @@ namespace GHIElectronics.Gadgeteer {
         /// <param name="timing">The required timings from an LCD controller.</param>
         protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GTM.Module.DisplayModule.TimingRequirements timing) {
             throw new NotSupportedException();
-        }
-
-        private void NativeBitmapConvert(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp) {
-            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
-
-            GHI.Utilities.Bitmaps.Convert(bitmap, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE, pixelBytes);
-        }
-
-        private void NativeBitmapSpi(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp) {
-            if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
-
-            if (!this.configSet) {
-                Display.Populate(Display.GHIDisplay.DisplayN18);
-                Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
-                Display.ControlPin = Cpu.Pin.GPIO_NONE;
-                Display.BacklightPin = Cpu.Pin.GPIO_NONE;
-                Display.ResetPin = Cpu.Pin.GPIO_NONE;
-                Display.ChipSelectPin = config.ChipSelect_Port;
-                Display.SpiModule = config.SPI_mod;
-
-                if ((bitmap.Width == 128 || bitmap.Width == 160) && (bitmap.Height == 128 || bitmap.Height == 160))
-                    Display.CurrentRotation = bitmap.Width == 128 ? Display.Rotation.Normal : Display.Rotation.Clockwise90;
-
-                Display.Save();
-
-                this.configSet = true;
-            }
-
-            bitmap.Flush(xSrc, ySrc, width, height);
         }
 
         private class InteropI2CBus : GT.SocketInterfaces.I2CBus {
