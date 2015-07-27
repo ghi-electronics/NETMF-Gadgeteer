@@ -164,7 +164,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
         private void OnDeviceDisconnected(object sender, EventArgs e) {
             this.status = CameraStatus.Disconnected;
             this.running = false;
-            this.workerThread.Join();
             this.takePictureFlag = false;
 
             if (this.status == CameraStatus.StreamBitmap)
