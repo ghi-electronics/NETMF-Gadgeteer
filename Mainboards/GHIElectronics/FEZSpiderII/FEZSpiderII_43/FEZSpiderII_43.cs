@@ -149,7 +149,7 @@ namespace GHIElectronics.Gadgeteer {
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_7;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_2;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_3;
-            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
+            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
             GT.Socket.SocketInterfaces.SetAnalogOutputFactors(socket, 3.3, 0, 10);
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
@@ -165,7 +165,7 @@ namespace GHIElectronics.Gadgeteer {
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_6;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_1;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_0;
-            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 10);
+            GT.Socket.SocketInterfaces.SetAnalogInputFactors(socket, 3.3, 0, 12);
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(11);
