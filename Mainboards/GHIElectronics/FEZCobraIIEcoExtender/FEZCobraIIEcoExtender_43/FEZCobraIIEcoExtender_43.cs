@@ -175,9 +175,9 @@ namespace GHIElectronics.Gadgeteer {
 			socket.CpuPins[4] = G120.P1_14;
 			socket.CpuPins[5] = G120.P1_16;
 			socket.CpuPins[6] = G120.P1_17;
-			socket.CpuPins[7] = (Cpu.Pin)9;
-			socket.CpuPins[8] = (Cpu.Pin)8;
-			socket.CpuPins[9] = (Cpu.Pin)7;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			socket.SPIModule = SPI.SPI_module.SPI2;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
