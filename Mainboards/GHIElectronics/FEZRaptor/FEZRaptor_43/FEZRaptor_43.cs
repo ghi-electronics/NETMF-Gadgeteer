@@ -96,9 +96,9 @@ namespace GHIElectronics.Gadgeteer {
 			socket.CpuPins[4] = G400.PC23;
 			socket.CpuPins[5] = G400.PB3;
 			socket.CpuPins[6] = G400.PA28;
-			socket.CpuPins[7] = G400.PA12;
-			socket.CpuPins[8] = G400.PA11;
-			socket.CpuPins[9] = G400.PA13;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
@@ -185,9 +185,9 @@ namespace GHIElectronics.Gadgeteer {
 			socket.CpuPins[4] = G400.PA5;
 			socket.CpuPins[5] = G400.PA6;
 			socket.CpuPins[6] = G400.PB4;
-			socket.CpuPins[7] = G400.PA12;
-			socket.CpuPins[8] = G400.PA11;
-			socket.CpuPins[9] = G400.PA13;
+			socket.CpuPins[7] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[8] = GT.Socket.UnnumberedPin;
+			socket.CpuPins[9] = GT.Socket.UnnumberedPin;
 			socket.SPIModule = SPI.SPI_module.SPI1;
 			socket.SerialPortName = "COM3";
 			GT.Socket.SocketInterfaces.RegisterSocket(socket);
