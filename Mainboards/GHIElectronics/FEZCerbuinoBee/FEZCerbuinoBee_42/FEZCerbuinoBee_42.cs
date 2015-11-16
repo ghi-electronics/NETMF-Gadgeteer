@@ -12,7 +12,6 @@ namespace GHIElectronics.Gadgeteer {
     /// <summary>
     /// Support class for GHI Electronics FEZCerbuinoBee for Microsoft .NET Gadgeteer
     /// </summary>
-    [Obsolete]
     public class FEZCerbuinoBee : GT.Mainboard {
         private bool configSet = false;
         // The mainboard constructor gets called before anything else in Gadgeteer (module constructors, etc), 

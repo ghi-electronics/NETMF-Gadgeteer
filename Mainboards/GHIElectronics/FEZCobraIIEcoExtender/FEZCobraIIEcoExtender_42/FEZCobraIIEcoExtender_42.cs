@@ -15,7 +15,6 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZCobra II for Microsoft .NET Gadgeteer
 	/// </summary>
-	[Obsolete]
 	public class FEZCobraIIEcoExtender : GT.Mainboard
 	{
 		/// <summary>

@@ -11,7 +11,6 @@ namespace GHIElectronics.Gadgeteer {
     /// <summary>
     /// Support class for GHI Electronics FEZCerberus for Microsoft .NET Gadgeteer
     /// </summary>
-    [Obsolete]
     public class FEZCerberus : GT.Mainboard {
         private bool configSet = false;
 

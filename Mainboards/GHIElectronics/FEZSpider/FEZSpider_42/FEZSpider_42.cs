@@ -14,7 +14,6 @@ namespace GHIElectronics.Gadgeteer {
     /// <summary>
     /// Support class for GHI Electronics FEZSpider, using the GHI EMX SoM, for Microsoft .NET Gadgeteer
     /// </summary>
-    [Obsolete]
     public class FEZSpider : GT.Mainboard {
         // The mainboard constructor gets called before anything else in Gadgeteer (module constructors, etc), 
         // so it can set up fields in Gadgeteer.dll specifying socket types supported, etc.

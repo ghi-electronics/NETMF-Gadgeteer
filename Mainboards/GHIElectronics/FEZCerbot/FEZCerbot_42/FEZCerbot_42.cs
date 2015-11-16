@@ -12,7 +12,6 @@ namespace GHIElectronics.Gadgeteer
 	/// <summary>
 	/// Support class for GHI Electronics FEZCerbot for Microsoft .NET Gadgeteer
 	/// </summary>
-	[Obsolete]
 	public class FEZCerbot : GT.Mainboard
     {
         private const int MOTOR_BASE_FREQUENCY = 100000;

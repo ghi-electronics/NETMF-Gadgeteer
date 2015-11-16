@@ -11,7 +11,6 @@ using GTM = Gadgeteer.Modules;
 
 namespace GHIElectronics.Gadgeteer {
     /// <summary>The mainboard class for the FEZ Cerbot.</summary>
-    [Obsolete]
     public class FEZCerbot : GT.Mainboard {
         private const double MOTOR_BASE_FREQUENCY = 100000;
 

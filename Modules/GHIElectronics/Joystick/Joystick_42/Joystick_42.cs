@@ -148,15 +148,6 @@ namespace Gadgeteer.Modules.GHIElectronics
         }
 
 		/// <summary>
-		/// Gets the joystick position. Use GetPosition() instead.
-		/// </summary>
-		/// <returns></returns>
-		[Obsolete] public Position GetJoystickPosition()
-		{
-			return this.GetPosition();
-		}
-
-		/// <summary>
 		/// Calibrates the joystick such that the current position is interpreted as 0.
 		/// </summary>
 		public void Calibrate()

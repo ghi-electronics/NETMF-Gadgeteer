@@ -13,7 +13,6 @@ using FEZCerberusPins = GHI.Pins.FEZCerberus;
 
 namespace GHIElectronics.Gadgeteer {
     /// <summary>The mainboard class for the FEZ Cerberus.</summary>
-    [Obsolete]
     public class FEZCerberus : GT.Mainboard {
         private bool configSet;
         private OutputPort debugLed;

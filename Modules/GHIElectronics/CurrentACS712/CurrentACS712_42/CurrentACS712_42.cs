@@ -6,7 +6,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
     /// <summary>
     /// A Current ACS712 module for Microsoft .NET Gadgeteer
     /// </summary>
-    [Obsolete]
     public class CurrentACS712 : GTM.Module {
         // -- CHANGE FOR MICRO FRAMEWORK 4.2 --
         // If you want to use Serial, SPI, or DaisyLink (which includes GTI.SoftwareI2C), you must do a few more steps

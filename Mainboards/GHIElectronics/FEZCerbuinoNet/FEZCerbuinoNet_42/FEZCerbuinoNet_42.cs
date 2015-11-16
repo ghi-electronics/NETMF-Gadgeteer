@@ -9,7 +9,6 @@ namespace GHIElectronics.Gadgeteer {
     /// <summary>
     /// Support class for GHI Electronics FEZCerbuinoNet for Microsoft .NET Gadgeteer
     /// </summary>
-    [Obsolete]
     public class FEZCerbuinoNet : GT.Mainboard {
         private bool configSet = false;
 

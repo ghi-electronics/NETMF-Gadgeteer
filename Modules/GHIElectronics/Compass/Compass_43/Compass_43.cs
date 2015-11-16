@@ -5,7 +5,6 @@ using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics {
     /// <summary>A Compass module for Microsoft .NET Gadgeteer</summary>
-    [Obsolete]
     public class Compass : GTM.Module {
         private GTI.InterruptInput dataReady;
         private GTI.I2CBus i2c;

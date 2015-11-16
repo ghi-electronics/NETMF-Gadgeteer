@@ -5,7 +5,6 @@ using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics {
     /// <summary>A CurrentACS712 module for Microsoft .NET Gadgeteer</summary>
-    [Obsolete]
     public class CurrentACS712 : GTM.Module {
         private GTI.AnalogInput input;
 
