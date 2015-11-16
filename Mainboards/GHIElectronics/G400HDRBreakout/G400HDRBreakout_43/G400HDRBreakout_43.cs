@@ -6,7 +6,7 @@ using GHI.Usb.Host;
 using Microsoft.SPOT;
 using Microsoft.SPOT.Hardware;
 using System;
-using G400 = GHI.Pins.G400;
+using G400 = GHI.Pins.G400D;
 using GT = Gadgeteer;
 using GTM = Gadgeteer.Modules;
 
@@ -32,7 +32,7 @@ namespace GHIElectronics.Gadgeteer {
         public InterruptPort LDR0 {
             get {
                 if (this.ldr0 == null)
-                    this.ldr0 = new InterruptPort(G400.PA24, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+                    this.ldr0 = new InterruptPort(G400.Gpio.PA24, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
 
                 return this.ldr0;
             }
@@ -42,7 +42,7 @@ namespace GHIElectronics.Gadgeteer {
         public InterruptPort LDR1 {
             get {
                 if (this.ldr1 == null)
-                    this.ldr1 = new InterruptPort(G400.PA4, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
+                    this.ldr1 = new InterruptPort(G400.Gpio.PA4, true, Port.ResistorMode.PullUp, Port.InterruptMode.InterruptEdgeBoth);
 
                 return this.ldr1;
             }
@@ -64,49 +64,49 @@ namespace GHIElectronics.Gadgeteer {
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(1);
             socket.SupportedTypes = new char[] { 'R', 'Y' };
-            socket.CpuPins[3] = G400.PC11;
-            socket.CpuPins[4] = G400.PC12;
-            socket.CpuPins[5] = G400.PC13;
-            socket.CpuPins[6] = G400.PC14;
-            socket.CpuPins[7] = G400.PC15;
-            socket.CpuPins[8] = G400.PC27;
-            socket.CpuPins[9] = G400.PC28;
+            socket.CpuPins[3] = G400.Gpio.PC11;
+            socket.CpuPins[4] = G400.Gpio.PC12;
+            socket.CpuPins[5] = G400.Gpio.PC13;
+            socket.CpuPins[6] = G400.Gpio.PC14;
+            socket.CpuPins[7] = G400.Gpio.PC15;
+            socket.CpuPins[8] = G400.Gpio.PC27;
+            socket.CpuPins[9] = G400.Gpio.PC28;
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(2);
             socket.SupportedTypes = new char[] { 'G', 'Y' };
-            socket.CpuPins[3] = G400.PC5;
-            socket.CpuPins[4] = G400.PC6;
-            socket.CpuPins[5] = G400.PC7;
-            socket.CpuPins[6] = G400.PC8;
-            socket.CpuPins[7] = G400.PC9;
-            socket.CpuPins[8] = G400.PC10;
-            socket.CpuPins[9] = G400.PA28;
+            socket.CpuPins[3] = G400.Gpio.PC5;
+            socket.CpuPins[4] = G400.Gpio.PC6;
+            socket.CpuPins[5] = G400.Gpio.PC7;
+            socket.CpuPins[6] = G400.Gpio.PC8;
+            socket.CpuPins[7] = G400.Gpio.PC9;
+            socket.CpuPins[8] = G400.Gpio.PC10;
+            socket.CpuPins[9] = G400.Gpio.PA28;
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(3);
             socket.SupportedTypes = new char[] { 'B', 'Y' };
-            socket.CpuPins[3] = G400.PC0;
-            socket.CpuPins[4] = G400.PC1;
-            socket.CpuPins[5] = G400.PC2;
-            socket.CpuPins[6] = G400.PC3;
-            socket.CpuPins[7] = G400.PC4;
-            socket.CpuPins[8] = G400.PC29;
-            socket.CpuPins[9] = G400.PC30;
+            socket.CpuPins[3] = G400.Gpio.PC0;
+            socket.CpuPins[4] = G400.Gpio.PC1;
+            socket.CpuPins[5] = G400.Gpio.PC2;
+            socket.CpuPins[6] = G400.Gpio.PC3;
+            socket.CpuPins[7] = G400.Gpio.PC4;
+            socket.CpuPins[8] = G400.Gpio.PC29;
+            socket.CpuPins[9] = G400.Gpio.PC30;
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(4);
             socket.SupportedTypes = new char[] { 'D', 'I' };
-            socket.CpuPins[3] = G400.PD5;
+            socket.CpuPins[3] = G400.Gpio.PD5;
             socket.CpuPins[4] = GT.Socket.UnnumberedPin;
             socket.CpuPins[5] = GT.Socket.UnnumberedPin;
-            socket.CpuPins[6] = G400.PA27;
-            socket.CpuPins[7] = G400.PA29;
-            socket.CpuPins[8] = G400.PA30;
-            socket.CpuPins[9] = G400.PA31;
+            socket.CpuPins[6] = G400.Gpio.PA27;
+            socket.CpuPins[7] = G400.Gpio.PA29;
+            socket.CpuPins[8] = G400.Gpio.PA30;
+            socket.CpuPins[9] = G400.Gpio.PA31;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(5);
@@ -122,13 +122,13 @@ namespace GHIElectronics.Gadgeteer {
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(6);
             socket.SupportedTypes = new char[] { 'C', 'S', 'U', 'Y' };
-            socket.CpuPins[3] = G400.PC31;
-            socket.CpuPins[4] = G400.PA5;
-            socket.CpuPins[5] = G400.PA6;
-            socket.CpuPins[6] = G400.PC22;
-            socket.CpuPins[7] = G400.PA22;
-            socket.CpuPins[8] = G400.PA21;
-            socket.CpuPins[9] = G400.PA23;
+            socket.CpuPins[3] = G400.Gpio.PC31;
+            socket.CpuPins[4] = G400.Gpio.PA5;
+            socket.CpuPins[5] = G400.Gpio.PA6;
+            socket.CpuPins[6] = G400.Gpio.PC22;
+            socket.CpuPins[7] = G400.Gpio.PA22;
+            socket.CpuPins[8] = G400.Gpio.PA21;
+            socket.CpuPins[9] = G400.Gpio.PA23;
             socket.SPIModule = SPI.SPI_module.SPI2;
             socket.SerialPortName = "COM3";
             socket.I2CBusIndirector = nativeI2C;
@@ -136,23 +136,23 @@ namespace GHIElectronics.Gadgeteer {
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(7);
             socket.SupportedTypes = new char[] { 'C', 'I', 'U', 'X' };
-            socket.CpuPins[3] = G400.PA26;
-            socket.CpuPins[4] = G400.PA10;
-            socket.CpuPins[5] = G400.PA9;
-            socket.CpuPins[6] = G400.PB12;
-            socket.CpuPins[8] = G400.PA30;
-            socket.CpuPins[9] = G400.PA31;
+            socket.CpuPins[3] = G400.Gpio.PA26;
+            socket.CpuPins[4] = G400.Gpio.PA10;
+            socket.CpuPins[5] = G400.Gpio.PA9;
+            socket.CpuPins[6] = G400.Gpio.PB12;
+            socket.CpuPins[8] = G400.Gpio.PA30;
+            socket.CpuPins[9] = G400.Gpio.PA31;
             socket.SerialPortName = "COM1";
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(8);
             socket.SupportedTypes = new char[] { 'A', 'I', 'X' };
-            socket.CpuPins[3] = G400.PB14;
-            socket.CpuPins[4] = G400.PB15;
-            socket.CpuPins[5] = G400.PB16;
-            socket.CpuPins[6] = G400.PB17;
-            socket.CpuPins[8] = G400.PA30;
-            socket.CpuPins[9] = G400.PA31;
+            socket.CpuPins[3] = G400.Gpio.PB14;
+            socket.CpuPins[4] = G400.Gpio.PB15;
+            socket.CpuPins[5] = G400.Gpio.PB16;
+            socket.CpuPins[6] = G400.Gpio.PB17;
+            socket.CpuPins[8] = G400.Gpio.PA30;
+            socket.CpuPins[9] = G400.Gpio.PA31;
             socket.AnalogInput3 = Cpu.AnalogChannel.ANALOG_3;
             socket.AnalogInput4 = Cpu.AnalogChannel.ANALOG_4;
             socket.AnalogInput5 = Cpu.AnalogChannel.ANALOG_5;
@@ -161,13 +161,13 @@ namespace GHIElectronics.Gadgeteer {
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(9);
             socket.SupportedTypes = new char[] { 'P', 'U', 'Y' };
-            socket.CpuPins[3] = G400.PB18;
-            socket.CpuPins[4] = G400.PA7;
-            socket.CpuPins[5] = G400.PA8;
-            socket.CpuPins[6] = G400.PC26;
-            socket.CpuPins[7] = G400.PC18;
-            socket.CpuPins[8] = G400.PC21;
-            socket.CpuPins[9] = G400.PC20;
+            socket.CpuPins[3] = G400.Gpio.PB18;
+            socket.CpuPins[4] = G400.Gpio.PA7;
+            socket.CpuPins[5] = G400.Gpio.PA8;
+            socket.CpuPins[6] = G400.Gpio.PC26;
+            socket.CpuPins[7] = G400.Gpio.PC18;
+            socket.CpuPins[8] = G400.Gpio.PC21;
+            socket.CpuPins[9] = G400.Gpio.PC20;
             socket.PWM7 = Cpu.PWMChannel.PWM_0;
             socket.PWM8 = Cpu.PWMChannel.PWM_3;
             socket.PWM9 = Cpu.PWMChannel.PWM_2;
@@ -177,13 +177,13 @@ namespace GHIElectronics.Gadgeteer {
 
             socket = GT.Socket.SocketInterfaces.CreateNumberedSocket(10);
             socket.SupportedTypes = new char[] { 'F' };
-            socket.CpuPins[3] = G400.PB8;
-            socket.CpuPins[4] = G400.PA15;
-            socket.CpuPins[5] = G400.PA18;
-            socket.CpuPins[6] = G400.PA16;
-            socket.CpuPins[7] = G400.PA19;
-            socket.CpuPins[8] = G400.PA20;
-            socket.CpuPins[9] = G400.PA17;
+            socket.CpuPins[3] = G400.Gpio.PB8;
+            socket.CpuPins[4] = G400.Gpio.PA15;
+            socket.CpuPins[5] = G400.Gpio.PA18;
+            socket.CpuPins[6] = G400.Gpio.PA16;
+            socket.CpuPins[7] = G400.Gpio.PA19;
+            socket.CpuPins[8] = G400.Gpio.PA20;
+            socket.CpuPins[9] = G400.Gpio.PA17;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
         }
 
@@ -254,7 +254,7 @@ namespace GHIElectronics.Gadgeteer {
         /// <param name="on">The new state.</param>
         public override void SetDebugLED(bool on) {
             if (this.debugLed == null)
-                this.debugLed = new OutputPort(G400.PD3, on);
+                this.debugLed = new OutputPort(G400.Gpio.PD3, on);
 
             this.debugLed.Write(on);
         }
