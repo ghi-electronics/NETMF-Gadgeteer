@@ -129,7 +129,7 @@ namespace GHIElectronics.Gadgeteer {
             socket.CpuPins[7] = G400.PA22;
             socket.CpuPins[8] = G400.PA21;
             socket.CpuPins[9] = G400.PA23;
-            socket.SPIModule = SPI.SPI_module.SPI1;
+            socket.SPIModule = SPI.SPI_module.SPI2;
             socket.SerialPortName = "COM3";
             socket.I2CBusIndirector = nativeI2C;
             GT.Socket.SocketInterfaces.RegisterSocket(socket);
