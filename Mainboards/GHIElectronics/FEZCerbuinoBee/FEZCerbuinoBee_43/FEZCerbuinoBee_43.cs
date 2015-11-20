@@ -242,7 +242,7 @@ namespace GHIElectronics.Gadgeteer {
         private void NativeBitmapConvert(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp) {
             if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
 
-            GHI.Utilities.Bitmaps.Convert(bitmap, GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE, pixelBytes);
+            GHI.Utilities.Bitmaps.Convert(bitmap, GHI.Utilities.Bitmaps.Format.Bpp16BgrBe, pixelBytes);
         }
 
         private void NativeBitmapSpi(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp) {
@@ -250,7 +250,7 @@ namespace GHIElectronics.Gadgeteer {
 
             if (!this.configSet) {
                 Display.Populate(Display.GHIDisplay.DisplayN18);
-                Display.Bpp = GHI.Utilities.Bitmaps.BitsPerPixel.BPP16_BGR_BE;
+                Display.Bpp = GHI.Utilities.Bitmaps.Format.Bpp16BgrBe;
                 Display.ControlPin = Cpu.Pin.GPIO_NONE;
                 Display.BacklightPin = Cpu.Pin.GPIO_NONE;
                 Display.ResetPin = Cpu.Pin.GPIO_NONE;
