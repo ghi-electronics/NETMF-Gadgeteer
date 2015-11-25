@@ -132,10 +132,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Swaps the red and blue channels if your display has them reversed.</summary>
 		public void SwapRedBlueChannels() {
-			this.WriteCommand(0x36); //MX, MY, RGB mode
-			this.WriteData((byte)(this.isBgr ? 0xC0 : 0xC8));
-
 			this.isBgr = !this.isBgr;
+
+			this.SetFormat(this.Orientation, this.isBgr);
 		}
 
 		/// <summary>Renders display data on the display device.</summary>
@@ -164,17 +163,11 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Sets the orientation.</summary>
 		/// <param name="orientation">The orientation.</param>
 		protected override void SetOrientationOverride(DisplayOrientation orientation) {
-			this.WriteCommand(DisplayN18.ST7735_MADCTL);
-
-			switch (orientation) {
-				case DisplayOrientation.Normal: this.WriteData((byte)(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
-				case DisplayOrientation.Clockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MX | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
-				case DisplayOrientation.UpsideDown: this.WriteData((byte)(this.isBgr ? DisplayN18.MADCTL_BGR : 0)); break;
-				case DisplayOrientation.Counterclockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MY | (this.isBgr ? DisplayN18.MADCTL_BGR : 0))); break;
-				default: throw new ArgumentException("orientation");
-			}
+			this.SetFormat(orientation, this.isBgr);
 
 			base.OnDisplayConnected("Display N18", 128, 160, orientation, null);
+
+			Thread.Sleep(1);
 		}
 
 		/// <summary>Checks if the orientation is supported.</summary>
@@ -186,6 +179,19 @@ namespace Gadgeteer.Modules.GHIElectronics {
 				case DisplayOrientation.UpsideDown: return true;
 				case DisplayOrientation.Counterclockwise90Degrees: return true;
 				default: return false;
+			}
+		}
+
+		private void SetFormat(DisplayOrientation orientation, bool isBgr) {
+			this.WriteCommand(DisplayN18.ST7735_MADCTL);
+
+			var bgr = (byte)(isBgr ? DisplayN18.MADCTL_BGR : 0);
+			switch (orientation) {
+				case DisplayOrientation.Normal: this.WriteData((byte)(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | bgr)); break;
+				case DisplayOrientation.Clockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MX | bgr)); break;
+				case DisplayOrientation.UpsideDown: this.WriteData(bgr); break;
+				case DisplayOrientation.Counterclockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MY | bgr)); break;
+				default: throw new ArgumentException("orientation");
 			}
 		}
 
