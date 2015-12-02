@@ -9,8 +9,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 	public class Gyro : GTM.Module {
 		private GT.Timer timer;
 		private GTI.I2CBus i2c;
-		private GTI.InterruptInput interruptInput;
-		private bool ready;
 		private byte[] readBuffer1;
 		private byte[] writeBuffer1;
 		private byte[] writeBuffer2;
@@ -35,11 +33,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// </summary>
 		public Bandwidth LowPassFilter {
 			get {
-				return (Bandwidth)(this.Read(Register.DLPF_FS) & 0x7);
+				return (Bandwidth)(this.Read(Register.Scale) & 0x7);
 			}
-
 			set {
-				this.Write(Register.DLPF_FS, (byte)((byte)value | 0x18));
+				this.Write(Register.Scale, (byte)((byte)value | 0x18));
 			}
 		}
 
@@ -49,11 +46,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// </summary>
 		public byte SampleRateDivider {
 			get {
-				return this.Read(Register.SMPLRT_DIV);
+				return this.Read(Register.SampleRateDivider);
 			}
-
 			set {
-				this.Write(Register.SMPLRT_DIV, value);
+				this.Write(Register.SampleRateDivider, value);
 			}
 		}
 
@@ -62,7 +58,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			get {
 				return this.timer.Interval;
 			}
-
 			set {
 				var wasRunning = this.timer.IsRunning;
 
@@ -83,44 +78,26 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Available low pass filter bandwidth settings.</summary>
 		public enum Bandwidth {
-
 			/// <summary>256Hz</summary>
 			Hertz256 = 0,
-
 			/// <summary>188Hz</summary>
 			Hertz188 = 1,
-
 			/// <summary>98Hz</summary>
 			Hertz98 = 2,
-
 			/// <summary>42Hz</summary>
 			Hertz42 = 3,
-
 			/// <summary>20Hz</summary>
 			Hertz20 = 4,
-
 			/// <summary>10Hz</summary>
 			Hertz10 = 5,
-
 			/// <summary>5Hz</summary>
 			Hertz5 = 6
 		}
 
 		private enum Register : byte {
-			WHO_AM_I = 0x00,
-			SMPLRT_DIV = 0x15,
-			DLPF_FS = 0x16,
-			INT_CFG = 0x17,
-			INT_STATUS = 0x1A,
-			TEMP_OUT_H = 0x1B,
-			TEMP_OUT_L = 0x1C,
-			GYRO_OUT_XOUT_H = 0x1D,
-			GYRO_OUT_XOUT_L = 0x1E,
-			GYRO_OUT_YOUT_H = 0x1F,
-			GYRO_OUT_YOUT_L = 0x20,
-			GYRO_OUT_ZOUT_H = 0x21,
-			GYRO_OUT_ZOUT_L = 0x22,
-			PWR_MGM = 0x3E
+			SampleRateDivider = 0x15,
+			Scale = 0x16,
+			TemperatureOutHigh = 0x1B,
 		}
 
 		/// <summary>Constructs a new instance.</summary>
@@ -138,21 +115,17 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.offsetY = 0;
 			this.offsetZ = 0;
 
-			this.ready = false;
 			this.timer = new GT.Timer(200);
 			this.timer.Tick += (a) => this.TakeMeasurement();
 
 			this.i2c = GTI.I2CBusFactory.Create(socket, 0x68, 100, this);
-
-			this.interruptInput = GTI.InterruptInputFactory.Create(socket, GT.Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingEdge, this);
-			this.interruptInput.Interrupt += this.OnInterrupt;
 
 			this.SetFullScaleRange();
 		}
 
 		/// <summary>Calibrates the gyro values. Ensure that the sensor is not moving when calling this method.</summary>
 		public void Calibrate() {
-			this.Read(Register.TEMP_OUT_H, this.readBuffer8);
+			this.Read(Register.TemperatureOutHigh, this.readBuffer8);
 			int rawT = (this.readBuffer8[0] << 8) | this.readBuffer8[1];
 			int rawX = (this.readBuffer8[2] << 8) | this.readBuffer8[3];
 			int rawY = (this.readBuffer8[4] << 8) | this.readBuffer8[5];
@@ -172,35 +145,23 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public void RequestSingleMeasurement() {
 			if (this.IsTakingMeasurements) throw new InvalidOperationException("You cannot request a single measurement while continuous measurements are being taken.");
 
-			this.EnableInterruptOnDataReady();
 			this.timer.Behavior = Timer.BehaviorType.RunOnce;
 			this.timer.Start();
 		}
 
 		/// <summary>Starts taking measurements and fires MeasurementComplete when a new measurement is available.</summary>
 		public void StartTakingMeasurements() {
-			this.EnableInterruptOnDataReady();
 			this.timer.Behavior = Timer.BehaviorType.RunContinuously;
 			this.timer.Start();
 		}
 
 		/// <summary>Stops taking measurements.</summary>
 		public void StopTakingMeasurements() {
-			this.DisableInterruptOnDataReady();
 			this.timer.Stop();
 		}
 
 		private void SetFullScaleRange() {
-			this.Write(Register.DLPF_FS, (byte)(this.Read(Register.DLPF_FS) | 0x18));
-		}
-
-		private void EnableInterruptOnDataReady() {
-			this.Write(Register.INT_CFG, 0x21);
-			this.Read(Register.INT_STATUS);
-		}
-
-		private void DisableInterruptOnDataReady() {
-			this.Write(Register.INT_CFG, 0x20);
+			this.Write(Register.Scale, (byte)(this.Read(Register.Scale) | 0x18));
 		}
 
 		private byte Read(Register register) {
@@ -220,19 +181,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.i2c.Write(this.writeBuffer2);
 		}
 
-		private void OnInterrupt(GTI.InterruptInput sender, bool value) {
-			this.Read(Register.INT_STATUS);
-
-			this.ready = true;
-		}
-
 		private void TakeMeasurement() {
-			if (!this.ready)
-				return;
+			this.Read(Register.TemperatureOutHigh, this.readBuffer8);
 
-			this.ready = false;
-
-			this.Read(Register.TEMP_OUT_H, this.readBuffer8);
 			int rawT = (this.readBuffer8[0] << 8) | this.readBuffer8[1];
 			int rawX = (this.readBuffer8[2] << 8) | this.readBuffer8[3];
 			int rawY = (this.readBuffer8[4] << 8) | this.readBuffer8[5];
@@ -258,16 +209,16 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			if (Program.CheckAndInvoke(this.MeasurementComplete, this.onMeasurementComplete, sender, e))
 				this.MeasurementComplete(sender, e);
 		}
+
 		/// <summary>Event arguments for the MeasurementComplete event.</summary>
 		public class MeasurementCompleteEventArgs : Microsoft.SPOT.EventArgs {
-
 			/// <summary>Angular rate around the X axis (roll) in degree per second.</summary>
 			public double X { get; private set; }
 
 			/// <summary>Angular rate around the Y axis (pitch) in degree per second.</summary>
 			public double Y { get; private set; }
 
-			/// <summary>Angular rate around the Z axis (yaww) in degree per second.</summary>
+			/// <summary>Angular rate around the Z axis (yaw) in degree per second.</summary>
 			public double Z { get; private set; }
 
 			/// <summary>Temperature in degree celsius.</summary>
