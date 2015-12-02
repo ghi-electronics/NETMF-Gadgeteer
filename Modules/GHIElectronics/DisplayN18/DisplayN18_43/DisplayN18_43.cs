@@ -188,9 +188,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			var bgr = (byte)(isBgr ? DisplayN18.MADCTL_BGR : 0);
 			switch (orientation) {
 				case DisplayOrientation.Normal: this.WriteData((byte)(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | bgr)); break;
-				case DisplayOrientation.Clockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MX | bgr)); break;
+				case DisplayOrientation.Clockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MY | bgr)); break;
 				case DisplayOrientation.UpsideDown: this.WriteData(bgr); break;
-				case DisplayOrientation.Counterclockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MY | bgr)); break;
+				case DisplayOrientation.Counterclockwise90Degrees: this.WriteData((byte)(DisplayN18.MADCTL_MV | DisplayN18.MADCTL_MX | bgr)); break;
 				default: throw new ArgumentException("orientation");
 			}
 		}
@@ -232,8 +232,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.WriteCommand(0xC5); //VCOM
 			this.WriteData(0x0E);
 
-			this.WriteCommand(0x36); //MX, MY, RGB mode
-			this.WriteData(DisplayN18.MADCTL_MX | DisplayN18.MADCTL_MY | DisplayN18.MADCTL_BGR);
+			this.SetOrientationOverride(DisplayOrientation.Normal);
 
 			//ST7735R Gamma Sequence
 			this.WriteCommand(0xe0);

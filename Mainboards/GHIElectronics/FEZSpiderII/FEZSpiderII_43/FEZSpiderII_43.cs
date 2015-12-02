@@ -320,20 +320,20 @@ namespace GHIElectronics.Gadgeteer {
                 default: throw new ArgumentOutOfRangeException("orientationDeg", "orientationDeg must be 0, 90, 180, or 270.");
             }
 
-            Display.Height = (uint)height;
+            Display.Height = height;
             Display.HorizontalBackPorch = timing.HorizontalBackPorch;
             Display.HorizontalFrontPorch = timing.HorizontalFrontPorch;
             Display.HorizontalSyncPolarity = timing.HorizontalSyncPulseIsActiveHigh;
             Display.HorizontalSyncPulseWidth = timing.HorizontalSyncPulseWidth;
             Display.OutputEnableIsFixed = timing.UsesCommonSyncPin; //not the proper property, but we needed it;
             Display.OutputEnablePolarity = timing.CommonSyncPinIsActiveHigh; //not the proper property, but we needed it;
-            Display.PixelClockRateKHz = timing.MaximumClockSpeed;
+            Display.PixelClockRateKHz = (int)timing.MaximumClockSpeed;
             Display.PixelPolarity = timing.PixelDataIsValidOnClockRisingEdge;
             Display.VerticalBackPorch = timing.VerticalBackPorch;
             Display.VerticalFrontPorch = timing.VerticalFrontPorch;
             Display.VerticalSyncPolarity = timing.VerticalSyncPulseIsActiveHigh;
             Display.VerticalSyncPulseWidth = timing.VerticalSyncPulseWidth;
-            Display.Width = (uint)width;
+            Display.Width = width;
 
             if (Display.Save()) {
                 Debug.Print("Updating display configuration. THE MAINBOARD WILL NOW REBOOT.");

@@ -262,12 +262,14 @@ namespace GHIElectronics.Gadgeteer {
 
             if (!this.configSet) {
                 Display.Populate(Display.GHIDisplay.DisplayN18);
-                Display.Bpp = GHI.Utilities.Bitmaps.Format.Bpp16BgrBe;
+                Display.BitmapFormat = GHI.Utilities.Bitmaps.Format.Bpp16BgrBe;
                 Display.ControlPin = Cpu.Pin.GPIO_NONE;
                 Display.BacklightPin = Cpu.Pin.GPIO_NONE;
                 Display.ResetPin = Cpu.Pin.GPIO_NONE;
                 Display.ChipSelectPin = config.ChipSelect_Port;
-                Display.SpiModule = config.SPI_mod;
+				Display.SpiModule = config.SPI_mod;
+				Display.Width = bitmap.Width;
+				Display.Height = bitmap.Height;
 
                 if ((bitmap.Width == 128 || bitmap.Width == 160) && (bitmap.Height == 128 || bitmap.Height == 160))
                     Display.CurrentRotation = bitmap.Width == 128 ? Display.Rotation.Normal : Display.Rotation.Clockwise90;
