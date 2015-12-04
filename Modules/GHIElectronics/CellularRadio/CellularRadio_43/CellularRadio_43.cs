@@ -201,27 +201,28 @@ namespace Gadgeteer.Modules.GHIElectronics {
 				return this.networkInterface.LinkConnected;
 			}
 		}
+		
+		/// <summary>Whether or not the module is currently powered on.</summary>
+		public bool IsPoweredOn {
+			get {
+				return this.powerOn;
+			}
+		}
 
 		/// <summary>Possible states of network registration.</summary>
 		public enum NetworkRegistrationState {
 			/// <summary>The module couldn't find a network.</summary>
 			NotSearching,
-
 			/// <summary>The module is registered to a network.</summary>
 			Registered,
-
 			/// <summary>The module is searching for a network.</summary>
 			Searching,
-
 			/// <summary>The module tried to register to a network, but it was denied.</summary>
 			RegistrationDenied,
-
 			/// <summary>Unknown failure.</summary>
 			Unknown,
-
 			/// <summary>The module is roaming.</summary>
 			Roaming,
-
 			/// <summary>There was an error.</summary>
 			Error
 		}
@@ -230,25 +231,18 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public enum PinState {
 			/// <summary>The SIM is unlocked and ready to be used.</summary>
 			Ready,
-
 			/// <summary>The SIM is locked waiting for the PIN.</summary>
 			Pin,
-
 			/// <summary>The SIM is locked waiting for the PUK.</summary>
 			Puk,
-
 			/// <summary>The SIM is waiting for phone to SIM card (antitheft).</summary>
 			PhPin,
-
 			/// <summary>The SIM is waiting for phone to SIM PUK (antitheft).</summary>
 			PhPuk,
-
 			/// <summary>The SIM is waiting for second PIN.</summary>
 			Pin2,
-
 			/// <summary>The SIM is waiting for second PUK.</summary>
 			Puk2,
-
 			/// <summary>The SIM is not present.</summary>
 			NotPresent
 		}
@@ -257,16 +251,12 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public enum SmsState {
 			/// <summary>Messages that were received and read</summary>
 			ReceivedUnread,
-
 			/// <summary>Messages that were received but not yet read</summary>
 			ReceivedRead,
-
 			/// <summary>Messages that were created but not yet sent</summary>
 			StoredUnsent,
-
 			/// <summary>Messages that were created and sent</summary>
 			StoredSent,
-
 			/// <summary>All messages</summary>
 			All
 		}
@@ -275,16 +265,12 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public enum PhoneActivity {
 			/// <summary>The phone is not calling or being called.</summary>
 			Ready,
-
 			/// <summary>The phone is ringing.</summary>
 			Ringing,
-
 			/// <summary>There is an active voice all.</summary>
 			CallInProgress,
-
 			/// <summary>The module is in an unknown state.</summary>
 			Unknown,
-
 			/// <summary>The communication line with the module is busy.</summary>
 			CommLineBusy
 		}
@@ -293,19 +279,14 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public enum SignalStrength {
 			/// <summary>- 115dBm or less.</summary>
 			VeryWeak,
-
 			/// <summary>- 111dBm.</summary>
 			Weak,
-
 			/// <summary>- 110 to -54dBm.</summary>
 			Strong,
-
 			/// <summary>- 52dBm or greater.</summary>
 			VeryStrong,
-
 			/// <summary>Not known or undetectable.</summary>
 			Unknown,
-
 			/// <summary>There was an error in the response from the module.</summary>
 			Error
 		}
@@ -314,10 +295,8 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		public enum CallEndReason {
 			/// <summary>No dial tone was found.</summary>
 			NoDialTone,
-
 			/// <summary>No carrier was found.</summary>
 			NoCarrier,
-
 			/// <summary>The line is busy.</summary>
 			Busy
 		}
@@ -325,40 +304,32 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public CellularRadio(int socketNumber) {
-			this.newMessages = new Queue();
-			this.requestedMessages = new Queue();
-
-			this.powerOn = false;
 
 			var socket = GT.Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('K', this);
 
 			this.buffer = new byte[1024];
-			this.responseBuffer = "";
+			this.responseBuffer = string.Empty;
+			this.atExpectedResponse = string.Empty;
+			this.pppExpectedResponse = string.Empty;
 			this.worker = null;
 			this.running = false;
+			this.newMessages = new Queue();
+			this.requestedMessages = new Queue();
 			this.pppEvent = new AutoResetEvent(false);
 			this.atExpectedEvent = new AutoResetEvent(false);
-			this.power = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, true, this);
+			this.power = GTI.DigitalOutputFactory.Create(socket, GT.Socket.Pin.Three, false, this);
 			this.serial = new SerialPort(socket.SerialPortName, 19200, Parity.None, 8, StopBits.One);
 			this.serial.Handshake = Handshake.RequestToSend;
 			this.serial.Open();
 			this.serial.Write(Encoding.UTF8.GetBytes("AT\r"), 0, 3);
 
-			this.atExpectedResponse = string.Empty;
-			this.pppExpectedResponse = string.Empty;
+			Thread.Sleep(250);
 
-			Thread.Sleep(1000);
+			this.powerOn = this.serial.BytesToRead != 0;
 
-			if (this.serial.BytesToRead != 0) {
-				this.power.Write(false);
-				Thread.Sleep(1000);
-				this.power.Write(true);
-				Thread.Sleep(2200);
-
-				this.serial.DiscardInBuffer();
-				this.serial.DiscardOutBuffer();
-			}
+			this.serial.DiscardInBuffer();
+			this.serial.DiscardOutBuffer();
 
 			this.onPinStateRequested = this.OnPinStateRequested;
 			this.onGsmNetworkRegistrationChanged = this.OnGsmNetworkRegistrationChanged;
@@ -453,16 +424,17 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Power on the module.</summary>
 		/// <param name="initializationCommands">The initialization commands to send after power up.</param>
 		public void PowerOn(params string[] initializationCommands) {
-			if (this.powerOn) throw new InvalidOperationException("The module is already powered on.");
 			if (initializationCommands == null) throw new ArgumentNullException("initializationCommands");
+
+			if (!this.powerOn) {
+				this.power.Write(true);
+				Thread.Sleep(1000);
+				this.power.Write(false);
+				Thread.Sleep(2200);
+			}
 
 			this.serial.DiscardInBuffer();
 			this.serial.DiscardOutBuffer();
-
-			this.power.Write(false);
-			Thread.Sleep(1000);
-			this.power.Write(true);
-			Thread.Sleep(2200);
 
 			this.powerOn = true;
 			this.running = true;
@@ -476,12 +448,12 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Powers off the module.</summary>
 		public void PowerOff() {
-			if (!this.powerOn) throw new InvalidOperationException("The module is already powered off.");
-
-			this.power.Write(false);
-			Thread.Sleep(1000);
-			this.power.Write(true);
-			Thread.Sleep(1700);
+			if (this.powerOn) {
+				this.power.Write(true);
+				Thread.Sleep(1000);
+				this.power.Write(false);
+				Thread.Sleep(1700);
+			}
 
 			this.powerOn = false;
 			this.running = false;
@@ -552,7 +524,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="number">The phone number to send to.</param>
 		/// <param name="message">The message.</param>
 		public void SendSms(string number, string message) {
-			this.WriteLine("AT+CMGS=\"+" + number + "\"\r\n");
+			if (number[0] != '+')
+				number = '+' + number;
+
+			this.WriteLine("AT+CMGS=\"" + number + "\"\r\n");
 			Thread.Sleep(100);
 
 			this.WriteLine(message);
@@ -611,7 +586,10 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Dials a number in order to start a voice call.</summary>
 		/// <param name="number">Number to be called</param>
 		public void Dial(string number) {
-			this.SendATCommand((number.IndexOf("+") >= 0 ? "ATD" : "ATD+") + number + ";");
+			if (number[0] != '+')
+				number = '+' + number;
+
+			this.SendATCommand("ATD" + number + ";");
 		}
 
 		/// <summary>Redials the last number dialed.</summary>
@@ -781,7 +759,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 							#region Check GSM Network Registration (CREG)
 							case "CREG":
-								switch (response) {
+								parts = response.Split(',');
+
+								switch (parts[0]) {
 									case "0": this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
 									case "1": this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
 									case "2": this.OnGsmNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
@@ -796,7 +776,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 							#region Check GPRS Network Registration (CGREG)
 							case "CGREG":
-								switch (response) {
+								parts = response.Split(',');
+
+								switch (parts[0]) {
 									case "0": this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.NotSearching); break;
 									case "1": this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Registered); break;
 									case "2": this.OnGprsNetworkRegistrationChanged(this, NetworkRegistrationState.Searching); break;
