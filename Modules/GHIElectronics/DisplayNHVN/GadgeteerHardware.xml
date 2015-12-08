@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<GadgeteerDefinitions xmlns="http://schemas.microsoft.com/Gadgeteer/2011/Hardware">
+  <ModuleDefinitions>
+    <ModuleDefinition Name="Display NHVN"
+                  UniqueId="13402576-f113-45af-84ae-aba1b13f29a3"
+                  Manufacturer="GHI Electronics"
+                  Description="A DisplayNHVN module"
+                  InstanceName="DisplayNHVN"
+                  Type="Gadgeteer.Modules.GHIElectronics.DisplayNHVN"
+                  ModuleSuppliesPower="false"
+                  Image="Image.jpg"
+                  BoardHeight="87.2"
+                  BoardWidth="105.6"
+                  HardwareVersion="1.0"
+                  MinimumGadgeteerCoreVersion="2.43.800"
+                  HelpUrl="http://www.ghielectronics.com/catalog/product/549">
+
+      <Assemblies>
+        <Assembly MFVersion="4.3" Name="GTM.GHIElectronics.DisplayNHVN"/>
+      </Assemblies>
+
+      <Sockets>
+		  <Socket Left="4.5" Top="15.0" Orientation="180" ConstructorOrder="4" TypesLabel="T" Optional="true">
+			  <Types>
+				  <Type>T</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+			  </Pins>
+		  </Socket>
+		  <Socket Left="4.5" Top="29.5" Orientation="180" ConstructorOrder="1" TypesLabel="R">
+			  <Types>
+				  <Type>R</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+				  <Pin Shared="false">7</Pin>
+				  <Pin Shared="false">8</Pin>
+				  <Pin Shared="false">9</Pin>
+			  </Pins>
+		  </Socket>
+		  <Socket Left="4.5" Top="43.6" Orientation="180" ConstructorOrder="2" TypesLabel="G">
+			  <Types>
+				  <Type>G</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+				  <Pin Shared="false">7</Pin>
+				  <Pin Shared="false">8</Pin>
+				  <Pin Shared="false">9</Pin>
+			  </Pins>
+		  </Socket>
+		  <Socket Left="4.5" Top="57.5" Orientation="180" ConstructorOrder="3" TypesLabel="B">
+			  <Types>
+				  <Type>B</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="false">4</Pin>
+				  <Pin Shared="false">5</Pin>
+				  <Pin Shared="false">6</Pin>
+				  <Pin Shared="false">7</Pin>
+				  <Pin Shared="false">8</Pin>
+				  <Pin Shared="false">9</Pin>
+			  </Pins>
+		  </Socket>
+		  <Socket Left="4.5" Top="72.0" Orientation="180" ConstructorOrder="5" TypesLabel="I" Optional="true">
+			  <Types>
+				  <Type>I</Type>
+			  </Types>
+			  <Pins>
+				  <Pin Shared="false">3</Pin>
+				  <Pin Shared="true">8</Pin>
+				  <Pin Shared="true">9</Pin>
+			  </Pins>
+		  </Socket>
+      </Sockets>
+    </ModuleDefinition>
+  </ModuleDefinitions>
+</GadgeteerDefinitions>
