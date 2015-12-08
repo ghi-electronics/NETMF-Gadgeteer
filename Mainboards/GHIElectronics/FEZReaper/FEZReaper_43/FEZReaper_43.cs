@@ -346,7 +346,7 @@ namespace GHIElectronics.Gadgeteer {
         /// <param name="orientationDeg">Display orientation in degrees.</param>
         /// <param name="timing">The required timings from an LCD controller.</param>
         protected override void OnOnboardControllerDisplayConnected(string displayModel, int width, int height, int orientationDeg, GTM.Module.DisplayModule.TimingRequirements timing) {
-            throw new NotSupportedException();
+			throw new NotSupportedException();
         }
 
         private void NativeBitmapConvert(Bitmap bitmap, byte[] pixelBytes, GT.Mainboard.BPP bpp) {
@@ -358,23 +358,20 @@ namespace GHIElectronics.Gadgeteer {
         private void NativeBitmapSpi(Bitmap bitmap, SPI.Configuration config, int xSrc, int ySrc, int width, int height, GT.Mainboard.BPP bpp) {
             if (bpp != GT.Mainboard.BPP.BPP16_BGR_BE) throw new ArgumentOutOfRangeException("bpp", "Only BPP16_BGR_BE supported");
 
-            if (!this.configSet) {
-                Display.Populate(Display.GHIDisplay.DisplayN18);
-                Display.BitmapFormat = GHI.Utilities.Bitmaps.Format.Bpp16BgrBe;
-                Display.ControlPin = Cpu.Pin.GPIO_NONE;
-                Display.BacklightPin = Cpu.Pin.GPIO_NONE;
-                Display.ResetPin = Cpu.Pin.GPIO_NONE;
-                Display.ChipSelectPin = config.ChipSelect_Port;
-				Display.SpiModule = config.SPI_mod;
+			if (!this.configSet) {
+				Display.BitmapFormat = GHI.Utilities.Bitmaps.Format.Bpp16BgrBe;
+				Display.CurrentRotation = Display.Rotation.Normal;
+				Display.Type = Display.DisplayType.Spi;
+				Display.ControlPin = Cpu.Pin.GPIO_NONE;
+				Display.BacklightPin = Cpu.Pin.GPIO_NONE;
+				Display.ResetPin = Cpu.Pin.GPIO_NONE;
+				Display.SpiConfiguration = config;
 				Display.Width = bitmap.Width;
 				Display.Height = bitmap.Height;
 
-                if ((bitmap.Width == 128 || bitmap.Width == 160) && (bitmap.Height == 128 || bitmap.Height == 160))
-                    Display.CurrentRotation = bitmap.Width == 128 ? Display.Rotation.Normal : Display.Rotation.Clockwise90;
+				Display.Save();
 
-                Display.Save();
-
-                this.configSet = true;
+				this.configSet = true;
             }
 
             bitmap.Flush(xSrc, ySrc, width, height);
