@@ -29,7 +29,7 @@ namespace GHIElectronics.Gadgeteer {
 
 		/// <summary>The name of the mainboard.</summary>
 		public override string MainboardName {
-			get { return "GHI Electronics FEZ Cobra II Net"; }
+			get { return "GHI Electronics FEZ Cobra II WiFi"; }
 		}
 
 		/// <summary>The current version of the mainboard hardware.</summary>
