@@ -27,7 +27,7 @@
       </ExtraLibrariesRequired>
 
       <Sockets>
-        <Socket TypesLabel="K" ConstructorOrder="1" Orientation="90" Top="42" Left="47">
+        <Socket TypesLabel="K" ConstructorOrder="1" Orientation="90" Top="42" Left="49">
           <Types>
             <Type>K</Type>
           </Types>
