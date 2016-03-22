@@ -6,6 +6,7 @@ using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics {
 	/// <summary>A SerialCameraL2 module for Microsoft .NET Gadgeteer</summary>
+	[Obsolete]
 	public class SerialCameraL2 : GTM.Module {
 		private const int CMD_DELAY_TIME = 50;
 		private const int RESET_DELAY_TIME = 1000;

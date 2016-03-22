@@ -6,6 +6,7 @@ using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics {
 	/// <summary>A Accelerometer module for Microsoft .NET Gadgeteer</summary>
+	[Obsolete]
 	public class Accelerometer : GTM.Module {
 		private GTI.InterruptInput interrupt;
 		private GTI.I2CBus i2c;

@@ -7,6 +7,7 @@ using GTM = Gadgeteer.Modules;
 
 namespace Gadgeteer.Modules.GHIElectronics {
 	/// <summary>A DisplayCP7 module for Microsoft .NET Gadgeteer.</summary>
+	[Obsolete]
 	public class DisplayCP7 : GTM.Module.DisplayModule {
 		private GTI.DigitalOutput backlightPin;
 		private GTI.InterruptInput touchInterrupt;
