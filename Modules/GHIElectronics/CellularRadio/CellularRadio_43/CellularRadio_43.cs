@@ -30,6 +30,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		private GsmNetworkRegistrationChangedHandler onGsmNetworkRegistrationChanged;
 		private GprsNetworkRegistrationChangedHandler onGprsNetworkRegistrationChanged;
 		private SmsReceivedHandler onSmsReceived;
+		private SmsSentHandler onSmsSent;
 		private IncomingCallHandler onIncomingCall;
 		private PhoneActivityRequestedHandler onPhoneActivityRequested;
 		private ContactOpenRequested onContactRequested;
@@ -73,6 +74,11 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <param name="sender">The object that raised the event.</param>
 		/// <param name="message">SMS that was requested</param>
 		public delegate void SmsRequestedHandler(CellularRadio sender, Sms message);
+
+		/// <summary>Represents the delegate used for the SmsSent event.</summary>
+		/// <param name="sender">The object that raised the event.</param>
+		/// <param name="message">SMS reference that was sent</param>
+		public delegate void SmsSentHandler(CellularRadio sender, int message);
 
 		/// <summary>Represents the delegate used for the PhoneActivityRequested event.</summary>
 		/// <param name="sender">The object that raised the event.</param>
@@ -145,6 +151,9 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 		/// <summary>Raised when the module receives a new SMS.</summary>
 		public event SmsReceivedHandler SmsReceived;
+
+		/// <summary>Raised when the module sends an SMS.</summary>
+		public event SmsSentHandler SmsSent;
 
 		/// <summary>Raised when the module detects an incoming call.</summary>
 		public event IncomingCallHandler IncomingCall;
@@ -304,7 +313,6 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		/// <summary>Constructs a new instance.</summary>
 		/// <param name="socketNumber">The socket that this module is plugged in to.</param>
 		public CellularRadio(int socketNumber) {
-
 			var socket = GT.Socket.GetSocket(socketNumber, true, this, null);
 			socket.EnsureTypeIsSupported('K', this);
 
@@ -335,6 +343,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 			this.onGsmNetworkRegistrationChanged = this.OnGsmNetworkRegistrationChanged;
 			this.onGprsNetworkRegistrationChanged = this.OnGprsNetworkRegistrationChanged;
 			this.onSmsReceived = this.OnSmsReceived;
+			this.onSmsSent = this.OnSmsSent;
 			this.onIncomingCall = this.OnIncomingCall;
 			this.onPhoneActivityRequested = this.OnPhoneActivityRequested;
 			this.onContactRequested = this.OnContactRequested;
@@ -970,6 +979,13 @@ namespace Gadgeteer.Modules.GHIElectronics {
 								break;
 
 							#endregion Check Sms Requested (CMGR)
+
+							#region Check Sms Sent (CMGS)
+							case "CMGS":
+								this.OnSmsSent(this, int.Parse(response));
+
+								break;
+							#endregion Check Sms Sent (CMGS)
 						}
 					}
 					else {
@@ -1080,6 +1096,11 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		private void OnSmsReceived(CellularRadio sender, Sms message) {
 			if (Program.CheckAndInvoke(this.SmsReceived, this.onSmsReceived, sender, message))
 				this.SmsReceived(sender, message);
+		}
+
+		private void OnSmsSent(CellularRadio sender, int message) {
+			if (Program.CheckAndInvoke(this.SmsSent, this.onSmsSent, sender, message))
+				this.SmsSent(sender, message);
 		}
 
 		private void OnIncomingCall(CellularRadio sender, string caller) {
