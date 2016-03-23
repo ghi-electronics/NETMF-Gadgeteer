@@ -218,7 +218,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 
 					if (this.isActive) {
 						this.io60.SetIOMode(this.pin, IO60P16.IOState.Pwm, GTI.ResistorMode.Disabled);
-						this.io60.SetPWM(this.pin, 1, 0.5);
+						this.io60.SetPWM(this.pin, 1000.0, 0.0);
 					}
 					else {
 						this.io60.SetIOMode(this.pin, IO60P16.IOState.Input, GTI.ResistorMode.Disabled);
