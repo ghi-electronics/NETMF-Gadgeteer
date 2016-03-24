@@ -234,7 +234,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 					this.OnWheelTouched(this, new WheelTouchedEventArgs(wheelTouched));
 
 				if (wheelPosition != this.previousWheelPosition || wheelDirection != this.previousWheelDirection)
-					this.WheelPositionChanged(this, new WheelPositionChangedEventArgs(wheelDirection, wheelPosition));
+					this.OnWheelPositionChanged(this, new WheelPositionChangedEventArgs(wheelDirection, wheelPosition));
 
 				this.previousWheelTouched = wheelTouched;
 				this.previousWheelPosition = wheelPosition;
