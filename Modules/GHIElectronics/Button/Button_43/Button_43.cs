@@ -117,7 +117,7 @@ namespace Gadgeteer.Modules.GHIElectronics {
 		}
 
 		private void OnInterrupt(GTI.InterruptInput input, bool value) {
-			ButtonState state = this.input.Read() ? ButtonState.Released : ButtonState.Pressed;
+			var state = value ? ButtonState.Released : ButtonState.Pressed;
 
 			switch (state) {
 				case ButtonState.Released:
